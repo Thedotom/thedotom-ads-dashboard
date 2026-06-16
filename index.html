@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>네이버 광고 월간 대시보드</title>
+  <style>
+    :root {
+      --bg: #f4f6f7;
+      --panel: #ffffff;
+      --line: #d8e0e3;
+      --text: #162126;
+      --muted: #63727a;
+      --green: #0f9f6e;
+      --blue: #2563eb;
+      --red: #c24132;
+      --amber: #b7791f;
+      --ink: #263238;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Malgun Gothic", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+    .app {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+    aside {
+      background: #fff;
+      border-right: 1px solid var(--line);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      align-self: start;
+    }
+    main { padding: 18px 22px 28px; min-width: 0; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 18px;
+      margin-bottom: 22px;
+    }
+    .mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: white;
+      font-weight: 900;
+    }
+    label {
+      display: block;
+      margin: 14px 0 7px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    select, input, textarea, button {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+    }
+    select, input, button { height: 38px; padding: 0 10px; }
+    textarea { min-height: 116px; padding: 10px; resize: vertical; line-height: 1.45; }
+    button { cursor: pointer; font-weight: 800; }
+    .primary { background: var(--green); border-color: var(--green); color: #fff; }
+    .ghost { background: #f8fafb; }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    h1 { margin: 0; font-size: 24px; line-height: 1.25; }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 6px; }
+    .profile {
+      margin-top: 6px;
+      color: #40505a;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .top-status {
+      margin-top: 6px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      min-height: 18px;
+    }
+    .actions { display: flex; gap: 8px; min-width: 300px; }
+    .actions button { width: auto; min-width: 106px; }
+    .nav {
+      display: grid;
+      gap: 8px;
+    }
+    .nav button {
+      text-align: left;
+      background: #f8fafb;
+    }
+    .nav button.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+    }
+    .sidebar-search {
+      margin-top: auto;
+      position: sticky;
+      bottom: 18px;
+      background: #fff;
+      padding-top: 12px;
+    }
+    .hidden-controls { display: none; }
+    .page-section.hidden { display: none; }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .metric, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .metric { padding: 12px; min-height: 92px; }
+    .metric .label { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .metric .value { margin-top: 8px; font-size: 22px; font-weight: 900; white-space: nowrap; }
+    .metric .sub { margin-top: 5px; color: var(--muted); font-size: 12px; }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(420px, 0.95fr) minmax(520px, 1.05fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    section { min-width: 0; overflow: visible; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    h2 { margin: 0; font-size: 15px; }
+    .count { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .bars { display: grid; gap: 10px; padding: 14px; }
+    .bar {
+      display: grid;
+      grid-template-columns: 92px 1fr 82px;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .track { height: 10px; border-radius: 999px; background: #edf1f3; overflow: hidden; }
+    .fill { height: 100%; background: var(--blue); }
+    .fill.power { background: var(--amber); }
+    .fill.shopping { background: var(--green); }
+    .table-wrap {
+      overflow: visible;
+      max-height: none;
+    }
+    table { width: 100%; min-width: 900px; border-collapse: collapse; font-size: 13px; }
+    table.compact { min-width: 720px; }
+    table.compact th, table.compact td { padding: 8px 10px; }
+    th, td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #eef2f4;
+      text-align: left;
+      white-space: nowrap;
+      vertical-align: top;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      background: #f8fafb;
+      z-index: 1;
+      color: #40505a;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    td.wrap { white-space: normal; min-width: 260px; line-height: 1.4; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      border-radius: 999px;
+      padding: 0 9px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .pill.good { background: #e8f6ef; color: #0b7a50; }
+    .pill.warn { background: #fff4db; color: #8a5a14; }
+    .pill.bad { background: #fdecea; color: #a12f24; }
+    .detail-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfd;
+    }
+    .detail-toolbar button {
+      width: auto;
+      height: 30px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+    .detail-toolbar button.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+    }
+    .memo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .memo-body { padding: 14px; }
+    .rank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding: 14px; }
+    .rank-card { border: 1px solid var(--line); border-radius: 8px; background: #fff; overflow: hidden; }
+    .rank-card-head { display: flex; gap: 12px; align-items: center; padding: 12px; background: #fbfcfd; border-bottom: 1px solid var(--line); }
+    .rank-thumb, .reward-thumb { width: 54px; height: 54px; border-radius: 7px; object-fit: cover; border: 1px solid var(--line); background: #f1f4f6; flex: 0 0 auto; }
+    .reward-product { display: flex; align-items: center; gap: 10px; min-width: 320px; }
+    .reward-product-title { font-weight: 800; white-space: normal; line-height: 1.35; }
+    .rank-card-title { font-size: 13px; font-weight: 900; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .rank-card-sub { margin-top: 4px; color: var(--muted); font-size: 12px; }
+    .rank-list { padding: 8px 12px; }
+    .rank-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f0f3f5; font-size: 13px; }
+    .rank-row:last-child { border-bottom: 0; }
+    .rank-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 52px; height: 24px; border-radius: 999px; padding: 0 8px; font-size: 12px; font-weight: 900; }
+    .rank-badge.one { background: #fff3cd; color: #856404; }
+    .rank-badge.top3 { background: #d1ecf1; color: #0c5460; }
+    .rank-badge.top5 { background: #d4edda; color: #155724; }
+    .rank-badge.top10 { background: #e2e8f0; color: #4a5568; }
+    .rank-badge.out { background: #fde8e8; color: #c53030; }
+    .rank-badge.none { background: #f7f8fc; color: #8a98a8; }
+    .rank-tabs { display: flex; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: #fbfcfd; flex-wrap: wrap; }
+    .rank-tabs button { width: auto; height: 30px; font-size: 12px; }
+    .rank-tabs button.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .note-row { display: grid; grid-template-columns: 108px minmax(180px, 1fr) 70px; gap: 8px; align-items: start; }
+    .note-row select, .note-row button { height: 32px; }
+    .note-row input { height: 32px; }
+    .empty { padding: 24px; color: var(--muted); text-align: center; }
+    @media (max-width: 1120px) {
+      .app { grid-template-columns: 1fr; }
+      aside { border-right: 0; border-bottom: 1px solid var(--line); }
+      .kpis { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+      .layout, .memo-grid { grid-template-columns: 1fr; }
+      .header { flex-direction: column; }
+      .actions { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand"><span class="mark">N</span><span>월간 광고</span></div>
+      <label for="monthFilter">월 선택</label>
+      <select id="monthFilter"><option value="">불러오는 중</option></select>
+      <div class="nav">
+        <button class="active" type="button" data-page="overview">전체 요약</button>
+        <button type="button" data-page="powerlink">파워링크</button>
+        <button type="button" data-page="shopping">쇼핑검색</button>
+        <button type="button" data-page="brand">브랜드검색</button>
+        <button type="button" data-page="rankTraffic">순위 트래픽</button>
+      </div>
+      <div class="hidden-controls">
+        <select id="typeFilter">
+          <option value="">전체</option>
+          <option value="파워링크">파워링크</option>
+          <option value="쇼핑검색">쇼핑검색</option>
+          <option value="브랜드검색">브랜드검색</option>
+        </select>
+        <select id="campaignFilter"><option value="">전체</option></select>
+        <select id="adgroupFilter"><option value="">전체</option></select>
+        <select id="decisionFilter"><option value="">전체</option></select>
+        <button id="badOnlyBtn" type="button">점검대상만</button>
+      </div>
+      <div class="sidebar-search">
+        <label for="searchInput">검색</label>
+        <input id="searchInput" type="search" placeholder="캠페인, 광고그룹, 키워드, 상품">
+      </div>
+    </aside>
+    <main>
+      <div class="header">
+        <div>
+          <h1 id="pageTitle">네이버 광고 월간 대시보드</h1>
+          <div id="meta" class="meta">불러오는 중</div>
+          <div id="profile" class="profile"></div>
+          <div id="topStatus" class="top-status"></div>
+        </div>
+        <div class="actions">
+          <button id="refreshBtn" class="primary" type="button">새로고침</button>
+          <button id="rankBtn" class="ghost" type="button">순위 갱신</button>
+          <button id="saveMemoBtn" class="ghost" type="button">메모 저장</button>
+          <button id="exportBtn" class="ghost" type="button">보고서 초안</button>
+        </div>
+      </div>
+      <div id="kpis" class="kpis page-section" data-page="overview"></div>
+      <div class="layout page-section" data-page="overview">
+        <section>
+          <div class="section-head"><h2>광고유형별 성과</h2><span id="typeCount" class="count"></span></div>
+          <div id="typeBars" class="bars"></div>
+        </section>
+        <section>
+          <div class="section-head"><h2>캠페인 성과 순위</h2><span id="campaignCount" class="count"></span></div>
+          <div class="table-wrap">
+            <table class="compact">
+              <thead><tr><th>캠페인</th><th>비용</th><th>전환</th><th>매출</th><th>ROAS</th><th>판단</th></tr></thead>
+              <tbody id="campaignBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+      <section class="page-section hidden" data-page="report">
+        <div class="section-head"><h2>점검대상 및 조치 결정</h2><span id="inspectionCount" class="count"></span></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>유형</th><th>캠페인</th><th>키워드/상품</th><th>비용</th><th>전환</th><th>ROAS</th><th>점검사유</th><th>권장조치</th><th>결정/메모</th></tr></thead>
+            <tbody id="inspectionBody"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-section" data-page="powerlink">
+        <div class="section-head"><h2>파워링크 상세 데이터</h2><span id="keywordCount" class="count"></span></div>
+        <div class="detail-toolbar">
+          <button class="ghost active" type="button" data-detail-mode="all">전체</button>
+          <button class="ghost" type="button" data-detail-mode="highCpc">고CPC</button>
+          <button class="ghost" type="button" data-detail-mode="noConversion">무전환</button>
+          <button class="ghost" type="button" data-detail-mode="lowRoas">저ROAS</button>
+          <button class="ghost" type="button" data-detail-mode="scale">확대후보</button>
+          <button class="ghost" type="button" data-detail-mode="core">핵심키워드</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>유형</th><th>캠페인</th><th>광고그룹</th><th>키워드</th><th>기기</th><th>실제순위</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
+            <tbody id="keywordBody"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-section" data-page="shopping">
+        <div class="section-head"><h2>쇼핑검색 상세 데이터</h2><span id="shoppingCount" class="count"></span></div>
+        <div class="memo-body" id="shoppingIntegratedBody"></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>캠페인</th><th>광고그룹</th><th>상품/소재</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
+            <tbody id="shoppingBody"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-section" data-page="brand">
+        <div class="section-head"><h2>브랜드검색 계약 요약</h2><span id="brandStatus" class="count"></span></div>
+        <div class="memo-body" id="brandBody"></div>
+      </section>
+      <section class="page-section" data-page="rankTraffic">
+        <div class="section-head"><h2>순위 트래픽 대시보드</h2><span id="rankStatus" class="count"></span></div>
+        <div class="memo-body" id="rankOverview"></div>
+        <div class="rank-tabs">
+          <button class="ghost active" type="button" data-rank-view="shopping">쇼핑검색 상세</button>
+          <button class="ghost" type="button" data-rank-view="powerlink">파워링크 상세</button>
+        </div>
+        <div class="rank-tabs" id="rankDateTabs"></div>
+        <div class="rank-tabs" id="rankSlotTabs"></div>
+        <div id="rankBody"></div>
+      </section>
+      <div class="memo-grid page-section hidden" data-page="report">
+        <section>
+          <div class="section-head"><h2>다음달 진행 계획</h2><span id="planCount" class="count"></span></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>구분</th><th>대상</th><th>계획</th><th>근거</th></tr></thead>
+              <tbody id="planBody"></tbody>
+            </table>
+          </div>
+        </section>
+        <section>
+          <div class="section-head"><h2>보고서 작성 메모</h2><span id="saveState" class="count"></span></div>
+          <div class="memo-body">
+            <label for="planMemo">추가 운영 계획</label>
+            <textarea id="planMemo" placeholder="예: 파워링크 답례품 계열은 입찰가 15% 인하 후 1주 관찰"></textarea>
+            <label for="reportMemo">보고서에 넣을 코멘트</label>
+            <textarea id="reportMemo" placeholder="예: 쇼핑검색은 전체 효율이 좋아 예산 유지 또는 확대 권장"></textarea>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script>
+    if (window.location.protocol === "file:") {
+      document.body.innerHTML = `
+        <div style="padding:28px;font-family:'Segoe UI','Malgun Gothic',Arial,sans-serif">
+          <h1 style="margin:0 0 12px;font-size:24px">대시보드 서버로 여는 중</h1>
+          <p style="margin:0 0 14px;color:#40505a">이 화면은 엑셀 데이터를 로컬 서버에서 읽어와야 합니다. 잠시 후 서버 주소로 이동합니다.</p>
+          <p style="margin:0;color:#40505a">이동 후에도 열리지 않으면 <strong>D:\\광고보고서\\월간광고대시보드_실행.bat</strong>를 실행해 주세요.</p>
+        </div>`;
+      window.location.replace("http://127.0.0.1:8790");
+    }
+    const initialMonth = new URLSearchParams(window.location.search).get("month") || "";
+    const state = { data: null, badOnly: false, detailMode: "all", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "" };
+    const els = {
+      pageTitle: document.getElementById("pageTitle"),
+      meta: document.getElementById("meta"),
+      topStatus: document.getElementById("topStatus"),
+      profile: document.getElementById("profile"),
+      kpis: document.getElementById("kpis"),
+      typeBars: document.getElementById("typeBars"),
+      typeCount: document.getElementById("typeCount"),
+      campaignBody: document.getElementById("campaignBody"),
+      campaignCount: document.getElementById("campaignCount"),
+      keywordBody: document.getElementById("keywordBody"),
+      keywordCount: document.getElementById("keywordCount"),
+      shoppingBody: document.getElementById("shoppingBody"),
+      shoppingCount: document.getElementById("shoppingCount"),
+      shoppingIntegratedBody: document.getElementById("shoppingIntegratedBody"),
+      brandBody: document.getElementById("brandBody"),
+      brandStatus: document.getElementById("brandStatus"),
+      rankStatus: document.getElementById("rankStatus"),
+      rankOverview: document.getElementById("rankOverview"),
+      rankDateTabs: document.getElementById("rankDateTabs"),
+      rankSlotTabs: document.getElementById("rankSlotTabs"),
+      rankBody: document.getElementById("rankBody"),
+      inspectionBody: document.getElementById("inspectionBody"),
+      inspectionCount: document.getElementById("inspectionCount"),
+      planBody: document.getElementById("planBody"),
+      planCount: document.getElementById("planCount"),
+      typeFilter: document.getElementById("typeFilter"),
+      monthFilter: document.getElementById("monthFilter"),
+      campaignFilter: document.getElementById("campaignFilter"),
+      adgroupFilter: document.getElementById("adgroupFilter"),
+      decisionFilter: document.getElementById("decisionFilter"),
+      searchInput: document.getElementById("searchInput"),
+      badOnlyBtn: document.getElementById("badOnlyBtn"),
+      planMemo: document.getElementById("planMemo"),
+      reportMemo: document.getElementById("reportMemo"),
+      saveState: document.getElementById("saveState")
+    };
+    const won = new Intl.NumberFormat("ko-KR", { style: "currency", currency: "KRW", maximumFractionDigits: 0 });
+    const num = new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 0 });
+    function money(v) { return won.format(Number(v || 0)); }
+    function number(v) { return num.format(Number(v || 0)); }
+    function pct(v) { return `${(Number(v || 0) * 100).toFixed(1)}%`; }
+    function ratio(v) { return Number(v || 0).toFixed(2); }
+    function html(v) {
+      return String(v ?? "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;" }[m]));
+    }
+    function setStatus(message, isError = false) {
+      els.topStatus.textContent = message || "";
+      els.topStatus.style.color = isError ? "var(--red)" : "var(--green)";
+      if (els.saveState) els.saveState.textContent = message || "";
+    }
+    async function loadData() {
+      state.data = await fetchDashboardData();
+      state.month = state.data.month;
+      fillMonths();
+      fillCampaigns();
+      fillAdgroups();
+      els.planMemo.value = state.data.state.planMemo || "";
+      els.reportMemo.value = state.data.state.reportMemo || "";
+      render();
+    }
+    async function fetchDashboardData() {
+      const qs = state.month ? `?month=${encodeURIComponent(state.month)}` : "";
+      try {
+        const res = await fetch(`/api/monthly-dashboard${qs}`);
+        if (res.ok) return await res.json();
+      } catch (error) {
+        console.warn("API fetch failed; trying static dashboard data", error);
+      }
+      const staticPath = state.month ? `data/monthly-dashboard-${encodeURIComponent(state.month)}.json` : "data/monthly-dashboard-latest.json";
+      const staticRes = await fetch(staticPath);
+      if (!staticRes.ok) throw new Error("대시보드 데이터를 불러오지 못했습니다.");
+      return await staticRes.json();
+    }
+    function fillMonths() {
+      const months = state.data.availableMonths || [];
+      els.monthFilter.innerHTML = months.map(month => `<option value="${html(month)}">${html(month)}</option>`).join("");
+      els.monthFilter.value = state.month;
+    }
+    function pageType() {
+      if (state.page === "powerlink") return "파워링크";
+      if (state.page === "shopping") return "쇼핑검색";
+      if (state.page === "brand") return "브랜드검색";
+      return "";
+    }
+    function renderPageShell() {
+      const titles = {
+        overview: "네이버 광고 월간 대시보드",
+        powerlink: "파워링크 운영",
+        shopping: "쇼핑검색 운영",
+        brand: "브랜드검색 계약",
+        rankTraffic: "순위 트래픽 대시보드"
+      };
+      els.pageTitle.textContent = titles[state.page] || titles.overview;
+      document.querySelectorAll("[data-page]").forEach(el => {
+        if (el.tagName === "BUTTON") return;
+        el.classList.toggle("hidden", el.dataset.page !== state.page);
+      });
+      document.querySelectorAll(".nav [data-page]").forEach(button => {
+        button.classList.toggle("active", button.dataset.page === state.page);
+      });
+      els.typeFilter.value = pageType();
+    }
+    function fillCampaigns() {
+      const current = els.campaignFilter.value;
+      const type = pageType();
+      const names = [...new Set(state.data.campaigns
+        .filter(row => !type || row["광고유형"] === type)
+        .map(r => r["캠페인명"])
+        .filter(Boolean))].sort();
+      els.campaignFilter.innerHTML = `<option value="">전체</option>` + names.map(name => `<option value="${html(name)}">${html(name)}</option>`).join("");
+      els.campaignFilter.value = names.includes(current) ? current : "";
+    }
+    function fillAdgroups() {
+      const current = els.adgroupFilter.value;
+      const type = pageType();
+      const campaign = els.campaignFilter.value;
+      const names = [...new Set(state.data.keywordPerformance
+        .filter(row => !type || row["광고유형"] === type)
+        .filter(row => !campaign || row["캠페인명"] === campaign)
+        .map(row => row["광고그룹명"])
+        .filter(Boolean))].sort();
+      els.adgroupFilter.innerHTML = `<option value="">전체</option>` + names.map(name => `<option value="${html(name)}">${html(name)}</option>`).join("");
+      els.adgroupFilter.value = names.includes(current) ? current : "";
+    }
+    function filters(row) {
+      const type = els.typeFilter.value;
+      const campaign = els.campaignFilter.value;
+      const adgroup = els.adgroupFilter.value;
+      const decision = els.decisionFilter.value;
+      const q = els.searchInput.value.trim().toLowerCase();
+      if (type && row["광고유형"] !== type) return false;
+      if (campaign && row["캠페인명"] !== campaign) return false;
+      if (adgroup && row["광고그룹명"] !== adgroup) return false;
+      if (decision && row["결정"] !== decision) return false;
+      if (q) {
+        const hay = `${row["캠페인명"] || ""} ${row["광고그룹명"] || ""} ${row["키워드"] || ""} ${row["상품명"] || ""}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    }
+    function render() {
+      const d = state.data;
+      renderPageShell();
+      els.meta.textContent = `${d.month} 보고서 · ${d.reportPath} · 업데이트 ${d.updatedAt}`;
+      els.profile.textContent = `${d.dataProfile.period} · ${d.dataProfile.granularity} · 원천 ${number(d.dataProfile.rawRows)}행 · 상세 ${number(d.dataProfile.detailRows)}개`;
+      renderKpis();
+      renderTypes();
+      renderCampaigns();
+      renderKeywords();
+      renderShoppingIntegrated();
+      renderShopping();
+      renderBrandContract();
+      renderRankTraffic();
+      renderInspection();
+      renderPlan();
+    }
+    function renderKpis() {
+      const s = state.data.summary;
+      const items = [
+        ["총 광고비", money(s.cost), "파워링크+쇼핑검색"],
+        ["전환매출", money(s.revenue), `전환 ${number(s.conversions)}건`],
+        ["ROAS", ratio(s.roas), `CVR ${pct(s.cvr)}`],
+        ["CTR / CPC", `${pct(s.ctr)} · ${money(s.cpc)}`, `클릭 ${number(s.clicks)}회`],
+        ["상세 데이터", `${number(state.data.dataProfile.detailRows)}개`, `캠페인 ${number(state.data.dataProfile.campaigns)}개 · 광고그룹 ${number(state.data.dataProfile.adgroups)}개`]
+      ];
+      els.kpis.innerHTML = items.map(([label, value, sub]) => `<div class="metric"><div class="label">${html(label)}</div><div class="value">${html(value)}</div><div class="sub">${html(sub)}</div></div>`).join("");
+    }
+    function renderTypes() {
+      const rows = state.data.typePerformance;
+      const max = Math.max(...rows.map(r => Number(r["총비용"] || 0)), 1);
+      els.typeCount.textContent = `${rows.length}개 유형`;
+      els.typeBars.innerHTML = rows.map(row => {
+        const cls = row["광고유형"] === "파워링크" ? "power" : row["광고유형"] === "쇼핑검색" ? "shopping" : "";
+        return `<div class="bar"><strong>${html(row["광고유형"])}</strong><div class="track"><div class="fill ${cls}" style="width:${Math.max(3, Number(row["총비용"] || 0) / max * 100)}%"></div></div><span>${money(row["총비용"])}</span></div>`;
+      }).join("");
+    }
+    function renderCampaigns() {
+      const rows = state.data.campaigns
+        .filter(row => !pageType() || row["광고유형"] === pageType())
+        .filter(row => !els.campaignFilter.value || row["캠페인명"] === els.campaignFilter.value);
+      els.campaignCount.textContent = `${rows.length}개 캠페인`;
+      els.campaignBody.innerHTML = rows.map(row => {
+        const roas = Number(row["ROAS"] || 0);
+        const pill = roas >= 5 ? ["good", "확대"] : roas >= 3 ? ["warn", "유지"] : ["bad", "점검"];
+        return `<tr><td>${html(row["캠페인명"])}</td><td>${money(row["총비용"])}</td><td>${number(row["전환수"])}</td><td>${money(row["전환매출"])}</td><td>${ratio(row["ROAS"])}</td><td><span class="pill ${pill[0]}">${pill[1]}</span></td></tr>`;
+      }).join("");
+    }
+    function detailFilteredKeywords() {
+      const q = els.searchInput.value.trim().toLowerCase();
+      return state.data.keywordPerformance
+        .filter(row => row["광고유형"] === "파워링크")
+        .filter(row => !els.campaignFilter.value || row["캠페인명"] === els.campaignFilter.value)
+        .filter(row => !els.adgroupFilter.value || row["광고그룹명"] === els.adgroupFilter.value)
+        .filter(row => {
+          if (!q) return true;
+          const hay = `${row["캠페인명"] || ""} ${row["광고그룹명"] || ""} ${row["키워드"] || ""} ${row["상품명"] || ""}`.toLowerCase();
+          return hay.includes(q);
+        })
+        .filter(row => {
+          if (state.detailMode === "highCpc") return Number(row["CPC"] || 0) >= 3000;
+          if (state.detailMode === "noConversion") return Number(row["클릭수"] || 0) >= 20 && Number(row["전환수"] || 0) === 0;
+          if (state.detailMode === "lowRoas") return Number(row["총비용"] || 0) >= 100000 && Number(row["ROAS"] || 0) > 0 && Number(row["ROAS"] || 0) < 3;
+          if (state.detailMode === "scale") return Number(row["전환수"] || 0) > 0 && Number(row["ROAS"] || 0) >= 5;
+          if (state.detailMode === "core") return row["광고유형"] === "파워링크" && ["답례품", "돌답례품", "돌잔치답례품"].includes(String(row["키워드"] || "").trim());
+          return true;
+        });
+    }
+    function actualRankText(row) {
+      if (row["실제검색순위"]) return `${number(row["실제검색순위"])}위`;
+      const keyword = String(row["키워드"] || "").trim();
+      const isCore = row["광고유형"] === "파워링크" && ["답례품", "돌답례품", "돌잔치답례품"].includes(keyword);
+      return isCore ? "미확인" : "-";
+    }
+    function renderKeywords() {
+      const rows = detailFilteredKeywords();
+      els.keywordCount.textContent = `${rows.length}개 키워드`;
+      if (!rows.length) {
+        els.keywordBody.innerHTML = `<tr><td class="empty" colspan="15">조건에 맞는 상세 데이터가 없습니다.</td></tr>`;
+        return;
+      }
+      els.keywordBody.innerHTML = rows.slice(0, 150).map(row => {
+        const judgement = row["판단"] || "관찰";
+        const cls = judgement.includes("핵심") || judgement.includes("확대") ? "good" : judgement.includes("고") || judgement.includes("무전환") || judgement.includes("저") ? "bad" : "warn";
+        return `<tr>
+          <td>${html(row["광고유형"])}</td>
+          <td>${html(row["캠페인명"])}</td>
+          <td>${html(row["광고그룹명"])}</td>
+          <td>${html(row["키워드"] || row["상품명"])}</td>
+          <td>${html(row["검색기기"] || "")}</td>
+          <td>${actualRankText(row)}</td>
+          <td>${number(row["노출수"])}</td>
+          <td>${number(row["클릭수"])}</td>
+          <td>${money(row["총비용"])}</td>
+          <td><strong>${money(row["CPC"])}</strong></td>
+          <td>${number(row["전환수"])}</td>
+          <td>${money(row["CPA"])}</td>
+          <td>${ratio(row["ROAS"])}</td>
+          <td><span class="pill ${cls}">${html(judgement)}</span></td>
+          <td class="wrap">${html(row["권장조치"])}</td>
+        </tr>`;
+      }).join("");
+    }
+    function shoppingRows() {
+      const q = els.searchInput.value.trim().toLowerCase();
+      return state.data.keywordPerformance
+        .filter(row => row["광고유형"] === "쇼핑검색")
+        .filter(row => !els.campaignFilter.value || row["캠페인명"] === els.campaignFilter.value)
+        .filter(row => !els.adgroupFilter.value || row["광고그룹명"] === els.adgroupFilter.value)
+        .filter(row => {
+          if (!q) return true;
+          const hay = `${row["캠페인명"] || ""} ${row["광고그룹명"] || ""} ${row["상품명"] || ""}`.toLowerCase();
+          return hay.includes(q);
+        });
+    }
+    function renderShopping() {
+      const rows = shoppingRows();
+      els.shoppingCount.textContent = `${rows.length}개 상품/소재`;
+      if (!rows.length) {
+        els.shoppingBody.innerHTML = `<tr><td class="empty" colspan="12">조건에 맞는 쇼핑검색 데이터가 없습니다.</td></tr>`;
+        return;
+      }
+      els.shoppingBody.innerHTML = rows.slice(0, 150).map(row => {
+        const judgement = row["판단"] || "관찰";
+        const cls = judgement.includes("확대") ? "good" : judgement.includes("고") || judgement.includes("무전환") || judgement.includes("저") ? "bad" : "warn";
+        return `<tr>
+          <td>${html(row["캠페인명"])}</td>
+          <td>${html(row["광고그룹명"])}</td>
+          <td>${html(row["상품명"] || row["광고그룹명"])}</td>
+          <td>${number(row["노출수"])}</td>
+          <td>${number(row["클릭수"])}</td>
+          <td>${money(row["총비용"])}</td>
+          <td><strong>${money(row["CPC"])}</strong></td>
+          <td>${number(row["전환수"])}</td>
+          <td>${money(row["CPA"])}</td>
+          <td>${ratio(row["ROAS"])}</td>
+          <td><span class="pill ${cls}">${html(judgement)}</span></td>
+          <td class="wrap">${html(row["권장조치"])}</td>
+        </tr>`;
+      }).join("");
+    }
+    function renderShoppingIntegrated() {
+      const mix = state.data.shoppingIntegrated || {};
+      const reward = state.data.rewardMarketing || {};
+      const rewardRows = (reward.items || []).map(item => `
+        <tr>
+          <td class="wrap">
+            <div class="reward-product">
+              ${item.image ? `<img class="reward-thumb" src="${html(item.image)}" alt="">` : `<div class="reward-thumb"></div>`}
+              <div><div class="reward-product-title">${html(item.productName || "")}</div><div class="meta">상품번호 ${html(item.productId || "")}</div></div>
+            </div>
+          </td>
+          <td>${html(item.keyword || "")}</td>
+          <td><a href="${html(item.link || "#")}" target="_blank" rel="noreferrer">상품 링크</a></td>
+          <td>${html(item.startDate || "")} ~ ${html(item.endDate || "")}</td>
+          <td>${money(item.recognizedAmount || 0)}</td>
+          <td>${money(item.totalAmount || 0)}</td>
+          <td>${html(item.status || "")}</td>
+          <td class="wrap">${html(item.metric || "")}</td>
+        </tr>`).join("");
+      els.shoppingIntegratedBody.innerHTML = `
+        <div class="kpis" style="margin-bottom:12px">
+          <div class="metric"><div class="label">쇼핑검색 광고비</div><div class="value">${money(mix.adCost || 0)}</div><div class="sub">네이버 광고 API 비용</div></div>
+          <div class="metric"><div class="label">리워드 인정 비용</div><div class="value">${money(mix.rewardCost || 0)}</div><div class="sub">${html(reward.period || "")} 기준</div></div>
+          <div class="metric"><div class="label">통합 비용</div><div class="value">${money(mix.blendedCost || 0)}</div><div class="sub">광고비 + 리워드</div></div>
+          <div class="metric"><div class="label">광고 ROAS</div><div class="value">${ratio(mix.adRoas || 0)}</div><div class="sub">쇼핑검색 단독</div></div>
+          <div class="metric"><div class="label">통합 ROAS</div><div class="value">${ratio(mix.blendedRoas || 0)}</div><div class="sub">${html(mix.targetRank || "")}</div></div>
+        </div>
+        <div class="meta" style="margin-bottom:10px">${html(mix.rewardMemo || "")}</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>진행 상품</th><th>키워드</th><th>링크</th><th>기간</th><th>보고기간 비용</th><th>총 금액</th><th>상태</th><th>성과 확인</th></tr></thead>
+            <tbody>${rewardRows || `<tr><td class="empty" colspan="8">리워드 마케팅 내역이 없습니다.</td></tr>`}</tbody>
+          </table>
+        </div>`;
+    }
+    function renderBrandContract() {
+      const brand = state.data.brandContract || {};
+      els.brandStatus.textContent = brand.status || "";
+      const keywordRows = (brand.keywords || []).map(row => `
+        <tr><td>${html(row["키워드"])}</td><td>${number(row["노출수"])}</td><td>${number(row["클릭수"])}</td></tr>
+      `).join("");
+      els.brandBody.innerHTML = `
+        <div class="kpis" style="margin-bottom:12px">
+          <div class="metric"><div class="label">계약</div><div class="value" style="font-size:18px">${html(brand.period || "-")}</div><div class="sub">${html(brand.status || "")}</div></div>
+          <div class="metric"><div class="label">총 계약금</div><div class="value">${money(brand.totalAmount || 0)}</div><div class="sub">PC ${money(brand.pcAmount || 0)} · 모바일 ${money(brand.mobileAmount || 0)}</div></div>
+          <div class="metric"><div class="label">월 환산</div><div class="value">${money(brand.monthlyAmount || 0)}</div><div class="sub">${html(brand.payment || "")}</div></div>
+          <div class="metric"><div class="label">노출</div><div class="value">${number(brand.impressions)}</div><div class="sub">브랜드 영역 노출 추이</div></div>
+          <div class="metric"><div class="label">클릭</div><div class="value">${number(brand.clicks)}</div><div class="sub">브랜드 검색 유입</div></div>
+          <div class="metric"><div class="label">전환</div><div class="value">${number(brand.conversions)}</div><div class="sub">${money(brand.revenue || 0)}</div></div>
+        </div>
+        <div class="meta" style="margin-bottom:10px">${html(brand.startDate || "")} ~ ${html(brand.endDate || "")} · ${html(brand.areas || "")} · ${html(brand.checkPoint || "")}</div>
+        <div class="meta" style="margin-bottom:10px">${html(brand.memo || "")}</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>브랜드 키워드</th><th>노출</th><th>클릭</th></tr></thead>
+            <tbody>${keywordRows || `<tr><td class="empty" colspan="3">브랜드검색 계약 데이터가 없습니다.</td></tr>`}</tbody>
+          </table>
+        </div>`;
+    }
+    function rankBadge(cellOrRank) {
+      const cell = typeof cellOrRank === "object" ? cellOrRank : { rank: cellOrRank };
+      const rank = cell.rank;
+      const hasRank = rank !== null && rank !== undefined && rank !== "";
+      const bucket = cell.bucket || (!hasRank ? "none" : rank === 1 ? "one" : rank <= 3 ? "top3" : rank <= 5 ? "top5" : rank <= 10 ? "top10" : "out");
+      const text = cell.text || (hasRank ? `${rank}위` : "미노출");
+      return `<span class="rank-badge ${html(bucket)}">${html(text)}</span>`;
+    }
+    function deltaBadge(delta) {
+      const d = delta || {};
+      const cls = d.direction === "up" ? "good" : d.direction === "down" ? "bad" : "warn";
+      return `<span class="pill ${cls}" style="height:22px">${html(d.text || "-")}</span>`;
+    }
+    function selectedRankDetail(rank) {
+      const details = rank.slotDetails || [];
+      if (!details.length) return null;
+      if (!state.rankDate) state.rankDate = rank.latestDate || details[details.length - 1].date;
+      const dateDetails = details.filter(item => item.date === state.rankDate);
+      if (!dateDetails.some(item => item.slot === state.rankSlot)) {
+        state.rankSlot = (dateDetails.find(item => item.slot === "afternoon") || dateDetails[0] || details[details.length - 1]).slot;
+      }
+      return details.find(item => item.date === state.rankDate && item.slot === state.rankSlot) || details[details.length - 1];
+    }
+    function renderRankTabs(rank) {
+      const dates = rank.dates || [];
+      els.rankDateTabs.innerHTML = dates.map(date => `<button class="ghost ${date === state.rankDate ? "active" : ""}" type="button" data-rank-date="${html(date)}">${html(date)}</button>`).join("");
+      const slots = (rank.slotDetails || []).filter(item => item.date === state.rankDate);
+      els.rankSlotTabs.innerHTML = slots.map(item => `<button class="ghost ${item.slot === state.rankSlot ? "active" : ""}" type="button" data-rank-slot="${html(item.slot)}">${html(item.slotLabel)}</button>`).join("");
+      els.rankDateTabs.querySelectorAll("[data-rank-date]").forEach(button => {
+        button.addEventListener("click", () => {
+          state.rankDate = button.dataset.rankDate;
+          state.rankSlot = "";
+          renderRankTraffic();
+        });
+      });
+      els.rankSlotTabs.querySelectorAll("[data-rank-slot]").forEach(button => {
+        button.addEventListener("click", () => {
+          state.rankSlot = button.dataset.rankSlot;
+          renderRankTraffic();
+        });
+      });
+    }
+    function renderShoppingRankDetail(detail) {
+      const products = detail.shoppingProducts || [];
+      if (!products.length) return `<div class="empty">선택한 시간대의 쇼핑검색 순위 데이터가 없습니다.</div>`;
+      return `<div class="rank-grid">${products.map(group => `
+        <div class="rank-card">
+          <div class="rank-card-head">
+            ${group.image ? `<img class="rank-thumb" src="${html(group.image)}" alt="">` : `<div class="rank-thumb"></div>`}
+            <div style="min-width:0"><div class="rank-card-title">${html(group.title)}</div><div class="rank-card-sub">상품 ID: ${html(group.productId)}</div></div>
+          </div>
+          <div class="rank-list">${(group.items || []).map(item => `<div class="rank-row"><span>${html(item.keyword)}</span><span style="display:flex;gap:6px;align-items:center">${rankBadge(item)}${deltaBadge(item.delta)}</span></div>`).join("")}</div>
+        </div>`).join("")}</div>`;
+    }
+    function renderPowerlinkDevice(title, rows) {
+      if (!rows.length) return `<div class="empty">${html(title)} 데이터가 없습니다.</div>`;
+      return `<section style="margin-top:14px">
+        <div class="section-head"><h2>${html(title)}</h2><span class="count">${number(rows.reduce((sum, section) => sum + (section.items || []).length, 0))}개</span></div>
+        <div class="table-wrap"><table><thead><tr><th>캠페인</th><th>키워드</th><th>순위</th><th>직전 대비</th><th>수집시각</th></tr></thead><tbody>
+          ${rows.map(section => (section.items || []).map(item => `<tr><td class="wrap">${html(section.campaign)}</td><td>${html(item.keyword)}</td><td>${rankBadge(item)}</td><td>${deltaBadge(item.delta)}</td><td>${html(item.collectedAt || "")}</td></tr>`).join("")).join("")}
+        </tbody></table></div>
+      </section>`;
+    }
+    function renderPowerlinkRankDetail(detail) {
+      const sections = detail.powerlinkSections || [];
+      const pc = sections.map(section => ({ campaign: section.campaign, items: section.pc || [] })).filter(section => section.items.length);
+      const mobile = sections.map(section => ({ campaign: section.campaign, items: section.mobile || [] })).filter(section => section.items.length);
+      return `${renderPowerlinkDevice("파워링크 PC", pc)}${renderPowerlinkDevice("파워링크 모바일", mobile)}`;
+    }
+    function renderRankTraffic() {
+      const rank = state.data.rankTraffic || {};
+      els.rankStatus.textContent = `${rank.updatedAt || "데이터 없음"} · ${rank.sourcePath || ""}`;
+      const latestTop5 = (rank.latestShopping || []).filter(row => Number(row.rank || 999) <= 5).length;
+      const detail = selectedRankDetail(rank);
+      els.rankOverview.innerHTML = `
+        <div class="kpis" style="margin-bottom:0">
+          <div class="metric"><div class="label">누적 날짜</div><div class="value">${number((rank.dates || []).length)}</div><div class="sub">${html((rank.dates || []).join(", ") || "데이터 없음")}</div></div>
+          <div class="metric"><div class="label">쇼핑 순위 항목</div><div class="value">${number((rank.shoppingRows || []).length)}</div><div class="sub">상품/키워드 조합</div></div>
+          <div class="metric"><div class="label">최근 1~5위</div><div class="value">${number(latestTop5)}</div><div class="sub">${html(rank.latestLabel || "")}</div></div>
+          <div class="metric"><div class="label">비교 기준</div><div class="value" style="font-size:16px">${html(detail?.previousLabel || "첫 수집")}</div><div class="sub">직전 수집 대비 상승/하락</div></div>
+        </div>`;
+      document.querySelectorAll("[data-rank-view]").forEach(button => button.classList.toggle("active", button.dataset.rankView === state.rankView));
+      if (!detail) {
+        els.rankDateTabs.innerHTML = "";
+        els.rankSlotTabs.innerHTML = "";
+        els.rankBody.innerHTML = `<div class="empty">D:\\자동화\\rank_data.json 데이터가 없습니다.</div>`;
+        return;
+      }
+      renderRankTabs(rank);
+      els.rankBody.innerHTML = state.rankView === "powerlink" ? renderPowerlinkRankDetail(detail) : renderShoppingRankDetail(detail);
+    }
+    function renderInspection() {
+      const rows = state.data.inspection.filter(filters);
+      els.inspectionCount.textContent = `${rows.length}건`;
+      if (!rows.length) {
+        els.inspectionBody.innerHTML = `<tr><td class="empty" colspan="9">조건에 맞는 점검대상이 없습니다.</td></tr>`;
+        return;
+      }
+      els.inspectionBody.innerHTML = rows.map(row => `<tr>
+        <td>${html(row["광고유형"])}</td>
+        <td>${html(row["캠페인명"])}</td>
+        <td>${html(row["키워드"] || row["상품명"])}</td>
+        <td>${money(row["총비용"])}</td>
+        <td>${number(row["전환수"])}</td>
+        <td>${ratio(row["ROAS"])}</td>
+        <td class="wrap">${html(row["점검사유"])}</td>
+        <td class="wrap">${html(row["권장조치"])}</td>
+        <td>
+          <div class="note-row">
+            <select data-decision="${html(row["대시보드키"])}">${["검토중","진행","보류","제외"].map(v => `<option value="${v}" ${row["결정"] === v ? "selected" : ""}>${v}</option>`).join("")}</select>
+            <input data-memo="${html(row["대시보드키"])}" value="${html(row["담당자메모"])}" placeholder="메모">
+            <button type="button" data-save="${html(row["대시보드키"])}">저장</button>
+          </div>
+        </td>
+      </tr>`).join("");
+      els.inspectionBody.querySelectorAll("[data-save]").forEach(btn => btn.addEventListener("click", () => saveNote(btn.dataset.save)));
+    }
+    function renderPlan() {
+      const rows = state.data.plan;
+      els.planCount.textContent = `${rows.length}개`;
+      els.planBody.innerHTML = rows.map(row => `<tr><td>${html(row["구분"])}</td><td>${html(row["대상"])}</td><td class="wrap">${html(row["계획"])}</td><td class="wrap">${html(row["근거"])}</td></tr>`).join("");
+    }
+    async function saveNote(key) {
+      const decision = document.querySelector(`[data-decision="${CSS.escape(key)}"]`).value;
+      const memo = document.querySelector(`[data-memo="${CSS.escape(key)}"]`).value;
+      await fetch(`/api/note?month=${encodeURIComponent(state.month)}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ key, decision, memo }) });
+      els.saveState.textContent = "저장됨";
+      setStatus("저장됨");
+      await loadData();
+    }
+    async function saveMemo() {
+      await fetch(`/api/memo?month=${encodeURIComponent(state.month)}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ planMemo: els.planMemo.value, reportMemo: els.reportMemo.value }) });
+      setStatus("메모 저장됨");
+    }
+    async function exportDraft() {
+      await saveMemo();
+      const res = await fetch(`/api/export-draft?month=${encodeURIComponent(state.month)}`);
+      const data = await res.json();
+      if (data.ok) {
+        setStatus(`디자인 보고서 생성: ${data.reportPath || data.draftPath}`);
+        if (data.reportUrl) window.open(data.reportUrl, "_blank");
+      } else {
+        setStatus("보고서 초안 생성 실패", true);
+      }
+    }
+    async function updateRanks() {
+      setStatus("검색 순위 갱신 중");
+      const res = await fetch(`/api/update-ranks?month=${encodeURIComponent(state.month)}`);
+      const data = await res.json();
+      if (data.ok) {
+        const summary = String(data.stdout || "").trim().split("\n").filter(Boolean).slice(0, 6).join(" / ");
+        setStatus(summary ? `검색 순위 갱신됨: ${summary}` : "검색 순위 갱신됨");
+      } else {
+        setStatus(`검색 순위 갱신 실패: ${data.stderr || ""}`, true);
+      }
+      await loadData();
+    }
+    document.getElementById("refreshBtn").addEventListener("click", loadData);
+    document.getElementById("rankBtn").addEventListener("click", updateRanks);
+    document.getElementById("saveMemoBtn").addEventListener("click", saveMemo);
+    document.getElementById("exportBtn").addEventListener("click", exportDraft);
+    els.monthFilter.addEventListener("change", () => {
+      state.month = els.monthFilter.value;
+      els.campaignFilter.value = "";
+      els.adgroupFilter.value = "";
+      loadData();
+    });
+    els.badOnlyBtn.addEventListener("click", () => {
+      state.badOnly = !state.badOnly;
+      els.badOnlyBtn.classList.toggle("primary", state.badOnly);
+      renderInspection();
+    });
+    document.querySelectorAll("[data-detail-mode]").forEach(button => {
+      button.addEventListener("click", () => {
+        state.detailMode = button.dataset.detailMode;
+        document.querySelectorAll("[data-detail-mode]").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        renderKeywords();
+      });
+    });
+    document.querySelectorAll("[data-rank-view]").forEach(button => {
+      button.addEventListener("click", () => {
+        state.rankView = button.dataset.rankView;
+        renderRankTraffic();
+      });
+    });
+    document.querySelectorAll(".nav [data-page]").forEach(button => {
+      button.addEventListener("click", () => {
+        state.page = button.dataset.page;
+        els.campaignFilter.value = "";
+        els.adgroupFilter.value = "";
+        fillCampaigns();
+        fillAdgroups();
+        render();
+      });
+    });
+    [els.campaignFilter].forEach(el => {
+      el.addEventListener("change", () => {
+        fillAdgroups();
+        render();
+      });
+    });
+    [els.adgroupFilter, els.decisionFilter, els.searchInput].forEach(el => {
+      el.addEventListener("input", render);
+      el.addEventListener("change", render);
+    });
+    loadData().catch(err => {
+      els.meta.textContent = err.message;
+      console.error(err);
+    });
+  </script>
+</body>
+</html>
