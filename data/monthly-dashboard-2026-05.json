@@ -6,8 +6,8 @@
     "2026-05",
     "2026-04"
   ],
-  "reportPath": "D:\\광고보고서\\naver_ads_monthly_report_2026-05.xlsx",
-  "draftPath": "D:\\광고보고서\\naver_ads_report_draft_2026-05.md",
+  "reportPath": "D:\\광고보고서\\reports\\naver_ads_monthly_report_2026-05.xlsx",
+  "draftPath": "D:\\광고보고서\\reports\\naver_ads_report_draft_2026-05.md",
   "monthly": [
     {
       "항목": "보고기간",
@@ -3830,8 +3830,6074 @@
     "rewardMemo": "리워드/슬롯 비용은 네이버 광고 API 비용이 아니므로 쇼핑검색 보조비로 별도 합산",
     "targetRank": "네이버 쇼핑 검색 순위 1페이지 1~5위"
   },
+  "dailyProductCosts": {
+    "sourcePath": "D:\\광고보고서\\raw\\naver_ads_2026_05_raw.xlsx",
+    "dates": [
+      "2026-05-01",
+      "2026-05-02",
+      "2026-05-03",
+      "2026-05-04",
+      "2026-05-05",
+      "2026-05-06",
+      "2026-05-07",
+      "2026-05-08",
+      "2026-05-09",
+      "2026-05-10",
+      "2026-05-11",
+      "2026-05-12",
+      "2026-05-13",
+      "2026-05-14",
+      "2026-05-15",
+      "2026-05-16",
+      "2026-05-17",
+      "2026-05-18",
+      "2026-05-19",
+      "2026-05-20",
+      "2026-05-21",
+      "2026-05-22",
+      "2026-05-23",
+      "2026-05-24",
+      "2026-05-25",
+      "2026-05-26",
+      "2026-05-27",
+      "2026-05-28",
+      "2026-05-29",
+      "2026-05-30",
+      "2026-05-31"
+    ],
+    "items": [
+      {
+        "campaign": "쇼핑검색_더도톰_수건",
+        "adgroup": "2600원_수건답례품",
+        "productName": "2600원_수건답례품",
+        "totalCost": 10535563.0,
+        "avgDailyCost": 339856.87096774194,
+        "clicks": 4145.0,
+        "conversions": 1897.0,
+        "revenue": 752049210.0,
+        "cpc": 2541.752231604343,
+        "roas": 71.38196696275273,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 9946979.0,
+            "clicks": 3883.0,
+            "conversions": 1806.0,
+            "revenue": 717114660.0,
+            "impressions": 85286.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 588584.0,
+            "clicks": 262.0,
+            "conversions": 91.0,
+            "revenue": 34934550.0,
+            "impressions": 4226.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_조구만",
+        "adgroup": "조구만_에디션_돌잔치답례품",
+        "productName": "조구만_에디션_돌잔치답례품",
+        "totalCost": 2517407.0,
+        "avgDailyCost": 81206.67741935483,
+        "clicks": 1118.0,
+        "conversions": 342.0,
+        "revenue": 188503490.0,
+        "cpc": 2251.70572450805,
+        "roas": 74.880021387086,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 2258012.0,
+            "clicks": 1007.0,
+            "conversions": 307.0,
+            "revenue": 167872410.0,
+            "impressions": 48598.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 259395.0,
+            "clicks": 111.0,
+            "conversions": 35.0,
+            "revenue": 20631080.0,
+            "impressions": 5958.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_데일리",
+        "adgroup": "데일리_호텔수건_최종",
+        "productName": "데일리_호텔수건_최종",
+        "totalCost": 1575677.0,
+        "avgDailyCost": 50828.290322580644,
+        "clicks": 1004.0,
+        "conversions": 274.0,
+        "revenue": 26239500.0,
+        "cpc": 1569.3994023904384,
+        "roas": 16.65284192128209,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 1422360.0,
+            "clicks": 905.0,
+            "conversions": 254.0,
+            "revenue": 24730300.0,
+            "impressions": 42454.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 153317.0,
+            "clicks": 99.0,
+            "conversions": 20.0,
+            "revenue": 1509200.0,
+            "impressions": 5424.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_조구만",
+        "adgroup": "조구만_핸드워시세트_돌잔치답례품",
+        "productName": "조구만_핸드워시세트_돌잔치답례품",
+        "totalCost": 1390180.0,
+        "avgDailyCost": 44844.51612903226,
+        "clicks": 898.0,
+        "conversions": 199.0,
+        "revenue": 122890900.0,
+        "cpc": 1548.0846325167038,
+        "roas": 88.39927203671466,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 1255880.0,
+            "clicks": 814.0,
+            "conversions": 184.0,
+            "revenue": 115382000.0,
+            "impressions": 45735.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 134300.0,
+            "clicks": 84.0,
+            "conversions": 15.0,
+            "revenue": 7508900.0,
+            "impressions": 5398.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_조구만",
+        "adgroup": "조구만_에디션_돌답례품1",
+        "productName": "조구만_에디션_돌답례품1",
+        "totalCost": 802129.0,
+        "avgDailyCost": 25875.129032258064,
+        "clicks": 443.0,
+        "conversions": 130.0,
+        "revenue": 46820900.0,
+        "cpc": 1810.6749435665913,
+        "roas": 58.370785746432304,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 744378.0,
+            "clicks": 409.0,
+            "conversions": 125.0,
+            "revenue": 46453500.0,
+            "impressions": 9071.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 57751.0,
+            "clicks": 34.0,
+            "conversions": 5.0,
+            "revenue": 367400.0,
+            "impressions": 738.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_꿀",
+        "adgroup": "꿀_돌잔치답례품1",
+        "productName": "꿀_돌잔치답례품1",
+        "totalCost": 637739.0,
+        "avgDailyCost": 20572.225806451614,
+        "clicks": 365.0,
+        "conversions": 62.0,
+        "revenue": 26067400.0,
+        "cpc": 1747.2301369863014,
+        "roas": 40.87471520480949,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 588165.0,
+            "clicks": 337.0,
+            "conversions": 59.0,
+            "revenue": 24577800.0,
+            "impressions": 15806.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 49574.0,
+            "clicks": 28.0,
+            "conversions": 3.0,
+            "revenue": 1489600.0,
+            "impressions": 1716.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_조구만",
+        "adgroup": "조구만_핸드워시_돌답례품",
+        "productName": "조구만_핸드워시_돌답례품",
+        "totalCost": 564842.0,
+        "avgDailyCost": 18220.709677419356,
+        "clicks": 458.0,
+        "conversions": 53.0,
+        "revenue": 23717300.0,
+        "cpc": 1233.2794759825329,
+        "roas": 41.98926425442867,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 493463.0,
+            "clicks": 405.0,
+            "conversions": 46.0,
+            "revenue": 20630300.0,
+            "impressions": 22065.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 71379.0,
+            "clicks": 53.0,
+            "conversions": 7.0,
+            "revenue": 3087000.0,
+            "impressions": 3766.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_호두정과",
+        "adgroup": "호두정과_돌답례품_메인",
+        "productName": "호두정과_돌답례품_메인",
+        "totalCost": 310956.0,
+        "avgDailyCost": 10030.838709677419,
+        "clicks": 244.0,
+        "conversions": 27.0,
+        "revenue": 4823100.0,
+        "cpc": 1274.4098360655737,
+        "roas": 15.510554547910315,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 260189.0,
+            "clicks": 208.0,
+            "conversions": 22.0,
+            "revenue": 3790100.0,
+            "impressions": 18705.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 50767.0,
+            "clicks": 36.0,
+            "conversions": 5.0,
+            "revenue": 1033000.0,
+            "impressions": 2106.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_꿀",
+        "adgroup": "꿀_결혼답례품",
+        "productName": "꿀_결혼답례품",
+        "totalCost": 183491.0,
+        "avgDailyCost": 5919.064516129032,
+        "clicks": 132.0,
+        "conversions": 20.0,
+        "revenue": 5985600.0,
+        "cpc": 1390.0833333333333,
+        "roas": 32.620673493522844,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 166669.0,
+            "clicks": 120.0,
+            "conversions": 17.0,
+            "revenue": 5062100.0,
+            "impressions": 4259.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 16822.0,
+            "clicks": 12.0,
+            "conversions": 3.0,
+            "revenue": 923500.0,
+            "impressions": 388.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_수건",
+        "adgroup": "3200원_수건답례품(M)",
+        "productName": "3200원_수건답례품(M)",
+        "totalCost": 147835.0,
+        "avgDailyCost": 4768.870967741936,
+        "clicks": 129.0,
+        "conversions": 31.0,
+        "revenue": 10897120.0,
+        "cpc": 1146.0077519379845,
+        "roas": 73.71136740284777,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 125436.0,
+            "clicks": 109.0,
+            "conversions": 29.0,
+            "revenue": 10443620.0,
+            "impressions": 4226.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 22399.0,
+            "clicks": 20.0,
+            "conversions": 2.0,
+            "revenue": 453500.0,
+            "impressions": 687.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_비타민",
+        "adgroup": "비타민_결혼답례품",
+        "productName": "비타민_결혼답례품",
+        "totalCost": 141055.0,
+        "avgDailyCost": 4550.1612903225805,
+        "clicks": 114.0,
+        "conversions": 7.0,
+        "revenue": 1448000.0,
+        "cpc": 1237.3245614035088,
+        "roas": 10.265499273333097,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 141055.0,
+            "clicks": 114.0,
+            "conversions": 7.0,
+            "revenue": 1448000.0,
+            "impressions": 4653.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_꿀",
+        "adgroup": "꿀_돌답례품",
+        "productName": "꿀_돌답례품",
+        "totalCost": 104259.0,
+        "avgDailyCost": 3363.1935483870966,
+        "clicks": 62.0,
+        "conversions": 15.0,
+        "revenue": 8660500.0,
+        "cpc": 1681.5967741935483,
+        "roas": 83.0671692611669,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 104259.0,
+            "clicks": 62.0,
+            "conversions": 15.0,
+            "revenue": 8660500.0,
+            "impressions": 7526.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_수건",
+        "adgroup": "2600원_수건답례품(완)",
+        "productName": "2600원_수건답례품(완)",
+        "totalCost": 102225.0,
+        "avgDailyCost": 3297.5806451612902,
+        "clicks": 58.0,
+        "conversions": 21.0,
+        "revenue": 7744350.0,
+        "cpc": 1762.5,
+        "roas": 75.75788701393984,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 102225.0,
+            "clicks": 58.0,
+            "conversions": 21.0,
+            "revenue": 7744350.0,
+            "impressions": 2557.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_조구만",
+        "adgroup": "조구만_꿀_돌잔치답례품",
+        "productName": "조구만_꿀_돌잔치답례품",
+        "totalCost": 60359.0,
+        "avgDailyCost": 1947.0645161290322,
+        "clicks": 62.0,
+        "conversions": 13.0,
+        "revenue": 2886000.0,
+        "cpc": 973.5322580645161,
+        "roas": 47.81391341804868,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 60359.0,
+            "clicks": 62.0,
+            "conversions": 13.0,
+            "revenue": 2886000.0,
+            "impressions": 6571.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_조구만",
+        "adgroup": "조구만_에디션_돌답례품2",
+        "productName": "조구만_에디션_돌답례품2",
+        "totalCost": 29589.0,
+        "avgDailyCost": 954.483870967742,
+        "clicks": 17.0,
+        "conversions": 9.0,
+        "revenue": 6590000.0,
+        "cpc": 1740.5294117647059,
+        "roas": 222.71790192301194,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 29589.0,
+            "clicks": 17.0,
+            "conversions": 9.0,
+            "revenue": 6590000.0,
+            "impressions": 5019.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_조구만",
+        "adgroup": "조구만_꿀세트_돌답례품",
+        "productName": "조구만_꿀세트_돌답례품",
+        "totalCost": 21279.0,
+        "avgDailyCost": 686.4193548387096,
+        "clicks": 18.0,
+        "conversions": 3.0,
+        "revenue": 2765500.0,
+        "cpc": 1182.1666666666667,
+        "roas": 129.96381408900794,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 21279.0,
+            "clicks": 18.0,
+            "conversions": 3.0,
+            "revenue": 2765500.0,
+            "impressions": 2094.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_조구만",
+        "adgroup": "조구만_수건단품_돌답례품",
+        "productName": "조구만_수건단품_돌답례품",
+        "totalCost": 12178.0,
+        "avgDailyCost": 392.83870967741933,
+        "clicks": 13.0,
+        "conversions": 4.0,
+        "revenue": 2523500.0,
+        "cpc": 936.7692307692307,
+        "roas": 207.21793397930693,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 9156.0,
+            "clicks": 11.0,
+            "conversions": 4.0,
+            "revenue": 2523500.0,
+            "impressions": 937.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 3022.0,
+            "clicks": 2.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 168.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_수건",
+        "adgroup": "2600원_돌수건(M)",
+        "productName": "2600원_돌수건(M)",
+        "totalCost": 5073.0,
+        "avgDailyCost": 163.6451612903226,
+        "clicks": 3.0,
+        "conversions": 0.0,
+        "revenue": 0.0,
+        "cpc": 1691.0,
+        "roas": 0.0,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 5073.0,
+            "clicks": 3.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 154.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_데일리",
+        "adgroup": "데일리_호텔수건2",
+        "productName": "데일리_호텔수건2",
+        "totalCost": 2055.0,
+        "avgDailyCost": 66.29032258064517,
+        "clicks": 2.0,
+        "conversions": 0.0,
+        "revenue": 0.0,
+        "cpc": 1027.5,
+        "roas": 0.0,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 2055.0,
+            "clicks": 2.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 51.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_수건",
+        "adgroup": "2600원_돌답례품수건(M)",
+        "productName": "2600원_돌답례품수건(M)",
+        "totalCost": 1183.0,
+        "avgDailyCost": 38.16129032258065,
+        "clicks": 1.0,
+        "conversions": 0.0,
+        "revenue": 0.0,
+        "cpc": 1183.0,
+        "roas": 0.0,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 1183.0,
+            "clicks": 1.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 18.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_꿀",
+        "adgroup": "꿀_돌잔치답례품2",
+        "productName": "꿀_돌잔치답례품2",
+        "totalCost": 0.0,
+        "avgDailyCost": 0.0,
+        "clicks": 0.0,
+        "conversions": 7.0,
+        "revenue": 2484400.0,
+        "cpc": 0,
+        "roas": 0,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 7.0,
+            "revenue": 2484400.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_데일리",
+        "adgroup": "데일리_호텔수건1",
+        "productName": "데일리_호텔수건1",
+        "totalCost": 0.0,
+        "avgDailyCost": 0.0,
+        "clicks": 0.0,
+        "conversions": 4.0,
+        "revenue": 558600.0,
+        "cpc": 0,
+        "roas": 0,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 4.0,
+            "revenue": 558600.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_호두정과",
+        "adgroup": "호두정과_돌답례품",
+        "productName": "호두정과_돌답례품",
+        "totalCost": 0.0,
+        "avgDailyCost": 0.0,
+        "clicks": 0.0,
+        "conversions": 0.0,
+        "revenue": 0.0,
+        "cpc": 0,
+        "roas": 0,
+        "daily": [
+          {
+            "date": "2026-05-01",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-02",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-03",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-04",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-05",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-06",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-07",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-08",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-09",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-10",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-11",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-12",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-13",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-14",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-15",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-16",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-17",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-18",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-19",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-20",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-21",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-22",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-23",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-25",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-26",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-27",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-28",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 37.0
+          },
+          {
+            "date": "2026-05-29",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-30",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          },
+          {
+            "date": "2026-05-31",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
+          }
+        ]
+      }
+    ],
+    "totalCost": 19145074.0,
+    "summary": "2026-05-01 ~ 2026-05-31 쇼핑검색 상품/소재별 일 광고비"
+  },
   "rankTraffic": {
-    "sourcePath": "D:\\자동화\\rank_data.json",
+    "sourcePath": "D:\\광고보고서\\rank\\rank_data.json",
     "updatedAt": "",
     "dates": [],
     "slots": [],

@@ -738,6 +738,33 @@
       font-size: 12px;
       font-weight: 800;
     }
+    .daily-cost-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(86px, 1fr));
+      gap: 6px;
+      min-width: 420px;
+    }
+    .daily-cost-chip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 6px 8px;
+      border-radius: 8px;
+      background: #f6f8fd;
+      color: #20304a;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .daily-cost-chip.zero {
+      color: #a2adbf;
+      background: #fafbfe;
+    }
+    .daily-cost-date {
+      color: #8491a8;
+      font-weight: 900;
+    }
     .thumb-placeholder {
       display: grid;
       place-items: center;
@@ -1221,6 +1248,7 @@
       const mix = state.data.shoppingIntegrated || {};
       const reward = state.data.rewardMarketing || {};
       const observation = state.data.rankObservation || {};
+      const dailyCosts = state.data.dailyProductCosts || {};
       const productThumb = item => {
         const thumb = item.image ? `<img class="reward-thumb" src="${html(item.image)}" alt="">` : `<div class="reward-thumb thumb-placeholder">대기</div>`;
         return item.link ? `<a class="reward-thumb-link" href="${html(item.link)}" target="_blank" rel="noreferrer" title="상품 열기">${thumb}</a>` : thumb;
@@ -1264,6 +1292,22 @@
           <td><span class="pill ${cls}">${html(judgement)}</span></td>
         </tr>`;
       }).join("");
+      const dailyCostRows = (dailyCosts.items || []).slice(0, 30).map(item => {
+        const chips = (item.daily || []).map(day => `
+          <span class="daily-cost-chip ${Number(day.cost || 0) ? "" : "zero"}">
+            <span class="daily-cost-date">${html(String(day.date || "").slice(5))}</span>
+            <span>${money(day.cost || 0)}</span>
+          </span>`).join("");
+        return `<tr>
+          <td class="wrap"><strong>${html(item.productName || "")}</strong><div class="meta">${html(item.campaign || "")} · ${html(item.adgroup || "")}</div></td>
+          <td>${money(item.totalCost || 0)}</td>
+          <td>${money(item.avgDailyCost || 0)}</td>
+          <td>${number(item.clicks || 0)}</td>
+          <td>${money(item.cpc || 0)}</td>
+          <td>${ratio(item.roas || 0)}</td>
+          <td><div class="daily-cost-grid">${chips}</div></td>
+        </tr>`;
+      }).join("");
       const categoryTable = (title, sub, headers, body, emptyColspan) => `
         <div class="product-category">
           <div class="product-category-head">
@@ -1287,6 +1331,7 @@
         <div class="meta" style="margin-bottom:10px">${html(mix.rewardMemo || "")}</div>
         ${categoryTable("리워드 진행 상품", reward.summary || reward.memo || "", ["진행 상품", "키워드", "기간", "보고기간 비용", "총 금액", "상태", "성과 확인"], rewardRows, 7)}
         ${categoryTable("순위 관찰 상품", observation.summary || "", ["관찰 상품", "우선 키워드", "확인 기준", "상태", "메모"], observationRows, 5)}
+        ${categoryTable("일자별 상품 광고비", dailyCosts.summary || "6월 1일부터 어제까지 쇼핑검색 상품/소재별 광고 사용 금액", ["상품/소재", "누적 비용", "일평균", "클릭", "CPC", "ROAS", "일자별 비용"], dailyCostRows, 7)}
         ${categoryTable("광고 연동 상품", "쇼핑검색 광고 데이터와 함께 효율을 비교하는 상품/소재", ["상품/소재", "클릭", "비용", "CPC", "ROAS", "판단"], adLinkedRows, 6)}`;
     }
     function renderBrandContract() {
