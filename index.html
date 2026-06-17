@@ -269,6 +269,303 @@
     .note-row select, .note-row button { height: 32px; }
     .note-row input { height: 32px; }
     .empty { padding: 24px; color: var(--muted); text-align: center; }
+
+    /* Soft dashboard theme */
+    :root {
+      --bg: #f3f6fc;
+      --panel: #ffffff;
+      --line: #e6ebf5;
+      --text: #172033;
+      --muted: #8491a8;
+      --green: #15a36d;
+      --blue: #4865f4;
+      --blue-soft: #eef2ff;
+      --red: #e14b59;
+      --amber: #ffad4d;
+      --mint: #d9f5e4;
+      --sky: #d7f4fb;
+      --rose: #ffe7e8;
+      --cream: #fff1bf;
+      --soft: #f8faff;
+      --shadow: 0 8px 24px rgba(26, 39, 78, .07);
+    }
+    body {
+      background:
+        radial-gradient(circle at 22% 8%, rgba(255, 255, 255, .95), transparent 28%),
+        linear-gradient(180deg, #f6f8ff 0%, #f2f5fb 100%);
+    }
+    .app { grid-template-columns: 206px minmax(0, 1fr); }
+    aside {
+      padding: 18px 10px;
+      border-right-color: #e7edf8;
+      box-shadow: 6px 0 24px rgba(34, 47, 88, .05);
+    }
+    main { padding: 22px 28px 38px; }
+    .brand {
+      display: block;
+      padding: 0 4px 18px;
+      border-bottom-color: #edf1f8;
+      line-height: 1.25;
+    }
+    .brand .mark {
+      display: none;
+    }
+    .brand span:last-child {
+      display: block;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+    .brand::after {
+      content: "Naver Ads Dashboard";
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    label {
+      margin: 15px 8px 8px;
+      color: #8a98ad;
+      font-size: 11px;
+      letter-spacing: 0;
+    }
+    select, input, textarea {
+      border-color: #dfe7f3;
+      background: #fff;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+    }
+    select:focus, input:focus, textarea:focus {
+      outline: 2px solid rgba(72,101,244,.18);
+      border-color: rgba(72,101,244,.42);
+    }
+    .nav { gap: 7px; margin-top: 8px; }
+    .nav button {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      height: 39px;
+      padding: 0 11px 0 12px;
+      border-radius: 8px;
+      color: #5f6d84;
+      font-size: 13px;
+      font-weight: 800;
+      transition: background .15s ease, color .15s ease, transform .15s ease, box-shadow .15s ease;
+    }
+    .nav button::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border-radius: 5px;
+      background: linear-gradient(135deg, #8ca0ff, #52d6c6);
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,.08);
+      flex: 0 0 auto;
+    }
+    .nav button[data-page="powerlink"]::before { background: linear-gradient(135deg, #ff78a7, #ffb15c); }
+    .nav button[data-page="shopping"]::before { background: linear-gradient(135deg, #82d7ff, #4865f4); }
+    .nav button[data-page="brand"]::before { background: linear-gradient(135deg, #cba6ff, #ff8bc1); }
+    .nav button[data-page="rankTraffic"]::before { background: linear-gradient(135deg, #ffb44d, #ffd86e); }
+    .nav button:hover {
+      background: #f3f6ff;
+      color: var(--blue);
+      transform: translateX(1px);
+    }
+    .nav button.active {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 10px 18px rgba(72,101,244,.25);
+    }
+    .nav button.active::before { background: rgba(255,255,255,.36); box-shadow: none; }
+    .sidebar-search {
+      bottom: 12px;
+      padding: 14px 0 0;
+      border-top-color: #edf1f8;
+    }
+    .header {
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 900;
+      color: #10192d;
+    }
+    h2 {
+      font-size: 16px;
+      font-weight: 900;
+      color: #14213d;
+    }
+    .meta, .profile { color: #75839a; }
+    .top-status { color: var(--blue); }
+    .actions button {
+      height: 38px;
+      border-radius: 9px;
+      border-color: #dde6f3;
+      box-shadow: 0 8px 18px rgba(26, 39, 78, .06);
+    }
+    .primary {
+      background: var(--green);
+      border-color: var(--green);
+      box-shadow: 0 10px 18px rgba(21,163,109,.22);
+    }
+    .ghost {
+      background: #fff;
+      color: #22324b;
+    }
+    .metric, section {
+      border-color: #e5ebf6;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .metric {
+      min-height: 94px;
+      padding: 15px 16px;
+    }
+    .metric .label {
+      color: #7b88a0;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .metric .value {
+      color: #172033;
+      font-size: 23px;
+      letter-spacing: 0;
+    }
+    .metric .sub { color: #8b98ad; }
+    .section-head {
+      padding: 15px 16px;
+      border-bottom-color: #edf1f7;
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+      border-radius: 12px 12px 0 0;
+    }
+    .count {
+      color: #67758c;
+      font-weight: 900;
+    }
+    .track { height: 9px; background: #edf3f7; }
+    .fill { border-radius: 999px; }
+    th {
+      background: #f8faff;
+      color: #526178;
+      font-size: 12px;
+    }
+    th, td { border-bottom-color: #eef3f9; }
+    tbody tr:hover { background: #fbfcff; }
+    .pill {
+      height: 23px;
+      border-radius: 999px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+    .pill.good { background: #e4f8ed; color: #148456; }
+    .pill.warn { background: #fff1cf; color: #a16712; }
+    .pill.bad { background: #ffe5e8; color: #d53b4a; }
+    .detail-toolbar, .rank-tabs {
+      background: #fbfcff;
+      border-bottom-color: #edf1f7;
+    }
+    .detail-toolbar button,
+    .rank-tabs button {
+      border-color: #dfe7f3;
+      border-radius: 999px;
+      color: #45546b;
+      box-shadow: 0 3px 8px rgba(26, 39, 78, .04);
+    }
+    .detail-toolbar button.active,
+    .rank-tabs button.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      box-shadow: 0 8px 16px rgba(72,101,244,.22);
+    }
+    #rankSlotTabs button.active {
+      background: var(--amber);
+      border-color: var(--amber);
+      color: #fff;
+      box-shadow: 0 8px 16px rgba(255,173,77,.24);
+    }
+    .rank-grid {
+      grid-template-columns: repeat(auto-fill, minmax(292px, 1fr));
+      gap: 16px;
+      padding: 16px;
+      background: #f5f7fc;
+    }
+    .rank-card {
+      border-color: #e5ebf5;
+      border-radius: 10px;
+      box-shadow: 0 8px 18px rgba(26, 39, 78, .08);
+    }
+    .rank-card-head {
+      min-height: 86px;
+      padding: 13px 16px;
+      gap: 13px;
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+      border-bottom-color: #edf1f7;
+    }
+    .rank-thumb,
+    .reward-thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      border-color: #e1e8f3;
+      box-shadow: 0 4px 10px rgba(26, 39, 78, .08);
+    }
+    .rank-card-title {
+      color: #172033;
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .rank-card-sub {
+      color: #9aa6ba;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .rank-list {
+      padding: 11px 16px 14px;
+      background: #fff;
+    }
+    .rank-row {
+      min-height: 32px;
+      padding: 6px 0;
+      border-bottom-color: #f0f4f8;
+      color: #24324a;
+      font-weight: 700;
+    }
+    .rank-keyword {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .rank-badge {
+      min-width: 46px;
+      height: 22px;
+      border-radius: 999px;
+      padding: 0 9px;
+      font-size: 12px;
+    }
+    .rank-badge.one { background: var(--cream); color: #9a6a00; }
+    .rank-badge.top3 { background: var(--sky); color: #167184; }
+    .rank-badge.top5 { background: var(--mint); color: #1d7d4b; }
+    .rank-badge.top10 { background: #e8edf7; color: #526178; }
+    .rank-badge.out { background: var(--rose); color: #d53b4a; }
+    .rank-badge.none { background: #f1f4f8; color: #9aa6ba; }
+    .delta-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 16px;
+      height: 18px;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .delta-badge.good { color: #11845b; }
+    .delta-badge.bad { color: #e14b59; }
+    .delta-badge.warn { color: #aab3c2; }
+    .empty {
+      color: #94a0b4;
+      font-weight: 700;
+    }
     @media (max-width: 1120px) {
       .app { grid-template-columns: 1fr; }
       aside { border-right: 0; border-bottom: 1px solid var(--line); }
@@ -776,7 +1073,7 @@
     function deltaBadge(delta) {
       const d = delta || {};
       const cls = d.direction === "up" ? "good" : d.direction === "down" ? "bad" : "warn";
-      return `<span class="pill ${cls}" style="height:22px">${html(d.text || "-")}</span>`;
+      return `<span class="delta-badge ${cls}">${html(d.text || "-")}</span>`;
     }
     function selectedRankDetail(rank) {
       const details = rank.slotDetails || [];
@@ -816,7 +1113,7 @@
             ${group.image ? `<img class="rank-thumb" src="${html(group.image)}" alt="">` : `<div class="rank-thumb"></div>`}
             <div style="min-width:0"><div class="rank-card-title">${html(group.title)}</div><div class="rank-card-sub">상품 ID: ${html(group.productId)}</div></div>
           </div>
-          <div class="rank-list">${(group.items || []).map(item => `<div class="rank-row"><span>${html(item.keyword)}</span><span style="display:flex;gap:6px;align-items:center">${rankBadge(item)}${deltaBadge(item.delta)}</span></div>`).join("")}</div>
+          <div class="rank-list">${(group.items || []).map(item => `<div class="rank-row"><span class="rank-keyword">${html(item.keyword)}</span><span style="display:flex;gap:6px;align-items:center">${rankBadge(item)}${deltaBadge(item.delta)}</span></div>`).join("")}</div>
         </div>`).join("")}</div>`;
     }
     function renderPowerlinkDevice(title, rows) {
