@@ -3084,6 +3084,118 @@
     "activeCount": 0,
     "memo": "쇼핑검색 상품 순위 트래픽 보강 비용으로 광고비와 분리해 관리"
   },
+  "rankObservation": {
+    "items": [
+      {
+        "category": "순위 관찰 상품",
+        "productName": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
+        "link": "https://smartstore.naver.com/thedotomshop/products/11562165854",
+        "productId": "11562165854",
+        "keywords": [
+          "돌답례품",
+          "돌잔치수건",
+          "돌수건",
+          "조구만",
+          "돌잔치답례품",
+          "답례품",
+          "돌답례품수건",
+          "돌수건답례품"
+        ],
+        "priorityKeywords": [
+          "돌잔치답례품",
+          "돌답례품",
+          "답례품"
+        ],
+        "device": "네이버 쇼핑 기준",
+        "memo": "리워드 미진행, 자연 순위 관찰용",
+        "keyword": "돌잔치답례품, 돌답례품, 답례품",
+        "image": "",
+        "rankTitle": "",
+        "status": "관찰중",
+        "metric": "네이버 쇼핑 순위 변화"
+      },
+      {
+        "category": "순위 관찰 상품",
+        "productName": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
+        "link": "https://smartstore.naver.com/thedotomshop/products/7444568862",
+        "productId": "7444568862",
+        "keywords": [
+          "답례품꿀",
+          "돌잔치답례품",
+          "돌답례품",
+          "답례품",
+          "꿀답례품",
+          "결혼답례품",
+          "꿀결혼답례품"
+        ],
+        "priorityKeywords": [
+          "꿀답례품",
+          "답례품꿀",
+          "꿀결혼답례품"
+        ],
+        "device": "네이버 쇼핑 기준",
+        "memo": "리워드 미진행, 자연 순위 관찰용",
+        "keyword": "꿀답례품, 답례품꿀, 꿀결혼답례품",
+        "image": "",
+        "rankTitle": "",
+        "status": "관찰중",
+        "metric": "네이버 쇼핑 순위 변화"
+      },
+      {
+        "category": "순위 관찰 상품",
+        "productName": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
+        "link": "https://smartstore.naver.com/thedotomshop/products/12047676813",
+        "productId": "12047676813",
+        "keywords": [
+          "호두정과답례품",
+          "답례품호두정과",
+          "결혼답례품",
+          "돌잔치답례품",
+          "결혼식답례품"
+        ],
+        "priorityKeywords": [
+          "결혼식답례품",
+          "결혼답례품",
+          "호두정과답례품"
+        ],
+        "device": "네이버 쇼핑 기준",
+        "memo": "리워드 미진행, 자연 순위 관찰용",
+        "keyword": "결혼식답례품, 결혼답례품, 호두정과답례품",
+        "image": "",
+        "rankTitle": "",
+        "status": "관찰중",
+        "metric": "네이버 쇼핑 순위 변화"
+      },
+      {
+        "category": "순위 관찰 상품",
+        "productName": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
+        "link": "https://smartstore.naver.com/thedotomshop/products/11858377273",
+        "productId": "11858377273",
+        "keywords": [
+          "호텔수건",
+          "호텔타월",
+          "호텔수건40수",
+          "부드러운수건",
+          "호텔수건5+5",
+          "수건5+5",
+          "수건"
+        ],
+        "priorityKeywords": [
+          "호텔수건",
+          "수건",
+          "40수수건"
+        ],
+        "device": "네이버 쇼핑 기준",
+        "memo": "리워드 미진행, 자연 순위 관찰용",
+        "keyword": "호텔수건, 수건, 40수수건",
+        "image": "",
+        "rankTitle": "",
+        "status": "관찰중",
+        "metric": "네이버 쇼핑 순위 변화"
+      }
+    ],
+    "summary": "4개 상품 / 리워드 미진행 자연 순위 관찰"
+  },
   "shoppingIntegrated": {
     "adCost": 18207906.0,
     "rewardCost": 0.0,

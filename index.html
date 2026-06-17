@@ -709,6 +709,42 @@
       transform: translateY(-1px);
       box-shadow: 0 8px 16px rgba(26, 39, 78, .12);
     }
+    .product-category {
+      margin-top: 14px;
+      border: 1px solid #e5ebf5;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 16px rgba(26, 39, 78, .05);
+    }
+    .product-category-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 16px;
+      background: #fbfcff;
+      border-bottom: 1px solid #edf1f7;
+    }
+    .product-category-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 900;
+      color: #172033;
+    }
+    .product-category-sub {
+      margin-top: 4px;
+      color: #8491a8;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .thumb-placeholder {
+      display: grid;
+      place-items: center;
+      color: #9aa6ba;
+      font-size: 11px;
+      font-weight: 900;
+    }
     .delta-badge {
       display: inline-flex;
       align-items: center;
@@ -1184,25 +1220,62 @@
     function renderShoppingIntegrated() {
       const mix = state.data.shoppingIntegrated || {};
       const reward = state.data.rewardMarketing || {};
+      const observation = state.data.rankObservation || {};
+      const productThumb = item => {
+        const thumb = item.image ? `<img class="reward-thumb" src="${html(item.image)}" alt="">` : `<div class="reward-thumb thumb-placeholder">대기</div>`;
+        return item.link ? `<a class="reward-thumb-link" href="${html(item.link)}" target="_blank" rel="noreferrer" title="상품 열기">${thumb}</a>` : thumb;
+      };
+      const productNameCell = item => `
+        <td class="wrap">
+          <div class="reward-product">
+            ${productThumb(item)}
+            <div><div class="reward-product-title">${html(item.productName || item["상품명"] || item["광고그룹명"] || "")}</div><div class="meta">상품번호 ${html(item.productId || "")}</div></div>
+          </div>
+        </td>`;
       const rewardRows = (reward.items || []).map(item => {
-        const thumb = item.image ? `<img class="reward-thumb" src="${html(item.image)}" alt="">` : `<div class="reward-thumb"></div>`;
-        const linkedThumb = item.link ? `<a class="reward-thumb-link" href="${html(item.link)}" target="_blank" rel="noreferrer" title="상품 열기">${thumb}</a>` : thumb;
         return `
         <tr>
-          <td class="wrap">
-            <div class="reward-product">
-              ${linkedThumb}
-              <div><div class="reward-product-title">${html(item.productName || "")}</div><div class="meta">상품번호 ${html(item.productId || "")}</div></div>
-            </div>
-          </td>
+          ${productNameCell(item)}
           <td>${html(item.keyword || "")}</td>
           <td>${html(item.startDate || "")} ~ ${html(item.endDate || "")}</td>
           <td>${money(item.recognizedAmount || 0)}</td>
           <td>${money(item.totalAmount || 0)}</td>
-          <td>${html(item.status || "")}</td>
+          <td><span class="pill good">${html(item.status || "")}</span></td>
           <td class="wrap">${html(item.metric || "")}</td>
         </tr>`;
       }).join("");
+      const observationRows = (observation.items || []).map(item => `
+        <tr>
+          ${productNameCell(item)}
+          <td class="wrap">${html((item.priorityKeywords || []).join(", ") || item.keyword || "")}</td>
+          <td>${html(item.device || "")}</td>
+          <td><span class="pill warn">${html(item.status || "")}</span></td>
+          <td class="wrap">${html(item.memo || "")}</td>
+        </tr>`).join("");
+      const adLinkedRows = shoppingRows().slice(0, 12).map(row => {
+        const judgement = row["판단"] || "관찰";
+        const cls = judgement.includes("확대") ? "good" : judgement.includes("고") || judgement.includes("무전환") || judgement.includes("저") ? "bad" : "warn";
+        return `<tr>
+          <td class="wrap"><strong>${html(row["상품명"] || row["광고그룹명"] || "")}</strong><div class="meta">${html(row["캠페인명"] || "")} · ${html(row["광고그룹명"] || "")}</div></td>
+          <td>${number(row["클릭수"])}</td>
+          <td>${money(row["총비용"])}</td>
+          <td>${money(row["CPC"])}</td>
+          <td>${ratio(row["ROAS"])}</td>
+          <td><span class="pill ${cls}">${html(judgement)}</span></td>
+        </tr>`;
+      }).join("");
+      const categoryTable = (title, sub, headers, body, emptyColspan) => `
+        <div class="product-category">
+          <div class="product-category-head">
+            <div><h3 class="product-category-title">${html(title)}</h3><div class="product-category-sub">${html(sub || "")}</div></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr>${headers.map(h => `<th>${html(h)}</th>`).join("")}</tr></thead>
+              <tbody>${body || `<tr><td class="empty" colspan="${emptyColspan}">표시할 상품이 없습니다.</td></tr>`}</tbody>
+            </table>
+          </div>
+        </div>`;
       els.shoppingIntegratedBody.innerHTML = `
         <div class="kpis" style="margin-bottom:12px">
           <div class="metric"><div class="label">쇼핑검색 광고비</div><div class="value">${money(mix.adCost || 0)}</div><div class="sub">네이버 광고 API 비용</div></div>
@@ -1212,12 +1285,9 @@
           <div class="metric"><div class="label">통합 ROAS</div><div class="value">${ratio(mix.blendedRoas || 0)}</div><div class="sub">${html(mix.targetRank || "")}</div></div>
         </div>
         <div class="meta" style="margin-bottom:10px">${html(mix.rewardMemo || "")}</div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>진행 상품</th><th>키워드</th><th>기간</th><th>보고기간 비용</th><th>총 금액</th><th>상태</th><th>성과 확인</th></tr></thead>
-            <tbody>${rewardRows || `<tr><td class="empty" colspan="7">리워드 마케팅 내역이 없습니다.</td></tr>`}</tbody>
-          </table>
-        </div>`;
+        ${categoryTable("리워드 진행 상품", reward.summary || reward.memo || "", ["진행 상품", "키워드", "기간", "보고기간 비용", "총 금액", "상태", "성과 확인"], rewardRows, 7)}
+        ${categoryTable("순위 관찰 상품", observation.summary || "", ["관찰 상품", "우선 키워드", "확인 기준", "상태", "메모"], observationRows, 5)}
+        ${categoryTable("광고 연동 상품", "쇼핑검색 광고 데이터와 함께 효율을 비교하는 상품/소재", ["상품/소재", "클릭", "비용", "CPC", "ROAS", "판단"], adLinkedRows, 6)}`;
     }
     function renderBrandContract() {
       const brand = state.data.brandContract || {};
