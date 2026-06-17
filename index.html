@@ -495,7 +495,7 @@
         console.warn("API fetch failed; trying static dashboard data", error);
       }
       const staticPath = state.month ? `data/monthly-dashboard-${encodeURIComponent(state.month)}.json` : "data/monthly-dashboard-latest.json";
-      const staticRes = await fetch(staticPath);
+      const staticRes = await fetch(`${staticPath}?v=${Date.now()}`, { cache: "no-store" });
       if (!staticRes.ok) throw new Error("대시보드 데이터를 불러오지 못했습니다.");
       return await staticRes.json();
     }
