@@ -176,6 +176,49 @@
     h2 { margin: 0; font-size: 15px; color: #1a202c; }
     .count { color: var(--muted); font-size: 12px; font-weight: 800; }
     .bars { display: grid; gap: 10px; padding: 14px; }
+    .type-card {
+      display: grid;
+      gap: 10px;
+      padding: 13px 14px;
+      border: 1px solid #edf2f8;
+      border-radius: 10px;
+      background: #fbfcff;
+    }
+    .type-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .type-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+      color: #22324b;
+    }
+    .type-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 4px;
+      background: var(--blue);
+    }
+    .type-dot.power { background: var(--amber); }
+    .type-dot.shopping { background: var(--green); }
+    .type-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      color: #7f8ca2;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .type-stats strong {
+      display: block;
+      margin-top: 3px;
+      color: #172033;
+      font-size: 13px;
+    }
     .bar {
       display: grid;
       grid-template-columns: 92px 1fr 82px;
@@ -417,9 +460,25 @@
       border-radius: 12px;
       box-shadow: var(--shadow);
     }
+    section {
+      overflow: hidden;
+    }
     .metric {
+      position: relative;
       min-height: 94px;
       padding: 15px 16px;
+      overflow: hidden;
+    }
+    .metric::before {
+      content: "";
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #82d7ff, #4865f4);
+      opacity: .7;
     }
     .metric .label {
       color: #7b88a0;
@@ -451,6 +510,16 @@
     }
     th, td { border-bottom-color: #eef3f9; }
     tbody tr:hover { background: #fbfcff; }
+    table.compact {
+      min-width: 0;
+    }
+    table.compact tbody tr {
+      transition: background .15s ease;
+    }
+    table.compact td:first-child {
+      font-weight: 800;
+      color: #22324b;
+    }
     .pill {
       height: 23px;
       border-radius: 999px;
@@ -549,6 +618,97 @@
     .rank-badge.top10 { background: #e8edf7; color: #526178; }
     .rank-badge.out { background: var(--rose); color: #d53b4a; }
     .rank-badge.none { background: #f1f4f8; color: #9aa6ba; }
+    .powerlink-rank-grid {
+      display: grid;
+      gap: 16px;
+      padding: 16px;
+      background: #f5f7fc;
+    }
+    .powerlink-rank-card {
+      background: #fff;
+      border: 1px solid #e5ebf5;
+      border-radius: 12px;
+      box-shadow: 0 8px 18px rgba(26, 39, 78, .08);
+      overflow: hidden;
+    }
+    .powerlink-rank-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid #eef3f9;
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+    }
+    .powerlink-rank-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 900;
+      color: #172033;
+    }
+    .powerlink-rank-sub {
+      margin-top: 8px;
+      color: #7d8aa1;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .device-block {
+      padding: 14px 18px 16px;
+    }
+    .device-block + .device-block {
+      border-top: 1px solid #f0f4f8;
+    }
+    .device-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 10px;
+      color: #44536b;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .device-title::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, #4865f4, #82d7ff);
+    }
+    .device-title.mobile::before {
+      background: linear-gradient(135deg, #ff78a7, #ffb15c);
+    }
+    .keyword-chips {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(154px, 1fr));
+      gap: 8px;
+    }
+    .keyword-chip {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      align-items: center;
+      gap: 7px;
+      min-height: 34px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      background: #f6f8fd;
+      color: #24324a;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .keyword-chip-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .reward-thumb-link {
+      display: inline-flex;
+      border-radius: 8px;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .reward-thumb-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(26, 39, 78, .12);
+    }
     .delta-badge {
       display: inline-flex;
       align-items: center;
@@ -579,7 +739,7 @@
 <body>
   <div class="app">
     <aside>
-      <div class="brand"><span class="mark">N</span><span>월간 광고</span></div>
+      <div class="brand"><span class="mark">N</span><span>더도톰</span></div>
       <label for="monthFilter">월 선택</label>
       <select id="monthFilter"><option value="">불러오는 중</option></select>
       <div class="nav">
@@ -765,6 +925,13 @@
     function number(v) { return num.format(Number(v || 0)); }
     function pct(v) { return `${(Number(v || 0) * 100).toFixed(1)}%`; }
     function ratio(v) { return Number(v || 0).toFixed(2); }
+    function todayLabel() {
+      const today = new Date();
+      const y = today.getFullYear();
+      const m = String(today.getMonth() + 1).padStart(2, "0");
+      const d = String(today.getDate()).padStart(2, "0");
+      return `오늘 ${y}-${m}-${d}`;
+    }
     function html(v) {
       return String(v ?? "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;" }[m]));
     }
@@ -866,7 +1033,7 @@
     function render() {
       const d = state.data;
       renderPageShell();
-      els.meta.textContent = `${d.month} 보고서 · ${d.reportPath} · 업데이트 ${d.updatedAt}`;
+      els.meta.textContent = `${todayLabel()} · ${d.month} 광고 운영 현황`;
       els.profile.textContent = `${d.dataProfile.period} · ${d.dataProfile.granularity} · 원천 ${number(d.dataProfile.rawRows)}행 · 상세 ${number(d.dataProfile.detailRows)}개`;
       renderKpis();
       renderTypes();
@@ -896,7 +1063,18 @@
       els.typeCount.textContent = `${rows.length}개 유형`;
       els.typeBars.innerHTML = rows.map(row => {
         const cls = row["광고유형"] === "파워링크" ? "power" : row["광고유형"] === "쇼핑검색" ? "shopping" : "";
-        return `<div class="bar"><strong>${html(row["광고유형"])}</strong><div class="track"><div class="fill ${cls}" style="width:${Math.max(3, Number(row["총비용"] || 0) / max * 100)}%"></div></div><span>${money(row["총비용"])}</span></div>`;
+        return `<div class="type-card">
+          <div class="type-card-head">
+            <div class="type-name"><span class="type-dot ${cls}"></span>${html(row["광고유형"])}</div>
+            <strong>${money(row["총비용"])}</strong>
+          </div>
+          <div class="track"><div class="fill ${cls}" style="width:${Math.max(3, Number(row["총비용"] || 0) / max * 100)}%"></div></div>
+          <div class="type-stats">
+            <span>클릭<strong>${number(row["클릭수"])}</strong></span>
+            <span>전환<strong>${number(row["전환수"])}</strong></span>
+            <span>ROAS<strong>${ratio(row["ROAS"])}</strong></span>
+          </div>
+        </div>`;
       }).join("");
     }
     function renderCampaigns() {
@@ -1006,22 +1184,25 @@
     function renderShoppingIntegrated() {
       const mix = state.data.shoppingIntegrated || {};
       const reward = state.data.rewardMarketing || {};
-      const rewardRows = (reward.items || []).map(item => `
+      const rewardRows = (reward.items || []).map(item => {
+        const thumb = item.image ? `<img class="reward-thumb" src="${html(item.image)}" alt="">` : `<div class="reward-thumb"></div>`;
+        const linkedThumb = item.link ? `<a class="reward-thumb-link" href="${html(item.link)}" target="_blank" rel="noreferrer" title="상품 열기">${thumb}</a>` : thumb;
+        return `
         <tr>
           <td class="wrap">
             <div class="reward-product">
-              ${item.image ? `<img class="reward-thumb" src="${html(item.image)}" alt="">` : `<div class="reward-thumb"></div>`}
+              ${linkedThumb}
               <div><div class="reward-product-title">${html(item.productName || "")}</div><div class="meta">상품번호 ${html(item.productId || "")}</div></div>
             </div>
           </td>
           <td>${html(item.keyword || "")}</td>
-          <td><a href="${html(item.link || "#")}" target="_blank" rel="noreferrer">상품 링크</a></td>
           <td>${html(item.startDate || "")} ~ ${html(item.endDate || "")}</td>
           <td>${money(item.recognizedAmount || 0)}</td>
           <td>${money(item.totalAmount || 0)}</td>
           <td>${html(item.status || "")}</td>
           <td class="wrap">${html(item.metric || "")}</td>
-        </tr>`).join("");
+        </tr>`;
+      }).join("");
       els.shoppingIntegratedBody.innerHTML = `
         <div class="kpis" style="margin-bottom:12px">
           <div class="metric"><div class="label">쇼핑검색 광고비</div><div class="value">${money(mix.adCost || 0)}</div><div class="sub">네이버 광고 API 비용</div></div>
@@ -1033,8 +1214,8 @@
         <div class="meta" style="margin-bottom:10px">${html(mix.rewardMemo || "")}</div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>진행 상품</th><th>키워드</th><th>링크</th><th>기간</th><th>보고기간 비용</th><th>총 금액</th><th>상태</th><th>성과 확인</th></tr></thead>
-            <tbody>${rewardRows || `<tr><td class="empty" colspan="8">리워드 마케팅 내역이 없습니다.</td></tr>`}</tbody>
+            <thead><tr><th>진행 상품</th><th>키워드</th><th>기간</th><th>보고기간 비용</th><th>총 금액</th><th>상태</th><th>성과 확인</th></tr></thead>
+            <tbody>${rewardRows || `<tr><td class="empty" colspan="7">리워드 마케팅 내역이 없습니다.</td></tr>`}</tbody>
           </table>
         </div>`;
     }
@@ -1116,20 +1297,39 @@
           <div class="rank-list">${(group.items || []).map(item => `<div class="rank-row"><span class="rank-keyword">${html(item.keyword)}</span><span style="display:flex;gap:6px;align-items:center">${rankBadge(item)}${deltaBadge(item.delta)}</span></div>`).join("")}</div>
         </div>`).join("")}</div>`;
     }
-    function renderPowerlinkDevice(title, rows) {
-      if (!rows.length) return `<div class="empty">${html(title)} 데이터가 없습니다.</div>`;
-      return `<section style="margin-top:14px">
-        <div class="section-head"><h2>${html(title)}</h2><span class="count">${number(rows.reduce((sum, section) => sum + (section.items || []).length, 0))}개</span></div>
-        <div class="table-wrap"><table><thead><tr><th>캠페인</th><th>키워드</th><th>순위</th><th>직전 대비</th><th>수집시각</th></tr></thead><tbody>
-          ${rows.map(section => (section.items || []).map(item => `<tr><td class="wrap">${html(section.campaign)}</td><td>${html(item.keyword)}</td><td>${rankBadge(item)}</td><td>${deltaBadge(item.delta)}</td><td>${html(item.collectedAt || "")}</td></tr>`).join("")).join("")}
-        </tbody></table></div>
-      </section>`;
+    function powerlinkDeviceBlock(label, cls, items) {
+      if (!items.length) return "";
+      return `<div class="device-block">
+        <div class="device-title ${html(cls)}">${html(label)} <span class="meta">노출 ${number(items.length)}/${number(items.length)}</span></div>
+        <div class="keyword-chips">
+          ${items.map(item => `<div class="keyword-chip" title="${html(item.keyword || "")} · ${html(item.collectedAt || "")}">
+            <span class="keyword-chip-name">${html(item.keyword || "")}</span>
+            ${rankBadge(item)}
+            ${deltaBadge(item.delta)}
+          </div>`).join("")}
+        </div>
+      </div>`;
     }
     function renderPowerlinkRankDetail(detail) {
       const sections = detail.powerlinkSections || [];
-      const pc = sections.map(section => ({ campaign: section.campaign, items: section.pc || [] })).filter(section => section.items.length);
-      const mobile = sections.map(section => ({ campaign: section.campaign, items: section.mobile || [] })).filter(section => section.items.length);
-      return `${renderPowerlinkDevice("파워링크 PC", pc)}${renderPowerlinkDevice("파워링크 모바일", mobile)}`;
+      if (!sections.length) return `<div class="empty">선택한 시간대의 파워링크 순위 데이터가 없습니다.</div>`;
+      return `<div class="powerlink-rank-grid">${sections.map(section => {
+        const pc = section.pc || [];
+        const mobile = section.mobile || [];
+        const total = pc.length + mobile.length;
+        if (!total) return "";
+        return `<div class="powerlink-rank-card">
+          <div class="powerlink-rank-head">
+            <div>
+              <h3 class="powerlink-rank-title">${html(section.campaign || "파워링크")}</h3>
+              <div class="powerlink-rank-sub">캠페인별 PC / 모바일 순위</div>
+            </div>
+            <span class="count">${number(total)}개</span>
+          </div>
+          ${powerlinkDeviceBlock("PC", "pc", pc)}
+          ${powerlinkDeviceBlock("모바일", "mobile", mobile)}
+        </div>`;
+      }).join("")}</div>`;
     }
     function renderRankTraffic() {
       const rank = state.data.rankTraffic || {};
