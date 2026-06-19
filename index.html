@@ -1591,7 +1591,13 @@
       });
     }
     function renderShoppingRankDetail(detail) {
-      const products = detail.shoppingProducts || [];
+      const rewardProductOrder = ["4624494637", "4843121925", "12924495111"];
+      const rewardOrderMap = new Map(rewardProductOrder.map((id, index) => [id, index]));
+      const products = [...(detail.shoppingProducts || [])].sort((a, b) => {
+        const aOrder = rewardOrderMap.has(String(a.productId || "")) ? rewardOrderMap.get(String(a.productId || "")) : 999;
+        const bOrder = rewardOrderMap.has(String(b.productId || "")) ? rewardOrderMap.get(String(b.productId || "")) : 999;
+        return aOrder - bOrder;
+      });
       if (!products.length) return `<div class="empty">선택한 시간대의 쇼핑검색 순위 데이터가 없습니다.</div>`;
       return `<div class="rank-grid">${products.map(group => `
         <div class="rank-card">
