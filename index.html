@@ -411,7 +411,29 @@
     .nav button[data-page="powerlink"]::before { background: linear-gradient(135deg, #ff78a7, #ffb15c); }
     .nav button[data-page="shopping"]::before { background: linear-gradient(135deg, #82d7ff, #4865f4); }
     .nav button[data-page="brand"]::before { background: linear-gradient(135deg, #cba6ff, #ff8bc1); }
-    .nav button[data-page="rankTraffic"]::before { background: linear-gradient(135deg, #ffb44d, #ffd86e); }
+    .nav button[data-page="rankShopping"]::before,
+    .nav button[data-page="rankPowerlink"]::before,
+    .nav button[data-rank-root]::before { background: linear-gradient(135deg, #ffb44d, #ffd86e); }
+    .nav-sub {
+      display: grid;
+      gap: 6px;
+      margin: -2px 0 8px 22px;
+      padding-left: 10px;
+      border-left: 1px solid #edf1f8;
+    }
+    .nav-sub button {
+      height: 34px;
+      padding-left: 10px;
+      font-size: 12px;
+      background: #fbfcff;
+      border: 1px solid #e6ebf5;
+      color: #5f6d84;
+    }
+    .nav-sub button::before {
+      width: 10px;
+      height: 10px;
+      border-radius: 4px;
+    }
     .nav button:hover {
       background: #f3f6ff;
       color: var(--blue);
@@ -981,7 +1003,11 @@
         <button type="button" data-page="powerlink">파워링크</button>
         <button type="button" data-page="shopping">쇼핑검색</button>
         <button type="button" data-page="brand">브랜드검색</button>
-        <button type="button" data-page="rankTraffic">순위 트래픽</button>
+        <button type="button" data-rank-root>순위 트래픽</button>
+        <div class="nav-sub">
+          <button type="button" data-page="rankShopping">쇼핑검색 순위</button>
+          <button type="button" data-page="rankPowerlink">파워링크 순위</button>
+        </div>
       </div>
       <div class="hidden-controls">
         <select id="typeFilter">
@@ -1212,15 +1238,21 @@
         powerlink: "파워링크 운영",
         shopping: "쇼핑검색 운영",
         brand: "브랜드검색 계약",
-        rankTraffic: "순위 트래픽 대시보드"
+        rankShopping: "쇼핑검색 순위 트래픽",
+        rankPowerlink: "파워링크 순위 트래픽"
       };
       els.pageTitle.textContent = titles[state.page] || titles.overview;
+      const isRankPage = state.page === "rankShopping" || state.page === "rankPowerlink";
       document.querySelectorAll("[data-page]").forEach(el => {
         if (el.tagName === "BUTTON") return;
-        el.classList.toggle("hidden", el.dataset.page !== state.page);
+        const visible = el.dataset.page === state.page || (el.dataset.page === "rankTraffic" && isRankPage);
+        el.classList.toggle("hidden", !visible);
       });
       document.querySelectorAll(".nav [data-page]").forEach(button => {
         button.classList.toggle("active", button.dataset.page === state.page);
+      });
+      document.querySelectorAll(".nav [data-rank-root]").forEach(button => {
+        button.classList.toggle("active", isRankPage);
       });
       els.typeFilter.value = pageType();
     }
@@ -1654,8 +1686,9 @@
       els.rankStatus.textContent = `${rank.updatedAt || "데이터 없음"} · ${rank.sourcePath || ""}`;
       const latestTop5 = (rank.latestShopping || []).filter(row => Number(row.rank || 999) <= 5).length;
       const detail = selectedRankDetail(rank);
+      const isPowerlinkRank = state.page === "rankPowerlink";
       els.rankOverview.innerHTML = `
-        ${renderRankRewardSection()}
+        ${isPowerlinkRank ? "" : renderRankRewardSection()}
         <div class="kpis" style="margin-bottom:0">
           <div class="metric"><div class="label">누적 날짜</div><div class="value">${number((rank.dates || []).length)}</div><div class="sub">${html((rank.dates || []).join(", ") || "데이터 없음")}</div></div>
           <div class="metric"><div class="label">쇼핑 순위 항목</div><div class="value">${number((rank.shoppingRows || []).length)}</div><div class="sub">상품/키워드 조합</div></div>
@@ -1669,6 +1702,20 @@
         return;
       }
       renderRankTabs(rank);
+      if (isPowerlinkRank) {
+        els.rankBody.innerHTML = `
+        <div class="rank-section-block">
+          <div class="rank-section-head">
+            <div>
+              <h3 class="rank-section-title">파워링크 순위</h3>
+              <div class="rank-section-sub">PC/모바일 검색 순위 분리 확인</div>
+            </div>
+            <span class="count">${html(detail.previousLabel || "비교 기준 없음")}</span>
+          </div>
+          ${renderPowerlinkRankDetail(detail)}
+        </div>`;
+        return;
+      }
       els.rankBody.innerHTML = `
         <div class="rank-section-block">
           <div class="rank-section-head">
@@ -1679,16 +1726,6 @@
             <span class="count">${html(detail.label || rank.latestLabel || "")}</span>
           </div>
           ${renderShoppingRankDetail(detail)}
-        </div>
-        <div class="rank-section-block">
-          <div class="rank-section-head">
-            <div>
-              <h3 class="rank-section-title">파워링크 순위</h3>
-              <div class="rank-section-sub">PC/모바일 검색 순위 분리 확인</div>
-            </div>
-            <span class="count">${html(detail.previousLabel || "비교 기준 없음")}</span>
-          </div>
-          ${renderPowerlinkRankDetail(detail)}
         </div>`;
     }
     function renderInspection() {
@@ -1793,6 +1830,17 @@
       button.addEventListener("click", () => {
         state.rankView = button.dataset.rankView;
         renderRankTraffic();
+      });
+    });
+    document.querySelectorAll("[data-rank-root]").forEach(button => {
+      button.addEventListener("click", () => {
+        state.page = "rankShopping";
+        els.campaignFilter.value = "";
+        els.adgroupFilter.value = "";
+        fillCampaigns();
+        fillAdgroups();
+        render();
+        closeMobileMenu();
       });
     });
     els.rankBody.addEventListener("click", event => {
