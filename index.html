@@ -308,6 +308,10 @@
     .rank-tabs { display: flex; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: #fbfcfd; flex-wrap: wrap; }
     .rank-tabs button { width: auto; height: 32px; font-size: 12px; border-radius: 20px; }
     .rank-tabs button.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .mobile-menu-toggle,
+    .mobile-backdrop {
+      display: none;
+    }
     .note-row { display: grid; grid-template-columns: 108px minmax(180px, 1fr) 70px; gap: 8px; align-items: start; }
     .note-row select, .note-row button { height: 32px; }
     .note-row input { height: 32px; }
@@ -552,6 +556,54 @@
       border-color: var(--amber);
       color: #fff;
       box-shadow: 0 8px 16px rgba(255,173,77,.24);
+    }
+    .rank-control-panel {
+      margin-top: 10px;
+      border-top: 1px solid #eef2f8;
+      border-bottom: 1px solid #eef2f8;
+      background: #fbfcff;
+    }
+    .rank-control-panel .rank-tabs {
+      padding: 8px 16px;
+      border-bottom: 0;
+      background: transparent;
+    }
+    .rank-control-panel .rank-tabs + .rank-tabs {
+      padding-top: 0;
+    }
+    .rank-section-block {
+      margin: 14px 16px 16px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #e5ebf5;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(26, 39, 78, .06);
+    }
+    .rank-section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid #edf1f7;
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+    }
+    .rank-section-title {
+      margin: 0;
+      color: #172033;
+      font-size: 16px;
+      font-weight: 900;
+    }
+    .rank-section-sub {
+      margin-top: 4px;
+      color: #8491a8;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .rank-section-block .rank-grid,
+    .rank-section-block .powerlink-rank-grid {
+      padding: 16px;
+      background: #fff;
     }
     .rank-grid {
       grid-template-columns: repeat(auto-fill, minmax(292px, 1fr));
@@ -814,9 +866,111 @@
       .header { flex-direction: column; }
       .actions { width: 100%; }
     }
+    @media (max-width: 760px) {
+      body.sidebar-open { overflow: hidden; }
+      .mobile-menu-toggle {
+        display: inline-flex;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 80;
+        width: auto;
+        height: 38px;
+        align-items: center;
+        gap: 7px;
+        padding: 0 12px;
+        border-color: #dfe7f3;
+        background: #fff;
+        color: #172033;
+        box-shadow: 0 8px 20px rgba(26, 39, 78, .12);
+      }
+      .mobile-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        background: rgba(23, 32, 51, .32);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .18s ease;
+      }
+      body.sidebar-open .mobile-backdrop {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      aside {
+        position: fixed;
+        inset: 0 auto 0 0;
+        z-index: 70;
+        width: min(82vw, 304px);
+        height: 100vh;
+        border-right: 1px solid var(--line);
+        border-bottom: 0;
+        transform: translateX(-105%);
+        transition: transform .18s ease;
+      }
+      body.sidebar-open aside { transform: translateX(0); }
+      main { padding: 62px 12px 24px; }
+      .header { gap: 12px; }
+      h1 { font-size: 20px; }
+      .actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        min-width: 0;
+      }
+      .actions button {
+        width: 100%;
+        min-width: 0;
+      }
+      .kpis { grid-template-columns: 1fr; }
+      .metric .value {
+        white-space: normal;
+        font-size: 20px;
+      }
+      .section-head,
+      .rank-section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .table-wrap { overflow-x: auto; }
+      .rank-grid,
+      .powerlink-rank-grid {
+        grid-template-columns: 1fr;
+        padding: 12px;
+      }
+      .rank-section-block {
+        margin: 12px 10px;
+      }
+      .rank-section-block .rank-grid,
+      .rank-section-block .powerlink-rank-grid {
+        padding: 12px;
+      }
+      .rank-tabs {
+        padding: 8px 12px;
+        gap: 6px;
+      }
+      .rank-tabs button {
+        height: 30px;
+        padding: 0 10px;
+        font-size: 12px;
+      }
+      .product-category {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+      }
+      .product-category .kpis {
+        grid-template-columns: 1fr;
+        padding: 12px 12px 0 !important;
+      }
+      .reward-product {
+        min-width: 260px;
+      }
+    }
   </style>
 </head>
 <body>
+  <button id="mobileMenuToggle" class="mobile-menu-toggle" type="button">☰ 메뉴</button>
+  <div id="mobileBackdrop" class="mobile-backdrop"></div>
   <div class="app">
     <aside>
       <div class="brand"><span class="mark">N</span><span>더도톰</span></div>
@@ -920,12 +1074,10 @@
       <section class="page-section" data-page="rankTraffic">
         <div class="section-head"><h2>순위 트래픽 대시보드</h2><span id="rankStatus" class="count"></span></div>
         <div class="memo-body" id="rankOverview"></div>
-        <div class="rank-tabs">
-          <button class="ghost active" type="button" data-rank-view="shopping">쇼핑검색 상세</button>
-          <button class="ghost" type="button" data-rank-view="powerlink">파워링크 상세</button>
+        <div class="rank-control-panel">
+          <div class="rank-tabs" id="rankDateTabs"></div>
+          <div class="rank-tabs" id="rankSlotTabs"></div>
         </div>
-        <div class="rank-tabs" id="rankDateTabs"></div>
-        <div class="rank-tabs" id="rankSlotTabs"></div>
         <div id="rankBody"></div>
       </section>
       <div class="memo-grid page-section hidden" data-page="report">
@@ -1503,13 +1655,13 @@
       const latestTop5 = (rank.latestShopping || []).filter(row => Number(row.rank || 999) <= 5).length;
       const detail = selectedRankDetail(rank);
       els.rankOverview.innerHTML = `
+        ${renderRankRewardSection()}
         <div class="kpis" style="margin-bottom:0">
           <div class="metric"><div class="label">누적 날짜</div><div class="value">${number((rank.dates || []).length)}</div><div class="sub">${html((rank.dates || []).join(", ") || "데이터 없음")}</div></div>
           <div class="metric"><div class="label">쇼핑 순위 항목</div><div class="value">${number((rank.shoppingRows || []).length)}</div><div class="sub">상품/키워드 조합</div></div>
           <div class="metric"><div class="label">최근 1~5위</div><div class="value">${number(latestTop5)}</div><div class="sub">${html(rank.latestLabel || "")}</div></div>
           <div class="metric"><div class="label">비교 기준</div><div class="value" style="font-size:16px">${html(detail?.previousLabel || "첫 수집")}</div><div class="sub">직전 수집 대비 상승/하락</div></div>
         </div>`;
-      document.querySelectorAll("[data-rank-view]").forEach(button => button.classList.toggle("active", button.dataset.rankView === state.rankView));
       if (!detail) {
         els.rankDateTabs.innerHTML = "";
         els.rankSlotTabs.innerHTML = "";
@@ -1517,8 +1669,27 @@
         return;
       }
       renderRankTabs(rank);
-      const detailHtml = state.rankView === "powerlink" ? renderPowerlinkRankDetail(detail) : renderShoppingRankDetail(detail);
-      els.rankBody.innerHTML = renderRankRewardSection() + detailHtml;
+      els.rankBody.innerHTML = `
+        <div class="rank-section-block">
+          <div class="rank-section-head">
+            <div>
+              <h3 class="rank-section-title">쇼핑검색 순위</h3>
+              <div class="rank-section-sub">대표님 확인용 핵심 구간 · 리워드/순위 트래픽 상품 우선 확인</div>
+            </div>
+            <span class="count">${html(detail.label || rank.latestLabel || "")}</span>
+          </div>
+          ${renderShoppingRankDetail(detail)}
+        </div>
+        <div class="rank-section-block">
+          <div class="rank-section-head">
+            <div>
+              <h3 class="rank-section-title">파워링크 순위</h3>
+              <div class="rank-section-sub">PC/모바일 검색 순위 분리 확인</div>
+            </div>
+            <span class="count">${html(detail.previousLabel || "비교 기준 없음")}</span>
+          </div>
+          ${renderPowerlinkRankDetail(detail)}
+        </div>`;
     }
     function renderInspection() {
       const rows = state.data.inspection.filter(filters);
@@ -1590,6 +1761,15 @@
     document.getElementById("rankBtn").addEventListener("click", updateRanks);
     document.getElementById("saveMemoBtn").addEventListener("click", saveMemo);
     document.getElementById("exportBtn").addEventListener("click", exportDraft);
+    const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+    const mobileBackdrop = document.getElementById("mobileBackdrop");
+    function closeMobileMenu() {
+      document.body.classList.remove("sidebar-open");
+    }
+    mobileMenuToggle?.addEventListener("click", () => {
+      document.body.classList.toggle("sidebar-open");
+    });
+    mobileBackdrop?.addEventListener("click", closeMobileMenu);
     els.monthFilter.addEventListener("change", () => {
       state.month = els.monthFilter.value;
       els.campaignFilter.value = "";
@@ -1629,6 +1809,7 @@
         fillCampaigns();
         fillAdgroups();
         render();
+        closeMobileMenu();
       });
     });
     [els.campaignFilter].forEach(el => {
