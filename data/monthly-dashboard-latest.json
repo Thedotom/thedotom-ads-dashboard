@@ -6218,10 +6218,11 @@
     "dateLabel": "2026-06-01 ~ 2026-06-02",
     "count": 31,
     "summary": "스마트스토어 하루치 상품성과와 네이버 광고 API 일별 데이터를 자동 병합한 기준입니다.",
-    "updatedAt": "2026-06-22 18:10:36",
+    "updatedAt": "2026-06-22 18:18:58",
     "automation": {
       "adAccountId": "1739029",
-      "naverAdGroupUrl": "https://ads.naver.com/manage/ad-accounts/1739029/sa/adgroups/grp-a001-02-000000013458778",
+      "naverAdGroupName": "2600원_돌수건(M)",
+      "naverAdGroupUrl": "https://ads.naver.com/manage/ad-accounts/1739029/sa/adgroups/grp-a001-02-000000013458876",
       "naverAdSource": "네이버 광고 API: 일자별 총비용, 노출수, 클릭수, 구매완료 전환매출액",
       "storeSource": "스마트스토어센터 판매분석 > 상품별 판매성과: 일매출, 주문건수",
       "storageTarget": "D:/광고보고서/data/daily_product_performance.json"

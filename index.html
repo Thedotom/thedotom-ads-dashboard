@@ -1193,6 +1193,8 @@
     function number(v) { return num.format(Number(v || 0)); }
     function pct(v) { return `${(Number(v || 0) * 100).toFixed(1)}%`; }
     function ratio(v) { return Number(v || 0).toFixed(2); }
+    function roasText(v) { return `${Number(v || 0).toFixed(2)}배`; }
+    function rateText(v) { return `${(Number(v || 0) * 100).toFixed(1)}%`; }
     function todayLabel() {
       const today = new Date();
       const y = today.getFullYear();
@@ -1554,8 +1556,8 @@
           <td>${html(row.product || "")}</td>
           <td>${number(row.orders || 0)}</td>
           <td>${html(row.slot || "")}</td>
-          <td>${ratio(row.roas || 0)}</td>
-          <td>${ratio(row.adCostRate || 0)}</td>
+          <td>${roasText(row.roas || 0)}</td>
+          <td>${rateText(row.adCostRate || 0)}</td>
           <td>${money(row.adProfit || 0)}</td>
         </tr>
       `).join("");
@@ -1565,7 +1567,8 @@
           <div class="metric"><div class="label">광고매출</div><div class="value">${money(totals.adSales || 0)}</div><div class="sub">구매완료 전환매출액</div></div>
           <div class="metric"><div class="label">광고비</div><div class="value">${money(totals.adCost || 0)}</div><div class="sub">네이버 광고 총비용</div></div>
           <div class="metric"><div class="label">일매출</div><div class="value">${money(totals.dailySales || 0)}</div><div class="sub">스마트스토어 상품별 판매성과</div></div>
-          <div class="metric"><div class="label">ROAS</div><div class="value">${ratio(totals.roas || 0)}</div><div class="sub">광고매출 / 광고비</div></div>
+          <div class="metric"><div class="label">ROAS</div><div class="value">${roasText(totals.roas || 0)}</div><div class="sub">광고매출 / 광고비</div></div>
+          <div class="metric"><div class="label">광고비율</div><div class="value">${rateText(totals.adCostRate || 0)}</div><div class="sub">광고비 / 일매출</div></div>
         </div>
         <div class="product-category" style="margin-bottom:14px">
           <div class="product-category-head">
@@ -1585,7 +1588,7 @@
           <section>
             <div class="section-head"><h2>광고 데이터 자동화</h2></div>
             <div class="memo-body">
-              <p class="meta">광고그룹: <a href="${html(perf.automation?.naverAdGroupUrl || "#")}" target="_blank" rel="noreferrer">2600원_수건답례품(완)</a></p>
+              <p class="meta">광고그룹: <a href="${html(perf.automation?.naverAdGroupUrl || "#")}" target="_blank" rel="noreferrer">${html(perf.automation?.naverAdGroupName || "2600원_돌수건(M)")}</a></p>
               <p class="meta">${html(perf.automation?.naverAdSource || "")}</p>
             </div>
           </section>
