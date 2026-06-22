@@ -553,6 +553,8 @@
       font-size: 12px;
     }
     .pill.good { background: #e4f8ed; color: #148456; }
+    .pill.active { background: #ffe4ef; color: #d13f75; }
+    .pill.done { background: #e4f8ed; color: #148456; }
     .pill.warn { background: #fff1cf; color: #a16712; }
     .pill.bad { background: #ffe5e8; color: #d53b4a; }
     .detail-toolbar, .rank-tabs {
@@ -1665,9 +1667,8 @@
           </td>
           <td>${html(item.keyword || "")}</td>
           <td>${html(item.startDate || "")} ~ ${html(item.endDate || "")}</td>
-          <td>${money(item.recognizedAmount || 0)}</td>
           <td>${money(item.totalAmount || 0)}</td>
-          <td><span class="pill ${item.status === "완료" ? "warn" : "good"}">${html(item.status || "")}</span></td>
+          <td><span class="pill ${item.status === "완료" ? "done" : "active"}">${html(item.status || "")}</span></td>
         </tr>`;
       }).join("");
       return `
@@ -1681,13 +1682,12 @@
           </div>
           <div class="kpis" style="padding:14px 16px 0">
             <div class="metric"><div class="label">${view === "completed" ? "완료 계약 금액" : "진행중 계약 금액"}</div><div class="value">${money(view === "completed" ? (reward.completedAmount || 0) : (reward.activeStatusAmount || 0))}</div><div class="sub">VAT 별도 기준</div></div>
-            <div class="metric"><div class="label">보고기간 인정 비용</div><div class="value">${money(reward.activeAmount || 0)}</div><div class="sub">${html(reward.period || "")}</div></div>
             <div class="metric"><div class="label">${view === "completed" ? "완료 상품" : "진행 상품"}</div><div class="value">${number(items.length)}</div><div class="sub">${view === "completed" ? "완료된 리워드 이력" : "현재 순위 트래픽 진행중"}</div></div>
           </div>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>진행 상품</th><th>키워드</th><th>기간</th><th>보고기간 비용</th><th>총 금액</th><th>상태</th></tr></thead>
-              <tbody>${rows || `<tr><td class="empty" colspan="6">${view === "completed" ? "완료 리워드 상품이 없습니다." : "리워드 진행 상품이 없습니다."}</td></tr>`}</tbody>
+              <thead><tr><th>진행 상품</th><th>키워드</th><th>기간</th><th>총 금액</th><th>상태</th></tr></thead>
+              <tbody>${rows || `<tr><td class="empty" colspan="5">${view === "completed" ? "완료 리워드 상품이 없습니다." : "리워드 진행 상품이 없습니다."}</td></tr>`}</tbody>
             </table>
           </div>
         </div>`;
