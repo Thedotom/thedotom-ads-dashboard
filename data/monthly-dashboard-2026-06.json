@@ -2743,7 +2743,7 @@
         "unitAmount": 40000,
         "vat": "VAT 별도",
         "quantity": "리워드 10개 (정확한 수량 모름)",
-        "status": "진행중",
+        "status": "완료",
         "metric": "네이버 쇼핑 순위 변화",
         "overlapDays": 10,
         "recognizedAmount": 400000.0,
@@ -2765,7 +2765,7 @@
         "unitAmount": 40000,
         "vat": "VAT 별도",
         "quantity": "리워드 15개 (정확한 수량 모름)",
-        "status": "진행중",
+        "status": "완료",
         "metric": "네이버 쇼핑 순위 변화",
         "overlapDays": 10,
         "recognizedAmount": 600000.0,
@@ -2787,7 +2787,7 @@
         "unitAmount": 40000,
         "vat": "VAT 별도",
         "quantity": "리워드 5개 (정확한 수량 모름)",
-        "status": "진행중",
+        "status": "완료",
         "metric": "네이버 쇼핑 순위 변화",
         "overlapDays": 10,
         "recognizedAmount": 200000.0,
@@ -2795,11 +2795,304 @@
         "isActiveInPeriod": true,
         "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
         "rankTitle": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이"
+      },
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 1,
+        "recognizedAmount": 40000.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": true,
+        "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
+        "rankTitle": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트"
+      },
+      {
+        "productName": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4843121925",
+        "productId": "4843121925",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 600000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 15개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 1,
+        "recognizedAmount": 60000.0,
+        "dailyAmount": 60000.0,
+        "isActiveInPeriod": true,
+        "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
+        "rankTitle": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트"
+      },
+      {
+        "productName": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
+        "link": "https://smartstore.naver.com/thedotomshop/products/12924495111",
+        "productId": "12924495111",
+        "keyword": "어린이집수건",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 200000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 5개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 1,
+        "recognizedAmount": 20000.0,
+        "dailyAmount": 20000.0,
+        "isActiveInPeriod": true,
+        "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
+        "rankTitle": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이"
+      },
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-05-22",
+        "endDate": "2026-05-31",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": false,
+        "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
+        "rankTitle": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트"
+      },
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-01",
+        "endDate": "2026-06-10",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 10,
+        "recognizedAmount": 400000.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": true,
+        "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
+        "rankTitle": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트"
       }
     ],
-    "activeAmount": 1200000.0,
-    "contractAmount": 1200000.0,
+    "activeItems": [
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 1,
+        "recognizedAmount": 40000.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": true,
+        "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
+        "rankTitle": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트"
+      },
+      {
+        "productName": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4843121925",
+        "productId": "4843121925",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 600000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 15개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 1,
+        "recognizedAmount": 60000.0,
+        "dailyAmount": 60000.0,
+        "isActiveInPeriod": true,
+        "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
+        "rankTitle": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트"
+      },
+      {
+        "productName": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
+        "link": "https://smartstore.naver.com/thedotomshop/products/12924495111",
+        "productId": "12924495111",
+        "keyword": "어린이집수건",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 200000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 5개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 1,
+        "recognizedAmount": 20000.0,
+        "dailyAmount": 20000.0,
+        "isActiveInPeriod": true,
+        "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
+        "rankTitle": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이"
+      }
+    ],
+    "completedItems": [
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-11",
+        "endDate": "2026-06-20",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 10,
+        "recognizedAmount": 400000.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": true,
+        "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
+        "rankTitle": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트"
+      },
+      {
+        "productName": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4843121925",
+        "productId": "4843121925",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-11",
+        "endDate": "2026-06-20",
+        "days": 10,
+        "totalAmount": 600000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 15개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 10,
+        "recognizedAmount": 600000.0,
+        "dailyAmount": 60000.0,
+        "isActiveInPeriod": true,
+        "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
+        "rankTitle": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트"
+      },
+      {
+        "productName": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
+        "link": "https://smartstore.naver.com/thedotomshop/products/12924495111",
+        "productId": "12924495111",
+        "keyword": "어린이집수건",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-11",
+        "endDate": "2026-06-20",
+        "days": 10,
+        "totalAmount": 200000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 5개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 10,
+        "recognizedAmount": 200000.0,
+        "dailyAmount": 20000.0,
+        "isActiveInPeriod": true,
+        "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
+        "rankTitle": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이"
+      },
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-05-22",
+        "endDate": "2026-05-31",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": false,
+        "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
+        "rankTitle": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트"
+      },
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-01",
+        "endDate": "2026-06-10",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 10,
+        "recognizedAmount": 400000.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": true,
+        "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
+        "rankTitle": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트"
+      }
+    ],
+    "activeAmount": 1720000.0,
+    "activeStatusAmount": 1200000.0,
+    "completedAmount": 2000000.0,
+    "contractAmount": 3200000.0,
     "activeCount": 3,
+    "completedCount": 5,
     "memo": "쇼핑검색 상품 순위 트래픽 보강 비용으로 광고비와 분리해 관리"
   },
   "rankObservation": {
@@ -2869,7 +3162,8 @@
           "답례품호두정과",
           "결혼답례품",
           "돌잔치답례품",
-          "결혼식답례품"
+          "결혼식답례품",
+          "무라호두정과"
         ],
         "priorityKeywords": [
           "결혼식답례품",
@@ -2879,8 +3173,8 @@
         "device": "네이버 쇼핑 기준",
         "memo": "리워드 미진행, 자연 순위 관찰용",
         "keyword": "결혼식답례품, 결혼답례품, 호두정과답례품",
-        "image": "",
-        "rankTitle": "",
+        "image": "https://shopping-phinf.pstatic.net/main_8959218/89592187512.2.jpg",
+        "rankTitle": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
         "status": "관찰중",
         "metric": "네이버 쇼핑 순위 변화"
       },
@@ -4451,8 +4745,8 @@
         "productName": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
         "productId": "12047676813",
         "link": "https://smartstore.naver.com/thedotomshop/products/12047676813",
-        "image": "",
-        "rankTitle": "",
+        "image": "https://shopping-phinf.pstatic.net/main_8959218/89592187512.2.jpg",
+        "rankTitle": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
         "totalCost": 304707.0,
         "avgDailyCost": 14509.857142857143,
         "clicks": 220.0,
@@ -5198,7 +5492,7 @@
   },
   "rankTraffic": {
     "sourcePath": "D:\\광고보고서\\rank\\rank_data.json",
-    "updatedAt": "2026-06-22 09:52",
+    "updatedAt": "2026-06-22 10:01",
     "dates": [
       "2026-06-22",
       "2026-06-21",
@@ -7143,6 +7437,101 @@
         "latestStatus": "미노출"
       },
       {
+        "key": "무라호두정과_12047676813",
+        "keyword": "무라호두정과",
+        "productId": "12047676813",
+        "title": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
+        "image": "https://shopping-phinf.pstatic.net/main_8959218/89592187512.2.jpg",
+        "cells": [
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "10:01:15"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          }
+        ],
+        "latestRank": 3,
+        "latestStatus": "1~5위"
+      },
+      {
         "key": "답례품호두정과_12047676813",
         "keyword": "답례품호두정과",
         "productId": "12047676813",
@@ -7426,6 +7815,291 @@
         ],
         "latestRank": 1,
         "latestStatus": "1~5위"
+      },
+      {
+        "key": "어린이집고리수건_12924495111",
+        "keyword": "어린이집고리수건",
+        "productId": "12924495111",
+        "title": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
+        "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
+        "cells": [
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "10:01:15"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          }
+        ],
+        "latestRank": 1,
+        "latestStatus": "1~5위"
+      },
+      {
+        "key": "어린이집준비물_12924495111",
+        "keyword": "어린이집준비물",
+        "productId": "12924495111",
+        "title": "",
+        "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
+        "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "10:01:15"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          }
+        ],
+        "latestRank": null,
+        "latestStatus": "미노출"
+      },
+      {
+        "key": "유치원준비물_12924495111",
+        "keyword": "유치원준비물",
+        "productId": "12924495111",
+        "title": "",
+        "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
+        "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "10:01:15"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          }
+        ],
+        "latestRank": null,
+        "latestStatus": "미노출"
       },
       {
         "key": "고리수건_12924495111",
@@ -14288,6 +14962,17 @@
         "collectedAt": "09:10:02"
       },
       {
+        "key": "무라호두정과_12047676813",
+        "keyword": "무라호두정과",
+        "productId": "12047676813",
+        "title": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
+        "image": "https://shopping-phinf.pstatic.net/main_8959218/89592187512.2.jpg",
+        "rank": 3,
+        "status": "1~5위",
+        "bucket": "top3",
+        "collectedAt": "10:01:15"
+      },
+      {
         "key": "답례품호두정과_12047676813",
         "keyword": "답례품호두정과",
         "productId": "12047676813",
@@ -14319,6 +15004,39 @@
         "status": "1~5위",
         "bucket": "one",
         "collectedAt": "09:10:02"
+      },
+      {
+        "key": "어린이집고리수건_12924495111",
+        "keyword": "어린이집고리수건",
+        "productId": "12924495111",
+        "title": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
+        "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
+        "rank": 1,
+        "status": "1~5위",
+        "bucket": "one",
+        "collectedAt": "10:01:15"
+      },
+      {
+        "key": "어린이집준비물_12924495111",
+        "keyword": "어린이집준비물",
+        "productId": "12924495111",
+        "title": "",
+        "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
+        "rank": null,
+        "status": "미노출",
+        "bucket": "none",
+        "collectedAt": "10:01:15"
+      },
+      {
+        "key": "유치원준비물_12924495111",
+        "keyword": "유치원준비물",
+        "productId": "12924495111",
+        "title": "",
+        "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
+        "rank": null,
+        "status": "미노출",
+        "bucket": "none",
+        "collectedAt": "10:01:15"
       },
       {
         "key": "고리수건_12924495111",
@@ -22760,8 +23478,8 @@
           },
           {
             "productId": "12047676813",
-            "title": "더도톰",
-            "image": "",
+            "title": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
+            "image": "https://shopping-phinf.pstatic.net/main_8959218/89592187512.2.jpg",
             "items": [
               {
                 "key": "결혼식답례품_12047676813",
@@ -22801,6 +23519,19 @@
                   "direction": "none"
                 },
                 "collectedAt": "09:10:02"
+              },
+              {
+                "key": "무라호두정과_12047676813",
+                "keyword": "무라호두정과",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "10:01:15"
               },
               {
                 "key": "답례품호두정과_12047676813",
@@ -22847,6 +23578,45 @@
                   "direction": "same"
                 },
                 "collectedAt": "09:10:02"
+              },
+              {
+                "key": "어린이집고리수건_12924495111",
+                "keyword": "어린이집고리수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "10:01:15"
+              },
+              {
+                "key": "어린이집준비물_12924495111",
+                "keyword": "어린이집준비물",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "10:01:15"
+              },
+              {
+                "key": "유치원준비물_12924495111",
+                "keyword": "유치원준비물",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "10:01:15"
               },
               {
                 "key": "고리수건_12924495111",
@@ -23771,6 +24541,6 @@
     "latestDate": "2026-06-22",
     "latestSlot": "morning",
     "latestLabel": "2026-06-22 오전",
-    "shoppingCount": 43
+    "shoppingCount": 47
   }
 }

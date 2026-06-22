@@ -1139,7 +1139,7 @@
       window.location.replace("http://127.0.0.1:8790");
     }
     const initialMonth = new URLSearchParams(window.location.search).get("month") || "";
-    const state = { data: null, badOnly: false, detailMode: "all", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc" };
+    const state = { data: null, badOnly: false, detailMode: "all", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -1651,7 +1651,8 @@
     }
     function renderRankRewardSection() {
       const reward = state.data.rewardMarketing || {};
-      const items = reward.items || [];
+      const view = state.rewardView || "active";
+      const items = view === "completed" ? (reward.completedItems || []) : (reward.activeItems || []);
       const rows = items.map(item => {
         const thumb = item.image ? `<img class="reward-thumb" src="${html(item.image)}" alt="">` : `<div class="reward-thumb thumb-placeholder">대기</div>`;
         const linkedThumb = item.link ? `<a class="reward-thumb-link" href="${html(item.link)}" target="_blank" rel="noreferrer" title="상품 열기">${thumb}</a>` : thumb;
@@ -1666,23 +1667,27 @@
           <td>${html(item.startDate || "")} ~ ${html(item.endDate || "")}</td>
           <td>${money(item.recognizedAmount || 0)}</td>
           <td>${money(item.totalAmount || 0)}</td>
-          <td><span class="pill good">${html(item.status || "")}</span></td>
+          <td><span class="pill ${item.status === "완료" ? "warn" : "good"}">${html(item.status || "")}</span></td>
         </tr>`;
       }).join("");
       return `
         <div class="product-category" style="margin-bottom:14px">
           <div class="product-category-head">
-            <div><h3 class="product-category-title">리워드 진행 상품</h3><div class="product-category-sub">${html(reward.memo || "")}</div></div>
+            <div><h3 class="product-category-title">${view === "completed" ? "완료 리워드 상품" : "리워드 진행 상품"}</h3><div class="product-category-sub">${html(reward.memo || "")}</div></div>
+          </div>
+          <div class="rank-tabs" style="border-bottom:0;padding-bottom:0">
+            <button class="ghost ${view === "active" ? "active" : ""}" type="button" data-reward-view="active">진행중 ${number(reward.activeCount || 0)}</button>
+            <button class="ghost ${view === "completed" ? "active" : ""}" type="button" data-reward-view="completed">완료 ${number(reward.completedCount || 0)}</button>
           </div>
           <div class="kpis" style="padding:14px 16px 0">
+            <div class="metric"><div class="label">${view === "completed" ? "완료 계약 금액" : "진행중 계약 금액"}</div><div class="value">${money(view === "completed" ? (reward.completedAmount || 0) : (reward.activeStatusAmount || 0))}</div><div class="sub">VAT 별도 기준</div></div>
             <div class="metric"><div class="label">보고기간 인정 비용</div><div class="value">${money(reward.activeAmount || 0)}</div><div class="sub">${html(reward.period || "")}</div></div>
-            <div class="metric"><div class="label">계약 총액</div><div class="value">${money(reward.contractAmount || 0)}</div><div class="sub">VAT 별도 기준</div></div>
-            <div class="metric"><div class="label">진행 상품</div><div class="value">${number(reward.activeCount || 0)}</div><div class="sub">순위 트래픽 진행중</div></div>
+            <div class="metric"><div class="label">${view === "completed" ? "완료 상품" : "진행 상품"}</div><div class="value">${number(items.length)}</div><div class="sub">${view === "completed" ? "완료된 리워드 이력" : "현재 순위 트래픽 진행중"}</div></div>
           </div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>진행 상품</th><th>키워드</th><th>기간</th><th>보고기간 비용</th><th>총 금액</th><th>상태</th></tr></thead>
-              <tbody>${rows || `<tr><td class="empty" colspan="6">리워드 진행 상품이 없습니다.</td></tr>`}</tbody>
+              <tbody>${rows || `<tr><td class="empty" colspan="6">${view === "completed" ? "완료 리워드 상품이 없습니다." : "리워드 진행 상품이 없습니다."}</td></tr>`}</tbody>
             </table>
           </div>
         </div>`;
@@ -1853,6 +1858,12 @@
       const button = event.target.closest("[data-powerlink-device]");
       if (!button) return;
       state.powerlinkDevice = button.dataset.powerlinkDevice;
+      renderRankTraffic();
+    });
+    els.rankOverview.addEventListener("click", event => {
+      const button = event.target.closest("[data-reward-view]");
+      if (!button) return;
+      state.rewardView = button.dataset.rewardView;
       renderRankTraffic();
     });
     document.querySelectorAll(".nav [data-page]").forEach(button => {
