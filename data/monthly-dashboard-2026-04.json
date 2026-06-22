@@ -10271,6 +10271,28 @@
     "totalCost": 18207906.0,
     "summary": "2026-04-01 ~ 2026-04-30 쇼핑검색 상품/소재별 일 광고비"
   },
+  "dailyProductPerformance": {
+    "rows": [],
+    "totals": {
+      "adSales": 0,
+      "adCost": 0,
+      "dailySales": 0,
+      "orders": 0,
+      "roas": 0,
+      "adCostRate": 0,
+      "adProfit": 0
+    },
+    "dateLabel": "",
+    "count": 0,
+    "summary": "현재는 수기 누적 데이터 기준이며, 네이버 광고 API와 스마트스토어 판매성과 자동 수집으로 확장 예정입니다.",
+    "automation": {
+      "adAccountId": "1739029",
+      "naverAdGroupUrl": "https://ads.naver.com/manage/ad-accounts/1739029/sa/adgroups/grp-a001-02-000000013458778",
+      "naverAdSource": "네이버 광고 API: 일자별 총비용, 노출수, 클릭수, 구매완료 전환매출액",
+      "storeSource": "스마트스토어센터 판매분석 > 상품별 판매성과: 일매출, 주문건수",
+      "storageTarget": "D:/광고보고서/data/daily_product_performance.json"
+    }
+  },
   "rankTraffic": {
     "sourcePath": "D:\\광고보고서\\rank\\rank_data.json",
     "updatedAt": "",

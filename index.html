@@ -413,6 +413,7 @@
     .nav button[data-page="brand"]::before { background: linear-gradient(135deg, #cba6ff, #ff8bc1); }
     .nav button[data-page="rankShopping"]::before,
     .nav button[data-page="rankPowerlink"]::before,
+    .nav button[data-page="dailyProduct"]::before,
     .nav button[data-rank-root]::before { background: linear-gradient(135deg, #ffb44d, #ffd86e); }
     .nav-sub {
       display: grid;
@@ -1009,6 +1010,7 @@
         <div class="nav-sub">
           <button type="button" data-page="rankShopping">쇼핑검색 순위</button>
           <button type="button" data-page="rankPowerlink">파워링크 순위</button>
+          <button type="button" data-page="dailyProduct">일일 제품 성과</button>
         </div>
       </div>
       <div class="hidden-controls">
@@ -1108,6 +1110,10 @@
         </div>
         <div id="rankBody"></div>
       </section>
+      <section class="page-section" data-page="dailyProduct">
+        <div class="section-head"><h2>일일 제품 성과</h2><span id="dailyProductStatus" class="count"></span></div>
+        <div class="memo-body" id="dailyProductBody"></div>
+      </section>
       <div class="memo-grid page-section hidden" data-page="report">
         <section>
           <div class="section-head"><h2>다음달 진행 계획</h2><span id="planCount" class="count"></span></div>
@@ -1164,6 +1170,8 @@
       rankDateTabs: document.getElementById("rankDateTabs"),
       rankSlotTabs: document.getElementById("rankSlotTabs"),
       rankBody: document.getElementById("rankBody"),
+      dailyProductStatus: document.getElementById("dailyProductStatus"),
+      dailyProductBody: document.getElementById("dailyProductBody"),
       inspectionBody: document.getElementById("inspectionBody"),
       inspectionCount: document.getElementById("inspectionCount"),
       planBody: document.getElementById("planBody"),
@@ -1241,20 +1249,22 @@
         shopping: "쇼핑검색 운영",
         brand: "브랜드검색 계약",
         rankShopping: "쇼핑검색 순위 트래픽",
-        rankPowerlink: "파워링크 순위 트래픽"
+        rankPowerlink: "파워링크 순위 트래픽",
+        dailyProduct: "일일 제품 성과"
       };
       els.pageTitle.textContent = titles[state.page] || titles.overview;
-      const isRankPage = state.page === "rankShopping" || state.page === "rankPowerlink";
+      const isRankTrafficPage = state.page === "rankShopping" || state.page === "rankPowerlink";
+      const isRankGroupPage = isRankTrafficPage || state.page === "dailyProduct";
       document.querySelectorAll("[data-page]").forEach(el => {
         if (el.tagName === "BUTTON") return;
-        const visible = el.dataset.page === state.page || (el.dataset.page === "rankTraffic" && isRankPage);
+        const visible = el.dataset.page === state.page || (el.dataset.page === "rankTraffic" && isRankTrafficPage);
         el.classList.toggle("hidden", !visible);
       });
       document.querySelectorAll(".nav [data-page]").forEach(button => {
         button.classList.toggle("active", button.dataset.page === state.page);
       });
       document.querySelectorAll(".nav [data-rank-root]").forEach(button => {
-        button.classList.toggle("active", isRankPage);
+        button.classList.toggle("active", isRankGroupPage);
       });
       els.typeFilter.value = pageType();
     }
@@ -1309,6 +1319,7 @@
       renderShopping();
       renderBrandContract();
       renderRankTraffic();
+      renderDailyProductPerformance();
       renderInspection();
       renderPlan();
     }
@@ -1526,6 +1537,67 @@
         ${categoryTable("일자별 상품 광고비", dailyCosts.summary || "6월 1일부터 어제까지 쇼핑검색 상품/소재별 광고 사용 금액", ["상품", "누적 비용", "일평균", "클릭", "CPC", "ROAS", "일자별 비용"], dailyCostRows, 7)}
         ${categoryTable("광고 연동 상품", "본 상품 기준으로 묶은 쇼핑검색 광고 집행 내역", ["상품", "클릭", "비용", "CPC", "ROAS", "연동 광고 내역"], adLinkedRows, 6)}`;
     }
+    function renderDailyProductPerformance() {
+      const perf = state.data.dailyProductPerformance || {};
+      const rows = perf.rows || [];
+      const totals = perf.totals || {};
+      els.dailyProductStatus.textContent = perf.dateLabel || "데이터 없음";
+      const tableRows = rows.map(row => `
+        <tr>
+          <td>${html(row.recordId || "")}</td>
+          <td>${html(row.date || "")}</td>
+          <td>${money(row.adSales || 0)}</td>
+          <td>${money(row.adCost || 0)}</td>
+          <td><span class="pill good">${html(row.status || "")}</span></td>
+          <td>${html(row.memo || "")}</td>
+          <td>${money(row.dailySales || 0)}</td>
+          <td>${html(row.product || "")}</td>
+          <td>${number(row.orders || 0)}</td>
+          <td>${html(row.slot || "")}</td>
+          <td>${ratio(row.roas || 0)}</td>
+          <td>${ratio(row.adCostRate || 0)}</td>
+          <td>${money(row.adProfit || 0)}</td>
+        </tr>
+      `).join("");
+      els.dailyProductBody.innerHTML = `
+        <div class="kpis" style="margin-bottom:12px">
+          <div class="metric"><div class="label">기간</div><div class="value" style="font-size:18px">${html(perf.dateLabel || "-")}</div><div class="sub">일별 제품 성과 ${number(perf.count || 0)}건</div></div>
+          <div class="metric"><div class="label">광고매출</div><div class="value">${money(totals.adSales || 0)}</div><div class="sub">구매완료 전환매출액</div></div>
+          <div class="metric"><div class="label">광고비</div><div class="value">${money(totals.adCost || 0)}</div><div class="sub">네이버 광고 총비용</div></div>
+          <div class="metric"><div class="label">일매출</div><div class="value">${money(totals.dailySales || 0)}</div><div class="sub">스마트스토어 상품별 판매성과</div></div>
+          <div class="metric"><div class="label">ROAS</div><div class="value">${ratio(totals.roas || 0)}</div><div class="sub">광고매출 / 광고비</div></div>
+        </div>
+        <div class="product-category" style="margin-bottom:14px">
+          <div class="product-category-head">
+            <div>
+              <h3 class="product-category-title">DB 4 — 일일 제품 성과</h3>
+              <div class="product-category-sub">${html(perf.summary || "")}</div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>기록ID</th><th>날짜</th><th>광고매출</th><th>광고비</th><th>운영상태</th><th>운영메모</th><th>일매출</th><th>제품</th><th>주문건수</th><th>진행 슬롯</th><th>ROAS</th><th>광고비율</th><th>광고이익(원)</th></tr></thead>
+              <tbody>${tableRows || `<tr><td class="empty" colspan="13">일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
+            </table>
+          </div>
+        </div>
+        <div class="memo-grid" style="grid-template-columns:1fr 1fr;margin-bottom:0">
+          <section>
+            <div class="section-head"><h2>광고 데이터 자동화</h2></div>
+            <div class="memo-body">
+              <p class="meta">광고그룹: <a href="${html(perf.automation?.naverAdGroupUrl || "#")}" target="_blank" rel="noreferrer">2600원_수건답례품(완)</a></p>
+              <p class="meta">${html(perf.automation?.naverAdSource || "")}</p>
+            </div>
+          </section>
+          <section>
+            <div class="section-head"><h2>매출 데이터 자동화</h2></div>
+            <div class="memo-body">
+              <p class="meta">${html(perf.automation?.storeSource || "")}</p>
+              <p class="meta">저장 위치: ${html(perf.automation?.storageTarget || "")}</p>
+            </div>
+          </section>
+        </div>`;
+    }
     function renderBrandContract() {
       const brand = state.data.brandContract || {};
       els.brandStatus.textContent = brand.status || "";
@@ -1698,10 +1770,11 @@
       const latestTop5 = (rank.latestShopping || []).filter(row => Number(row.rank || 999) <= 5).length;
       const detail = selectedRankDetail(rank);
       const isPowerlinkRank = state.page === "rankPowerlink";
+      const rankDateRange = rank.dateRangeLabel || ((rank.dates || []).length ? `${(rank.dates || [])[rank.dates.length - 1]} ~ ${(rank.dates || [])[0]}` : "데이터 없음");
       els.rankOverview.innerHTML = `
         ${isPowerlinkRank ? "" : renderRankRewardSection()}
         <div class="kpis" style="margin-bottom:0">
-          <div class="metric"><div class="label">누적 날짜</div><div class="value">${number((rank.dates || []).length)}</div><div class="sub">${html((rank.dates || []).join(", ") || "데이터 없음")}</div></div>
+          <div class="metric"><div class="label">누적 기간</div><div class="value" style="font-size:18px">${html(rankDateRange)}</div><div class="sub">수집일 ${number((rank.dates || []).length)}일 · 오전/오후 갱신 반영</div></div>
           <div class="metric"><div class="label">쇼핑 순위 항목</div><div class="value">${number((rank.shoppingRows || []).length)}</div><div class="sub">상품/키워드 조합</div></div>
           <div class="metric"><div class="label">최근 1~5위</div><div class="value">${number(latestTop5)}</div><div class="sub">${html(rank.latestLabel || "")}</div></div>
           <div class="metric"><div class="label">비교 기준</div><div class="value" style="font-size:16px">${html(detail?.previousLabel || "첫 수집")}</div><div class="sub">직전 수집 대비 상승/하락</div></div>
