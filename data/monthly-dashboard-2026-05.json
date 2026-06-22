@@ -10315,7 +10315,7 @@
     "dateLabel": "",
     "count": 0,
     "summary": "스마트스토어 하루치 상품성과와 네이버 광고 API 일별 데이터를 자동 병합한 기준입니다.",
-    "updatedAt": "2026-06-22 18:06:37",
+    "updatedAt": "2026-06-22 18:10:36",
     "automation": {
       "adAccountId": "1739029",
       "naverAdGroupUrl": "https://ads.naver.com/manage/ad-accounts/1739029/sa/adgroups/grp-a001-02-000000013458778",
