@@ -558,6 +558,7 @@
     .pill.done { background: #e4f8ed; color: #148456; }
     .pill.warn { background: #fff1cf; color: #a16712; }
     .pill.bad { background: #ffe5e8; color: #d53b4a; }
+    .pill.neutral { background: #eef2f7; color: #526174; }
     .detail-toolbar, .rank-tabs {
       background: #fbfcff;
       border-bottom-color: #edf1f7;
@@ -1147,7 +1148,7 @@
       window.location.replace("http://127.0.0.1:8790");
     }
     const initialMonth = new URLSearchParams(window.location.search).get("month") || "";
-    const state = { data: null, badOnly: false, detailMode: "all", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active" };
+    const state = { data: null, badOnly: false, detailMode: "all", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", dailyProductDate: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -1543,19 +1544,24 @@
       const perf = state.data.dailyProductPerformance || {};
       const rows = perf.rows || [];
       const totals = perf.totals || {};
+      const dates = [...new Set(rows.map(row => row.date).filter(Boolean))].sort();
+      if (!dates.includes(state.dailyProductDate)) state.dailyProductDate = dates[dates.length - 1] || "";
+      const visibleRows = state.dailyProductDate ? rows.filter(row => row.date === state.dailyProductDate) : rows;
       els.dailyProductStatus.textContent = perf.dateLabel || "데이터 없음";
-      const tableRows = rows.map(row => `
+      const dateTabs = dates.map(date => `<button class="ghost ${date === state.dailyProductDate ? "active" : ""}" type="button" data-daily-product-date="${html(date)}">${html(date)}</button>`).join("");
+      const statusClass = status => status === "광고+슬롯" ? "active" : status === "광고" ? "good" : status === "슬롯" ? "warn" : "neutral";
+      const tableRows = visibleRows.map(row => `
         <tr>
+          <td class="wrap"><strong>${html(row.product || "")}</strong><div class="muted">상품번호 ${html(row.productId || "")}</div></td>
           <td>${html(row.recordId || "")}</td>
           <td>${html(row.date || "")}</td>
+          <td class="wrap">${html(row.adgroup || "연결 광고 없음")}</td>
           <td>${money(row.adSales || 0)}</td>
           <td>${money(row.adCost || 0)}</td>
-          <td><span class="pill good">${html(row.status || "")}</span></td>
+          <td><span class="pill ${statusClass(row.status || "")}">${html(row.status || "")}</span></td>
           <td>${html(row.memo || "")}</td>
           <td>${money(row.dailySales || 0)}</td>
-          <td>${html(row.product || "")}</td>
           <td>${number(row.orders || 0)}</td>
-          <td>${html(row.slot || "")}</td>
           <td>${roasText(row.roas || 0)}</td>
           <td>${rateText(row.adCostRate || 0)}</td>
           <td>${money(row.adProfit || 0)}</td>
@@ -1577,10 +1583,11 @@
               <div class="product-category-sub">${html(perf.summary || "")}</div>
             </div>
           </div>
+          <div class="tabs" style="margin:0 0 12px">${dateTabs}</div>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>기록ID</th><th>날짜</th><th>광고매출</th><th>광고비</th><th>운영상태</th><th>운영메모</th><th>일매출</th><th>제품</th><th>주문건수</th><th>진행 슬롯</th><th>ROAS</th><th>광고비율</th><th>광고이익(원)</th></tr></thead>
-              <tbody>${tableRows || `<tr><td class="empty" colspan="13">일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
+              <thead><tr><th>제품</th><th>기록ID</th><th>날짜</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>운영형태</th><th>운영메모</th><th>일매출</th><th>주문건수</th><th>ROAS</th><th>광고비율</th><th>광고이익(원)</th></tr></thead>
+              <tbody>${tableRows || `<tr><td class="empty" colspan="13">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
             </table>
           </div>
         </div>
@@ -1941,6 +1948,12 @@
       if (!button) return;
       state.rewardView = button.dataset.rewardView;
       renderRankTraffic();
+    });
+    els.dailyProductBody.addEventListener("click", event => {
+      const button = event.target.closest("[data-daily-product-date]");
+      if (!button) return;
+      state.dailyProductDate = button.dataset.dailyProductDate;
+      renderDailyProductPerformance();
     });
     document.querySelectorAll(".nav [data-page]").forEach(button => {
       button.addEventListener("click", () => {
