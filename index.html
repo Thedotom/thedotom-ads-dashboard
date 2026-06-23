@@ -1613,22 +1613,7 @@
             </table>
           </div>
         </div>
-        <div class="memo-grid" style="grid-template-columns:1fr 1fr;margin-bottom:0">
-          <section>
-            <div class="section-head"><h2>광고 데이터 자동화</h2></div>
-            <div class="memo-body">
-              <p class="meta">광고그룹: <a href="${html(perf.automation?.naverAdGroupUrl || "#")}" target="_blank" rel="noreferrer">${html(perf.automation?.naverAdGroupName || "2600원_돌수건(M)")}</a></p>
-              <p class="meta">${html(perf.automation?.naverAdSource || "")}</p>
-            </div>
-          </section>
-          <section>
-            <div class="section-head"><h2>매출 데이터 자동화</h2></div>
-            <div class="memo-body">
-              <p class="meta">${html(perf.automation?.storeSource || "")}</p>
-              <p class="meta">저장 위치: ${html(perf.automation?.storageTarget || "")}</p>
-            </div>
-          </section>
-        </div>`;
+        `;
     }
     function renderBrandContract() {
       const brand = state.data.brandContract || {};
@@ -1736,22 +1721,22 @@
           <button type="button" data-powerlink-device="pc" class="${selected === "pc" ? "active" : ""}">PC</button>
           <button type="button" data-powerlink-device="mobile" class="${selected === "mobile" ? "active" : ""}">모바일</button>
         </div>`;
-      return `<div class="powerlink-rank-grid">${sections.map(section => {
+      const visibleSections = sections.filter(section => (selected === "mobile" ? (section.mobile || []) : (section.pc || [])).length);
+      if (!visibleSections.length) return `${deviceTabs}<div class="empty">${selected === "mobile" ? "모바일" : "PC"} 순위 데이터가 없습니다.</div>`;
+      return `<div class="powerlink-rank-grid">${visibleSections.map(section => {
         const pc = section.pc || [];
         const mobile = section.mobile || [];
-        const total = pc.length + mobile.length;
         const items = selected === "mobile" ? mobile : pc;
         const label = selected === "mobile" ? "모바일" : "PC";
-        if (!total) return "";
         return `<div class="powerlink-rank-card">
           <div class="powerlink-rank-head">
             <div>
               <h3 class="powerlink-rank-title">${html(section.campaign || "파워링크")}</h3>
-              <div class="powerlink-rank-sub">${html(label)} 순위 · PC ${number(pc.length)}개 / 모바일 ${number(mobile.length)}개</div>
+              <div class="powerlink-rank-sub">${html(label)} 순위 · ${html(label)} ${number(items.length)}개</div>
             </div>
             <span class="count">${number(items.length)}개</span>
           </div>
-          ${items.length ? powerlinkDeviceBlock(label, selected, items) : `<div class="empty">${html(label)} 순위 데이터가 없습니다.</div>`}
+          ${powerlinkDeviceBlock(label, selected, items)}
         </div>`;
       }).join("")}</div>`.replace('<div class="powerlink-rank-grid">', `${deviceTabs}<div class="powerlink-rank-grid">`);
     }
