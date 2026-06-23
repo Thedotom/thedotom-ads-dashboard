@@ -583,6 +583,28 @@
       color: #fff;
       box-shadow: 0 8px 16px rgba(255,173,77,.24);
     }
+    .daily-product-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 12px;
+    }
+    .daily-product-tabs button {
+      width: auto;
+      height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border-color: #dfe7f3;
+      color: #45546b;
+      font-size: 12px;
+      box-shadow: 0 3px 8px rgba(26, 39, 78, .04);
+    }
+    .daily-product-tabs button.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      box-shadow: 0 8px 16px rgba(72,101,244,.22);
+    }
     .rank-control-panel {
       margin-top: 10px;
       border-top: 1px solid #eef2f8;
@@ -1583,7 +1605,7 @@
               <div class="product-category-sub">${html(perf.summary || "")}</div>
             </div>
           </div>
-          <div class="tabs" style="margin:0 0 12px">${dateTabs}</div>
+          <div class="daily-product-tabs">${dateTabs}</div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>제품</th><th>기록ID</th><th>날짜</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>운영형태</th><th>운영메모</th><th>일매출</th><th>주문건수</th><th>ROAS</th><th>광고비율</th><th>광고이익(원)</th></tr></thead>
