@@ -1630,6 +1630,9 @@
       if (!els.totalSalesBody) return;
       const weeks = metrics.weeks || [];
       els.totalSalesStatus.textContent = metrics.memo ? "수기/자동 비교" : "데이터 없음";
+      const monthButtons = (metrics.availableMonths || []).map(month => `
+        <button class="ghost ${month === state.month ? "active" : ""}" type="button" data-total-sales-month="${html(month)}">${html(month)}</button>
+      `).join("");
       const weekHeaders = weeks.map(week => `<th>${html(week)}</th>`).join("");
       const metricTable = (title, sub, rows, totalRow) => {
         const body = (rows || []).map(row => `
@@ -1666,6 +1669,7 @@
       const autoSales = Number(autoSalesTotal.total || 0);
       const autoAd = Number(autoAdTotal.total || 0);
       els.totalSalesBody.innerHTML = `
+        <div class="rank-tabs" style="margin-bottom:12px">${monthButtons}</div>
         <div class="kpis" style="margin-bottom:12px">
           <div class="metric"><div class="label">수기 전체 매출</div><div class="value">${money(totalSales)}</div><div class="sub">스토어+자사몰+무라+기프트몰</div></div>
           <div class="metric"><div class="label">수기 전체 광고비</div><div class="value">${money(totalAd)}</div><div class="sub">검색광고+성과형+슬롯비</div></div>
@@ -1673,12 +1677,19 @@
           <div class="metric"><div class="label">자동 수집 매출</div><div class="value">${money(autoSales)}</div><div class="sub">현재 저장된 상품성과 파일 기준</div></div>
           <div class="metric"><div class="label">자동 광고비</div><div class="value">${money(autoAd)}</div><div class="sub">네이버 광고 API + 슬롯 기준</div></div>
         </div>
-        <div class="meta" style="margin-bottom:12px">${html(metrics.memo || "")}</div>
+        <div class="meta" style="margin-bottom:12px">${html(metrics.manualSource || "")} · ${html(metrics.memo || "")}</div>
         ${metricTable("수기 입력 매출", "이미지 기준으로 입력한 주차별 전체 매출", metrics.manualSales || [], metrics.manualSalesTotal)}
         ${metricTable("자동 수집 매출", "스마트스토어 상품성과 파일에서 읽은 매출. 카페24/무라 자동 연동은 다음 단계에서 추가", metrics.autoSales || [], metrics.autoSalesTotal)}
         ${metricTable("수기 입력 광고비", "이미지 기준으로 입력한 검색광고/성과형/슬롯비", metrics.manualAdCosts || [], metrics.manualAdCostTotal)}
         ${metricTable("자동 수집 광고비", "네이버 광고 API 원본과 리워드 계약 기간 기준 슬롯비", metrics.autoAdCosts || [], metrics.autoAdCostTotal)}
       `;
+      els.totalSalesBody.querySelectorAll("[data-total-sales-month]").forEach(button => {
+        button.addEventListener("click", () => {
+          state.month = button.dataset.totalSalesMonth;
+          els.monthFilter.value = state.month;
+          loadData();
+        });
+      });
     }
     function renderBrandContract() {
       const brand = state.data.brandContract || {};

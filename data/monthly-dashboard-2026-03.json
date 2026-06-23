@@ -1,0 +1,774 @@
+{
+  "updatedAt": "2026-06-23 11:36",
+  "month": "2026-03",
+  "availableMonths": [
+    "2026-06",
+    "2026-05",
+    "2026-04",
+    "2026-03",
+    "2026-02",
+    "2026-01"
+  ],
+  "reportPath": "",
+  "draftPath": "D:\\광고보고서\\reports\\naver_ads_report_draft_2026-03.md",
+  "monthly": [],
+  "typePerformance": [],
+  "campaigns": [],
+  "adgroups": [],
+  "keywordPerformance": [],
+  "inspection": [],
+  "plan": [],
+  "state": {
+    "notes": {},
+    "planMemo": "",
+    "reportMemo": ""
+  },
+  "summary": {
+    "adCost": 0,
+    "revenue": 0,
+    "roas": 0,
+    "clicks": 0,
+    "conversions": 0,
+    "ctr": 0,
+    "cpc": 0,
+    "inspectionCount": 0
+  },
+  "dataProfile": {
+    "source": "manual-revenue-only",
+    "period": "2026.03.01 - 2026.03.31",
+    "memo": "광고 보고서 파일 없이 수기 매출표만 반영된 월입니다."
+  },
+  "brandContract": {
+    "status": "광고 보고서 없음",
+    "period": "",
+    "startDate": "2026-05-19",
+    "endDate": "2026-08-18",
+    "pcAmount": 1980000,
+    "mobileAmount": 2640000,
+    "totalAmount": 4620000,
+    "monthlyAmount": 1540000.0,
+    "payment": "계약시 광고비 선차감",
+    "areas": "모바일 브랜드검색, PC 브랜드검색",
+    "memo": "5월부터 3개월 계약. 브랜드 키워드 세팅",
+    "keywords": [],
+    "impressions": 0,
+    "clicks": 0,
+    "conversions": 0,
+    "revenue": 0
+  },
+  "rewardMarketing": {
+    "period": "2026-03-01 ~ 2026-03-31",
+    "items": [
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-11",
+        "endDate": "2026-06-20",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4843121925",
+        "productId": "4843121925",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-11",
+        "endDate": "2026-06-20",
+        "days": 10,
+        "totalAmount": 600000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 15개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 60000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
+        "link": "https://smartstore.naver.com/thedotomshop/products/12924495111",
+        "productId": "12924495111",
+        "keyword": "어린이집수건",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-11",
+        "endDate": "2026-06-20",
+        "days": 10,
+        "totalAmount": 200000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 5개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 20000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4843121925",
+        "productId": "4843121925",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 600000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 15개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 60000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
+        "link": "https://smartstore.naver.com/thedotomshop/products/12924495111",
+        "productId": "12924495111",
+        "keyword": "어린이집수건",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 200000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 5개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 20000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-05-22",
+        "endDate": "2026-05-31",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-01",
+        "endDate": "2026-06-10",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      }
+    ],
+    "activeItems": [
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4843121925",
+        "productId": "4843121925",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 600000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 15개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 60000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
+        "link": "https://smartstore.naver.com/thedotomshop/products/12924495111",
+        "productId": "12924495111",
+        "keyword": "어린이집수건",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-21",
+        "endDate": "2026-06-30",
+        "days": 10,
+        "totalAmount": 200000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 5개 (정확한 수량 모름)",
+        "status": "진행중",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 20000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      }
+    ],
+    "completedItems": [
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-11",
+        "endDate": "2026-06-20",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4843121925",
+        "productId": "4843121925",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-11",
+        "endDate": "2026-06-20",
+        "days": 10,
+        "totalAmount": 600000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 15개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 60000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
+        "link": "https://smartstore.naver.com/thedotomshop/products/12924495111",
+        "productId": "12924495111",
+        "keyword": "어린이집수건",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-11",
+        "endDate": "2026-06-20",
+        "days": 10,
+        "totalAmount": 200000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 5개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 20000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-05-22",
+        "endDate": "2026-05-31",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      },
+      {
+        "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+        "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
+        "productId": "4624494637",
+        "keyword": "돌잔치답례품",
+        "purpose": "순위 트래픽 (상단 순위 확보)",
+        "startDate": "2026-06-01",
+        "endDate": "2026-06-10",
+        "days": 10,
+        "totalAmount": 400000,
+        "unitAmount": 40000,
+        "vat": "VAT 별도",
+        "quantity": "리워드 10개 (정확한 수량 모름)",
+        "status": "완료",
+        "metric": "네이버 쇼핑 순위 변화",
+        "overlapDays": 0,
+        "recognizedAmount": 0.0,
+        "dailyAmount": 40000.0,
+        "isActiveInPeriod": false,
+        "image": "",
+        "rankTitle": ""
+      }
+    ],
+    "activeAmount": 0.0,
+    "activeStatusAmount": 1200000.0,
+    "completedAmount": 2000000.0,
+    "contractAmount": 3200000.0,
+    "activeCount": 3,
+    "completedCount": 5,
+    "memo": "쇼핑검색 상품 순위 트래픽 보강 비용으로 광고비와 분리해 관리"
+  },
+  "rankObservation": {
+    "items": [
+      {
+        "category": "순위 관찰 상품",
+        "productName": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
+        "link": "https://smartstore.naver.com/thedotomshop/products/11562165854",
+        "productId": "11562165854",
+        "keywords": [
+          "돌답례품",
+          "돌잔치수건",
+          "돌수건",
+          "조구만",
+          "돌잔치답례품",
+          "답례품",
+          "돌답례품수건",
+          "돌수건답례품"
+        ],
+        "priorityKeywords": [
+          "돌잔치답례품",
+          "돌답례품",
+          "답례품"
+        ],
+        "device": "네이버 쇼핑 기준",
+        "memo": "리워드 미진행, 자연 순위 관찰용",
+        "keyword": "돌잔치답례품, 돌답례품, 답례품",
+        "image": "",
+        "rankTitle": "",
+        "status": "관찰중",
+        "metric": "네이버 쇼핑 순위 변화"
+      },
+      {
+        "category": "순위 관찰 상품",
+        "productName": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
+        "link": "https://smartstore.naver.com/thedotomshop/products/7444568862",
+        "productId": "7444568862",
+        "keywords": [
+          "답례품꿀",
+          "돌잔치답례품",
+          "돌답례품",
+          "답례품",
+          "꿀답례품",
+          "결혼답례품",
+          "꿀결혼답례품"
+        ],
+        "priorityKeywords": [
+          "꿀답례품",
+          "답례품꿀",
+          "꿀결혼답례품"
+        ],
+        "device": "네이버 쇼핑 기준",
+        "memo": "리워드 미진행, 자연 순위 관찰용",
+        "keyword": "꿀답례품, 답례품꿀, 꿀결혼답례품",
+        "image": "",
+        "rankTitle": "",
+        "status": "관찰중",
+        "metric": "네이버 쇼핑 순위 변화"
+      },
+      {
+        "category": "순위 관찰 상품",
+        "productName": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
+        "link": "https://smartstore.naver.com/thedotomshop/products/12047676813",
+        "productId": "12047676813",
+        "keywords": [
+          "호두정과답례품",
+          "답례품호두정과",
+          "결혼답례품",
+          "돌잔치답례품",
+          "결혼식답례품",
+          "무라호두정과"
+        ],
+        "priorityKeywords": [
+          "결혼식답례품",
+          "결혼답례품",
+          "호두정과답례품"
+        ],
+        "device": "네이버 쇼핑 기준",
+        "memo": "리워드 미진행, 자연 순위 관찰용",
+        "keyword": "결혼식답례품, 결혼답례품, 호두정과답례품",
+        "image": "",
+        "rankTitle": "",
+        "status": "관찰중",
+        "metric": "네이버 쇼핑 순위 변화"
+      },
+      {
+        "category": "순위 관찰 상품",
+        "productName": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
+        "link": "https://smartstore.naver.com/thedotomshop/products/11858377273",
+        "productId": "11858377273",
+        "keywords": [
+          "호텔수건",
+          "호텔타월",
+          "호텔수건40수",
+          "부드러운수건",
+          "호텔수건5+5",
+          "수건5+5",
+          "수건"
+        ],
+        "priorityKeywords": [
+          "호텔수건",
+          "수건",
+          "40수수건"
+        ],
+        "device": "네이버 쇼핑 기준",
+        "memo": "리워드 미진행, 자연 순위 관찰용",
+        "keyword": "호텔수건, 수건, 40수수건",
+        "image": "",
+        "rankTitle": "",
+        "status": "관찰중",
+        "metric": "네이버 쇼핑 순위 변화"
+      }
+    ],
+    "summary": "4개 상품 / 리워드 미진행 자연 순위 관찰"
+  },
+  "shoppingIntegrated": {
+    "adCost": 0,
+    "clicks": 0,
+    "conversions": 0,
+    "revenue": 0,
+    "rewardCost": 0,
+    "blendedRoas": 0,
+    "rewardMemo": "",
+    "targetRank": ""
+  },
+  "dailyProductCosts": {
+    "sourcePath": "",
+    "dates": [],
+    "items": [],
+    "summary": "일별 원본 데이터가 없습니다."
+  },
+  "dailyProductPerformance": {
+    "rows": [],
+    "totals": {
+      "adSales": 0,
+      "adCost": 0,
+      "dailySales": 0,
+      "orders": 0,
+      "roas": 0,
+      "adCostRate": 0,
+      "adProfit": 0
+    },
+    "dateLabel": "",
+    "count": 0,
+    "summary": "스마트스토어 하루치 상품성과와 네이버 광고 API 일별 데이터를 자동 병합한 기준입니다.",
+    "updatedAt": "2026-06-23 10:29:57",
+    "automation": {
+      "adAccountId": "1739029",
+      "naverAdGroupName": "2600원_돌수건(M)",
+      "naverAdGroupUrl": "https://ads.naver.com/manage/ad-accounts/1739029/sa/adgroups/grp-a001-02-000000013458876",
+      "naverAdSource": "네이버 광고 API: 일자별 총비용, 노출수, 클릭수, 구매완료 전환매출액",
+      "storeSource": "스마트스토어센터 판매분석 > 상품별 판매성과: 일매출, 주문건수",
+      "storageTarget": "D:/광고보고서/data/daily_product_performance.json"
+    }
+  },
+  "totalSalesMetrics": {
+    "weeks": [
+      "3월1주차(1~8)",
+      "3월2주차(9~15)",
+      "3월3주차(16~22)",
+      "3월4주차(23~29)",
+      "3월5주차(30~31)"
+    ],
+    "availableMonths": [
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06"
+    ],
+    "manualSource": "2026년_매출액&광고비 (1월~).xlsx · 3월 시트 기준",
+    "manualSales": [
+      {
+        "name": "스토어",
+        "weeks": [
+          103679450.0,
+          96343250.0,
+          72646150.0,
+          64157050.0,
+          28867920.0
+        ],
+        "total": 365693820.0
+      },
+      {
+        "name": "자사몰",
+        "weeks": [
+          94577500.0,
+          81298200.0,
+          69066250.0,
+          72603700.0,
+          27938600.0
+        ],
+        "total": 345484250.0
+      },
+      {
+        "name": "무라",
+        "weeks": [
+          4362800.0,
+          3869300.0,
+          2048700.0,
+          1469000.0,
+          297300.0
+        ],
+        "total": 12047100.0
+      },
+      {
+        "name": "기프트몰",
+        "weeks": [
+          1164350.0,
+          885500.0,
+          1059300.0,
+          2975500.0,
+          0.0
+        ],
+        "total": 6084650.0
+      }
+    ],
+    "manualSalesTotal": {
+      "name": "수기 매출 합계",
+      "weeks": [
+        203784100.0,
+        182396250.0,
+        144820400.0,
+        141205250.0,
+        57103820.0
+      ],
+      "total": 729309820.0
+    },
+    "manualAdCosts": [
+      {
+        "name": "검색광고",
+        "weeks": [
+          6030915.0,
+          5508690.0,
+          4460577.0,
+          3771559.0,
+          585322.0
+        ],
+        "total": 20357063.0
+      },
+      {
+        "name": "검색광고2",
+        "weeks": [
+          834366.0,
+          473282.0,
+          376315.0,
+          338278.0,
+          96452.0
+        ],
+        "total": 2118693.0
+      },
+      {
+        "name": "성과형1",
+        "weeks": [
+          2323371.0,
+          2369334.0,
+          2233190.0,
+          2049832.0,
+          583701.0
+        ],
+        "total": 9559428.0
+      }
+    ],
+    "manualAdCostTotal": {
+      "name": "수기 광고비 합계",
+      "weeks": [
+        9188652.0,
+        8351306.0,
+        7070082.0,
+        6159669.0,
+        1265475.0
+      ],
+      "total": 32035184.0
+    },
+    "autoSales": [
+      {
+        "name": "스마트스토어 자동수집",
+        "weeks": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "total": 0.0
+      }
+    ],
+    "autoSalesTotal": {
+      "name": "자동 매출 합계",
+      "weeks": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "total": 0.0
+    },
+    "autoAdCosts": [
+      {
+        "name": "네이버 광고 자동수집",
+        "weeks": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "total": 0.0
+      },
+      {
+        "name": "슬롯/리워드 기준",
+        "weeks": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "total": 0.0
+      }
+    ],
+    "autoAdCostTotal": {
+      "name": "자동 광고비 합계",
+      "weeks": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "total": 0.0
+    },
+    "memo": "수기 입력값은 연간 매출표 엑셀 기준, 자동 수집값은 현재 저장된 스마트스토어 상품성과 파일과 네이버 광고 API 원본 기준입니다."
+  },
+  "rankTraffic": {
+    "sourcePath": "D:\\광고보고서\\rank\\rank_data.json",
+    "updatedAt": "",
+    "dates": [],
+    "slots": [],
+    "summaryColumns": [],
+    "shoppingRows": [],
+    "powerlinkPcRows": [],
+    "powerlinkMobileRows": [],
+    "latestShopping": [],
+    "latestPowerlink": [],
+    "slotDetails": []
+  }
+}
