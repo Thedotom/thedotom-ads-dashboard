@@ -1717,10 +1717,24 @@
       const cls = d.direction === "up" ? "good" : d.direction === "down" ? "bad" : "warn";
       return `<span class="delta-badge ${cls}">${html(d.text || "-")}</span>`;
     }
-    function selectedRankDetail(rank) {
+    function detailHasShoppingData(detail) {
+      return (detail?.shoppingProducts || []).some(product => (product.items || []).length);
+    }
+    function detailHasPowerlinkData(detail) {
+      return (detail?.powerlinkSections || []).some(section => (section.pc || []).length || (section.mobile || []).length);
+    }
+    function filteredRankDetails(rank) {
       const details = rank.slotDetails || [];
+      if (state.page === "rankPowerlink") return details.filter(detailHasPowerlinkData);
+      return details.filter(detailHasShoppingData);
+    }
+    function selectedRankDetail(rank) {
+      const details = filteredRankDetails(rank);
       if (!details.length) return null;
-      if (!state.rankDate) state.rankDate = rank.latestDate || details[details.length - 1].date;
+      if (!state.rankDate || !details.some(item => item.date === state.rankDate)) {
+        state.rankDate = details[details.length - 1].date;
+        state.rankSlot = "";
+      }
       const dateDetails = details.filter(item => item.date === state.rankDate);
       if (!dateDetails.some(item => item.slot === state.rankSlot)) {
         state.rankSlot = (dateDetails.find(item => item.slot === "afternoon") || dateDetails[0] || details[details.length - 1]).slot;
@@ -1728,9 +1742,17 @@
       return details.find(item => item.date === state.rankDate && item.slot === state.rankSlot) || details[details.length - 1];
     }
     function renderRankTabs(rank) {
-      const dates = rank.dates || [];
+      const details = filteredRankDetails(rank);
+      const dates = [...new Set(details.map(item => item.date))].sort().reverse();
+      if (!dates.includes(state.rankDate)) {
+        state.rankDate = dates[0] || "";
+        state.rankSlot = "";
+      }
       els.rankDateTabs.innerHTML = dates.map(date => `<button class="ghost ${date === state.rankDate ? "active" : ""}" type="button" data-rank-date="${html(date)}">${html(date)}</button>`).join("");
-      const slots = (rank.slotDetails || []).filter(item => item.date === state.rankDate);
+      const slots = details.filter(item => item.date === state.rankDate);
+      if (!slots.some(item => item.slot === state.rankSlot)) {
+        state.rankSlot = (slots.find(item => item.slot === "afternoon") || slots[0] || {}).slot || "";
+      }
       els.rankSlotTabs.innerHTML = slots.map(item => `<button class="ghost ${item.slot === state.rankSlot ? "active" : ""}" type="button" data-rank-slot="${html(item.slot)}">${html(item.slotLabel)}</button>`).join("");
       els.rankDateTabs.querySelectorAll("[data-rank-date]").forEach(button => {
         button.addEventListener("click", () => {
