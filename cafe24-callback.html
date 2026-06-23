@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>카페24 인증 코드</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Pretendard", "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: #172033;
+      background: #f5f7fb;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    main {
+      width: min(720px, 100%);
+      background: #fff;
+      border: 1px solid #dfe6f1;
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(34, 47, 84, .12);
+      padding: 28px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 8px 0;
+      color: #60708c;
+      line-height: 1.6;
+    }
+    .code-box {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #f1f5ff;
+      border: 1px solid #dbe5ff;
+      word-break: break-all;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 14px;
+      color: #172033;
+    }
+    button {
+      margin-top: 16px;
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      background: #4263eb;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .error {
+      background: #fff1f1;
+      border-color: #ffd1d1;
+      color: #c92a2a;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>카페24 인증 코드</h1>
+    <p>아래 code 값을 복사해서 토큰 발급 단계에 사용합니다.</p>
+    <div id="codeBox" class="code-box">확인 중...</div>
+    <button id="copyBtn" type="button">코드 복사</button>
+    <p id="stateText"></p>
+  </main>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const code = params.get("code") || "";
+    const state = params.get("state") || "";
+    const error = params.get("error") || "";
+    const codeBox = document.getElementById("codeBox");
+    const copyBtn = document.getElementById("copyBtn");
+    const stateText = document.getElementById("stateText");
+
+    if (error) {
+      codeBox.classList.add("error");
+      codeBox.textContent = `error=${error}`;
+      copyBtn.disabled = true;
+    } else if (code) {
+      codeBox.textContent = code;
+      stateText.textContent = state ? `state: ${state}` : "";
+    } else {
+      codeBox.classList.add("error");
+      codeBox.textContent = "URL에 code 값이 없습니다.";
+      copyBtn.disabled = true;
+    }
+
+    copyBtn.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(code);
+      copyBtn.textContent = "복사 완료";
+    });
+  </script>
+</body>
+</html>
