@@ -315,6 +315,20 @@
     .note-row { display: grid; grid-template-columns: 108px minmax(180px, 1fr) 70px; gap: 8px; align-items: start; }
     .note-row select, .note-row button { height: 32px; }
     .note-row input { height: 32px; }
+    .manual-revenue-input {
+      height: 30px;
+      min-width: 96px;
+      padding: 0 8px;
+      border-radius: 7px;
+      background: #fbfcff;
+      font-size: 12px;
+      text-align: right;
+    }
+    .manual-revenue-input.name {
+      min-width: 118px;
+      text-align: left;
+      font-weight: 800;
+    }
     .empty { padding: 24px; color: var(--muted); text-align: center; }
 
     /* Soft dashboard theme */
@@ -1226,6 +1240,11 @@
     function ratio(v) { return Number(v || 0).toFixed(2); }
     function roasText(v) { return `${Number(v || 0).toFixed(2)}배`; }
     function rateText(v) { return `${(Number(v || 0) * 100).toFixed(1)}%`; }
+    function parseMoneyValue(value) {
+      const cleaned = String(value || "").replace(/[^\d.-]/g, "");
+      const parsed = Number(cleaned);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
     function todayLabel() {
       const today = new Date();
       const y = today.getFullYear();
@@ -1587,7 +1606,7 @@
           <td class="wrap"><strong>${html(row.product || "")}</strong><div class="muted">상품번호 ${html(row.productId || "")}</div></td>
           <td>${html(row.recordId || "")}</td>
           <td>${html(row.date || "")}</td>
-          <td class="wrap">${html(row.adgroup || "연결 광고 없음")}</td>
+          <td class="wrap">${html(row.adgroup || (String(row.status || "").includes("슬롯") ? "슬롯 진행 상품" : "연결 광고 없음"))}</td>
           <td>${money(row.adSales || 0)}</td>
           <td>${money(row.adCost || 0)}</td>
           <td><span class="pill ${statusClass(row.status || "")}">${html(row.status || "")}</span></td>
@@ -1634,6 +1653,32 @@
         <button class="ghost ${month === state.month ? "active" : ""}" type="button" data-total-sales-month="${html(month)}">${html(month)}</button>
       `).join("");
       const weekHeaders = weeks.map(week => `<th>${html(week)}</th>`).join("");
+      const rowsForEdit = (rows, defaults) => {
+        const source = (rows && rows.length ? rows : defaults.map(name => ({ name, weeks: [0, 0, 0, 0, 0] }))).map(row => ({
+          name: row.name || "",
+          weeks: [...(row.weeks || []), 0, 0, 0, 0, 0].slice(0, 5)
+        }));
+        return [...source, { name: "", weeks: [0, 0, 0, 0, 0] }];
+      };
+      const manualInputTable = (title, kind, rows, defaults) => {
+        const body = rowsForEdit(rows, defaults).map((row, rowIndex) => `
+          <tr>
+            <td><input class="manual-revenue-input name" data-manual-name value="${html(row.name)}" placeholder="항목명"></td>
+            ${weeks.map((week, weekIndex) => `<td><input class="manual-revenue-input" data-manual-week="${weekIndex}" value="${number(row.weeks[weekIndex] || 0)}" inputmode="numeric" aria-label="${html(week)}"></td>`).join("")}
+          </tr>`).join("");
+        return `
+          <div class="product-category">
+            <div class="product-category-head">
+              <div><h3 class="product-category-title">${html(title)}</h3><div class="product-category-sub">수기로 관리하는 값은 여기서 바로 수정 후 저장합니다.</div></div>
+            </div>
+            <div class="table-wrap">
+              <table data-manual-kind="${html(kind)}">
+                <thead><tr><th>구분</th>${weekHeaders}</tr></thead>
+                <tbody>${body}</tbody>
+              </table>
+            </div>
+          </div>`;
+      };
       const metricTable = (title, sub, rows, totalRow) => {
         const body = (rows || []).map(row => `
           <tr>
@@ -1678,6 +1723,14 @@
           <div class="metric"><div class="label">자동 광고비</div><div class="value">${money(autoAd)}</div><div class="sub">네이버 광고 API + 슬롯 기준</div></div>
         </div>
         <div class="meta" style="margin-bottom:12px">${html(metrics.manualSource || "")} · ${html(metrics.memo || "")}</div>
+        <div class="product-category">
+          <div class="product-category-head">
+            <div><h3 class="product-category-title">수기 입력 편집</h3><div class="product-category-sub">6월 기준을 먼저 정리하고, 이후 1~5월도 월 버튼을 눌러 같은 방식으로 채우면 됩니다.</div></div>
+            <button class="primary" type="button" data-save-manual-revenue>수기 입력 저장</button>
+          </div>
+        </div>
+        ${manualInputTable("수기 매출 입력", "manualSales", metrics.manualSales || [], ["스토어", "자사몰", "무라", "기프트몰"])}
+        ${manualInputTable("수기 광고비 입력", "manualAdCosts", metrics.manualAdCosts || [], ["검색광고", "검색광고2", "성과형1", "성과형2", "슬롯비"])}
         ${metricTable("수기 입력 매출", "이미지 기준으로 입력한 주차별 전체 매출", metrics.manualSales || [], metrics.manualSalesTotal)}
         ${metricTable("자동 수집 매출", "스마트스토어 상품성과 파일에서 읽은 매출. 카페24/무라 자동 연동은 다음 단계에서 추가", metrics.autoSales || [], metrics.autoSalesTotal)}
         ${metricTable("수기 입력 광고비", "이미지 기준으로 입력한 검색광고/성과형/슬롯비", metrics.manualAdCosts || [], metrics.manualAdCostTotal)}
@@ -1690,6 +1743,39 @@
           loadData();
         });
       });
+      els.totalSalesBody.querySelector("[data-save-manual-revenue]")?.addEventListener("click", saveManualRevenue);
+    }
+    async function saveManualRevenue() {
+      const weeks = state.data?.totalSalesMetrics?.weeks || [];
+      const collect = kind => {
+        const table = els.totalSalesBody.querySelector(`[data-manual-kind="${kind}"]`);
+        if (!table) return [];
+        return [...table.querySelectorAll("tbody tr")].map(row => {
+          const name = row.querySelector("[data-manual-name]")?.value?.trim() || "";
+          const values = [...row.querySelectorAll("[data-manual-week]")].map(input => parseMoneyValue(input.value));
+          return { name, weeks: values };
+        }).filter(row => row.name);
+      };
+      try {
+        setStatus("수기 입력값 저장 중...");
+        const response = await fetch(`/api/manual-revenue?month=${encodeURIComponent(state.month)}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            weeks,
+            manualSales: collect("manualSales"),
+            manualAdCosts: collect("manualAdCosts")
+          })
+        });
+        if (!response.ok) throw new Error("수기 입력값 저장 실패");
+        const result = await response.json();
+        if (!result.ok) throw new Error(result.error || "수기 입력값 저장 실패");
+        await loadData();
+        setStatus("수기 입력값 저장 완료");
+      } catch (error) {
+        setStatus("로컬 대시보드에서만 수기 입력값을 저장할 수 있습니다.", true);
+        console.error(error);
+      }
     }
     function renderBrandContract() {
       const brand = state.data.brandContract || {};
