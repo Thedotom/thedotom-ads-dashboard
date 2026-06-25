@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25 10:08",
+  "updatedAt": "2026-06-25 11:20",
   "month": "2026-01",
   "availableMonths": [
     "2026-06",
@@ -534,6 +534,31 @@
       },
       {
         "category": "순위 관찰 상품",
+        "productName": "무라 꿀 답례품",
+        "link": "https://smartstore.naver.com/mura/products/11979458131",
+        "productId": "11979458131",
+        "keywords": [
+          "꿀답례품",
+          "답례품꿀",
+          "꿀결혼답례품",
+          "결혼답례품",
+          "돌잔치답례품"
+        ],
+        "priorityKeywords": [
+          "꿀답례품",
+          "답례품꿀",
+          "꿀결혼답례품"
+        ],
+        "device": "네이버 쇼핑 기준",
+        "memo": "무라 스토어 순위 관찰용",
+        "keyword": "꿀답례품, 답례품꿀, 꿀결혼답례품",
+        "image": "",
+        "rankTitle": "",
+        "status": "관찰중",
+        "metric": "네이버 쇼핑 순위 변화"
+      },
+      {
+        "category": "순위 관찰 상품",
         "productName": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
         "link": "https://smartstore.naver.com/thedotomshop/products/11858377273",
         "productId": "11858377273",
@@ -560,7 +585,7 @@
         "metric": "네이버 쇼핑 순위 변화"
       }
     ],
-    "summary": "5개 상품 / 리워드 미진행 자연 순위 관찰"
+    "summary": "6개 상품 / 리워드 미진행 자연 순위 관찰"
   },
   "shoppingIntegrated": {
     "adCost": 0,
