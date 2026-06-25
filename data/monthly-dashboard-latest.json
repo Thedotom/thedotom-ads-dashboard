@@ -9341,7 +9341,7 @@
   },
   "rankTraffic": {
     "sourcePath": "D:\\광고보고서\\rank\\rank_data.json",
-    "updatedAt": "2026-06-25 11:37",
+    "updatedAt": "2026-06-25 18:03",
     "dates": [
       "2026-06-25",
       "2026-06-24",
@@ -9364,6 +9364,11 @@
         "date": "2026-06-25",
         "slot": "morning",
         "label": "06-25 오전"
+      },
+      {
+        "date": "2026-06-25",
+        "slot": "afternoon",
+        "label": "06-25 오후"
       },
       {
         "date": "2026-06-24",
@@ -9541,6 +9546,11 @@
         "date": "2026-06-25",
         "slot": "morning",
         "label": "06-25 오전"
+      },
+      {
+        "date": "2026-06-25",
+        "slot": "afternoon",
+        "label": "06-25 오후"
       }
     ],
     "shoppingRows": [
@@ -9557,6 +9567,13 @@
             "bucket": "out",
             "status": "10위권 밖",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 53,
+            "text": "53위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 61,
@@ -9694,6 +9711,13 @@
             "bucket": "out",
             "status": "10위권 밖",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 51,
+            "text": "51위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 60,
@@ -9837,6 +9861,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -9968,6 +9999,13 @@
             "bucket": "out",
             "status": "10위권 밖",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 17,
+            "text": "17위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 22,
@@ -10107,6 +10145,13 @@
             "collectedAt": "09:10:02"
           },
           {
+            "rank": 17,
+            "text": "17위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
+          },
+          {
             "rank": 22,
             "text": "22위",
             "bucket": "out",
@@ -10242,6 +10287,13 @@
             "bucket": "out",
             "status": "10위권 밖",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 18,
+            "text": "18위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 25,
@@ -10385,6 +10437,13 @@
             "text": "21위",
             "bucket": "out",
             "status": "10위권 밖",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": 21,
+            "text": "21위",
+            "bucket": "out",
+            "status": "10위권 밖",
             "collectedAt": "09:10:03"
           },
           {
@@ -10516,6 +10575,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 3,
@@ -10659,6 +10725,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -10790,6 +10863,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -10929,6 +11009,13 @@
             "collectedAt": "11:30:41"
           },
           {
+            "rank": 57,
+            "text": "57위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
+          },
+          {
             "rank": 54,
             "text": "54위",
             "bucket": "out",
@@ -11064,6 +11151,13 @@
             "bucket": "out",
             "status": "10위권 밖",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": 41,
+            "text": "41위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 43,
@@ -11203,6 +11297,13 @@
             "collectedAt": "11:30:41"
           },
           {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -11338,6 +11439,13 @@
             "bucket": "out",
             "status": "10위권 밖",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": 52,
+            "text": "52위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 57,
@@ -11481,6 +11589,13 @@
             "text": "1위",
             "bucket": "one",
             "status": "1~5위",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
             "collectedAt": "09:10:03"
           },
           {
@@ -11612,6 +11727,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -11751,6 +11873,13 @@
             "collectedAt": "11:30:41"
           },
           {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
+          },
+          {
             "rank": null,
             "text": "미노출",
             "bucket": "none",
@@ -11888,6 +12017,13 @@
             "collectedAt": "11:30:41"
           },
           {
+            "rank": 48,
+            "text": "48위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
+          },
+          {
             "rank": null,
             "text": "미노출",
             "bucket": "none",
@@ -12023,6 +12159,13 @@
             "bucket": "out",
             "status": "10위권 밖",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": 52,
+            "text": "52위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -12166,6 +12309,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": ""
           },
           {
@@ -12297,6 +12447,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -12440,6 +12597,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": ""
           },
           {
@@ -12571,6 +12735,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -12714,6 +12885,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": ""
           },
           {
@@ -12845,6 +13023,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -12988,6 +13173,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": ""
           },
           {
@@ -13119,6 +13311,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -13262,6 +13461,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -13393,6 +13599,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -13536,6 +13749,13 @@
             "text": "3위",
             "bucket": "top3",
             "status": "1~5위",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
             "collectedAt": "09:10:03"
           },
           {
@@ -13667,6 +13887,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -13810,6 +14037,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -13941,6 +14175,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 4,
+            "text": "4위",
+            "bucket": "top5",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 1,
@@ -14078,6 +14319,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 2,
@@ -14221,6 +14469,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -14352,6 +14607,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -14495,6 +14757,13 @@
             "text": "1위",
             "bucket": "one",
             "status": "1~5위",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
             "collectedAt": "09:10:03"
           },
           {
@@ -14626,6 +14895,13 @@
             "bucket": "one",
             "status": "1~5위",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 1,
@@ -14769,6 +15045,13 @@
             "text": "3위",
             "bucket": "top3",
             "status": "1~5위",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
             "collectedAt": "09:10:03"
           },
           {
@@ -14900,6 +15183,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 4,
+            "text": "4위",
+            "bucket": "top5",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 4,
@@ -15039,6 +15329,13 @@
             "collectedAt": "09:10:02"
           },
           {
+            "rank": 25,
+            "text": "25위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
+          },
+          {
             "rank": 19,
             "text": "19위",
             "bucket": "out",
@@ -15174,6 +15471,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 1,
@@ -15317,6 +15621,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -15448,6 +15759,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 2,
@@ -15591,6 +15909,13 @@
             "text": "1위",
             "bucket": "one",
             "status": "1~5위",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
             "collectedAt": "09:10:03"
           },
           {
@@ -15722,6 +16047,13 @@
             "bucket": "top10",
             "status": "6~10위",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 6,
+            "text": "6위",
+            "bucket": "top10",
+            "status": "6~10위",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 5,
@@ -15861,6 +16193,13 @@
             "collectedAt": "09:10:02"
           },
           {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
+          },
+          {
             "rank": 5,
             "text": "5위",
             "bucket": "top5",
@@ -15996,6 +16335,13 @@
             "bucket": "out",
             "status": "10위권 밖",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 24,
+            "text": "24위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 25,
@@ -16135,6 +16481,13 @@
             "collectedAt": "09:10:02"
           },
           {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
+          },
+          {
             "rank": 4,
             "text": "4위",
             "bucket": "top5",
@@ -16270,6 +16623,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 2,
@@ -16409,6 +16769,13 @@
             "collectedAt": "09:10:02"
           },
           {
+            "rank": 6,
+            "text": "6위",
+            "bucket": "top10",
+            "status": "6~10위",
+            "collectedAt": "17:55:53"
+          },
+          {
             "rank": 5,
             "text": "5위",
             "bucket": "top5",
@@ -16544,6 +16911,13 @@
             "bucket": "out",
             "status": "10위권 밖",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 17,
+            "text": "17위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 20,
@@ -16683,6 +17057,13 @@
             "collectedAt": "09:10:02"
           },
           {
+            "rank": 15,
+            "text": "15위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
+          },
+          {
             "rank": 16,
             "text": "16위",
             "bucket": "out",
@@ -16818,6 +17199,13 @@
             "bucket": "top10",
             "status": "6~10위",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 5,
+            "text": "5위",
+            "bucket": "top5",
+            "status": "1~5위",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": 9,
@@ -16961,6 +17349,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -17092,6 +17487,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:30:41"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -17235,6 +17637,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:55:53"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -17366,6 +17775,13 @@
             "bucket": "out",
             "status": "10위권 밖",
             "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 93,
+            "text": "93위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:55:53"
           },
           {
             "rank": null,
@@ -17503,6 +17919,13 @@
             "bucket": "one",
             "status": "1~5위",
             "collectedAt": "11:32:35"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:58:40"
           },
           {
             "rank": 2,
@@ -17644,6 +18067,13 @@
             "text": "1위",
             "bucket": "one",
             "status": "1~5위",
+            "collectedAt": "17:58:33"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
             "collectedAt": "12:42:00"
           },
           {
@@ -17773,6 +18203,13 @@
             "bucket": "one",
             "status": "1~5위",
             "collectedAt": "11:31:52"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "17:57:59"
           },
           {
             "rank": 1,
@@ -17914,6 +18351,13 @@
             "text": "1위",
             "bucket": "one",
             "status": "1~5위",
+            "collectedAt": "17:58:06"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
             "collectedAt": "12:41:33"
           },
           {
@@ -18043,6 +18487,13 @@
             "bucket": "one",
             "status": "1~5위",
             "collectedAt": "11:32:05"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "17:58:13"
           },
           {
             "rank": 1,
@@ -18184,6 +18635,13 @@
             "text": "1위",
             "bucket": "one",
             "status": "1~5위",
+            "collectedAt": "17:58:19"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
             "collectedAt": "12:41:47"
           },
           {
@@ -18313,6 +18771,13 @@
             "bucket": "one",
             "status": "1~5위",
             "collectedAt": "11:32:58"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "17:58:59"
           },
           {
             "rank": 1,
@@ -18450,6 +18915,13 @@
             "collectedAt": "11:32:20"
           },
           {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:58:26"
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -18583,6 +19055,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "11:31:37"
+          },
+          {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:57:45"
           },
           {
             "rank": 1,
@@ -18720,6 +19199,13 @@
             "collectedAt": "11:32:43"
           },
           {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:58:46"
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -18853,6 +19339,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "11:31:44"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:57:52"
           },
           {
             "rank": 2,
@@ -18990,6 +19483,13 @@
             "collectedAt": "11:32:50"
           },
           {
+            "rank": 4,
+            "text": "4위",
+            "bucket": "top5",
+            "status": "1~5위",
+            "collectedAt": "17:58:54"
+          },
+          {
             "rank": 2,
             "text": "2위",
             "bucket": "top3",
@@ -19123,6 +19623,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:33:12"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:59:13"
           },
           {
             "rank": 6,
@@ -19264,6 +19771,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "17:59:06"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:42:35"
           },
           {
@@ -19395,6 +19909,13 @@
             "collectedAt": "11:33:18"
           },
           {
+            "rank": 8,
+            "text": "8위",
+            "bucket": "top10",
+            "status": "6~10위",
+            "collectedAt": "17:59:20"
+          },
+          {
             "rank": null,
             "text": "미노출",
             "bucket": "none",
@@ -19514,7 +20035,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 7,
+        "latestRank": 8,
         "latestStatus": "6~10위"
       },
       {
@@ -19528,6 +20049,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:33:24"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:59:26"
           },
           {
             "rank": null,
@@ -19663,6 +20191,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:33:31"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:59:33"
           },
           {
             "rank": null,
@@ -19806,6 +20341,13 @@
             "text": "1위",
             "bucket": "one",
             "status": "1~5위",
+            "collectedAt": "18:03:04"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
             "collectedAt": "12:46:39"
           },
           {
@@ -19935,6 +20477,13 @@
             "bucket": "one",
             "status": "1~5위",
             "collectedAt": "11:36:03"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "18:02:06"
           },
           {
             "rank": 3,
@@ -20076,6 +20625,13 @@
             "text": "1위",
             "bucket": "one",
             "status": "1~5위",
+            "collectedAt": "18:02:37"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
             "collectedAt": "12:46:12"
           },
           {
@@ -20205,6 +20761,13 @@
             "bucket": "one",
             "status": "1~5위",
             "collectedAt": "11:35:33"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "18:01:39"
           },
           {
             "rank": 1,
@@ -20346,6 +20909,13 @@
             "text": "1위",
             "bucket": "one",
             "status": "1~5위",
+            "collectedAt": "18:01:21"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
             "collectedAt": "12:44:50"
           },
           {
@@ -20475,6 +21045,13 @@
             "bucket": "one",
             "status": "1~5위",
             "collectedAt": "11:35:26"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "18:01:34"
           },
           {
             "rank": 1,
@@ -20616,6 +21193,13 @@
             "text": "2위",
             "bucket": "top3",
             "status": "1~5위",
+            "collectedAt": "18:01:53"
+          },
+          {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
             "collectedAt": "12:45:23"
           },
           {
@@ -20751,6 +21335,13 @@
             "text": "1위",
             "bucket": "one",
             "status": "1~5위",
+            "collectedAt": "18:02:13"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
             "collectedAt": "12:45:45"
           },
           {
@@ -20872,6 +21463,148 @@
       {
         "campaign": "파워링크_더도톰_세부 키워드",
         "device": "mobile",
+        "keyword": "돌수건제작",
+        "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "11:35:56"
+          },
+          {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "18:02:00"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "12:45:30"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:05:56"
+          },
+          {
+            "rank": 14,
+            "text": "14위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:55:20"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "17:09:35"
+          },
+          {
+            "rank": 14,
+            "text": "14위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:51:45"
+          },
+          {
+            "rank": 18,
+            "text": "18위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:06:05"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": 7,
+            "text": "7위",
+            "bucket": "top10",
+            "status": "6~10위",
+            "collectedAt": "09:10:27"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "17:10:47"
+          },
+          {
+            "rank": 17,
+            "text": "17위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:13:25"
+          },
+          {
+            "rank": 11,
+            "text": "11위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "16:31:33"
+          }
+        ],
+        "latestRank": 2,
+        "latestStatus": "1~5위"
+      },
+      {
+        "campaign": "파워링크_더도톰_세부 키워드",
+        "device": "mobile",
         "keyword": "돌잔치수건답례품",
         "cells": [
           {
@@ -20880,6 +21613,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "11:35:20"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "18:01:27"
           },
           {
             "rank": 1,
@@ -21021,6 +21761,13 @@
             "text": "2위",
             "bucket": "top3",
             "status": "1~5위",
+            "collectedAt": "18:02:25"
+          },
+          {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
             "collectedAt": "12:45:58"
           },
           {
@@ -21150,6 +21897,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "11:36:31"
+          },
+          {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "18:02:31"
           },
           {
             "rank": 2,
@@ -21291,6 +22045,13 @@
             "text": "2위",
             "bucket": "top3",
             "status": "1~5위",
+            "collectedAt": "18:02:51"
+          },
+          {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
             "collectedAt": "12:46:26"
           },
           {
@@ -21422,6 +22183,13 @@
             "collectedAt": "11:36:56"
           },
           {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "18:02:57"
+          },
+          {
             "rank": 2,
             "text": "2위",
             "bucket": "top3",
@@ -21547,141 +22315,6 @@
       {
         "campaign": "파워링크_더도톰_세부 키워드",
         "device": "mobile",
-        "keyword": "돌수건제작",
-        "cells": [
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "11:35:56"
-          },
-          {
-            "rank": 3,
-            "text": "3위",
-            "bucket": "top3",
-            "status": "1~5위",
-            "collectedAt": "12:45:30"
-          },
-          {
-            "rank": 3,
-            "text": "3위",
-            "bucket": "top3",
-            "status": "1~5위",
-            "collectedAt": "17:05:56"
-          },
-          {
-            "rank": 14,
-            "text": "14위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "09:55:20"
-          },
-          {
-            "rank": 1,
-            "text": "1위",
-            "bucket": "one",
-            "status": "1~5위",
-            "collectedAt": "17:09:35"
-          },
-          {
-            "rank": 14,
-            "text": "14위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "09:51:45"
-          },
-          {
-            "rank": 18,
-            "text": "18위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "17:06:05"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": 7,
-            "text": "7위",
-            "bucket": "top10",
-            "status": "6~10위",
-            "collectedAt": "09:10:27"
-          },
-          {
-            "rank": 1,
-            "text": "1위",
-            "bucket": "one",
-            "status": "1~5위",
-            "collectedAt": "17:10:47"
-          },
-          {
-            "rank": 17,
-            "text": "17위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "09:13:25"
-          },
-          {
-            "rank": 11,
-            "text": "11위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "16:31:33"
-          }
-        ],
-        "latestRank": 3,
-        "latestStatus": "1~5위"
-      },
-      {
-        "campaign": "파워링크_더도톰_세부 키워드",
-        "device": "mobile",
         "keyword": "돌잔치답례수건",
         "cells": [
           {
@@ -21690,6 +22323,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "11:35:40"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "18:01:46"
           },
           {
             "rank": 2,
@@ -21827,6 +22467,13 @@
             "collectedAt": "11:36:44"
           },
           {
+            "rank": 4,
+            "text": "4위",
+            "bucket": "top5",
+            "status": "1~5위",
+            "collectedAt": "18:02:43"
+          },
+          {
             "rank": 2,
             "text": "2위",
             "bucket": "top3",
@@ -21962,6 +22609,13 @@
             "collectedAt": "11:36:17"
           },
           {
+            "rank": 4,
+            "text": "4위",
+            "bucket": "top5",
+            "status": "1~5위",
+            "collectedAt": "18:02:19"
+          },
+          {
             "rank": null,
             "text": "미노출",
             "bucket": "none",
@@ -22081,8 +22735,150 @@
             "collectedAt": "16:31:56"
           }
         ],
-        "latestRank": null,
-        "latestStatus": "미노출"
+        "latestRank": 4,
+        "latestStatus": "1~5위"
+      },
+      {
+        "campaign": "파워링크_더도톰_자사몰",
+        "device": "mobile",
+        "keyword": "돌잔치답례품수건",
+        "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "11:33:47"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "17:59:52"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "12:43:20"
+          },
+          {
+            "rank": 4,
+            "text": "4위",
+            "bucket": "top5",
+            "status": "1~5위",
+            "collectedAt": "17:03:49"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:52:53"
+          },
+          {
+            "rank": 22,
+            "text": "22위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:06:59"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:49:16"
+          },
+          {
+            "rank": 28,
+            "text": "28위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:03:41"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:07:58"
+          },
+          {
+            "rank": 18,
+            "text": "18위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:08:27"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:10:56"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "16:28:51"
+          }
+        ],
+        "latestRank": 1,
+        "latestStatus": "1~5위"
       },
       {
         "campaign": "파워링크_더도톰_자사몰",
@@ -22095,6 +22891,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:33:40"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "17:59:44"
           },
           {
             "rank": 3,
@@ -22222,133 +23025,140 @@
       {
         "campaign": "파워링크_더도톰_자사몰",
         "device": "mobile",
-        "keyword": "돌잔치답례품수건",
+        "keyword": "돌수건",
         "cells": [
           {
             "rank": null,
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
-            "collectedAt": "11:33:47"
+            "collectedAt": "11:34:12"
           },
           {
             "rank": 3,
             "text": "3위",
             "bucket": "top3",
             "status": "1~5위",
-            "collectedAt": "12:43:20"
+            "collectedAt": "18:00:19"
           },
           {
             "rank": 4,
             "text": "4위",
             "bucket": "top5",
             "status": "1~5위",
-            "collectedAt": "17:03:49"
+            "collectedAt": "12:43:46"
           },
           {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "09:52:53"
+            "rank": 4,
+            "text": "4위",
+            "bucket": "top5",
+            "status": "1~5위",
+            "collectedAt": "17:04:15"
           },
           {
-            "rank": 22,
-            "text": "22위",
+            "rank": 21,
+            "text": "21위",
             "bucket": "out",
             "status": "10위권 밖",
-            "collectedAt": "17:06:59"
+            "collectedAt": "09:53:22"
           },
           {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "09:49:16"
-          },
-          {
-            "rank": 28,
-            "text": "28위",
+            "rank": 14,
+            "text": "14위",
             "bucket": "out",
             "status": "10위권 밖",
-            "collectedAt": "17:03:41"
+            "collectedAt": "17:07:28"
           },
           {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "09:07:58"
-          },
-          {
-            "rank": 18,
-            "text": "18위",
+            "rank": 19,
+            "text": "19위",
             "bucket": "out",
             "status": "10위권 밖",
-            "collectedAt": "17:08:27"
+            "collectedAt": "09:49:43"
+          },
+          {
+            "rank": 29,
+            "text": "29위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:04:08"
           },
           {
             "rank": null,
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
-            "collectedAt": "09:10:56"
+            "collectedAt": ""
           },
           {
             "rank": null,
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
-            "collectedAt": "16:28:51"
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": 21,
+            "text": "21위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:08:26"
+          },
+          {
+            "rank": 24,
+            "text": "24위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "17:08:55"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:11:24"
+          },
+          {
+            "rank": 31,
+            "text": "31위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "16:29:22"
           }
         ],
         "latestRank": 3,
@@ -22365,6 +23175,13 @@
             "bucket": "top3",
             "status": "1~5위",
             "collectedAt": "11:33:53"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "17:59:59"
           },
           {
             "rank": 1,
@@ -22492,56 +23309,63 @@
       {
         "campaign": "파워링크_더도톰_자사몰",
         "device": "mobile",
-        "keyword": "돌수건",
+        "keyword": "송월타올돌답례품",
         "cells": [
           {
             "rank": null,
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
-            "collectedAt": "11:34:12"
+            "collectedAt": "11:34:40"
           },
           {
-            "rank": 4,
-            "text": "4위",
-            "bucket": "top5",
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
             "status": "1~5위",
-            "collectedAt": "12:43:46"
+            "collectedAt": "18:00:46"
           },
           {
-            "rank": 4,
-            "text": "4위",
-            "bucket": "top5",
-            "status": "1~5위",
-            "collectedAt": "17:04:15"
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "12:44:14"
           },
           {
-            "rank": 21,
-            "text": "21위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "09:53:22"
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:04:42"
           },
           {
-            "rank": 14,
-            "text": "14위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "17:07:28"
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:53:50"
           },
           {
-            "rank": 19,
-            "text": "19위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "09:49:43"
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:08:00"
           },
           {
-            "rank": 29,
-            "text": "29위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "17:04:08"
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:50:13"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:04:37"
           },
           {
             "rank": null,
@@ -22593,35 +23417,35 @@
             "collectedAt": ""
           },
           {
-            "rank": 21,
-            "text": "21위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "09:08:26"
-          },
-          {
-            "rank": 24,
-            "text": "24위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "17:08:55"
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:08:53"
           },
           {
             "rank": null,
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
-            "collectedAt": "09:11:24"
+            "collectedAt": "17:09:22"
           },
           {
-            "rank": 31,
-            "text": "31위",
-            "bucket": "out",
-            "status": "10위권 밖",
-            "collectedAt": "16:29:22"
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:11:51"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "16:29:56"
           }
         ],
-        "latestRank": 4,
+        "latestRank": 3,
         "latestStatus": "1~5위"
       },
       {
@@ -22635,6 +23459,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:34:25"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "18:00:33"
           },
           {
             "rank": null,
@@ -22776,6 +23607,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "18:01:09"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:44:36"
           },
           {
@@ -22899,6 +23737,13 @@
         "device": "mobile",
         "keyword": "답례품선물",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -23046,6 +23891,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "18:01:15"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:44:43"
           },
           {
@@ -23175,6 +24027,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:34:18"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "18:00:27"
           },
           {
             "rank": null,
@@ -23316,6 +24175,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "18:00:05"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:43:33"
           },
           {
@@ -23445,6 +24311,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:34:06"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "18:00:12"
           },
           {
             "rank": null,
@@ -23586,6 +24459,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "18:00:40"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:44:08"
           },
           {
@@ -23721,6 +24601,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:12:04"
           },
           {
@@ -23842,141 +24729,6 @@
       {
         "campaign": "파워링크_더도톰_자사몰",
         "device": "mobile",
-        "keyword": "송월타올돌답례품",
-        "cells": [
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "11:34:40"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "12:44:14"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "17:04:42"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "09:53:50"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "17:08:00"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "09:50:13"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "17:04:37"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "09:08:53"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "17:09:22"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "09:11:51"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "16:29:56"
-          }
-        ],
-        "latestRank": null,
-        "latestStatus": "미노출"
-      },
-      {
-        "campaign": "파워링크_더도톰_자사몰",
-        "device": "mobile",
         "keyword": "수건답례품",
         "cells": [
           {
@@ -23985,6 +24737,13 @@
             "bucket": "none",
             "status": "미노출",
             "collectedAt": "11:34:46"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "18:00:53"
           },
           {
             "rank": null,
@@ -24126,6 +24885,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "18:01:01"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:44:28"
           },
           {
@@ -24247,6 +25013,148 @@
       {
         "campaign": "파워링크_더도톰스튜디오_스스",
         "device": "mobile",
+        "keyword": "돌답례품",
+        "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "11:37:16"
+          },
+          {
+            "rank": 4,
+            "text": "4위",
+            "bucket": "top5",
+            "status": "1~5위",
+            "collectedAt": "18:03:18"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "12:46:50"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:07:16"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "10:16:03"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "17:11:01"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          }
+        ],
+        "latestRank": 4,
+        "latestStatus": "1~5위"
+      },
+      {
+        "campaign": "파워링크_더도톰스튜디오_스스",
+        "device": "mobile",
         "keyword": "돌잔치답례품",
         "cells": [
           {
@@ -24255,6 +25163,13 @@
             "bucket": "top5",
             "status": "1~5위",
             "collectedAt": "11:37:09"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "18:03:11"
           },
           {
             "rank": null,
@@ -24396,6 +25311,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "18:03:25"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:46:58"
           },
           {
@@ -24513,141 +25435,6 @@
         ],
         "latestRank": null,
         "latestStatus": "미노출"
-      },
-      {
-        "campaign": "파워링크_더도톰스튜디오_스스",
-        "device": "mobile",
-        "keyword": "돌답례품",
-        "cells": [
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "11:37:16"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "12:46:50"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "17:07:16"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "10:16:03"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": "17:11:01"
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          },
-          {
-            "rank": null,
-            "text": "미노출",
-            "bucket": "none",
-            "status": "미노출",
-            "collectedAt": ""
-          }
-        ],
-        "latestRank": null,
-        "latestStatus": "미노출"
       }
     ],
     "latestShopping": [
@@ -24660,7 +25447,7 @@
         "rank": 53,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌답례품_11562165854",
@@ -24671,7 +25458,7 @@
         "rank": 51,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "답례품_11562165854",
@@ -24682,7 +25469,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌답례품수건_11562165854",
@@ -24690,10 +25477,10 @@
         "productId": "11562165854",
         "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
-        "rank": 18,
+        "rank": 17,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌수건_11562165854",
@@ -24704,7 +25491,7 @@
         "rank": 17,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌수건답례품_11562165854",
@@ -24712,10 +25499,10 @@
         "productId": "11562165854",
         "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
-        "rank": 19,
+        "rank": 18,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌잔치수건_11562165854",
@@ -24726,7 +25513,7 @@
         "rank": 21,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "조구만_11562165854",
@@ -24737,7 +25524,7 @@
         "rank": 2,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "호텔수건_11858377273",
@@ -24748,7 +25535,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "수건_11858377273",
@@ -24759,7 +25546,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "40수수건_11858377273",
@@ -24767,10 +25554,10 @@
         "productId": "11858377273",
         "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
-        "rank": 52,
+        "rank": 57,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "부드러운수건_11858377273",
@@ -24778,10 +25565,10 @@
         "productId": "11858377273",
         "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
-        "rank": 40,
+        "rank": 41,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "수건5+5_11858377273",
@@ -24792,7 +25579,7 @@
         "rank": 2,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "호텔수건40수_11858377273",
@@ -24800,10 +25587,10 @@
         "productId": "11858377273",
         "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
-        "rank": 53,
+        "rank": 52,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "호텔수건5+5_11858377273",
@@ -24814,7 +25601,7 @@
         "rank": 1,
         "status": "1~5위",
         "bucket": "one",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "호텔타월_11858377273",
@@ -24825,7 +25612,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "무라호두정과_11943090047",
@@ -24836,7 +25623,7 @@
         "rank": 1,
         "status": "1~5위",
         "bucket": "one",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "호두정과답례품_11943090047",
@@ -24847,7 +25634,7 @@
         "rank": 48,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "답례품호두정과_11943090047",
@@ -24855,10 +25642,10 @@
         "productId": "11943090047",
         "title": "무라 호두정과 답례품 호두강정 결혼식 회사 돌잔치 선물 맞춤엽서 4봉",
         "image": "https://shopping-phinf.pstatic.net/main_8948760/89487600735.3.jpg",
-        "rank": 51,
+        "rank": 52,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "결혼답례품_11943090047",
@@ -24869,7 +25656,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "결혼식답례품_11943090047",
@@ -24880,7 +25667,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "꿀답례품_11979458131",
@@ -24891,7 +25678,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "답례품꿀_11979458131",
@@ -24902,7 +25689,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "꿀결혼답례품_11979458131",
@@ -24913,7 +25700,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "결혼답례품_11979458131",
@@ -24924,7 +25711,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌잔치답례품_11979458131",
@@ -24935,7 +25722,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "결혼식답례품_12047676813",
@@ -24946,7 +25733,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "결혼답례품_12047676813",
@@ -24957,7 +25744,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "호두정과답례품_12047676813",
@@ -24968,7 +25755,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "무라호두정과_12047676813",
@@ -24979,7 +25766,7 @@
         "rank": 3,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "답례품호두정과_12047676813",
@@ -24990,7 +25777,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌잔치답례품_12047676813",
@@ -25001,7 +25788,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "어린이집수건_12924495111",
@@ -25009,10 +25796,10 @@
         "productId": "12924495111",
         "title": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
         "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
-        "rank": 3,
+        "rank": 4,
         "status": "1~5위",
-        "bucket": "top3",
-        "collectedAt": "09:10:02"
+        "bucket": "top5",
+        "collectedAt": "17:55:53"
       },
       {
         "key": "어린이집고리수건_12924495111",
@@ -25020,10 +25807,10 @@
         "productId": "12924495111",
         "title": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
         "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
-        "rank": 2,
+        "rank": 3,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "어린이집준비물_12924495111",
@@ -25034,7 +25821,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "유치원준비물_12924495111",
@@ -25045,7 +25832,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "고리수건_12924495111",
@@ -25056,7 +25843,7 @@
         "rank": 1,
         "status": "1~5위",
         "bucket": "one",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "수건고리_12924495111",
@@ -25067,7 +25854,7 @@
         "rank": 1,
         "status": "1~5위",
         "bucket": "one",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌잔치답례품_4624494637",
@@ -25078,7 +25865,7 @@
         "rank": 3,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌답례품_4624494637",
@@ -25086,10 +25873,10 @@
         "productId": "4624494637",
         "title": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
-        "rank": 3,
+        "rank": 4,
         "status": "1~5위",
-        "bucket": "top3",
-        "collectedAt": "09:10:02"
+        "bucket": "top5",
+        "collectedAt": "17:55:53"
       },
       {
         "key": "답례품_4624494637",
@@ -25097,10 +25884,10 @@
         "productId": "4624494637",
         "title": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
-        "rank": 24,
+        "rank": 25,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "수건답례품_4624494637",
@@ -25111,7 +25898,7 @@
         "rank": 2,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "답례품수건_4624494637",
@@ -25122,7 +25909,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌답례품타올_4624494637",
@@ -25133,7 +25920,7 @@
         "rank": 3,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌잔치수건_4624494637",
@@ -25144,7 +25931,7 @@
         "rank": 1,
         "status": "1~5위",
         "bucket": "one",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌잔치답례품_4843121925",
@@ -25152,10 +25939,10 @@
         "productId": "4843121925",
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
-        "rank": 7,
+        "rank": 6,
         "status": "6~10위",
         "bucket": "top10",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌답례품_4843121925",
@@ -25163,10 +25950,10 @@
         "productId": "4843121925",
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
-        "rank": 4,
+        "rank": 3,
         "status": "1~5위",
-        "bucket": "top5",
-        "collectedAt": "09:10:02"
+        "bucket": "top3",
+        "collectedAt": "17:55:53"
       },
       {
         "key": "답례품_4843121925",
@@ -25174,10 +25961,10 @@
         "productId": "4843121925",
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
-        "rank": 25,
+        "rank": 24,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "답례품세트_4843121925",
@@ -25185,10 +25972,10 @@
         "productId": "4843121925",
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
-        "rank": 5,
+        "rank": 2,
         "status": "1~5위",
-        "bucket": "top5",
-        "collectedAt": "09:10:02"
+        "bucket": "top3",
+        "collectedAt": "17:55:53"
       },
       {
         "key": "답례품핸드워시_4843121925",
@@ -25199,7 +25986,7 @@
         "rank": 3,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌잔치기념품_4843121925",
@@ -25207,10 +25994,10 @@
         "productId": "4843121925",
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
-        "rank": 7,
+        "rank": 6,
         "status": "6~10위",
         "bucket": "top10",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "꿀답례품_7444568862",
@@ -25218,10 +26005,10 @@
         "productId": "7444568862",
         "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
-        "rank": 18,
+        "rank": 17,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "답례품꿀_7444568862",
@@ -25232,7 +26019,7 @@
         "rank": 15,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "꿀결혼답례품_7444568862",
@@ -25240,43 +26027,43 @@
         "productId": "7444568862",
         "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
-        "rank": 7,
-        "status": "6~10위",
-        "bucket": "top10",
-        "collectedAt": "09:10:02"
+        "rank": 5,
+        "status": "1~5위",
+        "bucket": "top5",
+        "collectedAt": "17:55:53"
       },
       {
         "key": "결혼답례품_7444568862",
         "keyword": "결혼답례품",
         "productId": "7444568862",
         "title": "",
-        "image": "",
+        "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "답례품_7444568862",
         "keyword": "답례품",
         "productId": "7444568862",
         "title": "",
-        "image": "",
+        "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌답례품_7444568862",
         "keyword": "돌답례품",
         "productId": "7444568862",
         "title": "",
-        "image": "",
+        "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "11:30:41"
+        "collectedAt": "17:55:53"
       },
       {
         "key": "돌잔치답례품_7444568862",
@@ -25284,10 +26071,10 @@
         "productId": "7444568862",
         "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
-        "rank": 94,
+        "rank": 93,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "09:10:02"
+        "collectedAt": "17:55:53"
       }
     ],
     "slotDetails": [
@@ -42655,11 +43442,1471 @@
             ]
           }
         ]
+      },
+      {
+        "date": "2026-06-25",
+        "slot": "afternoon",
+        "slotLabel": "오후",
+        "label": "2026-06-25 오후",
+        "previousLabel": "2026-06-25 오전",
+        "shoppingProducts": [
+          {
+            "productId": "11562165854",
+            "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
+            "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
+            "items": [
+              {
+                "key": "돌잔치답례품_11562165854",
+                "keyword": "돌잔치답례품",
+                "rank": 53,
+                "bucket": "out",
+                "text": "53위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌답례품_11562165854",
+                "keyword": "돌답례품",
+                "rank": 51,
+                "bucket": "out",
+                "text": "51위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "답례품_11562165854",
+                "keyword": "답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌답례품수건_11562165854",
+                "keyword": "돌답례품수건",
+                "rank": 17,
+                "bucket": "out",
+                "text": "17위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌수건_11562165854",
+                "keyword": "돌수건",
+                "rank": 17,
+                "bucket": "out",
+                "text": "17위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌수건답례품_11562165854",
+                "keyword": "돌수건답례품",
+                "rank": 18,
+                "bucket": "out",
+                "text": "18위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌잔치수건_11562165854",
+                "keyword": "돌잔치수건",
+                "rank": 21,
+                "bucket": "out",
+                "text": "21위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "조구만_11562165854",
+                "keyword": "조구만",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              }
+            ]
+          },
+          {
+            "productId": "11858377273",
+            "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
+            "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
+            "items": [
+              {
+                "key": "호텔수건_11858377273",
+                "keyword": "호텔수건",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "수건_11858377273",
+                "keyword": "수건",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "40수수건_11858377273",
+                "keyword": "40수수건",
+                "rank": 57,
+                "bucket": "out",
+                "text": "57위",
+                "delta": {
+                  "value": -5,
+                  "text": "▼5",
+                  "direction": "down"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "부드러운수건_11858377273",
+                "keyword": "부드러운수건",
+                "rank": 41,
+                "bucket": "out",
+                "text": "41위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "수건5+5_11858377273",
+                "keyword": "수건5+5",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "호텔수건40수_11858377273",
+                "keyword": "호텔수건40수",
+                "rank": 52,
+                "bucket": "out",
+                "text": "52위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "호텔수건5+5_11858377273",
+                "keyword": "호텔수건5+5",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "호텔타월_11858377273",
+                "keyword": "호텔타월",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              }
+            ]
+          },
+          {
+            "productId": "11943090047",
+            "title": "무라 호두정과 답례품 호두강정 결혼식 회사 돌잔치 선물 맞춤엽서 4봉",
+            "image": "https://shopping-phinf.pstatic.net/main_8948760/89487600735.3.jpg",
+            "items": [
+              {
+                "key": "무라호두정과_11943090047",
+                "keyword": "무라호두정과",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "호두정과답례품_11943090047",
+                "keyword": "호두정과답례품",
+                "rank": 48,
+                "bucket": "out",
+                "text": "48위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "답례품호두정과_11943090047",
+                "keyword": "답례품호두정과",
+                "rank": 52,
+                "bucket": "out",
+                "text": "52위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "결혼답례품_11943090047",
+                "keyword": "결혼답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "결혼식답례품_11943090047",
+                "keyword": "결혼식답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              }
+            ]
+          },
+          {
+            "productId": "11979458131",
+            "title": "더도톰",
+            "image": "",
+            "items": [
+              {
+                "key": "꿀답례품_11979458131",
+                "keyword": "꿀답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "답례품꿀_11979458131",
+                "keyword": "답례품꿀",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "꿀결혼답례품_11979458131",
+                "keyword": "꿀결혼답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "결혼답례품_11979458131",
+                "keyword": "결혼답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌잔치답례품_11979458131",
+                "keyword": "돌잔치답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              }
+            ]
+          },
+          {
+            "productId": "12047676813",
+            "title": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
+            "image": "https://shopping-phinf.pstatic.net/main_8959218/89592187512.2.jpg",
+            "items": [
+              {
+                "key": "결혼식답례품_12047676813",
+                "keyword": "결혼식답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "결혼답례품_12047676813",
+                "keyword": "결혼답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "호두정과답례품_12047676813",
+                "keyword": "호두정과답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "무라호두정과_12047676813",
+                "keyword": "무라호두정과",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "답례품호두정과_12047676813",
+                "keyword": "답례품호두정과",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌잔치답례품_12047676813",
+                "keyword": "돌잔치답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              }
+            ]
+          },
+          {
+            "productId": "12924495111",
+            "title": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
+            "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
+            "items": [
+              {
+                "key": "어린이집수건_12924495111",
+                "keyword": "어린이집수건",
+                "rank": 4,
+                "bucket": "top5",
+                "text": "4위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "어린이집고리수건_12924495111",
+                "keyword": "어린이집고리수건",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "어린이집준비물_12924495111",
+                "keyword": "어린이집준비물",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "유치원준비물_12924495111",
+                "keyword": "유치원준비물",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "고리수건_12924495111",
+                "keyword": "고리수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "수건고리_12924495111",
+                "keyword": "수건고리",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              }
+            ]
+          },
+          {
+            "productId": "4624494637",
+            "title": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+            "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
+            "items": [
+              {
+                "key": "돌잔치답례품_4624494637",
+                "keyword": "돌잔치답례품",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌답례품_4624494637",
+                "keyword": "돌답례품",
+                "rank": 4,
+                "bucket": "top5",
+                "text": "4위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "답례품_4624494637",
+                "keyword": "답례품",
+                "rank": 25,
+                "bucket": "out",
+                "text": "25위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "수건답례품_4624494637",
+                "keyword": "수건답례품",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "답례품수건_4624494637",
+                "keyword": "답례품수건",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌답례품타올_4624494637",
+                "keyword": "돌답례품타올",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌잔치수건_4624494637",
+                "keyword": "돌잔치수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              }
+            ]
+          },
+          {
+            "productId": "4843121925",
+            "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+            "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
+            "items": [
+              {
+                "key": "돌잔치답례품_4843121925",
+                "keyword": "돌잔치답례품",
+                "rank": 6,
+                "bucket": "top10",
+                "text": "6위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌답례품_4843121925",
+                "keyword": "돌답례품",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "답례품_4843121925",
+                "keyword": "답례품",
+                "rank": 24,
+                "bucket": "out",
+                "text": "24위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "답례품세트_4843121925",
+                "keyword": "답례품세트",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 3,
+                  "text": "▲3",
+                  "direction": "up"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "답례품핸드워시_4843121925",
+                "keyword": "답례품핸드워시",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌잔치기념품_4843121925",
+                "keyword": "돌잔치기념품",
+                "rank": 6,
+                "bucket": "top10",
+                "text": "6위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "17:55:53"
+              }
+            ]
+          },
+          {
+            "productId": "7444568862",
+            "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
+            "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
+            "items": [
+              {
+                "key": "꿀답례품_7444568862",
+                "keyword": "꿀답례품",
+                "rank": 17,
+                "bucket": "out",
+                "text": "17위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "답례품꿀_7444568862",
+                "keyword": "답례품꿀",
+                "rank": 15,
+                "bucket": "out",
+                "text": "15위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "꿀결혼답례품_7444568862",
+                "keyword": "꿀결혼답례품",
+                "rank": 5,
+                "bucket": "top5",
+                "text": "5위",
+                "delta": {
+                  "value": 2,
+                  "text": "▲2",
+                  "direction": "up"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "결혼답례품_7444568862",
+                "keyword": "결혼답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "답례품_7444568862",
+                "keyword": "답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌답례품_7444568862",
+                "keyword": "돌답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:55:53"
+              },
+              {
+                "key": "돌잔치답례품_7444568862",
+                "keyword": "돌잔치답례품",
+                "rank": 93,
+                "bucket": "out",
+                "text": "93위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "17:55:53"
+              }
+            ]
+          }
+        ],
+        "powerlinkSections": [
+          {
+            "campaign": "파워링크_더도톰_세부 키워드",
+            "pc": [],
+            "mobile": [
+              {
+                "keyword": "결혼답례품",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 2,
+                  "text": "▲2",
+                  "direction": "up"
+                },
+                "collectedAt": "18:02:57"
+              },
+              {
+                "keyword": "결혼수건답례품",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "18:03:04"
+              },
+              {
+                "keyword": "돌기념수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "18:02:06"
+              },
+              {
+                "keyword": "돌답례",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "18:02:13"
+              },
+              {
+                "keyword": "돌잔치답례수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 2,
+                  "text": "▲2",
+                  "direction": "up"
+                },
+                "collectedAt": "18:01:46"
+              },
+              {
+                "keyword": "돌잔치수건답례품",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "18:01:27"
+              },
+              {
+                "keyword": "소규모돌잔치답례품",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "18:02:37"
+              },
+              {
+                "keyword": "아기돌수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "18:01:39"
+              },
+              {
+                "keyword": "아기돌잔치답례품",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "18:01:21"
+              },
+              {
+                "keyword": "인기돌답례품",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "18:01:34"
+              },
+              {
+                "keyword": "가족돌답례품",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "18:01:53"
+              },
+              {
+                "keyword": "돌수건제작",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:02:00"
+              },
+              {
+                "keyword": "센스있는답례품",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "18:02:25"
+              },
+              {
+                "keyword": "소규모돌답례품",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "18:02:31"
+              },
+              {
+                "keyword": "직계가족돌잔치답례품",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "18:02:51"
+              },
+              {
+                "keyword": "답례수건",
+                "rank": 4,
+                "bucket": "top5",
+                "text": "4위",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:02:19"
+              },
+              {
+                "keyword": "소규모답례품",
+                "rank": 4,
+                "bucket": "top5",
+                "text": "4위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "18:02:43"
+              }
+            ]
+          },
+          {
+            "campaign": "파워링크_더도톰_자사몰",
+            "pc": [
+              {
+                "keyword": "돌답례수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:58:33"
+              },
+              {
+                "keyword": "돌답례품수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:57:59"
+              },
+              {
+                "keyword": "돌수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:58:06"
+              },
+              {
+                "keyword": "돌수건답례품",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:58:13"
+              },
+              {
+                "keyword": "돌잔치답례품",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:58:19"
+              },
+              {
+                "keyword": "생일답례품",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:58:59"
+              },
+              {
+                "keyword": "돌잔치수건",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:57:45"
+              },
+              {
+                "keyword": "돌잔치수건답례품",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:58:46"
+              },
+              {
+                "keyword": "고급돌답례품",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": -2,
+                  "text": "▼2",
+                  "direction": "down"
+                },
+                "collectedAt": "17:58:40"
+              },
+              {
+                "keyword": "돌답례품",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:57:52"
+              },
+              {
+                "keyword": "돌잔치답례품수건",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "17:58:26"
+              },
+              {
+                "keyword": "답례품",
+                "rank": 4,
+                "bucket": "top5",
+                "text": "4위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "17:58:54"
+              },
+              {
+                "keyword": "답례품수건",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:59:13"
+              },
+              {
+                "keyword": "수건답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:59:06"
+              }
+            ],
+            "mobile": [
+              {
+                "keyword": "돌잔치답례품수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:59:52"
+              },
+              {
+                "keyword": "돌잔치수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 2,
+                  "text": "▲2",
+                  "direction": "up"
+                },
+                "collectedAt": "17:59:59"
+              },
+              {
+                "keyword": "돌답례품수건",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:59:44"
+              },
+              {
+                "keyword": "돌수건",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:00:19"
+              },
+              {
+                "keyword": "송월타올돌답례품",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:00:46"
+              },
+              {
+                "keyword": "답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:01:09"
+              },
+              {
+                "keyword": "답례품수건",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:01:15"
+              },
+              {
+                "keyword": "돌답례수건",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:00:33"
+              },
+              {
+                "keyword": "돌답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:00:27"
+              },
+              {
+                "keyword": "돌수건답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:00:05"
+              },
+              {
+                "keyword": "돌잔치답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:00:12"
+              },
+              {
+                "keyword": "돌잔치답례품추천",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:00:40"
+              },
+              {
+                "keyword": "수건답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:00:53"
+              },
+              {
+                "keyword": "수건제작",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:01:01"
+              }
+            ]
+          },
+          {
+            "campaign": "파워링크_더도톰스튜디오_스스",
+            "pc": [
+              {
+                "keyword": "돌잔치답례품",
+                "rank": 8,
+                "bucket": "top10",
+                "text": "8위",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:59:20"
+              },
+              {
+                "keyword": "답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:59:33"
+              },
+              {
+                "keyword": "돌답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "17:59:26"
+              }
+            ],
+            "mobile": [
+              {
+                "keyword": "돌잔치답례품",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 3,
+                  "text": "▲3",
+                  "direction": "up"
+                },
+                "collectedAt": "18:03:11"
+              },
+              {
+                "keyword": "돌답례품",
+                "rank": 4,
+                "bucket": "top5",
+                "text": "4위",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:03:18"
+              },
+              {
+                "keyword": "답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "18:03:25"
+              }
+            ]
+          }
+        ]
       }
     ],
     "latestDate": "2026-06-25",
-    "latestSlot": "morning",
-    "latestLabel": "2026-06-25 오전",
+    "latestSlot": "afternoon",
+    "latestLabel": "2026-06-25 오후",
     "shoppingCount": 58
   }
 }
