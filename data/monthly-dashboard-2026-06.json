@@ -2645,7 +2645,7 @@
     "inspectionCount": 4
   },
   "dataProfile": {
-    "period": "2026-06-01 ~ 2026-06-23",
+    "period": "2026-06-01 ~ 2026-06-24",
     "granularity": "월 누적 성과를 광고/키워드 단위로 집계",
     "rawRows": 1044,
     "detailRows": 85,
@@ -2731,7 +2731,7 @@
     ]
   },
   "rewardMarketing": {
-    "period": "2026-06-01 ~ 2026-06-23",
+    "period": "2026-06-01 ~ 2026-06-24",
     "items": [
       {
         "productName": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
@@ -2814,8 +2814,8 @@
         "quantity": "리워드 10개 (정확한 수량 모름)",
         "status": "진행중",
         "metric": "네이버 쇼핑 순위 변화",
-        "overlapDays": 3,
-        "recognizedAmount": 120000.0,
+        "overlapDays": 4,
+        "recognizedAmount": 160000.0,
         "dailyAmount": 40000.0,
         "isActiveInPeriod": true,
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
@@ -2836,8 +2836,8 @@
         "quantity": "리워드 15개 (정확한 수량 모름)",
         "status": "진행중",
         "metric": "네이버 쇼핑 순위 변화",
-        "overlapDays": 3,
-        "recognizedAmount": 180000.0,
+        "overlapDays": 4,
+        "recognizedAmount": 240000.0,
         "dailyAmount": 60000.0,
         "isActiveInPeriod": true,
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
@@ -2858,8 +2858,8 @@
         "quantity": "리워드 5개 (정확한 수량 모름)",
         "status": "진행중",
         "metric": "네이버 쇼핑 순위 변화",
-        "overlapDays": 3,
-        "recognizedAmount": 60000.0,
+        "overlapDays": 4,
+        "recognizedAmount": 80000.0,
         "dailyAmount": 20000.0,
         "isActiveInPeriod": true,
         "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
@@ -2926,8 +2926,8 @@
         "quantity": "리워드 10개 (정확한 수량 모름)",
         "status": "진행중",
         "metric": "네이버 쇼핑 순위 변화",
-        "overlapDays": 3,
-        "recognizedAmount": 120000.0,
+        "overlapDays": 4,
+        "recognizedAmount": 160000.0,
         "dailyAmount": 40000.0,
         "isActiveInPeriod": true,
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
@@ -2948,8 +2948,8 @@
         "quantity": "리워드 15개 (정확한 수량 모름)",
         "status": "진행중",
         "metric": "네이버 쇼핑 순위 변화",
-        "overlapDays": 3,
-        "recognizedAmount": 180000.0,
+        "overlapDays": 4,
+        "recognizedAmount": 240000.0,
         "dailyAmount": 60000.0,
         "isActiveInPeriod": true,
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
@@ -2970,8 +2970,8 @@
         "quantity": "리워드 5개 (정확한 수량 모름)",
         "status": "진행중",
         "metric": "네이버 쇼핑 순위 변화",
-        "overlapDays": 3,
-        "recognizedAmount": 60000.0,
+        "overlapDays": 4,
+        "recognizedAmount": 80000.0,
         "dailyAmount": 20000.0,
         "isActiveInPeriod": true,
         "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
@@ -3090,7 +3090,7 @@
         "rankTitle": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트"
       }
     ],
-    "activeAmount": 1960000.0,
+    "activeAmount": 2080000.0,
     "activeStatusAmount": 1200000.0,
     "completedAmount": 2000000.0,
     "contractAmount": 3200000.0,
@@ -3244,7 +3244,8 @@
       "2026-06-20",
       "2026-06-21",
       "2026-06-22",
-      "2026-06-23"
+      "2026-06-23",
+      "2026-06-24"
     ],
     "items": [
       {
@@ -3257,7 +3258,7 @@
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
         "rankTitle": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
         "totalCost": 6067833.0,
-        "avgDailyCost": 263818.82608695654,
+        "avgDailyCost": 252826.375,
         "clicks": 2418.0,
         "conversions": 1214.0,
         "revenue": 420740740.0,
@@ -3447,6 +3448,14 @@
             "conversions": 31.0,
             "revenue": 21648600.0,
             "impressions": 483.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       },
@@ -3460,7 +3469,7 @@
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "rankTitle": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "totalCost": 3263863.0,
-        "avgDailyCost": 141907.08695652173,
+        "avgDailyCost": 135994.29166666666,
         "clicks": 1288.0,
         "conversions": 397.0,
         "revenue": 159660300.0,
@@ -3650,6 +3659,14 @@
             "conversions": 22.0,
             "revenue": 6777200.0,
             "impressions": 2084.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       },
@@ -3663,7 +3680,7 @@
         "image": "",
         "rankTitle": "",
         "totalCost": 1685801.0,
-        "avgDailyCost": 73295.69565217392,
+        "avgDailyCost": 70241.70833333333,
         "clicks": 1129.0,
         "conversions": 312.0,
         "revenue": 159133680.0,
@@ -3853,6 +3870,14 @@
             "conversions": 12.0,
             "revenue": 3981800.0,
             "impressions": 2144.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       },
@@ -3866,7 +3891,7 @@
         "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
         "rankTitle": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
         "totalCost": 906648.0,
-        "avgDailyCost": 39419.47826086957,
+        "avgDailyCost": 37777.0,
         "clicks": 579.0,
         "conversions": 148.0,
         "revenue": 12431800.0,
@@ -4056,6 +4081,14 @@
             "conversions": 4.0,
             "revenue": 239400.0,
             "impressions": 775.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       },
@@ -4069,7 +4102,7 @@
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "rankTitle": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "totalCost": 670593.0,
-        "avgDailyCost": 29156.217391304348,
+        "avgDailyCost": 27941.375,
         "clicks": 365.0,
         "conversions": 80.0,
         "revenue": 21045030.0,
@@ -4259,6 +4292,14 @@
             "conversions": 10.0,
             "revenue": 3397500.0,
             "impressions": 637.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       },
@@ -4272,7 +4313,7 @@
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
         "rankTitle": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "totalCost": 493258.0,
-        "avgDailyCost": 21446.0,
+        "avgDailyCost": 20552.416666666668,
         "clicks": 233.0,
         "conversions": 52.0,
         "revenue": 25781150.0,
@@ -4462,6 +4503,14 @@
             "conversions": 0.0,
             "revenue": 0.0,
             "impressions": 0.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       },
@@ -4475,7 +4524,7 @@
         "image": "",
         "rankTitle": "",
         "totalCost": 487873.0,
-        "avgDailyCost": 21211.869565217392,
+        "avgDailyCost": 20328.041666666668,
         "clicks": 409.0,
         "conversions": 87.0,
         "revenue": 29663850.0,
@@ -4665,6 +4714,14 @@
             "conversions": 3.0,
             "revenue": 294850.0,
             "impressions": 1123.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       },
@@ -4678,7 +4735,7 @@
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "rankTitle": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "totalCost": 424030.0,
-        "avgDailyCost": 18436.08695652174,
+        "avgDailyCost": 17667.916666666668,
         "clicks": 240.0,
         "conversions": 44.0,
         "revenue": 19718100.0,
@@ -4868,6 +4925,14 @@
             "conversions": 0.0,
             "revenue": 0.0,
             "impressions": 558.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       },
@@ -4881,7 +4946,7 @@
         "image": "https://shopping-phinf.pstatic.net/main_8959218/89592187512.2.jpg",
         "rankTitle": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
         "totalCost": 382835.0,
-        "avgDailyCost": 16645.0,
+        "avgDailyCost": 15951.458333333334,
         "clicks": 272.0,
         "conversions": 46.0,
         "revenue": 9836100.0,
@@ -5071,6 +5136,14 @@
             "conversions": 0.0,
             "revenue": 0.0,
             "impressions": 563.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       },
@@ -5084,7 +5157,7 @@
         "image": "",
         "rankTitle": "",
         "totalCost": 133109.0,
-        "avgDailyCost": 5787.347826086957,
+        "avgDailyCost": 5546.208333333333,
         "clicks": 83.0,
         "conversions": 19.0,
         "revenue": 9788900.0,
@@ -5274,6 +5347,14 @@
             "conversions": 1.0,
             "revenue": 144000.0,
             "impressions": 241.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       },
@@ -5287,7 +5368,7 @@
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "rankTitle": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "totalCost": 81007.0,
-        "avgDailyCost": 3522.0434782608695,
+        "avgDailyCost": 3375.2916666666665,
         "clicks": 57.0,
         "conversions": 7.0,
         "revenue": 1427900.0,
@@ -5477,6 +5558,14 @@
             "conversions": 0.0,
             "revenue": 0.0,
             "impressions": 131.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       },
@@ -5490,7 +5579,7 @@
         "image": "",
         "rankTitle": "",
         "totalCost": 13992.0,
-        "avgDailyCost": 608.3478260869565,
+        "avgDailyCost": 583.0,
         "clicks": 11.0,
         "conversions": 2.0,
         "revenue": 1652000.0,
@@ -5680,12 +5769,20 @@
             "conversions": 0.0,
             "revenue": 0.0,
             "impressions": 0.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 0.0,
+            "clicks": 0.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 0.0
           }
         ]
       }
     ],
     "totalCost": 14610842.0,
-    "summary": "2026-06-01 ~ 2026-06-23 쇼핑검색 상품/소재별 일 광고비"
+    "summary": "2026-06-01 ~ 2026-06-24 쇼핑검색 상품/소재별 일 광고비"
   },
   "dailyProductPerformance": {
     "rows": [
@@ -8667,8 +8764,9 @@
   },
   "rankTraffic": {
     "sourcePath": "D:\\광고보고서\\rank\\rank_data.json",
-    "updatedAt": "2026-06-24 17:07",
+    "updatedAt": "2026-06-25 09:10",
     "dates": [
+      "2026-06-25",
       "2026-06-24",
       "2026-06-23",
       "2026-06-22",
@@ -8679,12 +8777,17 @@
       "2026-06-17",
       "2026-06-16"
     ],
-    "dateRangeLabel": "2026-06-16 ~ 2026-06-24",
+    "dateRangeLabel": "2026-06-16 ~ 2026-06-25",
     "slots": [
       "morning",
       "afternoon"
     ],
     "summaryColumns": [
+      {
+        "date": "2026-06-25",
+        "slot": "morning",
+        "label": "06-25 오전"
+      },
       {
         "date": "2026-06-24",
         "slot": "morning",
@@ -8856,6 +8959,11 @@
         "date": "2026-06-24",
         "slot": "afternoon",
         "label": "06-24 오후"
+      },
+      {
+        "date": "2026-06-25",
+        "slot": "morning",
+        "label": "06-25 오전"
       }
     ],
     "shoppingRows": [
@@ -8866,6 +8974,13 @@
         "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "cells": [
+          {
+            "rank": 53,
+            "text": "53위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 61,
             "text": "61위",
@@ -8986,7 +9101,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 61,
+        "latestRank": 53,
         "latestStatus": "10위권 밖"
       },
       {
@@ -8996,6 +9111,13 @@
         "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "cells": [
+          {
+            "rank": 51,
+            "text": "51위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 60,
             "text": "60위",
@@ -9116,7 +9238,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 60,
+        "latestRank": 51,
         "latestStatus": "10위권 밖"
       },
       {
@@ -9126,6 +9248,13 @@
         "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -9257,6 +9386,13 @@
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "cells": [
           {
+            "rank": 18,
+            "text": "18위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:10:02"
+          },
+          {
             "rank": 22,
             "text": "22위",
             "bucket": "out",
@@ -9376,7 +9512,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 22,
+        "latestRank": 18,
         "latestStatus": "10위권 밖"
       },
       {
@@ -9386,6 +9522,13 @@
         "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "cells": [
+          {
+            "rank": 17,
+            "text": "17위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 22,
             "text": "22위",
@@ -9506,7 +9649,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 22,
+        "latestRank": 17,
         "latestStatus": "10위권 밖"
       },
       {
@@ -9516,6 +9659,13 @@
         "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "cells": [
+          {
+            "rank": 19,
+            "text": "19위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 25,
             "text": "25위",
@@ -9636,7 +9786,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 25,
+        "latestRank": 19,
         "latestStatus": "10위권 밖"
       },
       {
@@ -9646,6 +9796,13 @@
         "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "cells": [
+          {
+            "rank": 21,
+            "text": "21위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 21,
             "text": "21위",
@@ -9777,6 +9934,13 @@
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "cells": [
           {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
+          {
             "rank": 3,
             "text": "3위",
             "bucket": "top3",
@@ -9896,7 +10060,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 3,
+        "latestRank": 2,
         "latestStatus": "1~5위"
       },
       {
@@ -9906,6 +10070,13 @@
         "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -10041,6 +10212,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -10166,6 +10344,13 @@
         "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 54,
             "text": "54위",
@@ -10297,6 +10482,13 @@
         "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 43,
             "text": "43위",
             "bucket": "out",
@@ -10426,6 +10618,13 @@
         "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -10557,6 +10756,13 @@
         "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 57,
             "text": "57위",
             "bucket": "out",
@@ -10686,6 +10892,13 @@
         "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -10821,6 +11034,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -10946,6 +11166,13 @@
         "title": "더도톰",
         "image": "",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -11081,6 +11308,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -11211,6 +11445,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -11336,6 +11577,13 @@
         "title": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8959218/89592187512.2.jpg",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 3,
             "text": "3위",
@@ -11471,6 +11719,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -11596,6 +11851,13 @@
         "title": "더도톰",
         "image": "",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -11727,6 +11989,13 @@
         "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
         "cells": [
           {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -11846,7 +12115,7 @@
             "collectedAt": "16:26:26"
           }
         ],
-        "latestRank": 1,
+        "latestRank": 3,
         "latestStatus": "1~5위"
       },
       {
@@ -11856,6 +12125,13 @@
         "title": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
         "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
         "cells": [
+          {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 2,
             "text": "2위",
@@ -11991,6 +12267,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": "09:10:02"
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -12116,6 +12399,13 @@
         "title": "",
         "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -12251,6 +12541,13 @@
             "text": "1위",
             "bucket": "one",
             "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
             "collectedAt": "09:10:03"
           },
           {
@@ -12376,6 +12673,13 @@
         "title": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
         "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
         "cells": [
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -12511,6 +12815,13 @@
             "text": "3위",
             "bucket": "top3",
             "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
             "collectedAt": "09:10:03"
           },
           {
@@ -12637,6 +12948,13 @@
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
         "cells": [
           {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
+          {
             "rank": 4,
             "text": "4위",
             "bucket": "top5",
@@ -12756,7 +13074,7 @@
             "collectedAt": "16:26:26"
           }
         ],
-        "latestRank": 4,
+        "latestRank": 3,
         "latestStatus": "1~5위"
       },
       {
@@ -12766,6 +13084,13 @@
         "title": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
         "cells": [
+          {
+            "rank": 24,
+            "text": "24위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 19,
             "text": "19위",
@@ -12886,7 +13211,7 @@
             "collectedAt": "16:26:26"
           }
         ],
-        "latestRank": 19,
+        "latestRank": 24,
         "latestStatus": "10위권 밖"
       },
       {
@@ -12896,6 +13221,13 @@
         "title": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
         "cells": [
+          {
+            "rank": 2,
+            "text": "2위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -13016,7 +13348,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 1,
+        "latestRank": 2,
         "latestStatus": "1~5위"
       },
       {
@@ -13026,6 +13358,13 @@
         "title": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -13157,6 +13496,13 @@
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
         "cells": [
           {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
+          {
             "rank": 2,
             "text": "2위",
             "bucket": "top3",
@@ -13276,7 +13622,7 @@
             "collectedAt": "16:26:26"
           }
         ],
-        "latestRank": 2,
+        "latestRank": 3,
         "latestStatus": "1~5위"
       },
       {
@@ -13286,6 +13632,13 @@
         "title": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
         "cells": [
+          {
+            "rank": 1,
+            "text": "1위",
+            "bucket": "one",
+            "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -13417,6 +13770,13 @@
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
         "cells": [
           {
+            "rank": 7,
+            "text": "7위",
+            "bucket": "top10",
+            "status": "6~10위",
+            "collectedAt": "09:10:02"
+          },
+          {
             "rank": 5,
             "text": "5위",
             "bucket": "top5",
@@ -13536,8 +13896,8 @@
             "collectedAt": "16:26:26"
           }
         ],
-        "latestRank": 5,
-        "latestStatus": "1~5위"
+        "latestRank": 7,
+        "latestStatus": "6~10위"
       },
       {
         "key": "돌답례품_4843121925",
@@ -13546,6 +13906,13 @@
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
         "cells": [
+          {
+            "rank": 4,
+            "text": "4위",
+            "bucket": "top5",
+            "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 5,
             "text": "5위",
@@ -13666,7 +14033,7 @@
             "collectedAt": "16:26:26"
           }
         ],
-        "latestRank": 5,
+        "latestRank": 4,
         "latestStatus": "1~5위"
       },
       {
@@ -13676,6 +14043,13 @@
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
         "cells": [
+          {
+            "rank": 25,
+            "text": "25위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 25,
             "text": "25위",
@@ -13807,6 +14181,13 @@
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
         "cells": [
           {
+            "rank": 5,
+            "text": "5위",
+            "bucket": "top5",
+            "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
+          {
             "rank": 4,
             "text": "4위",
             "bucket": "top5",
@@ -13926,7 +14307,7 @@
             "collectedAt": "16:26:26"
           }
         ],
-        "latestRank": 4,
+        "latestRank": 5,
         "latestStatus": "1~5위"
       },
       {
@@ -13936,6 +14317,13 @@
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
         "cells": [
+          {
+            "rank": 3,
+            "text": "3위",
+            "bucket": "top3",
+            "status": "1~5위",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 2,
             "text": "2위",
@@ -14056,7 +14444,7 @@
             "collectedAt": "16:26:26"
           }
         ],
-        "latestRank": 2,
+        "latestRank": 3,
         "latestStatus": "1~5위"
       },
       {
@@ -14066,6 +14454,13 @@
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
         "cells": [
+          {
+            "rank": 7,
+            "text": "7위",
+            "bucket": "top10",
+            "status": "6~10위",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 5,
             "text": "5위",
@@ -14186,8 +14581,8 @@
             "collectedAt": "16:26:26"
           }
         ],
-        "latestRank": 5,
-        "latestStatus": "1~5위"
+        "latestRank": 7,
+        "latestStatus": "6~10위"
       },
       {
         "key": "꿀답례품_7444568862",
@@ -14196,6 +14591,13 @@
         "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "cells": [
+          {
+            "rank": 18,
+            "text": "18위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 20,
             "text": "20위",
@@ -14316,7 +14718,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 20,
+        "latestRank": 18,
         "latestStatus": "10위권 밖"
       },
       {
@@ -14326,6 +14728,13 @@
         "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "cells": [
+          {
+            "rank": 15,
+            "text": "15위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 16,
             "text": "16위",
@@ -14446,7 +14855,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 16,
+        "latestRank": 15,
         "latestStatus": "10위권 밖"
       },
       {
@@ -14456,6 +14865,13 @@
         "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "cells": [
+          {
+            "rank": 7,
+            "text": "7위",
+            "bucket": "top10",
+            "status": "6~10위",
+            "collectedAt": "09:10:02"
+          },
           {
             "rank": 9,
             "text": "9위",
@@ -14576,7 +14992,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 9,
+        "latestRank": 7,
         "latestStatus": "6~10위"
       },
       {
@@ -14586,6 +15002,13 @@
         "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -14721,6 +15144,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "09:10:03"
           },
           {
@@ -14846,6 +15276,13 @@
         "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -14977,6 +15414,13 @@
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "cells": [
           {
+            "rank": 94,
+            "text": "94위",
+            "bucket": "out",
+            "status": "10위권 밖",
+            "collectedAt": "09:10:02"
+          },
+          {
             "rank": null,
             "text": "미노출",
             "bucket": "none",
@@ -15096,7 +15540,7 @@
             "collectedAt": ""
           }
         ],
-        "latestRank": 96,
+        "latestRank": 94,
         "latestStatus": "10위권 밖"
       }
     ],
@@ -15106,6 +15550,13 @@
         "device": "pc",
         "keyword": "돌답례수건",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -15235,6 +15686,13 @@
         "keyword": "돌답례품수건",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -15362,6 +15820,13 @@
         "device": "pc",
         "keyword": "돌수건",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -15491,6 +15956,13 @@
         "keyword": "돌수건답례품",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -15618,6 +16090,13 @@
         "device": "pc",
         "keyword": "돌잔치답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -15747,6 +16226,13 @@
         "keyword": "돌잔치답례품수건",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -15874,6 +16360,13 @@
         "device": "pc",
         "keyword": "돌잔치수건",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -16003,6 +16496,13 @@
         "keyword": "돌잔치수건답례품",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -16130,6 +16630,13 @@
         "device": "pc",
         "keyword": "생일답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -16259,6 +16766,13 @@
         "keyword": "고급돌답례품",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 2,
             "text": "2위",
             "bucket": "top3",
@@ -16386,6 +16900,13 @@
         "device": "pc",
         "keyword": "답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 2,
             "text": "2위",
@@ -16515,6 +17036,13 @@
         "keyword": "돌답례품",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 2,
             "text": "2위",
             "bucket": "top3",
@@ -16642,6 +17170,13 @@
         "device": "pc",
         "keyword": "답례품수건",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 6,
             "text": "6위",
@@ -16775,6 +17310,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:42:35"
           },
           {
@@ -16898,6 +17440,13 @@
         "device": "pc",
         "keyword": "돌잔치답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -17031,6 +17580,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:42:56"
           },
           {
@@ -17154,6 +17710,13 @@
         "device": "pc",
         "keyword": "답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -17285,6 +17848,13 @@
         "keyword": "결혼수건답례품",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -17412,6 +17982,13 @@
         "device": "mobile",
         "keyword": "돌답례",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -17541,6 +18118,13 @@
         "keyword": "돌잔치수건답례품",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -17668,6 +18252,13 @@
         "device": "mobile",
         "keyword": "소규모돌잔치답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -17797,6 +18388,13 @@
         "keyword": "아기돌수건",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -17924,6 +18522,13 @@
         "device": "mobile",
         "keyword": "아기돌잔치답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -18053,6 +18658,13 @@
         "keyword": "인기돌답례품",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 1,
             "text": "1위",
             "bucket": "one",
@@ -18180,6 +18792,13 @@
         "device": "mobile",
         "keyword": "가족돌답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 2,
             "text": "2위",
@@ -18309,6 +18928,13 @@
         "keyword": "결혼답례품",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 2,
             "text": "2위",
             "bucket": "top3",
@@ -18436,6 +19062,13 @@
         "device": "mobile",
         "keyword": "돌잔치답례수건",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 2,
             "text": "2위",
@@ -18565,6 +19198,13 @@
         "keyword": "센스있는답례품",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 2,
             "text": "2위",
             "bucket": "top3",
@@ -18692,6 +19332,13 @@
         "device": "mobile",
         "keyword": "소규모답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 2,
             "text": "2위",
@@ -18821,6 +19468,13 @@
         "keyword": "소규모돌답례품",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 2,
             "text": "2위",
             "bucket": "top3",
@@ -18948,6 +19602,13 @@
         "device": "mobile",
         "keyword": "직계가족돌잔치답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 2,
             "text": "2위",
@@ -19077,6 +19738,13 @@
         "keyword": "돌기념수건",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 3,
             "text": "3위",
             "bucket": "top3",
@@ -19204,6 +19872,13 @@
         "device": "mobile",
         "keyword": "돌수건제작",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 3,
             "text": "3위",
@@ -19337,6 +20012,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:45:52"
           },
           {
@@ -19460,6 +20142,13 @@
         "device": "mobile",
         "keyword": "돌잔치수건",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 1,
             "text": "1위",
@@ -19589,6 +20278,13 @@
         "keyword": "돌답례품수건",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 3,
             "text": "3위",
             "bucket": "top3",
@@ -19717,6 +20413,13 @@
         "keyword": "돌잔치답례품수건",
         "cells": [
           {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
+          {
             "rank": 3,
             "text": "3위",
             "bucket": "top3",
@@ -19844,6 +20547,13 @@
         "device": "mobile",
         "keyword": "돌수건",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": 4,
             "text": "4위",
@@ -19977,6 +20687,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:44:01"
           },
           {
@@ -20100,6 +20817,13 @@
         "device": "mobile",
         "keyword": "답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -20233,6 +20957,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:11:57"
           },
           {
@@ -20356,6 +21087,13 @@
         "device": "mobile",
         "keyword": "답례품수건",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -20489,6 +21227,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:43:53"
           },
           {
@@ -20612,6 +21357,13 @@
         "device": "mobile",
         "keyword": "돌수건답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -20745,6 +21497,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:43:39"
           },
           {
@@ -20868,6 +21627,13 @@
         "device": "mobile",
         "keyword": "돌잔치답례품추천",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -21001,6 +21767,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:12:04"
           },
           {
@@ -21124,6 +21897,13 @@
         "device": "mobile",
         "keyword": "송월타올돌답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -21257,6 +22037,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:44:21"
           },
           {
@@ -21380,6 +22167,13 @@
         "device": "mobile",
         "keyword": "수건제작",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -21513,6 +22307,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:46:45"
           },
           {
@@ -21636,6 +22437,13 @@
         "device": "mobile",
         "keyword": "답례품",
         "cells": [
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
+            "collectedAt": ""
+          },
           {
             "rank": null,
             "text": "미노출",
@@ -21769,6 +22577,13 @@
             "text": "미노출",
             "bucket": "none",
             "status": "미노출",
+            "collectedAt": ""
+          },
+          {
+            "rank": null,
+            "text": "미노출",
+            "bucket": "none",
+            "status": "미노출",
             "collectedAt": "12:46:50"
           },
           {
@@ -21895,10 +22710,10 @@
         "productId": "11562165854",
         "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
-        "rank": 55,
+        "rank": 53,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌답례품_11562165854",
@@ -21909,7 +22724,7 @@
         "rank": 51,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "답례품_11562165854",
@@ -21920,7 +22735,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌답례품수건_11562165854",
@@ -21931,7 +22746,7 @@
         "rank": 18,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌수건_11562165854",
@@ -21942,7 +22757,7 @@
         "rank": 17,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌수건답례품_11562165854",
@@ -21950,10 +22765,10 @@
         "productId": "11562165854",
         "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
-        "rank": 22,
+        "rank": 19,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌잔치수건_11562165854",
@@ -21961,10 +22776,10 @@
         "productId": "11562165854",
         "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
-        "rank": 20,
+        "rank": 21,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "조구만_11562165854",
@@ -21975,161 +22790,7 @@
         "rank": 2,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "호텔수건_11858377273",
-        "keyword": "호텔수건",
-        "productId": "11858377273",
-        "title": "",
-        "image": "",
-        "rank": null,
-        "status": "미노출",
-        "bucket": "none",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "수건_11858377273",
-        "keyword": "수건",
-        "productId": "11858377273",
-        "title": "",
-        "image": "",
-        "rank": null,
-        "status": "미노출",
-        "bucket": "none",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "40수수건_11858377273",
-        "keyword": "40수수건",
-        "productId": "11858377273",
-        "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
-        "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
-        "rank": 56,
-        "status": "10위권 밖",
-        "bucket": "out",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "부드러운수건_11858377273",
-        "keyword": "부드러운수건",
-        "productId": "11858377273",
-        "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
-        "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
-        "rank": 33,
-        "status": "10위권 밖",
-        "bucket": "out",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "수건5+5_11858377273",
-        "keyword": "수건5+5",
-        "productId": "11858377273",
-        "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
-        "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
-        "rank": 1,
-        "status": "1~5위",
-        "bucket": "one",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "호텔수건40수_11858377273",
-        "keyword": "호텔수건40수",
-        "productId": "11858377273",
-        "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
-        "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
-        "rank": 46,
-        "status": "10위권 밖",
-        "bucket": "out",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "호텔수건5+5_11858377273",
-        "keyword": "호텔수건5+5",
-        "productId": "11858377273",
-        "title": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
-        "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
-        "rank": 1,
-        "status": "1~5위",
-        "bucket": "one",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "호텔타월_11858377273",
-        "keyword": "호텔타월",
-        "productId": "11858377273",
-        "title": "",
-        "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
-        "rank": null,
-        "status": "미노출",
-        "bucket": "none",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "결혼식답례품_12047676813",
-        "keyword": "결혼식답례품",
-        "productId": "12047676813",
-        "title": "",
-        "image": "",
-        "rank": null,
-        "status": "미노출",
-        "bucket": "none",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "결혼답례품_12047676813",
-        "keyword": "결혼답례품",
-        "productId": "12047676813",
-        "title": "",
-        "image": "",
-        "rank": null,
-        "status": "미노출",
-        "bucket": "none",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "호두정과답례품_12047676813",
-        "keyword": "호두정과답례품",
-        "productId": "12047676813",
-        "title": "",
-        "image": "",
-        "rank": null,
-        "status": "미노출",
-        "bucket": "none",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "무라호두정과_12047676813",
-        "keyword": "무라호두정과",
-        "productId": "12047676813",
-        "title": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
-        "image": "https://shopping-phinf.pstatic.net/main_8959218/89592187512.2.jpg",
-        "rank": 3,
-        "status": "1~5위",
-        "bucket": "top3",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "답례품호두정과_12047676813",
-        "keyword": "답례품호두정과",
-        "productId": "12047676813",
-        "title": "",
-        "image": "",
-        "rank": null,
-        "status": "미노출",
-        "bucket": "none",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "돌잔치답례품_12047676813",
-        "keyword": "돌잔치답례품",
-        "productId": "12047676813",
-        "title": "",
-        "image": "",
-        "rank": null,
-        "status": "미노출",
-        "bucket": "none",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "어린이집수건_12924495111",
@@ -22137,10 +22798,10 @@
         "productId": "12924495111",
         "title": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
         "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
-        "rank": 1,
+        "rank": 3,
         "status": "1~5위",
-        "bucket": "one",
-        "collectedAt": "17:00:02"
+        "bucket": "top3",
+        "collectedAt": "09:10:02"
       },
       {
         "key": "어린이집고리수건_12924495111",
@@ -22151,7 +22812,7 @@
         "rank": 2,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "어린이집준비물_12924495111",
@@ -22162,7 +22823,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "유치원준비물_12924495111",
@@ -22173,7 +22834,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "고리수건_12924495111",
@@ -22184,7 +22845,7 @@
         "rank": 1,
         "status": "1~5위",
         "bucket": "one",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "수건고리_12924495111",
@@ -22195,7 +22856,7 @@
         "rank": 1,
         "status": "1~5위",
         "bucket": "one",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌잔치답례품_4624494637",
@@ -22206,7 +22867,7 @@
         "rank": 3,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌답례품_4624494637",
@@ -22214,10 +22875,10 @@
         "productId": "4624494637",
         "title": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
-        "rank": 1,
+        "rank": 3,
         "status": "1~5위",
-        "bucket": "one",
-        "collectedAt": "17:00:02"
+        "bucket": "top3",
+        "collectedAt": "09:10:02"
       },
       {
         "key": "답례품_4624494637",
@@ -22225,10 +22886,10 @@
         "productId": "4624494637",
         "title": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
-        "rank": 14,
+        "rank": 24,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "수건답례품_4624494637",
@@ -22236,10 +22897,10 @@
         "productId": "4624494637",
         "title": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
-        "rank": 1,
+        "rank": 2,
         "status": "1~5위",
-        "bucket": "one",
-        "collectedAt": "17:00:02"
+        "bucket": "top3",
+        "collectedAt": "09:10:02"
       },
       {
         "key": "답례품수건_4624494637",
@@ -22250,7 +22911,7 @@
         "rank": null,
         "status": "미노출",
         "bucket": "none",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌답례품타올_4624494637",
@@ -22261,7 +22922,7 @@
         "rank": 3,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌잔치수건_4624494637",
@@ -22272,7 +22933,7 @@
         "rank": 1,
         "status": "1~5위",
         "bucket": "one",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌잔치답례품_4843121925",
@@ -22280,10 +22941,10 @@
         "productId": "4843121925",
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
-        "rank": 5,
-        "status": "1~5위",
-        "bucket": "top5",
-        "collectedAt": "17:00:02"
+        "rank": 7,
+        "status": "6~10위",
+        "bucket": "top10",
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌답례품_4843121925",
@@ -22291,10 +22952,10 @@
         "productId": "4843121925",
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
-        "rank": 5,
+        "rank": 4,
         "status": "1~5위",
         "bucket": "top5",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "답례품_4843121925",
@@ -22305,7 +22966,7 @@
         "rank": 25,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "답례품세트_4843121925",
@@ -22316,7 +22977,7 @@
         "rank": 5,
         "status": "1~5위",
         "bucket": "top5",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "답례품핸드워시_4843121925",
@@ -22324,10 +22985,10 @@
         "productId": "4843121925",
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
-        "rank": 2,
+        "rank": 3,
         "status": "1~5위",
         "bucket": "top3",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌잔치기념품_4843121925",
@@ -22335,10 +22996,10 @@
         "productId": "4843121925",
         "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
         "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
-        "rank": 6,
+        "rank": 7,
         "status": "6~10위",
         "bucket": "top10",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "꿀답례품_7444568862",
@@ -22349,7 +23010,7 @@
         "rank": 18,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "답례품꿀_7444568862",
@@ -22357,10 +23018,10 @@
         "productId": "7444568862",
         "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
-        "rank": 11,
+        "rank": 15,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "꿀결혼답례품_7444568862",
@@ -22368,43 +23029,10 @@
         "productId": "7444568862",
         "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
-        "rank": 6,
+        "rank": 7,
         "status": "6~10위",
         "bucket": "top10",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "결혼답례품_7444568862",
-        "keyword": "결혼답례품",
-        "productId": "7444568862",
-        "title": "",
-        "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
-        "rank": null,
-        "status": "미노출",
-        "bucket": "none",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "답례품_7444568862",
-        "keyword": "답례품",
-        "productId": "7444568862",
-        "title": "",
-        "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
-        "rank": null,
-        "status": "미노출",
-        "bucket": "none",
-        "collectedAt": "17:00:02"
-      },
-      {
-        "key": "돌답례품_7444568862",
-        "keyword": "돌답례품",
-        "productId": "7444568862",
-        "title": "",
-        "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
-        "rank": null,
-        "status": "미노출",
-        "bucket": "none",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       },
       {
         "key": "돌잔치답례품_7444568862",
@@ -22412,10 +23040,10 @@
         "productId": "7444568862",
         "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
-        "rank": 96,
+        "rank": 94,
         "status": "10위권 밖",
         "bucket": "out",
-        "collectedAt": "17:00:02"
+        "collectedAt": "09:10:02"
       }
     ],
     "slotDetails": [
@@ -38323,11 +38951,459 @@
             ]
           }
         ]
+      },
+      {
+        "date": "2026-06-25",
+        "slot": "morning",
+        "slotLabel": "오전",
+        "label": "2026-06-25 오전",
+        "previousLabel": "2026-06-24 오후",
+        "shoppingProducts": [
+          {
+            "productId": "11562165854",
+            "title": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
+            "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
+            "items": [
+              {
+                "key": "돌잔치답례품_11562165854",
+                "keyword": "돌잔치답례품",
+                "rank": 53,
+                "bucket": "out",
+                "text": "53위",
+                "delta": {
+                  "value": 2,
+                  "text": "▲2",
+                  "direction": "up"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "돌답례품_11562165854",
+                "keyword": "돌답례품",
+                "rank": 51,
+                "bucket": "out",
+                "text": "51위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "답례품_11562165854",
+                "keyword": "답례품",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "돌답례품수건_11562165854",
+                "keyword": "돌답례품수건",
+                "rank": 18,
+                "bucket": "out",
+                "text": "18위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "돌수건_11562165854",
+                "keyword": "돌수건",
+                "rank": 17,
+                "bucket": "out",
+                "text": "17위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "돌수건답례품_11562165854",
+                "keyword": "돌수건답례품",
+                "rank": 19,
+                "bucket": "out",
+                "text": "19위",
+                "delta": {
+                  "value": 3,
+                  "text": "▲3",
+                  "direction": "up"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "돌잔치수건_11562165854",
+                "keyword": "돌잔치수건",
+                "rank": 21,
+                "bucket": "out",
+                "text": "21위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "조구만_11562165854",
+                "keyword": "조구만",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              }
+            ]
+          },
+          {
+            "productId": "12924495111",
+            "title": "어린이집 수건 고리 유치원 조구만 자수 국산 5장 해피데이",
+            "image": "https://shopping-phinf.pstatic.net/main_9046900/90469006103.8.jpg",
+            "items": [
+              {
+                "key": "어린이집수건_12924495111",
+                "keyword": "어린이집수건",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": -2,
+                  "text": "▼2",
+                  "direction": "down"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "어린이집고리수건_12924495111",
+                "keyword": "어린이집고리수건",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "어린이집준비물_12924495111",
+                "keyword": "어린이집준비물",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "유치원준비물_12924495111",
+                "keyword": "유치원준비물",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "고리수건_12924495111",
+                "keyword": "고리수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "수건고리_12924495111",
+                "keyword": "수건고리",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              }
+            ]
+          },
+          {
+            "productId": "4624494637",
+            "title": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+            "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
+            "items": [
+              {
+                "key": "돌잔치답례품_4624494637",
+                "keyword": "돌잔치답례품",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "돌답례품_4624494637",
+                "keyword": "돌답례품",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": -2,
+                  "text": "▼2",
+                  "direction": "down"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "답례품_4624494637",
+                "keyword": "답례품",
+                "rank": 24,
+                "bucket": "out",
+                "text": "24위",
+                "delta": {
+                  "value": -10,
+                  "text": "▼10",
+                  "direction": "down"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "수건답례품_4624494637",
+                "keyword": "수건답례품",
+                "rank": 2,
+                "bucket": "top3",
+                "text": "2위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "답례품수건_4624494637",
+                "keyword": "답례품수건",
+                "rank": null,
+                "bucket": "none",
+                "text": "미노출",
+                "delta": {
+                  "value": null,
+                  "text": "-",
+                  "direction": "none"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "돌답례품타올_4624494637",
+                "keyword": "돌답례품타올",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "돌잔치수건_4624494637",
+                "keyword": "돌잔치수건",
+                "rank": 1,
+                "bucket": "one",
+                "text": "1위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              }
+            ]
+          },
+          {
+            "productId": "4843121925",
+            "title": "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+            "image": "https://shopping-phinf.pstatic.net/main_8238764/82387645079.5.jpg",
+            "items": [
+              {
+                "key": "돌잔치답례품_4843121925",
+                "keyword": "돌잔치답례품",
+                "rank": 7,
+                "bucket": "top10",
+                "text": "7위",
+                "delta": {
+                  "value": -2,
+                  "text": "▼2",
+                  "direction": "down"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "돌답례품_4843121925",
+                "keyword": "돌답례품",
+                "rank": 4,
+                "bucket": "top5",
+                "text": "4위",
+                "delta": {
+                  "value": 1,
+                  "text": "▲1",
+                  "direction": "up"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "답례품_4843121925",
+                "keyword": "답례품",
+                "rank": 25,
+                "bucket": "out",
+                "text": "25위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "답례품세트_4843121925",
+                "keyword": "답례품세트",
+                "rank": 5,
+                "bucket": "top5",
+                "text": "5위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "답례품핸드워시_4843121925",
+                "keyword": "답례품핸드워시",
+                "rank": 3,
+                "bucket": "top3",
+                "text": "3위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "돌잔치기념품_4843121925",
+                "keyword": "돌잔치기념품",
+                "rank": 7,
+                "bucket": "top10",
+                "text": "7위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "09:10:02"
+              }
+            ]
+          },
+          {
+            "productId": "7444568862",
+            "title": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
+            "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
+            "items": [
+              {
+                "key": "꿀답례품_7444568862",
+                "keyword": "꿀답례품",
+                "rank": 18,
+                "bucket": "out",
+                "text": "18위",
+                "delta": {
+                  "value": 0,
+                  "text": "-",
+                  "direction": "same"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "답례품꿀_7444568862",
+                "keyword": "답례품꿀",
+                "rank": 15,
+                "bucket": "out",
+                "text": "15위",
+                "delta": {
+                  "value": -4,
+                  "text": "▼4",
+                  "direction": "down"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "꿀결혼답례품_7444568862",
+                "keyword": "꿀결혼답례품",
+                "rank": 7,
+                "bucket": "top10",
+                "text": "7위",
+                "delta": {
+                  "value": -1,
+                  "text": "▼1",
+                  "direction": "down"
+                },
+                "collectedAt": "09:10:02"
+              },
+              {
+                "key": "돌잔치답례품_7444568862",
+                "keyword": "돌잔치답례품",
+                "rank": 94,
+                "bucket": "out",
+                "text": "94위",
+                "delta": {
+                  "value": 2,
+                  "text": "▲2",
+                  "direction": "up"
+                },
+                "collectedAt": "09:10:02"
+              }
+            ]
+          }
+        ],
+        "powerlinkSections": []
       }
     ],
-    "latestDate": "2026-06-24",
-    "latestSlot": "afternoon",
-    "latestLabel": "2026-06-24 오후",
+    "latestDate": "2026-06-25",
+    "latestSlot": "morning",
+    "latestLabel": "2026-06-25 오전",
     "shoppingCount": 48
   }
 }
