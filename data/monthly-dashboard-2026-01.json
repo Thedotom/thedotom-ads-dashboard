@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25 09:53",
+  "updatedAt": "2026-06-25 10:08",
   "month": "2026-01",
   "availableMonths": [
     "2026-06",
@@ -509,6 +509,31 @@
       },
       {
         "category": "순위 관찰 상품",
+        "productName": "무라 호두정과 답례품 호두강정 결혼식 회사 돌잔치 선물 맞춤엽서 4봉",
+        "link": "https://smartstore.naver.com/mura/products/11943090047",
+        "productId": "11943090047",
+        "keywords": [
+          "무라호두정과",
+          "호두정과답례품",
+          "답례품호두정과",
+          "결혼답례품",
+          "결혼식답례품"
+        ],
+        "priorityKeywords": [
+          "무라호두정과",
+          "호두정과답례품",
+          "답례품호두정과"
+        ],
+        "device": "네이버 쇼핑 기준",
+        "memo": "무라 스토어 순위 관찰용",
+        "keyword": "무라호두정과, 호두정과답례품, 답례품호두정과",
+        "image": "",
+        "rankTitle": "",
+        "status": "관찰중",
+        "metric": "네이버 쇼핑 순위 변화"
+      },
+      {
+        "category": "순위 관찰 상품",
         "productName": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
         "link": "https://smartstore.naver.com/thedotomshop/products/11858377273",
         "productId": "11858377273",
@@ -535,7 +560,7 @@
         "metric": "네이버 쇼핑 순위 변화"
       }
     ],
-    "summary": "4개 상품 / 리워드 미진행 자연 순위 관찰"
+    "summary": "5개 상품 / 리워드 미진행 자연 순위 관찰"
   },
   "shoppingIntegrated": {
     "adCost": 0,

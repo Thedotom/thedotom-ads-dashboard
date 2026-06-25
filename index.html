@@ -329,6 +329,36 @@
       text-align: left;
       font-weight: 800;
     }
+    .manual-revenue-editor {
+      display: grid;
+      grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) minmax(120px, 1fr) minmax(140px, 1fr) auto;
+      gap: 8px;
+      align-items: end;
+      padding: 12px 16px;
+      border-top: 1px solid var(--line);
+      background: #fbfcff;
+    }
+    .manual-revenue-editor label {
+      display: grid;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .manual-revenue-editor select,
+    .manual-revenue-editor input {
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 0 10px;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .manual-revenue-editor input {
+      text-align: right;
+      font-weight: 900;
+    }
     .empty { padding: 24px; color: var(--muted); text-align: center; }
 
     /* Soft dashboard theme */
@@ -1604,6 +1634,7 @@
       const tableRows = visibleRows.map(row => `
         <tr>
           <td class="wrap"><strong>${html(row.product || "")}</strong><div class="muted">상품번호 ${html(row.productId || "")}</div></td>
+          <td>${html(row.store === "mura" ? "무라" : row.store === "thedotom" ? "더도톰" : row.store || "-")}</td>
           <td>${html(row.recordId || "")}</td>
           <td>${html(row.date || "")}</td>
           <td class="wrap">${html(row.adgroup || (String(row.status || "").includes("슬롯") ? "슬롯 진행 상품" : "연결 광고 없음"))}</td>
@@ -1637,12 +1668,19 @@
           <div class="daily-product-tabs">${dateTabs}</div>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>제품</th><th>기록ID</th><th>날짜</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>운영형태</th><th>운영메모</th><th>일매출</th><th>주문건수</th><th>ROAS</th><th>광고비율</th><th>광고이익(원)</th></tr></thead>
-              <tbody>${tableRows || `<tr><td class="empty" colspan="13">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
+              <thead><tr><th>제품</th><th>스토어</th><th>기록ID</th><th>날짜</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>운영형태</th><th>운영메모</th><th>일매출</th><th>주문건수</th><th>ROAS</th><th>광고비율</th><th>광고이익(원)</th></tr></thead>
+              <tbody>${tableRows || `<tr><td class="empty" colspan="14">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
             </table>
           </div>
         </div>
         `;
+    }
+    function normalizedManualRows(rows, defaults) {
+      const map = new Map((rows || []).map(row => [row.name, [...(row.weeks || []), 0, 0, 0, 0, 0].slice(0, 5)]));
+      defaults.forEach(name => {
+        if (!map.has(name)) map.set(name, [0, 0, 0, 0, 0]);
+      });
+      return [...map.entries()].map(([name, values]) => ({ name, weeks: values }));
     }
     function renderTotalSalesMetrics() {
       const metrics = state.data.totalSalesMetrics || {};
@@ -1653,29 +1691,29 @@
         <button class="ghost ${month === state.month ? "active" : ""}" type="button" data-total-sales-month="${html(month)}">${html(month)}</button>
       `).join("");
       const weekHeaders = weeks.map(week => `<th>${html(week)}</th>`).join("");
-      const rowsForEdit = (rows, defaults) => {
-        const source = (rows && rows.length ? rows : defaults.map(name => ({ name, weeks: [0, 0, 0, 0, 0] }))).map(row => ({
-          name: row.name || "",
-          weeks: [...(row.weeks || []), 0, 0, 0, 0, 0].slice(0, 5)
-        }));
-        return [...source, { name: "", weeks: [0, 0, 0, 0, 0] }];
-      };
-      const manualInputTable = (title, kind, rows, defaults) => {
-        const body = rowsForEdit(rows, defaults).map((row, rowIndex) => `
-          <tr>
-            <td><input class="manual-revenue-input name" data-manual-name value="${html(row.name)}" placeholder="항목명"></td>
-            ${weeks.map((week, weekIndex) => `<td><input class="manual-revenue-input" data-manual-week="${weekIndex}" value="${number(row.weeks[weekIndex] || 0)}" inputmode="numeric" aria-label="${html(week)}"></td>`).join("")}
-          </tr>`).join("");
+      const manualEditor = (title, kind, rows, defaults) => {
+        const source = normalizedManualRows(rows, defaults);
+        const options = source.map(row => `<option value="${html(row.name)}">${html(row.name)}</option>`).join("");
+        const weekOptions = weeks.map((week, weekIndex) => `<option value="${weekIndex}">${html(week)}</option>`).join("");
         return `
           <div class="product-category">
             <div class="product-category-head">
-              <div><h3 class="product-category-title">${html(title)}</h3><div class="product-category-sub">수기로 관리하는 값은 여기서 바로 수정 후 저장합니다.</div></div>
+              <div><h3 class="product-category-title">${html(title)}</h3><div class="product-category-sub">항목과 주차를 선택해서 한 칸씩 저장합니다.</div></div>
             </div>
-            <div class="table-wrap">
-              <table data-manual-kind="${html(kind)}">
-                <thead><tr><th>구분</th>${weekHeaders}</tr></thead>
-                <tbody>${body}</tbody>
-              </table>
+            <div class="manual-revenue-editor" data-manual-kind="${html(kind)}">
+              <label>구분
+                <select data-manual-name>${options}</select>
+              </label>
+              <label>주차
+                <select data-manual-week>${weekOptions}</select>
+              </label>
+              <label>날짜 기준
+                <input type="date" data-manual-date value="${html(`${state.month}-01`)}">
+              </label>
+              <label>금액
+                <input data-manual-amount inputmode="numeric" placeholder="0">
+              </label>
+              <button class="primary" type="button" data-apply-manual-revenue>저장</button>
             </div>
           </div>`;
       };
@@ -1725,12 +1763,11 @@
         <div class="meta" style="margin-bottom:12px">${html(metrics.manualSource || "")} · ${html(metrics.memo || "")}</div>
         <div class="product-category">
           <div class="product-category-head">
-            <div><h3 class="product-category-title">수기 입력 편집</h3><div class="product-category-sub">6월 기준을 먼저 정리하고, 이후 1~5월도 월 버튼을 눌러 같은 방식으로 채우면 됩니다.</div></div>
-            <button class="primary" type="button" data-save-manual-revenue>수기 입력 저장</button>
+            <div><h3 class="product-category-title">수기 입력 편집</h3><div class="product-category-sub">드롭다운으로 구분과 주차를 고른 뒤 금액을 저장하면 아래 수기 입력 표에 바로 반영됩니다.</div></div>
           </div>
         </div>
-        ${manualInputTable("수기 매출 입력", "manualSales", metrics.manualSales || [], ["스토어", "자사몰", "무라", "기프트몰"])}
-        ${manualInputTable("수기 광고비 입력", "manualAdCosts", metrics.manualAdCosts || [], ["검색광고", "검색광고2", "성과형1", "성과형2", "슬롯비"])}
+        ${manualEditor("수기 매출 입력", "manualSales", metrics.manualSales || [], ["스토어", "자사몰", "무라", "기프트몰"])}
+        ${manualEditor("수기 광고비 입력", "manualAdCosts", metrics.manualAdCosts || [], ["검색광고", "검색광고2", "성과형1", "성과형2", "슬롯비"])}
         ${metricTable("수기 입력 매출", "이미지 기준으로 입력한 주차별 전체 매출", metrics.manualSales || [], metrics.manualSalesTotal)}
         ${metricTable("자동 수집 매출", "스마트스토어 상품성과 파일에서 읽은 매출. 카페24/무라 자동 연동은 다음 단계에서 추가", metrics.autoSales || [], metrics.autoSalesTotal)}
         ${metricTable("수기 입력 광고비", "이미지 기준으로 입력한 검색광고/성과형/슬롯비", metrics.manualAdCosts || [], metrics.manualAdCostTotal)}
@@ -1743,19 +1780,45 @@
           loadData();
         });
       });
-      els.totalSalesBody.querySelector("[data-save-manual-revenue]")?.addEventListener("click", saveManualRevenue);
+      els.totalSalesBody.querySelectorAll("[data-manual-date]").forEach(input => {
+        input.addEventListener("change", event => {
+          const date = event.target.value || "";
+          const day = Number(date.slice(-2));
+          const week = day <= 7 ? 0 : day <= 14 ? 1 : day <= 21 ? 2 : day <= 28 ? 3 : 4;
+          const editor = event.target.closest("[data-manual-kind]");
+          const weekSelect = editor?.querySelector("[data-manual-week]");
+          if (weekSelect) weekSelect.value = String(week);
+        });
+      });
+      els.totalSalesBody.querySelectorAll("[data-apply-manual-revenue]").forEach(button => {
+        button.addEventListener("click", applyManualRevenueEdit);
+      });
     }
-    async function saveManualRevenue() {
-      const weeks = state.data?.totalSalesMetrics?.weeks || [];
-      const collect = kind => {
-        const table = els.totalSalesBody.querySelector(`[data-manual-kind="${kind}"]`);
-        if (!table) return [];
-        return [...table.querySelectorAll("tbody tr")].map(row => {
-          const name = row.querySelector("[data-manual-name]")?.value?.trim() || "";
-          const values = [...row.querySelectorAll("[data-manual-week]")].map(input => parseMoneyValue(input.value));
-          return { name, weeks: values };
-        }).filter(row => row.name);
+    async function applyManualRevenueEdit(event) {
+      const editor = event.target.closest("[data-manual-kind]");
+      if (!editor) return;
+      const kind = editor.dataset.manualKind;
+      const name = editor.querySelector("[data-manual-name]")?.value || "";
+      const weekIndex = Number(editor.querySelector("[data-manual-week]")?.value || 0);
+      const amount = parseMoneyValue(editor.querySelector("[data-manual-amount]")?.value || "0");
+      const metrics = state.data?.totalSalesMetrics || {};
+      const defaults = {
+        manualSales: ["스토어", "자사몰", "무라", "기프트몰"],
+        manualAdCosts: ["검색광고", "검색광고2", "성과형1", "성과형2", "슬롯비"]
       };
+      const ensureRows = (rows, fallback) => {
+        const result = normalizedManualRows(rows || [], fallback);
+        if (!result.find(row => row.name === name)) result.push({ name, weeks: [0, 0, 0, 0, 0] });
+        return result;
+      };
+      const targetRows = ensureRows(metrics[kind] || [], defaults[kind] || []);
+      const row = targetRows.find(item => item.name === name);
+      row.weeks[weekIndex] = amount;
+      metrics[kind] = targetRows;
+      await saveManualRevenueFromMetrics(metrics);
+    }
+    async function saveManualRevenueFromMetrics(metrics) {
+      const weeks = state.data?.totalSalesMetrics?.weeks || [];
       try {
         setStatus("수기 입력값 저장 중...");
         const response = await fetch(`/api/manual-revenue?month=${encodeURIComponent(state.month)}`, {
@@ -1763,8 +1826,8 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             weeks,
-            manualSales: collect("manualSales"),
-            manualAdCosts: collect("manualAdCosts")
+            manualSales: metrics.manualSales || [],
+            manualAdCosts: metrics.manualAdCosts || []
           })
         });
         if (!response.ok) throw new Error("수기 입력값 저장 실패");
