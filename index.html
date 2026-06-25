@@ -1691,10 +1691,24 @@
         <button class="ghost ${month === state.month ? "active" : ""}" type="button" data-total-sales-month="${html(month)}">${html(month)}</button>
       `).join("");
       const weekHeaders = weeks.map(week => `<th>${html(week)}</th>`).join("");
+      const availableMonths = metrics.availableMonths || [];
+      const manualMonthOptions = availableMonths.map(month => `
+        <option value="${html(month)}" ${month === state.month ? "selected" : ""}>${html(month)}</option>
+      `).join("");
+      const weekRangeLabel = (month, weekIndex) => {
+        const [year, monthNumber] = String(month || state.month).split("-").map(Number);
+        if (!year || !monthNumber) return weeks[weekIndex] || `${weekIndex + 1}주차`;
+        const lastDay = new Date(year, monthNumber, 0).getDate();
+        const startDay = weekIndex * 7 + 1;
+        const endDay = Math.min(startDay + 6, lastDay);
+        const pad = value => String(value).padStart(2, "0");
+        return `${year}-${pad(monthNumber)}-${pad(startDay)}~${year}-${pad(monthNumber)}-${pad(endDay)}`;
+      };
       const manualEditor = (title, kind, rows, defaults) => {
         const source = normalizedManualRows(rows, defaults);
         const options = source.map(row => `<option value="${html(row.name)}">${html(row.name)}</option>`).join("");
         const weekOptions = weeks.map((week, weekIndex) => `<option value="${weekIndex}">${html(week)}</option>`).join("");
+        const periodOptions = weeks.map((week, weekIndex) => `<option value="${weekIndex}">${html(weekRangeLabel(state.month, weekIndex))}</option>`).join("");
         return `
           <div class="product-category">
             <div class="product-category-head">
@@ -1704,11 +1718,14 @@
               <label>구분
                 <select data-manual-name>${options}</select>
               </label>
+              <label>월
+                <select data-manual-month>${manualMonthOptions}</select>
+              </label>
               <label>주차
                 <select data-manual-week>${weekOptions}</select>
               </label>
-              <label>날짜 기준
-                <input type="date" data-manual-date value="${html(`${state.month}-01`)}">
+              <label>기간
+                <select data-manual-period>${periodOptions}</select>
               </label>
               <label>금액
                 <input data-manual-amount inputmode="numeric" placeholder="0">
@@ -1761,11 +1778,6 @@
           <div class="metric"><div class="label">자동 광고비</div><div class="value">${money(autoAd)}</div><div class="sub">네이버 광고 API + 슬롯 기준</div></div>
         </div>
         <div class="meta" style="margin-bottom:12px">${html(metrics.manualSource || "")} · ${html(metrics.memo || "")}</div>
-        <div class="product-category">
-          <div class="product-category-head">
-            <div><h3 class="product-category-title">수기 입력 편집</h3><div class="product-category-sub">드롭다운으로 구분과 주차를 고른 뒤 금액을 저장하면 아래 수기 입력 표에 바로 반영됩니다.</div></div>
-          </div>
-        </div>
         ${manualEditor("수기 매출 입력", "manualSales", metrics.manualSales || [], ["스토어", "자사몰", "무라", "기프트몰"])}
         ${manualEditor("수기 광고비 입력", "manualAdCosts", metrics.manualAdCosts || [], ["검색광고", "검색광고2", "성과형1", "성과형2", "슬롯비"])}
         ${metricTable("수기 입력 매출", "이미지 기준으로 입력한 주차별 전체 매출", metrics.manualSales || [], metrics.manualSalesTotal)}
@@ -1780,14 +1792,25 @@
           loadData();
         });
       });
-      els.totalSalesBody.querySelectorAll("[data-manual-date]").forEach(input => {
-        input.addEventListener("change", event => {
-          const date = event.target.value || "";
-          const day = Number(date.slice(-2));
-          const week = day <= 7 ? 0 : day <= 14 ? 1 : day <= 21 ? 2 : day <= 28 ? 3 : 4;
+      els.totalSalesBody.querySelectorAll("[data-manual-month]").forEach(select => {
+        select.addEventListener("change", event => {
+          state.month = event.target.value;
+          els.monthFilter.value = state.month;
+          loadData();
+        });
+      });
+      els.totalSalesBody.querySelectorAll("[data-manual-week]").forEach(select => {
+        select.addEventListener("change", event => {
+          const editor = event.target.closest("[data-manual-kind]");
+          const periodSelect = editor?.querySelector("[data-manual-period]");
+          if (periodSelect) periodSelect.value = event.target.value;
+        });
+      });
+      els.totalSalesBody.querySelectorAll("[data-manual-period]").forEach(select => {
+        select.addEventListener("change", event => {
           const editor = event.target.closest("[data-manual-kind]");
           const weekSelect = editor?.querySelector("[data-manual-week]");
-          if (weekSelect) weekSelect.value = String(week);
+          if (weekSelect) weekSelect.value = event.target.value;
         });
       });
       els.totalSalesBody.querySelectorAll("[data-apply-manual-revenue]").forEach(button => {

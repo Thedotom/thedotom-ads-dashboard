@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25 11:38",
+  "updatedAt": "2026-06-25 12:03",
   "month": "2026-01",
   "availableMonths": [
     "2026-06",
@@ -625,7 +625,7 @@
         "refundAmount": 337200.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 1094000.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -648,7 +648,7 @@
         "refundAmount": 120000.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 1839900.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -671,7 +671,7 @@
         "refundAmount": 77800.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 920600.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -694,7 +694,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 3211200.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -717,7 +717,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 902000.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -740,7 +740,7 @@
         "refundAmount": 212400.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 2498000.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -763,7 +763,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 35000.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -786,7 +786,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 2000.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -809,7 +809,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 11900.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -832,7 +832,7 @@
         "refundAmount": 67000.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 374600.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -855,7 +855,7 @@
         "refundAmount": 962800.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 4720300.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -878,7 +878,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 420900.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -901,7 +901,7 @@
         "refundAmount": 1511189.5239257812,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 4229850.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -924,7 +924,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 1348000.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -947,7 +947,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 84100.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -970,7 +970,7 @@
         "refundAmount": 2470200.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 5485450.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -993,7 +993,7 @@
         "refundAmount": 90600.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 454600.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1016,7 +1016,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 198500.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1039,7 +1039,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 1649600.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1062,7 +1062,7 @@
         "refundAmount": 38900.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 461800.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1085,7 +1085,7 @@
         "refundAmount": 296000.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 3939500.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1108,7 +1108,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 2031000.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1131,7 +1131,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 47000.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1154,7 +1154,7 @@
         "refundAmount": 2800.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 301800.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1177,7 +1177,7 @@
         "refundAmount": 162000.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 647400.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1200,7 +1200,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 1316700.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1223,7 +1223,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 576500.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1246,7 +1246,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 119000.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1269,7 +1269,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 3801800.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1292,7 +1292,7 @@
         "refundAmount": 280000.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 1257750.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1315,7 +1315,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 184000.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1338,7 +1338,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 43200.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1361,7 +1361,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 4119150.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1384,7 +1384,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 67600.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1407,7 +1407,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 43400.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1430,7 +1430,7 @@
         "refundAmount": 0.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 137500.0,
+        "adProfit": 0.0,
         "source": "manual"
       },
       {
@@ -1453,7 +1453,7 @@
         "refundAmount": 34700.0,
         "roas": 0,
         "adCostRate": 0.0,
-        "adProfit": 84300.0,
+        "adProfit": 0.0,
         "source": "manual"
       }
     ],
@@ -1464,12 +1464,12 @@
       "orders": 265.0,
       "roas": 0,
       "adCostRate": 0.0,
-      "adProfit": 48659900.0
+      "adProfit": 0.0
     },
     "dateLabel": "2026-01-01 ~ 2026-01-04",
     "count": 37,
     "summary": "스마트스토어 하루치 상품성과와 네이버 광고 API 일별 데이터를 자동 병합한 기준입니다.",
-    "updatedAt": "2026-06-25 11:37:52",
+    "updatedAt": "2026-06-25 12:01:24",
     "automation": {
       "adAccountId": "1739029",
       "naverAdGroupName": "2600원_돌수건(M)",
