@@ -2185,8 +2185,8 @@
         return `<div class="powerlink-rank-card">
           <div class="powerlink-rank-head">
             <div>
-              <h3 class="powerlink-rank-title">${html(section.campaign || "파워링크")}</h3>
-              <div class="powerlink-rank-sub">${html(label)} 순위 · ${html(label)} ${number(items.length)}개</div>
+              <h3 class="powerlink-rank-title">${html(section.adgroup || section.campaign || "파워링크")}</h3>
+              <div class="powerlink-rank-sub">${html(section.campaign || "")} · ${html(label)} ${number(items.length)}개</div>
             </div>
             <span class="count">${number(items.length)}개</span>
           </div>
