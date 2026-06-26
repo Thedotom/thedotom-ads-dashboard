@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-26 09:45",
+  "updatedAt": "2026-06-26 10:17",
   "month": "2026-02",
   "availableMonths": [
     "2026-06",
@@ -617,7 +617,7 @@
     "dateLabel": "",
     "count": 0,
     "summary": "스마트스토어 하루치 상품성과와 네이버 광고 API 일별 데이터를 자동 병합한 기준입니다.",
-    "updatedAt": "2026-06-26 09:44:05",
+    "updatedAt": "2026-06-26 10:17:27",
     "automation": {
       "adAccountId": "1739029",
       "naverAdGroupName": "2600원_돌수건(M)",
