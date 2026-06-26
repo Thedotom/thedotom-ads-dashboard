@@ -1662,7 +1662,6 @@
           <td>${number(row.orders || 0)}</td>
           <td>${roasText(row.roas || 0)}</td>
           <td>${rateText(row.adCostRate || 0)}</td>
-          <td>${money(row.adProfit || 0)}</td>
         </tr>
       `).join("");
       els.dailyProductBody.innerHTML = `
@@ -1684,8 +1683,8 @@
           <div class="daily-product-tabs">${dateTabs}</div>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>제품</th><th>스토어</th><th>기록ID</th><th>날짜</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>운영형태</th><th>운영메모</th><th>일매출</th><th>주문건수</th><th>ROAS</th><th>광고비율</th><th>광고이익(원)</th></tr></thead>
-              <tbody>${tableRows || `<tr><td class="empty" colspan="14">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
+              <thead><tr><th>제품</th><th>스토어</th><th>기록ID</th><th>날짜</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>운영형태</th><th>운영메모</th><th>일매출</th><th>주문건수</th><th>ROAS</th><th>광고비율</th></tr></thead>
+              <tbody>${tableRows || `<tr><td class="empty" colspan="13">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
             </table>
           </div>
         </div>
@@ -1697,6 +1696,29 @@
         if (!map.has(name)) map.set(name, [0, 0, 0, 0, 0]);
       });
       return [...map.entries()].map(([name, values]) => ({ name, weeks: values }));
+    }
+    function manualRowsWithTotals(rows) {
+      return (rows || []).map(row => {
+        const weeks = [...(row.weeks || []), 0, 0, 0, 0, 0].slice(0, 5).map(value => Number(value) || 0);
+        return { ...row, weeks, total: weeks.reduce((sum, value) => sum + value, 0) };
+      });
+    }
+    function manualTotalRow(rows, name) {
+      const weeks = [0, 0, 0, 0, 0];
+      (rows || []).forEach(row => {
+        (row.weeks || []).forEach((value, index) => {
+          if (index < weeks.length) weeks[index] += Number(value) || 0;
+        });
+      });
+      return { name, weeks, total: weeks.reduce((sum, value) => sum + value, 0) };
+    }
+    function refreshManualRevenueMetrics(metrics) {
+      if (!state.data) state.data = {};
+      metrics.manualSales = manualRowsWithTotals(metrics.manualSales || []);
+      metrics.manualAdCosts = manualRowsWithTotals(metrics.manualAdCosts || []);
+      metrics.manualSalesTotal = manualTotalRow(metrics.manualSales, "수기 매출 합계");
+      metrics.manualAdCostTotal = manualTotalRow(metrics.manualAdCosts, "수기 광고비 합계");
+      state.data.totalSalesMetrics = metrics;
     }
     function renderTotalSalesMetrics() {
       const metrics = state.data.totalSalesMetrics || {};
@@ -1862,6 +1884,11 @@
       if (!editor) return;
       const kind = editor.dataset.manualKind;
       const name = editor.querySelector("[data-manual-name]")?.value || "";
+      const selectedMonth = editor.querySelector("[data-manual-month]")?.value || state.month;
+      if (selectedMonth && selectedMonth !== state.month) {
+        state.month = selectedMonth;
+        if (els.monthFilter) els.monthFilter.value = selectedMonth;
+      }
       const weekIndex = Number(editor.querySelector("[data-manual-week]")?.value || 0);
       const amount = parseMoneyValue(editor.querySelector("[data-manual-amount]")?.value || "0");
       const metrics = state.data?.totalSalesMetrics || {};
@@ -1878,6 +1905,8 @@
       const row = targetRows.find(item => item.name === name);
       row.weeks[weekIndex] = amount;
       metrics[kind] = targetRows;
+      refreshManualRevenueMetrics(metrics);
+      renderTotalSalesMetrics();
       await saveManualRevenueFromMetrics(metrics);
     }
     async function saveManualRevenueFromMetrics(metrics) {
@@ -1896,10 +1925,9 @@
         if (!response.ok) throw new Error("수기 입력값 저장 실패");
         const result = await response.json();
         if (!result.ok) throw new Error(result.error || "수기 입력값 저장 실패");
-        await loadData();
         setStatus("수기 입력값 저장 완료");
       } catch (error) {
-        setStatus("로컬 대시보드에서만 수기 입력값을 저장할 수 있습니다.", true);
+        setStatus("화면에는 반영했습니다. 영구 저장은 로컬 대시보드에서 가능합니다.", true);
         console.error(error);
       }
     }
