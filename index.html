@@ -676,7 +676,7 @@
       margin-bottom: 12px;
     }
     .daily-product-kpis {
-      grid-template-columns: 1.1fr repeat(4, minmax(118px, .9fr));
+      grid-template-columns: minmax(180px, 1.2fr) repeat(5, minmax(100px, .8fr));
       gap: 10px;
     }
     .daily-product-kpis .metric {
@@ -1718,6 +1718,7 @@
       const dates = [...new Set(monthRows.map(row => row.date).filter(Boolean))].sort();
       if (!dates.includes(state.dailyProductDate)) state.dailyProductDate = dates[dates.length - 1] || "";
       const visibleRows = state.dailyProductDate ? monthRows.filter(row => row.date === state.dailyProductDate) : monthRows;
+      const selectedDaySales = visibleRows.reduce((sum, row) => sum + Number(row.dailySales || 0), 0);
       const monthOptions = months.map(month => `<option value="${html(month)}" ${month === state.dailyProductMonth ? "selected" : ""}>${html(month)}</option>`).join("");
       const dateLabel = dates.length ? `${dates[0]} ~ ${dates[dates.length - 1]}` : "데이터 없음";
       els.dailyProductStatus.textContent = dateLabel;
@@ -1746,8 +1747,9 @@
         </div>
         <div class="kpis daily-product-kpis" style="margin-bottom:12px">
           <div class="metric"><div class="label">기간</div><div class="value" style="font-size:18px">${html(dateLabel)}</div><div class="sub">일별 제품 성과 ${number(monthRows.length)}건</div></div>
+          <div class="metric"><div class="label">선택일 매출</div><div class="value">${money(selectedDaySales)}</div><div class="sub">${html(state.dailyProductDate || "-")} 전체 상품 합계</div></div>
           <div class="metric"><div class="label">광고비</div><div class="value">${money(totals.adCost || 0)}</div><div class="sub">네이버 광고 총비용</div></div>
-          <div class="metric"><div class="label">일매출</div><div class="value">${money(totals.dailySales || 0)}</div><div class="sub">스마트스토어 상품별 판매성과</div></div>
+          <div class="metric"><div class="label">매출</div><div class="value">${money(totals.dailySales || 0)}</div><div class="sub">선택 월 상품별 판매성과</div></div>
           <div class="metric"><div class="label">ROAS</div><div class="value">${roasText(totals.roas || 0)}</div><div class="sub">광고매출 / 광고비</div></div>
           <div class="metric"><div class="label">광고비율</div><div class="value">${rateText(totals.adCostRate || 0)}</div><div class="sub">광고비 / 일매출</div></div>
         </div>
@@ -1761,7 +1763,7 @@
           <div class="daily-product-tabs">${dateTabs}</div>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>제품</th><th>스토어</th><th>기록ID</th><th>날짜</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>운영형태</th><th>운영메모</th><th>일매출</th><th>주문건수</th><th>ROAS</th><th>광고비율</th></tr></thead>
+              <thead><tr><th>제품</th><th>스토어</th><th>기록ID</th><th>날짜</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>운영형태</th><th>운영메모</th><th>상품매출</th><th>주문건수</th><th>ROAS</th><th>광고비율</th></tr></thead>
               <tbody>${tableRows || `<tr><td class="empty" colspan="13">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
             </table>
           </div>
@@ -1793,7 +1795,7 @@
     function refreshManualRevenueMetrics(metrics) {
       if (!state.data) state.data = {};
       metrics.manualSales = manualRowsWithTotals(metrics.manualSales || []);
-      metrics.manualAdCosts = manualRowsWithTotals(metrics.manualAdCosts || []);
+      metrics.manualAdCosts = manualRowsWithTotals(metrics.manualAdCosts || []).filter(row => row.name !== "성과형2");
       metrics.manualSalesTotal = manualTotalRow(metrics.manualSales, "수기 매출 합계");
       metrics.manualAdCostTotal = manualTotalRow(metrics.manualAdCosts, "수기 광고비 합계");
       state.data.totalSalesMetrics = metrics;
@@ -1942,9 +1944,9 @@
         <div class="meta" style="margin-bottom:12px">${html(metrics.manualSource || "")} · ${html(metrics.memo || "")}</div>
         ${manualEditor("수기 매출 입력", "manualSales", metrics.manualSales || [], ["스토어", "자사몰", "무라", "기프트몰"])}
         ${metricTable("수기 입력 매출", "이미지 기준으로 입력한 주차별 전체 매출", metrics.manualSales || [], metrics.manualSalesTotal)}
-        ${manualEditor("수기 광고비 입력", "manualAdCosts", metrics.manualAdCosts || [], ["검색광고", "검색광고2", "성과형1", "성과형2", "슬롯비"])}
-        ${metricTable("수기 입력 광고비", "이미지 기준으로 입력한 검색광고/성과형/슬롯비", metrics.manualAdCosts || [], metrics.manualAdCostTotal)}
         ${metricTable("자동 수집 매출", "스마트스토어 상품성과 파일에서 읽은 매출. 카페24/무라 자동 연동은 다음 단계에서 추가", metrics.autoSales || [], metrics.autoSalesTotal)}
+        ${manualEditor("수기 광고비 입력", "manualAdCosts", metrics.manualAdCosts || [], ["검색광고", "검색광고2", "성과형1", "슬롯비"])}
+        ${metricTable("수기 입력 광고비", "이미지 기준으로 입력한 검색광고/성과형/슬롯비", metrics.manualAdCosts || [], metrics.manualAdCostTotal)}
         ${metricTable("자동 수집 광고비", "네이버 광고 API 원본과 리워드 계약 기간 기준 슬롯비", metrics.autoAdCosts || [], metrics.autoAdCostTotal)}
       `;
       els.totalSalesBody.querySelectorAll("[data-total-sales-month]").forEach(button => {
@@ -2006,7 +2008,7 @@
       const metrics = state.data?.totalSalesMetrics || {};
       const defaults = {
         manualSales: ["스토어", "자사몰", "무라", "기프트몰"],
-        manualAdCosts: ["검색광고", "검색광고2", "성과형1", "성과형2", "슬롯비"]
+        manualAdCosts: ["검색광고", "검색광고2", "성과형1", "슬롯비"]
       };
       const ensureRows = (rows, fallback) => {
         const result = normalizedManualRows(rows || [], fallback);
