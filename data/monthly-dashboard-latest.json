@@ -3270,7 +3270,7 @@
     "memo": "네이버 쇼핑검색 광고 API 기준 성과입니다. 리워드/슬롯 비용은 순위 트래픽에서 별도 관리합니다."
   },
   "dailyProductCosts": {
-    "sourcePath": "D:\\광고보고서\\raw\\naver_ads_2026_06_01_23_daily_raw.xlsx",
+    "sourcePath": "D:\\광고보고서\\raw\\naver_ads_2026_06_01_25_daily_raw.xlsx",
     "dates": [
       "2026-06-01",
       "2026-06-02",
@@ -3308,13 +3308,13 @@
         "link": "https://smartstore.naver.com/thedotomshop/products/4624494637",
         "image": "https://shopping-phinf.pstatic.net/main_8216901/82169015001.8.jpg",
         "rankTitle": "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
-        "totalCost": 6067833.0,
-        "avgDailyCost": 242713.32,
-        "clicks": 2418.0,
-        "conversions": 1214.0,
-        "revenue": 420740740.0,
-        "cpc": 2509.442928039702,
-        "roas": 69.33953851399667,
+        "totalCost": 6099842.0,
+        "avgDailyCost": 243993.68,
+        "clicks": 2434.0,
+        "conversions": 1234.0,
+        "revenue": 427576490.0,
+        "cpc": 2506.0977814297453,
+        "roas": 70.09632216703318,
         "daily": [
           {
             "date": "2026-06-01",
@@ -3502,19 +3502,19 @@
           },
           {
             "date": "2026-06-24",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 14593.0,
+            "clicks": 8.0,
+            "conversions": 10.0,
+            "revenue": 2511250.0,
+            "impressions": 419.0
           },
           {
             "date": "2026-06-25",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 17416.0,
+            "clicks": 8.0,
+            "conversions": 10.0,
+            "revenue": 4324500.0,
+            "impressions": 391.0
           }
         ]
       },
@@ -3527,13 +3527,13 @@
         "link": "https://smartstore.naver.com/thedotomshop/products/11562165854",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "rankTitle": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
-        "totalCost": 3263863.0,
-        "avgDailyCost": 130554.52,
-        "clicks": 1288.0,
-        "conversions": 397.0,
-        "revenue": 159660300.0,
-        "cpc": 2534.0551242236024,
-        "roas": 48.917586308003735,
+        "totalCost": 3577158.0,
+        "avgDailyCost": 143086.32,
+        "clicks": 1397.0,
+        "conversions": 432.0,
+        "revenue": 172276050.0,
+        "cpc": 2560.5998568360774,
+        "roas": 48.16003374746097,
         "daily": [
           {
             "date": "2026-06-01",
@@ -3721,19 +3721,19 @@
           },
           {
             "date": "2026-06-24",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 170429.0,
+            "clicks": 59.0,
+            "conversions": 13.0,
+            "revenue": 4397950.0,
+            "impressions": 2055.0
           },
           {
             "date": "2026-06-25",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 142866.0,
+            "clicks": 50.0,
+            "conversions": 22.0,
+            "revenue": 8217800.0,
+            "impressions": 1687.0
           }
         ]
       },
@@ -3746,13 +3746,13 @@
         "link": "https://smartstore.naver.com/thedotomshop/products/13337070806",
         "image": "",
         "rankTitle": "",
-        "totalCost": 1685801.0,
-        "avgDailyCost": 67432.04,
-        "clicks": 1129.0,
-        "conversions": 312.0,
-        "revenue": 159133680.0,
-        "cpc": 1493.1806908768822,
-        "roas": 94.39647977430313,
+        "totalCost": 1808566.0,
+        "avgDailyCost": 72342.64,
+        "clicks": 1208.0,
+        "conversions": 334.0,
+        "revenue": 173315980.0,
+        "cpc": 1497.1572847682119,
+        "roas": 95.83060833831887,
         "daily": [
           {
             "date": "2026-06-01",
@@ -3940,19 +3940,19 @@
           },
           {
             "date": "2026-06-24",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 67920.0,
+            "clicks": 46.0,
+            "conversions": 11.0,
+            "revenue": 8021200.0,
+            "impressions": 2286.0
           },
           {
             "date": "2026-06-25",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 54845.0,
+            "clicks": 33.0,
+            "conversions": 11.0,
+            "revenue": 6161100.0,
+            "impressions": 2152.0
           }
         ]
       },
@@ -3965,13 +3965,13 @@
         "link": "https://smartstore.naver.com/thedotomshop/products/11858377273",
         "image": "https://shopping-phinf.pstatic.net/main_8940288/89402887867.jpg",
         "rankTitle": "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
-        "totalCost": 906648.0,
-        "avgDailyCost": 36265.92,
-        "clicks": 579.0,
-        "conversions": 148.0,
-        "revenue": 12431800.0,
-        "cpc": 1565.8860103626944,
-        "roas": 13.711826419955704,
+        "totalCost": 965990.0,
+        "avgDailyCost": 38639.6,
+        "clicks": 617.0,
+        "conversions": 169.0,
+        "revenue": 15501300.0,
+        "cpc": 1565.6239870340357,
+        "roas": 16.0470605285769,
         "daily": [
           {
             "date": "2026-06-01",
@@ -4159,19 +4159,19 @@
           },
           {
             "date": "2026-06-24",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 28088.0,
+            "clicks": 18.0,
+            "conversions": 8.0,
+            "revenue": 1076000.0,
+            "impressions": 957.0
           },
           {
             "date": "2026-06-25",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 31254.0,
+            "clicks": 20.0,
+            "conversions": 13.0,
+            "revenue": 1993500.0,
+            "impressions": 739.0
           }
         ]
       },
@@ -4184,13 +4184,13 @@
         "link": "https://smartstore.naver.com/thedotomshop/products/11562165854",
         "image": "https://shopping-phinf.pstatic.net/main_8910667/89106676260.2.jpg",
         "rankTitle": "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
-        "totalCost": 670593.0,
-        "avgDailyCost": 26823.72,
-        "clicks": 365.0,
-        "conversions": 80.0,
-        "revenue": 21045030.0,
-        "cpc": 1837.2410958904109,
-        "roas": 31.38271649122493,
+        "totalCost": 776982.0,
+        "avgDailyCost": 31079.28,
+        "clicks": 418.0,
+        "conversions": 98.0,
+        "revenue": 29727030.0,
+        "cpc": 1858.8086124401914,
+        "roas": 38.25961219178823,
         "daily": [
           {
             "date": "2026-06-01",
@@ -4378,19 +4378,238 @@
           },
           {
             "date": "2026-06-24",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 53231.0,
+            "clicks": 27.0,
+            "conversions": 14.0,
+            "revenue": 6587500.0,
+            "impressions": 589.0
           },
           {
             "date": "2026-06-25",
-            "cost": 0.0,
-            "clicks": 0.0,
+            "cost": 53158.0,
+            "clicks": 26.0,
+            "conversions": 4.0,
+            "revenue": 2094500.0,
+            "impressions": 642.0
+          }
+        ]
+      },
+      {
+        "campaign": "쇼핑검색_더도톰_조구만",
+        "adgroup": "조구만_핸드워시_돌답례품",
+        "adProductName": "조구만_핸드워시_돌답례품",
+        "productName": "조구만 돌답례품 핸드워시 손세정제 돌잔치답례품 (20개이상단가)",
+        "productId": "13337257373",
+        "link": "https://smartstore.naver.com/thedotomshop/products/13337257373",
+        "image": "",
+        "rankTitle": "",
+        "totalCost": 532687.0,
+        "avgDailyCost": 21307.48,
+        "clicks": 445.0,
+        "conversions": 100.0,
+        "revenue": 31824600.0,
+        "cpc": 1197.0494382022473,
+        "roas": 59.74352668640309,
+        "daily": [
+          {
+            "date": "2026-06-01",
+            "cost": 38859.0,
+            "clicks": 28.0,
+            "conversions": 3.0,
+            "revenue": 1787800.0,
+            "impressions": 1363.0
+          },
+          {
+            "date": "2026-06-02",
+            "cost": 25333.0,
+            "clicks": 21.0,
+            "conversions": 2.0,
+            "revenue": 361000.0,
+            "impressions": 1057.0
+          },
+          {
+            "date": "2026-06-03",
+            "cost": 28599.0,
+            "clicks": 21.0,
             "conversions": 0.0,
             "revenue": 0.0,
-            "impressions": 0.0
+            "impressions": 994.0
+          },
+          {
+            "date": "2026-06-04",
+            "cost": 32633.0,
+            "clicks": 25.0,
+            "conversions": 3.0,
+            "revenue": 441400.0,
+            "impressions": 1260.0
+          },
+          {
+            "date": "2026-06-05",
+            "cost": 14131.0,
+            "clicks": 12.0,
+            "conversions": 1.0,
+            "revenue": 207000.0,
+            "impressions": 986.0
+          },
+          {
+            "date": "2026-06-06",
+            "cost": 13332.0,
+            "clicks": 12.0,
+            "conversions": 2.0,
+            "revenue": 552000.0,
+            "impressions": 978.0
+          },
+          {
+            "date": "2026-06-07",
+            "cost": 23345.0,
+            "clicks": 16.0,
+            "conversions": 1.0,
+            "revenue": 345000.0,
+            "impressions": 1206.0
+          },
+          {
+            "date": "2026-06-08",
+            "cost": 18805.0,
+            "clicks": 14.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 1389.0
+          },
+          {
+            "date": "2026-06-09",
+            "cost": 14337.0,
+            "clicks": 14.0,
+            "conversions": 4.0,
+            "revenue": 811600.0,
+            "impressions": 1580.0
+          },
+          {
+            "date": "2026-06-10",
+            "cost": 25396.0,
+            "clicks": 17.0,
+            "conversions": 6.0,
+            "revenue": 3693000.0,
+            "impressions": 1320.0
+          },
+          {
+            "date": "2026-06-11",
+            "cost": 22903.0,
+            "clicks": 20.0,
+            "conversions": 2.0,
+            "revenue": 1745000.0,
+            "impressions": 1410.0
+          },
+          {
+            "date": "2026-06-12",
+            "cost": 16537.0,
+            "clicks": 16.0,
+            "conversions": 6.0,
+            "revenue": 1808900.0,
+            "impressions": 1114.0
+          },
+          {
+            "date": "2026-06-13",
+            "cost": 14687.0,
+            "clicks": 12.0,
+            "conversions": 11.0,
+            "revenue": 4730400.0,
+            "impressions": 1074.0
+          },
+          {
+            "date": "2026-06-14",
+            "cost": 21253.0,
+            "clicks": 20.0,
+            "conversions": 3.0,
+            "revenue": 378900.0,
+            "impressions": 1157.0
+          },
+          {
+            "date": "2026-06-15",
+            "cost": 28745.0,
+            "clicks": 26.0,
+            "conversions": 6.0,
+            "revenue": 1767200.0,
+            "impressions": 1665.0
+          },
+          {
+            "date": "2026-06-16",
+            "cost": 19557.0,
+            "clicks": 22.0,
+            "conversions": 2.0,
+            "revenue": 200000.0,
+            "impressions": 1259.0
+          },
+          {
+            "date": "2026-06-17",
+            "cost": 14806.0,
+            "clicks": 13.0,
+            "conversions": 7.0,
+            "revenue": 1394300.0,
+            "impressions": 953.0
+          },
+          {
+            "date": "2026-06-18",
+            "cost": 17120.0,
+            "clicks": 13.0,
+            "conversions": 4.0,
+            "revenue": 3282300.0,
+            "impressions": 940.0
+          },
+          {
+            "date": "2026-06-19",
+            "cost": 14127.0,
+            "clicks": 14.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 881.0
+          },
+          {
+            "date": "2026-06-20",
+            "cost": 8458.0,
+            "clicks": 7.0,
+            "conversions": 0.0,
+            "revenue": 0.0,
+            "impressions": 754.0
+          },
+          {
+            "date": "2026-06-21",
+            "cost": 32544.0,
+            "clicks": 25.0,
+            "conversions": 2.0,
+            "revenue": 781300.0,
+            "impressions": 1115.0
+          },
+          {
+            "date": "2026-06-22",
+            "cost": 29340.0,
+            "clicks": 29.0,
+            "conversions": 19.0,
+            "revenue": 5081900.0,
+            "impressions": 1211.0
+          },
+          {
+            "date": "2026-06-23",
+            "cost": 13026.0,
+            "clicks": 12.0,
+            "conversions": 3.0,
+            "revenue": 294850.0,
+            "impressions": 1123.0
+          },
+          {
+            "date": "2026-06-24",
+            "cost": 26395.0,
+            "clicks": 21.0,
+            "conversions": 5.0,
+            "revenue": 1602250.0,
+            "impressions": 1085.0
+          },
+          {
+            "date": "2026-06-25",
+            "cost": 18419.0,
+            "clicks": 15.0,
+            "conversions": 8.0,
+            "revenue": 558500.0,
+            "impressions": 965.0
           }
         ]
       },
@@ -4614,225 +4833,6 @@
         ]
       },
       {
-        "campaign": "쇼핑검색_더도톰_조구만",
-        "adgroup": "조구만_핸드워시_돌답례품",
-        "adProductName": "조구만_핸드워시_돌답례품",
-        "productName": "조구만 돌답례품 핸드워시 손세정제 돌잔치답례품 (20개이상단가)",
-        "productId": "13337257373",
-        "link": "https://smartstore.naver.com/thedotomshop/products/13337257373",
-        "image": "",
-        "rankTitle": "",
-        "totalCost": 487873.0,
-        "avgDailyCost": 19514.92,
-        "clicks": 409.0,
-        "conversions": 87.0,
-        "revenue": 29663850.0,
-        "cpc": 1192.8435207823961,
-        "roas": 60.80240144463826,
-        "daily": [
-          {
-            "date": "2026-06-01",
-            "cost": 38859.0,
-            "clicks": 28.0,
-            "conversions": 3.0,
-            "revenue": 1787800.0,
-            "impressions": 1363.0
-          },
-          {
-            "date": "2026-06-02",
-            "cost": 25333.0,
-            "clicks": 21.0,
-            "conversions": 2.0,
-            "revenue": 361000.0,
-            "impressions": 1057.0
-          },
-          {
-            "date": "2026-06-03",
-            "cost": 28599.0,
-            "clicks": 21.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 994.0
-          },
-          {
-            "date": "2026-06-04",
-            "cost": 32633.0,
-            "clicks": 25.0,
-            "conversions": 3.0,
-            "revenue": 441400.0,
-            "impressions": 1260.0
-          },
-          {
-            "date": "2026-06-05",
-            "cost": 14131.0,
-            "clicks": 12.0,
-            "conversions": 1.0,
-            "revenue": 207000.0,
-            "impressions": 986.0
-          },
-          {
-            "date": "2026-06-06",
-            "cost": 13332.0,
-            "clicks": 12.0,
-            "conversions": 2.0,
-            "revenue": 552000.0,
-            "impressions": 978.0
-          },
-          {
-            "date": "2026-06-07",
-            "cost": 23345.0,
-            "clicks": 16.0,
-            "conversions": 1.0,
-            "revenue": 345000.0,
-            "impressions": 1206.0
-          },
-          {
-            "date": "2026-06-08",
-            "cost": 18805.0,
-            "clicks": 14.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 1389.0
-          },
-          {
-            "date": "2026-06-09",
-            "cost": 14337.0,
-            "clicks": 14.0,
-            "conversions": 4.0,
-            "revenue": 811600.0,
-            "impressions": 1580.0
-          },
-          {
-            "date": "2026-06-10",
-            "cost": 25396.0,
-            "clicks": 17.0,
-            "conversions": 6.0,
-            "revenue": 3693000.0,
-            "impressions": 1320.0
-          },
-          {
-            "date": "2026-06-11",
-            "cost": 22903.0,
-            "clicks": 20.0,
-            "conversions": 2.0,
-            "revenue": 1745000.0,
-            "impressions": 1410.0
-          },
-          {
-            "date": "2026-06-12",
-            "cost": 16537.0,
-            "clicks": 16.0,
-            "conversions": 6.0,
-            "revenue": 1808900.0,
-            "impressions": 1114.0
-          },
-          {
-            "date": "2026-06-13",
-            "cost": 14687.0,
-            "clicks": 12.0,
-            "conversions": 11.0,
-            "revenue": 4730400.0,
-            "impressions": 1074.0
-          },
-          {
-            "date": "2026-06-14",
-            "cost": 21253.0,
-            "clicks": 20.0,
-            "conversions": 3.0,
-            "revenue": 378900.0,
-            "impressions": 1157.0
-          },
-          {
-            "date": "2026-06-15",
-            "cost": 28745.0,
-            "clicks": 26.0,
-            "conversions": 6.0,
-            "revenue": 1767200.0,
-            "impressions": 1665.0
-          },
-          {
-            "date": "2026-06-16",
-            "cost": 19557.0,
-            "clicks": 22.0,
-            "conversions": 2.0,
-            "revenue": 200000.0,
-            "impressions": 1259.0
-          },
-          {
-            "date": "2026-06-17",
-            "cost": 14806.0,
-            "clicks": 13.0,
-            "conversions": 7.0,
-            "revenue": 1394300.0,
-            "impressions": 953.0
-          },
-          {
-            "date": "2026-06-18",
-            "cost": 17120.0,
-            "clicks": 13.0,
-            "conversions": 4.0,
-            "revenue": 3282300.0,
-            "impressions": 940.0
-          },
-          {
-            "date": "2026-06-19",
-            "cost": 14127.0,
-            "clicks": 14.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 881.0
-          },
-          {
-            "date": "2026-06-20",
-            "cost": 8458.0,
-            "clicks": 7.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 754.0
-          },
-          {
-            "date": "2026-06-21",
-            "cost": 32544.0,
-            "clicks": 25.0,
-            "conversions": 2.0,
-            "revenue": 781300.0,
-            "impressions": 1115.0
-          },
-          {
-            "date": "2026-06-22",
-            "cost": 29340.0,
-            "clicks": 29.0,
-            "conversions": 19.0,
-            "revenue": 5081900.0,
-            "impressions": 1211.0
-          },
-          {
-            "date": "2026-06-23",
-            "cost": 13026.0,
-            "clicks": 12.0,
-            "conversions": 3.0,
-            "revenue": 294850.0,
-            "impressions": 1123.0
-          },
-          {
-            "date": "2026-06-24",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
-          },
-          {
-            "date": "2026-06-25",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
-          }
-        ]
-      },
-      {
         "campaign": "쇼핑검색_더도톰_꿀",
         "adgroup": "꿀_돌잔치답례품1",
         "adProductName": "꿀_돌잔치답례품1",
@@ -4841,13 +4841,13 @@
         "link": "https://smartstore.naver.com/thedotomshop/products/7444568862",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "rankTitle": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
-        "totalCost": 424030.0,
-        "avgDailyCost": 16961.2,
-        "clicks": 240.0,
-        "conversions": 44.0,
-        "revenue": 19718100.0,
-        "cpc": 1766.7916666666667,
-        "roas": 46.50166261821098,
+        "totalCost": 458842.0,
+        "avgDailyCost": 18353.68,
+        "clicks": 261.0,
+        "conversions": 47.0,
+        "revenue": 20058700.0,
+        "cpc": 1758.015325670498,
+        "roas": 43.715919641183675,
         "daily": [
           {
             "date": "2026-06-01",
@@ -5035,19 +5035,19 @@
           },
           {
             "date": "2026-06-24",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 14980.0,
+            "clicks": 9.0,
+            "conversions": 1.0,
+            "revenue": 100.0,
+            "impressions": 471.0
           },
           {
             "date": "2026-06-25",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 19832.0,
+            "clicks": 12.0,
+            "conversions": 2.0,
+            "revenue": 340500.0,
+            "impressions": 378.0
           }
         ]
       },
@@ -5060,13 +5060,13 @@
         "link": "https://smartstore.naver.com/thedotomshop/products/12047676813",
         "image": "https://shopping-phinf.pstatic.net/main_8959218/89592187512.2.jpg",
         "rankTitle": "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
-        "totalCost": 382835.0,
-        "avgDailyCost": 15313.4,
-        "clicks": 272.0,
-        "conversions": 46.0,
-        "revenue": 9836100.0,
-        "cpc": 1407.4816176470588,
-        "roas": 25.692791933861848,
+        "totalCost": 402202.0,
+        "avgDailyCost": 16088.08,
+        "clicks": 285.0,
+        "conversions": 49.0,
+        "revenue": 9946800.0,
+        "cpc": 1411.2350877192982,
+        "roas": 24.730856634228573,
         "daily": [
           {
             "date": "2026-06-01",
@@ -5254,19 +5254,19 @@
           },
           {
             "date": "2026-06-24",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 13796.0,
+            "clicks": 9.0,
+            "conversions": 1.0,
+            "revenue": 3900.0,
+            "impressions": 535.0
           },
           {
             "date": "2026-06-25",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 5571.0,
+            "clicks": 4.0,
+            "conversions": 2.0,
+            "revenue": 106800.0,
+            "impressions": 387.0
           }
         ]
       },
@@ -5279,13 +5279,13 @@
         "link": "https://smartstore.naver.com/thedotomshop/products/4766394357",
         "image": "",
         "rankTitle": "",
-        "totalCost": 133109.0,
-        "avgDailyCost": 5324.36,
-        "clicks": 83.0,
-        "conversions": 19.0,
-        "revenue": 9788900.0,
-        "cpc": 1603.7228915662652,
-        "roas": 73.54048186073068,
+        "totalCost": 157751.0,
+        "avgDailyCost": 6310.04,
+        "clicks": 95.0,
+        "conversions": 21.0,
+        "revenue": 9932900.0,
+        "cpc": 1660.536842105263,
+        "roas": 62.96568642988,
         "daily": [
           {
             "date": "2026-06-01",
@@ -5473,19 +5473,19 @@
           },
           {
             "date": "2026-06-24",
-            "cost": 0.0,
-            "clicks": 0.0,
+            "cost": 14575.0,
+            "clicks": 7.0,
             "conversions": 0.0,
             "revenue": 0.0,
-            "impressions": 0.0
+            "impressions": 189.0
           },
           {
             "date": "2026-06-25",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 10067.0,
+            "clicks": 5.0,
+            "conversions": 2.0,
+            "revenue": 144000.0,
+            "impressions": 186.0
           }
         ]
       },
@@ -5498,13 +5498,13 @@
         "link": "https://smartstore.naver.com/thedotomshop/products/7444568862",
         "image": "https://shopping-phinf.pstatic.net/main_8498906/84989069184.3.jpg",
         "rankTitle": "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
-        "totalCost": 81007.0,
-        "avgDailyCost": 3240.28,
-        "clicks": 57.0,
-        "conversions": 7.0,
-        "revenue": 1427900.0,
-        "cpc": 1421.1754385964912,
-        "roas": 17.626871751823916,
+        "totalCost": 86675.0,
+        "avgDailyCost": 3467.0,
+        "clicks": 61.0,
+        "conversions": 8.0,
+        "revenue": 1441200.0,
+        "cpc": 1420.9016393442623,
+        "roas": 16.627631958465532,
         "daily": [
           {
             "date": "2026-06-01",
@@ -5692,19 +5692,19 @@
           },
           {
             "date": "2026-06-24",
-            "cost": 0.0,
-            "clicks": 0.0,
+            "cost": 1495.0,
+            "clicks": 1.0,
             "conversions": 0.0,
             "revenue": 0.0,
-            "impressions": 0.0
+            "impressions": 87.0
           },
           {
             "date": "2026-06-25",
-            "cost": 0.0,
-            "clicks": 0.0,
-            "conversions": 0.0,
-            "revenue": 0.0,
-            "impressions": 0.0
+            "cost": 4173.0,
+            "clicks": 3.0,
+            "conversions": 1.0,
+            "revenue": 13300.0,
+            "impressions": 151.0
           }
         ]
       },
@@ -5928,7 +5928,7 @@
         ]
       }
     ],
-    "totalCost": 14610842.0,
+    "totalCost": 15373945.0,
     "summary": "2026-06-01 ~ 2026-06-25 쇼핑검색 상품/소재별 일 광고비"
   },
   "dailyProductPerformance": {
@@ -13042,11 +13042,11 @@
   },
   "totalSalesMetrics": {
     "weeks": [
-      "6월1주차(1~7)",
-      "6월2주차(8~14)",
-      "6월3주차(15~21)",
-      "6월4주차(22~28)",
-      "6월5주차(29~30)"
+      "1주차",
+      "2주차",
+      "3주차",
+      "4주차",
+      "5주차"
     ],
     "availableMonths": [
       "2026-01",
@@ -13056,40 +13056,40 @@
       "2026-05",
       "2026-06"
     ],
-    "manualSource": "2026년_매출액&광고비 (1월~).xlsx · 6월 시트 기준",
+    "manualSource": "대시보드 수기 입력값 기준 · 2026-06-26 reset",
     "manualSales": [
       {
         "name": "스토어",
         "weeks": [
-          108583700.0,
+          0.0,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "total": 108583700.0
+        "total": 0.0
       },
       {
         "name": "자사몰",
         "weeks": [
-          91872000.0,
+          0.0,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "total": 91872000.0
+        "total": 0.0
       },
       {
         "name": "무라",
         "weeks": [
-          2648100.0,
+          0.0,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "total": 2648100.0
+        "total": 0.0
       },
       {
         "name": "기프트몰",
@@ -13106,36 +13106,36 @@
     "manualSalesTotal": {
       "name": "수기 매출 합계",
       "weeks": [
-        203103800.0,
+        0.0,
         0.0,
         0.0,
         0.0,
         0.0
       ],
-      "total": 203103800.0
+      "total": 0.0
     },
     "manualAdCosts": [
       {
         "name": "검색광고",
         "weeks": [
-          9385315.0,
+          0.0,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "total": 9385315.0
+        "total": 0.0
       },
       {
         "name": "검색광고2",
         "weeks": [
-          250816.0,
+          0.0,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "total": 250816.0
+        "total": 0.0
       },
       {
         "name": "성과형1",
@@ -13151,25 +13151,36 @@
       {
         "name": "성과형2",
         "weeks": [
-          566870.0,
+          0.0,
           0.0,
           0.0,
           0.0,
           0.0
         ],
-        "total": 566870.0
+        "total": 0.0
+      },
+      {
+        "name": "슬롯비",
+        "weeks": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "total": 0.0
       }
     ],
     "manualAdCostTotal": {
       "name": "수기 광고비 합계",
       "weeks": [
-        10203001.0,
+        0.0,
         0.0,
         0.0,
         0.0,
         0.0
       ],
-      "total": 10203001.0
+      "total": 0.0
     },
     "autoSales": [
       {
