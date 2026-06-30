@@ -1511,19 +1511,19 @@
           return { rank: row.latestRank, status: row.latestStatus, bucket: null, text: null };
         };
 
-        // Group by campaign
-        const campaignMap = {};
+        // Group by adgroup (광고그룹 단위)
+        const adgroupMap = {};
         pcRows.forEach(row => {
-          const cKey = row.campaign || row.adgroup || "기타";
-          if (!campaignMap[cKey]) campaignMap[cKey] = { campaign: row.campaign, adgroup: row.adgroup, pc: [], mobile: [] };
-          campaignMap[cKey].pc.push(row);
+          const cKey = row.adgroup || row.campaign || "기타";
+          if (!adgroupMap[cKey]) adgroupMap[cKey] = { campaign: row.campaign, adgroup: row.adgroup, pc: [], mobile: [] };
+          adgroupMap[cKey].pc.push(row);
         });
         mobileRows.forEach(row => {
-          const cKey = row.campaign || row.adgroup || "기타";
-          if (!campaignMap[cKey]) campaignMap[cKey] = { campaign: row.campaign, adgroup: row.adgroup, pc: [], mobile: [] };
-          campaignMap[cKey].mobile.push(row);
+          const cKey = row.adgroup || row.campaign || "기타";
+          if (!adgroupMap[cKey]) adgroupMap[cKey] = { campaign: row.campaign, adgroup: row.adgroup, pc: [], mobile: [] };
+          adgroupMap[cKey].mobile.push(row);
         });
-        const cards = Object.values(campaignMap).map(group => {
+        const cards = Object.values(adgroupMap).map(group => {
           const pcChips = group.pc.map(row => {
             const cell = getCellRank(row);
             return `<div class="keyword-chip"><span class="keyword-chip-name">${html(row.keyword || "")}</span>${rankBadge(cell)}${deltaBadge(cell.delta)}</div>`;
@@ -1532,7 +1532,7 @@
             const cell = getCellRank(row);
             return `<div class="keyword-chip"><span class="keyword-chip-name">${html(row.keyword || "")}</span>${rankBadge(cell)}${deltaBadge(cell.delta)}</div>`;
           }).join("");
-          return `<div class="powerlink-rank-card"><div class="powerlink-rank-head"><div><h3 class="powerlink-rank-title">${html(group.campaign || group.adgroup || "")}</h3><div class="powerlink-rank-sub">${html(group.adgroup || "")}</div></div></div>${pcChips ? `<div class="device-block"><div class="device-title">PC</div><div class="keyword-chips">${pcChips}</div></div>` : ""}${mChips ? `<div class="device-block mobile"><div class="device-title mobile">모바일</div><div class="keyword-chips">${mChips}</div></div>` : ""}</div>`;
+          return `<div class="powerlink-rank-card"><div class="powerlink-rank-head"><div><h3 class="powerlink-rank-title">${html(group.adgroup || group.campaign || "")}</h3><div class="powerlink-rank-sub">${html(group.campaign || "")}</div></div></div>${pcChips ? `<div class="device-block"><div class="device-title">PC</div><div class="keyword-chips">${pcChips}</div></div>` : ""}${mChips ? `<div class="device-block mobile"><div class="device-title mobile">모바일</div><div class="keyword-chips">${mChips}</div></div>` : ""}</div>`;
         }).join("");
         els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">파워링크 순위</h3><div style="font-size:12px;color:var(--muted);margin-top:2px">${colIndex >= 0 ? (state.rankDate + " " + (slotLabels[state.rankSlot] || state.rankSlot)) : "최신 기준"}</div></div></div><div class="powerlink-rank-grid">${cards}</div></div>`;
       }
@@ -1576,4 +1576,4 @@
           options: {
             responsive: true, maintainAspectRatio: false,
             plugins: {
-              legend: { position: "bottom", labels: { font: { size: 12, fami
+              legend: { position: "bottom", labels: { font: { 
