@@ -1576,4 +1576,106 @@
           options: {
             responsive: true, maintainAspectRatio: false,
             plugins: {
-              legend: { position: "bottom", labels: { font: { 
+              legend: { position: "bottom", labels: { font: { size: 12, family: "'Segoe UI','Malgun Gothic',Arial,sans-serif" }, padding: 16, boxWidth: 12, color: "#64748b" } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${won.format(ctx.raw)}` } }
+            },
+            cutout: "60%"
+          }
+        });
+      }
+      const weeklyCanvas = document.getElementById("weeklyTrendChart");
+      if (weeklyCanvas) {
+        if (window._charts.weekly) { window._charts.weekly.destroy(); window._charts.weekly = null; }
+        const metrics = state.data.totalSalesMetrics || {};
+        const weeks = metrics.weeks || ["1주","2주","3주","4주","5주"];
+        const salesTotal = metrics.manualSalesTotal || {};
+        const adTotal = metrics.manualAdCostTotal || {};
+        const salesData = (salesTotal.weeks || [0,0,0,0,0]).map(v => Number(v)||0);
+        const adData = (adTotal.weeks || [0,0,0,0,0]).map(v => Number(v)||0);
+        const labels = weeks.map((w, i) => w || `${i+1}주차`);
+        window._charts.weekly = new Chart(weeklyCanvas, {
+          type: "bar",
+          data: {
+            labels,
+            datasets: [
+              { label: "수기매출", data: salesData, backgroundColor: "rgba(16,185,129,0.15)", borderColor: "#10b981", borderWidth: 2, borderRadius: 6, order: 2 },
+              { label: "수기광고비", data: adData, backgroundColor: "rgba(72,101,244,0.15)", borderColor: "#4865f4", borderWidth: 2, borderRadius: 6, order: 2 }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { position: "bottom", labels: { font: { size: 12, family: "'Segoe UI','Malgun Gothic',Arial,sans-serif" }, padding: 16, boxWidth: 12, color: "#64748b" } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${won.format(ctx.raw)}` } }
+            },
+            scales: {
+              x: { grid: { display: false }, ticks: { color: "#64748b", font: { size: 12 } } },
+              y: { grid: { color: "#f1f5f9" }, ticks: { color: "#64748b", font: { size: 11 }, callback: v => won.format(v) } }
+            }
+          }
+        });
+      }
+    }
+    // Navigation
+    document.querySelectorAll(".nav button[data-page]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.page = btn.dataset.page;
+        fillCampaigns(); fillAdgroups(); render();
+        if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
+      });
+    });
+    document.querySelectorAll(".nav button[data-rank-root]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (state.page !== "rankShopping" && state.page !== "rankPowerlink") state.page = "rankShopping";
+        render();
+        if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
+      });
+    });
+    els.monthFilter.addEventListener("change", () => { state.month = els.monthFilter.value; loadData(); });
+    els.typeFilter?.addEventListener("change", () => { fillCampaigns(); fillAdgroups(); render(); });
+    els.campaignFilter?.addEventListener("change", () => { fillAdgroups(); render(); });
+    els.adgroupFilter?.addEventListener("change", render);
+    els.decisionFilter?.addEventListener("change", render);
+    els.searchInput?.addEventListener("input", render);
+    els.badOnlyBtn?.addEventListener("click", () => { state.badOnly = !state.badOnly; render(); });
+    document.querySelectorAll("[data-detail-mode]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.detailMode = btn.dataset.detailMode;
+        document.querySelectorAll("[data-detail-mode]").forEach(b => b.classList.toggle("active", b === btn));
+        renderKeywords();
+      });
+    });
+    document.getElementById("refreshBtn")?.addEventListener("click", loadData);
+    document.getElementById("rankBtn")?.addEventListener("click", async () => {
+      setStatus("순위 갱신 중...");
+      try { const r = await fetch("/api/refresh-rank", {method:"POST"}); if(r.ok){setStatus("순위 갱신 완료");loadData();}else setStatus("순위 갱신 실패",true); } catch(e){setStatus("순위 갱신 실패",true);}
+    });
+    document.getElementById("saveMemoBtn")?.addEventListener("click", async () => {
+      setStatus("메모 저장 중...");
+      try { const r = await fetch("/api/save-memo",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({planMemo:els.planMemo.value,reportMemo:els.reportMemo.value})}); setStatus(r.ok?"메모 저장 완료":"메모 저장 실패",!r.ok); } catch(e){setStatus("메모 저장 실패",true);}
+    });
+    document.getElementById("exportBtn")?.addEventListener("click", () => {
+      if(!state.data) return;
+      const d = state.data;
+      const txt = [`# ${d.month} 네이버 광고 보고서`,`광고비: ${money(d.summary.cost)}`,`매출: ${money(d.summary.revenue)}`,`ROAS: ${ratio(d.summary.roas)}`,``,els.planMemo.value,``,els.reportMemo.value].join("\n");
+      const a = Object.assign(document.createElement("a"),{href:URL.createObjectURL(new Blob([txt],{type:"text/plain"})),download:`광고보고서_${d.month}.txt`});
+      a.click();
+    });
+    document.getElementById("mobileMenuToggle")?.addEventListener("click", () => document.body.classList.toggle("sidebar-open"));
+    document.getElementById("mobileBackdrop")?.addEventListener("click", () => document.body.classList.remove("sidebar-open"));
+    document.addEventListener("click", e => {
+      const d = e.target.closest("[data-daily-product-date]");
+      if (d) { state.dailyProductDate = d.dataset.dailyProductDate; renderDailyProductPerformance(); }
+      const rd = e.target.closest("[data-rank-date]");
+      if (rd) { state.rankDate = rd.dataset.rankDate; document.querySelectorAll("[data-rank-date]").forEach(b=>b.classList.toggle("active",b===rd)); renderRankTraffic(); }
+      const rs = e.target.closest("[data-rank-slot]");
+      if (rs) { state.rankSlot = rs.dataset.rankSlot; document.querySelectorAll("[data-rank-slot]").forEach(b=>b.classList.toggle("active",b===rs)); renderRankTraffic(); }
+    });
+    document.addEventListener("change", e => {
+      const m = e.target.closest("[data-daily-product-month]");
+      if (m) { state.dailyProductMonth = m.value; renderDailyProductPerformance(); }
+    });
+    loadData().catch(err => { if(els.meta) els.meta.textContent = "데이터 로드 실패: " + err.message; });
+  </script>
+</body>
+</html>
