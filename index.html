@@ -1489,6 +1489,28 @@
           els.rankBody.innerHTML = `<div class="empty" style="padding:24px">파워링크 순위 데이터가 없습니다.</div>`;
           return;
         }
+
+        // Find column index for selected date+slot
+        // chronologicalColumns = oldest→newest; try explicit key first, fallback to slotDetails sorted asc
+        let colIndex = -1;
+        const chronoCols = rank.chronologicalColumns;
+        if (chronoCols && chronoCols.length) {
+          colIndex = chronoCols.findIndex(c => c.date === state.rankDate && c.slot === state.rankSlot);
+        } else {
+          const slotOrder = rank.slots || [];
+          const sortedCols = [...(rank.slotDetails || [])].sort((a, b) => {
+            if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+            return slotOrder.indexOf(a.slot) - slotOrder.indexOf(b.slot);
+          });
+          colIndex = sortedCols.findIndex(sd => sd.date === state.rankDate && sd.slot === state.rankSlot);
+        }
+
+        // Helper: get rank cell for a row at the selected date+slot
+        const getCellRank = (row) => {
+          if (colIndex >= 0 && row.cells && row.cells[colIndex] != null) return row.cells[colIndex];
+          return { rank: row.latestRank, status: row.latestStatus, bucket: null, text: null };
+        };
+
         // Group by campaign
         const campaignMap = {};
         pcRows.forEach(row => {
@@ -1502,15 +1524,17 @@
           campaignMap[cKey].mobile.push(row);
         });
         const cards = Object.values(campaignMap).map(group => {
-          const pcChips = group.pc.map(row =>
-            `<div class="keyword-chip"><span class="keyword-chip-name">${html(row.keyword || "")}</span>${rankBadge({ rank: row.latestRank, status: row.latestStatus })}${deltaBadge(row.delta)}</div>`
-          ).join("");
-          const mChips = group.mobile.map(row =>
-            `<div class="keyword-chip"><span class="keyword-chip-name">${html(row.keyword || "")}</span>${rankBadge({ rank: row.latestRank, status: row.latestStatus })}${deltaBadge(row.delta)}</div>`
-          ).join("");
+          const pcChips = group.pc.map(row => {
+            const cell = getCellRank(row);
+            return `<div class="keyword-chip"><span class="keyword-chip-name">${html(row.keyword || "")}</span>${rankBadge(cell)}${deltaBadge(cell.delta)}</div>`;
+          }).join("");
+          const mChips = group.mobile.map(row => {
+            const cell = getCellRank(row);
+            return `<div class="keyword-chip"><span class="keyword-chip-name">${html(row.keyword || "")}</span>${rankBadge(cell)}${deltaBadge(cell.delta)}</div>`;
+          }).join("");
           return `<div class="powerlink-rank-card"><div class="powerlink-rank-head"><div><h3 class="powerlink-rank-title">${html(group.campaign || group.adgroup || "")}</h3><div class="powerlink-rank-sub">${html(group.adgroup || "")}</div></div></div>${pcChips ? `<div class="device-block"><div class="device-title">PC</div><div class="keyword-chips">${pcChips}</div></div>` : ""}${mChips ? `<div class="device-block mobile"><div class="device-title mobile">모바일</div><div class="keyword-chips">${mChips}</div></div>` : ""}</div>`;
         }).join("");
-        els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">파워링크 순위</h3></div></div><div class="powerlink-rank-grid">${cards}</div></div>`;
+        els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">파워링크 순위</h3><div style="font-size:12px;color:var(--muted);margin-top:2px">${colIndex >= 0 ? (state.rankDate + " " + (slotLabels[state.rankSlot] || state.rankSlot)) : "최신 기준"}</div></div></div><div class="powerlink-rank-grid">${cards}</div></div>`;
       }
     }
     function renderInspection() {
