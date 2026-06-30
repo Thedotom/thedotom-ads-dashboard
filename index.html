@@ -4,20 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>네이버 광고 월간 대시보드</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
     :root {
-      --bg: #f4f6fb;
+      --sidebar-bg: #0f172a;
+      --sidebar-hover: rgba(255,255,255,0.06);
+      --sidebar-active: #4865f4;
+      --sidebar-text: rgba(255,255,255,0.6);
+      --sidebar-text-active: #fff;
+      --bg: #f1f5f9;
       --panel: #ffffff;
       --line: #e2e8f0;
-      --text: #1a202c;
-      --muted: #718096;
-      --green: #0f9f6e;
-      --blue: #4361ee;
-      --red: #c53030;
-      --amber: #d97706;
-      --ink: #2d3748;
-      --soft: #f7f8fc;
-      --shadow: 0 1px 4px rgba(0,0,0,.06);
+      --text: #1e293b;
+      --muted: #64748b;
+      --green: #10b981;
+      --blue: #4865f4;
+      --red: #ef4444;
+      --amber: #f59e0b;
+      --purple: #8b5cf6;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px rgba(0,0,0,0.04);
     }
     * { box-sizing: border-box; }
     body {
@@ -29,20 +36,19 @@
     }
     .app {
       display: grid;
-      grid-template-columns: 218px minmax(0, 1fr);
+      grid-template-columns: 220px minmax(0, 1fr);
       min-height: 100vh;
     }
     aside {
-      background: #fff;
-      border-right: 1px solid var(--line);
-      padding: 16px 10px;
+      background: var(--sidebar-bg);
+      padding: 20px 10px;
       display: flex;
       flex-direction: column;
       position: sticky;
       top: 0;
       height: 100vh;
       align-self: start;
-      box-shadow: 2px 0 8px rgba(0,0,0,.04);
+      overflow-y: auto;
     }
     main { padding: 24px 28px 32px; min-width: 0; }
     .brand {
@@ -51,9 +57,10 @@
       gap: 10px;
       font-weight: 800;
       font-size: 16px;
-      padding: 4px 8px 16px;
-      margin-bottom: 12px;
-      border-bottom: 1px solid #f0f2f7;
+      color: #fff;
+      padding: 4px 8px 18px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .mark {
       width: 30px;
@@ -64,16 +71,31 @@
       background: var(--green);
       color: white;
       font-weight: 900;
+      flex: 0 0 auto;
     }
-    label {
+    aside label {
       display: block;
-      margin: 14px 8px 7px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
+      margin: 14px 8px 6px;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    aside select {
+      width: calc(100% - 8px);
+      margin: 0 4px;
+      height: 36px;
+      padding: 0 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.8);
+      font: inherit;
+      font-size: 13px;
     }
     select, input, textarea, button {
-      width: 100%;
+      box-sizing: border-box;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #fff;
@@ -81,67 +103,52 @@
       font: inherit;
     }
     select, input, button { height: 38px; padding: 0 10px; }
-    aside select, aside input { margin: 0 4px; width: calc(100% - 8px); }
-    textarea { min-height: 116px; padding: 10px; resize: vertical; line-height: 1.45; }
-    button { cursor: pointer; font-weight: 800; white-space: nowrap; }
+    textarea { min-height: 116px; padding: 10px; resize: vertical; line-height: 1.45; width: 100%; }
+    button { cursor: pointer; font-weight: 700; white-space: nowrap; }
     button:focus { outline: none; }
-    button:focus-visible { outline: 2px solid rgba(67,97,238,.35); outline-offset: 2px; }
+    button:focus-visible { outline: 2px solid rgba(72,101,244,.35); outline-offset: 2px; }
     .primary { background: var(--green); border-color: var(--green); color: #fff; }
-    .ghost { background: #fff; }
+    .ghost { background: #fff; border-color: var(--line); }
     .header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 16px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
-    h1 { margin: 0; font-size: 22px; line-height: 1.25; letter-spacing: 0; }
+    h1 { margin: 0; font-size: 22px; font-weight: 900; line-height: 1.25; color: var(--text); }
+    h2 { margin: 0; font-size: 15px; font-weight: 800; color: var(--text); }
+    h3 { margin: 0; }
     .meta { color: var(--muted); font-size: 13px; margin-top: 6px; }
-    .profile {
-      margin-top: 6px;
-      color: #40505a;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .top-status {
-      margin-top: 6px;
-      color: var(--green);
-      font-size: 12px;
-      font-weight: 800;
-      min-height: 18px;
-    }
-    .actions { display: flex; gap: 8px; min-width: 300px; }
-    .actions button { width: auto; min-width: 112px; box-shadow: var(--shadow); }
+    .profile { margin-top: 6px; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .top-status { margin-top: 6px; color: var(--green); font-size: 12px; font-weight: 700; min-height: 18px; }
+    .actions { display: flex; gap: 8px; }
+    .actions button { width: auto; min-width: 100px; box-shadow: var(--shadow); height: 36px; border-radius: 8px; font-size: 13px; }
     .actions { display: none; }
-    .nav {
-      display: grid;
-      gap: 3px;
-    }
+    .nav { display: grid; gap: 2px; margin-top: 4px; }
     .nav button {
       text-align: left;
       background: transparent;
       border: 0;
-      color: #4a5568;
+      color: var(--sidebar-text);
       font-size: 13px;
+      font-weight: 600;
       height: 38px;
       padding: 0 12px;
-      margin: 0 0 2px;
+      border-radius: 8px;
+      transition: background .12s, color .12s;
+      width: 100%;
     }
-    .nav button:hover { background: #f0f4ff; color: var(--blue); }
-    .nav button.active {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #fff;
-      box-shadow: 0 6px 16px rgba(67,97,238,.18);
+    .nav button:hover { background: var(--sidebar-hover); color: rgba(255,255,255,0.9); }
+    .nav button.active { background: var(--sidebar-active); color: var(--sidebar-text-active); }
+    .nav-sub {
+      display: grid;
+      gap: 2px;
+      margin: 0 0 4px 18px;
+      padding-left: 10px;
+      border-left: 1px solid rgba(255,255,255,0.1);
     }
-    .sidebar-search {
-      margin-top: auto;
-      position: sticky;
-      bottom: 18px;
-      background: #fff;
-      padding: 12px 4px 0;
-      border-top: 1px solid #f0f2f7;
-    }
+    .nav-sub button { height: 34px; font-size: 12px; }
     .sidebar-search { display: none; }
     .hidden-controls { display: none; }
     .page-section.hidden { display: none; }
@@ -151,40 +158,55 @@
       gap: 12px;
       margin-bottom: 16px;
     }
-    .metric, section {
+    .metric {
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 12px;
       box-shadow: var(--shadow);
+      padding: 16px 18px;
+      min-height: 96px;
+      position: relative;
+      overflow: hidden;
     }
-    .metric { padding: 14px 16px; min-height: 96px; }
-    .metric .label { color: var(--muted); font-size: 12px; font-weight: 800; }
-    .metric .value { margin-top: 8px; font-size: 22px; font-weight: 900; white-space: nowrap; }
+    .metric:nth-child(1) { border-left: 4px solid var(--blue); }
+    .metric:nth-child(2) { border-left: 4px solid var(--green); }
+    .metric:nth-child(3) { border-left: 4px solid var(--amber); }
+    .metric:nth-child(4) { border-left: 4px solid var(--purple); }
+    .metric:nth-child(5) { border-left: 4px solid #94a3b8; }
+    .metric .label { color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    .metric .value { margin-top: 8px; font-size: 22px; font-weight: 900; white-space: nowrap; color: var(--text); }
     .metric .sub { margin-top: 5px; color: var(--muted); font-size: 12px; }
     .layout {
       display: grid;
-      grid-template-columns: minmax(420px, 0.95fr) minmax(520px, 1.05fr);
+      grid-template-columns: minmax(380px, 0.95fr) minmax(480px, 1.05fr);
       gap: 16px;
       margin-bottom: 16px;
     }
-    section { min-width: 0; overflow: visible; }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+      overflow: hidden;
+    }
     .section-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 16px;
+      padding: 14px 18px;
       border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
     }
-    h2 { margin: 0; font-size: 15px; color: #1a202c; }
-    .count { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .count { color: var(--muted); font-size: 12px; font-weight: 700; }
     .bars { display: grid; gap: 10px; padding: 14px; }
     .type-card {
       display: grid;
       gap: 10px;
       padding: 13px 14px;
-      border: 1px solid #edf2f8;
+      border: 1px solid var(--line);
       border-radius: 10px;
-      background: #fbfcff;
+      background: #f8fafc;
     }
     .type-card-head {
       display: flex;
@@ -196,141 +218,92 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-weight: 900;
-      color: #22324b;
+      font-weight: 800;
+      color: var(--text);
     }
-    .type-dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 4px;
-      background: var(--blue);
-    }
+    .type-dot { width: 11px; height: 11px; border-radius: 4px; background: var(--blue); }
     .type-dot.power { background: var(--amber); }
     .type-dot.shopping { background: var(--green); }
     .type-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      color: #7f8ca2;
+      color: var(--muted);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
     }
-    .type-stats strong {
-      display: block;
-      margin-top: 3px;
-      color: #172033;
-      font-size: 13px;
-    }
-    .bar {
-      display: grid;
-      grid-template-columns: 92px 1fr 82px;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-    }
-    .track { height: 10px; border-radius: 999px; background: #edf1f3; overflow: hidden; }
-    .fill { height: 100%; background: var(--blue); }
+    .type-stats strong { display: block; margin-top: 3px; color: var(--text); font-size: 13px; }
+    .bar { display: grid; grid-template-columns: 92px 1fr 82px; align-items: center; gap: 10px; font-size: 13px; }
+    .track { height: 8px; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
+    .fill { height: 100%; background: var(--blue); border-radius: 999px; }
     .fill.power { background: var(--amber); }
     .fill.shopping { background: var(--green); }
-    .table-wrap {
-      overflow: visible;
-      max-height: none;
-    }
+    .table-wrap { overflow: visible; max-height: none; }
     table { width: 100%; min-width: 900px; border-collapse: collapse; font-size: 13px; }
-    table.compact { min-width: 720px; }
-    table.compact th, table.compact td { padding: 8px 10px; }
-    th, td {
-      padding: 9px 10px;
-      border-bottom: 1px solid #eef2f7;
-      text-align: left;
-      white-space: nowrap;
-      vertical-align: top;
-    }
-    th {
-      position: sticky;
-      top: 0;
-      background: #f7f8fc;
-      z-index: 1;
-      color: #40505a;
-      font-size: 12px;
-      font-weight: 900;
-    }
-    td.wrap { white-space: normal; min-width: 260px; line-height: 1.4; }
+    table.compact { min-width: 600px; }
+    table.compact th, table.compact td { padding: 8px 12px; }
+    th, td { padding: 9px 12px; border-bottom: 1px solid #f1f5f9; text-align: left; white-space: nowrap; vertical-align: top; }
+    th { position: sticky; top: 0; background: #f8fafc; z-index: 1; color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    td.wrap { white-space: normal; min-width: 240px; line-height: 1.4; }
+    tbody tr:hover { background: #f8fafc; }
+    tbody tr:nth-child(even) { background: #fafcff; }
+    tbody tr:nth-child(even):hover { background: #f1f5f9; }
     .pill {
       display: inline-flex;
       align-items: center;
-      height: 24px;
+      height: 22px;
       border-radius: 999px;
-      padding: 0 9px;
-      font-size: 12px;
-      font-weight: 900;
+      padding: 0 10px;
+      font-size: 11px;
+      font-weight: 700;
     }
-    .pill.good { background: #e8f6ef; color: #0b7a50; }
-    .pill.warn { background: #fff4db; color: #8a5a14; }
-    .pill.bad { background: #fdecea; color: #a12f24; }
+    .pill.good { background: #d1fae5; color: #065f46; }
+    .pill.warn { background: #fef3c7; color: #92400e; }
+    .pill.bad { background: #fee2e2; color: #991b1b; }
+    .pill.neutral { background: #e2e8f0; color: #475569; }
+    .pill.active { background: #ede9fe; color: #6d28d9; }
+    .pill.done { background: #d1fae5; color: #065f46; }
     .detail-toolbar {
       display: flex;
       align-items: center;
       gap: 8px;
       padding: 10px 14px;
       border-bottom: 1px solid var(--line);
-      background: #fbfcfd;
+      background: #f8fafc;
+      flex-wrap: wrap;
     }
-    .detail-toolbar button {
-      width: auto;
-      height: 30px;
-      padding: 0 10px;
-      font-size: 12px;
-    }
-    .detail-toolbar button.active {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #fff;
-    }
+    .detail-toolbar button { width: auto; height: 30px; padding: 0 12px; font-size: 12px; border-radius: 999px; border-color: var(--line); }
+    .detail-toolbar button.active { background: var(--blue); border-color: var(--blue); color: #fff; }
     .memo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
     .memo-body { padding: 14px; }
+    .memo-body label { display: block; margin: 10px 0 5px; color: var(--muted); font-size: 12px; font-weight: 700; }
     .rank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 16px; }
-    .rank-card { border: 1px solid #e8ecf4; border-radius: 12px; background: #fff; overflow: hidden; box-shadow: var(--shadow); }
-    .rank-card-head { display: flex; gap: 14px; align-items: center; padding: 14px 16px; background: #fafbff; border-bottom: 1px solid #f0f2f7; }
-    .rank-thumb, .reward-thumb { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; border: 1px solid var(--line); background: #f1f4f6; flex: 0 0 auto; }
-    .reward-product { display: flex; align-items: center; gap: 10px; min-width: 320px; }
-    .reward-product-title { font-weight: 800; white-space: normal; line-height: 1.35; }
-    .rank-card-title { font-size: 13px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .rank-card-sub { margin-top: 4px; color: var(--muted); font-size: 12px; }
-    .rank-list { padding: 10px 16px; }
-    .rank-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f7f8fc; font-size: 13px; }
+    .rank-card { border: 1px solid var(--line); border-radius: 12px; background: #fff; overflow: hidden; box-shadow: var(--shadow); }
+    .rank-card-head { display: flex; gap: 14px; align-items: center; padding: 14px 16px; background: #f8fafc; border-bottom: 1px solid var(--line); }
+    .rank-thumb, .reward-thumb { width: 56px; height: 56px; border-radius: 8px; object-fit: cover; border: 1px solid var(--line); background: #f1f5f9; flex: 0 0 auto; }
+    .reward-product { display: flex; align-items: center; gap: 10px; min-width: 300px; }
+    .reward-product-title { font-weight: 700; white-space: normal; line-height: 1.35; }
+    .rank-card-title { font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .rank-card-sub { margin-top: 4px; color: var(--muted); font-size: 11px; }
+    .rank-list { padding: 10px 16px 14px; background: #fff; }
+    .rank-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
     .rank-row:last-child { border-bottom: 0; }
-    .rank-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 52px; height: 24px; border-radius: 999px; padding: 0 8px; font-size: 12px; font-weight: 900; }
-    .rank-badge.one { background: #fff3cd; color: #856404; }
-    .rank-badge.top3 { background: #d1ecf1; color: #0c5460; }
-    .rank-badge.top5 { background: #d4edda; color: #155724; }
-    .rank-badge.top10 { background: #e2e8f0; color: #4a5568; }
-    .rank-badge.out { background: #fde8e8; color: #c53030; }
-    .rank-badge.none { background: #f7f8fc; color: #8a98a8; }
-    .rank-tabs { display: flex; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: #fbfcfd; flex-wrap: wrap; }
-    .rank-tabs button { width: auto; height: 32px; font-size: 12px; border-radius: 20px; }
+    .rank-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 48px; height: 22px; border-radius: 999px; padding: 0 8px; font-size: 11px; font-weight: 700; }
+    .rank-badge.one { background: #fef3c7; color: #92400e; }
+    .rank-badge.top3 { background: #cffafe; color: #155e75; }
+    .rank-badge.top5 { background: #d1fae5; color: #065f46; }
+    .rank-badge.top10 { background: #e2e8f0; color: #475569; }
+    .rank-badge.out { background: #fee2e2; color: #991b1b; }
+    .rank-badge.none { background: #f1f5f9; color: #94a3b8; }
+    .rank-tabs { display: flex; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: #f8fafc; flex-wrap: wrap; }
+    .rank-tabs button { width: auto; height: 30px; font-size: 12px; border-radius: 999px; border-color: var(--line); padding: 0 12px; }
     .rank-tabs button.active { background: var(--blue); border-color: var(--blue); color: #fff; }
-    .mobile-menu-toggle,
-    .mobile-backdrop {
-      display: none;
-    }
+    .mobile-menu-toggle, .mobile-backdrop { display: none; }
     .note-row { display: grid; grid-template-columns: 108px minmax(180px, 1fr) 70px; gap: 8px; align-items: start; }
     .note-row select, .note-row button { height: 32px; }
     .note-row input { height: 32px; }
-    .manual-revenue-input {
-      height: 30px;
-      min-width: 96px;
-      padding: 0 8px;
-      border-radius: 7px;
-      background: #fbfcff;
-      font-size: 12px;
-      text-align: right;
-    }
-    .manual-revenue-input.name {
-      min-width: 118px;
-      text-align: left;
-      font-weight: 800;
-    }
+    .manual-revenue-input { height: 30px; min-width: 96px; padding: 0 8px; border-radius: 7px; background: #f8fafc; font-size: 12px; text-align: right; }
+    .manual-revenue-input.name { min-width: 118px; text-align: left; font-weight: 700; }
     .manual-revenue-editor {
       display: grid;
       grid-template-columns: minmax(120px, 1fr) minmax(110px, .8fr) minmax(100px, .7fr) minmax(250px, 1.6fr) minmax(120px, .9fr) auto;
@@ -338,764 +311,94 @@
       align-items: end;
       padding: 12px 16px;
       border-top: 1px solid var(--line);
-      background: #fbfcff;
+      background: #f8fafc;
     }
-    .manual-revenue-editor label {
-      display: grid;
-      gap: 5px;
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 800;
-    }
-    .manual-revenue-editor select,
-    .manual-revenue-editor input {
-      height: 34px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      background: #fff;
-      padding: 0 10px;
-      font-size: 13px;
-      color: var(--text);
-    }
-    .manual-revenue-editor input {
-      text-align: right;
-      font-weight: 900;
-    }
-    .manual-date-range {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 6px;
-      align-items: center;
-    }
-    .manual-date-range span {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 900;
-    }
-    .manual-date-range input {
-      text-align: left;
-      font-weight: 700;
-      min-width: 0;
-    }
+    .manual-revenue-editor label { display: grid; gap: 5px; font-size: 11px; color: var(--muted); font-weight: 700; }
+    .manual-revenue-editor select, .manual-revenue-editor input { height: 34px; border-radius: 8px; border: 1px solid var(--line); background: #fff; padding: 0 10px; font-size: 13px; color: var(--text); }
+    .manual-revenue-editor input { text-align: right; font-weight: 700; }
+    .manual-date-range { display: grid; grid-template-columns: 1fr auto 1fr; gap: 6px; align-items: center; }
+    .manual-date-range span { color: var(--muted); font-size: 12px; font-weight: 700; }
+    .manual-date-range input { text-align: left; font-weight: 600; min-width: 0; }
     .empty { padding: 24px; color: var(--muted); text-align: center; }
-
-    /* Soft dashboard theme */
-    :root {
-      --bg: #f3f6fc;
-      --panel: #ffffff;
-      --line: #e6ebf5;
-      --text: #172033;
-      --muted: #8491a8;
-      --green: #15a36d;
-      --blue: #4865f4;
-      --blue-soft: #eef2ff;
-      --red: #e14b59;
-      --amber: #ffad4d;
-      --mint: #d9f5e4;
-      --sky: #d7f4fb;
-      --rose: #ffe7e8;
-      --cream: #fff1bf;
-      --soft: #f8faff;
-      --shadow: 0 8px 24px rgba(26, 39, 78, .07);
-    }
-    body {
-      background:
-        radial-gradient(circle at 22% 8%, rgba(255, 255, 255, .95), transparent 28%),
-        linear-gradient(180deg, #f6f8ff 0%, #f2f5fb 100%);
-    }
-    .app { grid-template-columns: 206px minmax(0, 1fr); }
-    aside {
-      padding: 18px 10px;
-      border-right-color: #e7edf8;
-      box-shadow: 6px 0 24px rgba(34, 47, 88, .05);
-    }
-    main { padding: 22px 28px 38px; }
-    .brand {
-      display: block;
-      padding: 0 4px 18px;
-      border-bottom-color: #edf1f8;
-      line-height: 1.25;
-    }
-    .brand .mark {
-      display: none;
-    }
-    .brand span:last-child {
-      display: block;
-      font-size: 17px;
-      letter-spacing: 0;
-    }
-    .brand::after {
-      content: "Naver Ads Dashboard";
-      display: block;
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 600;
-    }
-    label {
-      margin: 15px 8px 8px;
-      color: #8a98ad;
-      font-size: 11px;
-      letter-spacing: 0;
-    }
-    select, input, textarea {
-      border-color: #dfe7f3;
-      background: #fff;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
-    }
-    select:focus, input:focus, textarea:focus {
-      outline: 2px solid rgba(72,101,244,.18);
-      border-color: rgba(72,101,244,.42);
-    }
-    .nav { gap: 7px; margin-top: 8px; }
-    .nav button {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      height: 39px;
-      padding: 0 11px 0 12px;
-      border-radius: 8px;
-      color: #5f6d84;
-      font-size: 13px;
-      font-weight: 800;
-      transition: background .15s ease, color .15s ease, transform .15s ease, box-shadow .15s ease;
-    }
-    .nav button::before {
-      content: "";
-      width: 16px;
-      height: 16px;
-      border-radius: 5px;
-      background: linear-gradient(135deg, #8ca0ff, #52d6c6);
-      box-shadow: inset 0 -2px 0 rgba(0,0,0,.08);
-      flex: 0 0 auto;
-    }
-    .nav button[data-page="powerlink"]::before { background: linear-gradient(135deg, #ff78a7, #ffb15c); }
-    .nav button[data-page="shopping"]::before { background: linear-gradient(135deg, #82d7ff, #4865f4); }
-    .nav button[data-page="brand"]::before { background: linear-gradient(135deg, #cba6ff, #ff8bc1); }
-    .nav button[data-page="rankShopping"]::before,
-    .nav button[data-page="rankPowerlink"]::before,
-    .nav button[data-page="dailyProduct"]::before,
-    .nav button[data-page="totalSales"]::before,
-    .nav button[data-rank-root]::before { background: linear-gradient(135deg, #ffb44d, #ffd86e); }
-    .nav-sub {
-      display: grid;
-      gap: 6px;
-      margin: -2px 0 8px 22px;
-      padding-left: 10px;
-      border-left: 1px solid #edf1f8;
-    }
-    .nav-sub button {
-      height: 34px;
-      padding-left: 10px;
-      font-size: 12px;
-      background: #fbfcff;
-      border: 1px solid #e6ebf5;
-      color: #5f6d84;
-    }
-    .nav-sub button::before {
-      width: 10px;
-      height: 10px;
-      border-radius: 4px;
-    }
-    .nav button:hover {
-      background: #f3f6ff;
-      color: var(--blue);
-      transform: translateX(1px);
-    }
-    .nav button.active {
-      background: var(--blue);
-      color: #fff;
-      box-shadow: 0 10px 18px rgba(72,101,244,.25);
-    }
-    .nav button.active::before { background: rgba(255,255,255,.36); box-shadow: none; }
-    .sidebar-search {
-      bottom: 12px;
-      padding: 14px 0 0;
-      border-top-color: #edf1f8;
-    }
-    .header {
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    h1 {
-      font-size: 24px;
-      font-weight: 900;
-      color: #10192d;
-    }
-    h2 {
-      font-size: 16px;
-      font-weight: 900;
-      color: #14213d;
-    }
-    .meta, .profile { color: #75839a; }
-    .top-status { color: var(--blue); }
-    .actions button {
-      height: 38px;
-      border-radius: 9px;
-      border-color: #dde6f3;
-      box-shadow: 0 8px 18px rgba(26, 39, 78, .06);
-    }
-    .primary {
-      background: var(--green);
-      border-color: var(--green);
-      box-shadow: 0 10px 18px rgba(21,163,109,.22);
-    }
-    .ghost {
-      background: #fff;
-      color: #22324b;
-    }
-    .metric, section {
-      border-color: #e5ebf6;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-    }
-    section {
-      overflow: hidden;
-    }
-    .metric {
-      position: relative;
-      min-height: 94px;
-      padding: 15px 16px;
-      overflow: hidden;
-    }
-    .metric::before {
-      content: "";
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #82d7ff, #4865f4);
-      opacity: .7;
-    }
-    .metric .label {
-      color: #7b88a0;
-      font-size: 12px;
-      font-weight: 800;
-    }
-    .metric .value {
-      color: #172033;
-      font-size: 23px;
-      letter-spacing: 0;
-    }
-    .metric .sub { color: #8b98ad; }
-    .section-head {
-      padding: 15px 16px;
-      border-bottom-color: #edf1f7;
-      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
-      border-radius: 12px 12px 0 0;
-    }
-    .count {
-      color: #67758c;
-      font-weight: 900;
-    }
-    .track { height: 9px; background: #edf3f7; }
-    .fill { border-radius: 999px; }
-    th {
-      background: #f8faff;
-      color: #526178;
-      font-size: 12px;
-    }
-    th, td { border-bottom-color: #eef3f9; }
-    tbody tr:hover { background: #fbfcff; }
-    table.compact {
-      min-width: 0;
-    }
-    table.compact tbody tr {
-      transition: background .15s ease;
-    }
-    table.compact td:first-child {
-      font-weight: 800;
-      color: #22324b;
-    }
-    .pill {
-      height: 23px;
-      border-radius: 999px;
-      padding: 0 10px;
-      font-size: 12px;
-    }
-    .pill.good { background: #e4f8ed; color: #148456; }
-    .pill.active { background: #ffe4ef; color: #d13f75; }
-    .pill.done { background: #e4f8ed; color: #148456; }
-    .pill.warn { background: #fff1cf; color: #a16712; }
-    .pill.bad { background: #ffe5e8; color: #d53b4a; }
-    .pill.neutral { background: #eef2f7; color: #526174; }
-    .detail-toolbar, .rank-tabs {
-      background: #fbfcff;
-      border-bottom-color: #edf1f7;
-    }
-    .detail-toolbar button,
-    .rank-tabs button {
-      border-color: #dfe7f3;
-      border-radius: 999px;
-      color: #45546b;
-      box-shadow: 0 3px 8px rgba(26, 39, 78, .04);
-    }
-    .detail-toolbar button.active,
-    .rank-tabs button.active {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #fff;
-      box-shadow: 0 8px 16px rgba(72,101,244,.22);
-    }
-    #rankSlotTabs button.active {
-      background: var(--amber);
-      border-color: var(--amber);
-      color: #fff;
-      box-shadow: 0 8px 16px rgba(255,173,77,.24);
-    }
-    .daily-product-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 0 0 12px;
-    }
-    .daily-product-tabs button {
-      width: auto;
-      height: 30px;
-      padding: 0 12px;
-      border-radius: 999px;
-      border-color: #dfe7f3;
-      color: #45546b;
-      font-size: 12px;
-      box-shadow: 0 3px 8px rgba(26, 39, 78, .04);
-    }
-    .daily-product-tabs button.active {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #fff;
-      box-shadow: 0 8px 16px rgba(72,101,244,.22);
-    }
-    .daily-product-filter {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      max-width: 220px;
-      margin-bottom: 12px;
-    }
-    .daily-product-kpis {
-      grid-template-columns: minmax(180px, 1.2fr) repeat(5, minmax(100px, .8fr));
-      gap: 10px;
-    }
-    .daily-product-kpis .metric {
-      min-height: 78px;
-      padding: 11px 13px;
-    }
-    .rank-control-panel {
-      margin-top: 10px;
-      border-top: 1px solid #eef2f8;
-      border-bottom: 1px solid #eef2f8;
-      background: #fbfcff;
-    }
-    .rank-control-panel .rank-tabs {
-      padding: 8px 16px;
-      border-bottom: 0;
-      background: transparent;
-    }
-    .rank-control-panel .rank-tabs + .rank-tabs {
-      padding-top: 0;
-    }
-    .rank-section-block {
-      margin: 14px 16px 16px;
-      overflow: hidden;
-      background: #fff;
-      border: 1px solid #e5ebf5;
-      border-radius: 14px;
-      box-shadow: 0 8px 20px rgba(26, 39, 78, .06);
-    }
-    .rank-section-head {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px 16px;
-      border-bottom: 1px solid #edf1f7;
-      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
-    }
-    .rank-section-title {
-      margin: 0;
-      color: #172033;
-      font-size: 16px;
-      font-weight: 900;
-    }
-    .rank-section-sub {
-      margin-top: 4px;
-      color: #8491a8;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .rank-section-block .rank-grid,
-    .rank-section-block .powerlink-rank-grid {
-      padding: 16px;
-      background: #fff;
-    }
-    .rank-grid {
-      grid-template-columns: repeat(auto-fill, minmax(292px, 1fr));
-      gap: 16px;
-      padding: 16px;
-      background: #f5f7fc;
-    }
-    .rank-card {
-      border-color: #e5ebf5;
-      border-radius: 10px;
-      box-shadow: 0 8px 18px rgba(26, 39, 78, .08);
-    }
-    .rank-card-head {
-      min-height: 86px;
-      padding: 13px 16px;
-      gap: 13px;
-      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
-      border-bottom-color: #edf1f7;
-    }
-    .rank-thumb,
-    .reward-thumb {
-      width: 56px;
-      height: 56px;
-      border-radius: 8px;
-      border-color: #e1e8f3;
-      box-shadow: 0 4px 10px rgba(26, 39, 78, .08);
-    }
-    .rank-card-title {
-      color: #172033;
-      font-size: 13px;
-      font-weight: 900;
-    }
-    .rank-card-sub {
-      color: #9aa6ba;
-      font-size: 11px;
-      font-weight: 800;
-    }
-    .rank-list {
-      padding: 11px 16px 14px;
-      background: #fff;
-    }
-    .rank-row {
-      min-height: 32px;
-      padding: 6px 0;
-      border-bottom-color: #f0f4f8;
-      color: #24324a;
-      font-weight: 700;
-    }
-    .rank-keyword {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .rank-badge {
-      min-width: 46px;
-      height: 22px;
-      border-radius: 999px;
-      padding: 0 9px;
-      font-size: 12px;
-    }
-    .rank-badge.one { background: var(--cream); color: #9a6a00; }
-    .rank-badge.top3 { background: var(--sky); color: #167184; }
-    .rank-badge.top5 { background: var(--mint); color: #1d7d4b; }
-    .rank-badge.top10 { background: #e8edf7; color: #526178; }
-    .rank-badge.out { background: var(--rose); color: #d53b4a; }
-    .rank-badge.none { background: #f1f4f8; color: #9aa6ba; }
-    .powerlink-rank-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 16px;
-      padding: 16px;
-      background: #f5f7fc;
-    }
-    .powerlink-rank-card {
-      background: #fff;
-      border: 1px solid #e5ebf5;
-      border-radius: 12px;
-      box-shadow: 0 8px 18px rgba(26, 39, 78, .08);
-      overflow: hidden;
-    }
-    .powerlink-rank-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 18px 12px;
-      border-bottom: 1px solid #eef3f9;
-      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
-    }
-    .powerlink-rank-title {
-      margin: 0;
-      font-size: 15px;
-      font-weight: 900;
-      color: #172033;
-    }
-    .powerlink-rank-sub {
-      margin-top: 8px;
-      color: #7d8aa1;
-      font-size: 12px;
-      font-weight: 800;
-    }
-    .device-block {
-      padding: 14px 18px 16px;
-    }
-    .device-block + .device-block {
-      border-top: 1px solid #f0f4f8;
-    }
-    .device-title {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      margin-bottom: 10px;
-      color: #44536b;
-      font-size: 12px;
-      font-weight: 900;
-    }
-    .device-title::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      border-radius: 3px;
-      background: linear-gradient(135deg, #4865f4, #82d7ff);
-    }
-    .device-title.mobile::before {
-      background: linear-gradient(135deg, #ff78a7, #ffb15c);
-    }
-    .keyword-chips {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 7px;
-    }
-    .keyword-chip {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto auto;
-      align-items: center;
-      gap: 7px;
-      min-height: 34px;
-      padding: 7px 10px;
-      border-radius: 8px;
-      background: #f6f8fd;
-      color: #24324a;
-      font-size: 12px;
-      font-weight: 800;
-      white-space: normal;
-    }
-    .keyword-chip-name {
-      overflow: visible;
-      text-overflow: clip;
-      white-space: normal;
-      line-height: 1.3;
-    }
-    .comparison-table td.diff-plus { color: var(--red); font-weight: 900; }
-    .comparison-table td.diff-minus { color: var(--green); font-weight: 900; }
-    .reward-thumb-link {
-      display: inline-flex;
-      border-radius: 8px;
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-    .reward-thumb-link:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 16px rgba(26, 39, 78, .12);
-    }
-    .product-category {
-      margin-top: 14px;
-      border: 1px solid #e5ebf5;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 0 6px 16px rgba(26, 39, 78, .05);
-    }
-    .product-category-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 13px 16px;
-      background: #fbfcff;
-      border-bottom: 1px solid #edf1f7;
-    }
-    .product-category-title {
-      margin: 0;
-      font-size: 15px;
-      font-weight: 900;
-      color: #172033;
-    }
-    .product-category-sub {
-      margin-top: 4px;
-      color: #8491a8;
-      font-size: 12px;
-      font-weight: 800;
-    }
-    .daily-cost-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(86px, 1fr));
-      gap: 6px;
-      min-width: 420px;
-    }
-    .daily-cost-chip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-      padding: 6px 8px;
-      border-radius: 8px;
-      background: #f6f8fd;
-      color: #20304a;
-      font-size: 11px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-    .daily-cost-chip.zero {
-      color: #a2adbf;
-      background: #fafbfe;
-    }
-    .daily-cost-date {
-      color: #8491a8;
-      font-weight: 900;
-    }
-    .ad-detail-list {
-      display: grid;
-      gap: 5px;
-      margin-top: 8px;
-      min-width: 280px;
-    }
-    .ad-detail-line {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 6px 8px;
-      border-radius: 8px;
-      background: #f8faff;
-      color: #42516b;
-      font-size: 11px;
-      font-weight: 800;
-    }
-    .thumb-placeholder {
-      display: grid;
-      place-items: center;
-      color: #9aa6ba;
-      font-size: 11px;
-      font-weight: 900;
-    }
-    .delta-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 16px;
-      height: 18px;
-      font-size: 11px;
-      font-weight: 900;
-      line-height: 1;
-    }
-    .delta-badge.good { color: #11845b; }
-    .delta-badge.bad { color: #e14b59; }
-    .delta-badge.warn { color: #aab3c2; }
-    .empty {
-      color: #94a0b4;
-      font-weight: 700;
-    }
+    .rank-section-block { margin: 14px 16px 16px; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+    .rank-section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #fff 0%, #f8fafc 100%); }
+    .rank-section-title { margin: 0; color: var(--text); font-size: 15px; font-weight: 800; }
+    .rank-section-sub { margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .rank-section-block .rank-grid, .rank-section-block .powerlink-rank-grid { padding: 16px; background: #fff; }
+    .rank-grid { grid-template-columns: repeat(auto-fill, minmax(292px, 1fr)); gap: 16px; }
+    .powerlink-rank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 16px; background: #f1f5f9; }
+    .powerlink-rank-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+    .powerlink-rank-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px 12px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #fff 0%, #f8fafc 100%); }
+    .powerlink-rank-title { margin: 0; font-size: 15px; font-weight: 800; color: var(--text); }
+    .powerlink-rank-sub { margin-top: 8px; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .device-block { padding: 14px 18px 16px; }
+    .device-block + .device-block { border-top: 1px solid #f1f5f9; }
+    .device-title { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; color: #44536b; font-size: 12px; font-weight: 700; }
+    .device-title::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: linear-gradient(135deg, #4865f4, #82d7ff); }
+    .device-title.mobile::before { background: linear-gradient(135deg, #f59e0b, #f97316); }
+    .keyword-chips { display: grid; grid-template-columns: 1fr; gap: 7px; }
+    .keyword-chip { display: grid; grid-template-columns: minmax(0,1fr) auto auto; align-items: center; gap: 7px; min-height: 34px; padding: 7px 10px; border-radius: 8px; background: #f8fafc; color: var(--text); font-size: 12px; font-weight: 600; white-space: normal; }
+    .keyword-chip-name { overflow: visible; text-overflow: clip; white-space: normal; line-height: 1.3; }
+    .comparison-table td.diff-plus { color: var(--red); font-weight: 700; }
+    .comparison-table td.diff-minus { color: var(--green); font-weight: 700; }
+    .reward-thumb-link { display: inline-flex; border-radius: 8px; transition: transform .15s ease, box-shadow .15s ease; }
+    .reward-thumb-link:hover { transform: translateY(-1px); box-shadow: 0 8px 16px rgba(0,0,0,.12); }
+    .product-category { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff; box-shadow: var(--shadow); }
+    .product-category-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; background: #f8fafc; border-bottom: 1px solid var(--line); }
+    .product-category-title { margin: 0; font-size: 14px; font-weight: 800; color: var(--text); }
+    .product-category-sub { margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .daily-cost-grid { display: grid; grid-template-columns: repeat(4, minmax(86px,1fr)); gap: 6px; min-width: 420px; }
+    .daily-cost-chip { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 6px 8px; border-radius: 8px; background: #f1f5f9; color: var(--text); font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .daily-cost-chip.zero { color: #94a3b8; background: #f8fafc; }
+    .daily-cost-date { color: var(--muted); font-weight: 700; }
+    .ad-detail-list { display: grid; gap: 5px; margin-top: 8px; min-width: 280px; }
+    .ad-detail-line { display: flex; justify-content: space-between; gap: 10px; padding: 6px 8px; border-radius: 8px; background: #f8fafc; color: var(--text); font-size: 11px; font-weight: 700; }
+    .thumb-placeholder { display: grid; place-items: center; color: #94a3b8; font-size: 11px; font-weight: 700; }
+    .delta-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 18px; font-size: 11px; font-weight: 700; line-height: 1; }
+    .delta-badge.good { color: #10b981; }
+    .delta-badge.bad { color: #ef4444; }
+    .delta-badge.warn { color: #94a3b8; }
+    .rank-keyword { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .rank-control-panel { margin-top: 10px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #f8fafc; }
+    .rank-control-panel .rank-tabs { padding: 8px 16px; border-bottom: 0; background: transparent; }
+    .daily-product-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+    .daily-product-tabs button { width: auto; height: 30px; padding: 0 12px; border-radius: 999px; border-color: var(--line); color: var(--muted); font-size: 12px; }
+    .daily-product-tabs button.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .daily-product-filter { display: flex; gap: 8px; align-items: center; max-width: 220px; margin-bottom: 12px; }
+    .daily-product-kpis { grid-template-columns: minmax(180px,1.2fr) repeat(5, minmax(100px,.8fr)); gap: 10px; }
+    .daily-product-kpis .metric { min-height: 78px; padding: 11px 13px; }
+    .chart-row { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-bottom: 16px; }
+    .chart-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+    .chart-panel .section-head { padding: 12px 16px; }
+    .chart-body { padding: 16px; position: relative; height: 280px; }
     @media (max-width: 1120px) {
       .app { grid-template-columns: 1fr; }
-      aside { border-right: 0; border-bottom: 1px solid var(--line); }
-      .kpis { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+      aside { border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.08); position: relative; height: auto; }
+      .kpis { grid-template-columns: repeat(2, minmax(140px,1fr)); }
       .layout, .memo-grid { grid-template-columns: 1fr; }
       .header { flex-direction: column; }
       .actions { width: 100%; }
+      .chart-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 760px) {
       body.sidebar-open { overflow: hidden; }
-      .mobile-menu-toggle {
-        display: inline-flex;
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        z-index: 80;
-        width: auto;
-        height: 38px;
-        align-items: center;
-        gap: 7px;
-        padding: 0 12px;
-        border-color: #dfe7f3;
-        background: #fff;
-        color: #172033;
-        box-shadow: 0 8px 20px rgba(26, 39, 78, .12);
-      }
-      .mobile-backdrop {
-        display: block;
-        position: fixed;
-        inset: 0;
-        z-index: 60;
-        background: rgba(23, 32, 51, .32);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .18s ease;
-      }
-      body.sidebar-open .mobile-backdrop {
-        opacity: 1;
-        pointer-events: auto;
-      }
-      aside {
-        position: fixed;
-        inset: 0 auto 0 0;
-        z-index: 70;
-        width: min(82vw, 304px);
-        height: 100vh;
-        border-right: 1px solid var(--line);
-        border-bottom: 0;
-        transform: translateX(-105%);
-        transition: transform .18s ease;
-      }
+      .mobile-menu-toggle { display: inline-flex; position: fixed; top: 10px; left: 10px; z-index: 80; width: auto; height: 38px; align-items: center; gap: 7px; padding: 0 12px; border-color: var(--line); background: #fff; color: var(--text); box-shadow: var(--shadow-md); }
+      .mobile-backdrop { display: block; position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.4); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+      body.sidebar-open .mobile-backdrop { opacity: 1; pointer-events: auto; }
+      aside { position: fixed; inset: 0 auto 0 0; z-index: 70; width: min(82vw, 280px); height: 100vh; transform: translateX(-105%); transition: transform .18s ease; }
       body.sidebar-open aside { transform: translateX(0); }
       main { padding: 62px 12px 24px; }
-      .header { gap: 12px; }
-      h1 { font-size: 20px; }
-      .actions {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        min-width: 0;
-      }
-      .actions button {
-        width: 100%;
-        min-width: 0;
-      }
+      h1 { font-size: 19px; }
       .kpis { grid-template-columns: 1fr; }
-      .metric .value {
-        white-space: normal;
-        font-size: 20px;
-      }
-      .section-head,
-      .rank-section-head {
-        align-items: flex-start;
-        flex-direction: column;
-      }
+      .metric .value { white-space: normal; font-size: 20px; }
+      .section-head, .rank-section-head { align-items: flex-start; flex-direction: column; gap: 8px; }
       .table-wrap { overflow-x: auto; }
-      .rank-grid,
-      .powerlink-rank-grid {
-        grid-template-columns: 1fr;
-        padding: 12px;
-      }
-      .rank-section-block {
-        margin: 12px 10px;
-      }
-      .rank-section-block .rank-grid,
-      .rank-section-block .powerlink-rank-grid {
-        padding: 12px;
-      }
-      .rank-tabs {
-        padding: 8px 12px;
-        gap: 6px;
-      }
-      .rank-tabs button {
-        height: 30px;
-        padding: 0 10px;
-        font-size: 12px;
-      }
-      .product-category {
-        margin-left: 10px !important;
-        margin-right: 10px !important;
-      }
-      .product-category .kpis {
-        grid-template-columns: 1fr;
-        padding: 12px 12px 0 !important;
-      }
-      .reward-product {
-        min-width: 260px;
-      }
+      .rank-grid, .powerlink-rank-grid { grid-template-columns: 1fr; padding: 12px; }
+      .rank-section-block { margin: 12px 10px; }
+      .rank-tabs { padding: 8px 12px; gap: 6px; }
+      .rank-tabs button { height: 30px; padding: 0 10px; font-size: 12px; }
+      .chart-row { grid-template-columns: 1fr; }
+      .chart-body { height: 220px; }
     }
   </style>
 </head>
@@ -1154,6 +457,16 @@
         </div>
       </div>
       <div id="kpis" class="kpis page-section" data-page="overview"></div>
+      <div class="chart-row page-section" data-page="overview">
+        <section class="chart-panel">
+          <div class="section-head"><h2>광고유형별 비용 분포</h2></div>
+          <div class="chart-body"><canvas id="typeDonutChart"></canvas></div>
+        </section>
+        <section class="chart-panel">
+          <div class="section-head"><h2>주차별 비용 vs 매출 추이</h2></div>
+          <div class="chart-body"><canvas id="weeklyTrendChart"></canvas></div>
+        </section>
+      </div>
       <div class="layout page-section" data-page="overview">
         <section>
           <div class="section-head"><h2>광고유형별 성과</h2><span id="typeCount" class="count"></span></div>
@@ -1415,7 +728,6 @@
       };
       els.pageTitle.textContent = titles[state.page] || titles.overview;
       const isRankTrafficPage = state.page === "rankShopping" || state.page === "rankPowerlink";
-      const isRankGroupPage = isRankTrafficPage;
       document.querySelectorAll("[data-page]").forEach(el => {
         if (el.tagName === "BUTTON") return;
         const visible = el.dataset.page === state.page || (el.dataset.page === "rankTraffic" && isRankTrafficPage);
@@ -1425,7 +737,7 @@
         button.classList.toggle("active", button.dataset.page === state.page);
       });
       document.querySelectorAll(".nav [data-rank-root]").forEach(button => {
-        button.classList.toggle("active", isRankGroupPage);
+        button.classList.toggle("active", isRankTrafficPage);
       });
       els.typeFilter.value = pageType();
     }
@@ -1484,6 +796,7 @@
       renderTotalSalesMetrics();
       renderInspection();
       renderPlan();
+      renderOverviewCharts();
     }
     function renderKpis() {
       const s = state.data.summary;
@@ -1696,7 +1009,7 @@
           <div class="metric"><div class="label">상품/소재</div><div class="value">${number((dailyCosts.items || []).length)}</div><div class="sub">일자별 광고비 기준</div></div>
         </div>
         <div class="meta" style="margin-bottom:10px">${html(mix.memo || "")}</div>
-        ${categoryTable("일자별 상품 광고비", dailyCosts.summary || "6월 1일부터 어제까지 쇼핑검색 상품/소재별 광고 사용 금액", ["상품", "누적 비용", "일평균", "클릭", "CPC", "ROAS", "일자별 비용"], dailyCostRows, 7)}
+        ${categoryTable("일자별 상품 광고비", dailyCosts.summary || "쇼핑검색 상품/소재별 광고 사용 금액", ["상품", "누적 비용", "일평균", "클릭", "CPC", "ROAS", "일자별 비용"], dailyCostRows, 7)}
         ${categoryTable("광고 연동 상품", "본 상품 기준으로 묶은 쇼핑검색 광고 집행 내역", ["상품", "클릭", "비용", "CPC", "ROAS", "연동 광고 내역"], adLinkedRows, 6)}`;
     }
     function renderDailyProductPerformance() {
@@ -2084,370 +1397,182 @@
       const cls = d.direction === "up" ? "good" : d.direction === "down" ? "bad" : "warn";
       return `<span class="delta-badge ${cls}">${html(d.text || "-")}</span>`;
     }
-    function detailHasShoppingData(detail) {
-      return (detail?.shoppingProducts || []).some(product => (product.items || []).length);
-    }
-    function detailHasPowerlinkData(detail) {
-      return (detail?.powerlinkSections || []).some(section => (section.pc || []).length || (section.mobile || []).length);
-    }
-    function filteredRankDetails(rank) {
-      const details = rank.slotDetails || [];
-      if (state.page === "rankPowerlink") return details.filter(detailHasPowerlinkData);
-      return details.filter(detailHasShoppingData);
-    }
-    function selectedRankDetail(rank) {
-      const details = filteredRankDetails(rank);
-      if (!details.length) return null;
-      if (!state.rankDate || !details.some(item => item.date === state.rankDate)) {
-        state.rankDate = details[details.length - 1].date;
-        state.rankSlot = "";
-      }
-      const dateDetails = details.filter(item => item.date === state.rankDate);
-      if (!dateDetails.some(item => item.slot === state.rankSlot)) {
-        state.rankSlot = (dateDetails.find(item => item.slot === "afternoon") || dateDetails[0] || details[details.length - 1]).slot;
-      }
-      return details.find(item => item.date === state.rankDate && item.slot === state.rankSlot) || details[details.length - 1];
-    }
-    function renderRankTabs(rank) {
-      const details = filteredRankDetails(rank);
-      const dates = [...new Set(details.map(item => item.date))].sort().reverse();
-      if (!dates.includes(state.rankDate)) {
-        state.rankDate = dates[0] || "";
-        state.rankSlot = "";
-      }
-      els.rankDateTabs.innerHTML = dates.map(date => `<button class="ghost ${date === state.rankDate ? "active" : ""}" type="button" data-rank-date="${html(date)}">${html(date)}</button>`).join("");
-      const slots = details.filter(item => item.date === state.rankDate);
-      if (!slots.some(item => item.slot === state.rankSlot)) {
-        state.rankSlot = (slots.find(item => item.slot === "afternoon") || slots[0] || {}).slot || "";
-      }
-      els.rankSlotTabs.innerHTML = slots.map(item => `<button class="ghost ${item.slot === state.rankSlot ? "active" : ""}" type="button" data-rank-slot="${html(item.slot)}">${html(item.slotLabel)}</button>`).join("");
-      els.rankDateTabs.querySelectorAll("[data-rank-date]").forEach(button => {
-        button.addEventListener("click", () => {
-          state.rankDate = button.dataset.rankDate;
-          state.rankSlot = "";
-          renderRankTraffic();
-        });
-      });
-      els.rankSlotTabs.querySelectorAll("[data-rank-slot]").forEach(button => {
-        button.addEventListener("click", () => {
-          state.rankSlot = button.dataset.rankSlot;
-          renderRankTraffic();
-        });
-      });
-    }
-    function renderShoppingRankDetail(detail) {
-      const rewardProductOrder = ["4624494637", "4843121925", "12924495111"];
-      const rewardOrderMap = new Map(rewardProductOrder.map((id, index) => [id, index]));
-      const products = [...(detail.shoppingProducts || [])].sort((a, b) => {
-        const aOrder = rewardOrderMap.has(String(a.productId || "")) ? rewardOrderMap.get(String(a.productId || "")) : 999;
-        const bOrder = rewardOrderMap.has(String(b.productId || "")) ? rewardOrderMap.get(String(b.productId || "")) : 999;
-        return aOrder - bOrder;
-      });
-      if (!products.length) return `<div class="empty">선택한 시간대의 쇼핑검색 순위 데이터가 없습니다.</div>`;
-      return `<div class="rank-grid">${products.map(group => `
-        <div class="rank-card">
-          <div class="rank-card-head">
-            ${group.image ? `<img class="rank-thumb" src="${html(group.image)}" alt="">` : `<div class="rank-thumb"></div>`}
-            <div style="min-width:0"><div class="rank-card-title">${html(group.title)}</div><div class="rank-card-sub">상품 ID: ${html(group.productId)}</div></div>
-          </div>
-          <div class="rank-list">${(group.items || []).map(item => `<div class="rank-row"><span class="rank-keyword">${html(item.keyword)}</span><span style="display:flex;gap:6px;align-items:center">${rankBadge(item)}${deltaBadge(item.delta)}</span></div>`).join("")}</div>
-        </div>`).join("")}</div>`;
-    }
-    function powerlinkDeviceBlock(label, cls, items) {
-      if (!items.length) return "";
-      return `<div class="device-block">
-        <div class="device-title ${html(cls)}">${html(label)} <span class="meta">노출 ${number(items.length)}/${number(items.length)}</span></div>
-        <div class="keyword-chips">
-          ${items.map(item => `<div class="keyword-chip" title="${html(item.keyword || "")} · ${html(item.collectedAt || "")}">
-            <span class="keyword-chip-name">${html(item.keyword || "")}</span>
-            ${rankBadge(item)}
-            ${deltaBadge(item.delta)}
-          </div>`).join("")}
-        </div>
-      </div>`;
-    }
-    function renderPowerlinkRankDetail(detail) {
-      const sections = detail.powerlinkSections || [];
-      if (!sections.length) return `<div class="empty">선택한 시간대의 파워링크 순위 데이터가 없습니다.</div>`;
-      const selected = state.powerlinkDevice || "pc";
-      const deviceTabs = `
-        <div class="rank-tabs" style="margin-bottom:12px">
-          <button type="button" data-powerlink-device="pc" class="${selected === "pc" ? "active" : ""}">PC</button>
-          <button type="button" data-powerlink-device="mobile" class="${selected === "mobile" ? "active" : ""}">모바일</button>
-        </div>`;
-      const visibleSections = sections.filter(section => (selected === "mobile" ? (section.mobile || []) : (section.pc || [])).length);
-      if (!visibleSections.length) return `${deviceTabs}<div class="empty">${selected === "mobile" ? "모바일" : "PC"} 순위 데이터가 없습니다.</div>`;
-      return `<div class="powerlink-rank-grid">${visibleSections.map(section => {
-        const pc = section.pc || [];
-        const mobile = section.mobile || [];
-        const items = selected === "mobile" ? mobile : pc;
-        const label = selected === "mobile" ? "모바일" : "PC";
-        return `<div class="powerlink-rank-card">
-          <div class="powerlink-rank-head">
-            <div>
-              <h3 class="powerlink-rank-title">${html(section.adgroup || section.campaign || "파워링크")}</h3>
-              <div class="powerlink-rank-sub">${html(section.campaign || "")} · ${html(label)} ${number(items.length)}개</div>
-            </div>
-            <span class="count">${number(items.length)}개</span>
-          </div>
-          ${powerlinkDeviceBlock(label, selected, items)}
-        </div>`;
-      }).join("")}</div>`.replace('<div class="powerlink-rank-grid">', `${deviceTabs}<div class="powerlink-rank-grid">`);
-    }
-    function renderRankRewardSection() {
-      const reward = state.data.rewardMarketing || {};
-      const view = state.rewardView || "active";
-      const items = view === "completed" ? (reward.completedItems || []) : (reward.activeItems || []);
-      const rows = items.map(item => {
-        const thumb = item.image ? `<img class="reward-thumb" src="${html(item.image)}" alt="">` : `<div class="reward-thumb thumb-placeholder">대기</div>`;
-        const linkedThumb = item.link ? `<a class="reward-thumb-link" href="${html(item.link)}" target="_blank" rel="noreferrer" title="상품 열기">${thumb}</a>` : thumb;
-        return `<tr>
-          <td class="wrap">
-            <div class="reward-product">
-              ${linkedThumb}
-              <div><div class="reward-product-title">${html(item.productName || "")}</div><div class="meta">상품번호 ${html(item.productId || "")}</div></div>
-            </div>
-          </td>
-          <td>${html(item.keyword || "")}</td>
-          <td>${html(item.startDate || "")} ~ ${html(item.endDate || "")}</td>
-          <td>${money(item.totalAmount || 0)}</td>
-          <td><span class="pill ${item.status === "완료" ? "done" : "active"}">${html(item.status || "")}</span></td>
-        </tr>`;
-      }).join("");
-      return `
-        <div class="product-category" style="margin-bottom:14px">
-          <div class="product-category-head">
-            <div><h3 class="product-category-title">${view === "completed" ? "완료 리워드 상품" : "리워드 진행 상품"}</h3><div class="product-category-sub">${html(reward.memo || "")}</div></div>
-          </div>
-          <div class="rank-tabs" style="border-bottom:0;padding-bottom:0">
-            <button class="ghost ${view === "active" ? "active" : ""}" type="button" data-reward-view="active">진행중 ${number(reward.activeCount || 0)}</button>
-            <button class="ghost ${view === "completed" ? "active" : ""}" type="button" data-reward-view="completed">완료 ${number(reward.completedCount || 0)}</button>
-          </div>
-          <div class="kpis" style="padding:14px 16px 0">
-            <div class="metric"><div class="label">${view === "completed" ? "완료 계약 금액" : "진행중 계약 금액"}</div><div class="value">${money(view === "completed" ? (reward.completedAmount || 0) : (reward.activeStatusAmount || 0))}</div><div class="sub">VAT 별도 기준</div></div>
-            <div class="metric"><div class="label">${view === "completed" ? "완료 상품" : "진행 상품"}</div><div class="value">${number(items.length)}</div><div class="sub">${view === "completed" ? "완료된 리워드 이력" : "현재 순위 트래픽 진행중"}</div></div>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>진행 상품</th><th>키워드</th><th>기간</th><th>총 금액</th><th>상태</th></tr></thead>
-              <tbody>${rows || `<tr><td class="empty" colspan="5">${view === "completed" ? "완료 리워드 상품이 없습니다." : "리워드 진행 상품이 없습니다."}</td></tr>`}</tbody>
-            </table>
-          </div>
-        </div>`;
-    }
     function renderRankTraffic() {
       const rank = state.data.rankTraffic || {};
-      els.rankStatus.textContent = `${rank.updatedAt || "데이터 없음"} · ${rank.sourcePath || ""}`;
-      const latestTop5 = (rank.latestShopping || []).filter(row => Number(row.rank || 999) <= 5).length;
-      const detail = selectedRankDetail(rank);
-      const isPowerlinkRank = state.page === "rankPowerlink";
-      const rankDateRange = rank.dateRangeLabel || ((rank.dates || []).length ? `${(rank.dates || [])[rank.dates.length - 1]} ~ ${(rank.dates || [])[0]}` : "데이터 없음");
-      els.rankOverview.innerHTML = `
-        ${isPowerlinkRank ? "" : renderRankRewardSection()}
-        <div class="kpis" style="margin-bottom:0">
-          <div class="metric"><div class="label">누적 기간</div><div class="value" style="font-size:18px">${html(rankDateRange)}</div><div class="sub">수집일 ${number((rank.dates || []).length)}일 · 오전/오후 갱신 반영</div></div>
-          <div class="metric"><div class="label">쇼핑 순위 항목</div><div class="value">${number((rank.shoppingRows || []).length)}</div><div class="sub">상품/키워드 조합</div></div>
-          <div class="metric"><div class="label">최근 1~5위</div><div class="value">${number(latestTop5)}</div><div class="sub">${html(rank.latestLabel || "")}</div></div>
-          <div class="metric"><div class="label">비교 기준</div><div class="value" style="font-size:16px">${html(detail?.previousLabel || "첫 수집")}</div><div class="sub">직전 수집 대비 상승/하락</div></div>
-        </div>`;
-      if (!detail) {
-        els.rankDateTabs.innerHTML = "";
-        els.rankSlotTabs.innerHTML = "";
-        els.rankBody.innerHTML = `<div class="empty">D:\\자동화\\rank_data.json 데이터가 없습니다.</div>`;
+      const isShoppingPage = state.page === "rankShopping";
+      els.rankStatus.textContent = rank.updatedAt ? `업데이트: ${rank.updatedAt}` : "순위 데이터 없음";
+      els.rankOverview.innerHTML = rank.overview ? `<div class="meta" style="padding:10px 14px">${html(rank.overview)}</div>` : "";
+      const allItems = isShoppingPage ? (rank.shopping || rank.latestShopping || []) : (rank.powerlink || rank.latestPowerlink || []);
+      const dates = [...new Set(allItems.map(r => r.date).filter(Boolean))].sort().reverse();
+      if (!state.rankDate || !dates.includes(state.rankDate)) state.rankDate = dates[0] || "";
+      els.rankDateTabs.innerHTML = dates.slice(0, 7).map(d =>
+        `<button class="ghost ${d === state.rankDate ? "active" : ""}" type="button" data-rank-date="${html(d)}">${html(d)}</button>`
+      ).join("");
+      els.rankSlotTabs.innerHTML = "";
+      const items = allItems.filter(r => !state.rankDate || !r.date || r.date === state.rankDate);
+      if (!items.length) {
+        els.rankBody.innerHTML = `<div class="empty" style="padding:24px">순위 데이터가 없습니다.</div>`;
         return;
       }
-      renderRankTabs(rank);
-      if (isPowerlinkRank) {
-        els.rankBody.innerHTML = `
-        <div class="rank-section-block">
-          <div class="rank-section-head">
-            <div>
-              <h3 class="rank-section-title">파워링크 순위</h3>
-              <div class="rank-section-sub">PC/모바일 검색 순위 분리 확인</div>
-            </div>
-            <span class="count">${html(detail.previousLabel || "비교 기준 없음")}</span>
-          </div>
-          ${renderPowerlinkRankDetail(detail)}
-        </div>`;
-        return;
+      if (isShoppingPage) {
+        const byProduct = {};
+        items.forEach(row => {
+          const key = row.productId || row.productName || row.product || "기타";
+          if (!byProduct[key]) byProduct[key] = { ...row, keywords: [] };
+          if (row.keyword || row.slot) byProduct[key].keywords.push(row);
+        });
+        const cards = Object.values(byProduct).map(p => {
+          const img = p.image ? `<img class="rank-thumb" src="${html(p.image)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
+          const kws = (p.keywords || []).map(kw => `<div class="rank-row"><span class="rank-keyword">${html(kw.keyword || kw.slot || "")}</span>${rankBadge(kw)}${deltaBadge(kw.delta)}</div>`).join("");
+          return `<div class="rank-card"><div class="rank-card-head">${img}<div><div class="rank-card-title">${html(p.productName || p.product || key)}</div><div class="rank-card-sub">${html(p.productId || "")}</div></div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
+        }).join("");
+        els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">쇼핑검색 순위</h3></div></div><div class="rank-grid">${cards}</div></div>`;
+      } else {
+        const cards = items.map(item => {
+          const pcRows = (item.pc || []).map(kw => `<div class="keyword-chip"><span class="keyword-chip-name">${html(kw.keyword || "")}</span>${rankBadge(kw)}${deltaBadge(kw.delta)}</div>`).join("");
+          const mRows = (item.mobile || []).map(kw => `<div class="keyword-chip"><span class="keyword-chip-name">${html(kw.keyword || "")}</span>${rankBadge(kw)}${deltaBadge(kw.delta)}</div>`).join("");
+          return `<div class="powerlink-rank-card"><div class="powerlink-rank-head"><div><h3 class="powerlink-rank-title">${html(item.campaign || item.adgroup || "")}</h3><div class="powerlink-rank-sub">${html(item.adgroup || "")}</div></div></div>${pcRows ? `<div class="device-block"><div class="device-title">PC</div><div class="keyword-chips">${pcRows}</div></div>` : ""}${mRows ? `<div class="device-block mobile"><div class="device-title mobile">모바일</div><div class="keyword-chips">${mRows}</div></div>` : ""}</div>`;
+        }).join("");
+        els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">파워링크 순위</h3></div></div><div class="powerlink-rank-grid">${cards}</div></div>`;
       }
-      els.rankBody.innerHTML = `
-        <div class="rank-section-block">
-          <div class="rank-section-head">
-            <div>
-              <h3 class="rank-section-title">쇼핑검색 순위</h3>
-              <div class="rank-section-sub">대표님 확인용 핵심 구간 · 리워드/순위 트래픽 상품 우선 확인</div>
-            </div>
-            <span class="count">${html(detail.label || rank.latestLabel || "")}</span>
-          </div>
-          ${renderShoppingRankDetail(detail)}
-        </div>`;
     }
     function renderInspection() {
-      const rows = state.data.inspection.filter(filters);
-      els.inspectionCount.textContent = `${rows.length}건`;
-      if (!rows.length) {
-        els.inspectionBody.innerHTML = `<tr><td class="empty" colspan="9">조건에 맞는 점검대상이 없습니다.</td></tr>`;
-        return;
-      }
-      els.inspectionBody.innerHTML = rows.map(row => `<tr>
-        <td>${html(row["광고유형"])}</td>
-        <td>${html(row["캠페인명"])}</td>
-        <td>${html(row["키워드"] || row["상품명"])}</td>
-        <td>${money(row["총비용"])}</td>
-        <td>${number(row["전환수"])}</td>
-        <td>${ratio(row["ROAS"])}</td>
-        <td class="wrap">${html(row["점검사유"])}</td>
-        <td class="wrap">${html(row["권장조치"])}</td>
-        <td>
-          <div class="note-row">
-            <select data-decision="${html(row["대시보드키"])}">${["검토중","진행","보류","제외"].map(v => `<option value="${v}" ${row["결정"] === v ? "selected" : ""}>${v}</option>`).join("")}</select>
-            <input data-memo="${html(row["대시보드키"])}" value="${html(row["담당자메모"])}" placeholder="메모">
-            <button type="button" data-save="${html(row["대시보드키"])}">저장</button>
-          </div>
-        </td>
-      </tr>`).join("");
-      els.inspectionBody.querySelectorAll("[data-save]").forEach(btn => btn.addEventListener("click", () => saveNote(btn.dataset.save)));
+      const rows = (state.data.keywordPerformance || []).filter(row => {
+        const roas = Number(row["ROAS"] || 0);
+        const cost = Number(row["총비용"] || 0);
+        const clicks = Number(row["클릭수"] || 0);
+        const convs = Number(row["전환수"] || 0);
+        const cpc = Number(row["CPC"] || 0);
+        return (cpc >= 3000) || (clicks >= 20 && convs === 0) || (cost >= 100000 && roas > 0 && roas < 3);
+      });
+      els.inspectionCount.textContent = `${rows.length}개 항목`;
+      els.inspectionBody.innerHTML = rows.map(row => {
+        const reasons = [];
+        if (Number(row["CPC"]||0) >= 3000) reasons.push("고CPC");
+        if (Number(row["클릭수"]||0) >= 20 && Number(row["전환수"]||0) === 0) reasons.push("무전환");
+        if (Number(row["총비용"]||0) >= 100000 && Number(row["ROAS"]||0) > 0 && Number(row["ROAS"]||0) < 3) reasons.push("저ROAS");
+        return `<tr><td>${html(row["광고유형"]||"")}</td><td>${html(row["캠페인명"]||"")}</td><td>${html(row["키워드"]||row["상품명"]||"")}</td><td>${money(row["총비용"])}</td><td>${number(row["전환수"])}</td><td>${ratio(row["ROAS"])}</td><td>${reasons.join(", ")}</td><td class="wrap">${html(row["권장조치"]||"")}</td><td><span class="pill neutral">-</span></td></tr>`;
+      }).join("") || `<tr><td class="empty" colspan="9">점검대상이 없습니다.</td></tr>`;
     }
     function renderPlan() {
-      const rows = state.data.plan;
-      els.planCount.textContent = `${rows.length}개`;
-      els.planBody.innerHTML = rows.map(row => `<tr><td>${html(row["구분"])}</td><td>${html(row["대상"])}</td><td class="wrap">${html(row["계획"])}</td><td class="wrap">${html(row["근거"])}</td></tr>`).join("");
+      const plan = state.data.nextPlan || [];
+      els.planCount.textContent = `${plan.length}개 계획`;
+      els.planBody.innerHTML = plan.map(row => `<tr><td>${html(row["구분"]||"")}</td><td>${html(row["대상"]||"")}</td><td class="wrap">${html(row["계획"]||"")}</td><td class="wrap">${html(row["근거"]||"")}</td></tr>`).join("") || `<tr><td class="empty" colspan="4">다음달 계획 데이터가 없습니다.</td></tr>`;
     }
-    async function saveNote(key) {
-      const decision = document.querySelector(`[data-decision="${CSS.escape(key)}"]`).value;
-      const memo = document.querySelector(`[data-memo="${CSS.escape(key)}"]`).value;
-      await fetch(`/api/note?month=${encodeURIComponent(state.month)}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ key, decision, memo }) });
-      els.saveState.textContent = "저장됨";
-      setStatus("저장됨");
-      await loadData();
-    }
-    async function saveMemo() {
-      await fetch(`/api/memo?month=${encodeURIComponent(state.month)}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ planMemo: els.planMemo.value, reportMemo: els.reportMemo.value }) });
-      setStatus("메모 저장됨");
-    }
-    async function exportDraft() {
-      await saveMemo();
-      const res = await fetch(`/api/export-draft?month=${encodeURIComponent(state.month)}`);
-      const data = await res.json();
-      if (data.ok) {
-        setStatus(`디자인 보고서 생성: ${data.reportPath || data.draftPath}`);
-        if (data.reportUrl) window.open(data.reportUrl, "_blank");
-      } else {
-        setStatus("보고서 초안 생성 실패", true);
+    window._charts = {};
+    function renderOverviewCharts() {
+      if (state.page !== "overview") return;
+      const typeData = state.data.typePerformance || [];
+      const donutCanvas = document.getElementById("typeDonutChart");
+      if (donutCanvas) {
+        if (window._charts.donut) { window._charts.donut.destroy(); window._charts.donut = null; }
+        const labels = typeData.map(r => r["광고유형"] || "");
+        const values = typeData.map(r => Number(r["총비용"] || 0));
+        const colors = ["#4865f4", "#10b981", "#f59e0b", "#8b5cf6", "#ef4444"];
+        window._charts.donut = new Chart(donutCanvas, {
+          type: "doughnut",
+          data: { labels, datasets: [{ data: values, backgroundColor: colors.slice(0, labels.length), borderWidth: 2, borderColor: "#fff", hoverOffset: 6 }] },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { position: "bottom", labels: { font: { size: 12, family: "'Segoe UI','Malgun Gothic',Arial,sans-serif" }, padding: 16, boxWidth: 12, color: "#64748b" } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${won.format(ctx.raw)}` } }
+            },
+            cutout: "60%"
+          }
+        });
+      }
+      const weeklyCanvas = document.getElementById("weeklyTrendChart");
+      if (weeklyCanvas) {
+        if (window._charts.weekly) { window._charts.weekly.destroy(); window._charts.weekly = null; }
+        const metrics = state.data.totalSalesMetrics || {};
+        const weeks = metrics.weeks || ["1주","2주","3주","4주","5주"];
+        const salesTotal = metrics.manualSalesTotal || {};
+        const adTotal = metrics.manualAdCostTotal || {};
+        const salesData = (salesTotal.weeks || [0,0,0,0,0]).map(v => Number(v)||0);
+        const adData = (adTotal.weeks || [0,0,0,0,0]).map(v => Number(v)||0);
+        const labels = weeks.map((w, i) => w || `${i+1}주차`);
+        window._charts.weekly = new Chart(weeklyCanvas, {
+          type: "bar",
+          data: {
+            labels,
+            datasets: [
+              { label: "수기매출", data: salesData, backgroundColor: "rgba(16,185,129,0.15)", borderColor: "#10b981", borderWidth: 2, borderRadius: 6, order: 2 },
+              { label: "수기광고비", data: adData, backgroundColor: "rgba(72,101,244,0.15)", borderColor: "#4865f4", borderWidth: 2, borderRadius: 6, order: 2 }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { position: "bottom", labels: { font: { size: 12, family: "'Segoe UI','Malgun Gothic',Arial,sans-serif" }, padding: 16, boxWidth: 12, color: "#64748b" } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${won.format(ctx.raw)}` } }
+            },
+            scales: {
+              x: { grid: { display: false }, ticks: { color: "#64748b", font: { size: 12 } } },
+              y: { grid: { color: "#f1f5f9" }, ticks: { color: "#64748b", font: { size: 11 }, callback: v => won.format(v) } }
+            }
+          }
+        });
       }
     }
-    async function updateRanks() {
-      setStatus("검색 순위 갱신 중");
-      const res = await fetch(`/api/update-ranks?month=${encodeURIComponent(state.month)}`);
-      const data = await res.json();
-      if (data.ok) {
-        const summary = String(data.stdout || "").trim().split("\n").filter(Boolean).slice(0, 6).join(" / ");
-        setStatus(summary ? `검색 순위 갱신됨: ${summary}` : "검색 순위 갱신됨");
-      } else {
-        setStatus(`검색 순위 갱신 실패: ${data.stderr || ""}`, true);
-      }
-      await loadData();
-    }
-    document.getElementById("refreshBtn").addEventListener("click", loadData);
-    document.getElementById("rankBtn").addEventListener("click", updateRanks);
-    document.getElementById("saveMemoBtn").addEventListener("click", saveMemo);
-    document.getElementById("exportBtn").addEventListener("click", exportDraft);
-    const mobileMenuToggle = document.getElementById("mobileMenuToggle");
-    const mobileBackdrop = document.getElementById("mobileBackdrop");
-    function closeMobileMenu() {
-      document.body.classList.remove("sidebar-open");
-    }
-    mobileMenuToggle?.addEventListener("click", () => {
-      document.body.classList.toggle("sidebar-open");
+    // Navigation
+    document.querySelectorAll(".nav button[data-page]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.page = btn.dataset.page;
+        fillCampaigns(); fillAdgroups(); render();
+        if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
+      });
     });
-    mobileBackdrop?.addEventListener("click", closeMobileMenu);
-    els.monthFilter.addEventListener("change", () => {
-      state.month = els.monthFilter.value;
-      els.campaignFilter.value = "";
-      els.adgroupFilter.value = "";
-      loadData();
+    document.querySelectorAll(".nav button[data-rank-root]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (state.page !== "rankShopping" && state.page !== "rankPowerlink") state.page = "rankShopping";
+        render();
+        if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
+      });
     });
-    els.badOnlyBtn.addEventListener("click", () => {
-      state.badOnly = !state.badOnly;
-      els.badOnlyBtn.classList.toggle("primary", state.badOnly);
-      renderInspection();
-    });
-    document.querySelectorAll("[data-detail-mode]").forEach(button => {
-      button.addEventListener("click", () => {
-        state.detailMode = button.dataset.detailMode;
-        document.querySelectorAll("[data-detail-mode]").forEach(item => item.classList.remove("active"));
-        button.classList.add("active");
+    els.monthFilter.addEventListener("change", () => { state.month = els.monthFilter.value; loadData(); });
+    els.typeFilter?.addEventListener("change", () => { fillCampaigns(); fillAdgroups(); render(); });
+    els.campaignFilter?.addEventListener("change", () => { fillAdgroups(); render(); });
+    els.adgroupFilter?.addEventListener("change", render);
+    els.decisionFilter?.addEventListener("change", render);
+    els.searchInput?.addEventListener("input", render);
+    els.badOnlyBtn?.addEventListener("click", () => { state.badOnly = !state.badOnly; render(); });
+    document.querySelectorAll("[data-detail-mode]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.detailMode = btn.dataset.detailMode;
+        document.querySelectorAll("[data-detail-mode]").forEach(b => b.classList.toggle("active", b === btn));
         renderKeywords();
       });
     });
-    document.querySelectorAll("[data-rank-view]").forEach(button => {
-      button.addEventListener("click", () => {
-        state.rankView = button.dataset.rankView;
-        renderRankTraffic();
-      });
+    document.getElementById("refreshBtn")?.addEventListener("click", loadData);
+    document.getElementById("rankBtn")?.addEventListener("click", async () => {
+      setStatus("순위 갱신 중...");
+      try { const r = await fetch("/api/refresh-rank", {method:"POST"}); if(r.ok){setStatus("순위 갱신 완료");loadData();}else setStatus("순위 갱신 실패",true); } catch(e){setStatus("순위 갱신 실패",true);}
     });
-    document.querySelectorAll("[data-rank-root]").forEach(button => {
-      button.addEventListener("click", () => {
-        state.page = "rankShopping";
-        els.campaignFilter.value = "";
-        els.adgroupFilter.value = "";
-        fillCampaigns();
-        fillAdgroups();
-        render();
-        closeMobileMenu();
-      });
+    document.getElementById("saveMemoBtn")?.addEventListener("click", async () => {
+      setStatus("메모 저장 중...");
+      try { const r = await fetch("/api/save-memo",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({planMemo:els.planMemo.value,reportMemo:els.reportMemo.value})}); setStatus(r.ok?"메모 저장 완료":"메모 저장 실패",!r.ok); } catch(e){setStatus("메모 저장 실패",true);}
     });
-    els.rankBody.addEventListener("click", event => {
-      const button = event.target.closest("[data-powerlink-device]");
-      if (!button) return;
-      state.powerlinkDevice = button.dataset.powerlinkDevice;
-      renderRankTraffic();
+    document.getElementById("exportBtn")?.addEventListener("click", () => {
+      if(!state.data) return;
+      const d = state.data;
+      const txt = [`# ${d.month} 네이버 광고 보고서`,`광고비: ${money(d.summary.cost)}`,`매출: ${money(d.summary.revenue)}`,`ROAS: ${ratio(d.summary.roas)}`,``,els.planMemo.value,``,els.reportMemo.value].join("\n");
+      const a = Object.assign(document.createElement("a"),{href:URL.createObjectURL(new Blob([txt],{type:"text/plain"})),download:`광고보고서_${d.month}.txt`});
+      a.click();
     });
-    els.rankOverview.addEventListener("click", event => {
-      const button = event.target.closest("[data-reward-view]");
-      if (!button) return;
-      state.rewardView = button.dataset.rewardView;
-      renderRankTraffic();
+    document.getElementById("mobileMenuToggle")?.addEventListener("click", () => document.body.classList.toggle("sidebar-open"));
+    document.getElementById("mobileBackdrop")?.addEventListener("click", () => document.body.classList.remove("sidebar-open"));
+    document.addEventListener("click", e => {
+      const d = e.target.closest("[data-daily-product-date]");
+      if (d) { state.dailyProductDate = d.dataset.dailyProductDate; renderDailyProductPerformance(); }
+      const rd = e.target.closest("[data-rank-date]");
+      if (rd) { state.rankDate = rd.dataset.rankDate; document.querySelectorAll("[data-rank-date]").forEach(b=>b.classList.toggle("active",b===rd)); renderRankTraffic(); }
     });
-    els.dailyProductBody.addEventListener("click", event => {
-      const button = event.target.closest("[data-daily-product-date]");
-      if (!button) return;
-      state.dailyProductDate = button.dataset.dailyProductDate;
-      renderDailyProductPerformance();
+    document.addEventListener("change", e => {
+      const m = e.target.closest("[data-daily-product-month]");
+      if (m) { state.dailyProductMonth = m.value; renderDailyProductPerformance(); }
     });
-    els.dailyProductBody.addEventListener("change", event => {
-      const select = event.target.closest("[data-daily-product-month]");
-      if (!select) return;
-      state.dailyProductMonth = select.value;
-      state.dailyProductDate = "";
-      renderDailyProductPerformance();
-    });
-    document.querySelectorAll(".nav [data-page]").forEach(button => {
-      button.addEventListener("click", () => {
-        state.page = button.dataset.page;
-        els.campaignFilter.value = "";
-        els.adgroupFilter.value = "";
-        fillCampaigns();
-        fillAdgroups();
-        render();
-        closeMobileMenu();
-      });
-    });
-    [els.campaignFilter].forEach(el => {
-      el.addEventListener("change", () => {
-        fillAdgroups();
-        render();
-      });
-    });
-    [els.adgroupFilter, els.decisionFilter, els.searchInput].forEach(el => {
-      el.addEventListener("input", render);
-      el.addEventListener("change", render);
-    });
-    loadData().catch(err => {
-      els.meta.textContent = err.message;
-      console.error(err);
-    });
+    loadData().catch(err => { if(els.meta) els.meta.textContent = "데이터 로드 실패: " + err.message; });
   </script>
 </body>
 </html>
