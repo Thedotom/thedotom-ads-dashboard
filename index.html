@@ -279,12 +279,14 @@
     .memo-body label { display: block; margin: 10px 0 5px; color: var(--muted); font-size: 12px; font-weight: 700; }
     .rank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 16px; }
     .rank-card { border: 1px solid var(--line); border-radius: 12px; background: #fff; overflow: hidden; box-shadow: var(--shadow); }
-    .rank-card-head { display: flex; gap: 14px; align-items: center; padding: 14px 16px; background: #f8fafc; border-bottom: 1px solid var(--line); }
-    .rank-thumb, .reward-thumb { width: 56px; height: 56px; border-radius: 8px; object-fit: cover; border: 1px solid var(--line); background: #f1f5f9; flex: 0 0 auto; }
+    .rank-card-head { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; background: #f8fafc; border-bottom: 1px solid var(--line); min-width: 0; }
+    .rank-thumb, .reward-thumb { width: 56px; height: 56px; border-radius: 8px; object-fit: cover; border: 1px solid var(--line); background: #f1f5f9; flex: 0 0 56px; }
+    .rank-card-head-info { min-width: 0; flex: 1; }
     .reward-product { display: flex; align-items: center; gap: 10px; min-width: 300px; }
     .reward-product-title { font-weight: 700; white-space: normal; line-height: 1.35; }
-    .rank-card-title { font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .rank-card-title { font-size: 13px; font-weight: 700; white-space: normal; line-height: 1.4; word-break: keep-all; overflow-wrap: break-word; }
     .rank-card-sub { margin-top: 4px; color: var(--muted); font-size: 11px; }
+    .rank-card-reward-badge { display: inline-flex; align-items: center; gap: 4px; margin-top: 5px; padding: 2px 8px; border-radius: 999px; background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 700; }
     .rank-list { padding: 10px 16px 14px; background: #fff; }
     .rank-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
     .rank-row:last-child { border-bottom: 0; }
@@ -358,7 +360,7 @@
     .delta-badge.good { color: #10b981; }
     .delta-badge.bad { color: #ef4444; }
     .delta-badge.warn { color: #94a3b8; }
-    .rank-keyword { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .rank-keyword { flex: 1; min-width: 0; white-space: normal; word-break: keep-all; line-height: 1.35; }
     .rank-control-panel { margin-top: 10px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #f8fafc; }
     .rank-control-panel .rank-tabs { padding: 8px 16px; border-bottom: 0; background: transparent; }
     .daily-product-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
@@ -1430,12 +1432,22 @@
           || (rank.slotDetails || [])[0];
 
         if (slotDetail && (slotDetail.shoppingProducts || []).length) {
-          const cards = slotDetail.shoppingProducts.map(p => {
+          // Pin reward products to front
+          const rewardItems = state.data.rewardMarketing?.items || [];
+          const rewardIds = new Set(rewardItems.map(r => String(r.productId)));
+          const products = [...slotDetail.shoppingProducts].sort((a, b) => {
+            const aR = rewardIds.has(String(a.productId));
+            const bR = rewardIds.has(String(b.productId));
+            return aR === bR ? 0 : aR ? -1 : 1;
+          });
+          const cards = products.map(p => {
+            const isReward = rewardIds.has(String(p.productId));
             const img = p.image ? `<img class="rank-thumb" src="${html(p.image)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
+            const rewardBadge = isReward ? `<div class="rank-card-reward-badge">⭐ 리워드 슬롯 운영중</div>` : "";
             const kws = (p.items || []).map(item =>
               `<div class="rank-row"><span class="rank-keyword">${html(item.keyword || "")}</span>${rankBadge(item)}${deltaBadge(item.delta)}</div>`
             ).join("");
-            return `<div class="rank-card"><div class="rank-card-head">${img}<div><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div></div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
+            return `<div class="rank-card"${isReward ? ' style="border-color:#f59e0b;box-shadow:0 0 0 2px #fef3c780"' : ""}><div class="rank-card-head">${img}<div class="rank-card-head-info"><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div>${rewardBadge}</div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
           }).join("");
           els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">쇼핑검색 순위</h3><div style="font-size:12px;color:var(--muted);margin-top:2px">${html(slotDetail.label || "")}</div></div></div><div class="rank-grid">${cards || '<div class="empty" style="padding:24px">데이터 없음</div>'}</div></div>`;
         } else {
@@ -1451,12 +1463,21 @@
             if (!byProduct[pid]) byProduct[pid] = { ...item, keywords: [] };
             byProduct[pid].keywords.push(item);
           });
-          const cards = Object.values(byProduct).map(p => {
+          const rewardItems2 = state.data.rewardMarketing?.items || [];
+          const rewardIds2 = new Set(rewardItems2.map(r => String(r.productId)));
+          const sortedProducts = Object.values(byProduct).sort((a, b) => {
+            const aR = rewardIds2.has(String(a.productId));
+            const bR = rewardIds2.has(String(b.productId));
+            return aR === bR ? 0 : aR ? -1 : 1;
+          });
+          const cards = sortedProducts.map(p => {
+            const isReward = rewardIds2.has(String(p.productId));
             const img = p.image ? `<img class="rank-thumb" src="${html(p.image)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
+            const rewardBadge = isReward ? `<div class="rank-card-reward-badge">⭐ 리워드 슬롯 운영중</div>` : "";
             const kws = p.keywords.map(kw =>
               `<div class="rank-row"><span class="rank-keyword">${html(kw.keyword || "")}</span>${rankBadge(kw)}${deltaBadge(kw.delta)}</div>`
             ).join("");
-            return `<div class="rank-card"><div class="rank-card-head">${img}<div><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div></div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
+            return `<div class="rank-card"${isReward ? ' style="border-color:#f59e0b;box-shadow:0 0 0 2px #fef3c780"' : ""}><div class="rank-card-head">${img}<div class="rank-card-head-info"><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div>${rewardBadge}</div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
           }).join("");
           els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">쇼핑검색 순위 (최신)</h3></div></div><div class="rank-grid">${cards}</div></div>`;
         }
