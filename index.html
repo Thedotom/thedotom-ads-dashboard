@@ -1401,37 +1401,93 @@
       const rank = state.data.rankTraffic || {};
       const isShoppingPage = state.page === "rankShopping";
       els.rankStatus.textContent = rank.updatedAt ? `업데이트: ${rank.updatedAt}` : "순위 데이터 없음";
-      els.rankOverview.innerHTML = rank.overview ? `<div class="meta" style="padding:10px 14px">${html(rank.overview)}</div>` : "";
-      const allItems = isShoppingPage ? (rank.shopping || rank.latestShopping || []) : (rank.powerlink || rank.latestPowerlink || []);
-      const dates = [...new Set(allItems.map(r => r.date).filter(Boolean))].sort().reverse();
-      if (!state.rankDate || !dates.includes(state.rankDate)) state.rankDate = dates[0] || "";
-      els.rankDateTabs.innerHTML = dates.slice(0, 7).map(d =>
+      els.rankOverview.innerHTML = "";
+
+      // Date tabs from rank.dates
+      const dates = rank.dates || [];
+      if (!state.rankDate || !dates.includes(state.rankDate)) {
+        state.rankDate = rank.latestDate || dates[0] || "";
+      }
+
+      // Slot tabs from rank.slots
+      const slots = rank.slots || [];
+      const slotLabels = { morning: "오전", afternoon: "오후", evening: "저녁", night: "야간" };
+      if (!state.rankSlot || !slots.includes(state.rankSlot)) {
+        state.rankSlot = rank.latestSlot || slots[0] || "";
+      }
+
+      els.rankDateTabs.innerHTML = dates.map(d =>
         `<button class="ghost ${d === state.rankDate ? "active" : ""}" type="button" data-rank-date="${html(d)}">${html(d)}</button>`
       ).join("");
-      els.rankSlotTabs.innerHTML = "";
-      const items = allItems.filter(r => !state.rankDate || !r.date || r.date === state.rankDate);
-      if (!items.length) {
-        els.rankBody.innerHTML = `<div class="empty" style="padding:24px">순위 데이터가 없습니다.</div>`;
-        return;
-      }
+      els.rankSlotTabs.innerHTML = slots.map(s =>
+        `<button class="ghost ${s === state.rankSlot ? "active" : ""}" type="button" data-rank-slot="${html(s)}">${html(slotLabels[s] || s)}</button>`
+      ).join("");
+
       if (isShoppingPage) {
-        const byProduct = {};
-        items.forEach(row => {
-          const key = row.productId || row.productName || row.product || "기타";
-          if (!byProduct[key]) byProduct[key] = { ...row, keywords: [] };
-          if (row.keyword || row.slot) byProduct[key].keywords.push(row);
-        });
-        const cards = Object.values(byProduct).map(p => {
-          const img = p.image ? `<img class="rank-thumb" src="${html(p.image)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
-          const kws = (p.keywords || []).map(kw => `<div class="rank-row"><span class="rank-keyword">${html(kw.keyword || kw.slot || "")}</span>${rankBadge(kw)}${deltaBadge(kw.delta)}</div>`).join("");
-          return `<div class="rank-card"><div class="rank-card-head">${img}<div><div class="rank-card-title">${html(p.productName || p.product || key)}</div><div class="rank-card-sub">${html(p.productId || "")}</div></div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
-        }).join("");
-        els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">쇼핑검색 순위</h3></div></div><div class="rank-grid">${cards}</div></div>`;
+        // Find slotDetail matching selected date+slot
+        const slotDetail = (rank.slotDetails || []).find(sd => sd.date === state.rankDate && sd.slot === state.rankSlot)
+          || (rank.slotDetails || []).find(sd => sd.date === state.rankDate)
+          || (rank.slotDetails || [])[0];
+
+        if (slotDetail && (slotDetail.shoppingProducts || []).length) {
+          const cards = slotDetail.shoppingProducts.map(p => {
+            const img = p.image ? `<img class="rank-thumb" src="${html(p.image)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
+            const kws = (p.items || []).map(item =>
+              `<div class="rank-row"><span class="rank-keyword">${html(item.keyword || "")}</span>${rankBadge(item)}${deltaBadge(item.delta)}</div>`
+            ).join("");
+            return `<div class="rank-card"><div class="rank-card-head">${img}<div><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div></div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
+          }).join("");
+          els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">쇼핑검색 순위</h3><div style="font-size:12px;color:var(--muted);margin-top:2px">${html(slotDetail.label || "")}</div></div></div><div class="rank-grid">${cards || '<div class="empty" style="padding:24px">데이터 없음</div>'}</div></div>`;
+        } else {
+          // Fallback: latestShopping flat list grouped by productId
+          const latest = rank.latestShopping || [];
+          if (!latest.length) {
+            els.rankBody.innerHTML = `<div class="empty" style="padding:24px">쇼핑 순위 데이터가 없습니다.</div>`;
+            return;
+          }
+          const byProduct = {};
+          latest.forEach(item => {
+            const pid = item.productId || item.key || "기타";
+            if (!byProduct[pid]) byProduct[pid] = { ...item, keywords: [] };
+            byProduct[pid].keywords.push(item);
+          });
+          const cards = Object.values(byProduct).map(p => {
+            const img = p.image ? `<img class="rank-thumb" src="${html(p.image)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
+            const kws = p.keywords.map(kw =>
+              `<div class="rank-row"><span class="rank-keyword">${html(kw.keyword || "")}</span>${rankBadge(kw)}${deltaBadge(kw.delta)}</div>`
+            ).join("");
+            return `<div class="rank-card"><div class="rank-card-head">${img}<div><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div></div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
+          }).join("");
+          els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">쇼핑검색 순위 (최신)</h3></div></div><div class="rank-grid">${cards}</div></div>`;
+        }
       } else {
-        const cards = items.map(item => {
-          const pcRows = (item.pc || []).map(kw => `<div class="keyword-chip"><span class="keyword-chip-name">${html(kw.keyword || "")}</span>${rankBadge(kw)}${deltaBadge(kw.delta)}</div>`).join("");
-          const mRows = (item.mobile || []).map(kw => `<div class="keyword-chip"><span class="keyword-chip-name">${html(kw.keyword || "")}</span>${rankBadge(kw)}${deltaBadge(kw.delta)}</div>`).join("");
-          return `<div class="powerlink-rank-card"><div class="powerlink-rank-head"><div><h3 class="powerlink-rank-title">${html(item.campaign || item.adgroup || "")}</h3><div class="powerlink-rank-sub">${html(item.adgroup || "")}</div></div></div>${pcRows ? `<div class="device-block"><div class="device-title">PC</div><div class="keyword-chips">${pcRows}</div></div>` : ""}${mRows ? `<div class="device-block mobile"><div class="device-title mobile">모바일</div><div class="keyword-chips">${mRows}</div></div>` : ""}</div>`;
+        // Powerlink rank — powerlinkPcRows / powerlinkMobileRows are indexed objects
+        const pcRows = Object.values(rank.powerlinkPcRows || {});
+        const mobileRows = Object.values(rank.powerlinkMobileRows || {});
+        if (!pcRows.length && !mobileRows.length) {
+          els.rankBody.innerHTML = `<div class="empty" style="padding:24px">파워링크 순위 데이터가 없습니다.</div>`;
+          return;
+        }
+        // Group by campaign
+        const campaignMap = {};
+        pcRows.forEach(row => {
+          const cKey = row.campaign || row.adgroup || "기타";
+          if (!campaignMap[cKey]) campaignMap[cKey] = { campaign: row.campaign, adgroup: row.adgroup, pc: [], mobile: [] };
+          campaignMap[cKey].pc.push(row);
+        });
+        mobileRows.forEach(row => {
+          const cKey = row.campaign || row.adgroup || "기타";
+          if (!campaignMap[cKey]) campaignMap[cKey] = { campaign: row.campaign, adgroup: row.adgroup, pc: [], mobile: [] };
+          campaignMap[cKey].mobile.push(row);
+        });
+        const cards = Object.values(campaignMap).map(group => {
+          const pcChips = group.pc.map(row =>
+            `<div class="keyword-chip"><span class="keyword-chip-name">${html(row.keyword || "")}</span>${rankBadge({ rank: row.latestRank, status: row.latestStatus })}${deltaBadge(row.delta)}</div>`
+          ).join("");
+          const mChips = group.mobile.map(row =>
+            `<div class="keyword-chip"><span class="keyword-chip-name">${html(row.keyword || "")}</span>${rankBadge({ rank: row.latestRank, status: row.latestStatus })}${deltaBadge(row.delta)}</div>`
+          ).join("");
+          return `<div class="powerlink-rank-card"><div class="powerlink-rank-head"><div><h3 class="powerlink-rank-title">${html(group.campaign || group.adgroup || "")}</h3><div class="powerlink-rank-sub">${html(group.adgroup || "")}</div></div></div>${pcChips ? `<div class="device-block"><div class="device-title">PC</div><div class="keyword-chips">${pcChips}</div></div>` : ""}${mChips ? `<div class="device-block mobile"><div class="device-title mobile">모바일</div><div class="keyword-chips">${mChips}</div></div>` : ""}</div>`;
         }).join("");
         els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">파워링크 순위</h3></div></div><div class="powerlink-rank-grid">${cards}</div></div>`;
       }
@@ -1567,6 +1623,8 @@
       if (d) { state.dailyProductDate = d.dataset.dailyProductDate; renderDailyProductPerformance(); }
       const rd = e.target.closest("[data-rank-date]");
       if (rd) { state.rankDate = rd.dataset.rankDate; document.querySelectorAll("[data-rank-date]").forEach(b=>b.classList.toggle("active",b===rd)); renderRankTraffic(); }
+      const rs = e.target.closest("[data-rank-slot]");
+      if (rs) { state.rankSlot = rs.dataset.rankSlot; document.querySelectorAll("[data-rank-slot]").forEach(b=>b.classList.toggle("active",b===rs)); renderRankTraffic(); }
     });
     document.addEventListener("change", e => {
       const m = e.target.closest("[data-daily-product-month]");
