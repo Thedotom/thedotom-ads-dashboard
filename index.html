@@ -415,6 +415,31 @@
       .chart-row { grid-template-columns: 1fr; }
       .chart-body { height: 220px; }
     }
+    /* ── 파워링크 상세 데이터 개선 ── */
+    .pl-section-head { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--line); background:linear-gradient(180deg,#fff 0%,#f8fafc 100%); flex-wrap:wrap; }
+    .pl-section-head-left { display:flex; align-items:center; gap:10px; }
+    .pl-section-head-right { display:flex; gap:6px; }
+    .pl-view-btn { height:28px !important; padding:0 11px !important; border-radius:6px !important; border:1px solid var(--line) !important; background:#fff !important; color:var(--muted) !important; font-size:12px !important; font-weight:700 !important; cursor:pointer !important; }
+    .pl-view-btn.active { background:var(--blue) !important; border-color:var(--blue) !important; color:#fff !important; }
+    .pl-kpi-row { display:grid; grid-template-columns:repeat(5,1fr); border-bottom:1px solid var(--line); background:#f8fafc; }
+    .pl-kpi-item { padding:11px 16px; border-right:1px solid var(--line); }
+    .pl-kpi-item:last-child { border-right:0; }
+    .pl-kpi-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:4px; }
+    .pl-kpi-val { font-size:18px; font-weight:900; color:var(--text); white-space:nowrap; }
+    .pl-chip { border-radius:999px !important; border:1px solid var(--line) !important; background:#fff !important; color:var(--muted) !important; font-size:12px !important; font-weight:700 !important; display:inline-flex !important; align-items:center !important; gap:5px !important; height:28px !important; padding:0 12px !important; }
+    .pl-chip .pl-count { background:#e2e8f0; color:#475569; border-radius:999px; padding:1px 6px; font-size:11px; transition:background .12s,color .12s; }
+    .pl-chip.active { background:#1e293b !important; border-color:#1e293b !important; color:#fff !important; }
+    .pl-chip.active .pl-count { background:rgba(255,255,255,.18); color:#fff; }
+    .pl-chip[data-detail-mode="highCpc"].active { background:#fef3c7 !important; border-color:#f59e0b !important; color:#92400e !important; }
+    .pl-chip[data-detail-mode="noConversion"].active { background:#fee2e2 !important; border-color:#ef4444 !important; color:#991b1b !important; }
+    .pl-chip[data-detail-mode="lowRoas"].active { background:#fde8d8 !important; border-color:#f97316 !important; color:#9a3412 !important; }
+    .pl-chip[data-detail-mode="scale"].active { background:#dcfce7 !important; border-color:#22c55e !important; color:#166534 !important; }
+    .pl-chip[data-detail-mode="core"].active { background:#ede9fe !important; border-color:#8b5cf6 !important; color:#4c1d95 !important; }
+    .pl-chart-area { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--line); background:#fff; }
+    .pl-chart-panel { padding:14px 16px; border-right:1px solid var(--line); }
+    .pl-chart-panel:last-child { border-right:0; }
+    .pl-chart-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:10px; }
+    .roas-bar-inline { display:inline-block; height:5px; border-radius:3px; background:linear-gradient(90deg,var(--blue),var(--green)); vertical-align:middle; margin-left:6px; }
   </style>
 </head>
 <body>
@@ -512,18 +537,30 @@
         </div>
       </section>
       <section class="page-section" data-page="powerlink">
-        <div class="section-head"><h2>파워링크 상세 데이터</h2><span id="keywordCount" class="count"></span></div>
-        <div class="detail-toolbar">
-          <button class="ghost active" type="button" data-detail-mode="all">전체</button>
-          <button class="ghost" type="button" data-detail-mode="highCpc">고CPC</button>
-          <button class="ghost" type="button" data-detail-mode="noConversion">무전환</button>
-          <button class="ghost" type="button" data-detail-mode="lowRoas">저ROAS</button>
-          <button class="ghost" type="button" data-detail-mode="scale">확대후보</button>
-          <button class="ghost" type="button" data-detail-mode="core">핵심키워드</button>
+        <div class="pl-section-head">
+          <div class="pl-section-head-left"><h2>파워링크 상세 데이터</h2><span id="keywordCount" class="count"></span></div>
+          <div class="pl-section-head-right">
+            <button class="pl-view-btn active" type="button" data-pl-view="table">테이블</button>
+            <button class="pl-view-btn" type="button" data-pl-view="chart">그래프</button>
+          </div>
         </div>
-        <div class="table-wrap">
+        <div class="pl-kpi-row" id="plKpiRow"></div>
+        <div class="detail-toolbar">
+          <button class="pl-chip active" type="button" data-detail-mode="all">전체 <span class="pl-count" id="plCount-all">0</span></button>
+          <button class="pl-chip" type="button" data-detail-mode="highCpc">고CPC <span class="pl-count" id="plCount-highCpc">0</span></button>
+          <button class="pl-chip" type="button" data-detail-mode="noConversion">무전환 <span class="pl-count" id="plCount-noConversion">0</span></button>
+          <button class="pl-chip" type="button" data-detail-mode="lowRoas">저ROAS <span class="pl-count" id="plCount-lowRoas">0</span></button>
+          <button class="pl-chip" type="button" data-detail-mode="scale">확대후보 <span class="pl-count" id="plCount-scale">0</span></button>
+          <button class="pl-chip" type="button" data-detail-mode="core">핵심키워드 <span class="pl-count" id="plCount-core">0</span></button>
+        </div>
+        <div id="plChartArea" class="pl-chart-area" style="display:none">
+          <div class="pl-chart-panel"><div class="pl-chart-title">판단 분포</div><div style="height:220px;position:relative"><canvas id="plDonutChart"></canvas></div></div>
+          <div class="pl-chart-panel"><div class="pl-chart-title">비용 상위 키워드 TOP 8</div><div style="height:220px;position:relative"><canvas id="plBarChart"></canvas></div></div>
+          <div class="pl-chart-panel"><div class="pl-chart-title">CPC vs ROAS 포지셔닝</div><div style="height:220px;position:relative"><canvas id="plScatterChart"></canvas></div></div>
+        </div>
+        <div id="plTableArea" class="table-wrap">
           <table>
-            <thead><tr><th>유형</th><th>캠페인</th><th>광고그룹</th><th>키워드</th><th>기기</th><th>실제순위</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
+            <thead><tr><th>광고그룹 / 캠페인</th><th>키워드</th><th>기기</th><th>순위</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
             <tbody id="keywordBody"></tbody>
           </table>
         </div>
@@ -598,7 +635,7 @@
       window.location.replace("http://127.0.0.1:8790");
     }
     const initialMonth = new URLSearchParams(window.location.search).get("month") || "";
-    const state = { data: null, badOnly: false, detailMode: "all", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", dailyProductDate: "", dailyProductMonth: "" };
+    const state = { data: null, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -931,22 +968,81 @@
       const isCore = row["광고유형"] === "파워링크" && ["답례품", "돌답례품", "돌잔치답례품"].includes(keyword);
       return isCore ? "미확인" : "-";
     }
+    function destroyPlChart(name) { if (window._charts[name]) { window._charts[name].destroy(); window._charts[name] = null; } }
+    function renderPlCharts(rows) {
+      // 판단 분포 도넛
+      const jc = { "핵심·확대": 0, "관찰": 0, "고CPC·무전환": 0, "저ROAS": 0 };
+      rows.forEach(r => {
+        const j = r["판단"] || "관찰";
+        if (j.includes("핵심") || j.includes("확대")) jc["핵심·확대"]++;
+        else if (j.includes("저")) jc["저ROAS"]++;
+        else if (j.includes("고") || j.includes("무전환")) jc["고CPC·무전환"]++;
+        else jc["관찰"]++;
+      });
+      destroyPlChart("plDonut");
+      const dc = document.getElementById("plDonutChart");
+      if (dc) window._charts.plDonut = new Chart(dc, { type: "doughnut", data: { labels: Object.keys(jc), datasets: [{ data: Object.values(jc), backgroundColor: ["#10b981","#94a3b8","#ef4444","#f59e0b"], borderWidth: 2, borderColor: "#fff" }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "right", labels: { font: { size: 11 }, boxWidth: 10, color: "#64748b", padding: 8 } } }, cutout: "58%" } });
+      // 비용 상위 키워드 가로 바
+      const top8 = [...rows].sort((a,b) => Number(b["총비용"]||0)-Number(a["총비용"]||0)).slice(0,8).reverse();
+      destroyPlChart("plBar");
+      const bc = document.getElementById("plBarChart");
+      if (bc) window._charts.plBar = new Chart(bc, { type: "bar", data: { labels: top8.map(r => r["키워드"]||r["상품명"]||""), datasets: [{ data: top8.map(r => Number(r["총비용"]||0)), backgroundColor: top8.map(r => { const j=r["판단"]||""; return j.includes("핵심")||j.includes("확대")?"rgba(16,185,129,.8)":j.includes("고")||j.includes("무전환")||j.includes("저")?"rgba(239,68,68,.8)":"rgba(72,101,244,.8)"; }), borderRadius: 4, borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: "y", plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `₩${Math.round(ctx.parsed.x).toLocaleString()}` } } }, scales: { x: { ticks: { callback: v => `₩${(v/1000).toFixed(0)}k`, font: { size: 10 }, color: "#64748b" }, grid: { color: "#f1f5f9" } }, y: { ticks: { font: { size: 10 }, color: "#475569" } } } } });
+      // CPC vs ROAS 산점도
+      const sdRaw = rows.filter(r => Number(r["CPC"]||0)>0 && Number(r["ROAS"]||0)>0);
+      const sdData = sdRaw.map(r => ({ x: Number(r["CPC"]||0), y: Number(r["ROAS"]||0) }));
+      const sdColors = sdRaw.map(r => { const j=r["판단"]||""; return j.includes("핵심")||j.includes("확대")?"rgba(16,185,129,.8)":j.includes("고")||j.includes("무전환")||j.includes("저")?"rgba(239,68,68,.8)":"rgba(148,163,184,.8)"; });
+      destroyPlChart("plScatter");
+      const sc = document.getElementById("plScatterChart");
+      if (sc) window._charts.plScatter = new Chart(sc, { type: "scatter", data: { datasets: [{ data: sdData, backgroundColor: sdColors, pointRadius: 5, pointHoverRadius: 7, borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => { const d=sdRaw[ctx.dataIndex]; return `${d["키워드"]||""}: CPC ₩${Math.round(Number(d["CPC"]||0)).toLocaleString()} / ROAS ${Number(d["ROAS"]||0).toFixed(2)}`; } } } }, scales: { x: { title: { display: true, text: "CPC (₩)", font: { size: 10 }, color: "#94a3b8" }, ticks: { callback: v => `₩${(v/1000).toFixed(0)}k`, font: { size: 10 }, color: "#64748b" }, grid: { color: "#f1f5f9" } }, y: { title: { display: true, text: "ROAS", font: { size: 10 }, color: "#94a3b8" }, ticks: { font: { size: 10 }, color: "#64748b" }, grid: { color: "#f1f5f9" } } } } });
+    }
     function renderKeywords() {
+      const basePl = state.data.keywordPerformance
+        .filter(r => r["광고유형"]==="파워링크")
+        .filter(r => !els.campaignFilter.value || r["캠페인명"]===els.campaignFilter.value)
+        .filter(r => !els.adgroupFilter.value || r["광고그룹명"]===els.adgroupFilter.value)
+        .filter(r => { const q=els.searchInput.value.trim().toLowerCase(); if(!q) return true; return `${r["캠페인명"]||""} ${r["광고그룹명"]||""} ${r["키워드"]||""}`.toLowerCase().includes(q); });
+      // 칩 카운트 업데이트
+      const counts = {
+        all: basePl.length,
+        highCpc: basePl.filter(r=>Number(r["CPC"]||0)>=3000).length,
+        noConversion: basePl.filter(r=>Number(r["클릭수"]||0)>=20&&Number(r["전환수"]||0)===0).length,
+        lowRoas: basePl.filter(r=>Number(r["총비용"]||0)>=100000&&Number(r["ROAS"]||0)>0&&Number(r["ROAS"]||0)<3).length,
+        scale: basePl.filter(r=>Number(r["전환수"]||0)>0&&Number(r["ROAS"]||0)>=5).length,
+        core: basePl.filter(r=>["답례품","돌답례품","돌잔치답례품"].includes(String(r["키워드"]||"").trim())).length
+      };
+      Object.keys(counts).forEach(k => { const el=document.getElementById(`plCount-${k}`); if(el) el.textContent=counts[k]; });
       const rows = detailFilteredKeywords();
       els.keywordCount.textContent = `${rows.length}개 키워드`;
-      if (!rows.length) {
-        els.keywordBody.innerHTML = `<tr><td class="empty" colspan="15">조건에 맞는 상세 데이터가 없습니다.</td></tr>`;
-        return;
-      }
-      els.keywordBody.innerHTML = rows.slice(0, 150).map(row => {
+      // KPI 집계
+      const totalCost = rows.reduce((s,r)=>s+Number(r["총비용"]||0),0);
+      const totalClicks = rows.reduce((s,r)=>s+Number(r["클릭수"]||0),0);
+      const totalConv = rows.reduce((s,r)=>s+Number(r["전환수"]||0),0);
+      const avgCpc = totalClicks ? totalCost/totalClicks : 0;
+      const roasRows = rows.filter(r=>Number(r["ROAS"]||0)>0);
+      const avgRoas = roasRows.length ? roasRows.reduce((s,r)=>s+Number(r["ROAS"]||0),0)/roasRows.length : 0;
+      const kpiEl = document.getElementById("plKpiRow");
+      if (kpiEl) kpiEl.innerHTML = [
+        ["총 비용", money(totalCost)], ["총 클릭", number(totalClicks)],
+        ["총 전환", number(totalConv)], ["평균 CPC", money(Math.round(avgCpc))],
+        ["평균 ROAS", ratio(avgRoas)+"배"]
+      ].map(([l,v])=>`<div class="pl-kpi-item"><div class="pl-kpi-label">${l}</div><div class="pl-kpi-val">${v}</div></div>`).join("");
+      // 뷰 전환
+      const isChart = state.plView === "chart";
+      const ca = document.getElementById("plChartArea"), ta = document.getElementById("plTableArea");
+      if (ca) ca.style.display = isChart ? "grid" : "none";
+      if (ta) ta.style.display = isChart ? "none" : "block";
+      if (isChart) { renderPlCharts(rows); return; }
+      // 테이블 뷰
+      if (!rows.length) { els.keywordBody.innerHTML=`<tr><td class="empty" colspan="13">조건에 맞는 상세 데이터가 없습니다.</td></tr>`; return; }
+      const maxRoas = Math.max(...rows.filter(r=>Number(r["ROAS"]||0)>0).map(r=>Number(r["ROAS"]||0)), 1);
+      els.keywordBody.innerHTML = rows.slice(0,150).map(row => {
         const judgement = row["판단"] || "관찰";
-        const cls = judgement.includes("핵심") || judgement.includes("확대") ? "good" : judgement.includes("고") || judgement.includes("무전환") || judgement.includes("저") ? "bad" : "warn";
+        const cls = judgement.includes("핵심")||judgement.includes("확대") ? "good" : judgement.includes("고")||judgement.includes("무전환")||judgement.includes("저") ? "bad" : "warn";
+        const roas = Number(row["ROAS"]||0); const roasW = Math.round(Math.min(roas/maxRoas*44, 44));
         return `<tr>
-          <td>${html(row["광고유형"])}</td>
-          <td>${html(row["캠페인명"])}</td>
-          <td>${html(row["광고그룹명"])}</td>
-          <td>${html(row["키워드"] || row["상품명"])}</td>
-          <td>${html(row["검색기기"] || "")}</td>
+          <td><div style="font-weight:700;font-size:12px;line-height:1.3">${html(row["광고그룹명"])}</div><div style="font-size:11px;margin-top:2px;color:var(--muted)">${html(row["캠페인명"])}</div></td>
+          <td style="font-weight:700">${html(row["키워드"]||row["상품명"])}</td>
+          <td>${html(row["검색기기"]||"")}</td>
           <td>${actualRankText(row)}</td>
           <td>${number(row["노출수"])}</td>
           <td>${number(row["클릭수"])}</td>
@@ -954,7 +1050,7 @@
           <td><strong>${money(row["CPC"])}</strong></td>
           <td>${number(row["전환수"])}</td>
           <td>${money(row["CPA"])}</td>
-          <td>${ratio(row["ROAS"])}</td>
+          <td><span style="font-weight:700">${ratio(roas)}</span>${roasW>0?`<span class="roas-bar-inline" style="width:${roasW}px"></span>`:""}</td>
           <td><span class="pill ${cls}">${html(judgement)}</span></td>
           <td class="wrap">${html(row["권장조치"])}</td>
         </tr>`;
@@ -1723,6 +1819,13 @@
       btn.addEventListener("click", () => {
         state.detailMode = btn.dataset.detailMode;
         document.querySelectorAll("[data-detail-mode]").forEach(b => b.classList.toggle("active", b === btn));
+        renderKeywords();
+      });
+    });
+    document.querySelectorAll("[data-pl-view]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.plView = btn.dataset.plView;
+        document.querySelectorAll("[data-pl-view]").forEach(b => b.classList.toggle("active", b === btn));
         renderKeywords();
       });
     });
