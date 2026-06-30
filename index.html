@@ -86,14 +86,17 @@
       width: calc(100% - 8px);
       margin: 0 4px;
       height: 36px;
-      padding: 0 10px;
-      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0 10px 0 10px;
+      border: 1px solid rgba(255,255,255,0.18);
       border-radius: 8px;
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.10) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.6)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 10px center;
+      color: #fff;
       font: inherit;
       font-size: 13px;
+      -webkit-appearance: none;
+      appearance: none;
     }
+    aside select option { background: #1e293b; color: #fff; }
     select, input, textarea, button {
       box-sizing: border-box;
       border: 1px solid var(--line);
@@ -328,6 +331,16 @@
     .rank-section-sub { margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 600; }
     .rank-section-block .rank-grid, .rank-section-block .powerlink-rank-grid { padding: 16px; background: #fff; }
     .rank-grid { grid-template-columns: repeat(auto-fill, minmax(292px, 1fr)); gap: 16px; }
+
+    .pl-device-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); background: #f8fafc; }
+    .pl-device-tab { flex: 1; height: 34px; background: transparent; border: 0; border-bottom: 2px solid transparent; font-size: 12px; font-weight: 700; color: var(--muted); cursor: pointer; transition: all .12s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .pl-device-tab.active { color: var(--blue); border-bottom-color: var(--blue); background: #fff; }
+    .pl-device-tab::before { content: ""; width: 8px; height: 8px; border-radius: 2px; }
+    .pl-device-tab[data-pl-tab="pc"]::before { background: linear-gradient(135deg,#4865f4,#82d7ff); }
+    .pl-device-tab[data-pl-tab="mobile"]::before { background: linear-gradient(135deg,#f59e0b,#f97316); }
+    .pl-device-pane { display: none; }
+    .pl-device-pane.active { display: block; }
+    .pl-keyword-count { font-size: 11px; font-weight: 600; color: var(--muted); background: #e2e8f0; border-radius: 999px; padding: 1px 7px; }
     .powerlink-rank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 16px; background: #f1f5f9; }
     .powerlink-rank-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
     .powerlink-rank-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px 12px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #fff 0%, #f8fafc 100%); }
@@ -484,6 +497,11 @@
           </div>
         </section>
       </div>
+
+      <section class="page-section" data-page="overview" style="margin-bottom:16px;overflow:hidden;border-radius:12px;border:1px solid var(--line);background:var(--panel);box-shadow:var(--shadow)">
+        <div class="section-head"><h2>오늘 쇼핑검색 순위</h2><span id="overviewRankStatus" class="count"></span></div>
+        <div id="overviewRankBody" style="padding:12px 16px 16px"></div>
+      </section>
       <section class="page-section hidden" data-page="report">
         <div class="section-head"><h2>점검대상 및 조치 결정</h2><span id="inspectionCount" class="count"></span></div>
         <div class="table-wrap">
@@ -672,14 +690,58 @@
       localStorage.setItem(manualRevenueStorageKey(month), JSON.stringify(payload));
     }
     function applyManualRevenueLocal(month = state.month) {
-      const saved = loadManualRevenueLocal(month);
       const metrics = state.data?.totalSalesMetrics;
-      if (!saved || !metrics) return;
-      metrics.weeks = saved.weeks || metrics.weeks || [];
-      metrics.manualSales = saved.manualSales || [];
-      metrics.manualAdCosts = saved.manualAdCosts || [];
-      metrics.manualSource = `브라우저 저장 수기 입력값 기준 · ${String(saved.updatedAt || "").slice(0, 10)}`;
+      if (!metrics) return;
+      const saved = loadManualRevenueLocal(month);
+      if (saved) {
+        metrics.weeks = saved.weeks || metrics.weeks || [];
+        metrics.manualSales = saved.manualSales || [];
+        metrics.manualAdCosts = saved.manualAdCosts || [];
+        metrics.manualSource = `브라우저 저장 수기 입력값 기준 · ${String(saved.updatedAt || "").slice(0, 10)}`;
+      } else {
+        // localStorage 없으면 서버 top-level 데이터로 초기화
+        const d = state.data;
+        if (d.manualSales?.length) metrics.manualSales = JSON.parse(JSON.stringify(d.manualSales));
+        if (d.manualAdCosts?.length) metrics.manualAdCosts = JSON.parse(JSON.stringify(d.manualAdCosts));
+        metrics.manualSource = "서버 데이터 기준";
+      }
       refreshManualRevenueMetrics(metrics);
+    }
+
+    function renderOverviewShoppingRank() {
+      const rankBody = document.getElementById("overviewRankBody");
+      const rankStatus = document.getElementById("overviewRankStatus");
+      if (!rankBody) return;
+      const rank = state.data?.rankTraffic || {};
+      const slotDetails = rank.slotDetails || [];
+      if (!slotDetails.length) {
+        rankBody.innerHTML = '<div class="empty">순위 데이터 없음</div>';
+        return;
+      }
+      // 오늘 날짜 기준 최신 slotDetail
+      const today = new Date().toISOString().slice(0,10);
+      const todaySlots = slotDetails.filter(sd => sd.date === today);
+      const target = todaySlots.find(sd => sd.slot === "afternoon") || todaySlots[0]
+        || slotDetails[slotDetails.length - 1];
+      if (!target) { rankBody.innerHTML = '<div class="empty">오늘 데이터 없음</div>'; return; }
+      rankStatus?.textContent && (rankStatus.textContent = `${target.date} ${({morning:"오전",afternoon:"오후",evening:"저녁",night:"야간"})[target.slot]||target.slot}`);
+      if (rankStatus) rankStatus.textContent = `${target.date} ${({morning:"오전",afternoon:"오후",evening:"저녁",night:"야간"})[target.slot]||target.slot}`;
+      const rewardIds = new Set((state.data.rewardMarketing?.items||[]).map(r=>String(r.productId)));
+      const products = [...(target.shoppingProducts||[])].sort((a,b)=>{
+        const aR=rewardIds.has(String(a.productId)), bR=rewardIds.has(String(b.productId));
+        return aR===bR?0:aR?-1:1;
+      });
+      if (!products.length) { rankBody.innerHTML = '<div class="empty">상품 데이터 없음</div>'; return; }
+      rankBody.innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px">` +
+        products.map(p => {
+          const isReward = rewardIds.has(String(p.productId));
+          const img = p.image ? `<img style="width:44px;height:44px;border-radius:7px;object-fit:cover;border:1px solid var(--line);flex:0 0 44px" src="${html(p.image)}" alt="">` : `<div style="width:44px;height:44px;border-radius:7px;background:#f1f5f9;flex:0 0 44px;display:grid;place-items:center;font-size:10px;color:#94a3b8">없음</div>`;
+          const kws = (p.items||[]).slice(0,3).map(item=>`<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 0;font-size:12px;border-bottom:1px solid #f1f5f9"><span style="flex:1;min-width:0;white-space:normal;word-break:keep-all">${html(item.keyword||"")}</span>${rankBadge(item)}</div>`).join("");
+          const more = (p.items||[]).length > 3 ? `<div style="font-size:11px;color:var(--muted);padding-top:4px">+${(p.items||[]).length-3}개 더</div>` : "";
+          return `<div style="border:1px solid ${isReward?"#f59e0b":"var(--line)"};border-radius:10px;background:#fff;overflow:hidden;box-shadow:var(--shadow)${isReward?";box-shadow:0 0 0 2px #fef3c780":""}">`
+            + `<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:#f8fafc;border-bottom:1px solid var(--line)">${img}<div style="min-width:0;flex:1"><div style="font-size:12px;font-weight:700;white-space:normal;word-break:keep-all;line-height:1.35">${html(p.title||p.productId||"")}</div>${isReward?'<span style="display:inline-flex;align-items:center;gap:3px;margin-top:4px;padding:1px 7px;border-radius:999px;background:#fef3c7;color:#92400e;font-size:10px;font-weight:700">⭐ 리워드</span>':""}</div></div>`
+            + `<div style="padding:6px 12px 8px">${kws}${more}</div></div>`;
+        }).join("") + `</div>`;
     }
     async function loadData() {
       state.data = await fetchDashboardData();
@@ -799,6 +861,7 @@
       renderInspection();
       renderPlan();
       renderOverviewCharts();
+      renderOverviewShoppingRank();
     }
     function renderKpis() {
       const s = state.data.summary;
@@ -1406,14 +1469,19 @@
       els.rankOverview.innerHTML = "";
 
       // Date tabs from rank.dates
-      const dates = rank.dates || [];
+      const slotLabels = { morning: "오전", afternoon: "오후", evening: "저녁", night: "야간" };
+
+      // 쇼핑/파워링크 각자의 가용 날짜 분리
+      const shoppingDates = [...new Set((rank.slotDetails || []).map(sd => sd.date))].sort().reverse();
+      const plDates = [...new Set((rank.chronologicalColumns || []).map(c => c.date))].sort().reverse();
+      const dates = isShoppingPage ? shoppingDates : plDates;
       if (!state.rankDate || !dates.includes(state.rankDate)) {
         state.rankDate = rank.latestDate || dates[0] || "";
       }
 
-      // Slot tabs from rank.slots
-      const slots = rank.slots || [];
-      const slotLabels = { morning: "오전", afternoon: "오후", evening: "저녁", night: "야간" };
+      const shoppingSlots = [...new Set((rank.slotDetails || []).filter(sd=>sd.date===state.rankDate).map(sd=>sd.slot))];
+      const plSlots = [...new Set((rank.chronologicalColumns || []).filter(c=>c.date===state.rankDate).map(c=>c.slot))];
+      const slots = isShoppingPage ? (shoppingSlots.length ? shoppingSlots : (rank.slots||[])) : (plSlots.length ? plSlots : (rank.slots||[]));
       if (!state.rankSlot || !slots.includes(state.rankSlot)) {
         state.rankSlot = rank.latestSlot || slots[0] || "";
       }
@@ -1532,7 +1600,20 @@
             const cell = getCellRank(row);
             return `<div class="keyword-chip"><span class="keyword-chip-name">${html(row.keyword || "")}</span>${rankBadge(cell)}${deltaBadge(cell.delta)}</div>`;
           }).join("");
-          return `<div class="powerlink-rank-card"><div class="powerlink-rank-head"><div><h3 class="powerlink-rank-title">${html(group.adgroup || group.campaign || "")}</h3><div class="powerlink-rank-sub">${html(group.campaign || "")}</div></div></div>${pcChips ? `<div class="device-block"><div class="device-title">PC</div><div class="keyword-chips">${pcChips}</div></div>` : ""}${mChips ? `<div class="device-block mobile"><div class="device-title mobile">모바일</div><div class="keyword-chips">${mChips}</div></div>` : ""}</div>`;
+          const agKey = html(group.adgroup || group.campaign || "");
+          const pcCount = group.pc.length;
+          const mCount = group.mobile.length;
+          return `<div class="powerlink-rank-card" data-adgroup-card="${agKey}">
+            <div class="powerlink-rank-head"><div><h3 class="powerlink-rank-title">${html(group.adgroup || group.campaign || "")}</h3><div class="powerlink-rank-sub">${html(group.campaign || "")}</div></div></div>
+            ${(pcChips || mChips) ? `
+            <div class="pl-device-tabs">
+              ${pcChips ? `<button class="pl-device-tab active" data-pl-tab="pc" data-ag="${agKey}">PC <span class="pl-keyword-count">${pcCount}</span></button>` : ""}
+              ${mChips ? `<button class="pl-device-tab ${pcChips ? "" : "active"}" data-pl-tab="mobile" data-ag="${agKey}">모바일 <span class="pl-keyword-count">${mCount}</span></button>` : ""}
+            </div>
+            ${pcChips ? `<div class="pl-device-pane active" data-pane="pc" data-ag="${agKey}"><div class="keyword-chips" style="padding:12px 14px 14px">${pcChips}</div></div>` : ""}
+            ${mChips ? `<div class="pl-device-pane ${pcChips ? "" : "active"}" data-pane="mobile" data-ag="${agKey}"><div class="keyword-chips" style="padding:12px 14px 14px">${mChips}</div></div>` : ""}
+            ` : '<div style="padding:12px;color:var(--muted);font-size:13px">데이터 없음</div>'}
+          </div>`;
         }).join("");
         els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">파워링크 순위</h3><div style="font-size:12px;color:var(--muted);margin-top:2px">${colIndex >= 0 ? (state.rankDate + " " + (slotLabels[state.rankSlot] || state.rankSlot)) : "최신 기준"}</div></div></div><div class="powerlink-rank-grid">${cards}</div></div>`;
       }
@@ -1670,6 +1751,17 @@
       if (rd) { state.rankDate = rd.dataset.rankDate; document.querySelectorAll("[data-rank-date]").forEach(b=>b.classList.toggle("active",b===rd)); renderRankTraffic(); }
       const rs = e.target.closest("[data-rank-slot]");
       if (rs) { state.rankSlot = rs.dataset.rankSlot; document.querySelectorAll("[data-rank-slot]").forEach(b=>b.classList.toggle("active",b===rs)); renderRankTraffic(); }
+      // 파워링크 PC/모바일 탭 클릭
+      const plt = e.target.closest("[data-pl-tab]");
+      if (plt) {
+        const ag = plt.dataset.ag;
+        const tab = plt.dataset.plTab;
+        const card = plt.closest("[data-adgroup-card]");
+        if (card) {
+          card.querySelectorAll(".pl-device-tab").forEach(b => b.classList.toggle("active", b.dataset.plTab === tab));
+          card.querySelectorAll(".pl-device-pane").forEach(p => p.classList.toggle("active", p.dataset.pane === tab));
+        }
+      }
     });
     document.addEventListener("change", e => {
       const m = e.target.closest("[data-daily-product-month]");
