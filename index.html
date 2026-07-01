@@ -1549,8 +1549,7 @@ async function loadData() {
       row.weeks[weekIndex] = amount;
       metrics[kind] = targetRows;
       refreshManualRevenueMetrics(metrics);
-      renderRevenueDaily();
-  renderTotalSalesMetrics();
+      renderTotalSalesMetrics();
       await saveManualRevenueFromMetrics(metrics);
     }
     async function saveManualRevenueFromMetrics(metrics) {
@@ -1947,13 +1946,8 @@ els.monthFilter.addEventListener("change", () => { state.month = els.monthFilter
       if (m) { state.dailyProductMonth = m.value; renderDailyProductPerformance(); }
     });
     loadData().catch(err => { if(els.meta) els.meta.textContent = "데이터 로드 실패: " + err.message; });
-</script>
+  </script>
 </body>
 </html>
-
-
-
-
-
 
 
