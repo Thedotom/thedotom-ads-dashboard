@@ -1279,6 +1279,76 @@
       metrics.manualAdCostTotal = manualTotalRow(metrics.manualAdCosts, "수기 광고비 합계");
       state.data.totalSalesMetrics = metrics;
     }
+
+function renderDailyRevenue() {
+  const body = document.getElementById("dailyRevenueBody");
+  const status = document.getElementById("dailyRevenueStatus");
+  if (!body) return;
+
+  const revenue = state.data?.revenueMetrics || state.data?.totalSalesMetrics || {};
+  const rows = revenue.dailySales || [];
+  const month = state.month || state.data?.month || "";
+  const monthRows = rows.filter(row => !month || String(row.date || "").startsWith(month));
+
+  const stores = ["카페24(자사몰)", "스마트스토어(더도톰스튜디오)", "스마트스토어(무라)"];
+  const dates = Array.from(new Set(monthRows.map(row => row.date))).sort();
+  const fmt = value => `₩${Math.round(Number(value || 0)).toLocaleString("ko-KR")}`;
+
+  const storeTotals = stores.map(store => {
+    const total = monthRows
+      .filter(row => row.store === store)
+      .reduce((sum, row) => sum + Number(row.netSales || 0), 0);
+    return { store, total };
+  });
+
+  const allTotal = storeTotals.reduce((sum, row) => sum + row.total, 0);
+  if (status) status.textContent = `${dates.length}일 · 순매출 ${fmt(allTotal)}`;
+
+  body.innerHTML = `
+    <div class="kpis">
+      ${storeTotals.map(row => `
+        <div class="kpi">
+          <span>${row.store}</span>
+          <strong>${fmt(row.total)}</strong>
+          <small>${month} 순매출 합계</small>
+        </div>
+      `).join("")}
+      <div class="kpi">
+        <span>합계</span>
+        <strong>${fmt(allTotal)}</strong>
+        <small>전체 자동 순매출</small>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>날짜</th>
+            ${stores.map(store => `<th>${store}</th>`).join("")}
+            <th>합계</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${dates.length ? dates.map(date => {
+            const cells = stores.map(store => {
+              const row = monthRows.find(item => item.date === date && item.store === store);
+              return `<td>${fmt(row?.netSales || 0)}</td>`;
+            }).join("");
+
+            const total = monthRows
+              .filter(item => item.date === date)
+              .reduce((sum, item) => sum + Number(item.netSales || 0), 0);
+
+            return `<tr><td>${date}</td>${cells}<td><strong>${fmt(total)}</strong></td></tr>`;
+          }).join("") : `<tr><td colspan="${stores.length + 2}">선택한 월의 일일 매출 데이터가 없습니다.</td></tr>`}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+
     function renderTotalSalesMetrics() {
       const metrics = state.data.totalSalesMetrics || {};
       if (!els.totalSalesBody) return;
