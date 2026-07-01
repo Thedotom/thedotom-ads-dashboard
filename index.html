@@ -461,7 +461,9 @@
           <button type="button" data-page="rankPowerlink">파워링크 순위</button>
         </div>
         <button type="button" data-page="dailyProduct">일일 제품 성과</button>
-        <button type="button" data-page="totalSales">전체 매출 지표</button>
+        <button type="button" data-page="totalSales">매출 지표</button>
+      <button class="sub-nav" data-page="totalSales">월별 매출</button>
+      <button class="sub-nav" data-page="dailyRevenue">일일 매출</button>
         <button type="button" data-page="monthlyReport">월보고서</button>
       </div>
       <div class="hidden-controls">
@@ -592,8 +594,9 @@
         <div class="section-head"><h2>일일 제품 성과</h2><span id="dailyProductStatus" class="count"></span></div>
         <div class="memo-body" id="dailyProductBody"></div>
       </section>
-      <section class="page-section" data-page="totalSales">
-        <div class="section-head"><h2>전체 매출 지표</h2><span id="totalSalesStatus" class="count"></span></div>
+      <section class="page-section" data-page="dailyRevenue"><div class="section-head"><h2>일일 매출</h2><span id="dailyRevenueStatus" class="count"></span></div><div class="memo-body" id="dailyRevenueBody"></div></section>
+<section class="page-section" data-page="totalSales">
+        <div class="section-head"><h2>매출 지표</h2><span id="totalSalesStatus" class="count"></span></div>
         <div class="memo-body" id="totalSalesBody"></div>
       </section>
       <section class="page-section" data-page="monthlyReport">
@@ -824,7 +827,8 @@
         rankShopping: "쇼핑검색 순위 트래픽",
         rankPowerlink: "파워링크 순위 트래픽",
         dailyProduct: "일일 제품 성과",
-        totalSales: "전체 매출 지표",
+        totalSales: "매출 지표",
+        dailyRevenue: "일일 매출",
         monthlyReport: "월보고서"
       };
       els.pageTitle.textContent = titles[state.page] || titles.overview;
@@ -894,7 +898,8 @@
       renderBrandContract();
       renderRankTraffic();
       renderDailyProductPerformance();
-      renderTotalSalesMetrics();
+      renderDailyRevenue();
+  renderTotalSalesMetrics();
       renderInspection();
       renderPlan();
       renderOverviewCharts();
