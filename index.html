@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -461,7 +461,7 @@
           <button type="button" data-page="rankPowerlink">파워링크 순위</button>
         </div>
         <button type="button" data-page="dailyProduct">일일 제품 성과</button>
-        <button type="button" data-page="totalSales">매출 지표</button>
+        <button type="button" data-page="totalSales">전체 매출 지표</button>
         <button type="button" data-page="monthlyReport">월보고서</button>
       </div>
       <div class="hidden-controls">
@@ -487,7 +487,6 @@
           <h1 id="pageTitle">네이버 광고 월간 대시보드</h1>
           <div id="meta" class="meta">불러오는 중</div>
           <div id="profile" class="profile"></div>
-      <div id="pageMonthControl" class="profile"></div>
           <div id="topStatus" class="top-status"></div>
         </div>
         <div class="actions">
@@ -594,7 +593,7 @@
         <div class="memo-body" id="dailyProductBody"></div>
       </section>
       <section class="page-section" data-page="totalSales">
-        <div class="section-head"><h2>매출 지표</h2><span id="totalSalesStatus" class="count"></span></div>
+        <div class="section-head"><h2>전체 매출 지표</h2><span id="totalSalesStatus" class="count"></span></div>
         <div class="memo-body" id="totalSalesBody"></div>
       </section>
       <section class="page-section" data-page="monthlyReport">
@@ -636,13 +635,12 @@
       window.location.replace("http://127.0.0.1:8790");
     }
     const initialMonth = new URLSearchParams(window.location.search).get("month") || "";
-    const state = { data: null, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, availableMonths: [], rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", dailyProductDate: "", dailyProductMonth: "" };
+    const state = { data: null, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
       topStatus: document.getElementById("topStatus"),
       profile: document.getElementById("profile"),
-  pageMonthControl: document.getElementById("pageMonthControl"),
       kpis: document.getElementById("kpis"),
       typeBars: document.getElementById("typeBars"),
       typeCount: document.getElementById("typeCount"),
@@ -782,60 +780,9 @@
             + `<div style="padding:6px 12px 8px">${kws}${more}</div></div>`;
         }).join("") + `</div>`;
     }
-    
-function hideSidebarMonthFilter() {
-  const label = document.querySelector('label[for="monthFilter"]');
-  if (label) label.style.display = "none";
-  if (els.monthFilter) els.monthFilter.style.display = "none";
-}
-
-async function loadAvailableMonths() {
-  try {
-    const res = await fetch(`data/months.json?v=${Date.now()}`, { cache: "no-store" });
-    if (!res.ok) throw new Error("months.json load failed");
-    const monthsData = await res.json();
-    const months = monthsData.months || monthsData.availableMonths || [];
-    state.availableMonths = Array.from(new Set(months)).sort().reverse();
-    if (!state.month && state.availableMonths.length) {
-      state.month = monthsData.latest || state.availableMonths[0];
-    }
-  } catch (error) {
-    if (!state.availableMonths.length && state.data?.availableMonths) {
-      state.availableMonths = [...state.data.availableMonths];
-    }
-  }
-}
-
-function mergeAvailableMonths(data) {
-  const months = [
-    ...(state.availableMonths || []),
-    ...((data && data.availableMonths) || []),
-    ...((data && data.month) ? [data.month] : [])
-  ].filter(Boolean);
-  state.availableMonths = Array.from(new Set(months)).sort().reverse();
-}
-
-function renderPageMonthControl() {
-  if (!els.pageMonthControl) return;
-  const months = state.availableMonths?.length ? state.availableMonths : (state.data?.availableMonths || []);
-  if (!months.length) {
-    els.pageMonthControl.innerHTML = "";
-    return;
-  }
-  els.pageMonthControl.innerHTML = `
-    <select id="pageMonthFilter" data-page-month-filter>
-      ${months.map(month => `<option value="${month}" ${month === state.month ? "selected" : ""}>${month}</option>`).join("")}
-    </select>
-  `;
-}
-async function loadData() {
-  hideSidebarMonthFilter();
-  if (!state.availableMonths?.length || !state.month) {
-    await loadAvailableMonths();
-  }
-  state.data = await fetchDashboardData();
-  state.month = state.data.month || state.month;
-  mergeAvailableMonths(state.data);
+    async function loadData() {
+      state.data = await fetchDashboardData();
+      state.month = state.data.month;
       applyManualRevenueLocal(state.month);
       fillMonths();
       fillCampaigns();
@@ -858,7 +805,7 @@ async function loadData() {
       return await staticRes.json();
     }
     function fillMonths() {
-      const months = state.availableMonths?.length ? state.availableMonths : (state.data.availableMonths || []);
+      const months = state.data.availableMonths || [];
       els.monthFilter.innerHTML = months.map(month => `<option value="${html(month)}">${html(month)}</option>`).join("");
       els.monthFilter.value = state.month;
     }
@@ -869,7 +816,6 @@ async function loadData() {
       return "";
     }
     function renderPageShell() {
-  renderPageMonthControl();
       const titles = {
         overview: "네이버 광고 월간 대시보드",
         powerlink: "파워링크 운영",
@@ -878,7 +824,7 @@ async function loadData() {
         rankShopping: "쇼핑검색 순위 트래픽",
         rankPowerlink: "파워링크 순위 트래픽",
         dailyProduct: "일일 제품 성과",
-        totalSales: "매출 지표",
+        totalSales: "전체 매출 지표",
         monthlyReport: "월보고서"
       };
       els.pageTitle.textContent = titles[state.page] || titles.overview;
@@ -948,8 +894,7 @@ async function loadData() {
       renderBrandContract();
       renderRankTraffic();
       renderDailyProductPerformance();
-      renderRevenueDaily();
-  renderTotalSalesMetrics();
+      renderTotalSalesMetrics();
       renderInspection();
       renderPlan();
       renderOverviewCharts();
@@ -1863,27 +1808,7 @@ async function loadData() {
         if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
       });
     });
-    
-document.addEventListener("change", e => {
-  const pageMonth = e.target.closest("[data-page-month-filter]");
-  if (!pageMonth) return;
-  state.month = pageMonth.value;
-  state.rankDate = "";
-  state.rankSlot = "";
-  state.dailyProductMonth = "";
-  state.dailyProductDate = "";
-  if (els.monthFilter) els.monthFilter.value = state.month;
-  loadData();
-});
-els.monthFilter.addEventListener("change", () => { state.month = els.monthFilter.value;
-  state.rankDate = "";
-  state.rankSlot = "";
-  state.dailyProductMonth = "";
-  state.dailyProductDate = "";
-  state.rankDate = "";
-  state.rankSlot = "";
-  state.dailyProductMonth = "";
-  state.dailyProductDate = ""; loadData(); });
+    els.monthFilter.addEventListener("change", () => { state.month = els.monthFilter.value; loadData(); });
     els.typeFilter?.addEventListener("change", () => { fillCampaigns(); fillAdgroups(); render(); });
     els.campaignFilter?.addEventListener("change", () => { fillAdgroups(); render(); });
     els.adgroupFilter?.addEventListener("change", render);
@@ -1949,5 +1874,3 @@ els.monthFilter.addEventListener("change", () => { state.month = els.monthFilter
   </script>
 </body>
 </html>
-
-
