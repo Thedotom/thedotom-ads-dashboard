@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -833,6 +833,7 @@
       };
       els.pageTitle.textContent = titles[state.page] || titles.overview;
       const isRankTrafficPage = state.page === "rankShopping" || state.page === "rankPowerlink";
+      const isRevenuePage = state.page === "totalSales" || state.page === "dailyRevenue";
       document.querySelectorAll("[data-page]").forEach(el => {
         if (el.tagName === "BUTTON") return;
         const visible = el.dataset.page === state.page || (el.dataset.page === "rankTraffic" && isRankTrafficPage);
@@ -1953,3 +1954,4 @@ function renderDailyRevenue() {
   </script>
 </body>
 </html>
+
