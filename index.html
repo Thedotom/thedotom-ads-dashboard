@@ -1947,9 +1947,144 @@ els.monthFilter.addEventListener("change", () => { state.month = els.monthFilter
       if (m) { state.dailyProductMonth = m.value; renderDailyProductPerformance(); }
     });
     loadData().catch(err => { if(els.meta) els.meta.textContent = "데이터 로드 실패: " + err.message; });
-  </script>
+  
+/* REVENUE_SCREEN_PATCH_V2 */
+function ensureRevenueScreenPatchV2() {
+  const parent = Array.from(document.querySelectorAll("[data-page]"))
+    .find(el => el.textContent.trim() === "매출 지표");
+
+  if (parent) {
+    parent.setAttribute("data-page", "revenueDaily");
+
+    if (!document.querySelector("[data-revenue-subnav='true']")) {
+      parent.insertAdjacentHTML("afterend", `
+        <button class="sub-nav" data-page="revenueDaily" data-revenue-subnav="true">일일 매출</button>
+        <button class="sub-nav" data-page="totalSalesMetrics" data-revenue-subnav="true">주차 매출</button>
+      `);
+    }
+  }
+
+  if (!document.getElementById("revenueDaily")) {
+    const weekly = document.getElementById("totalSalesMetrics");
+    if (weekly) {
+      weekly.insertAdjacentHTML("beforebegin", `<section id="revenueDaily" class="page-section"></section>`);
+    }
+  }
+}
+
+function renderRevenueDailyPatchV2() {
+  ensureRevenueScreenPatchV2();
+
+  if (!state || state.page !== "revenueDaily") return;
+
+  const section = document.getElementById("revenueDaily");
+  if (!section) return;
+
+  document.querySelectorAll(".page-section").forEach(el => {
+    el.classList.toggle("active", el.id === "revenueDaily");
+  });
+
+  const title = document.getElementById("pageTitle");
+  if (title) title.textContent = "일일 매출";
+
+  const revenue = state.data?.revenueMetrics || state.data?.totalSalesMetrics || {};
+  const rows = revenue.dailySales || [];
+  const monthRows = rows.filter(row => !state.month || String(row.date || "").startsWith(state.month));
+
+  const stores = ["카페24(자사몰)", "스마트스토어(더도톰스튜디오)", "스마트스토어(무라)"];
+  const dates = Array.from(new Set(monthRows.map(row => row.date))).sort();
+  const fmt = value => `₩${Math.round(Number(value || 0)).toLocaleString("ko-KR")}`;
+
+  const storeTotals = stores.map(store => {
+    const total = monthRows
+      .filter(row => row.store === store)
+      .reduce((sum, row) => sum + Number(row.netSales || 0), 0);
+    return { store, total };
+  });
+
+  const allTotal = storeTotals.reduce((sum, row) => sum + row.total, 0);
+
+  section.innerHTML = `
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <h2>일일 매출</h2>
+          <p>카페24와 스마트스토어 자동 수집 매출을 순매출 기준으로 정리합니다.</p>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        ${storeTotals.map(row => `
+          <div class="kpi-card">
+            <span>${row.store}</span>
+            <strong>${fmt(row.total)}</strong>
+            <small>${state.month || ""} 순매출 합계</small>
+          </div>
+        `).join("")}
+        <div class="kpi-card">
+          <span>합계</span>
+          <strong>${fmt(allTotal)}</strong>
+          <small>전체 자동 순매출</small>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>날짜</th>
+              ${stores.map(store => `<th>${store}</th>`).join("")}
+              <th>합계</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${dates.length ? dates.map(date => {
+              const cells = stores.map(store => {
+                const row = monthRows.find(item => item.date === date && item.store === store);
+                return `<td>${fmt(row?.netSales || 0)}</td>`;
+              }).join("");
+
+              const total = monthRows
+                .filter(item => item.date === date)
+                .reduce((sum, item) => sum + Number(item.netSales || 0), 0);
+
+              return `<tr><td>${date}</td>${cells}<td><strong>${fmt(total)}</strong></td></tr>`;
+            }).join("") : `<tr><td colspan="${stores.length + 2}">선택한 월의 일일 매출 데이터가 없습니다.</td></tr>`}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+document.addEventListener("click", event => {
+  const nav = event.target.closest("[data-page]");
+  if (!nav) return;
+  setTimeout(() => {
+    ensureRevenueScreenPatchV2();
+    renderRevenueDailyPatchV2();
+  }, 0);
+});
+
+document.addEventListener("change", event => {
+  if (!event.target.closest("select")) return;
+  setTimeout(renderRevenueDailyPatchV2, 50);
+});
+
+setTimeout(() => {
+  ensureRevenueScreenPatchV2();
+  renderRevenueDailyPatchV2();
+}, 300);
+
+setInterval(() => {
+  ensureRevenueScreenPatchV2();
+  renderRevenueDailyPatchV2();
+}, 1000);
+
+</script>
 </body>
 </html>
+
 
 
 
