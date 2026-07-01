@@ -1281,6 +1281,7 @@
     }
 
 
+
 function renderDailyRevenue() {
   const body = document.getElementById("dailyRevenueBody");
   const status = document.getElementById("dailyRevenueStatus");
@@ -1296,10 +1297,10 @@ function renderDailyRevenue() {
   const fmt = value => `₩${Math.round(Number(value || 0)).toLocaleString("ko-KR")}`;
 
   const storeTotals = stores.map(store => {
-    const total = monthRows
+    const totalValue = monthRows
       .filter(row => row.store === store)
       .reduce((sum, row) => sum + Number(row.netSales || 0), 0);
-    return { store, total };
+    return { store, total: totalValue };
   });
 
   const allTotal = storeTotals.reduce((sum, row) => sum + row.total, 0);
@@ -1331,23 +1332,24 @@ function renderDailyRevenue() {
           </tr>
         </thead>
         <tbody>
-          ${dates.length ? dates.map(date => {
+          ${dates.length ? dates.map(day => {
             const cells = stores.map(store => {
-              const row = monthRows.find(item => item.date === date && item.store === store);
+              const row = monthRows.find(item => item.date === day && item.store === store);
               return `<td>${fmt(row?.netSales || 0)}</td>`;
             }).join("");
 
-            const total = monthRows
-              .filter(item => item.date === date)
+            const dayTotal = monthRows
+              .filter(item => item.date === day)
               .reduce((sum, item) => sum + Number(item.netSales || 0), 0);
 
-            return `<tr><td>${date}</td>${cells}<td><strong>${fmt(total)}</strong></td></tr>`;
+            return `<tr><td>${day}</td>${cells}<td><strong>${fmt(dayTotal)}</strong></td></tr>`;
           }).join("") : `<tr><td colspan="${stores.length + 2}">선택한 월의 일일 매출 데이터가 없습니다.</td></tr>`}
         </tbody>
       </table>
     </div>
   `;
 }
+
 
 
 
