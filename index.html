@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -487,6 +487,7 @@
           <h1 id="pageTitle">네이버 광고 월간 대시보드</h1>
           <div id="meta" class="meta">불러오는 중</div>
           <div id="profile" class="profile"></div>
+      <div id="pageMonthControl" class="profile"></div>
           <div id="topStatus" class="top-status"></div>
         </div>
         <div class="actions">
@@ -635,12 +636,13 @@
       window.location.replace("http://127.0.0.1:8790");
     }
     const initialMonth = new URLSearchParams(window.location.search).get("month") || "";
-    const state = { data: null, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", dailyProductDate: "", dailyProductMonth: "" };
+    const state = { data: null, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, availableMonths: [], rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
       topStatus: document.getElementById("topStatus"),
       profile: document.getElementById("profile"),
+  pageMonthControl: document.getElementById("pageMonthControl"),
       kpis: document.getElementById("kpis"),
       typeBars: document.getElementById("typeBars"),
       typeCount: document.getElementById("typeCount"),
@@ -781,8 +783,13 @@
         }).join("") + `</div>`;
     }
     async function loadData() {
-      state.data = await fetchDashboardData();
-      state.month = state.data.month;
+  hideSidebarMonthFilter();
+  if (!state.availableMonths?.length || !state.month) {
+    await loadAvailableMonths();
+  }
+  state.data = await fetchDashboardData();
+  state.month = state.data.month || state.month;
+  mergeAvailableMonths(state.data);
       applyManualRevenueLocal(state.month);
       fillMonths();
       fillCampaigns();
@@ -805,7 +812,7 @@
       return await staticRes.json();
     }
     function fillMonths() {
-      const months = state.data.availableMonths || [];
+      const months = state.availableMonths?.length ? state.availableMonths : (state.data.availableMonths || []);
       els.monthFilter.innerHTML = months.map(month => `<option value="${html(month)}">${html(month)}</option>`).join("");
       els.monthFilter.value = state.month;
     }
@@ -816,6 +823,7 @@
       return "";
     }
     function renderPageShell() {
+  renderPageMonthControl();
       const titles = {
         overview: "네이버 광고 월간 대시보드",
         powerlink: "파워링크 운영",
@@ -1808,7 +1816,11 @@
         if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
       });
     });
-    els.monthFilter.addEventListener("change", () => { state.month = els.monthFilter.value; loadData(); });
+    els.monthFilter.addEventListener("change", () => { state.month = els.monthFilter.value;
+  state.rankDate = "";
+  state.rankSlot = "";
+  state.dailyProductMonth = "";
+  state.dailyProductDate = ""; loadData(); });
     els.typeFilter?.addEventListener("change", () => { fillCampaigns(); fillAdgroups(); render(); });
     els.campaignFilter?.addEventListener("change", () => { fillAdgroups(); render(); });
     els.adgroupFilter?.addEventListener("change", render);
@@ -1874,3 +1886,4 @@
   </script>
 </body>
 </html>
+
