@@ -1321,14 +1321,46 @@ function renderDailyRevenue() {
   const dates = Array.from(new Set(monthRows.map(row => row.date))).sort();
   const fmt = value => `₩${Math.round(Number(value || 0)).toLocaleString("ko-KR")}`;
 
-  const storeTotals = stores.map(store => {
-    const totalValue = monthRows
-      .filter(row => row.store === store)
-      .reduce((sum, row) => sum + Number(row.netSales || 0), 0);
-    return { store, total: totalValue };
-  });
+  const storeAliases = {
+    "카페24(자사몰)": ["카페24", "자사몰", "cafe24"],
+    "스마트스토어(더도톰스튜디오)": ["스마트스토어(더도톰스튜디오)", "더도톰스튜디오", "thedotom", "studio"],
+    "스마트스토어(무라)": ["스마트스토어(무라)", "무라스토어", "무라", "mura"]
+  };
 
-  const allTotal = storeTotals.reduce((sum, row) => sum + row.total, 0);
+  const matchStore = (item, store) => {
+    const aliases = storeAliases[store] || [store];
+    const text = `${item?.store || ""} ${item?.name || ""} ${item?.key || ""}`.toLowerCase();
+    return aliases.some(alias => text.includes(String(alias).toLowerCase()));
+  };
+
+  const getStoreEntry = (row, store) => {
+    if (Array.isArray(row?.stores)) return row.stores.find(item => matchStore(item, store));
+    if (row?.stores && typeof row.stores === "object") {
+      return Object.entries(row.stores)
+        .map(([key, value]) => ({ key, ...(value || {}) }))
+        .find(item => matchStore(item, store));
+    }
+    if (matchStore(row, store)) return row;
+    return null;
+  };
+
+  const getStoreNetSales = (row, store) => {
+    const entry = getStoreEntry(row, store);
+    return Number(entry?.netSales ?? entry?.sales ?? entry?.value ?? 0);
+  };
+
+  const getDayTotal = row => {
+    const explicit = Number(row?.totalNetSales ?? row?.netSales);
+    if (Number.isFinite(explicit)) return explicit;
+    return stores.reduce((sum, store) => sum + getStoreNetSales(row, store), 0);
+  };
+
+  const storeTotals = stores.map(store => ({
+    store,
+    total: monthRows.reduce((sum, row) => sum + getStoreNetSales(row, store), 0)
+  }));
+
+  const allTotal = monthRows.reduce((sum, row) => sum + getDayTotal(row), 0);
   if (status) status.textContent = `${dates.length}일 · 순매출 ${fmt(allTotal)}`;
 
   body.innerHTML = `
@@ -1358,15 +1390,12 @@ function renderDailyRevenue() {
         </thead>
         <tbody>
           ${dates.length ? dates.map(day => {
+            const dayRows = monthRows.filter(item => item.date === day);
             const cells = stores.map(store => {
-              const row = monthRows.find(item => item.date === day && item.store === store);
-              return `<td>${fmt(row?.netSales || 0)}</td>`;
+              const value = dayRows.reduce((sum, row) => sum + getStoreNetSales(row, store), 0);
+              return `<td>${fmt(value)}</td>`;
             }).join("");
-
-            const dayTotal = monthRows
-              .filter(item => item.date === day)
-              .reduce((sum, item) => sum + Number(item.netSales || 0), 0);
-
+            const dayTotal = dayRows.reduce((sum, item) => sum + getDayTotal(item), 0);
             return `<tr><td>${day}</td>${cells}<td><strong>${fmt(dayTotal)}</strong></td></tr>`;
           }).join("") : `<tr><td colspan="${stores.length + 2}">선택한 월의 일일 매출 데이터가 없습니다.</td></tr>`}
         </tbody>
@@ -1377,8 +1406,7 @@ function renderDailyRevenue() {
 
 
 
-
-    function renderTotalSalesMetrics() {
+function renderTotalSalesMetrics() {
       const metrics = state.data.totalSalesMetrics || {};
       if (!els.totalSalesBody) return;
       const weeks = metrics.weeks || [];
