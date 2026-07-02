@@ -461,10 +461,10 @@
           <button type="button" data-page="rankPowerlink">파워링크 순위</button>
         </div>
         <button type="button" data-page="dailyProduct">일일 제품 성과</button>
-        <button type="button" data-revenue-root>&#47588;&#52636; &#51648;&#54364;</button>
+        <button type="button" data-revenue-root>매출 지표</button>
         <div class="sub-nav-group" data-revenue-subnav>
-          <button type="button" data-page="totalSales">&#50900;&#48324; &#47588;&#52636;</button>
-          <button type="button" data-page="dailyRevenue">&#51068;&#51068; &#47588;&#52636;</button>
+          <button type="button" data-page="totalSales">월별 매출</button>
+          <button type="button" data-page="dailyRevenue">일일 매출</button>
         </div>
         <button type="button" data-page="monthlyReport">월보고서</button>
       </div>
@@ -846,6 +846,9 @@
       });
       document.querySelectorAll(".nav [data-rank-root]").forEach(button => {
         button.classList.toggle("active", isRankTrafficPage);
+      });
+      document.querySelectorAll(".nav [data-revenue-root]").forEach(button => {
+        button.classList.toggle("active", isRevenuePage);
       });
       els.typeFilter.value = pageType();
     }
@@ -1509,32 +1512,14 @@ function renderDailyRevenue() {
         button.addEventListener("click", () => {
           state.month = button.dataset.totalSalesMonth;
           els.monthFilter.value = state.month;
-          if (!window.__revenueRootClickBound) {
-      window.__revenueRootClickBound = true;
-      document.addEventListener("click", event => {
-        const button = event.target.closest(".nav button[data-revenue-root]");
-        if (!button) return;
-        if (state.page !== "totalSales" && state.page !== "dailyRevenue") state.page = "totalSales";
-        render();
-      });
-    }
-    loadData();
+loadData();
         });
       });
       els.totalSalesBody.querySelectorAll("[data-manual-month]").forEach(select => {
         select.addEventListener("change", event => {
           state.month = event.target.value;
           els.monthFilter.value = state.month;
-          if (!window.__revenueRootClickBound) {
-      window.__revenueRootClickBound = true;
-      document.addEventListener("click", event => {
-        const button = event.target.closest(".nav button[data-revenue-root]");
-        if (!button) return;
-        if (state.page !== "totalSales" && state.page !== "dailyRevenue") state.page = "totalSales";
-        render();
-      });
-    }
-    loadData();
+loadData();
         });
       });
       const syncManualPeriod = (editor, weekIndex) => {
@@ -1974,6 +1959,7 @@ function renderDailyRevenue() {
   </script>
 </body>
 </html>
+
 
 
 
