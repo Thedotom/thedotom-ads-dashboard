@@ -1317,15 +1317,20 @@ function renderDailyRevenue() {
   const month = state.month || state.data?.month || "";
   const monthRows = rows.filter(row => !month || String(row.date || "").startsWith(month));
 
-  const stores = ["카페24(자사몰)", "스마트스토어(더도톰스튜디오)", "스마트스토어(무라)"];
-  const dates = Array.from(new Set(monthRows.map(row => row.date))).sort();
-  const fmt = value => `₩${Math.round(Number(value || 0)).toLocaleString("ko-KR")}`;
+  const stores = [
+    "\uce74\ud39824(\uc790\uc0ac\ubab0)",
+    "\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ub354\ub3c4\ud1b0\uc2a4\ud29c\ub514\uc624)",
+    "\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ubb34\ub77c)"
+  ];
 
   const storeAliases = {
-    "카페24(자사몰)": ["카페24", "자사몰", "cafe24"],
-    "스마트스토어(더도톰스튜디오)": ["스마트스토어(더도톰스튜디오)", "더도톰스튜디오", "thedotom", "studio"],
-    "스마트스토어(무라)": ["스마트스토어(무라)", "무라스토어", "무라", "mura"]
+    "\uce74\ud39824(\uc790\uc0ac\ubab0)": ["\uce74\ud39824", "\uc790\uc0ac\ubab0", "cafe24"],
+    "\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ub354\ub3c4\ud1b0\uc2a4\ud29c\ub514\uc624)": ["\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ub354\ub3c4\ud1b0\uc2a4\ud29c\ub514\uc624)", "\ub354\ub3c4\ud1b0\uc2a4\ud29c\ub514\uc624", "thedotom", "studio"],
+    "\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ubb34\ub77c)": ["\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ubb34\ub77c)", "\ubb34\ub77c\uc2a4\ud1a0\uc5b4", "\ubb34\ub77c", "mura"]
   };
+
+  const dates = Array.from(new Set(monthRows.map(row => row.date))).sort();
+  const fmt = value => "\u20a9" + Math.round(Number(value || 0)).toLocaleString("ko-KR");
 
   const matchStore = (item, store) => {
     const aliases = storeAliases[store] || [store];
@@ -1361,7 +1366,7 @@ function renderDailyRevenue() {
   }));
 
   const allTotal = monthRows.reduce((sum, row) => sum + getDayTotal(row), 0);
-  if (status) status.textContent = `${dates.length}일 · 순매출 ${fmt(allTotal)}`;
+  if (status) status.textContent = `${dates.length}\uc77c \u00b7 \uc21c\ub9e4\ucd9c ${fmt(allTotal)}`;
 
   body.innerHTML = `
     <div class="kpis">
@@ -1369,13 +1374,13 @@ function renderDailyRevenue() {
         <div class="kpi">
           <span>${row.store}</span>
           <strong>${fmt(row.total)}</strong>
-          <small>${month} 순매출 합계</small>
+          <small>${month} \uc21c\ub9e4\ucd9c \ud569\uacc4</small>
         </div>
       `).join("")}
       <div class="kpi">
-        <span>합계</span>
+        <span>\ud569\uacc4</span>
         <strong>${fmt(allTotal)}</strong>
-        <small>전체 자동 순매출</small>
+        <small>\uc804\uccb4 \uc790\ub3d9 \uc21c\ub9e4\ucd9c</small>
       </div>
     </div>
 
@@ -1383,9 +1388,9 @@ function renderDailyRevenue() {
       <table>
         <thead>
           <tr>
-            <th>날짜</th>
+            <th>\ub0a0\uc9dc</th>
             ${stores.map(store => `<th>${store}</th>`).join("")}
-            <th>합계</th>
+            <th>\ud569\uacc4</th>
           </tr>
         </thead>
         <tbody>
@@ -1397,7 +1402,7 @@ function renderDailyRevenue() {
             }).join("");
             const dayTotal = dayRows.reduce((sum, item) => sum + getDayTotal(item), 0);
             return `<tr><td>${day}</td>${cells}<td><strong>${fmt(dayTotal)}</strong></td></tr>`;
-          }).join("") : `<tr><td colspan="${stores.length + 2}">선택한 월의 일일 매출 데이터가 없습니다.</td></tr>`}
+          }).join("") : `<tr><td colspan="${stores.length + 2}">\uc120\ud0dd\ud55c \uc6d4\uc758 \uc77c\uc77c \ub9e4\ucd9c \ub370\uc774\ud130\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.</td></tr>`}
         </tbody>
       </table>
     </div>
