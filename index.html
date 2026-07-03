@@ -1416,7 +1416,7 @@ function renderTotalSalesMetrics() {
       if (!els.totalSalesBody) return;
 
       const weeks = metrics.weeks || ["1\uc8fc\ucc28", "2\uc8fc\ucc28", "3\uc8fc\ucc28", "4\uc8fc\ucc28", "5\uc8fc\ucc28"];
-      els.totalSalesStatus.textContent = "\uc790\ub3d9 \uc218\uc9d1 \uae30\uc900";
+      els.totalSalesStatus.textContent = "\uc218\uc9d1 \uae30\uc900";
 
       const monthButtons = (metrics.availableMonths || []).map(month => `
         <button class="ghost ${month === state.month ? "active" : ""}" type="button" data-total-sales-month="${html(month)}">${html(month)}</button>
@@ -1485,17 +1485,17 @@ function renderTotalSalesMetrics() {
           <div class="product-category">
             <div class="product-category-head">
               <div>
-                <h3 class="product-category-title">\uc790\ub3d9 \ub9e4\ucd9c/\uad11\uace0\ube44 \uc694\uc57d</h3>
-                <div class="product-category-sub">\uc790\ub3d9 \uc218\uc9d1 \ub370\uc774\ud130\ub9cc \uae30\uc900\uc73c\ub85c \uc8fc\ucc28\ubcc4 \ub9e4\ucd9c, \uad11\uace0\ube44, \uad11\uace0\ube44\uc728\uc744 \ud655\uc778\ud569\ub2c8\ub2e4.</div>
+                <h3 class="product-category-title">\ub9e4\ucd9c/\uad11\uace0\ube44 \uc694\uc57d</h3>
+                <div class="product-category-sub">\uc218\uc9d1 \ub370\uc774\ud130 \uae30\uc900\uc73c\ub85c \uc8fc\ucc28\ubcc4 \ub9e4\ucd9c, \uad11\uace0\ube44, \uad11\uace0\ube44\uc728\uc744 \ud655\uc778\ud569\ub2c8\ub2e4.</div>
               </div>
             </div>
             <div class="table-wrap">
               <table class="comparison-table">
                 <thead><tr><th>\uad6c\ubd84</th>${weekHeaders}<th>\ud569\uacc4</th></tr></thead>
                 <tbody>
-                  ${row("\uc790\ub3d9 \ub9e4\ucd9c", cells.map(item => item.sales))}
-                  ${row("\uc790\ub3d9 \uad11\uace0\ube44", cells.map(item => item.ad))}
-                  ${row("\uc790\ub3d9 \uad11\uace0\ube44\uc728", cells.map(item => item.rate), rateText, adRate(Number(autoAdTotal.total || 0), Number(autoSalesTotal.total || 0)))}
+                  ${row("\ub9e4\ucd9c", cells.map(item => item.sales))}
+                  ${row("\uad11\uace0\ube44", cells.map(item => item.ad))}
+                  ${row("\uad11\uace0\ube44\uc728", cells.map(item => item.rate), rateText, adRate(Number(autoAdTotal.total || 0), Number(autoSalesTotal.total || 0)))}
                 </tbody>
               </table>
             </div>
@@ -1505,9 +1505,9 @@ function renderTotalSalesMetrics() {
       els.totalSalesBody.innerHTML = `
         <div class="rank-tabs" style="margin-bottom:12px">${monthButtons}</div>
         ${summaryTable()}
-        <div class="meta" style="margin-bottom:12px">\uc218\uae30 \uc785\ub825\uac12 \uc81c\uc678 \u00b7 \uc790\ub3d9 \uc218\uc9d1 \ub370\uc774\ud130 \uae30\uc900</div>
-        ${metricTable("\uc790\ub3d9 \uc218\uc9d1 \ub9e4\ucd9c", "\uce74\ud39824, \uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4, \ubb34\ub77c\uc2a4\ud1a0\uc5b4 \uc790\ub3d9/\ud30c\uc77c \uc218\uc9d1 \uae30\uc900 \ub9e4\ucd9c", metrics.autoSales || [], metrics.autoSalesTotal)}
-        ${metricTable("\uc790\ub3d9 \uc218\uc9d1 \uad11\uace0\ube44", "\ub124\uc774\ubc84 \uad11\uace0 API \uc6d0\ubcf8\uacfc \ub9ac\uc6cc\ub4dc/\uc2ac\ub86f \ube44\uc6a9 \uae30\uc900 \uad11\uace0\ube44", metrics.autoAdCosts || [], metrics.autoAdCostTotal)}
+        <div class="meta" style="margin-bottom:12px">\uc218\uc9d1 \ub370\uc774\ud130 \uae30\uc900</div>
+        ${metricTable("\ub9e4\ucd9c", "\uce74\ud39824, \uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4, \ubb34\ub77c\uc2a4\ud1a0\uc5b4 \ud30c\uc77c/API \uc218\uc9d1 \uae30\uc900 \ub9e4\ucd9c", metrics.autoSales || [], metrics.autoSalesTotal)}
+        ${metricTable("\uad11\uace0\ube44", "\ub124\uc774\ubc84 \uad11\uace0 API \uc6d0\ubcf8\uacfc \ub9ac\uc6cc\ub4dc/\uc2ac\ub86f \ube44\uc6a9 \uae30\uc900 \uad11\uace0\ube44", metrics.autoAdCosts || [], metrics.autoAdCostTotal)}
       `;
 
       els.totalSalesBody.querySelectorAll("[data-total-sales-month]").forEach(button => {
