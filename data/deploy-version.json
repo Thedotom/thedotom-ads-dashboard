@@ -1,4 +1,4 @@
 ﻿{
-    "updatedAt":  "2026-07-03 18:47:05",
-    "reason":  "force github pages redeploy after february cafe24 data"
+    "updatedAt":  "2026-07-03 19:07:05",
+    "reason":  "retry pages deploy because previous run stayed queued"
 }
