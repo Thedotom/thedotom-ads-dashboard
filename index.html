@@ -1424,17 +1424,23 @@ function renderTotalSalesMetrics() {
 
       const weekHeaders = weeks.map((week, weekIndex) => `<th>${weekIndex + 1}\uc8fc\ucc28</th>`).join("");
 
+      const displayRevenueName = value => String(value || "")
+        .replace(/\s*자동수집/g, "")
+        .replace(/^자동\s+/g, "")
+        .replace(/자동\s*/g, "")
+        .trim();
+
       const metricTable = (title, sub, rows, totalRow) => {
         const body = (rows || []).map(row => `
           <tr>
-            <td><strong>${html(row.name || "")}</strong></td>
+            <td><strong>${html(displayRevenueName(row.name || ""))}</strong></td>
             ${weeks.map((_, index) => `<td>${money((row.weeks || [])[index] || 0)}</td>`).join("")}
             <td><strong>${money(row.total || 0)}</strong></td>
           </tr>`).join("");
 
         const total = totalRow ? `
           <tr class="total-row">
-            <td><strong>${html(totalRow.name || "\ud569\uacc4")}</strong></td>
+            <td><strong>${html(displayRevenueName(totalRow.name || "\ud569\uacc4"))}</strong></td>
             ${weeks.map((_, index) => `<td><strong>${money((totalRow.weeks || [])[index] || 0)}</strong></td>`).join("")}
             <td><strong>${money(totalRow.total || 0)}</strong></td>
           </tr>` : "";
