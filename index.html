@@ -824,6 +824,20 @@
       render();
     }
     async function fetchDashboardData() {
+      if (!state.month) {
+        try {
+          const monthRes = await fetch(`data/months.json?v=${Date.now()}`, { cache: "no-store" });
+          if (monthRes.ok) {
+            const monthData = await monthRes.json();
+            const months = Array.isArray(monthData)
+              ? monthData
+              : (monthData.months || monthData.availableMonths || []);
+            state.month = monthData.latest || months[0] || "";
+          }
+        } catch (error) {
+          console.warn("Month list fetch failed; falling back to latest dashboard data", error);
+        }
+      }
       const qs = state.month ? `?month=${encodeURIComponent(state.month)}` : "";
       try {
         const res = await fetch(`/api/monthly-dashboard${qs}`);
@@ -833,7 +847,7 @@
       }
       const staticPath = state.month ? `data/monthly-dashboard-${encodeURIComponent(state.month)}.json` : "data/monthly-dashboard-latest.json";
       const staticRes = await fetch(`${staticPath}?v=${Date.now()}`, { cache: "no-store" });
-      if (!staticRes.ok) throw new Error("대시보드 데이터를 불러오지 못했습니다.");
+      if (!staticRes.ok) throw new Error("??쒕낫???곗씠?곕? 遺덈윭?ㅼ? 紐삵뻽?듬땲??");
       return await staticRes.json();
     }
     function fillMonths() {
@@ -1907,6 +1921,7 @@ function renderBrandContract() {
   </script>
 </body>
 </html>
+
 
 
 
