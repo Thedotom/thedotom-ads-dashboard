@@ -1754,16 +1754,15 @@ function renderBrandContract() {
           const hasPrev = Number.isFinite(prevRank) && prevRank > 0;
           if (hasCurrent && hasPrev) {
             const diff = prevRank - currentRank;
-            if (diff > 0) return { text: `??{diff}`, direction: "up" };
-            if (diff < 0) return { text: `??{Math.abs(diff)}`, direction: "down" };
+            if (diff > 0) return { text: `\u25B2${diff}`, direction: "up" };
+            if (diff < 0) return { text: `\u25BC${Math.abs(diff)}`, direction: "down" };
             return { text: "-", direction: "same" };
           }
-          if (hasCurrent && !hasPrev) return { text: "??, direction: "up" };
-          if (!hasCurrent && hasPrev) return { text: "??, direction: "down" };
+          if (hasCurrent && !hasPrev) return { text: "\u25B2", direction: "up" };
+          if (!hasCurrent && hasPrev) return { text: "\u25BC", direction: "down" };
           return { text: "-", direction: "same" };
         };
 
-        // Helper: get rank cell for a row at the selected date+slot
         const getCellRank = (row) => {
           const cell = (colIndex >= 0 && row.cells && row.cells[colIndex] != null)
             ? { ...row.cells[colIndex] }
@@ -1771,7 +1770,6 @@ function renderBrandContract() {
           cell.delta = powerlinkDelta(row, cell);
           return cell;
         };
-
         // Group by adgroup (광고그룹 단위)
         const adgroupMap = {};
         pcRows.forEach(row => {
@@ -1976,6 +1974,7 @@ function renderBrandContract() {
   </script>
 </body>
 </html>
+
 
 
 
