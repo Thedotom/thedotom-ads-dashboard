@@ -893,9 +893,10 @@
       els.pageTitle.textContent = titles[state.page] || titles.overview;
       const isRankTrafficPage = state.page === "rankShopping" || state.page === "rankPowerlink";
       const isRevenuePage = state.page === "totalSales" || state.page === "dailyRevenue";
+      const isDailyProductPage = state.page === "dailyProduct" || state.page === "dailyProductCafe24" || state.page === "dailyProductSmartstore" || state.page === "dailyProductMura";
       document.querySelectorAll("[data-page]").forEach(el => {
         if (el.tagName === "BUTTON") return;
-        const visible = el.dataset.page === state.page || (el.dataset.page === "rankTraffic" && isRankTrafficPage);
+        const visible = el.dataset.page === state.page || (el.dataset.page === "rankTraffic" && isRankTrafficPage) || (el.dataset.page === "dailyProduct" && isDailyProductPage);
         el.classList.toggle("hidden", !visible);
       });
       document.querySelectorAll(".nav [data-page]").forEach(button => {
@@ -906,6 +907,9 @@
       });
       document.querySelectorAll(".nav [data-revenue-root]").forEach(button => {
         button.classList.toggle("active", isRevenuePage);
+      });
+      document.querySelectorAll(".nav [data-daily-product-root]").forEach(button => {
+        button.classList.toggle("active", isDailyProductPage);
       });
       els.typeFilter.value = pageType();
     }
@@ -1244,43 +1248,49 @@
     function renderDailyProductPerformance() {
       const perf = state.data.dailyProductPerformance || {};
       const rows = perf.rows || [];
+      const pageStore = {
+        dailyProductCafe24: "cafe24",
+        dailyProductSmartstore: "thedotom",
+        dailyProductMura: "mura"
+      }[state.page] || "";
+      const storeLabel = store => store === "mura" ? "???" : store === "thedotom" ? "?????????" : store === "cafe24" ? "????? : (store || "-");
       const months = [...new Set(rows.map(row => String(row.date || "").slice(0, 7)).filter(Boolean))].sort();
       if (!state.dailyProductMonth || !months.includes(state.dailyProductMonth)) {
         state.dailyProductMonth = months.includes(state.month) ? state.month : (months[months.length - 1] || state.month);
       }
-      const monthRows = state.dailyProductMonth ? rows.filter(row => String(row.date || "").startsWith(state.dailyProductMonth)) : rows;
+      const monthRowsAll = state.dailyProductMonth ? rows.filter(row => String(row.date || "").startsWith(state.dailyProductMonth)) : rows;
+      const monthRows = pageStore ? monthRowsAll.filter(row => row.store === pageStore) : monthRowsAll;
       const totals = monthRows.reduce((acc, row) => {
         acc.adCost += Number(row.adCost || 0);
         acc.dailySales += Number(row.dailySales || 0);
-        acc.orders += Number(row.orders || 0);
+        acc.adSales += Number(row.adSales || 0);
         return acc;
-      }, { adCost: 0, dailySales: 0, orders: 0 });
-      totals.roas = totals.adCost ? monthRows.reduce((sum, row) => sum + Number(row.adSales || 0), 0) / totals.adCost : 0;
+      }, { adCost: 0, dailySales: 0, adSales: 0 });
+      totals.roas = totals.adCost ? totals.adSales / totals.adCost : 0;
       totals.adCostRate = totals.dailySales ? totals.adCost / totals.dailySales : 0;
       const dates = [...new Set(monthRows.map(row => row.date).filter(Boolean))].sort();
-      if (!dates.includes(state.dailyProductDate)) state.dailyProductDate = dates[dates.length - 1] || "";
-      const visibleRows = state.dailyProductDate ? monthRows.filter(row => row.date === state.dailyProductDate) : monthRows;
+      if (!dates.includes(state.dailyProductDate)) state.dailyProductDate = dates[0] || "";
+      const visibleRows = (state.dailyProductDate ? monthRows.filter(row => row.date === state.dailyProductDate) : monthRows)
+        .slice()
+        .sort((a, b) => Number(b.dailySales || 0) - Number(a.dailySales || 0));
       const selectedDaySales = visibleRows.reduce((sum, row) => sum + Number(row.dailySales || 0), 0);
       const monthOptions = months.map(month => `<option value="${html(month)}" ${month === state.dailyProductMonth ? "selected" : ""}>${html(month)}</option>`).join("");
-      const dateLabel = dates.length ? `${dates[0]} ~ ${dates[dates.length - 1]}` : "데이터 없음";
-      els.dailyProductStatus.textContent = dateLabel;
+      const dateLabel = dates.length ? `${dates[0]} ~ ${dates[dates.length - 1]}` : "????????";
+      els.dailyProductStatus.textContent = `${dateLabel} ? ${pageStore ? storeLabel(pageStore) : "???"}`;
       const dateTabs = dates.map(date => `<button class="ghost ${date === state.dailyProductDate ? "active" : ""}" type="button" data-daily-product-date="${html(date)}">${html(date)}</button>`).join("");
-      const statusClass = status => status === "광고+슬롯" ? "active" : status === "광고" ? "good" : status === "슬롯" ? "warn" : "neutral";
+      const statusClass = status => status === "???+???" ? "active" : status === "???" ? "good" : status === "???" ? "warn" : "neutral";
       const tableRows = visibleRows.map(row => `
         <tr>
-          <td class="wrap"><strong>${html(row.product || "")}</strong><div class="muted">상품번호 ${html(row.productId || "")}</div></td>
-          <td>${html(row.store === "mura" ? "무라" : row.store === "thedotom" ? "더도톰" : row.store || "-")}</td>
-          <td>${html(row.recordId || "")}</td>
-          <td>${html(row.date || "")}</td>
-          <td class="wrap">${html(row.adgroup || (String(row.status || "").includes("슬롯") ? "슬롯 진행 상품" : "연결 광고 없음"))}</td>
-          <td>${money(row.adSales || 0)}</td>
-          <td>${money(row.adCost || 0)}</td>
+          <td class="wrap"><strong>${html(row.product || row.productName || "")}</strong></td>
+          <td>${html(row.productId || row.recordId || "")}</td>
           <td><span class="pill ${statusClass(row.status || "")}">${html(row.status || "")}</span></td>
-          <td>${html(row.memo || "")}</td>
           <td>${money(row.dailySales || 0)}</td>
           <td>${number(row.orders || 0)}</td>
+          <td class="wrap">${html(row.adgroup || (String(row.status || "").includes("???") ? "??? ??? ???" : "??? ??? ???"))}</td>
+          <td>${money(row.adSales || 0)}</td>
+          <td>${money(row.adCost || 0)}</td>
           <td>${roasText(row.roas || 0)}</td>
-          <td>${rateText(row.adCostRate || 0)}</td>
+          <td>${pct(row.adCostRate || 0)}</td>
         </tr>
       `).join("");
       els.dailyProductBody.innerHTML = `
@@ -1288,61 +1298,29 @@
           <select data-daily-product-month>${monthOptions}</select>
         </div>
         <div class="kpis daily-product-kpis" style="margin-bottom:12px">
-          <div class="metric"><div class="label">기간</div><div class="value" style="font-size:18px">${html(dateLabel)}</div><div class="sub">일별 제품 성과 ${number(monthRows.length)}건</div></div>
-          <div class="metric"><div class="label">선택일 매출</div><div class="value">${money(selectedDaySales)}</div><div class="sub">${html(state.dailyProductDate || "-")} 전체 상품 합계</div></div>
-          <div class="metric"><div class="label">광고비</div><div class="value">${money(totals.adCost || 0)}</div><div class="sub">네이버 광고 총비용</div></div>
-          <div class="metric"><div class="label">매출</div><div class="value">${money(totals.dailySales || 0)}</div><div class="sub">선택 월 상품별 판매성과</div></div>
-          <div class="metric"><div class="label">ROAS</div><div class="value">${roasText(totals.roas || 0)}</div><div class="sub">광고매출 / 광고비</div></div>
-          <div class="metric"><div class="label">광고비율</div><div class="value">${rateText(totals.adCostRate || 0)}</div><div class="sub">광고비 / 일매출</div></div>
+          <div class="metric"><div class="label">???</div><div class="value" style="font-size:18px">${html(dateLabel)}</div><div class="sub">${html(pageStore ? storeLabel(pageStore) : "???")} ??? ??? ${number(monthRows.length)}??/div></div>
+          <div class="metric"><div class="label">????????</div><div class="value">${money(selectedDaySales)}</div><div class="sub">${html(state.dailyProductDate || "-")} ?????? ???</div></div>
+          <div class="metric"><div class="label">?????/div><div class="value">${money(totals.adCost || 0)}</div><div class="sub">???????? ?????/div></div>
+          <div class="metric"><div class="label">???</div><div class="value">${money(totals.dailySales || 0)}</div><div class="sub">??? ?????????????</div></div>
+          <div class="metric"><div class="label">ROAS</div><div class="value">${roasText(totals.roas || 0)}</div><div class="sub">?????? / ?????/div></div>
         </div>
-        <div class="product-category" style="margin-bottom:14px">
+        <div class="product-category-card">
           <div class="product-category-head">
             <div>
-              <h3 class="product-category-title">DB 4 — 일일 제품 성과</h3>
+              <h3 class="product-category-title">??? ??? ???</h3>
               <div class="product-category-sub">${html(perf.summary || "")}</div>
             </div>
           </div>
-          <div class="daily-product-tabs">${dateTabs}</div>
+          <div class="rank-tabs" style="padding:12px 16px">${dateTabs}</div>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>제품</th><th>스토어</th><th>기록ID</th><th>날짜</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>운영형태</th><th>운영메모</th><th>상품매출</th><th>주문건수</th><th>ROAS</th><th>광고비율</th></tr></thead>
-              <tbody>${tableRows || `<tr><td class="empty" colspan="13">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
+              <thead><tr><th>???</th><th>??????</th><th>??????</th><th>??????</th><th>??????</th><th>??? ???</th><th>??????</th><th>?????/th><th>ROAS</th><th>??????</th></tr></thead>
+              <tbody>${tableRows || `<tr><td class="empty" colspan="10">????????????? ??? ??? ?????? ??????.</td></tr>`}</tbody>
             </table>
           </div>
         </div>
-        `;
+      `;
     }
-    function normalizedManualRows(rows, defaults) {
-      const map = new Map((rows || []).map(row => [row.name, [...(row.weeks || []), 0, 0, 0, 0, 0].slice(0, 5)]));
-      defaults.forEach(name => {
-        if (!map.has(name)) map.set(name, [0, 0, 0, 0, 0]);
-      });
-      return [...map.entries()].map(([name, values]) => ({ name, weeks: values }));
-    }
-    function manualRowsWithTotals(rows) {
-      return (rows || []).map(row => {
-        const weeks = [...(row.weeks || []), 0, 0, 0, 0, 0].slice(0, 5).map(value => Number(value) || 0);
-        return { ...row, weeks, total: weeks.reduce((sum, value) => sum + value, 0) };
-      });
-    }
-    function manualTotalRow(rows, name) {
-      const weeks = [0, 0, 0, 0, 0];
-      (rows || []).forEach(row => {
-        (row.weeks || []).forEach((value, index) => {
-          if (index < weeks.length) weeks[index] += Number(value) || 0;
-        });
-      });
-      return { name, weeks, total: weeks.reduce((sum, value) => sum + value, 0) };
-    }
-    function refreshManualRevenueMetrics(metrics) {
-      if (!state.data) state.data = {};
-      metrics.manualSales = manualRowsWithTotals(metrics.manualSales || []);
-      metrics.manualAdCosts = manualRowsWithTotals(metrics.manualAdCosts || []).filter(row => row.name !== "성과형2");
-      metrics.manualSalesTotal = manualTotalRow(metrics.manualSales, "수기 매출 합계");
-      metrics.manualAdCostTotal = manualTotalRow(metrics.manualAdCosts, "수기 광고비 합계");
-      state.data.totalSalesMetrics = metrics;
-    }
-
 
 
 function renderDailyRevenue() {
@@ -1873,6 +1851,13 @@ function renderBrandContract() {
     document.querySelectorAll(".nav button[data-rank-root]").forEach(btn => {
       btn.addEventListener("click", () => {
         if (state.page !== "rankShopping" && state.page !== "rankPowerlink") state.page = "rankShopping";
+        render();
+        if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
+      });
+    });
+    document.querySelectorAll(".nav button[data-daily-product-root]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (!["dailyProduct", "dailyProductCafe24", "dailyProductSmartstore", "dailyProductMura"].includes(state.page)) state.page = "dailyProduct";
         render();
         if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
       });
