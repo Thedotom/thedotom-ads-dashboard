@@ -1,0 +1,1954 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>네이버 광고 월간 대시보드</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --sidebar-bg: #0f172a;
+      --sidebar-hover: rgba(255,255,255,0.06);
+      --sidebar-active: #4865f4;
+      --sidebar-text: rgba(255,255,255,0.6);
+      --sidebar-text-active: #fff;
+      --bg: #f1f5f9;
+      --panel: #ffffff;
+      --line: #e2e8f0;
+      --text: #1e293b;
+      --muted: #64748b;
+      --green: #10b981;
+      --blue: #4865f4;
+      --red: #ef4444;
+      --amber: #f59e0b;
+      --purple: #8b5cf6;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px rgba(0,0,0,0.04);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Malgun Gothic", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+    .app {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+    aside {
+      background: var(--sidebar-bg);
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      align-self: start;
+      overflow-y: auto;
+    }
+    main { padding: 24px 28px 32px; min-width: 0; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      padding: 4px 8px 18px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: white;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+    aside label {
+      display: block;
+      margin: 14px 8px 6px;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    aside select {
+      width: calc(100% - 8px);
+      margin: 0 4px;
+      height: 36px;
+      padding: 0 10px 0 10px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.10) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.6)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 10px center;
+      color: #fff;
+      font: inherit;
+      font-size: 13px;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    aside select option { background: #1e293b; color: #fff; }
+    select, input, textarea, button {
+      box-sizing: border-box;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+    }
+    select, input, button { height: 38px; padding: 0 10px; }
+    textarea { min-height: 116px; padding: 10px; resize: vertical; line-height: 1.45; width: 100%; }
+    button { cursor: pointer; font-weight: 700; white-space: nowrap; }
+    button:focus { outline: none; }
+    button:focus-visible { outline: 2px solid rgba(72,101,244,.35); outline-offset: 2px; }
+    .primary { background: var(--green); border-color: var(--green); color: #fff; }
+    .ghost { background: #fff; border-color: var(--line); }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    h1 { margin: 0; font-size: 22px; font-weight: 900; line-height: 1.25; color: var(--text); }
+    h2 { margin: 0; font-size: 15px; font-weight: 800; color: var(--text); }
+    h3 { margin: 0; }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 6px; }
+    .profile { margin-top: 6px; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .top-status { margin-top: 6px; color: var(--green); font-size: 12px; font-weight: 700; min-height: 18px; }
+    .actions { display: flex; gap: 8px; }
+    .page-month-control { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+    .page-month-control label { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .page-month-control select { width: 140px; height: 38px; border-radius: 8px; background: #fff; color: var(--text); font-weight: 800; }
+    .actions button { width: auto; min-width: 100px; box-shadow: var(--shadow); height: 36px; border-radius: 8px; font-size: 13px; }
+    .actions { display: none; }
+    .nav { display: grid; gap: 2px; margin-top: 4px; }
+    .nav button {
+      text-align: left;
+      background: transparent;
+      border: 0;
+      color: var(--sidebar-text);
+      font-size: 13px;
+      font-weight: 600;
+      height: 38px;
+      padding: 0 12px;
+      border-radius: 8px;
+      transition: background .12s, color .12s;
+      width: 100%;
+    }
+    .nav button:hover { background: var(--sidebar-hover); color: rgba(255,255,255,0.9); }
+    .nav button.active { background: var(--sidebar-active); color: var(--sidebar-text-active); }
+    .nav .sub-nav-group {
+      margin: 4px 0 10px 18px;
+      padding-left: 14px;
+      border-left: 1px solid rgba(148, 163, 184, 0.22);
+      display: grid;
+      gap: 4px;
+    }
+    .nav .sub-nav-group button {
+      height: 36px;
+      padding: 0 14px;
+      font-size: 13px;
+      border-radius: 7px;
+      background: transparent;
+      color: rgba(255,255,255,0.82);
+    }
+    .nav .sub-nav-group button.active {
+      background: var(--sidebar-active);
+      color: var(--sidebar-text-active);
+    }
+    .nav-sub {
+      display: grid;
+      gap: 2px;
+      margin: 0 0 4px 18px;
+      padding-left: 10px;
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-sub button { height: 34px; font-size: 12px; }
+    .sidebar-search { display: none; }
+    .hidden-controls { display: none; }
+    .page-section.hidden { display: none; }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .metric {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 16px 18px;
+      min-height: 96px;
+      position: relative;
+      overflow: hidden;
+    }
+    .metric:nth-child(1) { border-left: 4px solid var(--blue); }
+    .metric:nth-child(2) { border-left: 4px solid var(--green); }
+    .metric:nth-child(3) { border-left: 4px solid var(--amber); }
+    .metric:nth-child(4) { border-left: 4px solid var(--purple); }
+    .metric:nth-child(5) { border-left: 4px solid #94a3b8; }
+    .metric .label { color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    .metric .value { margin-top: 8px; font-size: 22px; font-weight: 900; white-space: nowrap; color: var(--text); }
+    .metric .sub { margin-top: 5px; color: var(--muted); font-size: 12px; }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(380px, 0.95fr) minmax(480px, 1.05fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+      overflow: hidden;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+    }
+    .count { color: var(--muted); font-size: 12px; font-weight: 700; }
+    .bars { display: grid; gap: 10px; padding: 14px; }
+    .type-card {
+      display: grid;
+      gap: 10px;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #f8fafc;
+    }
+    .type-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .type-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .type-dot { width: 11px; height: 11px; border-radius: 4px; background: var(--blue); }
+    .type-dot.power { background: var(--amber); }
+    .type-dot.shopping { background: var(--green); }
+    .type-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .type-stats strong { display: block; margin-top: 3px; color: var(--text); font-size: 13px; }
+    .bar { display: grid; grid-template-columns: 92px 1fr 82px; align-items: center; gap: 10px; font-size: 13px; }
+    .track { height: 8px; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
+    .fill { height: 100%; background: var(--blue); border-radius: 999px; }
+    .fill.power { background: var(--amber); }
+    .fill.shopping { background: var(--green); }
+    .table-wrap { overflow: visible; max-height: none; }
+    table { width: 100%; min-width: 900px; border-collapse: collapse; font-size: 13px; }
+    table.compact { min-width: 600px; }
+    table.compact th, table.compact td { padding: 8px 12px; }
+    th, td { padding: 9px 12px; border-bottom: 1px solid #f1f5f9; text-align: left; white-space: nowrap; vertical-align: top; }
+    th { position: sticky; top: 0; background: #f8fafc; z-index: 1; color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    td.wrap { white-space: normal; min-width: 240px; line-height: 1.4; }
+    tbody tr:hover { background: #f8fafc; }
+    tbody tr:nth-child(even) { background: #fafcff; }
+    tbody tr:nth-child(even):hover { background: #f1f5f9; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      height: 22px;
+      border-radius: 999px;
+      padding: 0 10px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .pill.good { background: #d1fae5; color: #065f46; }
+    .pill.warn { background: #fef3c7; color: #92400e; }
+    .pill.bad { background: #fee2e2; color: #991b1b; }
+    .pill.neutral { background: #e2e8f0; color: #475569; }
+    .pill.active { background: #ede9fe; color: #6d28d9; }
+    .pill.done { background: #d1fae5; color: #065f46; }
+    .detail-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      background: #f8fafc;
+      flex-wrap: wrap;
+    }
+    .detail-toolbar button { width: auto; height: 30px; padding: 0 12px; font-size: 12px; border-radius: 999px; border-color: var(--line); }
+    .detail-toolbar button.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .memo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .memo-body { padding: 14px; }
+    .memo-body label { display: block; margin: 10px 0 5px; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .rank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 16px; }
+    .rank-card { border: 1px solid var(--line); border-radius: 12px; background: #fff; overflow: hidden; box-shadow: var(--shadow); }
+    .rank-card-head { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; background: #f8fafc; border-bottom: 1px solid var(--line); min-width: 0; }
+    .rank-thumb, .reward-thumb { width: 56px; height: 56px; border-radius: 8px; object-fit: cover; border: 1px solid var(--line); background: #f1f5f9; flex: 0 0 56px; }
+    .rank-card-head-info { min-width: 0; flex: 1; }
+    .reward-product { display: flex; align-items: center; gap: 10px; min-width: 300px; }
+    .reward-product-title { font-weight: 700; white-space: normal; line-height: 1.35; }
+    .rank-card-title { font-size: 13px; font-weight: 700; white-space: normal; line-height: 1.4; word-break: keep-all; overflow-wrap: break-word; }
+    .rank-card-sub { margin-top: 4px; color: var(--muted); font-size: 11px; }
+    .rank-card-reward-badge { display: inline-flex; align-items: center; gap: 4px; margin-top: 5px; padding: 2px 8px; border-radius: 999px; background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 700; }
+    .rank-list { padding: 10px 16px 14px; background: #fff; }
+    .rank-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+    .rank-row:last-child { border-bottom: 0; }
+    .rank-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 48px; height: 22px; border-radius: 999px; padding: 0 8px; font-size: 11px; font-weight: 700; }
+    .rank-badge.one { background: #fef3c7; color: #92400e; }
+    .rank-badge.top3 { background: #cffafe; color: #155e75; }
+    .rank-badge.top5 { background: #d1fae5; color: #065f46; }
+    .rank-badge.top10 { background: #e2e8f0; color: #475569; }
+    .rank-badge.out { background: #fee2e2; color: #991b1b; }
+    .rank-badge.none { background: #f1f5f9; color: #94a3b8; }
+    .rank-tabs { display: flex; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: #f8fafc; flex-wrap: wrap; }
+    .rank-tabs button { width: auto; height: 30px; font-size: 12px; border-radius: 999px; border-color: var(--line); padding: 0 12px; }
+    .rank-tabs button.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .mobile-menu-toggle, .mobile-backdrop { display: none; }
+    .note-row { display: grid; grid-template-columns: 108px minmax(180px, 1fr) 70px; gap: 8px; align-items: start; }
+    .note-row select, .note-row button { height: 32px; }
+    .note-row input { height: 32px; }
+    .manual-revenue-input { height: 30px; min-width: 96px; padding: 0 8px; border-radius: 7px; background: #f8fafc; font-size: 12px; text-align: right; }
+    .manual-revenue-input.name { min-width: 118px; text-align: left; font-weight: 700; }
+    .manual-revenue-editor {
+      display: grid;
+      grid-template-columns: minmax(120px, 1fr) minmax(110px, .8fr) minmax(100px, .7fr) minmax(250px, 1.6fr) minmax(120px, .9fr) auto;
+      gap: 8px;
+      align-items: end;
+      padding: 12px 16px;
+      border-top: 1px solid var(--line);
+      background: #f8fafc;
+    }
+    .manual-revenue-editor label { display: grid; gap: 5px; font-size: 11px; color: var(--muted); font-weight: 700; }
+    .manual-revenue-editor select, .manual-revenue-editor input { height: 34px; border-radius: 8px; border: 1px solid var(--line); background: #fff; padding: 0 10px; font-size: 13px; color: var(--text); }
+    .manual-revenue-editor input { text-align: right; font-weight: 700; }
+    .manual-date-range { display: grid; grid-template-columns: 1fr auto 1fr; gap: 6px; align-items: center; }
+    .manual-date-range span { color: var(--muted); font-size: 12px; font-weight: 700; }
+    .manual-date-range input { text-align: left; font-weight: 600; min-width: 0; }
+    .empty { padding: 24px; color: var(--muted); text-align: center; }
+    .rank-section-block { margin: 14px 16px 16px; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+    .rank-section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #fff 0%, #f8fafc 100%); }
+    .rank-section-title { margin: 0; color: var(--text); font-size: 15px; font-weight: 800; }
+    .rank-section-sub { margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .rank-section-block .rank-grid, .rank-section-block .powerlink-rank-grid { padding: 16px; background: #fff; }
+    .rank-grid { grid-template-columns: repeat(auto-fill, minmax(292px, 1fr)); gap: 16px; }
+
+    .pl-device-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); background: #f8fafc; }
+    .pl-device-tab { flex: 1; height: 34px; background: transparent; border: 0; border-bottom: 2px solid transparent; font-size: 12px; font-weight: 700; color: var(--muted); cursor: pointer; transition: all .12s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .pl-device-tab.active { color: var(--blue); border-bottom-color: var(--blue); background: #fff; }
+    .pl-device-tab::before { content: ""; width: 8px; height: 8px; border-radius: 2px; }
+    .pl-device-tab[data-pl-tab="pc"]::before { background: linear-gradient(135deg,#4865f4,#82d7ff); }
+    .pl-device-tab[data-pl-tab="mobile"]::before { background: linear-gradient(135deg,#f59e0b,#f97316); }
+    .pl-device-pane { display: none; }
+    .pl-device-pane.active { display: block; }
+    .pl-keyword-count { font-size: 11px; font-weight: 600; color: var(--muted); background: #e2e8f0; border-radius: 999px; padding: 1px 7px; }
+    .powerlink-rank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 16px; background: #f1f5f9; }
+    .powerlink-rank-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+    .powerlink-rank-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px 12px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #fff 0%, #f8fafc 100%); }
+    .powerlink-rank-title { margin: 0; font-size: 15px; font-weight: 800; color: var(--text); }
+    .powerlink-rank-sub { margin-top: 8px; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .device-block { padding: 14px 18px 16px; }
+    .device-block + .device-block { border-top: 1px solid #f1f5f9; }
+    .device-title { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; color: #44536b; font-size: 12px; font-weight: 700; }
+    .device-title::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: linear-gradient(135deg, #4865f4, #82d7ff); }
+    .device-title.mobile::before { background: linear-gradient(135deg, #f59e0b, #f97316); }
+    .keyword-chips { display: grid; grid-template-columns: 1fr; gap: 7px; }
+    .keyword-chip { display: grid; grid-template-columns: minmax(0,1fr) auto auto; align-items: center; gap: 7px; min-height: 34px; padding: 7px 10px; border-radius: 8px; background: #f8fafc; color: var(--text); font-size: 12px; font-weight: 600; white-space: normal; }
+    .keyword-chip-name { overflow: visible; text-overflow: clip; white-space: normal; line-height: 1.3; }
+    .comparison-table td.diff-plus { color: var(--red); font-weight: 700; }
+    .comparison-table td.diff-minus { color: var(--green); font-weight: 700; }
+    .reward-thumb-link { display: inline-flex; border-radius: 8px; transition: transform .15s ease, box-shadow .15s ease; }
+    .reward-thumb-link:hover { transform: translateY(-1px); box-shadow: 0 8px 16px rgba(0,0,0,.12); }
+    .product-category { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff; box-shadow: var(--shadow); }
+    .product-category-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; background: #f8fafc; border-bottom: 1px solid var(--line); }
+    .product-category-title { margin: 0; font-size: 14px; font-weight: 800; color: var(--text); }
+    .product-category-sub { margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .daily-cost-grid { display: grid; grid-template-columns: repeat(4, minmax(86px,1fr)); gap: 6px; min-width: 420px; }
+    .daily-cost-chip { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 6px 8px; border-radius: 8px; background: #f1f5f9; color: var(--text); font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .daily-cost-chip.zero { color: #94a3b8; background: #f8fafc; }
+    .daily-cost-date { color: var(--muted); font-weight: 700; }
+    .ad-detail-list { display: grid; gap: 5px; margin-top: 8px; min-width: 280px; }
+    .ad-detail-line { display: flex; justify-content: space-between; gap: 10px; padding: 6px 8px; border-radius: 8px; background: #f8fafc; color: var(--text); font-size: 11px; font-weight: 700; }
+    .thumb-placeholder { display: grid; place-items: center; color: #94a3b8; font-size: 11px; font-weight: 700; }
+    .delta-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 18px; font-size: 11px; font-weight: 700; line-height: 1; }
+    .delta-badge.good { color: #10b981; }
+    .delta-badge.bad { color: #ef4444; }
+    .delta-badge.warn { color: #94a3b8; }
+    .rank-keyword { flex: 1; min-width: 0; white-space: normal; word-break: keep-all; line-height: 1.35; }
+    .rank-control-panel { margin-top: 10px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #f8fafc; }
+    .rank-control-panel .rank-tabs { padding: 8px 16px; border-bottom: 0; background: transparent; }
+    .daily-product-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+    .daily-product-tabs button { width: auto; height: 30px; padding: 0 12px; border-radius: 999px; border-color: var(--line); color: var(--muted); font-size: 12px; }
+    .daily-product-tabs button.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .daily-product-filter { display: flex; gap: 8px; align-items: center; max-width: 220px; margin-bottom: 12px; }
+    .daily-product-kpis { grid-template-columns: minmax(180px,1.2fr) repeat(5, minmax(100px,.8fr)); gap: 10px; }
+    .daily-product-kpis .metric { min-height: 78px; padding: 11px 13px; }
+    .chart-row { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-bottom: 16px; }
+    .chart-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+    .chart-panel .section-head { padding: 12px 16px; }
+    .chart-body { padding: 16px; position: relative; height: 280px; }
+    @media (max-width: 1120px) {
+      .app { grid-template-columns: 1fr; }
+      aside { border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.08); position: relative; height: auto; }
+      .kpis { grid-template-columns: repeat(2, minmax(140px,1fr)); }
+      .layout, .memo-grid { grid-template-columns: 1fr; }
+      .header { flex-direction: column; }
+      .actions { width: 100%; }
+      .chart-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      body.sidebar-open { overflow: hidden; }
+      .mobile-menu-toggle { display: inline-flex; position: fixed; top: 10px; left: 10px; z-index: 80; width: auto; height: 38px; align-items: center; gap: 7px; padding: 0 12px; border-color: var(--line); background: #fff; color: var(--text); box-shadow: var(--shadow-md); }
+      .mobile-backdrop { display: block; position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.4); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+      body.sidebar-open .mobile-backdrop { opacity: 1; pointer-events: auto; }
+      aside { position: fixed; inset: 0 auto 0 0; z-index: 70; width: min(82vw, 280px); height: 100vh; transform: translateX(-105%); transition: transform .18s ease; }
+      body.sidebar-open aside { transform: translateX(0); }
+      main { padding: 62px 12px 24px; }
+      h1 { font-size: 19px; }
+      .kpis { grid-template-columns: 1fr; }
+      .metric .value { white-space: normal; font-size: 20px; }
+      .section-head, .rank-section-head { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .table-wrap { overflow-x: auto; }
+      .rank-grid, .powerlink-rank-grid { grid-template-columns: 1fr; padding: 12px; }
+      .rank-section-block { margin: 12px 10px; }
+      .rank-tabs { padding: 8px 12px; gap: 6px; }
+      .rank-tabs button { height: 30px; padding: 0 10px; font-size: 12px; }
+      .chart-row { grid-template-columns: 1fr; }
+      .chart-body { height: 220px; }
+    }
+    /* ── 파워링크 상세 데이터 개선 ── */
+    .pl-section-head { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--line); background:linear-gradient(180deg,#fff 0%,#f8fafc 100%); flex-wrap:wrap; }
+    .pl-section-head-left { display:flex; align-items:center; gap:10px; }
+    .pl-section-head-right { display:flex; gap:6px; }
+    .pl-view-btn { height:28px !important; padding:0 11px !important; border-radius:6px !important; border:1px solid var(--line) !important; background:#fff !important; color:var(--muted) !important; font-size:12px !important; font-weight:700 !important; cursor:pointer !important; }
+    .pl-view-btn.active { background:var(--blue) !important; border-color:var(--blue) !important; color:#fff !important; }
+    .pl-kpi-row { display:grid; grid-template-columns:repeat(5,1fr); border-bottom:1px solid var(--line); background:#f8fafc; }
+    .pl-kpi-item { padding:11px 16px; border-right:1px solid var(--line); }
+    .pl-kpi-item:last-child { border-right:0; }
+    .pl-kpi-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:4px; }
+    .pl-kpi-val { font-size:18px; font-weight:900; color:var(--text); white-space:nowrap; }
+    .pl-chip { border-radius:999px !important; border:1px solid var(--line) !important; background:#fff !important; color:var(--muted) !important; font-size:12px !important; font-weight:700 !important; display:inline-flex !important; align-items:center !important; gap:5px !important; height:28px !important; padding:0 12px !important; }
+    .pl-chip .pl-count { background:#e2e8f0; color:#475569; border-radius:999px; padding:1px 6px; font-size:11px; transition:background .12s,color .12s; }
+    .pl-chip.active { background:#1e293b !important; border-color:#1e293b !important; color:#fff !important; }
+    .pl-chip.active .pl-count { background:rgba(255,255,255,.18); color:#fff; }
+    .pl-chip[data-detail-mode="highCpc"].active { background:#fef3c7 !important; border-color:#f59e0b !important; color:#92400e !important; }
+    .pl-chip[data-detail-mode="noConversion"].active { background:#fee2e2 !important; border-color:#ef4444 !important; color:#991b1b !important; }
+    .pl-chip[data-detail-mode="lowRoas"].active { background:#fde8d8 !important; border-color:#f97316 !important; color:#9a3412 !important; }
+    .pl-chip[data-detail-mode="scale"].active { background:#dcfce7 !important; border-color:#22c55e !important; color:#166534 !important; }
+    .pl-chip[data-detail-mode="core"].active { background:#ede9fe !important; border-color:#8b5cf6 !important; color:#4c1d95 !important; }
+    .pl-chart-area { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--line); background:#fff; }
+    .pl-chart-panel { padding:14px 16px; border-right:1px solid var(--line); }
+    .pl-chart-panel:last-child { border-right:0; }
+    .pl-chart-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:10px; }
+    .roas-bar-inline { display:inline-block; height:5px; border-radius:3px; background:linear-gradient(90deg,var(--blue),var(--green)); vertical-align:middle; margin-left:6px; }
+  </style>
+</head>
+<body>
+  <button id="mobileMenuToggle" class="mobile-menu-toggle" type="button">☰ 메뉴</button>
+  <div id="mobileBackdrop" class="mobile-backdrop"></div>
+  <div class="app">
+    <aside>
+      <div class="brand"><span class="mark">N</span><span>더도톰</span></div>
+      <label for="monthFilter">월 선택</label>
+      <select id="monthFilter"><option value="">불러오는 중</option></select>
+      <div class="nav">
+        <button class="active" type="button" data-page="overview">전체 요약</button>
+        <button type="button" data-page="powerlink">파워링크</button>
+        <button type="button" data-page="shopping">쇼핑검색</button>
+        <button type="button" data-page="brand">브랜드검색</button>
+        <button type="button" data-rank-root>순위 트래픽</button>
+        <div class="nav-sub">
+          <button type="button" data-page="rankShopping">쇼핑검색 순위</button>
+          <button type="button" data-page="rankPowerlink">파워링크 순위</button>
+        </div>
+        <button type="button" data-page="dailyProduct">일일 제품 성과</button>
+        <button type="button" data-revenue-root>매출 지표</button>
+        <div class="sub-nav-group" data-revenue-subnav>
+          <button type="button" data-page="totalSales">월별 매출</button>
+          <button type="button" data-page="dailyRevenue">일일 매출</button>
+        </div>
+        <button type="button" data-page="monthlyReport">월보고서</button>
+      </div>
+      <div class="hidden-controls">
+        <select id="typeFilter">
+          <option value="">전체</option>
+          <option value="파워링크">파워링크</option>
+          <option value="쇼핑검색">쇼핑검색</option>
+          <option value="브랜드검색">브랜드검색</option>
+        </select>
+        <select id="campaignFilter"><option value="">전체</option></select>
+        <select id="adgroupFilter"><option value="">전체</option></select>
+        <select id="decisionFilter"><option value="">전체</option></select>
+        <button id="badOnlyBtn" type="button">점검대상만</button>
+      </div>
+      <div class="sidebar-search">
+        <label for="searchInput">검색</label>
+        <input id="searchInput" type="search" placeholder="캠페인, 광고그룹, 키워드, 상품">
+      </div>
+    </aside>
+    <main>
+      <div class="header">
+        <div>
+          <h1 id="pageTitle">네이버 광고 월간 대시보드</h1>
+          <div id="meta" class="meta">불러오는 중</div>
+          <div id="profile" class="profile"></div>
+          <div id="topStatus" class="top-status"></div>
+          <div class="page-month-control">
+            <label for="pageMonthFilter">월 선택</label>
+            <select id="pageMonthFilter"><option value="">Loading</option></select>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="refreshBtn" class="primary" type="button">새로고침</button>
+          <button id="rankBtn" class="ghost" type="button">순위 갱신</button>
+          <button id="saveMemoBtn" class="ghost" type="button">메모 저장</button>
+          <button id="exportBtn" class="ghost" type="button">보고서 초안</button>
+        </div>
+      </div>
+      <div id="kpis" class="kpis page-section" data-page="overview"></div>
+      <div class="chart-row page-section" data-page="overview">
+        <section class="chart-panel">
+          <div class="section-head"><h2>광고유형별 비용 분포</h2></div>
+          <div class="chart-body"><canvas id="typeDonutChart"></canvas></div>
+        </section>
+        <section class="chart-panel">
+          <div class="section-head"><h2>주차별 비용 vs 매출 추이</h2></div>
+          <div class="chart-body"><canvas id="weeklyTrendChart"></canvas></div>
+        </section>
+      </div>
+      <div class="layout page-section" data-page="overview">
+        <section>
+          <div class="section-head"><h2>광고유형별 성과</h2><span id="typeCount" class="count"></span></div>
+          <div id="typeBars" class="bars"></div>
+        </section>
+        <section>
+          <div class="section-head"><h2>캠페인 성과 순위</h2><span id="campaignCount" class="count"></span></div>
+          <div class="table-wrap">
+            <table class="compact">
+              <thead><tr><th>캠페인</th><th>비용</th><th>전환</th><th>매출</th><th>ROAS</th><th>판단</th></tr></thead>
+              <tbody id="campaignBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <section class="page-section" data-page="overview" style="margin-bottom:16px;overflow:hidden;border-radius:12px;border:1px solid var(--line);background:var(--panel);box-shadow:var(--shadow)">
+        <div class="section-head"><h2>오늘 쇼핑검색 순위</h2><span id="overviewRankStatus" class="count"></span></div>
+        <div id="overviewRankBody" style="padding:12px 16px 16px"></div>
+      </section>
+      <section class="page-section hidden" data-page="report">
+        <div class="section-head"><h2>점검대상 및 조치 결정</h2><span id="inspectionCount" class="count"></span></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>유형</th><th>캠페인</th><th>키워드/상품</th><th>비용</th><th>전환</th><th>ROAS</th><th>점검사유</th><th>권장조치</th><th>결정/메모</th></tr></thead>
+            <tbody id="inspectionBody"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-section" data-page="powerlink">
+        <div class="pl-section-head">
+          <div class="pl-section-head-left"><h2>파워링크 상세 데이터</h2><span id="keywordCount" class="count"></span></div>
+          <div class="pl-section-head-right">
+            <button class="pl-view-btn active" type="button" data-pl-view="table">테이블</button>
+            <button class="pl-view-btn" type="button" data-pl-view="chart">그래프</button>
+          </div>
+        </div>
+        <div class="pl-kpi-row" id="plKpiRow"></div>
+        <div class="detail-toolbar">
+          <button class="pl-chip active" type="button" data-detail-mode="all">전체 <span class="pl-count" id="plCount-all">0</span></button>
+          <button class="pl-chip" type="button" data-detail-mode="highCpc">고CPC <span class="pl-count" id="plCount-highCpc">0</span></button>
+          <button class="pl-chip" type="button" data-detail-mode="noConversion">무전환 <span class="pl-count" id="plCount-noConversion">0</span></button>
+          <button class="pl-chip" type="button" data-detail-mode="lowRoas">저ROAS <span class="pl-count" id="plCount-lowRoas">0</span></button>
+          <button class="pl-chip" type="button" data-detail-mode="scale">확대후보 <span class="pl-count" id="plCount-scale">0</span></button>
+          <button class="pl-chip" type="button" data-detail-mode="core">핵심키워드 <span class="pl-count" id="plCount-core">0</span></button>
+        </div>
+        <div id="plChartArea" class="pl-chart-area" style="display:none">
+          <div class="pl-chart-panel"><div class="pl-chart-title">판단 분포</div><div style="height:220px;position:relative"><canvas id="plDonutChart"></canvas></div></div>
+          <div class="pl-chart-panel"><div class="pl-chart-title">비용 상위 키워드 TOP 8</div><div style="height:220px;position:relative"><canvas id="plBarChart"></canvas></div></div>
+          <div class="pl-chart-panel"><div class="pl-chart-title">CPC vs ROAS 포지셔닝</div><div style="height:220px;position:relative"><canvas id="plScatterChart"></canvas></div></div>
+        </div>
+        <div id="plTableArea" class="table-wrap">
+          <table>
+            <thead><tr><th>광고그룹 / 캠페인</th><th>키워드</th><th>기기</th><th>순위</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
+            <tbody id="keywordBody"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-section" data-page="shopping">
+        <div class="section-head"><h2>쇼핑검색 상세 데이터</h2><span id="shoppingCount" class="count"></span></div>
+        <div class="memo-body" id="shoppingIntegratedBody"></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>캠페인</th><th>광고그룹</th><th>상품/소재</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
+            <tbody id="shoppingBody"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-section" data-page="brand">
+        <div class="section-head"><h2>브랜드검색 계약 요약</h2><span id="brandStatus" class="count"></span></div>
+        <div class="memo-body" id="brandBody"></div>
+      </section>
+      <section class="page-section" data-page="rankTraffic">
+        <div class="section-head"><h2>순위 트래픽 대시보드</h2><span id="rankStatus" class="count"></span></div>
+        <div class="memo-body" id="rankOverview"></div>
+        <div class="rank-control-panel">
+          <div class="rank-tabs" id="rankDateTabs"></div>
+          <div class="rank-tabs" id="rankSlotTabs"></div>
+        </div>
+        <div id="rankBody"></div>
+      </section>
+      <section class="page-section" data-page="dailyProduct">
+        <div class="section-head"><h2>일일 제품 성과</h2><span id="dailyProductStatus" class="count"></span></div>
+        <div class="memo-body" id="dailyProductBody"></div>
+      </section>
+      <section class="page-section" data-page="dailyRevenue"><div class="section-head"><h2>일일 매출</h2><span id="dailyRevenueStatus" class="count"></span></div><div class="memo-body" id="dailyRevenueBody"></div></section>
+<section class="page-section" data-page="totalSales">
+        <div class="section-head"><h2>매출 지표</h2><span id="totalSalesStatus" class="count"></span></div>
+        <div class="memo-body" id="totalSalesBody"></div>
+      </section>
+      <section class="page-section" data-page="monthlyReport">
+        <div class="section-head"><h2>월보고서</h2><span class="count">정리 예정</span></div>
+        <div class="memo-body">
+          <div class="empty">월보고서 내용은 이후 정리본을 붙여가며 보수할 수 있도록 비워두었습니다.</div>
+        </div>
+      </section>
+      <div class="memo-grid page-section hidden" data-page="report">
+        <section>
+          <div class="section-head"><h2>다음달 진행 계획</h2><span id="planCount" class="count"></span></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>구분</th><th>대상</th><th>계획</th><th>근거</th></tr></thead>
+              <tbody id="planBody"></tbody>
+            </table>
+          </div>
+        </section>
+        <section>
+          <div class="section-head"><h2>보고서 작성 메모</h2><span id="saveState" class="count"></span></div>
+          <div class="memo-body">
+            <label for="planMemo">추가 운영 계획</label>
+            <textarea id="planMemo" placeholder="예: 파워링크 답례품 계열은 입찰가 15% 인하 후 1주 관찰"></textarea>
+            <label for="reportMemo">보고서에 넣을 코멘트</label>
+            <textarea id="reportMemo" placeholder="예: 쇼핑검색은 전체 효율이 좋아 예산 유지 또는 확대 권장"></textarea>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script>
+    if (window.location.protocol === "file:") {
+      document.body.innerHTML = `
+        <div style="padding:28px;font-family:'Segoe UI','Malgun Gothic',Arial,sans-serif">
+          <h1 style="margin:0 0 12px;font-size:24px">대시보드 서버로 여는 중</h1>
+          <p style="margin:0 0 14px;color:#40505a">이 화면은 엑셀 데이터를 로컬 서버에서 읽어와야 합니다. 잠시 후 서버 주소로 이동합니다.</p>
+          <p style="margin:0;color:#40505a">이동 후에도 열리지 않으면 <strong>D:\\광고보고서\\월간광고대시보드_실행.bat</strong>를 실행해 주세요.</p>
+        </div>`;
+      window.location.replace("http://127.0.0.1:8790");
+    }
+    const initialMonth = new URLSearchParams(window.location.search).get("month") || "";
+    const state = { data: null, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", dailyProductDate: "", dailyProductMonth: "" };
+    const els = {
+      pageTitle: document.getElementById("pageTitle"),
+      meta: document.getElementById("meta"),
+      topStatus: document.getElementById("topStatus"),
+      profile: document.getElementById("profile"),
+      kpis: document.getElementById("kpis"),
+      typeBars: document.getElementById("typeBars"),
+      typeCount: document.getElementById("typeCount"),
+      campaignBody: document.getElementById("campaignBody"),
+      campaignCount: document.getElementById("campaignCount"),
+      keywordBody: document.getElementById("keywordBody"),
+      keywordCount: document.getElementById("keywordCount"),
+      shoppingBody: document.getElementById("shoppingBody"),
+      shoppingCount: document.getElementById("shoppingCount"),
+      shoppingIntegratedBody: document.getElementById("shoppingIntegratedBody"),
+      brandBody: document.getElementById("brandBody"),
+      brandStatus: document.getElementById("brandStatus"),
+      rankStatus: document.getElementById("rankStatus"),
+      rankOverview: document.getElementById("rankOverview"),
+      rankDateTabs: document.getElementById("rankDateTabs"),
+      rankSlotTabs: document.getElementById("rankSlotTabs"),
+      rankBody: document.getElementById("rankBody"),
+      dailyProductStatus: document.getElementById("dailyProductStatus"),
+      dailyProductBody: document.getElementById("dailyProductBody"),
+      totalSalesStatus: document.getElementById("totalSalesStatus"),
+      totalSalesBody: document.getElementById("totalSalesBody"),
+      inspectionBody: document.getElementById("inspectionBody"),
+      inspectionCount: document.getElementById("inspectionCount"),
+      planBody: document.getElementById("planBody"),
+      planCount: document.getElementById("planCount"),
+      typeFilter: document.getElementById("typeFilter"),
+      monthFilter: document.getElementById("monthFilter"),
+      pageMonthFilter: document.getElementById("pageMonthFilter"),
+      campaignFilter: document.getElementById("campaignFilter"),
+      adgroupFilter: document.getElementById("adgroupFilter"),
+      decisionFilter: document.getElementById("decisionFilter"),
+      searchInput: document.getElementById("searchInput"),
+      badOnlyBtn: document.getElementById("badOnlyBtn"),
+      planMemo: document.getElementById("planMemo"),
+      reportMemo: document.getElementById("reportMemo"),
+      saveState: document.getElementById("saveState")
+    };
+    const won = new Intl.NumberFormat("ko-KR", { style: "currency", currency: "KRW", maximumFractionDigits: 0 });
+    const num = new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 0 });
+    function money(v) { return won.format(Number(v || 0)); }
+    function number(v) { return num.format(Number(v || 0)); }
+    function pct(v) { return `${(Number(v || 0) * 100).toFixed(1)}%`; }
+    function ratio(v) { return Number(v || 0).toFixed(2); }
+    function roasText(v) { return `${Number(v || 0).toFixed(2)}배`; }
+    function rateText(v) { return `${(Number(v || 0) * 100).toFixed(1)}%`; }
+    function parseMoneyValue(value) {
+      const cleaned = String(value || "").replace(/[^\d.-]/g, "");
+      const parsed = Number(cleaned);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+    function todayLabel() {
+      const today = new Date();
+      const y = today.getFullYear();
+      const m = String(today.getMonth() + 1).padStart(2, "0");
+      const d = String(today.getDate()).padStart(2, "0");
+      return `오늘 ${y}-${m}-${d}`;
+    }
+    function html(v) {
+      return String(v ?? "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;" }[m]));
+    }
+    function setStatus(message, isError = false) {
+      els.topStatus.textContent = message || "";
+      els.topStatus.style.color = isError ? "var(--red)" : "var(--green)";
+      if (els.saveState) els.saveState.textContent = message || "";
+    }
+    function manualRevenueStorageKey(month = state.month) {
+      return `thedotom.manualRevenue.v2.${month || "latest"}`;
+    }
+    function loadManualRevenueLocal(month = state.month) {
+      try {
+        return JSON.parse(localStorage.getItem(manualRevenueStorageKey(month)) || "null");
+      } catch (error) {
+        console.warn("manual revenue local load failed", error);
+        return null;
+      }
+    }
+    function saveManualRevenueLocal(metrics, month = state.month) {
+      const weeks = metrics.weeks || state.data?.totalSalesMetrics?.weeks || [];
+      const payload = {
+        weeks,
+        manualSales: metrics.manualSales || [],
+        manualAdCosts: metrics.manualAdCosts || [],
+        updatedAt: new Date().toISOString()
+      };
+      localStorage.setItem(manualRevenueStorageKey(month), JSON.stringify(payload));
+    }
+    function applyManualRevenueLocal(month = state.month) {
+      const metrics = state.data?.totalSalesMetrics;
+      if (!metrics) return;
+      const saved = loadManualRevenueLocal(month);
+      if (saved) {
+        metrics.weeks = saved.weeks || metrics.weeks || [];
+        metrics.manualSales = saved.manualSales || [];
+        metrics.manualAdCosts = saved.manualAdCosts || [];
+        metrics.manualSource = `브라우저 저장 수기 입력값 기준 · ${String(saved.updatedAt || "").slice(0, 10)}`;
+      } else {
+        // localStorage 없으면 서버 top-level 데이터로 초기화
+        const d = state.data;
+        if (d.manualSales?.length) metrics.manualSales = JSON.parse(JSON.stringify(d.manualSales));
+        if (d.manualAdCosts?.length) metrics.manualAdCosts = JSON.parse(JSON.stringify(d.manualAdCosts));
+        metrics.manualSource = "서버 데이터 기준";
+      }
+      refreshManualRevenueMetrics(metrics);
+    }
+
+    function renderOverviewShoppingRank() {
+      const rankBody = document.getElementById("overviewRankBody");
+      const rankStatus = document.getElementById("overviewRankStatus");
+      if (!rankBody) return;
+      const rank = state.data?.rankTraffic || {};
+      const slotDetails = rank.slotDetails || [];
+      if (!slotDetails.length) {
+        rankBody.innerHTML = '<div class="empty">순위 데이터 없음</div>';
+        return;
+      }
+      // 오늘 날짜 기준 최신 slotDetail
+      const today = new Date().toISOString().slice(0,10);
+      const todaySlots = slotDetails.filter(sd => sd.date === today);
+      const target = todaySlots.find(sd => sd.slot === "afternoon") || todaySlots[0]
+        || slotDetails[slotDetails.length - 1];
+      if (!target) { rankBody.innerHTML = '<div class="empty">오늘 데이터 없음</div>'; return; }
+      rankStatus?.textContent && (rankStatus.textContent = `${target.date} ${({morning:"오전",afternoon:"오후",evening:"저녁",night:"야간"})[target.slot]||target.slot}`);
+      if (rankStatus) rankStatus.textContent = `${target.date} ${({morning:"오전",afternoon:"오후",evening:"저녁",night:"야간"})[target.slot]||target.slot}`;
+      const rewardIds = new Set((state.data.rewardMarketing?.items||[]).map(r=>String(r.productId)));
+      const products = [...(target.shoppingProducts||[])].sort((a,b)=>{
+        const aR=rewardIds.has(String(a.productId)), bR=rewardIds.has(String(b.productId));
+        return aR===bR?0:aR?-1:1;
+      });
+      if (!products.length) { rankBody.innerHTML = '<div class="empty">상품 데이터 없음</div>'; return; }
+      rankBody.innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px">` +
+        products.map(p => {
+          const isReward = rewardIds.has(String(p.productId));
+          const img = p.image ? `<img style="width:44px;height:44px;border-radius:7px;object-fit:cover;border:1px solid var(--line);flex:0 0 44px" src="${html(p.image)}" alt="">` : `<div style="width:44px;height:44px;border-radius:7px;background:#f1f5f9;flex:0 0 44px;display:grid;place-items:center;font-size:10px;color:#94a3b8">없음</div>`;
+          const kws = (p.items||[]).slice(0,3).map(item=>`<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 0;font-size:12px;border-bottom:1px solid #f1f5f9"><span style="flex:1;min-width:0;white-space:normal;word-break:keep-all">${html(item.keyword||"")}</span>${rankBadge(item)}</div>`).join("");
+          const more = (p.items||[]).length > 3 ? `<div style="font-size:11px;color:var(--muted);padding-top:4px">+${(p.items||[]).length-3}개 더</div>` : "";
+          return `<div style="border:1px solid ${isReward?"#f59e0b":"var(--line)"};border-radius:10px;background:#fff;overflow:hidden;box-shadow:var(--shadow)${isReward?";box-shadow:0 0 0 2px #fef3c780":""}">`
+            + `<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:#f8fafc;border-bottom:1px solid var(--line)">${img}<div style="min-width:0;flex:1"><div style="font-size:12px;font-weight:700;white-space:normal;word-break:keep-all;line-height:1.35">${html(p.title||p.productId||"")}</div>${isReward?'<span style="display:inline-flex;align-items:center;gap:3px;margin-top:4px;padding:1px 7px;border-radius:999px;background:#fef3c7;color:#92400e;font-size:10px;font-weight:700">⭐ 리워드</span>':""}</div></div>`
+            + `<div style="padding:6px 12px 8px">${kws}${more}</div></div>`;
+        }).join("") + `</div>`;
+    }
+    async function loadData() {
+      state.data = await fetchDashboardData();
+      state.month = state.data.month;
+      applyManualRevenueLocal(state.month);
+      fillMonths();
+      fillCampaigns();
+      fillAdgroups();
+      els.planMemo.value = state.data.state.planMemo || "";
+      els.reportMemo.value = state.data.state.reportMemo || "";
+      render();
+    }
+    async function fetchDashboardData() {
+      if (!state.month) {
+        try {
+          const monthRes = await fetch(`data/months.json?v=${Date.now()}`, { cache: "no-store" });
+          if (monthRes.ok) {
+            const monthData = await monthRes.json();
+            const months = Array.isArray(monthData)
+              ? monthData
+              : (monthData.months || monthData.availableMonths || []);
+            state.month = monthData.latest || months[0] || "";
+          }
+        } catch (error) {
+          console.warn("Month list fetch failed; falling back to latest dashboard data", error);
+        }
+      }
+      const qs = state.month ? `?month=${encodeURIComponent(state.month)}` : "";
+      try {
+        const res = await fetch(`/api/monthly-dashboard${qs}`);
+        if (res.ok) return await res.json();
+      } catch (error) {
+        console.warn("API fetch failed; trying static dashboard data", error);
+      }
+      const staticPath = state.month ? `data/monthly-dashboard-${encodeURIComponent(state.month)}.json` : "data/monthly-dashboard-latest.json";
+      const staticRes = await fetch(`${staticPath}?v=${Date.now()}`, { cache: "no-store" });
+      if (!staticRes.ok) throw new Error("??쒕낫???곗씠?곕? 遺덈윭?ㅼ? 紐삵뻽?듬땲??");
+      return await staticRes.json();
+    }
+    function fillMonths() {
+      const months = state.data.availableMonths || [];
+      const options = months.map(month => `<option value="${html(month)}">${html(month)}</option>`).join("");
+      els.monthFilter.innerHTML = options;
+      els.monthFilter.value = state.month;
+      if (els.pageMonthFilter) {
+        els.pageMonthFilter.innerHTML = options;
+        els.pageMonthFilter.value = state.month;
+      }
+    }
+    async function changeDashboardMonth(month) {
+      if (!month || month === state.month) {
+        if (els.monthFilter) els.monthFilter.value = state.month;
+        if (els.pageMonthFilter) els.pageMonthFilter.value = state.month;
+        return;
+      }
+      state.month = month;
+      if (els.monthFilter) els.monthFilter.value = month;
+      if (els.pageMonthFilter) els.pageMonthFilter.value = month;
+      await loadData();
+    }
+    function pageType() {
+      if (state.page === "powerlink") return "파워링크";
+      if (state.page === "shopping") return "쇼핑검색";
+      if (state.page === "brand") return "브랜드검색";
+      return "";
+    }
+    function renderPageShell() {
+      const titles = {
+        overview: "네이버 광고 월간 대시보드",
+        powerlink: "파워링크 운영",
+        shopping: "쇼핑검색 운영",
+        brand: "브랜드검색 계약",
+        rankShopping: "쇼핑검색 순위 트래픽",
+        rankPowerlink: "파워링크 순위 트래픽",
+        dailyProduct: "일일 제품 성과",
+        totalSales: "매출 지표",
+        dailyRevenue: "일일 매출",
+        monthlyReport: "월보고서"
+      };
+      els.pageTitle.textContent = titles[state.page] || titles.overview;
+      const isRankTrafficPage = state.page === "rankShopping" || state.page === "rankPowerlink";
+      const isRevenuePage = state.page === "totalSales" || state.page === "dailyRevenue";
+      document.querySelectorAll("[data-page]").forEach(el => {
+        if (el.tagName === "BUTTON") return;
+        const visible = el.dataset.page === state.page || (el.dataset.page === "rankTraffic" && isRankTrafficPage);
+        el.classList.toggle("hidden", !visible);
+      });
+      document.querySelectorAll(".nav [data-page]").forEach(button => {
+        button.classList.toggle("active", button.dataset.page === state.page);
+      });
+      document.querySelectorAll(".nav [data-rank-root]").forEach(button => {
+        button.classList.toggle("active", isRankTrafficPage);
+      });
+      document.querySelectorAll(".nav [data-revenue-root]").forEach(button => {
+        button.classList.toggle("active", isRevenuePage);
+      });
+      els.typeFilter.value = pageType();
+    }
+    function fillCampaigns() {
+      const current = els.campaignFilter.value;
+      const type = pageType();
+      const names = [...new Set(state.data.campaigns
+        .filter(row => !type || row["광고유형"] === type)
+        .map(r => r["캠페인명"])
+        .filter(Boolean))].sort();
+      els.campaignFilter.innerHTML = `<option value="">전체</option>` + names.map(name => `<option value="${html(name)}">${html(name)}</option>`).join("");
+      els.campaignFilter.value = names.includes(current) ? current : "";
+    }
+    function fillAdgroups() {
+      const current = els.adgroupFilter.value;
+      const type = pageType();
+      const campaign = els.campaignFilter.value;
+      const names = [...new Set(state.data.keywordPerformance
+        .filter(row => !type || row["광고유형"] === type)
+        .filter(row => !campaign || row["캠페인명"] === campaign)
+        .map(row => row["광고그룹명"])
+        .filter(Boolean))].sort();
+      els.adgroupFilter.innerHTML = `<option value="">전체</option>` + names.map(name => `<option value="${html(name)}">${html(name)}</option>`).join("");
+      els.adgroupFilter.value = names.includes(current) ? current : "";
+    }
+    function filters(row) {
+      const type = els.typeFilter.value;
+      const campaign = els.campaignFilter.value;
+      const adgroup = els.adgroupFilter.value;
+      const decision = els.decisionFilter.value;
+      const q = els.searchInput.value.trim().toLowerCase();
+      if (type && row["광고유형"] !== type) return false;
+      if (campaign && row["캠페인명"] !== campaign) return false;
+      if (adgroup && row["광고그룹명"] !== adgroup) return false;
+      if (decision && row["결정"] !== decision) return false;
+      if (q) {
+        const hay = `${row["캠페인명"] || ""} ${row["광고그룹명"] || ""} ${row["키워드"] || ""} ${row["상품명"] || ""}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    }
+    function render() {
+      const d = state.data;
+      renderPageShell();
+      els.meta.textContent = `${todayLabel()} · ${d.month} 광고 운영 현황`;
+      els.profile.textContent = `${d.dataProfile.period} · ${d.dataProfile.granularity} · 원천 ${number(d.dataProfile.rawRows)}행 · 상세 ${number(d.dataProfile.detailRows)}개`;
+      renderKpis();
+      renderTypes();
+      renderCampaigns();
+      renderKeywords();
+      renderShoppingIntegrated();
+      renderShopping();
+      renderBrandContract();
+      renderRankTraffic();
+      renderDailyProductPerformance();
+      renderDailyRevenue();
+  renderTotalSalesMetrics();
+      renderInspection();
+      renderPlan();
+      renderOverviewCharts();
+      renderOverviewShoppingRank();
+    }
+    function renderKpis() {
+      const s = state.data.summary;
+      const items = [
+        ["총 광고비", money(s.cost), "파워링크+쇼핑검색"],
+        ["전환매출", money(s.revenue), `전환 ${number(s.conversions)}건`],
+        ["ROAS", ratio(s.roas), `CVR ${pct(s.cvr)}`],
+        ["CTR / CPC", `${pct(s.ctr)} · ${money(s.cpc)}`, `클릭 ${number(s.clicks)}회`],
+        ["상세 데이터", `${number(state.data.dataProfile.detailRows)}개`, `캠페인 ${number(state.data.dataProfile.campaigns)}개 · 광고그룹 ${number(state.data.dataProfile.adgroups)}개`]
+      ];
+      els.kpis.innerHTML = items.map(([label, value, sub]) => `<div class="metric"><div class="label">${html(label)}</div><div class="value">${html(value)}</div><div class="sub">${html(sub)}</div></div>`).join("");
+    }
+    function renderTypes() {
+      const rows = state.data.typePerformance;
+      const max = Math.max(...rows.map(r => Number(r["총비용"] || 0)), 1);
+      els.typeCount.textContent = `${rows.length}개 유형`;
+      els.typeBars.innerHTML = rows.map(row => {
+        const cls = row["광고유형"] === "파워링크" ? "power" : row["광고유형"] === "쇼핑검색" ? "shopping" : "";
+        return `<div class="type-card">
+          <div class="type-card-head">
+            <div class="type-name"><span class="type-dot ${cls}"></span>${html(row["광고유형"])}</div>
+            <strong>${money(row["총비용"])}</strong>
+          </div>
+          <div class="track"><div class="fill ${cls}" style="width:${Math.max(3, Number(row["총비용"] || 0) / max * 100)}%"></div></div>
+          <div class="type-stats">
+            <span>클릭<strong>${number(row["클릭수"])}</strong></span>
+            <span>전환<strong>${number(row["전환수"])}</strong></span>
+            <span>ROAS<strong>${ratio(row["ROAS"])}</strong></span>
+          </div>
+        </div>`;
+      }).join("");
+    }
+    function renderCampaigns() {
+      const rows = state.data.campaigns
+        .filter(row => !pageType() || row["광고유형"] === pageType())
+        .filter(row => !els.campaignFilter.value || row["캠페인명"] === els.campaignFilter.value);
+      els.campaignCount.textContent = `${rows.length}개 캠페인`;
+      els.campaignBody.innerHTML = rows.map(row => {
+        const roas = Number(row["ROAS"] || 0);
+        const pill = roas >= 5 ? ["good", "확대"] : roas >= 3 ? ["warn", "유지"] : ["bad", "점검"];
+        return `<tr><td>${html(row["캠페인명"])}</td><td>${money(row["총비용"])}</td><td>${number(row["전환수"])}</td><td>${money(row["전환매출"])}</td><td>${ratio(row["ROAS"])}</td><td><span class="pill ${pill[0]}">${pill[1]}</span></td></tr>`;
+      }).join("");
+    }
+    function detailFilteredKeywords() {
+      const q = els.searchInput.value.trim().toLowerCase();
+      return state.data.keywordPerformance
+        .filter(row => row["광고유형"] === "파워링크")
+        .filter(row => !els.campaignFilter.value || row["캠페인명"] === els.campaignFilter.value)
+        .filter(row => !els.adgroupFilter.value || row["광고그룹명"] === els.adgroupFilter.value)
+        .filter(row => {
+          if (!q) return true;
+          const hay = `${row["캠페인명"] || ""} ${row["광고그룹명"] || ""} ${row["키워드"] || ""} ${row["상품명"] || ""}`.toLowerCase();
+          return hay.includes(q);
+        })
+        .filter(row => {
+          if (state.detailMode === "highCpc") return Number(row["CPC"] || 0) >= 3000;
+          if (state.detailMode === "noConversion") return Number(row["클릭수"] || 0) >= 20 && Number(row["전환수"] || 0) === 0;
+          if (state.detailMode === "lowRoas") return Number(row["총비용"] || 0) >= 100000 && Number(row["ROAS"] || 0) > 0 && Number(row["ROAS"] || 0) < 3;
+          if (state.detailMode === "scale") return Number(row["전환수"] || 0) > 0 && Number(row["ROAS"] || 0) >= 5;
+          if (state.detailMode === "core") return row["광고유형"] === "파워링크" && ["답례품", "돌답례품", "돌잔치답례품"].includes(String(row["키워드"] || "").trim());
+          return true;
+        });
+    }
+    function actualRankText(row) {
+      if (row["실제검색순위"]) return `${number(row["실제검색순위"])}위`;
+      const keyword = String(row["키워드"] || "").trim();
+      const isCore = row["광고유형"] === "파워링크" && ["답례품", "돌답례품", "돌잔치답례품"].includes(keyword);
+      return isCore ? "미확인" : "-";
+    }
+    function destroyPlChart(name) { if (window._charts[name]) { window._charts[name].destroy(); window._charts[name] = null; } }
+    function renderPlCharts(rows) {
+      // 판단 분포 도넛
+      const jc = { "핵심·확대": 0, "관찰": 0, "고CPC·무전환": 0, "저ROAS": 0 };
+      rows.forEach(r => {
+        const j = r["판단"] || "관찰";
+        if (j.includes("핵심") || j.includes("확대")) jc["핵심·확대"]++;
+        else if (j.includes("저")) jc["저ROAS"]++;
+        else if (j.includes("고") || j.includes("무전환")) jc["고CPC·무전환"]++;
+        else jc["관찰"]++;
+      });
+      destroyPlChart("plDonut");
+      const dc = document.getElementById("plDonutChart");
+      if (dc) window._charts.plDonut = new Chart(dc, { type: "doughnut", data: { labels: Object.keys(jc), datasets: [{ data: Object.values(jc), backgroundColor: ["#10b981","#94a3b8","#ef4444","#f59e0b"], borderWidth: 2, borderColor: "#fff" }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "right", labels: { font: { size: 11 }, boxWidth: 10, color: "#64748b", padding: 8 } } }, cutout: "58%" } });
+      // 비용 상위 키워드 가로 바
+      const top8 = [...rows].sort((a,b) => Number(b["총비용"]||0)-Number(a["총비용"]||0)).slice(0,8).reverse();
+      destroyPlChart("plBar");
+      const bc = document.getElementById("plBarChart");
+      if (bc) window._charts.plBar = new Chart(bc, { type: "bar", data: { labels: top8.map(r => r["키워드"]||r["상품명"]||""), datasets: [{ data: top8.map(r => Number(r["총비용"]||0)), backgroundColor: top8.map(r => { const j=r["판단"]||""; return j.includes("핵심")||j.includes("확대")?"rgba(16,185,129,.8)":j.includes("고")||j.includes("무전환")||j.includes("저")?"rgba(239,68,68,.8)":"rgba(72,101,244,.8)"; }), borderRadius: 4, borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: "y", plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `₩${Math.round(ctx.parsed.x).toLocaleString()}` } } }, scales: { x: { ticks: { callback: v => `₩${(v/1000).toFixed(0)}k`, font: { size: 10 }, color: "#64748b" }, grid: { color: "#f1f5f9" } }, y: { ticks: { font: { size: 10 }, color: "#475569" } } } } });
+      // CPC vs ROAS 산점도
+      const sdRaw = rows.filter(r => Number(r["CPC"]||0)>0 && Number(r["ROAS"]||0)>0);
+      const sdData = sdRaw.map(r => ({ x: Number(r["CPC"]||0), y: Number(r["ROAS"]||0) }));
+      const sdColors = sdRaw.map(r => { const j=r["판단"]||""; return j.includes("핵심")||j.includes("확대")?"rgba(16,185,129,.8)":j.includes("고")||j.includes("무전환")||j.includes("저")?"rgba(239,68,68,.8)":"rgba(148,163,184,.8)"; });
+      destroyPlChart("plScatter");
+      const sc = document.getElementById("plScatterChart");
+      if (sc) window._charts.plScatter = new Chart(sc, { type: "scatter", data: { datasets: [{ data: sdData, backgroundColor: sdColors, pointRadius: 5, pointHoverRadius: 7, borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => { const d=sdRaw[ctx.dataIndex]; return `${d["키워드"]||""}: CPC ₩${Math.round(Number(d["CPC"]||0)).toLocaleString()} / ROAS ${Number(d["ROAS"]||0).toFixed(2)}`; } } } }, scales: { x: { title: { display: true, text: "CPC (₩)", font: { size: 10 }, color: "#94a3b8" }, ticks: { callback: v => `₩${(v/1000).toFixed(0)}k`, font: { size: 10 }, color: "#64748b" }, grid: { color: "#f1f5f9" } }, y: { title: { display: true, text: "ROAS", font: { size: 10 }, color: "#94a3b8" }, ticks: { font: { size: 10 }, color: "#64748b" }, grid: { color: "#f1f5f9" } } } } });
+    }
+    function renderKeywords() {
+      const basePl = state.data.keywordPerformance
+        .filter(r => r["광고유형"]==="파워링크")
+        .filter(r => !els.campaignFilter.value || r["캠페인명"]===els.campaignFilter.value)
+        .filter(r => !els.adgroupFilter.value || r["광고그룹명"]===els.adgroupFilter.value)
+        .filter(r => { const q=els.searchInput.value.trim().toLowerCase(); if(!q) return true; return `${r["캠페인명"]||""} ${r["광고그룹명"]||""} ${r["키워드"]||""}`.toLowerCase().includes(q); });
+      // 칩 카운트 업데이트
+      const counts = {
+        all: basePl.length,
+        highCpc: basePl.filter(r=>Number(r["CPC"]||0)>=3000).length,
+        noConversion: basePl.filter(r=>Number(r["클릭수"]||0)>=20&&Number(r["전환수"]||0)===0).length,
+        lowRoas: basePl.filter(r=>Number(r["총비용"]||0)>=100000&&Number(r["ROAS"]||0)>0&&Number(r["ROAS"]||0)<3).length,
+        scale: basePl.filter(r=>Number(r["전환수"]||0)>0&&Number(r["ROAS"]||0)>=5).length,
+        core: basePl.filter(r=>["답례품","돌답례품","돌잔치답례품"].includes(String(r["키워드"]||"").trim())).length
+      };
+      Object.keys(counts).forEach(k => { const el=document.getElementById(`plCount-${k}`); if(el) el.textContent=counts[k]; });
+      const rows = detailFilteredKeywords();
+      els.keywordCount.textContent = `${rows.length}개 키워드`;
+      // KPI 집계
+      const totalCost = rows.reduce((s,r)=>s+Number(r["총비용"]||0),0);
+      const totalClicks = rows.reduce((s,r)=>s+Number(r["클릭수"]||0),0);
+      const totalConv = rows.reduce((s,r)=>s+Number(r["전환수"]||0),0);
+      const avgCpc = totalClicks ? totalCost/totalClicks : 0;
+      const roasRows = rows.filter(r=>Number(r["ROAS"]||0)>0);
+      const avgRoas = roasRows.length ? roasRows.reduce((s,r)=>s+Number(r["ROAS"]||0),0)/roasRows.length : 0;
+      const kpiEl = document.getElementById("plKpiRow");
+      if (kpiEl) kpiEl.innerHTML = [
+        ["총 비용", money(totalCost)], ["총 클릭", number(totalClicks)],
+        ["총 전환", number(totalConv)], ["평균 CPC", money(Math.round(avgCpc))],
+        ["평균 ROAS", ratio(avgRoas)+"배"]
+      ].map(([l,v])=>`<div class="pl-kpi-item"><div class="pl-kpi-label">${l}</div><div class="pl-kpi-val">${v}</div></div>`).join("");
+      // 뷰 전환
+      const isChart = state.plView === "chart";
+      const ca = document.getElementById("plChartArea"), ta = document.getElementById("plTableArea");
+      if (ca) ca.style.display = isChart ? "grid" : "none";
+      if (ta) ta.style.display = isChart ? "none" : "block";
+      if (isChart) { renderPlCharts(rows); return; }
+      // 테이블 뷰
+      if (!rows.length) { els.keywordBody.innerHTML=`<tr><td class="empty" colspan="13">조건에 맞는 상세 데이터가 없습니다.</td></tr>`; return; }
+      const maxRoas = Math.max(...rows.filter(r=>Number(r["ROAS"]||0)>0).map(r=>Number(r["ROAS"]||0)), 1);
+      els.keywordBody.innerHTML = rows.slice(0,150).map(row => {
+        const judgement = row["판단"] || "관찰";
+        const cls = judgement.includes("핵심")||judgement.includes("확대") ? "good" : judgement.includes("고")||judgement.includes("무전환")||judgement.includes("저") ? "bad" : "warn";
+        const roas = Number(row["ROAS"]||0); const roasW = Math.round(Math.min(roas/maxRoas*44, 44));
+        return `<tr>
+          <td><div style="font-weight:700;font-size:12px;line-height:1.3">${html(row["광고그룹명"])}</div><div style="font-size:11px;margin-top:2px;color:var(--muted)">${html(row["캠페인명"])}</div></td>
+          <td style="font-weight:700">${html(row["키워드"]||row["상품명"])}</td>
+          <td>${html(row["검색기기"]||"")}</td>
+          <td>${actualRankText(row)}</td>
+          <td>${number(row["노출수"])}</td>
+          <td>${number(row["클릭수"])}</td>
+          <td>${money(row["총비용"])}</td>
+          <td><strong>${money(row["CPC"])}</strong></td>
+          <td>${number(row["전환수"])}</td>
+          <td>${money(row["CPA"])}</td>
+          <td><span style="font-weight:700">${ratio(roas)}</span>${roasW>0?`<span class="roas-bar-inline" style="width:${roasW}px"></span>`:""}</td>
+          <td><span class="pill ${cls}">${html(judgement)}</span></td>
+          <td class="wrap">${html(row["권장조치"])}</td>
+        </tr>`;
+      }).join("");
+    }
+    function shoppingRows() {
+      const q = els.searchInput.value.trim().toLowerCase();
+      return state.data.keywordPerformance
+        .filter(row => row["광고유형"] === "쇼핑검색")
+        .filter(row => !els.campaignFilter.value || row["캠페인명"] === els.campaignFilter.value)
+        .filter(row => !els.adgroupFilter.value || row["광고그룹명"] === els.adgroupFilter.value)
+        .filter(row => {
+          if (!q) return true;
+          const hay = `${row["캠페인명"] || ""} ${row["광고그룹명"] || ""} ${row["상품명"] || ""}`.toLowerCase();
+          return hay.includes(q);
+        });
+    }
+    function renderShopping() {
+      const rows = shoppingRows();
+      els.shoppingCount.textContent = `${rows.length}개 상품/소재`;
+      if (!rows.length) {
+        els.shoppingBody.innerHTML = `<tr><td class="empty" colspan="12">조건에 맞는 쇼핑검색 데이터가 없습니다.</td></tr>`;
+        return;
+      }
+      els.shoppingBody.innerHTML = rows.slice(0, 150).map(row => {
+        const judgement = row["판단"] || "관찰";
+        const cls = judgement.includes("확대") ? "good" : judgement.includes("고") || judgement.includes("무전환") || judgement.includes("저") ? "bad" : "warn";
+        return `<tr>
+          <td>${html(row["캠페인명"])}</td>
+          <td>${html(row["광고그룹명"])}</td>
+          <td>${html(row["상품명"] || row["광고그룹명"])}</td>
+          <td>${number(row["노출수"])}</td>
+          <td>${number(row["클릭수"])}</td>
+          <td>${money(row["총비용"])}</td>
+          <td><strong>${money(row["CPC"])}</strong></td>
+          <td>${number(row["전환수"])}</td>
+          <td>${money(row["CPA"])}</td>
+          <td>${ratio(row["ROAS"])}</td>
+          <td><span class="pill ${cls}">${html(judgement)}</span></td>
+          <td class="wrap">${html(row["권장조치"])}</td>
+        </tr>`;
+      }).join("");
+    }
+    function renderShoppingIntegrated() {
+      const mix = state.data.shoppingIntegrated || {};
+      const dailyCosts = state.data.dailyProductCosts || {};
+      const productThumb = item => {
+        const thumb = item.image ? `<img class="reward-thumb" src="${html(item.image)}" alt="">` : `<div class="reward-thumb thumb-placeholder">대기</div>`;
+        return item.link ? `<a class="reward-thumb-link" href="${html(item.link)}" target="_blank" rel="noreferrer" title="상품 열기">${thumb}</a>` : thumb;
+      };
+      const productNameCell = item => `
+        <td class="wrap">
+          <div class="reward-product">
+            ${productThumb(item)}
+            <div><div class="reward-product-title">${html(item.productName || item["상품명"] || item["광고그룹명"] || "")}</div><div class="meta">상품번호 ${html(item.productId || "")}</div></div>
+          </div>
+        </td>`;
+      const groupedAdProducts = Object.values((dailyCosts.items || []).reduce((acc, item) => {
+        const key = item.productId || item.productName || item.adgroup;
+        if (!acc[key]) acc[key] = { ...item, ads: [], totalCost: 0, clicks: 0, conversions: 0, revenue: 0 };
+        acc[key].ads.push(item);
+        acc[key].totalCost += Number(item.totalCost || 0);
+        acc[key].clicks += Number(item.clicks || 0);
+        acc[key].conversions += Number(item.conversions || 0);
+        acc[key].revenue += Number(item.revenue || 0);
+        return acc;
+      }, {})).sort((a, b) => Number(b.totalCost || 0) - Number(a.totalCost || 0));
+      const adLinkedRows = groupedAdProducts.map(item => {
+        const details = (item.ads || []).map(ad => `
+          <div class="ad-detail-line">
+            <span>${html(ad.adProductName || ad.adgroup || "")}</span>
+            <strong>${money(ad.totalCost || 0)}</strong>
+          </div>`).join("");
+        return `<tr>
+          ${productNameCell(item)}
+          <td>${number(item.clicks || 0)}</td>
+          <td>${money(item.totalCost || 0)}</td>
+          <td>${money(item.totalCost && item.clicks ? item.totalCost / item.clicks : 0)}</td>
+          <td>${ratio(item.totalCost ? item.revenue / item.totalCost : 0)}</td>
+          <td><div class="ad-detail-list">${details}</div></td>
+        </tr>`;
+      }).join("");
+      const dailyCostRows = (dailyCosts.items || []).slice(0, 30).map(item => {
+        const chips = (item.daily || []).map(day => `
+          <span class="daily-cost-chip ${Number(day.cost || 0) ? "" : "zero"}">
+            <span class="daily-cost-date">${html(String(day.date || "").slice(5))}</span>
+            <span>${money(day.cost || 0)}</span>
+          </span>`).join("");
+        return `<tr>
+          ${productNameCell(item)}
+          <td>${money(item.totalCost || 0)}</td>
+          <td>${money(item.avgDailyCost || 0)}</td>
+          <td>${number(item.clicks || 0)}</td>
+          <td>${money(item.cpc || 0)}</td>
+          <td>${ratio(item.roas || 0)}</td>
+          <td><div class="daily-cost-grid">${chips}</div></td>
+        </tr>`;
+      }).join("");
+      const categoryTable = (title, sub, headers, body, emptyColspan) => `
+        <div class="product-category">
+          <div class="product-category-head">
+            <div><h3 class="product-category-title">${html(title)}</h3><div class="product-category-sub">${html(sub || "")}</div></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr>${headers.map(h => `<th>${html(h)}</th>`).join("")}</tr></thead>
+              <tbody>${body || `<tr><td class="empty" colspan="${emptyColspan}">표시할 상품이 없습니다.</td></tr>`}</tbody>
+            </table>
+          </div>
+        </div>`;
+      els.shoppingIntegratedBody.innerHTML = `
+        <div class="kpis" style="margin-bottom:12px">
+          <div class="metric"><div class="label">쇼핑검색 광고비</div><div class="value">${money(mix.adCost || 0)}</div><div class="sub">네이버 광고 API 비용</div></div>
+          <div class="metric"><div class="label">클릭</div><div class="value">${number(mix.clicks || 0)}</div><div class="sub">쇼핑검색 유입</div></div>
+          <div class="metric"><div class="label">전환</div><div class="value">${number(mix.conversions || 0)}</div><div class="sub">${money(mix.revenue || 0)}</div></div>
+          <div class="metric"><div class="label">광고 ROAS</div><div class="value">${ratio(mix.adRoas || 0)}</div><div class="sub">쇼핑검색 단독</div></div>
+          <div class="metric"><div class="label">상품/소재</div><div class="value">${number((dailyCosts.items || []).length)}</div><div class="sub">일자별 광고비 기준</div></div>
+        </div>
+        <div class="meta" style="margin-bottom:10px">${html(mix.memo || "")}</div>
+        ${categoryTable("일자별 상품 광고비", dailyCosts.summary || "쇼핑검색 상품/소재별 광고 사용 금액", ["상품", "누적 비용", "일평균", "클릭", "CPC", "ROAS", "일자별 비용"], dailyCostRows, 7)}
+        ${categoryTable("광고 연동 상품", "본 상품 기준으로 묶은 쇼핑검색 광고 집행 내역", ["상품", "클릭", "비용", "CPC", "ROAS", "연동 광고 내역"], adLinkedRows, 6)}`;
+    }
+    function renderDailyProductPerformance() {
+      const perf = state.data.dailyProductPerformance || {};
+      const rows = perf.rows || [];
+      const months = [...new Set(rows.map(row => String(row.date || "").slice(0, 7)).filter(Boolean))].sort();
+      if (!state.dailyProductMonth || !months.includes(state.dailyProductMonth)) {
+        state.dailyProductMonth = months.includes(state.month) ? state.month : (months[months.length - 1] || state.month);
+      }
+      const monthRows = state.dailyProductMonth ? rows.filter(row => String(row.date || "").startsWith(state.dailyProductMonth)) : rows;
+      const totals = monthRows.reduce((acc, row) => {
+        acc.adCost += Number(row.adCost || 0);
+        acc.dailySales += Number(row.dailySales || 0);
+        acc.orders += Number(row.orders || 0);
+        return acc;
+      }, { adCost: 0, dailySales: 0, orders: 0 });
+      totals.roas = totals.adCost ? monthRows.reduce((sum, row) => sum + Number(row.adSales || 0), 0) / totals.adCost : 0;
+      totals.adCostRate = totals.dailySales ? totals.adCost / totals.dailySales : 0;
+      const dates = [...new Set(monthRows.map(row => row.date).filter(Boolean))].sort();
+      if (!dates.includes(state.dailyProductDate)) state.dailyProductDate = dates[dates.length - 1] || "";
+      const visibleRows = state.dailyProductDate ? monthRows.filter(row => row.date === state.dailyProductDate) : monthRows;
+      const selectedDaySales = visibleRows.reduce((sum, row) => sum + Number(row.dailySales || 0), 0);
+      const monthOptions = months.map(month => `<option value="${html(month)}" ${month === state.dailyProductMonth ? "selected" : ""}>${html(month)}</option>`).join("");
+      const dateLabel = dates.length ? `${dates[0]} ~ ${dates[dates.length - 1]}` : "데이터 없음";
+      els.dailyProductStatus.textContent = dateLabel;
+      const dateTabs = dates.map(date => `<button class="ghost ${date === state.dailyProductDate ? "active" : ""}" type="button" data-daily-product-date="${html(date)}">${html(date)}</button>`).join("");
+      const statusClass = status => status === "광고+슬롯" ? "active" : status === "광고" ? "good" : status === "슬롯" ? "warn" : "neutral";
+      const tableRows = visibleRows.map(row => `
+        <tr>
+          <td class="wrap"><strong>${html(row.product || "")}</strong><div class="muted">상품번호 ${html(row.productId || "")}</div></td>
+          <td>${html(row.store === "mura" ? "무라" : row.store === "thedotom" ? "더도톰" : row.store || "-")}</td>
+          <td>${html(row.recordId || "")}</td>
+          <td>${html(row.date || "")}</td>
+          <td class="wrap">${html(row.adgroup || (String(row.status || "").includes("슬롯") ? "슬롯 진행 상품" : "연결 광고 없음"))}</td>
+          <td>${money(row.adSales || 0)}</td>
+          <td>${money(row.adCost || 0)}</td>
+          <td><span class="pill ${statusClass(row.status || "")}">${html(row.status || "")}</span></td>
+          <td>${html(row.memo || "")}</td>
+          <td>${money(row.dailySales || 0)}</td>
+          <td>${number(row.orders || 0)}</td>
+          <td>${roasText(row.roas || 0)}</td>
+          <td>${rateText(row.adCostRate || 0)}</td>
+        </tr>
+      `).join("");
+      els.dailyProductBody.innerHTML = `
+        <div class="daily-product-filter">
+          <select data-daily-product-month>${monthOptions}</select>
+        </div>
+        <div class="kpis daily-product-kpis" style="margin-bottom:12px">
+          <div class="metric"><div class="label">기간</div><div class="value" style="font-size:18px">${html(dateLabel)}</div><div class="sub">일별 제품 성과 ${number(monthRows.length)}건</div></div>
+          <div class="metric"><div class="label">선택일 매출</div><div class="value">${money(selectedDaySales)}</div><div class="sub">${html(state.dailyProductDate || "-")} 전체 상품 합계</div></div>
+          <div class="metric"><div class="label">광고비</div><div class="value">${money(totals.adCost || 0)}</div><div class="sub">네이버 광고 총비용</div></div>
+          <div class="metric"><div class="label">매출</div><div class="value">${money(totals.dailySales || 0)}</div><div class="sub">선택 월 상품별 판매성과</div></div>
+          <div class="metric"><div class="label">ROAS</div><div class="value">${roasText(totals.roas || 0)}</div><div class="sub">광고매출 / 광고비</div></div>
+          <div class="metric"><div class="label">광고비율</div><div class="value">${rateText(totals.adCostRate || 0)}</div><div class="sub">광고비 / 일매출</div></div>
+        </div>
+        <div class="product-category" style="margin-bottom:14px">
+          <div class="product-category-head">
+            <div>
+              <h3 class="product-category-title">DB 4 — 일일 제품 성과</h3>
+              <div class="product-category-sub">${html(perf.summary || "")}</div>
+            </div>
+          </div>
+          <div class="daily-product-tabs">${dateTabs}</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>제품</th><th>스토어</th><th>기록ID</th><th>날짜</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>운영형태</th><th>운영메모</th><th>상품매출</th><th>주문건수</th><th>ROAS</th><th>광고비율</th></tr></thead>
+              <tbody>${tableRows || `<tr><td class="empty" colspan="13">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
+            </table>
+          </div>
+        </div>
+        `;
+    }
+    function normalizedManualRows(rows, defaults) {
+      const map = new Map((rows || []).map(row => [row.name, [...(row.weeks || []), 0, 0, 0, 0, 0].slice(0, 5)]));
+      defaults.forEach(name => {
+        if (!map.has(name)) map.set(name, [0, 0, 0, 0, 0]);
+      });
+      return [...map.entries()].map(([name, values]) => ({ name, weeks: values }));
+    }
+    function manualRowsWithTotals(rows) {
+      return (rows || []).map(row => {
+        const weeks = [...(row.weeks || []), 0, 0, 0, 0, 0].slice(0, 5).map(value => Number(value) || 0);
+        return { ...row, weeks, total: weeks.reduce((sum, value) => sum + value, 0) };
+      });
+    }
+    function manualTotalRow(rows, name) {
+      const weeks = [0, 0, 0, 0, 0];
+      (rows || []).forEach(row => {
+        (row.weeks || []).forEach((value, index) => {
+          if (index < weeks.length) weeks[index] += Number(value) || 0;
+        });
+      });
+      return { name, weeks, total: weeks.reduce((sum, value) => sum + value, 0) };
+    }
+    function refreshManualRevenueMetrics(metrics) {
+      if (!state.data) state.data = {};
+      metrics.manualSales = manualRowsWithTotals(metrics.manualSales || []);
+      metrics.manualAdCosts = manualRowsWithTotals(metrics.manualAdCosts || []).filter(row => row.name !== "성과형2");
+      metrics.manualSalesTotal = manualTotalRow(metrics.manualSales, "수기 매출 합계");
+      metrics.manualAdCostTotal = manualTotalRow(metrics.manualAdCosts, "수기 광고비 합계");
+      state.data.totalSalesMetrics = metrics;
+    }
+
+
+
+function renderDailyRevenue() {
+  const body = document.getElementById("dailyRevenueBody");
+  const status = document.getElementById("dailyRevenueStatus");
+  if (!body) return;
+
+  const revenue = state.data?.revenueMetrics || state.data?.totalSalesMetrics || {};
+  const rows = revenue.dailySales || [];
+  const month = state.month || state.data?.month || "";
+  const monthRows = rows.filter(row => !month || String(row.date || "").startsWith(month));
+
+  const stores = [
+    "\uce74\ud39824(\uc790\uc0ac\ubab0)",
+    "\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ub354\ub3c4\ud1b0\uc2a4\ud29c\ub514\uc624)",
+    "\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ubb34\ub77c)"
+  ];
+
+  const storeAliases = {
+    "\uce74\ud39824(\uc790\uc0ac\ubab0)": ["\uce74\ud39824", "\uc790\uc0ac\ubab0", "cafe24"],
+    "\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ub354\ub3c4\ud1b0\uc2a4\ud29c\ub514\uc624)": ["\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ub354\ub3c4\ud1b0\uc2a4\ud29c\ub514\uc624)", "\ub354\ub3c4\ud1b0\uc2a4\ud29c\ub514\uc624", "thedotom", "studio"],
+    "\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ubb34\ub77c)": ["\uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4(\ubb34\ub77c)", "\ubb34\ub77c\uc2a4\ud1a0\uc5b4", "\ubb34\ub77c", "mura"]
+  };
+
+  const dates = Array.from(new Set(monthRows.map(row => row.date))).sort();
+  const fmt = value => "\u20a9" + Math.round(Number(value || 0)).toLocaleString("ko-KR");
+
+  const matchStore = (item, store) => {
+    const aliases = storeAliases[store] || [store];
+    const text = `${item?.store || ""} ${item?.name || ""} ${item?.key || ""}`.toLowerCase();
+    return aliases.some(alias => text.includes(String(alias).toLowerCase()));
+  };
+
+  const getStoreEntry = (row, store) => {
+    if (Array.isArray(row?.stores)) return row.stores.find(item => matchStore(item, store));
+    if (row?.stores && typeof row.stores === "object") {
+      return Object.entries(row.stores)
+        .map(([key, value]) => ({ key, ...(value || {}) }))
+        .find(item => matchStore(item, store));
+    }
+    if (matchStore(row, store)) return row;
+    return null;
+  };
+
+  const getStoreNetSales = (row, store) => {
+    const entry = getStoreEntry(row, store);
+    return Number(entry?.netSales ?? entry?.sales ?? entry?.value ?? 0);
+  };
+
+  const getDayTotal = row => {
+    const explicit = Number(row?.totalNetSales ?? row?.netSales);
+    if (Number.isFinite(explicit)) return explicit;
+    return stores.reduce((sum, store) => sum + getStoreNetSales(row, store), 0);
+  };
+
+  const storeTotals = stores.map(store => ({
+    store,
+    total: monthRows.reduce((sum, row) => sum + getStoreNetSales(row, store), 0)
+  }));
+
+  const allTotal = monthRows.reduce((sum, row) => sum + getDayTotal(row), 0);
+  if (status) status.textContent = `${dates.length}\uc77c \u00b7 \uc21c\ub9e4\ucd9c ${fmt(allTotal)}`;
+
+  body.innerHTML = `
+    <div class="kpis">
+      ${storeTotals.map(row => `
+        <div class="kpi">
+          <span>${row.store}</span>
+          <strong>${fmt(row.total)}</strong>
+          <small>${month} \uc21c\ub9e4\ucd9c \ud569\uacc4</small>
+        </div>
+      `).join("")}
+      <div class="kpi">
+        <span>\ud569\uacc4</span>
+        <strong>${fmt(allTotal)}</strong>
+        <small>\uc804\uccb4 \uc790\ub3d9 \uc21c\ub9e4\ucd9c</small>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>\ub0a0\uc9dc</th>
+            ${stores.map(store => `<th>${store}</th>`).join("")}
+            <th>\ud569\uacc4</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${dates.length ? dates.map(day => {
+            const dayRows = monthRows.filter(item => item.date === day);
+            const cells = stores.map(store => {
+              const value = dayRows.reduce((sum, row) => sum + getStoreNetSales(row, store), 0);
+              return `<td>${fmt(value)}</td>`;
+            }).join("");
+            const dayTotal = dayRows.reduce((sum, item) => sum + getDayTotal(item), 0);
+            return `<tr><td>${day}</td>${cells}<td><strong>${fmt(dayTotal)}</strong></td></tr>`;
+          }).join("") : `<tr><td colspan="${stores.length + 2}">\uc120\ud0dd\ud55c \uc6d4\uc758 \uc77c\uc77c \ub9e4\ucd9c \ub370\uc774\ud130\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.</td></tr>`}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+
+
+function renderTotalSalesMetrics() {
+      const metrics = state.data.totalSalesMetrics || {};
+      if (!els.totalSalesBody) return;
+
+      const weeks = metrics.weeks || ["1\uc8fc\ucc28", "2\uc8fc\ucc28", "3\uc8fc\ucc28", "4\uc8fc\ucc28", "5\uc8fc\ucc28"];
+      els.totalSalesStatus.textContent = "\uc218\uc9d1 \uae30\uc900";
+
+      const monthButtons = (metrics.availableMonths || []).map(month => `
+        <button class="ghost ${month === state.month ? "active" : ""}" type="button" data-total-sales-month="${html(month)}">${html(month)}</button>
+      `).join("");
+
+      const weekHeaders = weeks.map((week, weekIndex) => `<th>${weekIndex + 1}\uc8fc\ucc28</th>`).join("");
+
+      const displayRevenueName = value => String(value || "")
+        .replace(/\s*자동수집/g, "")
+        .replace(/^자동\s+/g, "")
+        .replace(/자동\s*/g, "")
+        .trim();
+
+      const metricTable = (title, sub, rows, totalRow) => {
+        const body = (rows || []).map(row => `
+          <tr>
+            <td><strong>${html(displayRevenueName(row.name || ""))}</strong></td>
+            ${weeks.map((_, index) => `<td>${money((row.weeks || [])[index] || 0)}</td>`).join("")}
+            <td><strong>${money(row.total || 0)}</strong></td>
+          </tr>`).join("");
+
+        const total = totalRow ? `
+          <tr class="total-row">
+            <td><strong>${html(displayRevenueName(totalRow.name || "\ud569\uacc4"))}</strong></td>
+            ${weeks.map((_, index) => `<td><strong>${money((totalRow.weeks || [])[index] || 0)}</strong></td>`).join("")}
+            <td><strong>${money(totalRow.total || 0)}</strong></td>
+          </tr>` : "";
+
+        return `
+          <div class="product-category">
+            <div class="product-category-head">
+              <div>
+                <h3 class="product-category-title">${html(title)}</h3>
+                <div class="product-category-sub">${html(sub || "")}</div>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>\uad6c\ubd84</th>${weekHeaders}<th>\ud569\uacc4</th></tr></thead>
+                <tbody>${body}${total}</tbody>
+              </table>
+            </div>
+          </div>`;
+      };
+
+      const autoSalesTotal = metrics.autoSalesTotal || {};
+      const autoAdTotal = metrics.autoAdCostTotal || {};
+      const adRate = (ad, sales) => sales ? ad / sales : 0;
+      const rateText = value => `${(Number(value || 0) * 100).toFixed(1)}%`;
+
+      const summaryTable = () => {
+        const cells = [0, 1, 2, 3, 4].map(index => {
+          const sales = Number((autoSalesTotal.weeks || [])[index] || 0);
+          const ad = Number((autoAdTotal.weeks || [])[index] || 0);
+          return { sales, ad, rate: adRate(ad, sales) };
+        });
+
+        const row = (label, values, formatter = money, totalOverride = null) => {
+          const totalValue = totalOverride === null
+            ? values.reduce((sum, value) => sum + Number(value || 0), 0)
+            : totalOverride;
+
+          return `
+            <tr>
+              <td><strong>${html(label)}</strong></td>
+              ${values.map(value => `<td>${formatter(value)}</td>`).join("")}
+              <td><strong>${formatter(totalValue)}</strong></td>
+            </tr>`;
+        };
+
+        return `
+          <div class="product-category">
+            <div class="product-category-head">
+              <div>
+                <h3 class="product-category-title">\ub9e4\ucd9c/\uad11\uace0\ube44 \uc694\uc57d</h3>
+                <div class="product-category-sub">\uc218\uc9d1 \ub370\uc774\ud130 \uae30\uc900\uc73c\ub85c \uc8fc\ucc28\ubcc4 \ub9e4\ucd9c, \uad11\uace0\ube44, \uad11\uace0\ube44\uc728\uc744 \ud655\uc778\ud569\ub2c8\ub2e4.</div>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="comparison-table">
+                <thead><tr><th>\uad6c\ubd84</th>${weekHeaders}<th>\ud569\uacc4</th></tr></thead>
+                <tbody>
+                  ${row("\ub9e4\ucd9c", cells.map(item => item.sales))}
+                  ${row("\uad11\uace0\ube44", cells.map(item => item.ad))}
+                  ${row("\uad11\uace0\ube44\uc728", cells.map(item => item.rate), rateText, adRate(Number(autoAdTotal.total || 0), Number(autoSalesTotal.total || 0)))}
+                </tbody>
+              </table>
+            </div>
+          </div>`;
+      };
+
+      els.totalSalesBody.innerHTML = `
+        <div class="rank-tabs" style="margin-bottom:12px">${monthButtons}</div>
+        ${summaryTable()}
+        <div class="meta" style="margin-bottom:12px">\uc218\uc9d1 \ub370\uc774\ud130 \uae30\uc900</div>
+        ${metricTable("\ub9e4\ucd9c", "\uce74\ud39824, \uc2a4\ub9c8\ud2b8\uc2a4\ud1a0\uc5b4, \ubb34\ub77c\uc2a4\ud1a0\uc5b4 \ud30c\uc77c/API \uc218\uc9d1 \uae30\uc900 \ub9e4\ucd9c", metrics.autoSales || [], metrics.autoSalesTotal)}
+        ${metricTable("\uad11\uace0\ube44", "\ub124\uc774\ubc84 \uad11\uace0 API \uc6d0\ubcf8\uacfc \ub9ac\uc6cc\ub4dc/\uc2ac\ub86f \ube44\uc6a9 \uae30\uc900 \uad11\uace0\ube44", metrics.autoAdCosts || [], metrics.autoAdCostTotal)}
+      `;
+
+      els.totalSalesBody.querySelectorAll("[data-total-sales-month]").forEach(button => {
+        button.addEventListener("click", () => {
+          changeDashboardMonth(button.dataset.totalSalesMonth);
+        });
+      });
+    }
+
+
+
+function renderBrandContract() {
+      const brand = state.data.brandContract || {};
+      els.brandStatus.textContent = brand.status || "";
+      const keywordRows = (brand.keywords || []).map(row => `
+        <tr><td>${html(row["키워드"])}</td><td>${number(row["노출수"])}</td><td>${number(row["클릭수"])}</td></tr>
+      `).join("");
+      els.brandBody.innerHTML = `
+        <div class="kpis" style="margin-bottom:12px">
+          <div class="metric"><div class="label">계약</div><div class="value" style="font-size:18px">${html(brand.period || "-")}</div><div class="sub">${html(brand.status || "")}</div></div>
+          <div class="metric"><div class="label">총 계약금</div><div class="value">${money(brand.totalAmount || 0)}</div><div class="sub">PC ${money(brand.pcAmount || 0)} · 모바일 ${money(brand.mobileAmount || 0)}</div></div>
+          <div class="metric"><div class="label">월 환산</div><div class="value">${money(brand.monthlyAmount || 0)}</div><div class="sub">${html(brand.payment || "")}</div></div>
+          <div class="metric"><div class="label">노출</div><div class="value">${number(brand.impressions)}</div><div class="sub">브랜드 영역 노출 추이</div></div>
+          <div class="metric"><div class="label">클릭</div><div class="value">${number(brand.clicks)}</div><div class="sub">브랜드 검색 유입</div></div>
+          <div class="metric"><div class="label">전환</div><div class="value">${number(brand.conversions)}</div><div class="sub">${money(brand.revenue || 0)}</div></div>
+        </div>
+        <div class="meta" style="margin-bottom:10px">${html(brand.startDate || "")} ~ ${html(brand.endDate || "")} · ${html(brand.areas || "")} · ${html(brand.checkPoint || "")}</div>
+        <div class="meta" style="margin-bottom:10px">${html(brand.memo || "")}</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>브랜드 키워드</th><th>노출</th><th>클릭</th></tr></thead>
+            <tbody>${keywordRows || `<tr><td class="empty" colspan="3">브랜드검색 계약 데이터가 없습니다.</td></tr>`}</tbody>
+          </table>
+        </div>`;
+    }
+    function rankBadge(cellOrRank) {
+      const cell = typeof cellOrRank === "object" ? cellOrRank : { rank: cellOrRank };
+      const rank = cell.rank;
+      const hasRank = rank !== null && rank !== undefined && rank !== "";
+      const bucket = cell.bucket || (!hasRank ? "none" : rank === 1 ? "one" : rank <= 3 ? "top3" : rank <= 5 ? "top5" : rank <= 10 ? "top10" : "out");
+      const text = cell.text || (hasRank ? `${rank}위` : "미노출");
+      return `<span class="rank-badge ${html(bucket)}">${html(text)}</span>`;
+    }
+    function deltaBadge(delta) {
+      const d = delta || {};
+      const cls = d.direction === "up" ? "good" : d.direction === "down" ? "bad" : "warn";
+      return `<span class="delta-badge ${cls}">${html(d.text || "-")}</span>`;
+    }
+    function renderRankTraffic() {
+      const rank = state.data.rankTraffic || {};
+      const isShoppingPage = state.page === "rankShopping";
+      els.rankStatus.textContent = rank.updatedAt ? `업데이트: ${rank.updatedAt}` : "순위 데이터 없음";
+      els.rankOverview.innerHTML = "";
+
+      // Date tabs from rank.dates
+      const slotLabels = { morning: "오전", afternoon: "오후", evening: "저녁", night: "야간" };
+
+      // 쇼핑/파워링크 각자의 가용 날짜 분리
+      const shoppingDates = [...new Set((rank.slotDetails || []).map(sd => sd.date))].sort().reverse();
+      const plDates = [...new Set((rank.chronologicalColumns || []).map(c => c.date))].sort().reverse();
+      const dates = isShoppingPage ? shoppingDates : plDates;
+      if (!state.rankDate || !dates.includes(state.rankDate)) {
+        state.rankDate = rank.latestDate || dates[0] || "";
+      }
+
+      const shoppingSlots = [...new Set((rank.slotDetails || []).filter(sd=>sd.date===state.rankDate).map(sd=>sd.slot))];
+      const plSlots = [...new Set((rank.chronologicalColumns || []).filter(c=>c.date===state.rankDate).map(c=>c.slot))];
+      const slots = isShoppingPage ? (shoppingSlots.length ? shoppingSlots : (rank.slots||[])) : (plSlots.length ? plSlots : (rank.slots||[]));
+      if (!state.rankSlot || !slots.includes(state.rankSlot)) {
+        state.rankSlot = rank.latestSlot || slots[0] || "";
+      }
+
+      els.rankDateTabs.innerHTML = dates.map(d =>
+        `<button class="ghost ${d === state.rankDate ? "active" : ""}" type="button" data-rank-date="${html(d)}">${html(d)}</button>`
+      ).join("");
+      els.rankSlotTabs.innerHTML = slots.map(s =>
+        `<button class="ghost ${s === state.rankSlot ? "active" : ""}" type="button" data-rank-slot="${html(s)}">${html(slotLabels[s] || s)}</button>`
+      ).join("");
+
+      if (isShoppingPage) {
+        // Find slotDetail matching selected date+slot
+        const slotDetail = (rank.slotDetails || []).find(sd => sd.date === state.rankDate && sd.slot === state.rankSlot)
+          || (rank.slotDetails || []).find(sd => sd.date === state.rankDate)
+          || (rank.slotDetails || [])[0];
+
+        if (slotDetail && (slotDetail.shoppingProducts || []).length) {
+          // Pin reward products to front
+          const rewardItems = state.data.rewardMarketing?.items || [];
+          const rewardIds = new Set(rewardItems.map(r => String(r.productId)));
+          const products = [...slotDetail.shoppingProducts].sort((a, b) => {
+            const aR = rewardIds.has(String(a.productId));
+            const bR = rewardIds.has(String(b.productId));
+            return aR === bR ? 0 : aR ? -1 : 1;
+          });
+          const cards = products.map(p => {
+            const isReward = rewardIds.has(String(p.productId));
+            const img = p.image ? `<img class="rank-thumb" src="${html(p.image)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
+            const rewardBadge = isReward ? `<div class="rank-card-reward-badge">⭐ 리워드 슬롯 운영중</div>` : "";
+            const kws = (p.items || []).map(item =>
+              `<div class="rank-row"><span class="rank-keyword">${html(item.keyword || "")}</span>${rankBadge(item)}${deltaBadge(item.delta)}</div>`
+            ).join("");
+            return `<div class="rank-card"${isReward ? ' style="border-color:#f59e0b;box-shadow:0 0 0 2px #fef3c780"' : ""}><div class="rank-card-head">${img}<div class="rank-card-head-info"><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div>${rewardBadge}</div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
+          }).join("");
+          els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">쇼핑검색 순위</h3><div style="font-size:12px;color:var(--muted);margin-top:2px">${html(slotDetail.label || "")}</div></div></div><div class="rank-grid">${cards || '<div class="empty" style="padding:24px">데이터 없음</div>'}</div></div>`;
+        } else {
+          // Fallback: latestShopping flat list grouped by productId
+          const latest = rank.latestShopping || [];
+          if (!latest.length) {
+            els.rankBody.innerHTML = `<div class="empty" style="padding:24px">쇼핑 순위 데이터가 없습니다.</div>`;
+            return;
+          }
+          const byProduct = {};
+          latest.forEach(item => {
+            const pid = item.productId || item.key || "기타";
+            if (!byProduct[pid]) byProduct[pid] = { ...item, keywords: [] };
+            byProduct[pid].keywords.push(item);
+          });
+          const rewardItems2 = state.data.rewardMarketing?.items || [];
+          const rewardIds2 = new Set(rewardItems2.map(r => String(r.productId)));
+          const sortedProducts = Object.values(byProduct).sort((a, b) => {
+            const aR = rewardIds2.has(String(a.productId));
+            const bR = rewardIds2.has(String(b.productId));
+            return aR === bR ? 0 : aR ? -1 : 1;
+          });
+          const cards = sortedProducts.map(p => {
+            const isReward = rewardIds2.has(String(p.productId));
+            const img = p.image ? `<img class="rank-thumb" src="${html(p.image)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
+            const rewardBadge = isReward ? `<div class="rank-card-reward-badge">⭐ 리워드 슬롯 운영중</div>` : "";
+            const kws = p.keywords.map(kw =>
+              `<div class="rank-row"><span class="rank-keyword">${html(kw.keyword || "")}</span>${rankBadge(kw)}${deltaBadge(kw.delta)}</div>`
+            ).join("");
+            return `<div class="rank-card"${isReward ? ' style="border-color:#f59e0b;box-shadow:0 0 0 2px #fef3c780"' : ""}><div class="rank-card-head">${img}<div class="rank-card-head-info"><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div>${rewardBadge}</div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
+          }).join("");
+          els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">쇼핑검색 순위 (최신)</h3></div></div><div class="rank-grid">${cards}</div></div>`;
+        }
+      } else {
+        // Powerlink rank — powerlinkPcRows / powerlinkMobileRows are indexed objects
+        const pcRows = Object.values(rank.powerlinkPcRows || {});
+        const mobileRows = Object.values(rank.powerlinkMobileRows || {});
+        if (!pcRows.length && !mobileRows.length) {
+          els.rankBody.innerHTML = `<div class="empty" style="padding:24px">파워링크 순위 데이터가 없습니다.</div>`;
+          return;
+        }
+
+        // Find column index for selected date+slot
+        // chronologicalColumns = oldest→newest; try explicit key first, fallback to slotDetails sorted asc
+        let colIndex = -1;
+        const chronoCols = rank.chronologicalColumns;
+        if (chronoCols && chronoCols.length) {
+          colIndex = chronoCols.findIndex(c => c.date === state.rankDate && c.slot === state.rankSlot);
+        } else {
+          const slotOrder = rank.slots || [];
+          const sortedCols = [...(rank.slotDetails || [])].sort((a, b) => {
+            if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+            return slotOrder.indexOf(a.slot) - slotOrder.indexOf(b.slot);
+          });
+          colIndex = sortedCols.findIndex(sd => sd.date === state.rankDate && sd.slot === state.rankSlot);
+        }
+
+        // Helper: compare selected powerlink rank against the previous collected slot
+        const powerlinkDelta = (row, cell) => {
+          if (cell && cell.delta) return cell.delta;
+          if (colIndex <= 0 || !row.cells) return { text: "-", direction: "same" };
+          const prev = row.cells[colIndex - 1] || {};
+          const currentRank = Number(cell?.rank);
+          const prevRank = Number(prev?.rank);
+          const hasCurrent = Number.isFinite(currentRank) && currentRank > 0;
+          const hasPrev = Number.isFinite(prevRank) && prevRank > 0;
+          if (hasCurrent && hasPrev) {
+            const diff = prevRank - currentRank;
+            if (diff > 0) return { text: `??{diff}`, direction: "up" };
+            if (diff < 0) return { text: `??{Math.abs(diff)}`, direction: "down" };
+            return { text: "-", direction: "same" };
+          }
+          if (hasCurrent && !hasPrev) return { text: "??, direction: "up" };
+          if (!hasCurrent && hasPrev) return { text: "??, direction: "down" };
+          return { text: "-", direction: "same" };
+        };
+
+        // Helper: get rank cell for a row at the selected date+slot
+        const getCellRank = (row) => {
+          const cell = (colIndex >= 0 && row.cells && row.cells[colIndex] != null)
+            ? { ...row.cells[colIndex] }
+            : { rank: row.latestRank, status: row.latestStatus, bucket: null, text: null };
+          cell.delta = powerlinkDelta(row, cell);
+          return cell;
+        };
+
+        // Group by adgroup (광고그룹 단위)
+        const adgroupMap = {};
+        pcRows.forEach(row => {
+          const cKey = row.adgroup || row.campaign || "기타";
+          if (!adgroupMap[cKey]) adgroupMap[cKey] = { campaign: row.campaign, adgroup: row.adgroup, pc: [], mobile: [] };
+          adgroupMap[cKey].pc.push(row);
+        });
+        mobileRows.forEach(row => {
+          const cKey = row.adgroup || row.campaign || "기타";
+          if (!adgroupMap[cKey]) adgroupMap[cKey] = { campaign: row.campaign, adgroup: row.adgroup, pc: [], mobile: [] };
+          adgroupMap[cKey].mobile.push(row);
+        });
+        const cards = Object.values(adgroupMap).map(group => {
+          const pcChips = group.pc.map(row => {
+            const cell = getCellRank(row);
+            return `<div class="keyword-chip"><span class="keyword-chip-name">${html(row.keyword || "")}</span>${rankBadge(cell)}${deltaBadge(cell.delta)}</div>`;
+          }).join("");
+          const mChips = group.mobile.map(row => {
+            const cell = getCellRank(row);
+            return `<div class="keyword-chip"><span class="keyword-chip-name">${html(row.keyword || "")}</span>${rankBadge(cell)}${deltaBadge(cell.delta)}</div>`;
+          }).join("");
+          const agKey = html(group.adgroup || group.campaign || "");
+          const pcCount = group.pc.length;
+          const mCount = group.mobile.length;
+          return `<div class="powerlink-rank-card" data-adgroup-card="${agKey}">
+            <div class="powerlink-rank-head"><div><h3 class="powerlink-rank-title">${html(group.adgroup || group.campaign || "")}</h3><div class="powerlink-rank-sub">${html(group.campaign || "")}</div></div></div>
+            ${(pcChips || mChips) ? `
+            <div class="pl-device-tabs">
+              ${pcChips ? `<button class="pl-device-tab active" data-pl-tab="pc" data-ag="${agKey}">PC <span class="pl-keyword-count">${pcCount}</span></button>` : ""}
+              ${mChips ? `<button class="pl-device-tab ${pcChips ? "" : "active"}" data-pl-tab="mobile" data-ag="${agKey}">모바일 <span class="pl-keyword-count">${mCount}</span></button>` : ""}
+            </div>
+            ${pcChips ? `<div class="pl-device-pane active" data-pane="pc" data-ag="${agKey}"><div class="keyword-chips" style="padding:12px 14px 14px">${pcChips}</div></div>` : ""}
+            ${mChips ? `<div class="pl-device-pane ${pcChips ? "" : "active"}" data-pane="mobile" data-ag="${agKey}"><div class="keyword-chips" style="padding:12px 14px 14px">${mChips}</div></div>` : ""}
+            ` : '<div style="padding:12px;color:var(--muted);font-size:13px">데이터 없음</div>'}
+          </div>`;
+        }).join("");
+        els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">파워링크 순위</h3><div style="font-size:12px;color:var(--muted);margin-top:2px">${colIndex >= 0 ? (state.rankDate + " " + (slotLabels[state.rankSlot] || state.rankSlot)) : "최신 기준"}</div></div></div><div class="powerlink-rank-grid">${cards}</div></div>`;
+      }
+    }
+    function renderInspection() {
+      const rows = (state.data.keywordPerformance || []).filter(row => {
+        const roas = Number(row["ROAS"] || 0);
+        const cost = Number(row["총비용"] || 0);
+        const clicks = Number(row["클릭수"] || 0);
+        const convs = Number(row["전환수"] || 0);
+        const cpc = Number(row["CPC"] || 0);
+        return (cpc >= 3000) || (clicks >= 20 && convs === 0) || (cost >= 100000 && roas > 0 && roas < 3);
+      });
+      els.inspectionCount.textContent = `${rows.length}개 항목`;
+      els.inspectionBody.innerHTML = rows.map(row => {
+        const reasons = [];
+        if (Number(row["CPC"]||0) >= 3000) reasons.push("고CPC");
+        if (Number(row["클릭수"]||0) >= 20 && Number(row["전환수"]||0) === 0) reasons.push("무전환");
+        if (Number(row["총비용"]||0) >= 100000 && Number(row["ROAS"]||0) > 0 && Number(row["ROAS"]||0) < 3) reasons.push("저ROAS");
+        return `<tr><td>${html(row["광고유형"]||"")}</td><td>${html(row["캠페인명"]||"")}</td><td>${html(row["키워드"]||row["상품명"]||"")}</td><td>${money(row["총비용"])}</td><td>${number(row["전환수"])}</td><td>${ratio(row["ROAS"])}</td><td>${reasons.join(", ")}</td><td class="wrap">${html(row["권장조치"]||"")}</td><td><span class="pill neutral">-</span></td></tr>`;
+      }).join("") || `<tr><td class="empty" colspan="9">점검대상이 없습니다.</td></tr>`;
+    }
+    function renderPlan() {
+      const plan = state.data.nextPlan || [];
+      els.planCount.textContent = `${plan.length}개 계획`;
+      els.planBody.innerHTML = plan.map(row => `<tr><td>${html(row["구분"]||"")}</td><td>${html(row["대상"]||"")}</td><td class="wrap">${html(row["계획"]||"")}</td><td class="wrap">${html(row["근거"]||"")}</td></tr>`).join("") || `<tr><td class="empty" colspan="4">다음달 계획 데이터가 없습니다.</td></tr>`;
+    }
+    window._charts = {};
+    function renderOverviewCharts() {
+      if (state.page !== "overview") return;
+      const typeData = state.data.typePerformance || [];
+      const donutCanvas = document.getElementById("typeDonutChart");
+      if (donutCanvas) {
+        if (window._charts.donut) { window._charts.donut.destroy(); window._charts.donut = null; }
+        const labels = typeData.map(r => r["광고유형"] || "");
+        const values = typeData.map(r => Number(r["총비용"] || 0));
+        const colors = ["#4865f4", "#10b981", "#f59e0b", "#8b5cf6", "#ef4444"];
+        window._charts.donut = new Chart(donutCanvas, {
+          type: "doughnut",
+          data: { labels, datasets: [{ data: values, backgroundColor: colors.slice(0, labels.length), borderWidth: 2, borderColor: "#fff", hoverOffset: 6 }] },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { position: "bottom", labels: { font: { size: 12, family: "'Segoe UI','Malgun Gothic',Arial,sans-serif" }, padding: 16, boxWidth: 12, color: "#64748b" } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${won.format(ctx.raw)}` } }
+            },
+            cutout: "60%"
+          }
+        });
+      }
+      const weeklyCanvas = document.getElementById("weeklyTrendChart");
+      if (weeklyCanvas) {
+        if (window._charts.weekly) { window._charts.weekly.destroy(); window._charts.weekly = null; }
+        const metrics = state.data.totalSalesMetrics || {};
+        const weeks = metrics.weeks || ["1주","2주","3주","4주","5주"];
+        const salesTotal = metrics.manualSalesTotal || {};
+        const adTotal = metrics.manualAdCostTotal || {};
+        const salesData = (salesTotal.weeks || [0,0,0,0,0]).map(v => Number(v)||0);
+        const adData = (adTotal.weeks || [0,0,0,0,0]).map(v => Number(v)||0);
+        const labels = weeks.map((w, i) => w || `${i+1}주차`);
+        window._charts.weekly = new Chart(weeklyCanvas, {
+          type: "bar",
+          data: {
+            labels,
+            datasets: [
+              { label: "수기매출", data: salesData, backgroundColor: "rgba(16,185,129,0.15)", borderColor: "#10b981", borderWidth: 2, borderRadius: 6, order: 2 },
+              { label: "수기광고비", data: adData, backgroundColor: "rgba(72,101,244,0.15)", borderColor: "#4865f4", borderWidth: 2, borderRadius: 6, order: 2 }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { position: "bottom", labels: { font: { size: 12, family: "'Segoe UI','Malgun Gothic',Arial,sans-serif" }, padding: 16, boxWidth: 12, color: "#64748b" } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${won.format(ctx.raw)}` } }
+            },
+            scales: {
+              x: { grid: { display: false }, ticks: { color: "#64748b", font: { size: 12 } } },
+              y: { grid: { color: "#f1f5f9" }, ticks: { color: "#64748b", font: { size: 11 }, callback: v => won.format(v) } }
+            }
+          }
+        });
+      }
+    }
+    // Navigation
+    document.querySelectorAll(".nav button[data-page]").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        state.page = btn.dataset.page;
+        if (state.data?.month !== state.month) {
+          await loadData();
+        } else {
+          fillCampaigns(); fillAdgroups(); render();
+        }
+        document.body.classList.remove("sidebar-open");
+      });
+    });
+    document.querySelectorAll(".nav button[data-rank-root]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (state.page !== "rankShopping" && state.page !== "rankPowerlink") state.page = "rankShopping";
+        render();
+        if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
+      });
+    });
+    els.monthFilter.addEventListener("change", () => { changeDashboardMonth(els.monthFilter.value); });
+    els.pageMonthFilter?.addEventListener("change", () => { changeDashboardMonth(els.pageMonthFilter.value); });
+    els.typeFilter?.addEventListener("change", () => { fillCampaigns(); fillAdgroups(); render(); });
+    els.campaignFilter?.addEventListener("change", () => { fillAdgroups(); render(); });
+    els.adgroupFilter?.addEventListener("change", render);
+    els.decisionFilter?.addEventListener("change", render);
+    els.searchInput?.addEventListener("input", render);
+    els.badOnlyBtn?.addEventListener("click", () => { state.badOnly = !state.badOnly; render(); });
+    document.querySelectorAll("[data-detail-mode]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.detailMode = btn.dataset.detailMode;
+        document.querySelectorAll("[data-detail-mode]").forEach(b => b.classList.toggle("active", b === btn));
+        renderKeywords();
+      });
+    });
+    document.querySelectorAll("[data-pl-view]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.plView = btn.dataset.plView;
+        document.querySelectorAll("[data-pl-view]").forEach(b => b.classList.toggle("active", b === btn));
+        renderKeywords();
+      });
+    });
+    document.getElementById("refreshBtn")?.addEventListener("click", loadData);
+    document.getElementById("rankBtn")?.addEventListener("click", async () => {
+      setStatus("순위 갱신 중...");
+      try { const r = await fetch("/api/refresh-rank", {method:"POST"}); if(r.ok){setStatus("순위 갱신 완료");loadData();}else setStatus("순위 갱신 실패",true); } catch(e){setStatus("순위 갱신 실패",true);}
+    });
+    document.getElementById("saveMemoBtn")?.addEventListener("click", async () => {
+      setStatus("메모 저장 중...");
+      try { const r = await fetch("/api/save-memo",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({planMemo:els.planMemo.value,reportMemo:els.reportMemo.value})}); setStatus(r.ok?"메모 저장 완료":"메모 저장 실패",!r.ok); } catch(e){setStatus("메모 저장 실패",true);}
+    });
+    document.getElementById("exportBtn")?.addEventListener("click", () => {
+      if(!state.data) return;
+      const d = state.data;
+      const txt = [`# ${d.month} 네이버 광고 보고서`,`광고비: ${money(d.summary.cost)}`,`매출: ${money(d.summary.revenue)}`,`ROAS: ${ratio(d.summary.roas)}`,``,els.planMemo.value,``,els.reportMemo.value].join("\n");
+      const a = Object.assign(document.createElement("a"),{href:URL.createObjectURL(new Blob([txt],{type:"text/plain"})),download:`광고보고서_${d.month}.txt`});
+      a.click();
+    });
+    document.getElementById("mobileMenuToggle")?.addEventListener("click", () => document.body.classList.toggle("sidebar-open"));
+    document.getElementById("mobileBackdrop")?.addEventListener("click", () => document.body.classList.remove("sidebar-open"));
+    document.addEventListener("click", e => {
+      const d = e.target.closest("[data-daily-product-date]");
+      if (d) { state.dailyProductDate = d.dataset.dailyProductDate; renderDailyProductPerformance(); }
+      const rd = e.target.closest("[data-rank-date]");
+      if (rd) { state.rankDate = rd.dataset.rankDate; document.querySelectorAll("[data-rank-date]").forEach(b=>b.classList.toggle("active",b===rd)); renderRankTraffic(); }
+      const rs = e.target.closest("[data-rank-slot]");
+      if (rs) { state.rankSlot = rs.dataset.rankSlot; document.querySelectorAll("[data-rank-slot]").forEach(b=>b.classList.toggle("active",b===rs)); renderRankTraffic(); }
+      // 파워링크 PC/모바일 탭 클릭
+      const plt = e.target.closest("[data-pl-tab]");
+      if (plt) {
+        const ag = plt.dataset.ag;
+        const tab = plt.dataset.plTab;
+        const card = plt.closest("[data-adgroup-card]");
+        if (card) {
+          card.querySelectorAll(".pl-device-tab").forEach(b => b.classList.toggle("active", b.dataset.plTab === tab));
+          card.querySelectorAll(".pl-device-pane").forEach(p => p.classList.toggle("active", p.dataset.pane === tab));
+        }
+      }
+    });
+    document.addEventListener("change", e => {
+      const m = e.target.closest("[data-daily-product-month]");
+      if (m) { state.dailyProductMonth = m.value; renderDailyProductPerformance(); }
+    });
+    loadData().catch(err => { if(els.meta) els.meta.textContent = "데이터 로드 실패: " + err.message; });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
