@@ -813,42 +813,74 @@
         }).join("") + `</div>`;
     }
     async function loadData() {
-      state.data = await fetchDashboardData();
-      state.month = state.data.month;
-      applyManualRevenueLocal(state.month);
-      fillMonths();
-      fillCampaigns();
-      fillAdgroups();
-      els.planMemo.value = state.data.state.planMemo || "";
-      els.reportMemo.value = state.data.state.reportMemo || "";
-      render();
+      try {
+        state.data = await fetchDashboardData();
+        state.month = state.data.month || state.month;
+        applyManualRevenueLocal(state.month);
+        fillMonths();
+        fillCampaigns();
+        fillAdgroups();
+        els.planMemo.value = state.data.state?.planMemo || "";
+        els.reportMemo.value = state.data.state?.reportMemo || "";
+        render();
+      } catch (error) {
+        console.error("Dashboard load failed", error);
+        els.meta.textContent = "??쒕낫???곗씠?곕? 遺덈윭?ㅼ? 紐삵뻽?듬땲?? ?덈줈怨좎묠 ?꾩뿉??諛섎났?섎㈃ ?뚮젮二쇱꽭??";
+        if (els.monthFilter) els.monthFilter.innerHTML = '<option value="">濡쒕뱶 ?ㅽ뙣</option>';
+        if (els.pageMonthFilter) els.pageMonthFilter.innerHTML = '<option value="">濡쒕뱶 ?ㅽ뙣</option>';
+      }
     }
     async function fetchDashboardData() {
-      if (!state.month) {
+      const normalizeMonth = value => {
+        if (!value) return "";
+        if (typeof value === "string") return value;
+        if (typeof value === "object") return value.month || value.value || value.id || value.name || "";
+        return String(value);
+      };
+      const normalizeMonths = value => {
+        const raw = Array.isArray(value)
+          ? value
+          : (Array.isArray(value?.months) ? value.months : (Array.isArray(value?.availableMonths) ? value.availableMonths : []));
+        return raw.map(normalizeMonth).filter(Boolean);
+      };
+
+      let months = [];
+      try {
+        const monthRes = await fetch(`data/months.json?v=${Date.now()}`, { cache: "no-store" });
+        if (monthRes.ok) {
+          const monthData = await monthRes.json();
+          months = normalizeMonths(monthData);
+          if (!state.month) state.month = normalizeMonth(monthData.latest) || months[0] || "";
+        }
+      } catch (error) {
+        console.warn("Month list fetch failed; falling back to latest dashboard data", error);
+      }
+
+      const tryStatic = async path => {
+        const res = await fetch(`${path}?v=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) throw new Error(`${path} fetch failed`);
+        return await res.json();
+      };
+
+      if (state.month) {
         try {
-          const monthRes = await fetch(`data/months.json?v=${Date.now()}`, { cache: "no-store" });
-          if (monthRes.ok) {
-            const monthData = await monthRes.json();
-            const months = Array.isArray(monthData)
-              ? monthData
-              : (monthData.months || monthData.availableMonths || []);
-            state.month = monthData.latest || months[0] || "";
-          }
+          return await tryStatic(`data/monthly-dashboard-${encodeURIComponent(state.month)}.json`);
         } catch (error) {
-          console.warn("Month list fetch failed; falling back to latest dashboard data", error);
+          console.warn("Selected month dashboard data fetch failed; trying latest", error);
         }
       }
-      const qs = state.month ? `?month=${encodeURIComponent(state.month)}` : "";
+
       try {
-        const res = await fetch(`/api/monthly-dashboard${qs}`);
-        if (res.ok) return await res.json();
-      } catch (error) {
-        console.warn("API fetch failed; trying static dashboard data", error);
+        const latest = await tryStatic("data/monthly-dashboard-latest.json");
+        state.month = normalizeMonth(latest.month) || state.month;
+        return latest;
+      } catch (latestError) {
+        if (months.length) {
+          state.month = months[0];
+          return await tryStatic(`data/monthly-dashboard-${encodeURIComponent(state.month)}.json`);
+        }
+        throw latestError;
       }
-      const staticPath = state.month ? `data/monthly-dashboard-${encodeURIComponent(state.month)}.json` : "data/monthly-dashboard-latest.json";
-      const staticRes = await fetch(`${staticPath}?v=${Date.now()}`, { cache: "no-store" });
-      if (!staticRes.ok) throw new Error("??쒕낫???곗씠?곕? 遺덈윭?ㅼ? 紐삵뻽?듬땲??");
-      return await staticRes.json();
     }
     function fillMonths() {
       const months = state.data.availableMonths || [];
@@ -1944,6 +1976,7 @@ function renderBrandContract() {
   </script>
 </body>
 </html>
+
 
 
 
