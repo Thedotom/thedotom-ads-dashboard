@@ -126,6 +126,9 @@
     .profile { margin-top: 6px; color: var(--muted); font-size: 12px; font-weight: 600; }
     .top-status { margin-top: 6px; color: var(--green); font-size: 12px; font-weight: 700; min-height: 18px; }
     .actions { display: flex; gap: 8px; }
+    .page-month-control { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+    .page-month-control label { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .page-month-control select { width: 140px; height: 38px; border-radius: 8px; background: #fff; color: var(--text); font-weight: 800; }
     .actions button { width: auto; min-width: 100px; box-shadow: var(--shadow); height: 36px; border-radius: 8px; font-size: 13px; }
     .actions { display: none; }
     .nav { display: grid; gap: 2px; margin-top: 4px; }
@@ -511,6 +514,10 @@
           <div id="meta" class="meta">불러오는 중</div>
           <div id="profile" class="profile"></div>
           <div id="topStatus" class="top-status"></div>
+          <div class="page-month-control">
+            <label for="pageMonthFilter">월 선택</label>
+            <select id="pageMonthFilter"><option value="">Loading</option></select>
+          </div>
         </div>
         <div class="actions">
           <button id="refreshBtn" class="primary" type="button">새로고침</button>
@@ -692,6 +699,7 @@
       planCount: document.getElementById("planCount"),
       typeFilter: document.getElementById("typeFilter"),
       monthFilter: document.getElementById("monthFilter"),
+      pageMonthFilter: document.getElementById("pageMonthFilter"),
       campaignFilter: document.getElementById("campaignFilter"),
       adgroupFilter: document.getElementById("adgroupFilter"),
       decisionFilter: document.getElementById("decisionFilter"),
@@ -830,8 +838,24 @@
     }
     function fillMonths() {
       const months = state.data.availableMonths || [];
-      els.monthFilter.innerHTML = months.map(month => `<option value="${html(month)}">${html(month)}</option>`).join("");
+      const options = months.map(month => `<option value="${html(month)}">${html(month)}</option>`).join("");
+      els.monthFilter.innerHTML = options;
       els.monthFilter.value = state.month;
+      if (els.pageMonthFilter) {
+        els.pageMonthFilter.innerHTML = options;
+        els.pageMonthFilter.value = state.month;
+      }
+    }
+    async function changeDashboardMonth(month) {
+      if (!month || month === state.month) {
+        if (els.monthFilter) els.monthFilter.value = state.month;
+        if (els.pageMonthFilter) els.pageMonthFilter.value = state.month;
+        return;
+      }
+      state.month = month;
+      if (els.monthFilter) els.monthFilter.value = month;
+      if (els.pageMonthFilter) els.pageMonthFilter.value = month;
+      await loadData();
     }
     function pageType() {
       if (state.page === "powerlink") return "파워링크";
@@ -1518,9 +1542,7 @@ function renderTotalSalesMetrics() {
 
       els.totalSalesBody.querySelectorAll("[data-total-sales-month]").forEach(button => {
         button.addEventListener("click", () => {
-          state.month = button.dataset.totalSalesMonth;
-          els.monthFilter.value = state.month;
-          loadData();
+          changeDashboardMonth(button.dataset.totalSalesMonth);
         });
       });
     }
@@ -1801,10 +1823,14 @@ function renderBrandContract() {
     }
     // Navigation
     document.querySelectorAll(".nav button[data-page]").forEach(btn => {
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", async () => {
         state.page = btn.dataset.page;
-        fillCampaigns(); fillAdgroups(); render();
-        if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
+        if (state.data?.month !== state.month) {
+          await loadData();
+        } else {
+          fillCampaigns(); fillAdgroups(); render();
+        }
+        document.body.classList.remove("sidebar-open");
       });
     });
     document.querySelectorAll(".nav button[data-rank-root]").forEach(btn => {
@@ -1814,7 +1840,8 @@ function renderBrandContract() {
         if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
       });
     });
-    els.monthFilter.addEventListener("change", () => { state.month = els.monthFilter.value; loadData(); });
+    els.monthFilter.addEventListener("change", () => { changeDashboardMonth(els.monthFilter.value); });
+    els.pageMonthFilter?.addEventListener("change", () => { changeDashboardMonth(els.pageMonthFilter.value); });
     els.typeFilter?.addEventListener("change", () => { fillCampaigns(); fillAdgroups(); render(); });
     els.campaignFilter?.addEventListener("change", () => { fillAdgroups(); render(); });
     els.adgroupFilter?.addEventListener("change", render);
@@ -1880,6 +1907,7 @@ function renderBrandContract() {
   </script>
 </body>
 </html>
+
 
 
 
