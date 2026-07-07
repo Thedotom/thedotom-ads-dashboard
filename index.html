@@ -546,7 +546,7 @@
           <div class="section-head"><h2>캠페인 성과 순위</h2><span id="campaignCount" class="count"></span></div>
           <div class="table-wrap">
             <table class="compact">
-              <thead><tr><th>캠페인</th><th>비용</th><th>전환</th><th>매출</th><th>ROAS</th><th>판단</th></tr></thead>
+              <thead><tr><th>제품</th><th>상품번호</th><th>운영형태</th><th>상품매출</th><th>주문건수</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>ROAS</th><th>광고비율</th></tr></thead>
               <tbody id="campaignBody"></tbody>
             </table>
           </div>
@@ -1101,7 +1101,7 @@
       if (ta) ta.style.display = isChart ? "none" : "block";
       if (isChart) { renderPlCharts(rows); return; }
       // 테이블 뷰
-      if (!rows.length) { els.keywordBody.innerHTML=`<tr><td class="empty" colspan="13">조건에 맞는 상세 데이터가 없습니다.</td></tr>`; return; }
+      if (!rows.length) { els.keywordBody.innerHTML=`<tr><td class="empty" colspan="10">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`; return; }
       const maxRoas = Math.max(...rows.filter(r=>Number(r["ROAS"]||0)>0).map(r=>Number(r["ROAS"]||0)), 1);
       els.keywordBody.innerHTML = rows.slice(0,150).map(row => {
         const judgement = row["판단"] || "관찰";
@@ -1268,17 +1268,14 @@
       const statusClass = status => status === "광고+슬롯" ? "active" : status === "광고" ? "good" : status === "슬롯" ? "warn" : "neutral";
       const tableRows = visibleRows.map(row => `
         <tr>
-          <td class="wrap"><strong>${html(row.product || "")}</strong><div class="muted">상품번호 ${html(row.productId || "")}</div></td>
-          <td>${html(row.store === "mura" ? "무라" : row.store === "thedotom" ? "더도톰" : row.store || "-")}</td>
-          <td>${html(row.recordId || "")}</td>
-          <td>${html(row.date || "")}</td>
-          <td class="wrap">${html(row.adgroup || (String(row.status || "").includes("슬롯") ? "슬롯 진행 상품" : "연결 광고 없음"))}</td>
-          <td>${money(row.adSales || 0)}</td>
-          <td>${money(row.adCost || 0)}</td>
+          <td class="wrap"><strong>${html(row.product || "")}</strong></td>
+          <td>${html(row.productId || row.recordId || "")}</td>
           <td><span class="pill ${statusClass(row.status || "")}">${html(row.status || "")}</span></td>
-          <td>${html(row.memo || "")}</td>
           <td>${money(row.dailySales || 0)}</td>
           <td>${number(row.orders || 0)}</td>
+          <td class="wrap">${html(row.adgroup || (String(row.status || "").includes("?щ’") ? "슬롯 진행 상품" : "연결 광고 없음"))}</td>
+          <td>${money(row.adSales || 0)}</td>
+          <td>${money(row.adCost || 0)}</td>
           <td>${roasText(row.roas || 0)}</td>
           <td>${rateText(row.adCostRate || 0)}</td>
         </tr>
@@ -1306,7 +1303,7 @@
           <div class="table-wrap">
             <table>
               <thead><tr><th>제품</th><th>스토어</th><th>기록ID</th><th>날짜</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>운영형태</th><th>운영메모</th><th>상품매출</th><th>주문건수</th><th>ROAS</th><th>광고비율</th></tr></thead>
-              <tbody>${tableRows || `<tr><td class="empty" colspan="13">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
+              <tbody>${tableRows || `<tr><td class="empty" colspan="10">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
             </table>
           </div>
         </div>
