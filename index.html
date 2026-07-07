@@ -1253,7 +1253,7 @@
         dailyProductSmartstore: "thedotom",
         dailyProductMura: "mura"
       }[state.page] || "";
-      const storeLabel = store => store === "mura" ? "???" : store === "thedotom" ? "?????????" : store === "cafe24" ? "????? : (store || "-");
+      const storeLabel = store => store === "mura" ? "\uBB34\uB77C" : store === "thedotom" ? "\uC2A4\uB9C8\uD2B8\uC2A4\uD1A0\uC5B4" : store === "cafe24" ? "\uC790\uC0AC\uBAB0" : (store || "-");
       const months = [...new Set(rows.map(row => String(row.date || "").slice(0, 7)).filter(Boolean))].sort();
       if (!state.dailyProductMonth || !months.includes(state.dailyProductMonth)) {
         state.dailyProductMonth = months.includes(state.month) ? state.month : (months[months.length - 1] || state.month);
