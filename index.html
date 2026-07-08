@@ -482,7 +482,13 @@
           <button type="button" data-page="rankShopping">쇼핑검색 순위</button>
           <button type="button" data-page="rankPowerlink">파워링크 순위</button>
         </div>
-        <button type="button" data-page="dailyProduct">일일 제품 성과</button>
+        <button type="button" data-daily-product-root>일일 제품 성과</button>
+        <div class="sub-nav-group" data-daily-product-subnav>
+          <button type="button" data-page="dailyProduct">전체</button>
+          <button type="button" data-page="dailyProductCafe24">자사몰</button>
+          <button type="button" data-page="dailyProductSmartstore">스마트스토어</button>
+          <button type="button" data-page="dailyProductMura">무라</button>
+        </div>
         <button type="button" data-revenue-root>매출 지표</button>
         <div class="sub-nav-group" data-revenue-subnav>
           <button type="button" data-page="totalSales">월별 매출</button>
@@ -893,9 +899,10 @@
       els.pageTitle.textContent = titles[state.page] || titles.overview;
       const isRankTrafficPage = state.page === "rankShopping" || state.page === "rankPowerlink";
       const isRevenuePage = state.page === "totalSales" || state.page === "dailyRevenue";
+      const isDailyProductPage = state.page === "dailyProduct" || state.page === "dailyProductCafe24" || state.page === "dailyProductSmartstore" || state.page === "dailyProductMura";
       document.querySelectorAll("[data-page]").forEach(el => {
         if (el.tagName === "BUTTON") return;
-        const visible = el.dataset.page === state.page || (el.dataset.page === "rankTraffic" && isRankTrafficPage);
+        const visible = el.dataset.page === state.page || (el.dataset.page === "rankTraffic" && isRankTrafficPage) || (el.dataset.page === "dailyProduct" && isDailyProductPage);
         el.classList.toggle("hidden", !visible);
       });
       document.querySelectorAll(".nav [data-page]").forEach(button => {
@@ -903,6 +910,9 @@
       });
       document.querySelectorAll(".nav [data-rank-root]").forEach(button => {
         button.classList.toggle("active", isRankTrafficPage);
+      });
+      document.querySelectorAll(".nav [data-daily-product-root]").forEach(button => {
+        button.classList.toggle("active", isDailyProductPage);
       });
       document.querySelectorAll(".nav [data-revenue-root]").forEach(button => {
         button.classList.toggle("active", isRevenuePage);
@@ -1248,7 +1258,14 @@
       if (!state.dailyProductMonth || !months.includes(state.dailyProductMonth)) {
         state.dailyProductMonth = months.includes(state.month) ? state.month : (months[months.length - 1] || state.month);
       }
-      const monthRows = state.dailyProductMonth ? rows.filter(row => String(row.date || "").startsWith(state.dailyProductMonth)) : rows;
+      const pageStoreMap = {
+        dailyProductCafe24: "cafe24",
+        dailyProductSmartstore: "thedotom",
+        dailyProductMura: "mura"
+      };
+      const pageStore = pageStoreMap[state.page] || "";
+      const monthRowsBase = state.dailyProductMonth ? rows.filter(row => String(row.date || "").startsWith(state.dailyProductMonth)) : rows;
+      const monthRows = pageStore ? monthRowsBase.filter(row => row.store === pageStore) : monthRowsBase;
       const totals = monthRows.reduce((acc, row) => {
         acc.adCost += Number(row.adCost || 0);
         acc.dailySales += Number(row.dailySales || 0);
@@ -1881,6 +1898,13 @@ function renderBrandContract() {
     els.adgroupFilter?.addEventListener("change", render);
     els.decisionFilter?.addEventListener("change", render);
     els.searchInput?.addEventListener("input", render);
+    document.querySelectorAll(".nav button[data-daily-product-root]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (!["dailyProduct", "dailyProductCafe24", "dailyProductSmartstore", "dailyProductMura"].includes(state.page)) state.page = "dailyProduct";
+        render();
+        document.body.classList.remove("sidebar-open");
+      });
+    });
     els.badOnlyBtn?.addEventListener("click", () => { state.badOnly = !state.badOnly; render(); });
     document.querySelectorAll("[data-detail-mode]").forEach(btn => {
       btn.addEventListener("click", () => {
