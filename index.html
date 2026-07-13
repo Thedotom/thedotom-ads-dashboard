@@ -404,6 +404,19 @@
     .daily-product-filter { display: flex; gap: 8px; align-items: center; max-width: 220px; margin-bottom: 12px; }
     .daily-product-kpis { grid-template-columns: minmax(180px,1.2fr) repeat(5, minmax(100px,.8fr)); gap: 10px; }
     .daily-product-kpis .metric { min-height: 78px; padding: 11px 13px; }
+    .daily-product-groups { display: grid; gap: 14px; }
+    .daily-product-group { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; }
+    .daily-product-group-head { display:flex; justify-content:space-between; gap:12px; align-items:center; padding:13px 15px; background:#f8fafc; border-bottom:1px solid var(--line); }
+    .daily-product-group-title { margin:0; font-size:15px; }
+    .daily-product-group-sub,.integrated-product-meta { color:var(--muted); font-size:11px; line-height:1.45; }
+    .store-badge { display:inline-flex; padding:4px 8px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
+    .store-badge.cafe24 { color:#9a3412; background:#ffedd5; }
+    .store-badge.thedotom { color:#1d4ed8; background:#dbeafe; }
+    .store-badge.mura { color:#047857; background:#d1fae5; }
+    .store-sales { font-weight:700; }
+    .store-sales.zero { color:#cbd5e1; font-weight:400; }
+    .integrated-product-name { display:block; font-weight:800; margin-bottom:4px; }
+    .daily-product-store-summary { display:flex; flex-wrap:wrap; gap:7px; margin:0 0 12px; }
     .chart-row { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-bottom: 16px; }
     .chart-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
     .chart-panel .section-head { padding: 12px 16px; }
@@ -1251,6 +1264,33 @@
         ${categoryTable("일자별 상품 광고비", dailyCosts.summary || "쇼핑검색 상품/소재별 광고 사용 금액", ["상품", "누적 비용", "일평균", "클릭", "CPC", "ROAS", "일자별 비용"], dailyCostRows, 7)}
         ${categoryTable("광고 연동 상품", "본 상품 기준으로 묶은 쇼핑검색 광고 집행 내역", ["상품", "클릭", "비용", "CPC", "ROAS", "연동 광고 내역"], adLinkedRows, 6)}`;
     }
+    function classifyDailyProduct(row) {
+      const id=String(row.productId||row.recordId||""), store=String(row.store||""), name=String(row.productName||row.product||"");
+      const categories={general:"\uC77C\uBC18 \uD1B5\uD569\uC0C1\uD488",partner:"\uD611\uB825\uC5C5\uCCB4 \uC0C1\uD488",custom:"\uACE0\uAC1D\uBCC4 \uCD94\uAC00\u00B7\uC2E0\uADDC \uC8FC\uBB38",addon:"\uBD80\uAC00\uC0C1\uD488"};
+      const products={premium:"\uD504\uB9AC\uBBF8\uC5C4 \uB2F5\uB840\uD488 \uC138\uD2B8",towel:"\uC218\uAC74 \uB2E8\uD488",honey:"\uBB34\uB77C \uBC8C\uAFC0 \uC138\uD2B8",jogumanTowel:"\uC870\uAD6C\uB9CC \uC218\uAC74 \uB2E8\uD488",jogumanSet:"\uC870\uAD6C\uB9CC \uD578\uB4DC\uC6CC\uC2DC \uC218\uAC74\uC138\uD2B8",invite:"\uBAA8\uBC14\uC77C \uB3CC\uC794\uCE58 \uCD08\uB300\uC7A5"};
+      const cafe={
+        P0000DRS:["general","premium","4843121925"],P0000DRU:["general","premium","4843121925"],P0000GKQ:["general","premium","4843121925"],
+        P0000CGX:["general","towel","4624494637 \u00B7 4766394357"],P00000UI:["general","towel","4624494637 \u00B7 4766394357"],P0000NBV:["general","towel","4624494637 \u00B7 4766394357"],P0000ITI:["general","towel","4624494637 \u00B7 4766394357"],
+        P0000IIM:["general","honey","7444568862 \u00B7 11979458131"],P0000WTI:["general","jogumanTowel","13336908552"],P000BBIH:["general","jogumanSet","13337070806"],P000BAON:["general","invite","13471936380"],
+        P000BBGT:["partner","\uD611\uB825\uC5C5\uCCB4 \u00B7 \uB2E8\uD488 \uC218\uAC74",""],P000BBHA:["partner","\uD611\uB825\uC5C5\uCCB4 \u00B7 \uC218\uAC74 \uC138\uD2B8",""],P000BBHC:["partner","\uD611\uB825\uC5C5\uCCB4 \u00B7 \uBC8C\uAFC0 \uC138\uD2B8",""],P000BBIT:["partner","\uD611\uB825\uC5C5\uCCB4 \u00B7 \uB2E8\uD488 \uC218\uAC74",""],P000BBIW:["partner","\uD611\uB825\uC5C5\uCCB4 \u00B7 \uD578\uB4DC\uC6CC\uC2DC",""],P000BBLH:["partner","\uD611\uB825\uC5C5\uCCB4 \u00B7 \uB2E8\uD488 \uC218\uAC74",""],
+        P000BBDS:["custom","\uD504\uB9AC\uBBF8\uC5C4 \uB2F5\uB840\uD488 \uC138\uD2B8 \uCD94\uAC00\uC8FC\uBB38","4843121925"],P000BBHM:["custom","\uD504\uB9AC\uBBF8\uC5C4 \uB2F5\uB840\uD488 \uC138\uD2B8 \uCD94\uAC00\uC8FC\uBB38","4843121925"],P000BBHQ:["custom","\uC7A5\uB840\uB2F5\uB840\uD488 \uCD94\uAC00\uC8FC\uBB38","6052815173"],
+        P0000BCF:["addon","\uC2A4\uD2F0\uCEE4\u00B7\uC778\uC1C4",""],P0000EJB:["addon","\uC1FC\uD551\uBC31",""],P0000IQR:["addon","\uC1FC\uD551\uBC31",""],P0000WTH:["addon","\uC1FC\uD551\uBC31",""],P0000ECC:["addon","\uC790\uC218\u00B7\uC81C\uC791\uBE44",""],P000BBJB:["addon","\uC790\uC218\u00B7\uC81C\uC791\uBE44",""],P0000XAN:["addon","\uCD94\uAC00\uAE08",""],P000BBHV:["addon","\uC791\uC5C5\uBE44",""],P000BBJI:["addon","\uD3EC\uC7A5 \uBD80\uC790\uC7AC",""]
+      };
+      const linked={"4843121925":["premium","4843121925"],"4624494637":["towel","4624494637 \u00B7 4766394357"],"4766394357":["towel","4624494637 \u00B7 4766394357"],"7444568862":["honey","7444568862 \u00B7 11979458131"],"11979458131":["honey","7444568862 \u00B7 11979458131"],"13336908552":["jogumanTowel","13336908552"],"13337070806":["jogumanSet","13337070806"],"13471936380":["invite","13471936380"]};
+      let def=store==="cafe24"?cafe[id]:null;
+      if(!def&&linked[id]) def=["general",...linked[id]];
+      if(!def) return {category:categories.general,product:name||id,linkedIds:id,sourceName:name,sourceId:id};
+      return {category:categories[def[0]],product:products[def[1]]||def[1],linkedIds:def[2],sourceName:name,sourceId:id};
+    }
+    function renderIntegratedDailyProducts(rows) {
+      const labels={cafe24:"\uC790\uC0AC\uBAB0",thedotom:"\uB354\uB3C4\uD1B0\uC2A4\uD29C\uB514\uC624",mura:"\uBB34\uB77C"};
+      const order=["\uC77C\uBC18 \uD1B5\uD569\uC0C1\uD488","\uD611\uB825\uC5C5\uCCB4 \uC0C1\uD488","\uACE0\uAC1D\uBCC4 \uCD94\uAC00\u00B7\uC2E0\uADDC \uC8FC\uBB38","\uBD80\uAC00\uC0C1\uD488"], groups=new Map();
+      rows.forEach(row=>{const i=classifyDailyProduct(row),key=i.category+"::"+i.product;if(!groups.has(key))groups.set(key,{...i,sales:{cafe24:0,thedotom:0,mura:0},orders:0,sources:[]});const g=groups.get(key);if(g.sales[row.store]!==undefined)g.sales[row.store]+=Number(row.dailySales||0);g.orders+=Number(row.orders||0);g.sources.push((labels[row.store]||row.store)+": "+(i.sourceName||i.sourceId));});
+      const storeTotal=store=>rows.filter(r=>r.store===store).reduce((s,r)=>s+Number(r.dailySales||0),0);
+      const summary=Object.entries(labels).map(([store,label])=>`<span class="store-badge ${store}">${html(label)} ${money(storeTotal(store))}</span>`).join("");
+      const sections=order.map(category=>{const items=[...groups.values()].filter(g=>g.category===category).sort((a,b)=>Object.values(b.sales).reduce((s,v)=>s+v,0)-Object.values(a.sales).reduce((s,v)=>s+v,0));if(!items.length)return"";const categorySales=items.reduce((s,i)=>s+Object.values(i.sales).reduce((x,v)=>x+v,0),0);const body=items.map(i=>{const total=Object.values(i.sales).reduce((s,v)=>s+v,0),cell=store=>`<td class="store-sales ${i.sales[store]?"":"zero"}">${i.sales[store]?money(i.sales[store]):"-"}</td>`,sources=[...new Set(i.sources)];return`<tr><td class="wrap"><span class="integrated-product-name">${html(i.product)}</span><span class="integrated-product-meta">${i.linkedIds?`\uC5F0\uACB0 \uC0C1\uD488 ${html(i.linkedIds)}<br>`:""}${html(sources.join(" \u00B7 "))}</span></td>${cell("cafe24")}${cell("thedotom")}${cell("mura")}<td><strong>${money(total)}</strong></td><td>${number(i.orders)}</td></tr>`;}).join("");return`<section class="daily-product-group"><div class="daily-product-group-head"><div><h3 class="daily-product-group-title">${html(category)}</h3><div class="daily-product-group-sub">\uD1B5\uD569\uC0C1\uD488 ${number(items.length)}\uAC1C</div></div><strong>${money(categorySales)}</strong></div><div class="table-wrap"><table><thead><tr><th>\uD1B5\uD569\uC0C1\uD488</th><th><span class="store-badge cafe24">\uC790\uC0AC\uBAB0</span></th><th><span class="store-badge thedotom">\uB354\uB3C4\uD1B0\uC2A4\uD29C\uB514\uC624</span></th><th><span class="store-badge mura">\uBB34\uB77C</span></th><th>\uD569\uACC4</th><th>\uC8FC\uBB38/\uD310\uB9E4\uC218\uB7C9</th></tr></thead><tbody>${body}</tbody></table></div></section>`;}).join("");
+      return `<div class="daily-product-store-summary">${summary}</div><div class="daily-product-groups">${sections}</div>`;
+    }
     function renderDailyProductPerformance() {
       const perf = state.data.dailyProductPerformance || {};
       const rows = perf.rows || [];
@@ -1297,6 +1337,8 @@
           <td>${rateText(row.adCostRate || 0)}</td>
         </tr>
       `).join("");
+      const productContent = !pageStore ? renderIntegratedDailyProducts(visibleRows) : `
+          <div class="table-wrap"><table><thead><tr><th>??</th><th>????</th><th>????</th><th>????</th><th>????</th><th>?? ??</th><th>????</th><th>???</th><th>ROAS</th><th>????</th></tr></thead><tbody>${tableRows || `<tr><td class="empty" colspan="10">??? ??? ?? ?? ?? ???? ????.</td></tr>`}</tbody></table></div>`;
       els.dailyProductBody.innerHTML = `
         <div class="daily-product-filter">
           <select data-daily-product-month>${monthOptions}</select>
@@ -1317,12 +1359,7 @@
             </div>
           </div>
           <div class="daily-product-tabs">${dateTabs}</div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>제품</th><th>상품번호</th><th>운영형태</th><th>상품매출</th><th>주문건수</th><th>연결 광고</th><th>광고매출</th><th>광고비</th><th>ROAS</th><th>광고비율</th></tr></thead>
-              <tbody>${tableRows || `<tr><td class="empty" colspan="10">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`}</tbody>
-            </table>
-          </div>
+          ${productContent}
         </div>
         `;
     }
