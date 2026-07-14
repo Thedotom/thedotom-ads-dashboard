@@ -458,8 +458,12 @@
     .pl-group-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:12px; }
     .pl-group-stat span { display:block; font-size:10px; color:var(--muted); }
     .pl-group-stat strong { display:block; margin-top:2px; font-size:12px; color:var(--text); }
-    .pl-group-row td { padding:10px 14px !important; background:#eef2ff; border-top:2px solid #c7d2fe; color:#3730a3; font-weight:800; }
-    .pl-group-row small { margin-left:8px; color:#6366f1; font-weight:600; }
+    .pl-keyword-groups { display:grid; gap:16px; padding:16px; background:#f8fafc; }
+    .pl-keyword-group { overflow:hidden; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:0 1px 3px rgba(15,23,42,.06); }
+    .pl-keyword-group-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 16px; border-bottom:1px solid #c7d2fe; background:#eef2ff; }
+    .pl-keyword-group-head strong { color:#3730a3; font-size:14px; }
+    .pl-keyword-group-head span { flex:0 0 auto; color:#6366f1; font-size:11px; font-weight:700; }
+    .pl-keyword-group .table-wrap { border:0; border-radius:0; }
     .pl-section-head { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--line); background:linear-gradient(180deg,#fff 0%,#f8fafc 100%); flex-wrap:wrap; }
     .pl-section-head-left { display:flex; align-items:center; gap:10px; }
     .pl-section-head-right { display:flex; gap:6px; }
@@ -617,12 +621,7 @@
           <div class="pl-chart-panel"><div class="pl-chart-title">비용 상위 키워드 TOP 8</div><div style="height:220px;position:relative"><canvas id="plBarChart"></canvas></div></div>
           <div class="pl-chart-panel"><div class="pl-chart-title">CPC vs ROAS 포지셔닝</div><div style="height:220px;position:relative"><canvas id="plScatterChart"></canvas></div></div>
         </div>
-        <div id="plTableArea" class="table-wrap">
-          <table>
-            <thead><tr><th>광고그룹 / 캠페인</th><th>키워드</th><th>기기</th><th>순위</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
-            <tbody id="keywordBody"></tbody>
-          </table>
-        </div>
+        <div id="plTableArea" class="pl-keyword-groups"></div>
       </section>
       <section class="page-section" data-page="shopping">
         <div class="section-head"><h2>쇼핑검색 상세 데이터</h2><span id="shoppingCount" class="count"></span></div>
@@ -706,7 +705,6 @@
       typeCount: document.getElementById("typeCount"),
       campaignBody: document.getElementById("campaignBody"),
       campaignCount: document.getElementById("campaignCount"),
-      keywordBody: document.getElementById("keywordBody"),
       keywordCount: document.getElementById("keywordCount"),
       shoppingBody: document.getElementById("shoppingBody"),
       shoppingCount: document.getElementById("shoppingCount"),
@@ -1157,10 +1155,9 @@
       if (ta) ta.style.display = isChart ? "none" : "block";
       if (isChart) { renderPlCharts(rows); return; }
       // 테이블 뷰
-      if (!rows.length) { els.keywordBody.innerHTML=`<tr><td class="empty" colspan="13">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`; return; }
+      if (!rows.length) { ta.innerHTML=`<div class="empty">선택한 조건의 파워링크 키워드 데이터가 없습니다.</div>`; return; }
       const maxRoas = Math.max(...rows.filter(r=>Number(r["ROAS"]||0)>0).map(r=>Number(r["ROAS"]||0)), 1);
-      els.keywordBody.innerHTML = groupedRows.map(([groupName, groupRows]) => {
-        const header = `<tr class="pl-group-row"><td colspan="13">${html(groupName)}<small>키워드 ${number(groupRows.length)}개</small></td></tr>`;
+      ta.innerHTML = groupedRows.map(([groupName, groupRows]) => {
         const body = groupRows.map(row => {
         const judgement = row["판단"] || "관찰";
         const cls = judgement.includes("핵심")||judgement.includes("확대") ? "good" : judgement.includes("고")||judgement.includes("무전환")||judgement.includes("저") ? "bad" : "warn";
@@ -1182,7 +1179,13 @@
         </tr>`;
 
         }).join("");
-        return header + body;
+        return `<section class="pl-keyword-group">
+          <div class="pl-keyword-group-head"><strong>${html(groupName)}</strong><span>키워드 ${number(groupRows.length)}개</span></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>광고그룹 / 캠페인</th><th>키워드</th><th>기기</th><th>순위</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
+            <tbody>${body}</tbody>
+          </table></div>
+        </section>`;
       }).join("");
     }
     function shoppingRows() {
