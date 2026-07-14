@@ -1744,12 +1744,15 @@ function renderBrandContract() {
           });
           const cards = products.map(p => {
             const isReward = rewardIds.has(String(p.productId));
-            const img = p.image ? `<img class="rank-thumb" src="${html(p.image)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
+            const muraHoney = String(p.productId || "") === "11979458131";
+            const productUrl = muraHoney ? "https://smartstore.naver.com/mu_ra/products/11979458131" : "";
+            const productImage = p.image || (muraHoney ? "https://shopping-phinf.pstatic.net/main_8952396/89523968819.jpg" : "");
+            const img = productImage ? `<img class="rank-thumb" src="${html(productImage)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
             const rewardBadge = isReward ? `<div class="rank-card-reward-badge">⭐ 리워드 슬롯 운영중</div>` : "";
             const kws = (p.items || []).map(item =>
               `<div class="rank-row"><span class="rank-keyword">${html(item.keyword || "")}</span>${rankBadge(item)}${deltaBadge(item.delta)}</div>`
             ).join("");
-            return `<div class="rank-card"${isReward ? ' style="border-color:#f59e0b;box-shadow:0 0 0 2px #fef3c780"' : ""}><div class="rank-card-head">${img}<div class="rank-card-head-info"><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div>${rewardBadge}</div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
+            return `<div class="rank-card"${isReward ? ' style="border-color:#f59e0b;box-shadow:0 0 0 2px #fef3c780"' : ""}><${productUrl ? `a href="${html(productUrl)}" target="_blank" rel="noopener"` : "div"} class="rank-card-head" style="color:inherit;text-decoration:none">${img}<div class="rank-card-head-info"><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div>${rewardBadge}</div></${productUrl ? "a" : "div"}><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
           }).join("");
           els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">쇼핑검색 순위</h3><div style="font-size:12px;color:var(--muted);margin-top:2px">${html(slotDetail.label || "")}</div></div></div><div class="rank-grid">${cards || '<div class="empty" style="padding:24px">데이터 없음</div>'}</div></div>`;
         } else {
@@ -1774,12 +1777,15 @@ function renderBrandContract() {
           });
           const cards = sortedProducts.map(p => {
             const isReward = rewardIds2.has(String(p.productId));
-            const img = p.image ? `<img class="rank-thumb" src="${html(p.image)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
+            const muraHoney = String(p.productId || "") === "11979458131";
+            const productUrl = muraHoney ? "https://smartstore.naver.com/mu_ra/products/11979458131" : "";
+            const productImage = p.image || (muraHoney ? "https://shopping-phinf.pstatic.net/main_8952396/89523968819.jpg" : "");
+            const img = productImage ? `<img class="rank-thumb" src="${html(productImage)}" alt="">` : `<div class="rank-thumb thumb-placeholder">대기</div>`;
             const rewardBadge = isReward ? `<div class="rank-card-reward-badge">⭐ 리워드 슬롯 운영중</div>` : "";
             const kws = p.keywords.map(kw =>
               `<div class="rank-row"><span class="rank-keyword">${html(kw.keyword || "")}</span>${rankBadge(kw)}${deltaBadge(kw.delta)}</div>`
             ).join("");
-            return `<div class="rank-card"${isReward ? ' style="border-color:#f59e0b;box-shadow:0 0 0 2px #fef3c780"' : ""}><div class="rank-card-head">${img}<div class="rank-card-head-info"><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div>${rewardBadge}</div></div><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
+            return `<div class="rank-card"${isReward ? ' style="border-color:#f59e0b;box-shadow:0 0 0 2px #fef3c780"' : ""}><${productUrl ? `a href="${html(productUrl)}" target="_blank" rel="noopener"` : "div"} class="rank-card-head" style="color:inherit;text-decoration:none">${img}<div class="rank-card-head-info"><div class="rank-card-title">${html(p.title || p.productId || "")}</div><div class="rank-card-sub">${html(p.productId || "")}</div>${rewardBadge}</div></${productUrl ? "a" : "div"}><div class="rank-list">${kws || '<div class="empty" style="padding:8px">데이터 없음</div>'}</div></div>`;
           }).join("");
           els.rankBody.innerHTML = `<div class="rank-section-block"><div class="rank-section-head"><div><h3 class="rank-section-title">쇼핑검색 순위 (최신)</h3></div></div><div class="rank-grid">${cards}</div></div>`;
         }
