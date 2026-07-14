@@ -1375,7 +1375,7 @@
           <td><span class="pill ${statusClass(row.status || "")}">${html(row.status || "")}</span></td>
           <td>${money(row.dailySales || 0)}</td>
           <td>${number(row.orders || 0)}</td>
-          <td class="wrap">${html(row.adgroup || (String(row.status || "").includes("?щ’") ? "슬롯 진행 상품" : "연결 광고 없음"))}</td>
+          <td class="wrap">${html(row.adgroup || (String(row.status || "").includes("슬롯") ? "슬롯 진행 상품" : "연결 광고 없음"))}</td>
           <td>${money(row.adSales || 0)}</td>
           <td>${money(row.adCost || 0)}</td>
           <td>${roasText(row.roas || 0)}</td>
@@ -1383,7 +1383,7 @@
         </tr>
       `).join("");
       const productContent = !pageStore ? renderIntegratedDailyProducts(visibleRows) : `
-          <div class="table-wrap"><table><thead><tr><th>??</th><th>????</th><th>????</th><th>????</th><th>????</th><th>?? ??</th><th>????</th><th>???</th><th>ROAS</th><th>????</th></tr></thead><tbody>${tableRows || `<tr><td class="empty" colspan="10">??? ??? ?? ?? ?? ???? ????.</td></tr>`}</tbody></table></div>`;
+          <div class="table-wrap"><table><thead><tr><th>상품명</th><th>상품번호</th><th>운영상태</th><th>일매출</th><th>주문수량</th><th>광고그룹</th><th>광고매출</th><th>광고비</th><th>ROAS</th><th>광고비율</th></tr></thead><tbody>${tableRows || `<tr><td class="empty" colspan="10">선택한 날짜에 표시할 제품 성과 데이터가 없습니다.</td></tr>`}</tbody></table></div>`
       els.dailyProductBody.innerHTML = `
         <div class="daily-product-filter">
           <select data-daily-product-month>${monthOptions}</select>
