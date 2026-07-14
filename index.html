@@ -451,6 +451,15 @@
       .chart-body { height: 220px; }
     }
     /* ── 파워링크 상세 데이터 개선 ── */
+    .pl-group-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; padding:14px 16px; background:#f8fafc; border-bottom:1px solid var(--line); }
+    .pl-group-card { border:1px solid var(--line); border-radius:12px; background:#fff; padding:14px; box-shadow:0 1px 2px rgba(15,23,42,.04); }
+    .pl-group-name { font-size:13px; font-weight:800; line-height:1.35; color:var(--text); word-break:keep-all; }
+    .pl-group-meta { margin-top:6px; font-size:11px; color:var(--muted); }
+    .pl-group-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:12px; }
+    .pl-group-stat span { display:block; font-size:10px; color:var(--muted); }
+    .pl-group-stat strong { display:block; margin-top:2px; font-size:12px; color:var(--text); }
+    .pl-group-row td { padding:10px 14px !important; background:#eef2ff; border-top:2px solid #c7d2fe; color:#3730a3; font-weight:800; }
+    .pl-group-row small { margin-left:8px; color:#6366f1; font-weight:600; }
     .pl-section-head { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--line); background:linear-gradient(180deg,#fff 0%,#f8fafc 100%); flex-wrap:wrap; }
     .pl-section-head-left { display:flex; align-items:center; gap:10px; }
     .pl-section-head-right { display:flex; gap:6px; }
@@ -594,6 +603,7 @@
           </div>
         </div>
         <div class="pl-kpi-row" id="plKpiRow"></div>
+        <div class="pl-group-grid" id="plGroupSummary"></div>
         <div class="detail-toolbar">
           <button class="pl-chip active" type="button" data-detail-mode="all">전체 <span class="pl-count" id="plCount-all">0</span></button>
           <button class="pl-chip" type="button" data-detail-mode="highCpc">고CPC <span class="pl-count" id="plCount-highCpc">0</span></button>
@@ -940,7 +950,8 @@
         .map(r => r["캠페인명"])
         .filter(Boolean))].sort();
       els.campaignFilter.innerHTML = `<option value="">전체</option>` + names.map(name => `<option value="${html(name)}">${html(name)}</option>`).join("");
-      els.campaignFilter.value = names.includes(current) ? current : "";
+      const preferred = "파워링크_더도톰_자사몰";
+      els.campaignFilter.value = names.includes(current) ? current : (state.page === "powerlink" && names.includes(preferred) ? preferred : "");
     }
     function fillAdgroups() {
       const current = els.adgroupFilter.value;
@@ -1117,6 +1128,28 @@
         ["총 전환", number(totalConv)], ["평균 CPC", money(Math.round(avgCpc))],
         ["평균 ROAS", ratio(avgRoas)+"배"]
       ].map(([l,v])=>`<div class="pl-kpi-item"><div class="pl-kpi-label">${l}</div><div class="pl-kpi-val">${v}</div></div>`).join("");
+      // 선택한 캠페인의 광고그룹을 독립 카드로 요약한다.
+      const groupMap = new Map();
+      rows.forEach(row => {
+        const name = row["광고그룹명"] || "광고그룹 미지정";
+        if (!groupMap.has(name)) groupMap.set(name, []);
+        groupMap.get(name).push(row);
+      });
+      const groupedRows = [...groupMap.entries()].sort(([a], [b]) => a.localeCompare(b, "ko"));
+      const groupSummary = document.getElementById("plGroupSummary");
+      if (groupSummary) groupSummary.innerHTML = groupedRows.map(([name, items]) => {
+        const cost = items.reduce((s,r)=>s+Number(r["총비용"]||0),0);
+        const conversions = items.reduce((s,r)=>s+Number(r["전환수"]||0),0);
+        return `<div class="pl-group-card">
+          <div class="pl-group-name">${html(name)}</div>
+          <div class="pl-group-meta">${html(items[0]?.["캠페인명"] || "")} · 키워드 ${number(items.length)}개</div>
+          <div class="pl-group-stats">
+            <div class="pl-group-stat"><span>비용</span><strong>${money(cost)}</strong></div>
+            <div class="pl-group-stat"><span>클릭</span><strong>${number(items.reduce((s,r)=>s+Number(r["클릭수"]||0),0))}</strong></div>
+            <div class="pl-group-stat"><span>전환</span><strong>${number(conversions)}</strong></div>
+          </div>
+        </div>`;
+      }).join("");
       // 뷰 전환
       const isChart = state.plView === "chart";
       const ca = document.getElementById("plChartArea"), ta = document.getElementById("plTableArea");
@@ -1124,9 +1157,11 @@
       if (ta) ta.style.display = isChart ? "none" : "block";
       if (isChart) { renderPlCharts(rows); return; }
       // 테이블 뷰
-      if (!rows.length) { els.keywordBody.innerHTML=`<tr><td class="empty" colspan="10">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`; return; }
+      if (!rows.length) { els.keywordBody.innerHTML=`<tr><td class="empty" colspan="13">선택한 날짜의 일일 제품 성과 데이터가 없습니다.</td></tr>`; return; }
       const maxRoas = Math.max(...rows.filter(r=>Number(r["ROAS"]||0)>0).map(r=>Number(r["ROAS"]||0)), 1);
-      els.keywordBody.innerHTML = rows.slice(0,150).map(row => {
+      els.keywordBody.innerHTML = groupedRows.map(([groupName, groupRows]) => {
+        const header = `<tr class="pl-group-row"><td colspan="13">${html(groupName)}<small>키워드 ${number(groupRows.length)}개</small></td></tr>`;
+        const body = groupRows.map(row => {
         const judgement = row["판단"] || "관찰";
         const cls = judgement.includes("핵심")||judgement.includes("확대") ? "good" : judgement.includes("고")||judgement.includes("무전환")||judgement.includes("저") ? "bad" : "warn";
         const roas = Number(row["ROAS"]||0); const roasW = Math.round(Math.min(roas/maxRoas*44, 44));
@@ -1145,6 +1180,9 @@
           <td><span class="pill ${cls}">${html(judgement)}</span></td>
           <td class="wrap">${html(row["권장조치"])}</td>
         </tr>`;
+
+        }).join("");
+        return header + body;
       }).join("");
     }
     function shoppingRows() {
