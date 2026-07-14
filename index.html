@@ -1836,16 +1836,26 @@ function renderBrandContract() {
           return cell;
         };
 
-        // Group by adgroup (광고그룹 단위)
+        const resolveActualAdgroup = row => {
+          if (row.campaign !== "파워링크_더도톰_자사몰") return row.adgroup || row.campaign || "기타";
+          const keyword = String(row.keyword || "");
+          const suffix = String(row.device || "").toLowerCase() === "mobile" ? "M" : "PC";
+          const isInvitation = /(초대장|초청장|청첩장|모바일돌|돌모바일|돌잔치모바일|생일파티)/.test(keyword);
+          return isInvitation
+            ? `더도톰 자사몰_돌잔치초대장(${suffix})`
+            : `더도톰_자사몰_돌답례품(${suffix})`;
+        };
+
+        // Group by actual Naver adgroup (광고그룹 단위)
         const adgroupMap = {};
         pcRows.forEach(row => {
-          const cKey = row.adgroup || row.campaign || "기타";
-          if (!adgroupMap[cKey]) adgroupMap[cKey] = { campaign: row.campaign, adgroup: row.adgroup, pc: [], mobile: [] };
+          const cKey = resolveActualAdgroup(row);
+          if (!adgroupMap[cKey]) adgroupMap[cKey] = { campaign: row.campaign, adgroup: cKey, pc: [], mobile: [] };
           adgroupMap[cKey].pc.push(row);
         });
         mobileRows.forEach(row => {
-          const cKey = row.adgroup || row.campaign || "기타";
-          if (!adgroupMap[cKey]) adgroupMap[cKey] = { campaign: row.campaign, adgroup: row.adgroup, pc: [], mobile: [] };
+          const cKey = resolveActualAdgroup(row);
+          if (!adgroupMap[cKey]) adgroupMap[cKey] = { campaign: row.campaign, adgroup: cKey, pc: [], mobile: [] };
           adgroupMap[cKey].mobile.push(row);
         });
         const cards = Object.values(adgroupMap).map(group => {
