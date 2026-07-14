@@ -1944,8 +1944,8 @@ function renderBrandContract() {
         if (window._charts.weekly) { window._charts.weekly.destroy(); window._charts.weekly = null; }
         const metrics = state.data.totalSalesMetrics || {};
         const weeks = metrics.weeks || ["1주","2주","3주","4주","5주"];
-        const salesTotal = metrics.manualSalesTotal || {};
-        const adTotal = metrics.manualAdCostTotal || {};
+        const salesTotal = metrics.autoSalesTotal || {};
+        const adTotal = metrics.autoAdCostTotal || {};
         const salesData = (salesTotal.weeks || [0,0,0,0,0]).map(v => Number(v)||0);
         const adData = (adTotal.weeks || [0,0,0,0,0]).map(v => Number(v)||0);
         const labels = weeks.map((w, i) => w || `${i+1}주차`);
@@ -1954,8 +1954,8 @@ function renderBrandContract() {
           data: {
             labels,
             datasets: [
-              { label: "수기매출", data: salesData, backgroundColor: "rgba(16,185,129,0.15)", borderColor: "#10b981", borderWidth: 2, borderRadius: 6, order: 2 },
-              { label: "수기광고비", data: adData, backgroundColor: "rgba(72,101,244,0.15)", borderColor: "#4865f4", borderWidth: 2, borderRadius: 6, order: 2 }
+              { label: "자동 수집 매출", data: salesData, backgroundColor: "rgba(16,185,129,0.15)", borderColor: "#10b981", borderWidth: 2, borderRadius: 6, order: 2 },
+              { label: "자동 수집 광고비", data: adData, backgroundColor: "rgba(72,101,244,0.15)", borderColor: "#4865f4", borderWidth: 2, borderRadius: 6, order: 2 }
             ]
           },
           options: {
