@@ -626,6 +626,14 @@
       <section class="page-section" data-page="shopping">
         <div class="section-head"><h2>쇼핑검색 상세 데이터</h2><span id="shoppingCount" class="count"></span></div>
         <div class="memo-body" id="shoppingIntegratedBody"></div>
+        <div class="detail-toolbar" id="shoppingAnalysisToolbar">
+          <button class="pl-chip active" type="button" data-shopping-mode="all">전체 <span class="pl-count" id="shoppingCount-all">0</span></button>
+          <button class="pl-chip" type="button" data-shopping-mode="highCpc">고CPC <span class="pl-count" id="shoppingCount-highCpc">0</span></button>
+          <button class="pl-chip" type="button" data-shopping-mode="noConversion">무전환 <span class="pl-count" id="shoppingCount-noConversion">0</span></button>
+          <button class="pl-chip" type="button" data-shopping-mode="lowRoas">저ROAS <span class="pl-count" id="shoppingCount-lowRoas">0</span></button>
+          <button class="pl-chip" type="button" data-shopping-mode="scale">확대후보 <span class="pl-count" id="shoppingCount-scale">0</span></button>
+          <button class="pl-chip" type="button" data-shopping-mode="maintain">유지 <span class="pl-count" id="shoppingCount-maintain">0</span></button>
+        </div>
         <div class="table-wrap">
           <table>
             <thead><tr><th>캠페인</th><th>광고그룹</th><th>상품/소재</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
@@ -694,7 +702,7 @@
       window.location.replace("http://127.0.0.1:8790");
     }
     const initialMonth = new URLSearchParams(window.location.search).get("month") || "";
-    const state = { data: null, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", dailyProductDate: "", dailyProductMonth: "" };
+    const state = { data: null, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -1188,7 +1196,19 @@
         </section>`;
       }).join("");
     }
-    function shoppingRows() {
+    function shoppingAssessment(row) {
+      const cost = Number(row["총비용"] || 0);
+      const clicks = Number(row["클릭수"] || 0);
+      const conversions = Number(row["전환수"] || 0);
+      const cpc = Number(row["CPC"] || 0);
+      const roas = Number(row["ROAS"] || 0);
+      if (clicks > 0 && conversions === 0) return { key: "noConversion", label: "무전환", cls: "bad", action: "검색어·소재 적합도를 점검하고 입찰가 또는 노출을 축소" };
+      if (cost >= 100000 && roas > 0 && roas < 5) return { key: "lowRoas", label: "저ROAS", cls: "bad", action: "수익성이 낮아 입찰가 인하와 예산 이동 검토" };
+      if (cpc >= 2500) return { key: "highCpc", label: "고CPC", cls: "warn", action: "클릭 단가가 높아 입찰가와 전환 품질을 함께 점검" };
+      if (conversions > 0 && roas >= 10) return { key: "scale", label: "확대후보", cls: "good", action: "효율 유지 시 예산 또는 입찰을 소폭 확대" };
+      return { key: "maintain", label: "유지", cls: "warn", action: "현재 운영을 유지하며 비용·전환 추이를 관찰" };
+    }
+    function shoppingBaseRows() {
       const q = els.searchInput.value.trim().toLowerCase();
       return state.data.keywordPerformance
         .filter(row => row["광고유형"] === "쇼핑검색")
@@ -1200,110 +1220,106 @@
           return hay.includes(q);
         });
     }
+    function shoppingRows() {
+      return shoppingBaseRows().filter(row => state.shoppingMode === "all" || shoppingAssessment(row).key === state.shoppingMode);
+    }
     function renderShopping() {
+      const baseRows = shoppingBaseRows();
       const rows = shoppingRows();
+      const modes = ["all", "highCpc", "noConversion", "lowRoas", "scale", "maintain"];
+      modes.forEach(mode => {
+        const count = mode === "all" ? baseRows.length : baseRows.filter(row => shoppingAssessment(row).key === mode).length;
+        const el = document.getElementById(`shoppingCount-${mode}`);
+        if (el) el.textContent = number(count);
+      });
+      document.querySelectorAll("[data-shopping-mode]").forEach(btn => btn.classList.toggle("active", btn.dataset.shoppingMode === state.shoppingMode));
       els.shoppingCount.textContent = `${rows.length}개 상품/소재`;
       if (!rows.length) {
-        els.shoppingBody.innerHTML = `<tr><td class="empty" colspan="12">조건에 맞는 쇼핑검색 데이터가 없습니다.</td></tr>`;
+        els.shoppingBody.innerHTML = `<tr><td class="empty" colspan="12">선택한 판단 카테고리에 해당하는 쇼핑검색 데이터가 없습니다.</td></tr>`;
         return;
       }
-      els.shoppingBody.innerHTML = rows.slice(0, 150).map(row => {
-        const judgement = row["판단"] || "관찰";
-        const cls = judgement.includes("확대") ? "good" : judgement.includes("고") || judgement.includes("무전환") || judgement.includes("저") ? "bad" : "warn";
-        return `<tr>
-          <td>${html(row["캠페인명"])}</td>
-          <td>${html(row["광고그룹명"])}</td>
-          <td>${html(row["상품명"] || row["광고그룹명"])}</td>
-          <td>${number(row["노출수"])}</td>
-          <td>${number(row["클릭수"])}</td>
-          <td>${money(row["총비용"])}</td>
-          <td><strong>${money(row["CPC"])}</strong></td>
-          <td>${number(row["전환수"])}</td>
-          <td>${money(row["CPA"])}</td>
-          <td>${ratio(row["ROAS"])}</td>
-          <td><span class="pill ${cls}">${html(judgement)}</span></td>
-          <td class="wrap">${html(row["권장조치"])}</td>
-        </tr>`;
+      const order = ["noConversion", "lowRoas", "highCpc", "scale", "maintain"];
+      const groups = order.map(key => ({ key, rows: rows.filter(row => shoppingAssessment(row).key === key) })).filter(group => group.rows.length);
+      els.shoppingBody.innerHTML = groups.map(group => {
+        const assessment = shoppingAssessment(group.rows[0]);
+        const groupCost = group.rows.reduce((sum, row) => sum + Number(row["총비용"] || 0), 0);
+        const head = `<tr class="total-row"><td colspan="12"><strong>${html(assessment.label)}</strong> · ${number(group.rows.length)}개 · 광고비 ${money(groupCost)}</td></tr>`;
+        const body = group.rows.sort((a, b) => Number(b["총비용"] || 0) - Number(a["총비용"] || 0)).map(row => {
+          const item = shoppingAssessment(row);
+          return `<tr>
+            <td>${html(row["캠페인명"])}</td>
+            <td>${html(row["광고그룹명"])}</td>
+            <td>${html(row["상품명"] || row["광고그룹명"])}</td>
+            <td>${number(row["노출수"])}</td>
+            <td>${number(row["클릭수"])}</td>
+            <td>${money(row["총비용"])}</td>
+            <td><strong>${money(row["CPC"])}</strong></td>
+            <td>${number(row["전환수"])}</td>
+            <td>${money(row["CPA"])}</td>
+            <td>${ratio(row["ROAS"])}</td>
+            <td><span class="pill ${item.cls}">${html(item.label)}</span></td>
+            <td class="wrap">${html(item.action)}</td>
+          </tr>`;
+        }).join("");
+        return head + body;
       }).join("");
     }
     function renderShoppingIntegrated() {
       const mix = state.data.shoppingIntegrated || {};
       const dailyCosts = state.data.dailyProductCosts || {};
-      const productThumb = item => {
-        const thumb = item.image ? `<img class="reward-thumb" src="${html(item.image)}" alt="">` : `<div class="reward-thumb thumb-placeholder">대기</div>`;
-        return item.link ? `<a class="reward-thumb-link" href="${html(item.link)}" target="_blank" rel="noreferrer" title="상품 열기">${thumb}</a>` : thumb;
-      };
-      const productNameCell = item => `
-        <td class="wrap">
-          <div class="reward-product">
-            ${productThumb(item)}
-            <div><div class="reward-product-title">${html(item.productName || item["상품명"] || item["광고그룹명"] || "")}</div><div class="meta">상품번호 ${html(item.productId || "")}</div></div>
-          </div>
-        </td>`;
-      const groupedAdProducts = Object.values((dailyCosts.items || []).reduce((acc, item) => {
-        const key = item.productId || item.productName || item.adgroup;
-        if (!acc[key]) acc[key] = { ...item, ads: [], totalCost: 0, clicks: 0, conversions: 0, revenue: 0 };
-        acc[key].ads.push(item);
-        acc[key].totalCost += Number(item.totalCost || 0);
-        acc[key].clicks += Number(item.clicks || 0);
-        acc[key].conversions += Number(item.conversions || 0);
-        acc[key].revenue += Number(item.revenue || 0);
-        return acc;
-      }, {})).sort((a, b) => Number(b.totalCost || 0) - Number(a.totalCost || 0));
-      const adLinkedRows = groupedAdProducts.map(item => {
-        const details = (item.ads || []).map(ad => `
-          <div class="ad-detail-line">
-            <span>${html(ad.adProductName || ad.adgroup || "")}</span>
-            <strong>${money(ad.totalCost || 0)}</strong>
-          </div>`).join("");
-        return `<tr>
-          ${productNameCell(item)}
-          <td>${number(item.clicks || 0)}</td>
-          <td>${money(item.totalCost || 0)}</td>
-          <td>${money(item.totalCost && item.clicks ? item.totalCost / item.clicks : 0)}</td>
-          <td>${ratio(item.totalCost ? item.revenue / item.totalCost : 0)}</td>
-          <td><div class="ad-detail-list">${details}</div></td>
-        </tr>`;
-      }).join("");
-      const dailyCostRows = (dailyCosts.items || []).slice(0, 30).map(item => {
-        const chips = (item.daily || []).map(day => `
-          <span class="daily-cost-chip ${Number(day.cost || 0) ? "" : "zero"}">
-            <span class="daily-cost-date">${html(String(day.date || "").slice(5))}</span>
-            <span>${money(day.cost || 0)}</span>
-          </span>`).join("");
-        return `<tr>
-          ${productNameCell(item)}
-          <td>${money(item.totalCost || 0)}</td>
-          <td>${money(item.avgDailyCost || 0)}</td>
-          <td>${number(item.clicks || 0)}</td>
-          <td>${money(item.cpc || 0)}</td>
-          <td>${ratio(item.roas || 0)}</td>
-          <td><div class="daily-cost-grid">${chips}</div></td>
-        </tr>`;
-      }).join("");
-      const categoryTable = (title, sub, headers, body, emptyColspan) => `
-        <div class="product-category">
-          <div class="product-category-head">
-            <div><h3 class="product-category-title">${html(title)}</h3><div class="product-category-sub">${html(sub || "")}</div></div>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr>${headers.map(h => `<th>${html(h)}</th>`).join("")}</tr></thead>
-              <tbody>${body || `<tr><td class="empty" colspan="${emptyColspan}">표시할 상품이 없습니다.</td></tr>`}</tbody>
-            </table>
-          </div>
-        </div>`;
+      const items = dailyCosts.items || [];
+      const dates = dailyCosts.dates || [];
+      const dailyTotals = dates.map(date => items.reduce((sum, item) => {
+        const day = (item.daily || []).find(entry => entry.date === date);
+        return sum + Number(day?.cost || 0);
+      }, 0));
+      const assessments = shoppingBaseRows().map(shoppingAssessment);
+      const categoryCount = key => assessments.filter(item => item.key === key).length;
+      const calculatedRoas = Number(mix.adCost || 0) ? Number(mix.revenue || 0) / Number(mix.adCost || 0) : 0;
       els.shoppingIntegratedBody.innerHTML = `
         <div class="kpis" style="margin-bottom:12px">
-          <div class="metric"><div class="label">쇼핑검색 광고비</div><div class="value">${money(mix.adCost || 0)}</div><div class="sub">네이버 광고 API 비용</div></div>
+          <div class="metric"><div class="label">쇼핑검색 광고비</div><div class="value">${money(mix.adCost || dailyCosts.totalCost || 0)}</div><div class="sub">자동 수집 누적 비용</div></div>
           <div class="metric"><div class="label">클릭</div><div class="value">${number(mix.clicks || 0)}</div><div class="sub">쇼핑검색 유입</div></div>
           <div class="metric"><div class="label">전환</div><div class="value">${number(mix.conversions || 0)}</div><div class="sub">${money(mix.revenue || 0)}</div></div>
-          <div class="metric"><div class="label">광고 ROAS</div><div class="value">${ratio(mix.adRoas || 0)}</div><div class="sub">쇼핑검색 단독</div></div>
-          <div class="metric"><div class="label">상품/소재</div><div class="value">${number((dailyCosts.items || []).length)}</div><div class="sub">일자별 광고비 기준</div></div>
+          <div class="metric"><div class="label">광고 ROAS</div><div class="value">${ratio(mix.adRoas || calculatedRoas)}</div><div class="sub">쇼핑검색 단독</div></div>
+          <div class="metric"><div class="label">점검 필요</div><div class="value">${number(categoryCount("highCpc") + categoryCount("noConversion") + categoryCount("lowRoas"))}</div><div class="sub">고CPC·무전환·저ROAS</div></div>
         </div>
-        <div class="meta" style="margin-bottom:10px">${html(mix.memo || "")}</div>
-        ${categoryTable("일자별 상품 광고비", dailyCosts.summary || "쇼핑검색 상품/소재별 광고 사용 금액", ["상품", "누적 비용", "일평균", "클릭", "CPC", "ROAS", "일자별 비용"], dailyCostRows, 7)}
-        ${categoryTable("광고 연동 상품", "본 상품 기준으로 묶은 쇼핑검색 광고 집행 내역", ["상품", "클릭", "비용", "CPC", "ROAS", "연동 광고 내역"], adLinkedRows, 6)}`;
+        <div class="pl-chart-area" style="display:grid;margin-bottom:14px">
+          <div class="pl-chart-panel" style="grid-column:1/-1">
+            <div class="pl-chart-title">일자별 쇼핑검색 광고비</div>
+            <div style="height:250px;position:relative"><canvas id="shoppingDailyCostChart"></canvas></div>
+          </div>
+        </div>`;
+      if (window._charts.shoppingDailyCost) window._charts.shoppingDailyCost.destroy();
+      const canvas = document.getElementById("shoppingDailyCostChart");
+      if (canvas) {
+        window._charts.shoppingDailyCost = new Chart(canvas, {
+          type: "bar",
+          data: {
+            labels: dates.map(date => String(date).slice(5)),
+            datasets: [{
+              label: "광고비",
+              data: dailyTotals,
+              backgroundColor: "rgba(72,101,244,.22)",
+              borderColor: "#4865f4",
+              borderWidth: 2,
+              borderRadius: 7
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: { callbacks: { label: context => ` 광고비: ${won.format(context.raw)}` } }
+            },
+            scales: {
+              x: { grid: { display: false }, ticks: { color: "#64748b" } },
+              y: { beginAtZero: true, grid: { color: "#f1f5f9" }, ticks: { color: "#64748b", callback: value => won.format(value) } }
+            }
+          }
+        });
+      }
     }
     function classifyDailyProduct(row) {
       const id=String(row.productId||row.recordId||""), store=String(row.store||""), name=String(row.productName||row.product||"");
@@ -2006,6 +2022,12 @@ function renderBrandContract() {
       });
     });
     els.badOnlyBtn?.addEventListener("click", () => { state.badOnly = !state.badOnly; render(); });
+    document.querySelectorAll("[data-shopping-mode]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.shoppingMode = btn.dataset.shoppingMode;
+        renderShopping();
+      });
+    });
     document.querySelectorAll("[data-detail-mode]").forEach(btn => {
       btn.addEventListener("click", () => {
         state.detailMode = btn.dataset.detailMode;
