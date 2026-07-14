@@ -1845,16 +1845,18 @@ function renderBrandContract() {
             ? `더도톰 자사몰_돌잔치초대장(${suffix})`
             : `더도톰_자사몰_돌답례품(${suffix})`;
         };
+        const adgroupBoxName = adgroup => String(adgroup || "")
+          .replace(/\s*\((?:M|PC)\)\s*$/i, "");
 
-        // Group by actual Naver adgroup (광고그룹 단위)
+        // (M)/(PC)는 노출 영역이므로 같은 기본 광고그룹은 한 박스에 합친다.
         const adgroupMap = {};
         pcRows.forEach(row => {
-          const cKey = resolveActualAdgroup(row);
+          const cKey = adgroupBoxName(resolveActualAdgroup(row));
           if (!adgroupMap[cKey]) adgroupMap[cKey] = { campaign: row.campaign, adgroup: cKey, pc: [], mobile: [] };
           adgroupMap[cKey].pc.push(row);
         });
         mobileRows.forEach(row => {
-          const cKey = resolveActualAdgroup(row);
+          const cKey = adgroupBoxName(resolveActualAdgroup(row));
           if (!adgroupMap[cKey]) adgroupMap[cKey] = { campaign: row.campaign, adgroup: cKey, pc: [], mobile: [] };
           adgroupMap[cKey].mobile.push(row);
         });
