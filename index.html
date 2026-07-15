@@ -1285,20 +1285,22 @@
           return sum + Number(day?.[field] || 0);
         }, 0);
       });
-      if (!state.shoppingProduct) state.shoppingProduct = "all";
-      const selectedIndex = items.findIndex((item, index) => productKey(item, index) === state.shoppingProduct);
-      if (state.shoppingProduct !== "all" && selectedIndex < 0) state.shoppingProduct = "all";
-      const selectedItem = state.shoppingProduct === "all" ? null : items[selectedIndex];
-      const selectedName = selectedItem ? productName(selectedItem) : "전체 상품";
+      let selectedIndex = items.findIndex((item, index) => productKey(item, index) === state.shoppingProduct);
+      if (selectedIndex < 0) {
+        selectedIndex = items.length ? 0 : -1;
+        state.shoppingProduct = selectedIndex >= 0 ? productKey(items[selectedIndex], selectedIndex) : "";
+      }
+      const selectedItem = selectedIndex >= 0 ? items[selectedIndex] : null;
+      const selectedName = selectedItem ? productName(selectedItem) : "선택 상품 없음";
       const selectedDailyCost = dailySum("cost", selectedItem);
       const selectedDailyRevenue = dailySum("revenue", selectedItem);
-      const productButtons = `<button class="pl-chip ${state.shoppingProduct === "all" ? "active" : ""}" type="button" data-shopping-product="all">전체</button>` + items.map((item, index) => {
+      const productButtons = items.map((item, index) => {
         const key = productKey(item, index);
         return `<button class="pl-chip ${key === state.shoppingProduct ? "active" : ""}" type="button" data-shopping-product="${html(key)}" title="${html(productName(item))}">${html(productName(item))}</button>`;
       }).join("");
-      const selectedCost = selectedItem ? Number(selectedItem.totalCost ?? selectedItem.cost ?? selectedDailyCost.reduce((sum, value) => sum + value, 0)) : selectedDailyCost.reduce((sum, value) => sum + value, 0);
-      const selectedRevenue = selectedItem ? Number(selectedItem.revenue ?? selectedDailyRevenue.reduce((sum, value) => sum + value, 0)) : selectedDailyRevenue.reduce((sum, value) => sum + value, 0);
-      const selectedClicks = selectedItem ? Number(selectedItem.clicks || 0) : items.reduce((sum, item) => sum + Number(item.clicks || 0), 0);
+      const selectedCost = selectedItem ? Number(selectedItem.totalCost ?? selectedItem.cost ?? selectedDailyCost.reduce((sum, value) => sum + value, 0)) : 0;
+      const selectedRevenue = selectedItem ? Number(selectedItem.revenue ?? selectedDailyRevenue.reduce((sum, value) => sum + value, 0)) : 0;
+      const selectedClicks = selectedItem ? Number(selectedItem.clicks || 0) : 0;
       const selectedRoas = selectedCost ? selectedRevenue / selectedCost : 0;
       const selectedCpc = selectedClicks ? selectedCost / selectedClicks : 0;
       const assessments = shoppingBaseRows().map(shoppingAssessment);
@@ -1314,7 +1316,7 @@
         </div>
         <div class="pl-chart-area" style="display:grid;margin-bottom:14px">
           <div class="pl-chart-panel" style="grid-column:1/-1">
-            <div class="pl-chart-title">일자별 쇼핑검색 광고비</div>
+            <div class="pl-chart-title">전체 일자별 쇼핑검색 광고비 · ${money(dailySum("cost").reduce((sum, value) => sum + value, 0))}</div>
             <div style="height:250px;position:relative"><canvas id="shoppingDailyCostChart"></canvas></div>
           </div>
         </div>
@@ -1323,11 +1325,11 @@
           ${items.length ? `
             <div class="shopping-product-tabs">${productButtons}</div>
             <div class="kpis" style="margin-bottom:12px">
-              <div class="metric"><div class="label">선택 상품</div><div class="value shopping-selected-name">${html(selectedName)}</div><div class="sub">${selectedItem ? "선택 상품" : "전 상품 합계"} 일별 추이</div></div>
+              <div class="metric"><div class="label">선택 상품</div><div class="value shopping-selected-name">${html(selectedName)}</div><div class="sub">선택 광고 일별 추이</div></div>
               <div class="metric"><div class="label">누적 광고비</div><div class="value">${money(selectedCost)}</div><div class="sub">선택 기간 합계</div></div>
               <div class="metric"><div class="label">광고매출</div><div class="value">${money(selectedRevenue)}</div><div class="sub">전환매출 합계</div></div>
               <div class="metric"><div class="label">클릭</div><div class="value">${number(selectedClicks)}</div><div class="sub">CPC ${money(selectedCpc)}</div></div>
-              <div class="metric"><div class="label">ROAS</div><div class="value">${ratio(selectedRoas)}</div><div class="sub">${selectedItem ? "선택 상품" : "전체 상품"}</div></div>
+              <div class="metric"><div class="label">ROAS</div><div class="value">${ratio(selectedRoas)}</div><div class="sub">선택 광고</div></div>
             </div>
             <div style="height:280px;position:relative"><canvas id="shoppingProductDailyCostChart"></canvas></div>`
             : `<div class="empty" style="padding:24px">상품별 일자 데이터가 없습니다.</div>`}
