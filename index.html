@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -702,7 +702,7 @@
       window.location.replace("http://127.0.0.1:8790");
     }
     const initialMonth = new URLSearchParams(window.location.search).get("month") || "";
-    const state = { data: null, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", dailyProductDate: "", dailyProductMonth: "" };
+    const state = { data: null, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -1273,7 +1273,24 @@
         const day = (item.daily || []).find(entry => entry.date === date);
         return sum + Number(day?.cost || 0);
       }, 0));
-      const assessments = shoppingBaseRows().map(shoppingAssessment);
+      const productKey = (item, index) => String(item.productId || item.id || item.productName || item.product || item.name || index);
+      const productName = item => String(item.productName || item.product || item.name || item.title || "상품명 없음");
+      const selectedIndex = items.findIndex((item, index) => productKey(item, index) === state.shoppingProduct);
+      const selectedItem = items[selectedIndex >= 0 ? selectedIndex : 0] || null;
+      if (selectedItem) state.shoppingProduct = productKey(selectedItem, selectedIndex >= 0 ? selectedIndex : 0);
+      else state.shoppingProduct = "";
+      const selectedDaily = selectedItem ? dates.map(date => {
+        const day = (selectedItem.daily || []).find(entry => entry.date === date);
+        return Number(day?.cost || 0);
+      }) : [];
+      const productButtons = items.map((item, index) => {
+        const key = productKey(item, index);
+        return `<button class="pl-chip ${key === state.shoppingProduct ? "active" : ""}" type="button" data-shopping-product="${html(key)}" title="${html(productName(item))}">${html(productName(item))}</button>`;
+      }).join("");
+      const selectedCost = Number(selectedItem?.totalCost ?? selectedItem?.cost ?? selectedDaily.reduce((sum, value) => sum + value, 0));
+      const selectedClicks = Number(selectedItem?.clicks || 0);
+      const selectedCpc = Number(selectedItem?.cpc || (selectedClicks ? selectedCost / selectedClicks : 0));
+      const selectedRoas = Number(selectedItem?.roas || selectedItem?.ROAS || 0);      const assessments = shoppingBaseRows().map(shoppingAssessment);
       const categoryCount = key => assessments.filter(item => item.key === key).length;
       const calculatedRoas = Number(mix.adCost || 0) ? Number(mix.revenue || 0) / Number(mix.adCost || 0) : 0;
       els.shoppingIntegratedBody.innerHTML = `
@@ -1289,6 +1306,20 @@
             <div class="pl-chart-title">일자별 쇼핑검색 광고비</div>
             <div style="height:250px;position:relative"><canvas id="shoppingDailyCostChart"></canvas></div>
           </div>
+        </div>
+        <div class="pl-chart-panel" style="margin-bottom:14px">
+          <div class="pl-chart-title">상품별 일자별 광고비</div>
+          ${items.length ? `
+            <div style="display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:thin">${productButtons}</div>
+            <div class="kpis" style="margin-bottom:12px">
+              <div class="metric"><div class="label">선택 상품</div><div class="value" style="font-size:15px;line-height:1.35">${html(productName(selectedItem))}</div><div class="sub">상품별 광고 집행 추이</div></div>
+              <div class="metric"><div class="label">누적 광고비</div><div class="value">${money(selectedCost)}</div><div class="sub">선택 기간 합계</div></div>
+              <div class="metric"><div class="label">클릭</div><div class="value">${number(selectedClicks)}</div><div class="sub">선택 상품</div></div>
+              <div class="metric"><div class="label">CPC</div><div class="value">${money(selectedCpc)}</div><div class="sub">평균 클릭 비용</div></div>
+              <div class="metric"><div class="label">ROAS</div><div class="value">${ratio(selectedRoas)}</div><div class="sub">선택 상품</div></div>
+            </div>
+            <div style="height:250px;position:relative"><canvas id="shoppingProductDailyCostChart"></canvas></div>`
+            : `<div class="empty" style="padding:24px">상품별 일자 데이터가 없습니다.</div>`}
         </div>`;
       if (window._charts.shoppingDailyCost) window._charts.shoppingDailyCost.destroy();
       const canvas = document.getElementById("shoppingDailyCostChart");
@@ -1320,7 +1351,15 @@
           }
         });
       }
-    }
+      if (window._charts.shoppingProductDailyCost) window._charts.shoppingProductDailyCost.destroy();
+      const productCanvas = document.getElementById("shoppingProductDailyCostChart");
+      if (productCanvas && selectedItem) {
+        window._charts.shoppingProductDailyCost = new Chart(productCanvas, {
+          type: "line",
+          data: { labels: dates.map(date => String(date).slice(5)), datasets: [{ label: productName(selectedItem), data: selectedDaily, borderColor: "#ef7d32", backgroundColor: "rgba(239,125,50,.13)", borderWidth: 3, pointRadius: 4, pointHoverRadius: 6, tension: .28, fill: true }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: context => ` 광고비: ${won.format(context.raw)}` } } }, scales: { x: { grid: { display: false }, ticks: { color: "#64748b" } }, y: { beginAtZero: true, grid: { color: "#f1f5f9" }, ticks: { color: "#64748b", callback: value => won.format(value) } } } }
+        });
+      }    }
     function classifyDailyProduct(row) {
       const id=String(row.productId||row.recordId||""), store=String(row.store||""), name=String(row.productName||row.product||"");
       const categories={general:"\uC77C\uBC18 \uD1B5\uD569\uC0C1\uD488",partner:"\uD611\uB825\uC5C5\uCCB4 \uC0C1\uD488",custom:"\uACE0\uAC1D\uBCC4 \uCD94\uAC00\u00B7\uC2E0\uADDC \uC8FC\uBB38",addon:"\uBD80\uAC00\uC0C1\uD488&\uCD94\uAC00\uAE08"};
@@ -2063,6 +2102,8 @@ function renderBrandContract() {
     document.addEventListener("click", e => {
       const d = e.target.closest("[data-daily-product-date]");
       if (d) { state.dailyProductDate = d.dataset.dailyProductDate; renderDailyProductPerformance(); }
+      const shoppingProduct = e.target.closest("[data-shopping-product]");
+      if (shoppingProduct) { state.shoppingProduct = shoppingProduct.dataset.shoppingProduct; renderShoppingIntegrated(); }
       const rd = e.target.closest("[data-rank-date]");
       if (rd) { state.rankDate = rd.dataset.rankDate; document.querySelectorAll("[data-rank-date]").forEach(b=>b.classList.toggle("active",b===rd)); renderRankTraffic(); }
       const rs = e.target.closest("[data-rank-slot]");
