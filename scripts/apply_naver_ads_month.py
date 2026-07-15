@@ -85,6 +85,14 @@ def parse_product(value: Any) -> dict[str, Any]:
     return {"productName": text} if text else {}
 
 
+def product_label(value: Any) -> str:
+    text = clean(value)
+    parsed = parse_product(value)
+    if text.startswith("{"):
+        return clean(parsed.get("productName"))
+    return clean(parsed.get("productName")) or text
+
+
 def image_url(value: Any) -> str:
     text = clean(value)
     if text.startswith("/"):
@@ -120,7 +128,7 @@ def build_shopping(frame: pd.DataFrame, existing: dict[str, Any], raw_path: Path
     grouped: dict[str, dict[str, Any]] = {}
     for _, row in shop.iterrows():
         campaign, adgroup, product_id = clean(row.get("캠페인명")), clean(row.get("광고그룹명")), clean(row.get("상품 ID"))
-        parsed = parse_product(row.get("상품명"))
+        parsed = parse_product(row.get("_상품원본") or row.get("상품명"))
         product_name = clean(parsed.get("productName")) or clean(row.get("소재명")) or adgroup
         prior = old_by_id.get(product_id) or old_by_group.get((campaign, adgroup)) or {}
         key = product_id or f"{campaign}|{adgroup}|{product_name}"
@@ -179,6 +187,19 @@ def main() -> None:
     frame["광고유형"] = frame["캠페인명"].map(campaign_type)
     frame["키워드"] = frame["키워드"].where(frame["키워드"].notna(), None)
     frame["상품명"] = frame["상품명"].where(frame["상품명"].notna(), frame["소재명"])
+    frame["_상품원본"] = frame["상품명"]
+    shopping_rows = frame["광고유형"] == "쇼핑검색"
+    shop_frame = frame.loc[shopping_rows]
+    product_names = shop_frame.apply(
+        lambda row: product_label(row["상품명"])
+        or product_label(row["소재명"])
+        or clean(row["광고그룹명"]),
+        axis=1,
+    )
+    frame.loc[shopping_rows, "상품명"] = product_names
+    for column in ["키워드", "소재명"]:
+        labels = shop_frame[column].map(product_label)
+        frame.loc[shopping_rows, column] = labels.where(labels.ne(""), product_names)
     types = aggregate(frame, ["광고유형"])
     campaigns = aggregate(frame, ["광고유형", "캠페인명"])
     adgroups = aggregate(frame, ["광고유형", "캠페인명", "광고그룹명"])
