@@ -1276,7 +1276,7 @@
       const dailyCosts = state.data.dailyProductCosts || {};
       const items = dailyCosts.items || [];
       const dates = dailyCosts.dates || [];
-      const productKey = (item, index) => String(item.productId || item.id || item.productName || item.product || item.name || index);
+      const productKey = (item, index) => [item.campaign, item.adgroup, item.adProductName, item.productId, index].map(value => String(value ?? "")).join("||");
       const productName = item => String(item?.productName || item?.product || item?.name || item?.title || "상품명 없음");
       const dailySum = (field, item = null) => dates.map(date => {
         const targets = item ? [item] : items;
