@@ -489,6 +489,15 @@
     .shopping-product-tabs { display:flex; flex-wrap:wrap; gap:8px; padding:4px 0 12px; overflow:visible; }
     .shopping-product-tabs .pl-chip { flex:1 1 180px; height:auto !important; min-height:34px; padding:6px 12px !important; white-space:normal; line-height:1.3; text-align:center; justify-content:center; }
     .shopping-selected-name { font-size:15px !important; line-height:1.4; white-space:normal !important; overflow-wrap:anywhere; word-break:keep-all; }
+    .shopping-campaign-list { display:grid; gap:12px; padding:4px 0 12px; }
+    .shopping-campaign-group { overflow:hidden; border:1px solid #c7d2fe; border-radius:10px; background:#f8fafc; }
+    .shopping-campaign-head { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 13px; background:#eef2ff; border-bottom:1px solid #c7d2fe; color:#3730a3; font-size:13px; font-weight:900; }
+    .shopping-campaign-count { color:#64748b; font-size:11px; font-weight:700; }
+    .shopping-adgroup-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:8px; padding:10px; }
+    .shopping-adgroup-button { width:100%; height:auto !important; min-height:58px; padding:9px 11px !important; border-radius:8px !important; white-space:normal !important; text-align:left; align-items:flex-start !important; justify-content:center; flex-direction:column; }
+    .shopping-adgroup-name { display:block; width:100%; color:inherit; font-size:12px; font-weight:900; line-height:1.35; overflow-wrap:anywhere; }
+    .shopping-adgroup-product { display:block; width:100%; margin-top:4px; color:#64748b; font-size:11px; font-weight:600; line-height:1.35; overflow-wrap:anywhere; }
+    .shopping-adgroup-button.active .shopping-adgroup-product { color:rgba(255,255,255,.72); }
     @media (max-width:760px) {
       .shopping-product-tabs { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:thin; }
       .shopping-product-tabs .pl-chip { flex:0 0 auto; max-width:230px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -1294,10 +1303,20 @@
       const selectedName = selectedItem ? productName(selectedItem) : "선택 상품 없음";
       const selectedDailyCost = dailySum("cost", selectedItem);
       const selectedDailyRevenue = dailySum("revenue", selectedItem);
-      const productButtons = items.map((item, index) => {
-        const key = productKey(item, index);
-        return `<button class="pl-chip ${key === state.shoppingProduct ? "active" : ""}" type="button" data-shopping-product="${html(key)}" title="${html(productName(item))}">${html(productName(item))}</button>`;
-      }).join("");
+      const campaignMap = new Map();
+      items.forEach((item, index) => {
+        const campaign = String(item.campaign || "캠페인 미지정");
+        if (!campaignMap.has(campaign)) campaignMap.set(campaign, []);
+        campaignMap.get(campaign).push({ item, index });
+      });
+      const campaignButtons = [...campaignMap.entries()].map(([campaign, entries]) => `
+        <section class="shopping-campaign-group">
+          <div class="shopping-campaign-head"><span>${html(campaign)}</span><span class="shopping-campaign-count">광고그룹 ${number(entries.length)}개</span></div>
+          <div class="shopping-adgroup-grid">${entries.map(({ item, index }) => {
+            const key = productKey(item, index);
+            return `<button class="pl-chip shopping-adgroup-button ${key === state.shoppingProduct ? "active" : ""}" type="button" data-shopping-product="${html(key)}" title="${html(productName(item))}"><span class="shopping-adgroup-name">${html(item.adgroup || item.adProductName || "광고그룹 미지정")}</span><span class="shopping-adgroup-product">${html(productName(item))}</span></button>`;
+          }).join("")}</div>
+        </section>`).join("");
       const selectedCost = selectedItem ? Number(selectedItem.totalCost ?? selectedItem.cost ?? selectedDailyCost.reduce((sum, value) => sum + value, 0)) : 0;
       const selectedRevenue = selectedItem ? Number(selectedItem.revenue ?? selectedDailyRevenue.reduce((sum, value) => sum + value, 0)) : 0;
       const selectedClicks = selectedItem ? Number(selectedItem.clicks || 0) : 0;
@@ -1323,13 +1342,13 @@
         <div class="pl-chart-panel" style="margin-bottom:14px">
           <div class="pl-chart-title">상품별 일자별 광고비·광고매출</div>
           ${items.length ? `
-            <div class="shopping-product-tabs">${productButtons}</div>
+            <div class="shopping-campaign-list">${campaignButtons}</div>
             <div class="kpis" style="margin-bottom:12px">
-              <div class="metric"><div class="label">선택 상품</div><div class="value shopping-selected-name">${html(selectedName)}</div><div class="sub">선택 광고 일별 추이</div></div>
-              <div class="metric"><div class="label">누적 광고비</div><div class="value">${money(selectedCost)}</div><div class="sub">선택 기간 합계</div></div>
-              <div class="metric"><div class="label">광고매출</div><div class="value">${money(selectedRevenue)}</div><div class="sub">전환매출 합계</div></div>
-              <div class="metric"><div class="label">클릭</div><div class="value">${number(selectedClicks)}</div><div class="sub">CPC ${money(selectedCpc)}</div></div>
-              <div class="metric"><div class="label">ROAS</div><div class="value">${ratio(selectedRoas)}</div><div class="sub">선택 광고</div></div>
+              <div class="metric"><div class="label">선택 광고그룹</div><div id="shoppingSelectedName" class="value shopping-selected-name">${html(selectedItem?.adgroup || selectedName)}</div><div id="shoppingSelectedMeta" class="sub">${html(selectedItem?.campaign || "")} · ${html(selectedName)}</div></div>
+              <div class="metric"><div class="label">누적 광고비</div><div id="shoppingSelectedCost" class="value">${money(selectedCost)}</div><div class="sub">선택 기간 합계</div></div>
+              <div class="metric"><div class="label">광고매출</div><div id="shoppingSelectedRevenue" class="value">${money(selectedRevenue)}</div><div class="sub">전환매출 합계</div></div>
+              <div class="metric"><div class="label">클릭</div><div id="shoppingSelectedClicks" class="value">${number(selectedClicks)}</div><div id="shoppingSelectedCpc" class="sub">CPC ${money(selectedCpc)}</div></div>
+              <div class="metric"><div class="label">ROAS</div><div id="shoppingSelectedRoas" class="value">${ratio(selectedRoas)}</div><div class="sub">선택 광고</div></div>
             </div>
             <div style="height:280px;position:relative"><canvas id="shoppingProductDailyCostChart"></canvas></div>`
             : `<div class="empty" style="padding:24px">상품별 일자 데이터가 없습니다.</div>`}
@@ -1357,7 +1376,43 @@
           options: { responsive: true, maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, plugins: { legend: { display: true, labels: { usePointStyle: true } }, tooltip: { callbacks: { label: context => ` ${context.dataset.label}: ${won.format(context.raw)}` } } }, scales: { x: { grid: { display: false }, ticks: { color: "#64748b" } }, yCost: { position: "left", beginAtZero: true, grid: { color: "#f1f5f9" }, ticks: { color: "#4865f4", callback: value => won.format(value) }, title: { display: true, text: "광고비", color: "#4865f4" } }, yRevenue: { position: "right", beginAtZero: true, grid: { drawOnChartArea: false }, ticks: { color: "#ef7d32", callback: value => won.format(value) }, title: { display: true, text: "광고매출", color: "#ef7d32" } } } }
         });
       }
-    }    function classifyDailyProduct(row) {
+    }
+    function selectShoppingProduct(key) {
+      const dailyCosts = state.data?.dailyProductCosts || {};
+      const items = dailyCosts.items || [];
+      const dates = dailyCosts.dates || [];
+      const productKey = (item, index) => [item.campaign, item.adgroup, item.adProductName, item.productId, index].map(value => String(value ?? "")).join("||");
+      const index = items.findIndex((item, itemIndex) => productKey(item, itemIndex) === key);
+      if (index < 0) return;
+      state.shoppingProduct = key;
+      const item = items[index];
+      const productName = String(item.productName || item.product || item.name || item.title || "상품명 없음");
+      const dailyValues = field => dates.map(date => {
+        const day = (item.daily || []).find(entry => entry.date === date);
+        return Number(day?.[field] || 0);
+      });
+      const dailyCost = dailyValues("cost");
+      const dailyRevenue = dailyValues("revenue");
+      const cost = Number(item.totalCost ?? item.cost ?? dailyCost.reduce((sum, value) => sum + value, 0));
+      const revenue = Number(item.revenue ?? dailyRevenue.reduce((sum, value) => sum + value, 0));
+      const clicks = Number(item.clicks || 0);
+      document.querySelectorAll("[data-shopping-product]").forEach(button => button.classList.toggle("active", button.dataset.shoppingProduct === key));
+      const setText = (id, value) => { const element = document.getElementById(id); if (element) element.textContent = value; };
+      setText("shoppingSelectedName", item.adgroup || item.adProductName || productName);
+      setText("shoppingSelectedMeta", `${item.campaign || "캠페인 미지정"} · ${productName}`);
+      setText("shoppingSelectedCost", money(cost));
+      setText("shoppingSelectedRevenue", money(revenue));
+      setText("shoppingSelectedClicks", number(clicks));
+      setText("shoppingSelectedCpc", `CPC ${money(clicks ? cost / clicks : 0)}`);
+      setText("shoppingSelectedRoas", ratio(cost ? revenue / cost : 0));
+      const chart = window._charts.shoppingProductDailyCost;
+      if (chart) {
+        chart.data.datasets[0].data = dailyCost;
+        chart.data.datasets[1].data = dailyRevenue;
+        chart.update("none");
+      }
+    }
+    function classifyDailyProduct(row) {
       const id=String(row.productId||row.recordId||""), store=String(row.store||""), name=String(row.productName||row.product||"");
       const categories={general:"\uC77C\uBC18 \uD1B5\uD569\uC0C1\uD488",partner:"\uD611\uB825\uC5C5\uCCB4 \uC0C1\uD488",custom:"\uACE0\uAC1D\uBCC4 \uCD94\uAC00\u00B7\uC2E0\uADDC \uC8FC\uBB38",addon:"\uBD80\uAC00\uC0C1\uD488&\uCD94\uAC00\uAE08"};
       const products={premium:"\uD504\uB9AC\uBBF8\uC5C4 \uB2F5\uB840\uD488 \uC138\uD2B8",towel:"\uC218\uAC74 \uB2E8\uD488",honey:"\uBB34\uB77C \uBC8C\uAFC0 \uC138\uD2B8",jogumanTowel:"\uC870\uAD6C\uB9CC \uC218\uAC74 \uB2E8\uD488",jogumanSet:"\uC870\uAD6C\uB9CC \uD578\uB4DC\uC6CC\uC2DC \uC218\uAC74\uC138\uD2B8",invite:"\uBAA8\uBC14\uC77C \uB3CC\uC794\uCE58 \uCD08\uB300\uC7A5"};
@@ -2100,7 +2155,7 @@ function renderBrandContract() {
       const d = e.target.closest("[data-daily-product-date]");
       if (d) { state.dailyProductDate = d.dataset.dailyProductDate; renderDailyProductPerformance(); }
       const shoppingProduct = e.target.closest("[data-shopping-product]");
-      if (shoppingProduct) { state.shoppingProduct = shoppingProduct.dataset.shoppingProduct; renderShoppingIntegrated(); }
+      if (shoppingProduct) { selectShoppingProduct(shoppingProduct.dataset.shoppingProduct); }
       const rd = e.target.closest("[data-rank-date]");
       if (rd) { state.rankDate = rd.dataset.rankDate; document.querySelectorAll("[data-rank-date]").forEach(b=>b.classList.toggle("active",b===rd)); renderRankTraffic(); }
       const rs = e.target.closest("[data-rank-slot]");
