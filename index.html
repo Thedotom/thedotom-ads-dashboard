@@ -489,18 +489,21 @@
     .shopping-product-tabs { display:flex; flex-wrap:wrap; gap:8px; padding:4px 0 12px; overflow:visible; }
     .shopping-product-tabs .pl-chip { flex:1 1 180px; height:auto !important; min-height:34px; padding:6px 12px !important; white-space:normal; line-height:1.3; text-align:center; justify-content:center; }
     .shopping-selected-name { font-size:15px !important; line-height:1.4; white-space:normal !important; overflow-wrap:anywhere; word-break:keep-all; }
-    .shopping-campaign-list { display:grid; gap:12px; padding:4px 0 12px; }
-    .shopping-campaign-group { overflow:hidden; border:1px solid #c7d2fe; border-radius:10px; background:#f8fafc; }
-    .shopping-campaign-head { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 13px; background:#eef2ff; border-bottom:1px solid #c7d2fe; color:#3730a3; font-size:13px; font-weight:900; }
-    .shopping-campaign-count { color:#64748b; font-size:11px; font-weight:700; }
-    .shopping-adgroup-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:8px; padding:10px; }
-    .shopping-adgroup-button { width:100%; height:auto !important; min-height:58px; padding:9px 11px !important; border-radius:8px !important; white-space:normal !important; text-align:left; align-items:flex-start !important; justify-content:center; flex-direction:column; }
-    .shopping-adgroup-name { display:block; width:100%; color:inherit; font-size:12px; font-weight:900; line-height:1.35; overflow-wrap:anywhere; }
-    .shopping-adgroup-product { display:block; width:100%; margin-top:4px; color:#64748b; font-size:11px; font-weight:600; line-height:1.35; overflow-wrap:anywhere; }
+    .shopping-campaign-list { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; padding:2px 0 7px; align-items:start; }
+    .shopping-campaign-group { min-width:0; overflow:hidden; border:1px solid #c7d2fe; border-radius:6px; background:#f8fafc; }
+    .shopping-campaign-head { display:flex; justify-content:space-between; align-items:center; gap:5px; min-width:0; padding:4px 6px; background:#eef2ff; border-bottom:1px solid #c7d2fe; color:#3730a3; font-size:10px; font-weight:900; line-height:1.2; }
+    .shopping-campaign-head > span:first-child { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .shopping-campaign-count { flex:0 0 auto; color:#64748b; font-size:9px; font-weight:700; white-space:nowrap; }
+    .shopping-adgroup-grid { display:grid; grid-template-columns:1fr; gap:3px; padding:4px; }
+    .shopping-adgroup-button { width:100%; height:auto !important; min-height:30px; padding:3px 6px !important; border-radius:5px !important; white-space:normal !important; text-align:left; align-items:flex-start !important; justify-content:center; flex-direction:column; }
+    .shopping-adgroup-name { display:block; width:100%; color:inherit; font-size:10px; font-weight:900; line-height:1.15; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .shopping-adgroup-product { display:block; width:100%; margin-top:1px; color:#64748b; font-size:9px; font-weight:600; line-height:1.15; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .shopping-adgroup-button.active .shopping-adgroup-product { color:rgba(255,255,255,.72); }
+    @media (max-width:1200px) { .shopping-campaign-list { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:760px) {
       .shopping-product-tabs { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:thin; }
       .shopping-product-tabs .pl-chip { flex:0 0 auto; max-width:230px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .shopping-campaign-list { grid-template-columns:1fr; }
     }
     .pl-chart-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:10px; }
     .roas-bar-inline { display:inline-block; height:5px; border-radius:3px; background:linear-gradient(90deg,var(--blue),var(--green)); vertical-align:middle; margin-left:6px; }
