@@ -1,4 +1,4 @@
-import json
+﻿import json
 import shutil
 from datetime import datetime
 from pathlib import Path
@@ -114,6 +114,10 @@ def update_dashboard(path, imported_rows):
             combined_weeks[i] += float(value or 0)
     metrics["autoSalesTotal"] = {"name": "자동 매출 합계", "weeks": combined_weeks, "total": sum(combined_weeks)}
 
+    revenue = data.setdefault("revenueMetrics", {})
+    revenue["dailySales"] = metrics["dailySales"]
+    revenue["dailySalesUpdatedAt"] = metrics["dailySalesUpdatedAt"]
+    revenue["updatedAt"] = metrics["dailySalesUpdatedAt"]
     path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
@@ -142,3 +146,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -1556,7 +1556,7 @@ function renderDailyRevenue() {
   const status = document.getElementById("dailyRevenueStatus");
   if (!body) return;
 
-  const revenue = state.data?.revenueMetrics || state.data?.totalSalesMetrics || {};
+  const revenue = state.data?.totalSalesMetrics || state.data?.revenueMetrics || {};
   const rows = revenue.dailySales || [];
   const month = state.month || state.data?.month || "";
   const monthRows = rows.filter(row => !month || String(row.date || "").startsWith(month));
@@ -2183,6 +2183,7 @@ function renderBrandContract() {
   </script>
 </body>
 </html>
+
 
 
 
