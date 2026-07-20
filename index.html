@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -655,7 +655,7 @@
         </div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>캠페인</th><th>광고그룹</th><th>상품/소재</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
+            <thead><tr><th>캠페인</th><th>광고그룹</th><th>상품/소재</th><th>현재 입찰가</th><th>입찰 변동</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
             <tbody id="shoppingBody"></tbody>
           </table>
         </div>
@@ -1095,6 +1095,15 @@
       const isCore = row["광고유형"] === "파워링크" && ["답례품", "돌답례품", "돌잔치답례품"].includes(keyword);
       return isCore ? "미확인" : "-";
     }
+    function bidChangeHtml(row) {
+      const status = String(row["입찰변동"] || "미수집");
+      const current = Number(row["현재입찰가"] || 0);
+      const previous = row["이전입찰가"] == null ? null : Number(row["이전입찰가"] || 0);
+      const delta = row["입찰변동액"] == null ? null : Number(row["입찰변동액"] || 0);
+      const cls = status === "인상" ? "bad" : status === "인하" ? "good" : "warn";
+      const detail = previous == null ? "최초 기준" : `${money(previous)} → ${money(current)}${delta ? ` (${delta > 0 ? "+" : ""}${money(delta)})` : ""}`;
+      return `<span class="pill ${cls}">${html(status)}</span><div style="font-size:10px;color:var(--muted);margin-top:3px;white-space:nowrap">${detail}</div>`;
+    }
     function destroyPlChart(name) { if (window._charts[name]) { window._charts[name].destroy(); window._charts[name] = null; } }
     function renderPlCharts(rows) {
       // 판단 분포 도넛
@@ -1194,6 +1203,8 @@
           <td style="font-weight:700">${html(row["키워드"]||row["상품명"])}</td>
           <td>${html(row["검색기기"]||"")}</td>
           <td>${actualRankText(row)}</td>
+          <td><strong>${money(row["현재입찰가"] || 0)}</strong><div style="font-size:10px;color:var(--muted)">${html(row["입찰단위"] || "")}</div></td>
+          <td>${bidChangeHtml(row)}</td>
           <td>${number(row["노출수"])}</td>
           <td>${number(row["클릭수"])}</td>
           <td>${money(row["총비용"])}</td>
@@ -1209,7 +1220,7 @@
         return `<section class="pl-keyword-group">
           <div class="pl-keyword-group-head"><strong>${html(groupName)}</strong><span>키워드 ${number(groupRows.length)}개</span></div>
           <div class="table-wrap"><table>
-            <thead><tr><th>광고그룹 / 캠페인</th><th>키워드</th><th>기기</th><th>순위</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
+            <thead><tr><th>광고그룹 / 캠페인</th><th>키워드</th><th>기기</th><th>순위</th><th>현재 입찰가</th><th>입찰 변동</th><th>노출</th><th>클릭</th><th>비용</th><th>CPC</th><th>전환</th><th>CPA</th><th>ROAS</th><th>판단</th><th>권장조치</th></tr></thead>
             <tbody>${body}</tbody>
           </table></div>
         </section>`;
@@ -1254,7 +1265,7 @@
       document.querySelectorAll("[data-shopping-mode]").forEach(btn => btn.classList.toggle("active", btn.dataset.shoppingMode === state.shoppingMode));
       els.shoppingCount.textContent = `${rows.length}개 상품/소재`;
       if (!rows.length) {
-        els.shoppingBody.innerHTML = `<tr><td class="empty" colspan="12">선택한 판단 카테고리에 해당하는 쇼핑검색 데이터가 없습니다.</td></tr>`;
+        els.shoppingBody.innerHTML = `<tr><td class="empty" colspan="14">선택한 판단 카테고리에 해당하는 쇼핑검색 데이터가 없습니다.</td></tr>`;
         return;
       }
       const order = ["noConversion", "lowRoas", "highCpc", "scale", "maintain"];
@@ -1262,13 +1273,15 @@
       els.shoppingBody.innerHTML = groups.map(group => {
         const assessment = shoppingAssessment(group.rows[0]);
         const groupCost = group.rows.reduce((sum, row) => sum + Number(row["총비용"] || 0), 0);
-        const head = `<tr class="total-row"><td colspan="12"><strong>${html(assessment.label)}</strong> · ${number(group.rows.length)}개 · 광고비 ${money(groupCost)}</td></tr>`;
+        const head = `<tr class="total-row"><td colspan="14"><strong>${html(assessment.label)}</strong> · ${number(group.rows.length)}개 · 광고비 ${money(groupCost)}</td></tr>`;
         const body = group.rows.sort((a, b) => Number(b["총비용"] || 0) - Number(a["총비용"] || 0)).map(row => {
           const item = shoppingAssessment(row);
           return `<tr>
             <td>${html(row["캠페인명"])}</td>
             <td>${html(row["광고그룹명"])}</td>
             <td>${html(row["상품명"] || row["광고그룹명"])}</td>
+            <td><strong>${money(row["현재입찰가"] || 0)}</strong><div style="font-size:10px;color:var(--muted)">${html(row["입찰단위"] || "")}</div></td>
+            <td>${bidChangeHtml(row)}</td>
             <td>${number(row["노출수"])}</td>
             <td>${number(row["클릭수"])}</td>
             <td>${money(row["총비용"])}</td>
