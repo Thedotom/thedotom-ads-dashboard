@@ -1,10 +1,11 @@
 $ErrorActionPreference = "Stop"
 
 $repo = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
+$reportRoot = Split-Path -Parent $repo
 $python = "C:\Users\user\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
 $fetcher = "C:\Users\user\Documents\New project 4\scripts\fetch_naver_ads_raw.py"
-$rawDir = "D:\광고보고서\raw"
-$logDir = "D:\광고보고서\logs"
+$rawDir = Join-Path $reportRoot "raw"
+$logDir = Join-Path $reportRoot "logs"
 $today = Get-Date
 $until = $today.AddDays(-1).ToString("yyyy-MM-dd")
 $month = $today.ToString("yyyy-MM")
