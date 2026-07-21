@@ -17,7 +17,7 @@ DATA_DIRS = [
     Path(r"C:\Users\user\Documents\New project 4\public_dashboard\data"),
 ]
 TARGET_FILES = ["monthly-dashboard-2026-07.json", "monthly-dashboard-latest.json"]
-date_match = re.search(r"sales_(\d{4})(\d{2})(\d{2})-", SOURCE.name)
+date_match = re.search(r"(?:sales_)?(\d{4})-?(\d{2})-?(\d{2})(?:-|_|\.)", SOURCE.name)
 if not date_match:
     raise ValueError(f"Cannot determine date from source filename: {SOURCE.name}")
 DATE = "-".join(date_match.groups())
@@ -158,4 +158,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
 

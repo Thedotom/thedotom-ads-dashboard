@@ -1,4 +1,4 @@
-import json
+﻿import json
 import re
 import shutil
 import sys
@@ -13,7 +13,7 @@ REPORT_ROOT = Path(r"D:\광고보고서")
 ARCHIVE_DIR = REPORT_ROOT / "data" / "smartstore_product_performance"
 DATA_DIRS = [REPORT_ROOT / "public_dashboard" / "data", Path(r"C:\Users\user\Documents\New project 4\public_dashboard\data")]
 TARGET_FILES = ["monthly-dashboard-2026-07.json", "monthly-dashboard-latest.json"]
-match = re.search(r"sales_(\d{4})(\d{2})(\d{2})-", SOURCE.name)
+match = re.search(r"(?:sales_)?(\d{4})-?(\d{2})-?(\d{2})(?:-|_|\.)", SOURCE.name)
 if not match:
     raise ValueError(f"Cannot determine date from {SOURCE.name}")
 DATE = "-".join(match.groups())
@@ -52,8 +52,6 @@ def read_rows():
             "grossSales": number(raw[col["판매금액(총)"]]), "quantity": number(raw[col["결제상품수량"]]),
             "refundQuantity": number(raw[col["환불상품수량"]]), "refundOrders": number(raw[col["환불건수"]]),
         })
-    if not rows:
-        raise ValueError("No product rows found")
     return rows
 
 
@@ -106,3 +104,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
