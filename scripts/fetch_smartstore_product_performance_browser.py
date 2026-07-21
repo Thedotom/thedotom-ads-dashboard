@@ -158,15 +158,17 @@ def download_file(driver, store_key, target):
     DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
     before = {path.name for path in DOWNLOAD_DIR.glob("*.xlsx")}
     button = wait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(normalize-space(), '엑셀 만들기') or contains(normalize-space(), '파일 다운로드')]")))
+    initial_label = button.text.strip()
     driver.execute_script("arguments[0].click()", button)
-    time.sleep(2)
-    for label in ("파일 다운로드", "엑셀 다운로드", "다운로드"):
-        try:
-            click_text(driver, label, timeout=5)
-            break
-        except TimeoutException:
-            continue
-    deadline = time.time() + 90
+    if "엑셀 만들기" in initial_label:
+        time.sleep(3)
+        for label in ("파일 다운로드", "엑셀 다운로드", "다운로드"):
+            try:
+                click_text(driver, label, timeout=10)
+                break
+            except TimeoutException:
+                continue
+    deadline = time.time() + 180
     downloaded = None
     while time.time() < deadline:
         candidates = [
@@ -235,6 +237,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 

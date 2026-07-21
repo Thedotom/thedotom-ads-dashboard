@@ -12,11 +12,11 @@ SOURCE = Path(sys.argv[1])
 REPORT_ROOT = Path(r"D:\광고보고서")
 ARCHIVE_DIR = REPORT_ROOT / "data" / "smartstore_product_performance"
 DATA_DIRS = [REPORT_ROOT / "public_dashboard" / "data", Path(r"C:\Users\user\Documents\New project 4\public_dashboard\data")]
-TARGET_FILES = ["monthly-dashboard-2026-07.json", "monthly-dashboard-latest.json"]
 match = re.search(r"(?:sales_)?(\d{4})-?(\d{2})-?(\d{2})(?:-|_|\.)", SOURCE.name)
 if not match:
     raise ValueError(f"Cannot determine date from {SOURCE.name}")
 DATE = "-".join(match.groups())
+TARGET_FILES = [f"monthly-dashboard-{DATE[:7]}.json", "monthly-dashboard-latest.json"]
 STORE = "mura"
 STORE_NAME = "스마트스토어(무라)"
 
@@ -104,6 +104,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 

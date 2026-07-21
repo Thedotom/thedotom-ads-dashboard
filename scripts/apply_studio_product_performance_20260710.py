@@ -16,11 +16,11 @@ DATA_DIRS = [
     REPORT_ROOT / "public_dashboard" / "data",
     Path(r"C:\Users\user\Documents\New project 4\public_dashboard\data"),
 ]
-TARGET_FILES = ["monthly-dashboard-2026-07.json", "monthly-dashboard-latest.json"]
 date_match = re.search(r"(?:sales_)?(\d{4})-?(\d{2})-?(\d{2})(?:-|_|\.)", SOURCE.name)
 if not date_match:
     raise ValueError(f"Cannot determine date from source filename: {SOURCE.name}")
 DATE = "-".join(date_match.groups())
+TARGET_FILES = [f"monthly-dashboard-{DATE[:7]}.json", "monthly-dashboard-latest.json"]
 STORE = "thedotom"
 STORE_NAME = "스마트스토어(더도톰스튜디오)"
 
@@ -158,6 +158,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
