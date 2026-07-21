@@ -126,18 +126,28 @@ def select_date(driver, target):
         click_text(driver, "1일", timeout=20)
     else:
         click_text(driver, "직접 선택", timeout=20)
-        inputs = wait(driver, 20).until(
-            lambda d: d.find_elements(By.CSS_SELECTOR, "input.date-picker-input")
-        )
+        inputs = wait(driver, 20).until(lambda d: d.find_elements(By.CSS_SELECTOR, "input.date-picker-input"))
         if len(inputs) < 2:
             raise RuntimeError("date inputs not found")
-        value = target.strftime("%Y.%m.%d")
-        for element in inputs[:2]:
-            driver.execute_script("const e=arguments[0],v=arguments[1]; const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set; s.call(e,v); e.dispatchEvent(new Event('input',{bubbles:true})); e.dispatchEvent(new Event('change',{bubbles:true}));", element, value)
+        for index in (0, 1):
+            inputs = driver.find_elements(By.CSS_SELECTOR, "input.date-picker-input")
+            current = datetime.strptime(inputs[index].get_attribute("value").replace("(자동)", ""), "%Y.%m.%d").date()
+            driver.execute_script("arguments[0].click()", inputs[index])
+            wait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".react-datepicker")))
+            delta = (target.year - current.year) * 12 + target.month - current.month
+            selector = "[data-testid='DatePickerHeader__btnNextMonth']" if delta > 0 else "[data-testid='DatePickerHeader__btnPrevMonth']"
+            for _ in range(abs(delta)):
+                driver.execute_script("arguments[0].click()", driver.find_element(By.CSS_SELECTOR, selector))
+                time.sleep(0.15)
+            aria_prefix = f"Choose {target.year}년 {target.month}월 {target.day}일"
+            day = wait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, f"//div[contains(@class,'react-datepicker__day') and starts-with(@aria-label, '{aria_prefix}')]") )
+            )
+            driver.execute_script("arguments[0].click()", day)
+            time.sleep(0.5)
     click_text(driver, "조회", timeout=20)
     wait(driver, 40).until(lambda d: (target.strftime("%Y-%m-%d") in d.page_source
                                      or target.strftime("%Y.%m.%d") in d.page_source))
-
 
 def select_product_dimension(driver):
     click_text(driver, "상품", timeout=20)
@@ -225,6 +235,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
