@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -29,6 +30,7 @@ def item_key(item):
 def main():
     spec = importlib.util.spec_from_file_location("naver_fetch", FETCHER)
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     account = module.load_accounts(module.DEFAULT_CONFIG)[0]
     campaigns = module.ensure_list(module.api_request(account, "GET", "/ncc/campaigns"))
