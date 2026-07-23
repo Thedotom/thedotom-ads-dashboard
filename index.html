@@ -526,7 +526,9 @@
     .pl-config-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 9px; border-radius:8px; background:#f8fafc; font-size:11px; }
     .pl-config-item-type { color:var(--muted); font-size:10px; }
     .pl-config-source { margin:-6px 0 12px; color:var(--muted); font-size:11px; }
-    .pl-config-group { margin-top:10px; border:1px solid var(--line); border-radius:11px; background:#fff; overflow:hidden; }
+    .pl-config-campaign-title { margin:18px 0 8px; padding:0 2px; color:#1e3a8a; font-size:13px; font-weight:900; }
+    .pl-config-campaign-title:first-child { margin-top:0; }
+    .pl-config-group { margin-top:8px; border:1px solid var(--line); border-radius:11px; background:#fff; overflow:hidden; }
     .pl-config-group > summary { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 14px; cursor:pointer; list-style:none; }
     .pl-config-group > summary::-webkit-details-marker { display:none; }
     .pl-config-group[open] > summary { border-bottom:1px solid var(--line); background:#f8fafc; }
@@ -1209,17 +1211,17 @@
       if (!root) return;
       const config = state.powerlinkCreativeConfig || {};
       const allGroups = config.groups || [];
-      const campaignFilter = els.campaignFilter?.value || "";
-      const adgroupFilter = els.adgroupFilter?.value || "";
-      const groups = allGroups.filter(group =>
-        (!campaignFilter || group.campaign === campaignFilter) &&
-        (!adgroupFilter || group.adgroup === adgroupFilter)
-      );
+      const groups = allGroups;
       if (!allGroups.length) {
         root.innerHTML = "";
         return;
       }
+      let previousCampaign = "";
       const groupCards = groups.map(group => {
+        const campaignHeading = group.campaign !== previousCampaign
+          ? `<h4 class="pl-config-campaign-title">${html(group.campaign || "캠페인 미지정")}</h4>`
+          : "";
+        previousCampaign = group.campaign;
         const keywordChips = (group.keywords || []).map(item =>
           `<span class="pl-keyword-chip" title="입찰가 ${money(item.bidAmount || 0)} · ${html(item.status || "")}">${html(item.keyword || "")}</span>`
         ).join("");
@@ -1237,7 +1239,7 @@
               <span class="slot-decision ${extension.status === "운영 가능" ? "good" : "caution"}">${html(extension.status || "")}</span>
             </div>`)
         ).join("") || `<div class="empty">등록된 확장소재가 없습니다.</div>`;
-        return `<details class="pl-config-group" ${groups.length === 1 ? "open" : ""}>
+        return `${campaignHeading}<details class="pl-config-group">
           <summary>
             <div><strong>${html(group.adgroup || "")}</strong><div class="pl-config-path">${html(group.campaign || "")} · ${html(group.device || "")}</div></div>
             <div class="pl-config-counts">
@@ -1258,10 +1260,10 @@
       root.innerHTML = `<section class="pl-config-wrap">
         <div class="pl-config-head">
           <div><h3>파워링크 광고 구성</h3><div class="pl-config-path">카페24 자사몰 연결 · 캠페인/광고그룹별 API 등록 현황</div></div>
-          <div class="pl-config-counts"><span class="pl-config-badge">전체 광고그룹 ${number(allGroups.length)}개</span><span class="pl-config-badge">현재 표시 ${number(groups.length)}개</span></div>
+          <div class="pl-config-counts"><span class="pl-config-badge">캠페인 ${number(new Set(allGroups.map(group => group.campaign)).size)}개</span><span class="pl-config-badge">광고그룹 ${number(allGroups.length)}개 전체 표시</span></div>
         </div>
-        <div class="pl-config-source">${html(config.source || "")} · ${html(config.updatedAt || "")} 기준 · 상단 캠페인/광고그룹 필터와 연동</div>
-        ${groupCards || '<div class="empty">선택한 필터와 일치하는 광고 구성이 없습니다.</div>'}
+        <div class="pl-config-source">${html(config.source || "")} · ${html(config.updatedAt || "")} 기준 · 성과 필터와 별도로 전체 광고 구성을 표시합니다.</div>
+        ${groupCards}
       </section>`;
     }
 
