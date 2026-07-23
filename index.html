@@ -507,6 +507,22 @@
     }
     .pl-chart-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:10px; }
     .roas-bar-inline { display:inline-block; height:5px; border-radius:3px; background:linear-gradient(90deg,var(--blue),var(--green)); vertical-align:middle; margin-left:6px; }
+    .slot-summary-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-bottom:14px; }
+    .slot-product-card { padding:16px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:var(--shadow); }
+    .slot-product-card h3 { margin:0 0 4px; font-size:15px; }
+    .slot-product-meta { color:var(--muted); font-size:11px; margin-bottom:12px; }
+    .slot-product-stats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+    .slot-product-stat { padding:9px 10px; border-radius:8px; background:#f8fafc; }
+    .slot-product-stat span { display:block; color:var(--muted); font-size:10px; margin-bottom:3px; }
+    .slot-product-stat strong { display:block; font-size:14px; }
+    .slot-decision { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:11px; font-weight:800; white-space:nowrap; }
+    .slot-decision.good { background:#dcfce7; color:#166534; }
+    .slot-decision.defense { background:#dbeafe; color:#1d4ed8; }
+    .slot-decision.caution { background:#fef3c7; color:#92400e; }
+    .slot-decision.bad { background:#fee2e2; color:#991b1b; }
+    .slot-decision.active { background:#ede9fe; color:#6d28d9; }
+    .slot-note { margin:0 0 14px; padding:12px 14px; border-radius:10px; border:1px solid #fde68a; background:#fffbeb; color:#854d0e; font-size:12px; line-height:1.55; }
+    @media (max-width:980px) { .slot-summary-grid { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -534,6 +550,7 @@
           <button type="button" data-page="dailyProductSmartstore">더도톰스튜디오</button>
           <button type="button" data-page="dailyProductMura">무라</button>
         </div>
+        <button type="button" data-page="slotEfficiency">슬롯 효율</button>
         <button type="button" data-revenue-root>매출·손익 분석</button>
         <div class="sub-nav-group" data-revenue-subnav>
           <button type="button" data-page="totalSales">월별 매출·광고비</button>
@@ -677,6 +694,10 @@
         <div class="section-head"><h2>일일 제품 성과</h2><span id="dailyProductStatus" class="count"></span></div>
         <div class="memo-body" id="dailyProductBody"></div>
       </section>
+      <section class="page-section" data-page="slotEfficiency">
+        <div class="section-head"><h2>슬롯 효율 분석</h2><span id="slotEfficiencyStatus" class="count"></span></div>
+        <div class="memo-body" id="slotEfficiencyBody"></div>
+      </section>
       <section class="page-section" data-page="dailyRevenue"><div class="section-head"><h2>일일 매출</h2><span id="dailyRevenueStatus" class="count"></span></div><div class="memo-body" id="dailyRevenueBody"></div></section>
 <section class="page-section" data-page="totalSales">
         <div class="section-head"><h2>월별 매출·광고비</h2><span id="totalSalesStatus" class="count"></span></div>
@@ -745,6 +766,8 @@
       rankBody: document.getElementById("rankBody"),
       dailyProductStatus: document.getElementById("dailyProductStatus"),
       dailyProductBody: document.getElementById("dailyProductBody"),
+      slotEfficiencyStatus: document.getElementById("slotEfficiencyStatus"),
+      slotEfficiencyBody: document.getElementById("slotEfficiencyBody"),
       totalSalesStatus: document.getElementById("totalSalesStatus"),
       totalSalesBody: document.getElementById("totalSalesBody"),
       inspectionBody: document.getElementById("inspectionBody"),
@@ -940,6 +963,10 @@
         rankShopping: "쇼핑검색 순위 트래픽",
         rankPowerlink: "파워링크 순위 트래픽",
         dailyProduct: "일일 제품 성과",
+        dailyProductCafe24: "자사몰 일일 제품 성과",
+        dailyProductSmartstore: "더도톰스튜디오 일일 제품 성과",
+        dailyProductMura: "무라 일일 제품 성과",
+        slotEfficiency: "슬롯 효율 분석",
         totalSales: "월별 매출·광고비",
         dailyRevenue: "일일 매출",
         monthlyReport: "월보고서"
@@ -1020,6 +1047,7 @@
       renderBrandContract();
       renderRankTraffic();
       renderDailyProductPerformance();
+      renderSlotEfficiency();
       renderDailyRevenue();
   renderTotalSalesMetrics();
       renderInspection();
@@ -1531,6 +1559,97 @@
         </div>
         `;
     }
+    function renderSlotEfficiency() {
+      const analysis = state.data.slotEfficiency || {};
+      const summary = analysis.summary || {};
+      const products = analysis.products || [];
+      const periods = analysis.periods || [];
+      if (!els.slotEfficiencyBody) return;
+      if (!periods.length) {
+        els.slotEfficiencyStatus.textContent = "데이터 없음";
+        els.slotEfficiencyBody.innerHTML = `<div class="empty">슬롯 효율 데이터가 없습니다.</div>`;
+        return;
+      }
+      els.slotEfficiencyStatus.textContent = `완료 ${number(summary.completedCount || 0)}개 · 관찰중 ${number(summary.activeCount || 0)}개`;
+      const decisionClass = decision => ({
+        "효율 우수": "good",
+        "순위 방어": "defense",
+        "매출 개선·비용 주의": "caution",
+        "재검토": "bad",
+        "관찰중": "active"
+      })[decision] || "active";
+      const signedMoney = value => `${Number(value || 0) >= 0 ? "+" : "-"}${money(Math.abs(Number(value || 0)))}`;
+      const signedRate = value => value == null ? "-" : `${Number(value) >= 0 ? "+" : ""}${rateText(value)}`;
+      const productCards = products.map(product => `
+        <article class="slot-product-card">
+          <h3>${html(product.product || "")}</h3>
+          <div class="slot-product-meta">상품번호 ${html(product.productId || "")} · 완료 슬롯 ${number(product.periodCount || 0)}회</div>
+          <div class="slot-product-stats">
+            <div class="slot-product-stat"><span>슬롯비</span><strong>${money(product.slotCost || 0)}</strong></div>
+            <div class="slot-product-stat"><span>기간 매출</span><strong>${money(product.sales || 0)}</strong></div>
+            <div class="slot-product-stat"><span>증분매출</span><strong style="color:${Number(product.incrementalSales || 0) >= 0 ? "var(--green)" : "var(--red)"}">${signedMoney(product.incrementalSales || 0)}</strong></div>
+            <div class="slot-product-stat"><span>슬롯비율</span><strong>${rateText(product.slotCostRate || 0)}</strong></div>
+            <div class="slot-product-stat"><span>평균 순위</span><strong>${product.rankAverage == null ? "-" : `${Number(product.rankAverage).toFixed(1)}위`}</strong></div>
+            <div class="slot-product-stat"><span>최고 순위</span><strong>${product.bestRank == null ? "-" : `${number(product.bestRank)}위`}</strong></div>
+          </div>
+        </article>`).join("");
+      const rows = periods.map(period => `
+        <tr>
+          <td class="wrap"><strong>${html(period.product || "")}</strong><br><span style="font-size:11px;color:var(--muted)">${html(period.keyword || "")}</span></td>
+          <td class="wrap">${html(period.startDate || "")}<br>~ ${html(period.endDate || "")}</td>
+          <td>${money(period.slotCost || 0)}</td>
+          <td>${money(period.prior?.sales || 0)}</td>
+          <td>${money(period.during?.sales || 0)}</td>
+          <td style="color:${Number(period.incrementalSales || 0) >= 0 ? "var(--green)" : "var(--red)"}"><strong>${signedMoney(period.incrementalSales || 0)}</strong><br><span style="font-size:11px">${signedRate(period.salesChangeRate)}</span></td>
+          <td>${number(period.during?.orders || 0)}</td>
+          <td>${period.slotCostRate == null ? "-" : rateText(period.slotCostRate)}</td>
+          <td>${period.blendedSalesRoas == null ? "-" : roasText(period.blendedSalesRoas)}</td>
+          <td>${period.rankAverage == null ? "-" : `${Number(period.rankAverage).toFixed(1)}위`}<br><span style="font-size:11px;color:var(--muted)">최고 ${period.rankBest == null ? "-" : `${number(period.rankBest)}위`}</span></td>
+          <td><span class="slot-decision ${decisionClass(period.decision)}">${html(period.decision || "")}</span>${period.isComplete ? "" : `<br><span style="font-size:10px;color:var(--muted)">${number(period.during?.daysWithData || 0)}/${number(period.days || 0)}일 집계</span>`}</td>
+        </tr>`).join("");
+      els.slotEfficiencyBody.innerHTML = `
+        <div class="kpis" style="margin-bottom:14px">
+          <div class="metric"><div class="label">완료 슬롯비</div><div class="value">${money(summary.totalSlotCost || 0)}</div><div class="sub">${number(summary.completedCount || 0)}개 완료 구간</div></div>
+          <div class="metric"><div class="label">슬롯 기간 매출</div><div class="value">${money(summary.totalSales || 0)}</div><div class="sub">완료 구간 합계</div></div>
+          <div class="metric"><div class="label">직전 대비 증분매출</div><div class="value" style="color:${Number(summary.incrementalSales || 0) >= 0 ? "var(--green)" : "var(--red)"}">${signedMoney(summary.incrementalSales || 0)}</div><div class="sub">동일 일수 직전 기간 비교</div></div>
+          <div class="metric"><div class="label">슬롯비율</div><div class="value">${rateText(summary.slotCostRate || 0)}</div><div class="sub">슬롯비 / 기간 매출</div></div>
+          <div class="metric"><div class="label">통합 매출 효율</div><div class="value">${roasText(summary.blendedSalesRoas || 0)}</div><div class="sub">매출 / (광고비+슬롯비)</div></div>
+          <div class="metric"><div class="label">평균 검색 순위</div><div class="value">${summary.rankAverage == null ? "-" : `${Number(summary.rankAverage).toFixed(1)}위`}</div><div class="sub">순위 표본이 있는 완료 구간</div></div>
+        </div>
+        <p class="slot-note">증분매출은 슬롯 시작 직전의 동일 일수와 비교한 운영 참고값입니다. 계절성·요일·프로모션 효과가 포함될 수 있으므로 순위와 슬롯비율을 함께 판단하세요. 부분 집계 구간은 완료 합계와 자동 판정에서 제외됩니다.</p>
+        <div class="slot-summary-grid">${productCards}</div>
+        <div class="pl-chart-panel" style="margin-bottom:14px">
+          <div class="pl-chart-title">완료 슬롯별 직전 기간 매출 vs 슬롯 기간 매출</div>
+          <div style="height:300px;position:relative"><canvas id="slotEfficiencyChart"></canvas></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>제품·키워드</th><th>슬롯 기간</th><th>슬롯비</th><th>직전 매출</th><th>기간 매출</th><th>증분매출</th><th>주문</th><th>슬롯비율</th><th>통합 효율</th><th>검색 순위</th><th>판정</th></tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>`;
+      if (window._charts.slotEfficiency) window._charts.slotEfficiency.destroy();
+      const completePeriods = periods.filter(period => period.isComplete);
+      const canvas = document.getElementById("slotEfficiencyChart");
+      if (canvas) {
+        window._charts.slotEfficiency = new Chart(canvas, {
+          type: "bar",
+          data: {
+            labels: completePeriods.map(period => `${period.product} ${String(period.startDate).slice(5)}`),
+            datasets: [
+              { label: "직전 동일기간 매출", data: completePeriods.map(period => Number(period.prior?.sales || 0)), backgroundColor: "rgba(148,163,184,.35)", borderColor: "#94a3b8", borderWidth: 1, borderRadius: 5 },
+              { label: "슬롯 기간 매출", data: completePeriods.map(period => Number(period.during?.sales || 0)), backgroundColor: "rgba(72,101,244,.25)", borderColor: "#4865f4", borderWidth: 2, borderRadius: 5 }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: "bottom" }, tooltip: { callbacks: { label: context => ` ${context.dataset.label}: ${won.format(context.raw)}` } } },
+            scales: { x: { grid: { display: false }, ticks: { color: "#64748b", maxRotation: 45, minRotation: 25 } }, y: { beginAtZero: true, grid: { color: "#f1f5f9" }, ticks: { color: "#64748b", callback: value => won.format(value) } } }
+          }
+        });
+      }
+    }
+
     function normalizedManualRows(rows, defaults) {
       const map = new Map((rows || []).map(row => [row.name, [...(row.weeks || []), 0, 0, 0, 0, 0].slice(0, 5)]));
       defaults.forEach(name => {
