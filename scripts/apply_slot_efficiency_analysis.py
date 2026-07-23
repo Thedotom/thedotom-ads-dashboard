@@ -98,16 +98,14 @@ def load_source(path: Path) -> tuple[list[dict], dict]:
         average_rank = sum(rank_values) / len(rank_values) if rank_values else None
         if not complete:
             decision = "관찰중"
-        elif sales_change_rate is not None and sales_change_rate >= 0.1 and (
-            slot_cost_rate is None or slot_cost_rate <= 0.15
+        elif average_rank is not None and average_rank <= 5 and (
+            slot_cost_rate is None or slot_cost_rate <= 0.05
         ):
-            decision = "효율 우수"
-        elif sales_change_rate is not None and sales_change_rate >= 0 and (
-            slot_cost_rate is not None and slot_cost_rate > 0.15
-        ):
-            decision = "매출 개선·비용 주의"
-        elif average_rank is not None and average_rank <= 5 and incremental_sales < 0:
-            decision = "순위 방어"
+            decision = "효율 양호"
+        elif average_rank is not None and average_rank <= 5:
+            decision = "순위 유지"
+        elif slot_cost_rate is not None and slot_cost_rate > 0.15:
+            decision = "비용 주의"
         else:
             decision = "재검토"
         periods.append(
@@ -119,17 +117,17 @@ def load_source(path: Path) -> tuple[list[dict], dict]:
                 "vendor": str(vendor or ""),
                 "startDate": str(start),
                 "endDate": str(end),
-                "priorStartDate": str(prior_start),
-                "priorEndDate": str(prior_end),
+                "comparisonStatus": "pending_2025_data",
+                "comparisonBasis": "전년 동기간 매출",
                 "days": days,
                 "sourceStatus": str(source_status or ""),
                 "isComplete": complete,
                 "slotCost": cost,
-                "prior": prior,
+                "yearOverYearSales": None,
                 "during": during,
-                "incrementalSales": round(incremental_sales),
-                "salesChangeRate": sales_change_rate,
-                "incrementalRoas": incremental_sales / cost if cost else None,
+                "incrementalSales": None,
+                "salesChangeRate": None,
+                "incrementalRoas": None,
                 "slotCostRate": slot_cost_rate,
                 "blendedMarketingCost": round(blended_cost),
                 "blendedSalesRoas": blended_roas,
@@ -148,8 +146,8 @@ def load_source(path: Path) -> tuple[list[dict], dict]:
         "activeCount": len(periods) - len(completed),
         "totalSlotCost": sum(period["slotCost"] for period in completed),
         "totalSales": sum(period["during"]["sales"] for period in completed),
-        "totalPriorSales": sum(period["prior"]["sales"] for period in completed),
-        "incrementalSales": sum(period["incrementalSales"] for period in completed),
+        "totalPriorSales": None,
+        "incrementalSales": None,
         "totalAdCost": sum(period["during"]["adCost"] for period in completed),
     }
     summary["slotCostRate"] = (
@@ -172,7 +170,7 @@ def load_source(path: Path) -> tuple[list[dict], dict]:
         if not rows:
             continue
         sales = sum(row["during"]["sales"] for row in rows)
-        incremental = sum(row["incrementalSales"] for row in rows)
+        incremental = None
         product_ranks = [
             row["rankAverage"] for row in rows if row["rankAverage"] is not None
         ]
@@ -201,7 +199,8 @@ def load_source(path: Path) -> tuple[list[dict], dict]:
     return periods, {
         "source": path.name,
         "sourceUrl": "https://docs.google.com/spreadsheets/d/1JEW2j1kRDo5P0sIEJQxXlGgk9Ao3NaHc_6B9eMhBAxM/edit",
-        "calculationBasis": "슬롯 기간과 직전 동일 일수의 제품 매출·주문·광고비 비교",
+        "calculationBasis": "슬롯 운영 기간의 매출·주문·광고비·검색 순위 집계",
+        "comparisonStatus": "2025년 전년 동기간 매출 데이터 적재 대기",
         "updatedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "summary": summary,
         "products": products,

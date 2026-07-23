@@ -1573,7 +1573,6 @@
       const sum = (rows, getter) => rows.reduce((total, row) => total + Number(getter(row) || 0), 0);
       const totalSlotCost = sum(completedPeriods, period => period.slotCost);
       const totalSales = sum(completedPeriods, period => period.during?.sales);
-      const totalPriorSales = sum(completedPeriods, period => period.prior?.sales);
       const totalAdCost = sum(completedPeriods, period => period.during?.adCost);
       const rankedPeriods = completedPeriods.filter(period => period.rankAverage != null);
       const summary = {
@@ -1581,8 +1580,8 @@
         activeCount: periods.length - completedPeriods.length,
         totalSlotCost,
         totalSales,
-        totalPriorSales,
-        incrementalSales: totalSales - totalPriorSales,
+        yearOverYearSales: null,
+        incrementalSales: null,
         slotCostRate: totalSales ? totalSlotCost / totalSales : 0,
         blendedSalesRoas: totalSales && (totalSlotCost + totalAdCost) ? totalSales / (totalSlotCost + totalAdCost) : 0,
         rankAverage: rankedPeriods.length ? sum(rankedPeriods, period => period.rankAverage) / rankedPeriods.length : null
@@ -1590,27 +1589,27 @@
       const productMap = new Map();
       completedPeriods.forEach(period => {
         const key = period.product || period.productId || "기타";
-        if (!productMap.has(key)) productMap.set(key, { product: period.product, productId: period.productId, periodCount: 0, slotCost: 0, sales: 0, priorSales: 0, ranks: [], bestRanks: [] });
+        if (!productMap.has(key)) productMap.set(key, { product: period.product, productId: period.productId, periodCount: 0, slotCost: 0, sales: 0, ranks: [], bestRanks: [] });
         const product = productMap.get(key);
         product.periodCount += 1;
         product.slotCost += Number(period.slotCost || 0);
         product.sales += Number(period.during?.sales || 0);
-        product.priorSales += Number(period.prior?.sales || 0);
         if (period.rankAverage != null) product.ranks.push(Number(period.rankAverage));
         if (period.rankBest != null) product.bestRanks.push(Number(period.rankBest));
       });
       const products = [...productMap.values()].map(product => ({
         ...product,
-        incrementalSales: product.sales - product.priorSales,
+        yearOverYearSales: null,
+        incrementalSales: null,
         slotCostRate: product.sales ? product.slotCost / product.sales : 0,
         rankAverage: product.ranks.length ? product.ranks.reduce((a, b) => a + b, 0) / product.ranks.length : null,
         bestRank: product.bestRanks.length ? Math.min(...product.bestRanks) : null
       }));
       els.slotEfficiencyStatus.textContent = `${state.month} · 완료 ${number(summary.completedCount || 0)}개 · 관찰중 ${number(summary.activeCount || 0)}개`;
       const decisionClass = decision => ({
-        "효율 우수": "good",
-        "순위 방어": "defense",
-        "매출 개선·비용 주의": "caution",
+        "효율 양호": "good",
+        "순위 유지": "defense",
+        "비용 주의": "caution",
         "재검토": "bad",
         "관찰중": "active"
       })[decision] || "active";
@@ -1623,7 +1622,7 @@
           <div class="slot-product-stats">
             <div class="slot-product-stat"><span>슬롯비</span><strong>${money(product.slotCost || 0)}</strong></div>
             <div class="slot-product-stat"><span>기간 매출</span><strong>${money(product.sales || 0)}</strong></div>
-            <div class="slot-product-stat"><span>증분매출</span><strong style="color:${Number(product.incrementalSales || 0) >= 0 ? "var(--green)" : "var(--red)"}">${signedMoney(product.incrementalSales || 0)}</strong></div>
+            <div class="slot-product-stat"><span>전년 동기간 대비</span><strong>-</strong></div>
             <div class="slot-product-stat"><span>슬롯비율</span><strong>${rateText(product.slotCostRate || 0)}</strong></div>
             <div class="slot-product-stat"><span>평균 순위</span><strong>${product.rankAverage == null ? "-" : `${Number(product.rankAverage).toFixed(1)}위`}</strong></div>
             <div class="slot-product-stat"><span>최고 순위</span><strong>${product.bestRank == null ? "-" : `${number(product.bestRank)}위`}</strong></div>
@@ -1634,9 +1633,9 @@
           <td class="wrap"><strong>${html(period.product || "")}</strong><br><span style="font-size:11px;color:var(--muted)">${html(period.keyword || "")}</span></td>
           <td class="wrap">${html(period.startDate || "")}<br>~ ${html(period.endDate || "")}</td>
           <td>${money(period.slotCost || 0)}</td>
-          <td>${money(period.prior?.sales || 0)}<br><span style="font-size:10px;color:var(--muted)">${html(period.priorStartDate || "")} ~ ${html(period.priorEndDate || "")}</span></td>
+          <td>-<br><span style="font-size:10px;color:var(--muted)">2025년 데이터 적재 대기</span></td>
           <td>${money(period.during?.sales || 0)}<br><span style="font-size:10px;color:var(--muted)">${html(period.startDate || "")} ~ ${html(period.endDate || "")}</span></td>
-          <td style="color:${Number(period.incrementalSales || 0) >= 0 ? "var(--green)" : "var(--red)"}"><strong>${signedMoney(period.incrementalSales || 0)}</strong><br><span style="font-size:11px">${signedRate(period.salesChangeRate)}</span></td>
+          <td>-<br><span style="font-size:10px;color:var(--muted)">전년 데이터 적재 후 계산</span></td>
           <td>${number(period.during?.orders || 0)}</td>
           <td>${period.slotCostRate == null ? "-" : rateText(period.slotCostRate)}</td>
           <td>${period.blendedSalesRoas == null ? "-" : roasText(period.blendedSalesRoas)}</td>
@@ -1646,21 +1645,21 @@
       els.slotEfficiencyBody.innerHTML = `
         <div class="kpis" style="margin-bottom:14px">
           <div class="metric"><div class="label">완료 슬롯비</div><div class="value">${money(summary.totalSlotCost || 0)}</div><div class="sub">${number(summary.completedCount || 0)}개 완료 구간</div></div>
-          <div class="metric"><div class="label">슬롯 운영기간 매출</div><div class="value">${money(summary.totalSales || 0)}</div><div class="sub">완료 구간 합계</div></div>
-          <div class="metric"><div class="label">이전 동일기간 대비</div><div class="value" style="color:${Number(summary.incrementalSales || 0) >= 0 ? "var(--green)" : "var(--red)"}">${signedMoney(summary.incrementalSales || 0)}</div><div class="sub">슬롯 직전 동일 일수와 비교</div></div>
+          <div class="metric"><div class="label">슬롯 운영 기간 매출</div><div class="value">${money(summary.totalSales || 0)}</div><div class="sub">완료 구간 합계</div></div>
+          <div class="metric"><div class="label">전년 동기간 대비</div><div class="value">-</div><div class="sub">2025년 데이터 적재 후 제공</div></div>
           <div class="metric"><div class="label">슬롯비율</div><div class="value">${rateText(summary.slotCostRate || 0)}</div><div class="sub">슬롯비 / 기간 매출</div></div>
           <div class="metric"><div class="label">통합 매출 효율</div><div class="value">${roasText(summary.blendedSalesRoas || 0)}</div><div class="sub">매출 / (광고비+슬롯비)</div></div>
           <div class="metric"><div class="label">평균 검색 순위</div><div class="value">${summary.rankAverage == null ? "-" : `${Number(summary.rankAverage).toFixed(1)}위`}</div><div class="sub">순위 표본이 있는 완료 구간</div></div>
         </div>
-        <p class="slot-note">이전 동일기간 매출은 슬롯 시작 직전의 같은 일수이며, 슬롯 미운영 기준선이 아닙니다. 연속 슬롯은 앞 슬롯 기간과 비교됩니다. 계절성·요일·프로모션 효과가 포함될 수 있으므로 순위와 슬롯비율을 함께 판단하세요. 부분 집계 구간은 완료 합계와 자동 판정에서 제외됩니다.</p>
+        <p class="slot-note">매출 비교와 증분매출은 2025년 전년 동기간 데이터가 충분히 적재된 뒤 제공합니다. 현재는 슬롯 운영 기간의 실제 매출·주문, 슬롯비율, 광고비 포함 효율, 검색 순위만 표시합니다. 부분 집계 구간은 완료 합계와 자동 판정에서 제외됩니다.</p>
         <div class="slot-summary-grid">${productCards}</div>
         <div class="pl-chart-panel" style="margin-bottom:14px">
-          <div class="pl-chart-title">선택 월 완료 슬롯 · 이전 동일기간 매출 vs 슬롯 운영기간 매출</div>
+          <div class="pl-chart-title">선택 월 완료 슬롯 · 슬롯 운영 기간 매출</div>
           <div style="height:300px;position:relative"><canvas id="slotEfficiencyChart"></canvas></div>
         </div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>제품·키워드</th><th>슬롯 기간</th><th>슬롯비</th><th>이전 동일기간 매출</th><th>슬롯 운영기간 매출</th><th>증분매출</th><th>주문</th><th>슬롯비율</th><th>통합 효율</th><th>검색 순위</th><th>판정</th></tr></thead>
+            <thead><tr><th>제품·키워드</th><th>슬롯 기간</th><th>슬롯비</th><th>전년 동기간 매출</th><th>슬롯 운영 기간 매출</th><th>증분매출</th><th>주문</th><th>슬롯비율</th><th>통합 효율</th><th>검색 순위</th><th>판정</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>
         </div>`;
@@ -1673,8 +1672,7 @@
           data: {
             labels: completePeriods.map(period => `${period.product} ${String(period.startDate).slice(5)}`),
             datasets: [
-              { label: "이전 동일기간 매출", data: completePeriods.map(period => Number(period.prior?.sales || 0)), backgroundColor: "rgba(148,163,184,.35)", borderColor: "#94a3b8", borderWidth: 1, borderRadius: 5 },
-              { label: "슬롯 운영기간 매출", data: completePeriods.map(period => Number(period.during?.sales || 0)), backgroundColor: "rgba(72,101,244,.25)", borderColor: "#4865f4", borderWidth: 2, borderRadius: 5 }
+              { label: "슬롯 운영 기간 매출", data: completePeriods.map(period => Number(period.during?.sales || 0)), backgroundColor: "rgba(72,101,244,.25)", borderColor: "#4865f4", borderWidth: 2, borderRadius: 5 }
             ]
           },
           options: {
