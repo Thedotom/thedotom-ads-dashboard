@@ -1,0 +1,66 @@
+{
+  "updatedAt": "2026-07-23 16:46:15",
+  "groups": [
+    {
+      "productId": "4624494637",
+      "productName": "수건단품",
+      "campaign": "파워링크_더도톰_핵심키워드(모바일)",
+      "adgroup": "파워링크_더도톰_NewTest_답레품(M)",
+      "device": "모바일",
+      "status": "운영 가능",
+      "keywords": [
+        "답례품"
+      ],
+      "creatives": [
+        {
+          "title": "기업 단체 {keyword:답례품} 제작 더도톰",
+          "previewTitle": "기업 단체 답례품 제작 더도톰",
+          "description": "자수수건, 핸드워시 세트 제작! 행사별 맞춤 견적 가능",
+          "displayUrl": "m.thedotom.com",
+          "status": "운영 가능"
+        },
+        {
+          "title": "제작 {keyword:답례품} 전문 더도톰",
+          "previewTitle": "제작 답례품 전문 더도톰",
+          "description": "기업, 교회, 관공서 맞춤 답례품! 소량부터 대량까지 제작",
+          "displayUrl": "m.thedotom.com",
+          "status": "운영 가능"
+        },
+        {
+          "title": "특판 {keyword:답례품} 제작 더도톰",
+          "previewTitle": "특판 답례품 제작 더도톰",
+          "description": "기업&단체 맞춤 제작! 수건, 핸드워시 답례품 대량 주문 가능",
+          "displayUrl": "m.thedotom.com",
+          "status": "운영 가능"
+        }
+      ],
+      "extensions": [
+        {
+          "type": "이미지형",
+          "name": "이미지형",
+          "status": "운영 가능"
+        },
+        {
+          "type": "서브링크",
+          "name": "특판수건",
+          "status": "운영 가능"
+        },
+        {
+          "type": "서브링크",
+          "name": "핸드워시세트",
+          "status": "운영 가능"
+        },
+        {
+          "type": "서브링크",
+          "name": "디퓨저세트",
+          "status": "운영 가능"
+        },
+        {
+          "type": "추가설명",
+          "name": "일정에 맞춰 신속하게",
+          "status": "운영 가능"
+        }
+      ]
+    }
+  ]
+}

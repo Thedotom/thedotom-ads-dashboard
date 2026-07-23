@@ -506,6 +506,27 @@
       .shopping-campaign-list { grid-template-columns:1fr; }
     }
     .pl-chart-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:10px; }
+    .pl-config-wrap { margin-bottom:18px; padding:16px; border:1px solid #bfdbfe; border-radius:14px; background:linear-gradient(180deg,#eff6ff 0%,#fff 100%); }
+    .pl-config-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:14px; }
+    .pl-config-head h3 { margin:0 0 5px; font-size:16px; }
+    .pl-config-path { color:var(--muted); font-size:12px; line-height:1.5; overflow-wrap:anywhere; }
+    .pl-config-counts { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:6px; }
+    .pl-config-badge { display:inline-flex; align-items:center; padding:4px 8px; border-radius:999px; background:#dbeafe; color:#1d4ed8; font-size:11px; font-weight:800; white-space:nowrap; }
+    .pl-config-product { display:flex; align-items:center; gap:10px; margin-bottom:14px; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; }
+    .pl-config-grid { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr); gap:14px; }
+    .pl-config-panel { padding:13px; border:1px solid var(--line); border-radius:11px; background:#fff; min-width:0; }
+    .pl-config-panel-title { margin:0 0 10px; font-size:12px; font-weight:900; color:#334155; }
+    .pl-creative-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+    .pl-creative-preview { padding:11px; border:1px solid #dbe3ec; border-radius:9px; background:#fff; min-width:0; }
+    .pl-creative-label { display:flex; justify-content:space-between; gap:6px; margin-bottom:8px; color:var(--muted); font-size:10px; }
+    .pl-creative-title { color:#1a0dab; font-size:14px; font-weight:800; line-height:1.4; word-break:keep-all; }
+    .pl-creative-url { margin:3px 0; color:#15803d; font-size:11px; }
+    .pl-creative-desc { color:#475569; font-size:11px; line-height:1.45; word-break:keep-all; }
+    .pl-config-list { display:flex; flex-direction:column; gap:7px; }
+    .pl-config-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 9px; border-radius:8px; background:#f8fafc; font-size:11px; }
+    .pl-config-item-type { color:var(--muted); font-size:10px; }
+    @media (max-width:1050px) { .pl-config-grid { grid-template-columns:1fr; } .pl-creative-grid { grid-template-columns:1fr; } }
+    @media (max-width:640px) { .pl-config-head { flex-direction:column; } .pl-config-counts { justify-content:flex-start; } }
     .roas-bar-inline { display:inline-block; height:5px; border-radius:3px; background:linear-gradient(90deg,var(--blue),var(--green)); vertical-align:middle; margin-left:6px; }
     .slot-summary-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-bottom:14px; }
     .slot-product-card { padding:16px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:var(--shadow); }
@@ -648,6 +669,7 @@
             <button class="pl-view-btn" type="button" data-pl-view="chart">그래프</button>
           </div>
         </div>
+        <div id="powerlinkCreativeConfigBody"></div>
         <div class="pl-kpi-row" id="plKpiRow"></div>
         <div class="pl-group-grid" id="plGroupSummary"></div>
         <div class="detail-toolbar">
@@ -748,7 +770,7 @@
       window.location.replace("http://127.0.0.1:8790");
     }
     const initialMonth = new URLSearchParams(window.location.search).get("month") || "";
-    const state = { data: null, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
+    const state = { data: null, powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -760,6 +782,7 @@
       campaignBody: document.getElementById("campaignBody"),
       campaignCount: document.getElementById("campaignCount"),
       keywordCount: document.getElementById("keywordCount"),
+      powerlinkCreativeConfigBody: document.getElementById("powerlinkCreativeConfigBody"),
       shoppingBody: document.getElementById("shoppingBody"),
       shoppingCount: document.getElementById("shoppingCount"),
       shoppingIntegratedBody: document.getElementById("shoppingIntegratedBody"),
@@ -896,7 +919,14 @@
         }).join("") + `</div>`;
     }
     async function loadData() {
-      state.data = await fetchDashboardData();
+      const [dashboardData, creativeConfig] = await Promise.all([
+        fetchDashboardData(),
+        fetch(`data/powerlink-creative-config.json?v=${Date.now()}`, { cache: "no-store" })
+          .then(response => response.ok ? response.json() : { groups: [] })
+          .catch(() => ({ groups: [] }))
+      ]);
+      state.data = dashboardData;
+      state.powerlinkCreativeConfig = creativeConfig;
       state.month = state.data.month;
       applyManualRevenueLocal(state.month);
       fillMonths();
@@ -1048,6 +1078,7 @@
       renderTypes();
       renderCampaigns();
       renderKeywords();
+      renderPowerlinkCreativeConfig();
       renderShoppingIntegrated();
       renderShopping();
       renderBrandContract();
@@ -1165,6 +1196,53 @@
       const sc = document.getElementById("plScatterChart");
       if (sc) window._charts.plScatter = new Chart(sc, { type: "scatter", data: { datasets: [{ data: sdData, backgroundColor: sdColors, pointRadius: 5, pointHoverRadius: 7, borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => { const d=sdRaw[ctx.dataIndex]; return `${d["키워드"]||""}: CPC ₩${Math.round(Number(d["CPC"]||0)).toLocaleString()} / ROAS ${Number(d["ROAS"]||0).toFixed(2)}`; } } } }, scales: { x: { title: { display: true, text: "CPC (₩)", font: { size: 10 }, color: "#94a3b8" }, ticks: { callback: v => `₩${(v/1000).toFixed(0)}k`, font: { size: 10 }, color: "#64748b" }, grid: { color: "#f1f5f9" } }, y: { title: { display: true, text: "ROAS", font: { size: 10 }, color: "#94a3b8" }, ticks: { font: { size: 10 }, color: "#64748b" }, grid: { color: "#f1f5f9" } } } } });
     }
+    function renderPowerlinkCreativeConfig() {
+      const root = els.powerlinkCreativeConfigBody;
+      if (!root) return;
+      const groups = state.powerlinkCreativeConfig?.groups || [];
+      if (!groups.length) {
+        root.innerHTML = "";
+        return;
+      }
+      const visualMap = new Map((state.data.rewardMarketing?.items || []).map(item => [String(item.productId || ""), item]));
+      root.innerHTML = groups.map(group => {
+        const visual = visualMap.get(String(group.productId || "")) || {};
+        const keywordChips = (group.keywords || []).map(keyword => `<span class="pl-config-badge">${html(keyword)}</span>`).join("");
+        const creativeCards = (group.creatives || []).map((creative, index) => `
+          <article class="pl-creative-preview">
+            <div class="pl-creative-label"><span>소재 ${number(index + 1)}</span><span>${html(creative.status || "")}</span></div>
+            <div class="pl-creative-title">${html(creative.previewTitle || creative.title || "")}</div>
+            <div class="pl-creative-url">${html(creative.displayUrl || "")}</div>
+            <div class="pl-creative-desc">${html(creative.description || "")}</div>
+            <div style="margin-top:8px;color:var(--muted);font-size:9px;overflow-wrap:anywhere">등록 제목: ${html(creative.title || "")}</div>
+          </article>`).join("");
+        const extensionItems = (group.extensions || []).map(extension => `
+          <div class="pl-config-item">
+            <div><div>${html(extension.name || "")}</div><div class="pl-config-item-type">${html(extension.type || "")}</div></div>
+            <span class="slot-decision good">${html(extension.status || "")}</span>
+          </div>`).join("");
+        const thumb = visual.image
+          ? `<img class="slot-product-thumb" src="${html(visual.image)}" alt="${html(group.productName || visual.productName || "상품")} 썸네일" loading="lazy">`
+          : `<span class="slot-product-thumb" aria-hidden="true"></span>`;
+        return `<section class="pl-config-wrap">
+          <div class="pl-config-head">
+            <div><h3>광고 구성 현황</h3><div class="pl-config-path">${html(group.campaign || "")}<br>${html(group.adgroup || "")}</div></div>
+            <div class="pl-config-counts">
+              <span class="pl-config-badge">${html(group.device || "")}</span>
+              <span class="pl-config-badge">키워드 ${number((group.keywords || []).length)}개</span>
+              <span class="pl-config-badge">소재 ${number((group.creatives || []).length)}개</span>
+              <span class="pl-config-badge">확장소재 ${number((group.extensions || []).length)}개</span>
+            </div>
+          </div>
+          <div class="pl-config-product">${thumb}<div><strong>${html(group.productName || visual.productName || "")}</strong><div style="margin-top:3px;color:var(--muted);font-size:11px">상품번호 ${html(group.productId || "")} · 등록 키워드 ${keywordChips}</div></div></div>
+          <div class="pl-config-grid">
+            <div class="pl-config-panel"><h4 class="pl-config-panel-title">일반 소재 미리보기</h4><div class="pl-creative-grid">${creativeCards}</div></div>
+            <div class="pl-config-panel"><h4 class="pl-config-panel-title">확장소재</h4><div class="pl-config-list">${extensionItems}</div></div>
+          </div>
+        </section>`;
+      }).join("");
+    }
+
     function renderKeywords() {
       const basePl = state.data.keywordPerformance
         .filter(r => r["광고유형"]==="파워링크")
