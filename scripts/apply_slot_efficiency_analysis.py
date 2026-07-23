@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import argparse
 import json
@@ -119,6 +119,8 @@ def load_source(path: Path) -> tuple[list[dict], dict]:
                 "vendor": str(vendor or ""),
                 "startDate": str(start),
                 "endDate": str(end),
+                "priorStartDate": str(prior_start),
+                "priorEndDate": str(prior_end),
                 "days": days,
                 "sourceStatus": str(source_status or ""),
                 "isComplete": complete,
