@@ -511,6 +511,12 @@
     .slot-product-card { padding:16px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:var(--shadow); }
     .slot-product-card h3 { margin:0 0 4px; font-size:15px; }
     .slot-product-meta { color:var(--muted); font-size:11px; margin-bottom:12px; }
+    .slot-product-cell { display:flex; align-items:center; gap:10px; min-width:190px; }
+    .slot-product-thumb { width:48px; height:48px; border-radius:9px; object-fit:cover; border:1px solid var(--line); background:#f1f5f9; flex:0 0 48px; }
+    .slot-product-thumb-link { display:inline-flex; border-radius:9px; flex:0 0 48px; }
+    .slot-product-thumb-link:focus-visible { outline:2px solid var(--blue); outline-offset:2px; }
+    .slot-product-copy { min-width:0; line-height:1.35; }
+    .slot-product-keyword { margin-top:3px; color:var(--muted); font-size:11px; }
     .slot-product-stats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
     .slot-product-stat { padding:9px 10px; border-radius:8px; background:#f8fafc; }
     .slot-product-stat span { display:block; color:var(--muted); font-size:10px; margin-bottom:3px; }
@@ -1615,6 +1621,7 @@
       })[decision] || "active";
       const signedMoney = value => `${Number(value || 0) >= 0 ? "+" : "-"}${money(Math.abs(Number(value || 0)))}`;
       const signedRate = value => value == null ? "-" : `${Number(value) >= 0 ? "+" : ""}${rateText(value)}`;
+      const productVisuals = new Map((state.data.rewardMarketing?.items || []).map(item => [String(item.productId || ""), item]));
       const productCards = products.map(product => `
         <article class="slot-product-card">
           <h3>${html(product.product || "")}</h3>
@@ -1628,9 +1635,19 @@
             <div class="slot-product-stat"><span>최고 순위</span><strong>${product.bestRank == null ? "-" : `${number(product.bestRank)}위`}</strong></div>
           </div>
         </article>`).join("");
-      const rows = periods.map(period => `
+      const rows = periods.map(period => {
+        const visual = productVisuals.get(String(period.productId || "")) || {};
+        const image = visual.image || "";
+        const link = period.link || visual.link || "";
+        const thumbnail = image
+          ? `<img class="slot-product-thumb" src="${html(image)}" alt="${html(period.product || visual.productName || "상품")} 썸네일" loading="lazy">`
+          : `<span class="slot-product-thumb" aria-hidden="true"></span>`;
+        const linkedThumbnail = link
+          ? `<a class="slot-product-thumb-link" href="${html(link)}" target="_blank" rel="noopener noreferrer" aria-label="${html(period.product || visual.productName || "상품")} 상품 페이지 열기">${thumbnail}</a>`
+          : thumbnail;
+        return `
         <tr>
-          <td class="wrap"><strong>${html(period.product || "")}</strong><br><span style="font-size:11px;color:var(--muted)">${html(period.keyword || "")}</span></td>
+          <td class="wrap"><div class="slot-product-cell">${linkedThumbnail}<div class="slot-product-copy"><strong>${html(period.product || "")}</strong><div class="slot-product-keyword">${html(period.keyword || "")}</div></div></div></td>
           <td class="wrap">${html(period.startDate || "")}<br>~ ${html(period.endDate || "")}</td>
           <td>${money(period.slotCost || 0)}</td>
           <td>-<br><span style="font-size:10px;color:var(--muted)">2025년 데이터 적재 대기</span></td>
@@ -1641,7 +1658,8 @@
           <td>${period.blendedSalesRoas == null ? "-" : roasText(period.blendedSalesRoas)}</td>
           <td>${period.rankAverage == null ? "-" : `${Number(period.rankAverage).toFixed(1)}위`}<br><span style="font-size:11px;color:var(--muted)">최고 ${period.rankBest == null ? "-" : `${number(period.rankBest)}위`}</span></td>
           <td><span class="slot-decision ${decisionClass(period.decision)}">${html(period.decision || "")}</span>${period.isComplete ? "" : `<br><span style="font-size:10px;color:var(--muted)">${number(period.during?.daysWithData || 0)}/${number(period.days || 0)}일 집계</span>`}</td>
-        </tr>`).join("");
+        </tr>`;
+      }).join("");
       els.slotEfficiencyBody.innerHTML = `
         <div class="kpis" style="margin-bottom:14px">
           <div class="metric"><div class="label">완료 슬롯비</div><div class="value">${money(summary.totalSlotCost || 0)}</div><div class="sub">${number(summary.completedCount || 0)}개 완료 구간</div></div>
