@@ -12,11 +12,16 @@ $month = $today.ToString("yyyy-MM")
 $since = "$month-01"
 $raw = Join-Path $rawDir ("naver_ads_{0}_{1}_daily_raw.xlsx" -f $since.Replace("-", "_"), $until.Substring(8, 2))
 $log = Join-Path $logDir ("daily_ad_routine_{0}.log" -f $today.ToString("yyyyMMdd_HHmmss"))
-$dataTargets = @(
-    "data/monthly-dashboard-$month.json",
-    "data/monthly-dashboard-latest.json",
-    "data/naver-bid-snapshot.json"
+$monthlyTargets = @(
+    Get-ChildItem -LiteralPath (Join-Path $repo "data") -File |
+        Where-Object { $_.Name -match '^monthly-dashboard-20\d{2}-\d{2}\.json$' } |
+        ForEach-Object { "data/$($_.Name)" }
 )
+$dataTargets = @(
+    $monthlyTargets
+    "data/monthly-dashboard-latest.json"
+    "data/naver-bid-snapshot.json"
+) | Select-Object -Unique
 
 New-Item -ItemType Directory -Force -Path $rawDir, $logDir | Out-Null
 Start-Transcript -Path $log -Append
@@ -53,6 +58,13 @@ try {
     Copy-Item -LiteralPath (Join-Path $repo "data\monthly-dashboard-$month.json") -Destination (Join-Path $repo "data\monthly-dashboard-latest.json") -Force
     & $python (Join-Path $repo "scripts\update_naver_bid_snapshot.py")
     if ($LASTEXITCODE -ne 0) { throw "Bid snapshot update failed" }
+
+    try {
+        & (Join-Path $repo "scripts\sync_slot_efficiency_google_sheet.ps1")
+        if ($LASTEXITCODE -ne 0) { throw "Slot efficiency Google Sheet sync failed" }
+    } catch {
+        Write-Warning "Slot efficiency Google Sheet sync failed; keeping the previous slot analysis. $($_.Exception.Message)"
+    }
 
     git -C $repo add $dataTargets
     $changes = git -C $repo diff --cached --name-only

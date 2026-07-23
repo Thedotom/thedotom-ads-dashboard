@@ -26,8 +26,13 @@ def as_number(value) -> float:
 def load_source(path: Path) -> tuple[list[dict], dict]:
     workbook = openpyxl.load_workbook(path, data_only=True, read_only=True)
     performance: dict[tuple, dict] = {}
-    for month in range(1, 8):
-        sheet = workbook[f"제품 성과({month}월)"]
+    performance_sheets = [
+        name
+        for name in workbook.sheetnames
+        if re.fullmatch(r"제품 성과\(\d{1,2}월\)", name)
+    ]
+    for sheet_name in performance_sheets:
+        sheet = workbook[sheet_name]
         for row in sheet.iter_rows(min_row=2, max_col=10, values_only=True):
             product, date_value, ad_sales, ad_cost, status, sales, orders = row[:7]
             if not product or not isinstance(date_value, datetime):
@@ -42,7 +47,17 @@ def load_source(path: Path) -> tuple[list[dict], dict]:
 
     rank_rows: dict[tuple, list[float]] = defaultdict(list)
     rank_sheet = workbook["순위 트래킹"]
-    for offset in (1, 6, 11, 16):
+    rank_headers = next(
+        rank_sheet.iter_rows(
+            min_row=1, max_row=1, min_col=1, max_col=80, values_only=True
+        )
+    )
+    rank_offsets = [
+        index + 1
+        for index, value in enumerate(rank_headers)
+        if value == "날짜&상품"
+    ]
+    for offset in rank_offsets:
         current_date = None
         for row in rank_sheet.iter_rows(
             min_row=2, min_col=offset, max_col=offset + 3, values_only=True
@@ -209,7 +224,7 @@ def load_source(path: Path) -> tuple[list[dict], dict]:
 
 
 def update_dashboard_files(payload: dict) -> None:
-    targets = sorted(path for path in DATA.glob("monthly-dashboard-2026-*.json") if re.fullmatch(r"monthly-dashboard-2026-\d{2}\.json", path.name))
+    targets = sorted(path for path in DATA.glob("monthly-dashboard-20??-??.json") if re.fullmatch(r"monthly-dashboard-20\d{2}-\d{2}\.json", path.name))
     latest = DATA / "monthly-dashboard-latest.json"
     if latest.exists():
         targets.append(latest)
@@ -243,4 +258,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
