@@ -13,6 +13,7 @@ $monthlyTargets = @(
 $dataTargets = @(
     $monthlyTargets
     "data/monthly-dashboard-latest.json"
+    "data/powerlink-creative-config.json"
 ) | Select-Object -Unique
 
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
@@ -38,6 +39,9 @@ try {
         git -C $repo rebase origin/main
         if ($LASTEXITCODE -ne 0) { throw "git rebase failed" }
     }
+
+    & python (Join-Path $repo "scripts\sync_powerlink_creative_config.py")
+    if ($LASTEXITCODE -ne 0) { throw "Powerlink creative configuration sync failed" }
 
     & (Join-Path $repo "scripts\sync_slot_efficiency_google_sheet.ps1")
     if ($LASTEXITCODE -ne 0) { throw "Slot efficiency Google Sheet sync failed" }

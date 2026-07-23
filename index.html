@@ -525,6 +525,14 @@
     .pl-config-list { display:flex; flex-direction:column; gap:7px; }
     .pl-config-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 9px; border-radius:8px; background:#f8fafc; font-size:11px; }
     .pl-config-item-type { color:var(--muted); font-size:10px; }
+    .pl-config-source { margin:-6px 0 12px; color:var(--muted); font-size:11px; }
+    .pl-config-group { margin-top:10px; border:1px solid var(--line); border-radius:11px; background:#fff; overflow:hidden; }
+    .pl-config-group > summary { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 14px; cursor:pointer; list-style:none; }
+    .pl-config-group > summary::-webkit-details-marker { display:none; }
+    .pl-config-group[open] > summary { border-bottom:1px solid var(--line); background:#f8fafc; }
+    .pl-config-group-body { padding:13px; }
+    .pl-keyword-cloud { display:flex; flex-wrap:wrap; gap:6px; max-height:150px; overflow:auto; }
+    .pl-keyword-chip { display:inline-flex; align-items:center; gap:5px; padding:5px 8px; border:1px solid #dbe3ec; border-radius:999px; background:#fff; color:#334155; font-size:11px; }
     @media (max-width:1050px) { .pl-config-grid { grid-template-columns:1fr; } .pl-creative-grid { grid-template-columns:1fr; } }
     @media (max-width:640px) { .pl-config-head { flex-direction:column; } .pl-config-counts { justify-content:flex-start; } }
     .roas-bar-inline { display:inline-block; height:5px; border-radius:3px; background:linear-gradient(90deg,var(--blue),var(--green)); vertical-align:middle; margin-left:6px; }
@@ -1199,48 +1207,62 @@
     function renderPowerlinkCreativeConfig() {
       const root = els.powerlinkCreativeConfigBody;
       if (!root) return;
-      const groups = state.powerlinkCreativeConfig?.groups || [];
-      if (!groups.length) {
+      const config = state.powerlinkCreativeConfig || {};
+      const allGroups = config.groups || [];
+      const campaignFilter = els.campaignFilter?.value || "";
+      const adgroupFilter = els.adgroupFilter?.value || "";
+      const groups = allGroups.filter(group =>
+        (!campaignFilter || group.campaign === campaignFilter) &&
+        (!adgroupFilter || group.adgroup === adgroupFilter)
+      );
+      if (!allGroups.length) {
         root.innerHTML = "";
         return;
       }
-      const visualMap = new Map((state.data.rewardMarketing?.items || []).map(item => [String(item.productId || ""), item]));
-      root.innerHTML = groups.map(group => {
-        const visual = visualMap.get(String(group.productId || "")) || {};
-        const keywordChips = (group.keywords || []).map(keyword => `<span class="pl-config-badge">${html(keyword)}</span>`).join("");
+      const groupCards = groups.map(group => {
+        const keywordChips = (group.keywords || []).map(item =>
+          `<span class="pl-keyword-chip" title="입찰가 ${money(item.bidAmount || 0)} · ${html(item.status || "")}">${html(item.keyword || "")}</span>`
+        ).join("");
         const creativeCards = (group.creatives || []).map((creative, index) => `
           <article class="pl-creative-preview">
-            <div class="pl-creative-label"><span>소재 ${number(index + 1)}</span><span>${html(creative.status || "")}</span></div>
-            <div class="pl-creative-title">${html(creative.previewTitle || creative.title || "")}</div>
+            <div class="pl-creative-label"><span>소재 ${number(index + 1)} · ${html(creative.type || "")}</span><span>${html(creative.status || "")}</span></div>
+            <div class="pl-creative-title">${html(creative.title || "제목 없음")}</div>
             <div class="pl-creative-url">${html(creative.displayUrl || "")}</div>
             <div class="pl-creative-desc">${html(creative.description || "")}</div>
-            <div style="margin-top:8px;color:var(--muted);font-size:9px;overflow-wrap:anywhere">등록 제목: ${html(creative.title || "")}</div>
-          </article>`).join("");
-        const extensionItems = (group.extensions || []).map(extension => `
-          <div class="pl-config-item">
-            <div><div>${html(extension.name || "")}</div><div class="pl-config-item-type">${html(extension.type || "")}</div></div>
-            <span class="slot-decision good">${html(extension.status || "")}</span>
-          </div>`).join("");
-        const thumb = visual.image
-          ? `<img class="slot-product-thumb" src="${html(visual.image)}" alt="${html(group.productName || visual.productName || "상품")} 썸네일" loading="lazy">`
-          : `<span class="slot-product-thumb" aria-hidden="true"></span>`;
-        return `<section class="pl-config-wrap">
-          <div class="pl-config-head">
-            <div><h3>광고 구성 현황</h3><div class="pl-config-path">${html(group.campaign || "")}<br>${html(group.adgroup || "")}</div></div>
+          </article>`).join("") || `<div class="empty">등록된 일반 소재가 없습니다.</div>`;
+        const extensionItems = (group.extensions || []).flatMap(extension =>
+          (extension.items || []).map(item => `
+            <div class="pl-config-item">
+              <div><div>${html(item.name || extension.typeLabel || "")}</div><div class="pl-config-item-type">${html(extension.typeLabel || extension.type || "")}</div></div>
+              <span class="slot-decision ${extension.status === "운영 가능" ? "good" : "caution"}">${html(extension.status || "")}</span>
+            </div>`)
+        ).join("") || `<div class="empty">등록된 확장소재가 없습니다.</div>`;
+        return `<details class="pl-config-group" ${groups.length === 1 ? "open" : ""}>
+          <summary>
+            <div><strong>${html(group.adgroup || "")}</strong><div class="pl-config-path">${html(group.campaign || "")} · ${html(group.device || "")}</div></div>
             <div class="pl-config-counts">
-              <span class="pl-config-badge">${html(group.device || "")}</span>
-              <span class="pl-config-badge">키워드 ${number((group.keywords || []).length)}개</span>
-              <span class="pl-config-badge">소재 ${number((group.creatives || []).length)}개</span>
-              <span class="pl-config-badge">확장소재 ${number((group.extensions || []).length)}개</span>
+              <span class="pl-config-badge">키워드 ${number((group.keywords || []).length)}</span>
+              <span class="pl-config-badge">소재 ${number((group.creatives || []).length)}</span>
+              <span class="pl-config-badge">확장 ${number((group.extensions || []).length)}건 / ${number(group.extensionItemCount || 0)}항목</span>
+            </div>
+          </summary>
+          <div class="pl-config-group-body">
+            <div class="pl-config-panel" style="margin-bottom:12px"><h4 class="pl-config-panel-title">등록 키워드</h4><div class="pl-keyword-cloud">${keywordChips || '<span class="empty">등록 키워드가 없습니다.</span>'}</div></div>
+            <div class="pl-config-grid">
+              <div class="pl-config-panel"><h4 class="pl-config-panel-title">일반 소재 미리보기</h4><div class="pl-creative-grid">${creativeCards}</div></div>
+              <div class="pl-config-panel"><h4 class="pl-config-panel-title">확장소재</h4><div class="pl-config-list">${extensionItems}</div></div>
             </div>
           </div>
-          <div class="pl-config-product">${thumb}<div><strong>${html(group.productName || visual.productName || "")}</strong><div style="margin-top:3px;color:var(--muted);font-size:11px">상품번호 ${html(group.productId || "")} · 등록 키워드 ${keywordChips}</div></div></div>
-          <div class="pl-config-grid">
-            <div class="pl-config-panel"><h4 class="pl-config-panel-title">일반 소재 미리보기</h4><div class="pl-creative-grid">${creativeCards}</div></div>
-            <div class="pl-config-panel"><h4 class="pl-config-panel-title">확장소재</h4><div class="pl-config-list">${extensionItems}</div></div>
-          </div>
-        </section>`;
+        </details>`;
       }).join("");
+      root.innerHTML = `<section class="pl-config-wrap">
+        <div class="pl-config-head">
+          <div><h3>파워링크 광고 구성</h3><div class="pl-config-path">카페24 자사몰 연결 · 캠페인/광고그룹별 API 등록 현황</div></div>
+          <div class="pl-config-counts"><span class="pl-config-badge">전체 광고그룹 ${number(allGroups.length)}개</span><span class="pl-config-badge">현재 표시 ${number(groups.length)}개</span></div>
+        </div>
+        <div class="pl-config-source">${html(config.source || "")} · ${html(config.updatedAt || "")} 기준 · 상단 캠페인/광고그룹 필터와 연동</div>
+        ${groupCards || '<div class="empty">선택한 필터와 일치하는 광고 구성이 없습니다.</div>'}
+      </section>`;
     }
 
     function renderKeywords() {
