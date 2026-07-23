@@ -59,13 +59,6 @@ try {
     & $python (Join-Path $repo "scripts\update_naver_bid_snapshot.py")
     if ($LASTEXITCODE -ne 0) { throw "Bid snapshot update failed" }
 
-    try {
-        & (Join-Path $repo "scripts\sync_slot_efficiency_google_sheet.ps1")
-        if ($LASTEXITCODE -ne 0) { throw "Slot efficiency Google Sheet sync failed" }
-    } catch {
-        Write-Warning "Slot efficiency Google Sheet sync failed; keeping the previous slot analysis. $($_.Exception.Message)"
-    }
-
     git -C $repo add $dataTargets
     $changes = git -C $repo diff --cached --name-only
     if ($changes) {
