@@ -1341,6 +1341,13 @@
         <div class="pl-config-source">${html(config.source || "")} · ${html(config.updatedAt || "")} 기준 · 성과 필터와 별도로 전체 광고 구성을 표시합니다.</div>
         ${groupCards}
       </section>`;
+      const groupDetails = [...root.querySelectorAll(".pl-config-group")];
+      groupDetails.forEach(detail => detail.addEventListener("toggle", () => {
+        if (!detail.open) return;
+        groupDetails.forEach(other => {
+          if (other !== detail && other.open) other.open = false;
+        });
+      }));
     }
 
     function renderKeywords() {
