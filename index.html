@@ -522,24 +522,18 @@
     .pl-creative-title { color:#1a0dab; font-size:14px; font-weight:800; line-height:1.4; word-break:keep-all; }
     .pl-creative-url { margin:3px 0; color:#15803d; font-size:11px; }
     .pl-creative-desc { color:#475569; font-size:11px; line-height:1.45; word-break:keep-all; }
-    .pl-serp-panel { margin-bottom:12px; padding:13px; border:1px solid #bfdbfe; border-radius:11px; background:#f8fbff; }
-    .pl-serp-panel-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:10px; }
-    .pl-serp-panel-note { color:var(--muted); font-size:10px; line-height:1.4; text-align:right; }
-    .pl-serp-card { width:min(100%,420px); padding:15px 13px 12px; border:1px solid #dbe3ec; border-radius:12px; background:#fff; box-shadow:0 3px 12px rgba(15,23,42,.08); }
-    .pl-serp-site { display:flex; align-items:center; gap:7px; margin-bottom:9px; color:#475569; font-size:12px; }
-    .pl-serp-site-icon { display:grid; place-items:center; width:22px; height:22px; border-radius:50%; background:#eef2f6; color:#475569; font-size:12px; font-weight:900; }
-    .pl-serp-login { margin-left:2px; padding:1px 4px; border-radius:2px; background:#03c75a; color:#fff; font-size:9px; font-weight:900; }
-    .pl-serp-title { color:#06c; font-size:18px; line-height:1.35; word-break:keep-all; }
-    .pl-serp-title .ad { margin-right:5px; color:#64748b; font-size:11px; font-weight:700; vertical-align:2px; }
-    .pl-serp-desc { margin-top:8px; color:#374151; font-size:14px; line-height:1.55; word-break:keep-all; }
-    .pl-serp-images { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; gap:9px; margin-top:11px; }
-    .pl-serp-image-button { display:block; width:100%; height:auto !important; min-height:0; padding:0 !important; border:0; background:transparent; cursor:zoom-in; overflow:visible; line-height:1; }
-    .pl-serp-image { display:block; width:100%; height:auto; aspect-ratio:1/1; border-radius:10px; object-fit:contain; background:#f8fafc; }
-    .pl-serp-image-name { margin-top:4px; color:#334155; font-size:12px; line-height:1.3; text-align:center; word-break:keep-all; }
-    .pl-serp-footer { display:flex; align-items:center; gap:7px; margin-top:10px; color:#64748b; font-size:11px; }
-    .pl-serp-meter { display:flex; gap:2px; }
-    .pl-serp-meter i { display:block; width:8px; height:6px; background:#dbeafe; }
-    .pl-serp-meter i:nth-child(n+4) { background:#2563eb; }
+    .pl-serp-preview { padding:10px; border:2px solid #60a5fa; border-radius:9px; background:#f8fbff; min-width:0; }
+    .pl-serp-preview-label { display:flex; justify-content:space-between; gap:6px; margin-bottom:7px; color:#2563eb; font-size:10px; font-weight:800; }
+    .pl-serp-site { display:flex; align-items:center; gap:5px; margin-bottom:6px; color:#475569; font-size:9px; white-space:nowrap; overflow:hidden; }
+    .pl-serp-site-icon { display:grid; place-items:center; flex:0 0 17px; width:17px; height:17px; border-radius:50%; background:#eef2f6; color:#475569; font-size:9px; font-weight:900; }
+    .pl-serp-login { padding:1px 3px; border-radius:2px; background:#03c75a; color:#fff; font-size:7px; font-weight:900; }
+    .pl-serp-title { display:-webkit-box; overflow:hidden; -webkit-box-orient:vertical; -webkit-line-clamp:2; color:#06c; font-size:13px; font-weight:700; line-height:1.35; word-break:keep-all; }
+    .pl-serp-title .ad { margin-right:4px; color:#64748b; font-size:9px; font-weight:700; vertical-align:1px; }
+    .pl-serp-desc { display:-webkit-box; overflow:hidden; -webkit-box-orient:vertical; -webkit-line-clamp:2; margin-top:5px; color:#374151; font-size:10px; line-height:1.4; word-break:keep-all; }
+    .pl-serp-images { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; gap:5px; margin-top:7px; }
+    .pl-serp-image-button { display:block; width:100%; height:auto !important; min-height:0; padding:0 !important; border:0; background:transparent; cursor:zoom-in; line-height:1; }
+    .pl-serp-image { display:block; width:100%; height:auto; aspect-ratio:1/1; border-radius:7px; object-fit:contain; background:#fff; }
+    .pl-serp-image-name { margin-top:3px; overflow:hidden; color:#334155; font-size:9px; line-height:1.2; text-align:center; text-overflow:ellipsis; white-space:nowrap; }
     .pl-config-list { display:flex; flex-direction:column; gap:7px; }
     .pl-config-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 9px; border-radius:8px; background:#f8fafc; font-size:11px; }
     .pl-config-item.has-image { align-items:flex-start; }
@@ -1301,7 +1295,7 @@
         const previewDescription = [activeCreative.description, descriptionExtra].filter(Boolean).join(" ");
         const previewSite = String(activeCreative.displayUrl || activeCreative.finalUrl || "m.thedotom.com").replace(/^https?:\/\//i, "").replace(/\/$/, "");
         const previewImageCards = previewImages.map(item => { const imageUrl = powerlinkImageUrl(item.imagePath); const imageName = item.name === "POWER_LINK_IMAGE" ? "대표 이미지" : (item.name || "이미지"); return `<div><button type="button" class="pl-serp-image-button" data-pl-image-url="${html(imageUrl)}" data-pl-image-title="${html(imageName)}" onclick="openPowerlinkImage(this.dataset.plImageUrl,this.dataset.plImageTitle)" aria-label="${html(imageName)} 이미지 크게 보기"><img class="pl-serp-image" src="${html(imageUrl)}" alt="${html(imageName)}" loading="lazy"></button><div class="pl-serp-image-name">${html(imageName)}</div></div>`; }).join("");
-        const searchPreview = activeCreative.title ? `<div class="pl-serp-panel"><div class="pl-serp-panel-head"><h4 class="pl-config-panel-title" style="margin:0">네이버 모바일 검색 노출 조합 미리보기</h4><div class="pl-serp-panel-note">운영 중인 소재를 자동 조합한 예시<br>실제 노출 형태는 네이버에서 달라질 수 있습니다.</div></div><article class="pl-serp-card"><div class="pl-serp-site"><span class="pl-serp-site-icon">▤</span><strong>더도톰</strong><span>${html(previewSite)}</span><span class="pl-serp-login">N 로그인</span></div><div class="pl-serp-title"><span class="ad">광고</span>${html(previewTitle)}</div><div class="pl-serp-desc">${html(previewDescription)}</div>${previewImageCards ? `<div class="pl-serp-images">${previewImageCards}</div>` : ""}<div class="pl-serp-footer"><span>API 수집 소재 조합</span><span class="pl-serp-meter"><i></i><i></i><i></i><i></i><i></i><i></i></span></div></article></div>` : "";
+        const searchPreview = activeCreative.title ? `<article class="pl-serp-preview"><div class="pl-serp-preview-label"><span>조합 예시 · 모바일 검색</span><span>자동 미리보기</span></div><div class="pl-serp-site"><span class="pl-serp-site-icon">▤</span><strong>더도톰</strong><span>${html(previewSite)}</span><span class="pl-serp-login">N 로그인</span></div><div class="pl-serp-title"><span class="ad">광고</span>${html(previewTitle)}</div><div class="pl-serp-desc">${html(previewDescription)}</div>${previewImageCards ? `<div class="pl-serp-images">${previewImageCards}</div>` : ""}</article>` : "";
         const extensionItems = (group.extensions || []).flatMap(extension =>
           (extension.items || []).map(item => {
             const imageUrl = powerlinkImageUrl(item.imagePath);
@@ -1331,10 +1325,9 @@
             </div>
           </summary>
           <div class="pl-config-group-body">
-            ${searchPreview}
             <div class="pl-config-panel" style="margin-bottom:12px"><h4 class="pl-config-panel-title">등록 키워드</h4><div class="pl-keyword-cloud">${keywordChips || '<span class="empty">등록 키워드가 없습니다.</span>'}</div></div>
             <div class="pl-config-grid">
-              <div class="pl-config-panel"><h4 class="pl-config-panel-title">일반 소재 미리보기</h4><div class="pl-creative-grid">${creativeCards}</div></div>
+              <div class="pl-config-panel"><h4 class="pl-config-panel-title">일반 소재 미리보기</h4><div class="pl-creative-grid">${creativeCards}${searchPreview}</div></div>
               <div class="pl-config-panel"><h4 class="pl-config-panel-title">확장소재</h4><div class="pl-config-list">${extensionItems}</div></div>
             </div>
           </div>
