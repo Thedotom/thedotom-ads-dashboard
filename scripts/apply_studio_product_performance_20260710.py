@@ -1,4 +1,4 @@
-﻿import json
+import json
 import re
 import shutil
 import sys
@@ -20,7 +20,7 @@ date_match = re.search(r"(?:sales_)?(\d{4})-?(\d{2})-?(\d{2})(?:-|_|\.)", SOURCE
 if not date_match:
     raise ValueError(f"Cannot determine date from source filename: {SOURCE.name}")
 DATE = "-".join(date_match.groups())
-TARGET_FILES = [f"monthly-dashboard-{DATE[:7]}.json", "monthly-dashboard-latest.json"]
+TARGET_FILE = f"monthly-dashboard-{DATE[:7]}.json"
 STORE = "thedotom"
 STORE_NAME = "스마트스토어(더도톰스튜디오)"
 
@@ -140,8 +140,13 @@ def main():
     update_master_file(rows)
     updated = []
     for directory in DATA_DIRS:
-        for filename in TARGET_FILES:
-            path = directory / filename
+        paths = [directory / TARGET_FILE]
+        latest = directory / "monthly-dashboard-latest.json"
+        if latest.exists():
+            latest_data = json.loads(latest.read_text(encoding="utf-8-sig"))
+            if latest_data.get("month") == DATE[:7]:
+                paths.append(latest)
+        for path in paths:
             update_dashboard(path, rows)
             updated.append(str(path))
     print(json.dumps({

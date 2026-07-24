@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import argparse
 import json
@@ -206,7 +206,12 @@ def build_driver(headless):
             "safebrowsing.enabled": True,
         },
     )
-    return webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(options=options)
+    driver.execute_cdp_cmd(
+        "Page.setDownloadBehavior",
+        {"behavior": "allow", "downloadPath": str(DOWNLOAD_DIR)},
+    )
+    return driver
 
 
 def main():

@@ -1,4 +1,4 @@
-﻿import json
+import json
 import re
 import shutil
 import sys
@@ -16,7 +16,7 @@ match = re.search(r"(?:sales_)?(\d{4})-?(\d{2})-?(\d{2})(?:-|_|\.)", SOURCE.name
 if not match:
     raise ValueError(f"Cannot determine date from {SOURCE.name}")
 DATE = "-".join(match.groups())
-TARGET_FILES = [f"monthly-dashboard-{DATE[:7]}.json", "monthly-dashboard-latest.json"]
+TARGET_FILE = f"monthly-dashboard-{DATE[:7]}.json"
 STORE = "mura"
 STORE_NAME = "스마트스토어(무라)"
 
@@ -97,8 +97,14 @@ def main():
         output = merged
     master.write_text(json.dumps(output, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     for directory in DATA_DIRS:
-        for filename in TARGET_FILES:
-            update_dashboard(directory / filename, rows)
+        paths = [directory / TARGET_FILE]
+        latest = directory / "monthly-dashboard-latest.json"
+        if latest.exists():
+            latest_data = json.loads(latest.read_text(encoding="utf-8-sig"))
+            if latest_data.get("month") == DATE[:7]:
+                paths.append(latest)
+        for path in paths:
+            update_dashboard(path, rows)
     print(json.dumps({"date": DATE, "products": len(rows), "grossSales": sum(r["grossSales"] for r in rows), "refunds": sum(r["refundAmount"] for r in rows), "netSales": sum(r["dailySales"] for r in rows)}, ensure_ascii=False))
 
 
