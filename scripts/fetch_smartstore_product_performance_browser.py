@@ -169,6 +169,7 @@ def download_file(driver, store_key, target):
             except TimeoutException:
                 continue
     deadline = time.time() + 180
+    next_retry = time.time() + 30
     downloaded = None
     while time.time() < deadline:
         candidates = [
@@ -179,6 +180,13 @@ def download_file(driver, store_key, target):
         if candidates:
             downloaded = max(candidates, key=lambda path: path.stat().st_mtime)
             break
+        if time.time() >= next_retry:
+            retry_button = driver.find_element(
+                By.XPATH,
+                "//button[contains(normalize-space(), '엑셀 만들기') or contains(normalize-space(), '파일 다운로드')]",
+            )
+            driver.execute_script("arguments[0].click()", retry_button)
+            next_retry = time.time() + 30
         time.sleep(1)
     if downloaded is None:
         raise RuntimeError("download did not complete within 90 seconds")
