@@ -524,6 +524,21 @@
     .pl-creative-desc { color:#475569; font-size:11px; line-height:1.45; word-break:keep-all; }
     .pl-config-list { display:flex; flex-direction:column; gap:7px; }
     .pl-config-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 9px; border-radius:8px; background:#f8fafc; font-size:11px; }
+    .pl-config-item.has-image { align-items:flex-start; }
+    .pl-config-item-main { display:flex; align-items:flex-start; gap:10px; min-width:0; }
+    .pl-config-image-button { display:block; flex:0 0 112px; width:112px; padding:0; border:0; border-radius:9px; background:#e2e8f0; overflow:hidden; cursor:zoom-in; box-shadow:inset 0 0 0 1px rgba(15,23,42,.1); }
+    .pl-config-image { display:block; width:112px; height:84px; object-fit:cover; transition:transform .2s ease; }
+    .pl-config-image-button:hover .pl-config-image { transform:scale(1.05); }
+    .pl-config-image-copy { min-width:0; padding-top:2px; }
+    .pl-config-image-name { font-size:12px; font-weight:800; line-height:1.35; word-break:keep-all; }
+    .pl-config-image-hint { margin-top:5px; color:var(--blue); font-size:10px; font-weight:700; }
+    .pl-image-dialog { width:min(920px,calc(100vw - 28px)); max-height:calc(100vh - 28px); padding:0; border:0; border-radius:14px; background:#fff; box-shadow:0 24px 70px rgba(15,23,42,.35); overflow:hidden; }
+    .pl-image-dialog::backdrop { background:rgba(15,23,42,.72); backdrop-filter:blur(3px); }
+    .pl-image-dialog-head { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 15px; border-bottom:1px solid var(--line); }
+    .pl-image-dialog-title { margin:0; font-size:14px; font-weight:900; }
+    .pl-image-dialog-close { width:34px; height:34px; border:0; border-radius:8px; background:#f1f5f9; color:#334155; font-size:21px; cursor:pointer; }
+    .pl-image-dialog-body { display:grid; place-items:center; padding:14px; background:#f8fafc; overflow:auto; max-height:calc(100vh - 100px); }
+    .pl-image-dialog-body img { display:block; max-width:100%; max-height:calc(100vh - 130px); width:auto; height:auto; object-fit:contain; }
     .pl-config-item-type { color:var(--muted); font-size:10px; }
     .pl-config-source { margin:-6px 0 12px; color:var(--muted); font-size:11px; }
     .pl-config-campaign-title { margin:18px 0 8px; padding:0 2px; color:#1e3a8a; font-size:13px; font-weight:900; }
@@ -536,7 +551,7 @@
     .pl-keyword-cloud { display:flex; flex-wrap:wrap; gap:6px; max-height:150px; overflow:auto; }
     .pl-keyword-chip { display:inline-flex; align-items:center; gap:5px; padding:5px 8px; border:1px solid #dbe3ec; border-radius:999px; background:#fff; color:#334155; font-size:11px; }
     @media (max-width:1050px) { .pl-config-grid { grid-template-columns:1fr; } .pl-creative-grid { grid-template-columns:1fr; } }
-    @media (max-width:640px) { .pl-config-head { flex-direction:column; } .pl-config-counts { justify-content:flex-start; } }
+    @media (max-width:640px) { .pl-config-head { flex-direction:column; } .pl-config-counts { justify-content:flex-start; } .pl-config-item.has-image { flex-direction:column; } .pl-config-image-button,.pl-config-image { width:132px; } }
     .roas-bar-inline { display:inline-block; height:5px; border-radius:3px; background:linear-gradient(90deg,var(--blue),var(--green)); vertical-align:middle; margin-left:6px; }
     .slot-summary-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-bottom:14px; }
     .slot-product-card { padding:16px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:var(--shadow); }
@@ -1206,6 +1221,32 @@
       const sc = document.getElementById("plScatterChart");
       if (sc) window._charts.plScatter = new Chart(sc, { type: "scatter", data: { datasets: [{ data: sdData, backgroundColor: sdColors, pointRadius: 5, pointHoverRadius: 7, borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => { const d=sdRaw[ctx.dataIndex]; return `${d["키워드"]||""}: CPC ₩${Math.round(Number(d["CPC"]||0)).toLocaleString()} / ROAS ${Number(d["ROAS"]||0).toFixed(2)}`; } } } }, scales: { x: { title: { display: true, text: "CPC (₩)", font: { size: 10 }, color: "#94a3b8" }, ticks: { callback: v => `₩${(v/1000).toFixed(0)}k`, font: { size: 10 }, color: "#64748b" }, grid: { color: "#f1f5f9" } }, y: { title: { display: true, text: "ROAS", font: { size: 10 }, color: "#94a3b8" }, ticks: { font: { size: 10 }, color: "#64748b" }, grid: { color: "#f1f5f9" } } } } });
     }
+    function powerlinkImageUrl(path) {
+      const value = String(path || "").trim();
+      if (!value) return "";
+      if (/^https?:\/\//i.test(value)) return value;
+      return `https://searchad-phinf.pstatic.net${value.startsWith("/") ? "" : "/"}${value}`;
+    }
+    function openPowerlinkImage(url, title) {
+      let dialog = document.getElementById("powerlinkImageDialog");
+      if (!dialog) {
+        dialog = document.createElement("dialog");
+        dialog.id = "powerlinkImageDialog";
+        dialog.className = "pl-image-dialog";
+        dialog.innerHTML = `<div class="pl-image-dialog-head"><h3 class="pl-image-dialog-title"></h3><button type="button" class="pl-image-dialog-close" aria-label="닫기">×</button></div><div class="pl-image-dialog-body"><img alt=""></div>`;
+        dialog.querySelector(".pl-image-dialog-close").addEventListener("click", () => dialog.close());
+        dialog.addEventListener("click", event => {
+          const rect = dialog.getBoundingClientRect();
+          if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
+        });
+        document.body.appendChild(dialog);
+      }
+      dialog.querySelector(".pl-image-dialog-title").textContent = title || "파워링크 이미지";
+      const image = dialog.querySelector("img");
+      image.src = url;
+      image.alt = title || "파워링크 이미지 원본";
+      dialog.showModal();
+    }
     function renderPowerlinkCreativeConfig() {
       const root = els.powerlinkCreativeConfigBody;
       if (!root) return;
@@ -1233,11 +1274,23 @@
             <div class="pl-creative-desc">${html(creative.description || "")}</div>
           </article>`).join("") || `<div class="empty">등록된 일반 소재가 없습니다.</div>`;
         const extensionItems = (group.extensions || []).flatMap(extension =>
-          (extension.items || []).map(item => `
-            <div class="pl-config-item">
-              <div><div>${html(item.name || extension.typeLabel || "")}</div><div class="pl-config-item-type">${html(extension.typeLabel || extension.type || "")}</div></div>
+          (extension.items || []).map(item => {
+            const imageUrl = powerlinkImageUrl(item.imagePath);
+            const itemName = item.name || extension.typeLabel || "";
+            const itemContent = imageUrl
+              ? `<div class="pl-config-item-main">
+                  <button type="button" class="pl-config-image-button" data-pl-image-url="${html(imageUrl)}" data-pl-image-title="${html(itemName)}" onclick="openPowerlinkImage(this.dataset.plImageUrl,this.dataset.plImageTitle)" aria-label="${html(itemName)} 이미지 크게 보기">
+                    <img class="pl-config-image" src="${html(imageUrl)}" alt="${html(itemName)}" loading="lazy">
+                  </button>
+                  <div class="pl-config-image-copy"><div class="pl-config-image-name">${html(itemName)}</div><div class="pl-config-item-type">${html(extension.typeLabel || extension.type || "")}</div><div class="pl-config-image-hint">클릭해서 크게 보기</div></div>
+                </div>`
+              : `<div><div>${html(itemName)}</div><div class="pl-config-item-type">${html(extension.typeLabel || extension.type || "")}</div></div>`;
+            return `
+            <div class="pl-config-item${imageUrl ? " has-image" : ""}">
+              ${itemContent}
               <span class="slot-decision ${extension.status === "운영 가능" ? "good" : "caution"}">${html(extension.status || "")}</span>
-            </div>`)
+            </div>`;
+          })
         ).join("") || `<div class="empty">등록된 확장소재가 없습니다.</div>`;
         return `${campaignHeading}<details class="pl-config-group">
           <summary>
