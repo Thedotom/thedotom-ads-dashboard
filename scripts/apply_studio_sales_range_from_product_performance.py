@@ -107,7 +107,10 @@ def update(path, start_date, end_date):
             if store.get("name") == STORE_NAME:
                 weeks[week_index(day["date"])] += number(store.get("netSales"))
 
-    auto_sales = metrics.get("autoSales", [])
+    auto_sales = [
+        item for item in metrics.get("autoSales", [])
+        if item.get("name") != "자사몰"
+    ]
     target = next((item for item in auto_sales if item.get("name") == AUTO_NAME), None)
     if target is None:
         target = {"name": AUTO_NAME}

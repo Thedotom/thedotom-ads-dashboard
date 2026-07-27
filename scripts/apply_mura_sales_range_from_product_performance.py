@@ -111,7 +111,9 @@ def update(path, start_date, end_date):
 
     auto_sales = [
         row for row in metrics.get("autoSales", [])
-        if "무라" not in str(row.get("name", "")) and "mura" not in str(row.get("name", "")).lower()
+        if "무라" not in str(row.get("name", ""))
+        and "mura" not in str(row.get("name", "")).lower()
+        and row.get("name") != "자사몰"
     ]
     auto_sales.append({"name": "무라", "weeks": mura_weeks, "total": sum(mura_weeks)})
     metrics["autoSales"] = auto_sales
