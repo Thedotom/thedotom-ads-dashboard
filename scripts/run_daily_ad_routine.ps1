@@ -4,6 +4,7 @@ $repo = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 $reportRoot = Split-Path -Parent $repo
 $python = "C:\Users\user\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
 $fetcher = "C:\Users\user\Documents\New project 4\scripts\fetch_naver_ads_raw.py"
+$cafe24Fetcher = "C:\Users\user\Documents\New project 4\scripts\fetch_cafe24_daily_sales.py"
 $rawDir = Join-Path $reportRoot "raw"
 $logDir = Join-Path $reportRoot "logs"
 $today = Get-Date
@@ -54,6 +55,12 @@ try {
 
     & $python (Join-Path $repo "scripts\apply_naver_ads_month.py") --month $month --raw $raw --data-dir (Join-Path $repo "data")
     if ($LASTEXITCODE -ne 0) { throw "Dashboard performance apply failed" }
+
+    & $python $cafe24Fetcher $until
+    if ($LASTEXITCODE -ne 0) { throw "Cafe24 daily sales fetch failed" }
+
+    & $python (Join-Path $repo "scripts\apply_cafe24_api_daily_sales.py") $until $until
+    if ($LASTEXITCODE -ne 0) { throw "Cafe24 daily sales apply failed" }
 
     Copy-Item -LiteralPath (Join-Path $repo "data\monthly-dashboard-$month.json") -Destination (Join-Path $repo "data\monthly-dashboard-latest.json") -Force
     & $python (Join-Path $repo "scripts\update_naver_bid_snapshot.py")

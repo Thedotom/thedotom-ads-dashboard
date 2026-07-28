@@ -8,11 +8,6 @@ SOURCE_DIR = Path(r"D:\광고보고서\data\cafe24_sales")
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 STORE_NAME = "카페24(자사몰)"
 AUTO_NAME = "자사몰 자동수집"
-TARGET_FILES = [
-    DATA_DIR / "monthly-dashboard-2026-07.json",
-    DATA_DIR / "monthly-dashboard-latest.json",
-]
-
 
 def week_index(date_text):
     day = int(date_text[-2:])
@@ -20,8 +15,12 @@ def week_index(date_text):
 
 
 def read_rows(start_date, end_date):
+    start_month = start_date[:7]
+    end_month = end_date[:7]
+    if start_month != end_month:
+        raise ValueError("Cafe24 apply range must stay within one month")
     rows = []
-    for path in sorted(SOURCE_DIR.glob("cafe24_daily_sales_2026-07-*.json")):
+    for path in sorted(SOURCE_DIR.glob(f"cafe24_daily_sales_{start_month}-*.json")):
         item = json.loads(path.read_text(encoding="utf-8-sig"))
         date_text = item.get("date") or path.stem.replace("cafe24_daily_sales_", "")
         if not start_date <= date_text <= end_date:
@@ -38,7 +37,7 @@ def read_rows(start_date, end_date):
                 "source": path.name,
             }
         )
-    expected = {f"2026-07-{day:02d}" for day in range(int(start_date[-2:]), int(end_date[-2:]) + 1)}
+    expected = {f"{start_month}-{day:02d}" for day in range(int(start_date[-2:]), int(end_date[-2:]) + 1)}
     actual = {row["date"] for row in rows}
     if actual != expected:
         raise ValueError(f"Missing Cafe24 API dates: {sorted(expected - actual)}")
@@ -116,10 +115,18 @@ def update(path, imported):
 
 
 def main():
-    start_date = sys.argv[1] if len(sys.argv) > 1 else "2026-07-20"
-    end_date = sys.argv[2] if len(sys.argv) > 2 else "2026-07-26"
+    default_date = datetime.now().date().isoformat()
+    start_date = sys.argv[1] if len(sys.argv) > 1 else default_date
+    end_date = sys.argv[2] if len(sys.argv) > 2 else start_date
     rows = read_rows(start_date, end_date)
-    for path in TARGET_FILES:
+    month = start_date[:7]
+    target_files = [DATA_DIR / f"monthly-dashboard-{month}.json"]
+    latest = DATA_DIR / "monthly-dashboard-latest.json"
+    if latest.exists():
+        latest_data = json.loads(latest.read_text(encoding="utf-8-sig"))
+        if latest_data.get("month") == month:
+            target_files.append(latest)
+    for path in target_files:
         update(path, rows)
     print(
         json.dumps(
@@ -127,7 +134,7 @@ def main():
                 "dates": [row["date"] for row in rows],
                 "orders": sum(row["orders"] for row in rows),
                 "netSales": sum(row["netSales"] for row in rows),
-                "targets": [str(path) for path in TARGET_FILES],
+                "targets": [str(path) for path in target_files],
             },
             ensure_ascii=False,
         )
