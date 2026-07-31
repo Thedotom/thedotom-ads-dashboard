@@ -1139,9 +1139,9 @@
     function renderKpis() {
       const s = state.data.summary;
       const items = [
-        ["총 광고비", money(s.cost), "파워링크+쇼핑검색"],
+        ["총 광고비", money(s.cost), state.data.displayAdvertising ? "파워링크+쇼핑검색+ADVoost" : "파워링크+쇼핑검색"],
         ["전환매출", money(s.revenue), `전환 ${number(s.conversions)}건`],
-        ["ROAS", ratio(s.roas), `CVR ${pct(s.cvr)}`],
+        [state.data.displayAdvertising ? "검색광고 ROAS" : "ROAS", ratio(s.roas), state.data.displayAdvertising ? "ADVoost 전환성과 미포함" : `CVR ${pct(s.cvr)}`],
         ["CTR / CPC", `${pct(s.ctr)} · ${money(s.cpc)}`, `클릭 ${number(s.clicks)}회`],
         ["상세 데이터", `${number(state.data.dataProfile.detailRows)}개`, `캠페인 ${number(state.data.dataProfile.campaigns)}개 · 광고그룹 ${number(state.data.dataProfile.adgroups)}개`]
       ];
@@ -1154,11 +1154,12 @@
       els.accountPerformanceBody.innerHTML = rows.map(row => {
         const cost = Number(row["총비용"] || 0);
         const revenue = Number(row["전환매출"] || 0);
+        const hasPerformance = row["성과제공"] !== false;
         const roas = cost ? revenue / cost : 0;
         return `<div class="metric">
           <div class="label">${html(row["광고계정명"] || "계정 미상")}</div>
           <div class="value">${money(cost)}</div>
-          <div class="sub">전환매출 ${money(revenue)} · ROAS ${roasText(roas)}</div>
+          <div class="sub">${hasPerformance ? `전환매출 ${money(revenue)} · ROAS ${roasText(roas)}` : "광고비 보고서 · 전환성과 미포함"}</div>
         </div>`;
       }).join("") || `<div class="empty">계정별 광고 데이터가 없습니다.</div>`;
     }
@@ -1177,7 +1178,7 @@
           <div class="type-stats">
             <span>클릭<strong>${number(row["클릭수"])}</strong></span>
             <span>전환<strong>${number(row["전환수"])}</strong></span>
-            <span>ROAS<strong>${ratio(row["ROAS"])}</strong></span>
+            <span>ROAS<strong>${row["성과제공"] === false ? "-" : ratio(row["ROAS"])}</strong></span>
           </div>
         </div>`;
       }).join("");
