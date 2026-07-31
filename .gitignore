@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+shopping-fallback.*.log
+shopping-fallback.pid
+top4-check.*.log
