@@ -659,6 +659,10 @@
         </div>
       </div>
       <div id="kpis" class="kpis page-section" data-page="overview"></div>
+      <section class="page-section" data-page="overview" style="margin-bottom:16px">
+        <div class="section-head"><h2>네이버 광고 계정별 성과</h2><span id="accountPerformanceStatus" class="count"></span></div>
+        <div class="kpis" id="accountPerformanceBody"></div>
+      </section>
       <div class="chart-row page-section" data-page="overview">
         <section class="chart-panel">
           <div class="section-head"><h2>광고유형별 비용 분포</h2></div>
@@ -678,7 +682,7 @@
           <div class="section-head"><h2>캠페인 성과 순위</h2><span id="campaignCount" class="count"></span></div>
           <div class="table-wrap">
             <table class="compact">
-              <thead><tr><th>캠페인</th><th>비용</th><th>전환</th><th>매출</th><th>ROAS</th><th>판단</th></tr></thead>
+              <thead><tr><th>계정</th><th>캠페인</th><th>비용</th><th>전환</th><th>매출</th><th>ROAS</th><th>판단</th></tr></thead>
               <tbody id="campaignBody"></tbody>
             </table>
           </div>
@@ -814,6 +818,8 @@
       topStatus: document.getElementById("topStatus"),
       profile: document.getElementById("profile"),
       kpis: document.getElementById("kpis"),
+      accountPerformanceBody: document.getElementById("accountPerformanceBody"),
+      accountPerformanceStatus: document.getElementById("accountPerformanceStatus"),
       typeBars: document.getElementById("typeBars"),
       typeCount: document.getElementById("typeCount"),
       campaignBody: document.getElementById("campaignBody"),
@@ -1112,6 +1118,7 @@
       els.meta.textContent = `${todayLabel()} · ${d.month} 광고 운영 현황`;
       els.profile.textContent = `${d.dataProfile.period} · ${d.dataProfile.granularity} · 원천 ${number(d.dataProfile.rawRows)}행 · 상세 ${number(d.dataProfile.detailRows)}개`;
       renderKpis();
+      renderAccountPerformance();
       renderTypes();
       renderCampaigns();
       renderKeywords();
@@ -1139,6 +1146,21 @@
         ["상세 데이터", `${number(state.data.dataProfile.detailRows)}개`, `캠페인 ${number(state.data.dataProfile.campaigns)}개 · 광고그룹 ${number(state.data.dataProfile.adgroups)}개`]
       ];
       els.kpis.innerHTML = items.map(([label, value, sub]) => `<div class="metric"><div class="label">${html(label)}</div><div class="value">${html(value)}</div><div class="sub">${html(sub)}</div></div>`).join("");
+    }
+    function renderAccountPerformance() {
+      const rows = state.data.accountPerformance || [];
+      if (!els.accountPerformanceBody) return;
+      els.accountPerformanceStatus.textContent = `${rows.length}개 계정`;
+      els.accountPerformanceBody.innerHTML = rows.map(row => {
+        const cost = Number(row["총비용"] || 0);
+        const revenue = Number(row["전환매출"] || 0);
+        const roas = cost ? revenue / cost : 0;
+        return `<div class="metric">
+          <div class="label">${html(row["광고계정명"] || "계정 미상")}</div>
+          <div class="value">${money(cost)}</div>
+          <div class="sub">전환매출 ${money(revenue)} · ROAS ${roasText(roas)}</div>
+        </div>`;
+      }).join("") || `<div class="empty">계정별 광고 데이터가 없습니다.</div>`;
     }
     function renderTypes() {
       const rows = state.data.typePerformance;
@@ -1168,7 +1190,7 @@
       els.campaignBody.innerHTML = rows.map(row => {
         const roas = Number(row["ROAS"] || 0);
         const pill = roas >= 5 ? ["good", "확대"] : roas >= 3 ? ["warn", "유지"] : ["bad", "점검"];
-        return `<tr><td>${html(row["캠페인명"])}</td><td>${money(row["총비용"])}</td><td>${number(row["전환수"])}</td><td>${money(row["전환매출"])}</td><td>${ratio(row["ROAS"])}</td><td><span class="pill ${pill[0]}">${pill[1]}</span></td></tr>`;
+        return `<tr><td>${html(row["광고계정명"] || "-")}</td><td>${html(row["캠페인명"])}</td><td>${money(row["총비용"])}</td><td>${number(row["전환수"])}</td><td>${money(row["전환매출"])}</td><td>${ratio(row["ROAS"])}</td><td><span class="pill ${pill[0]}">${pill[1]}</span></td></tr>`;
       }).join("");
     }
     function detailFilteredKeywords() {
