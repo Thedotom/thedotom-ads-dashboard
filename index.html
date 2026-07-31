@@ -2054,7 +2054,10 @@ function renderTotalSalesMetrics() {
       const weeks = metrics.weeks || ["1\uc8fc\ucc28", "2\uc8fc\ucc28", "3\uc8fc\ucc28", "4\uc8fc\ucc28", "5\uc8fc\ucc28"];
       els.totalSalesStatus.textContent = "\uc218\uc9d1 \uae30\uc900";
 
-      const monthButtons = (metrics.availableMonths || []).map(month => `
+      const totalSalesMonths = metrics.availableMonths?.length
+        ? metrics.availableMonths
+        : (state.data.availableMonths || []);
+      const monthButtons = totalSalesMonths.map(month => `
         <button class="ghost ${month === state.month ? "active" : ""}" type="button" data-total-sales-month="${html(month)}">${html(month)}</button>
       `).join("");
 
