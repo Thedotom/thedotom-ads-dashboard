@@ -2242,7 +2242,7 @@ function renderBrandContract() {
       const slotLabels = { morning: "오전", afternoon: "오후", evening: "저녁", night: "야간" };
 
       // 쇼핑/파워링크 각자의 가용 날짜 분리
-      const shoppingDates = [...new Set((rank.slotDetails || []).map(sd => sd.date))].sort().reverse();
+      const shoppingDates = [...new Set((rank.slotDetails || []).filter(sd => (sd.shoppingProducts || []).length).map(sd => sd.date))].sort().reverse();
       const plDates = [...new Set((rank.chronologicalColumns || []).map(c => c.date))].sort().reverse();
       const dates = isShoppingPage ? shoppingDates : plDates;
       if (!state.rankDate || !dates.includes(state.rankDate)) {
@@ -2295,7 +2295,7 @@ function renderBrandContract() {
           // Fallback: latestShopping flat list grouped by productId
           const latest = rank.latestShopping || [];
           if (!latest.length) {
-            els.rankBody.innerHTML = `<div class="empty" style="padding:24px">쇼핑 순위 데이터가 없습니다.</div>`;
+            els.rankBody.innerHTML = `<div class="empty" style="padding:24px">정확한 쇼핑 순위 데이터가 없습니다.</div>`;
             return;
           }
           const byProduct = {};
