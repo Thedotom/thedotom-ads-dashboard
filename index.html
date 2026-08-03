@@ -1872,23 +1872,39 @@
         </tr>`;
       }).join("");
       const benchmark = analysis.historicalAdBenchmark || {};
-      const benchmarkTotal = (benchmark.groups || []).find(group => group.key === "all")?.totals || {};
-      const benchmarkRows = (benchmark.monthly || []).map(row => `<tr><td>${html(row.month || "")}</td><td>${number(row.impressions || 0)}</td><td>${number(row.clicks || 0)}</td><td>${money(row.adCost || 0)}</td><td>${money(row.adSales || 0)}</td><td>${roasText(row.roas || 0)}</td><td>${money(row.cpc || 0)}</td><td>${money(row.cpa || 0)}</td></tr>`).join("");
-      const mappingRows = (benchmark.groups || []).filter(group => group.key !== "all").map(group => `<tr><td>${html(group.label || "")}</td><td>${html(group.productId || "-")}</td><td>${money(group.totals?.adCost || 0)}</td><td>${money(group.totals?.adSales || 0)}</td><td>${roasText(group.totals?.roas || 0)}</td><td class="wrap">${html(group.mappingNote || "")}</td></tr>`).join("");
-      const historicalHtml = benchmark.monthly?.length ? `
+      const report2025 = benchmark.reports?.["2025"] || {};
+      const report2026 = benchmark.reports?.["2026"] || {};
+      const total2025 = report2025.totals || {};
+      const total2026 = report2026.totals || {};
+      const compare = benchmark.comparison2026vs2025 || {};
+      const changeText = metric => compare[metric]?.rate == null ? "-" : `${Number(compare[metric].rate) >= 0 ? "+" : ""}${rateText(compare[metric].rate)}`;
+      const month2025 = new Map((report2025.monthly || []).map(row => [String(row.month).slice(5), row]));
+      const month2026 = new Map((report2026.monthly || []).map(row => [String(row.month).slice(5), row]));
+      const comparisonRows = [...new Set([...month2025.keys(), ...month2026.keys()])].sort().map(month => {
+        const oldRow = month2025.get(month) || {}; const newRow = month2026.get(month) || {};
+        const costChange = Number(oldRow.adCost || 0) ? (Number(newRow.adCost || 0) - Number(oldRow.adCost || 0)) / Number(oldRow.adCost) : null;
+        const salesChange = Number(oldRow.adSales || 0) ? (Number(newRow.adSales || 0) - Number(oldRow.adSales || 0)) / Number(oldRow.adSales) : null;
+        return `<tr><td>${html(month)}월</td><td>${money(oldRow.adCost || 0)}</td><td>${money(newRow.adCost || 0)}</td><td>${signedRate(costChange)}</td><td>${money(oldRow.adSales || 0)}</td><td>${money(newRow.adSales || 0)}</td><td>${signedRate(salesChange)}</td><td>${roasText(oldRow.roas || 0)}</td><td>${roasText(newRow.roas || 0)}</td></tr>`;
+      }).join("");
+      const accountRows = (report2026.accounts || []).map(account => `<tr><td>${html(account.account || "")}</td><td>${money(account.totals?.adCost || 0)}</td><td>${money(account.totals?.adSales || 0)}</td><td>${roasText(account.totals?.roas || 0)}</td><td>${number(account.totals?.conversions || 0)}</td><td>${Number(account.totals?.adCost || 0) ? "정상 집계" : "실적 0원"}</td></tr>`).join("");
+      const mappingRows = (report2026.groups || []).map(group => `<tr><td>${html(group.label || "")}</td><td>${html(group.productId || "-")}</td><td>${money(group.totals?.adCost || 0)}</td><td>${money(group.totals?.adSales || 0)}</td><td>${roasText(group.totals?.roas || 0)}</td><td class="wrap">${html(group.mappingNote || "")}</td></tr>`).join("");
+      const historicalHtml = report2026.monthly?.length ? `
         <div class="product-category" style="margin-bottom:14px">
-          <div class="product-category-head"><div><h3 class="product-category-title">2025년 1~7월 광고 효율 기준</h3><div class="product-category-sub">네이버 검색광고 API 원본 · 상품 ID가 없는 과거 데이터는 캠페인명 기준으로 상품군 매핑</div></div></div>
+          <div class="product-category-head"><div><h3 class="product-category-title">2025·2026년 1~7월 네이버 광고 효율 비교</h3><div class="product-category-sub">네이버 광고 3개 계정 전체 포함 · 광고비·전환매출·ROAS 전년 동기간 비교</div></div></div>
           <div class="kpis" style="margin:12px 0 14px">
-            <div class="metric"><div class="label">누적 광고비</div><div class="value">${money(benchmarkTotal.adCost || 0)}</div><div class="sub">2025-01-01 ~ 2025-07-31</div></div>
-            <div class="metric"><div class="label">누적 광고매출</div><div class="value">${money(benchmarkTotal.adSales || 0)}</div><div class="sub">네이버 전환매출</div></div>
-            <div class="metric"><div class="label">광고 ROAS</div><div class="value">${roasText(benchmarkTotal.roas || 0)}</div><div class="sub">광고매출 / 광고비</div></div>
-            <div class="metric"><div class="label">전환수</div><div class="value">${number(benchmarkTotal.conversions || 0)}</div><div class="sub">7개월 누적</div></div>
+            <div class="metric"><div class="label">2026 광고비</div><div class="value">${money(total2026.adCost || 0)}</div><div class="sub">전년 대비 ${changeText("adCost")}</div></div>
+            <div class="metric"><div class="label">2026 광고매출</div><div class="value">${money(total2026.adSales || 0)}</div><div class="sub">전년 대비 ${changeText("adSales")}</div></div>
+            <div class="metric"><div class="label">2026 광고 ROAS</div><div class="value">${roasText(total2026.roas || 0)}</div><div class="sub">2025 ${roasText(total2025.roas || 0)}</div></div>
+            <div class="metric"><div class="label">2026 전환수</div><div class="value">${number(total2026.conversions || 0)}</div><div class="sub">전년 대비 ${changeText("conversions")}</div></div>
           </div>
-          <div class="pl-chart-panel" style="margin-bottom:14px"><div class="pl-chart-title">2025년 월별 광고비·광고매출 추세</div><div style="height:300px;position:relative"><canvas id="historicalAdChart"></canvas></div></div>
-          <div class="table-wrap" style="margin-bottom:14px"><table><thead><tr><th>월</th><th>노출</th><th>클릭</th><th>광고비</th><th>광고매출</th><th>ROAS</th><th>CPC</th><th>CPA</th></tr></thead><tbody>${benchmarkRows}</tbody></table></div>
-          <div class="table-wrap"><table><thead><tr><th>비교 상품군</th><th>연결 상품번호</th><th>광고비</th><th>광고매출</th><th>ROAS</th><th>매핑 기준·제한</th></tr></thead><tbody>${mappingRows}<tr><td>세트모음전</td><td>4843121925</td><td colspan="3">비교 불가</td><td class="wrap">2025 원본에서 직접 식별 가능한 전용 캠페인 또는 상품 ID가 없습니다.</td></tr></tbody></table></div>
+          <p class="slot-note">2026년 3월부터 전환매출과 ROAS가 크게 상승했습니다. 광고 성과 개선과 함께 전환 추적·집계 기준 변경 가능성도 있으므로 월별 추세를 함께 확인해야 합니다. 과거 원본에는 상품 ID가 없어 상품별 비교는 캠페인명 기준입니다.</p>
+          <div class="pl-chart-panel" style="margin-bottom:14px"><div class="pl-chart-title">2025 vs 2026 월별 광고 ROAS</div><div style="height:300px;position:relative"><canvas id="historicalAdChart"></canvas></div></div>
+          <div class="table-wrap" style="margin-bottom:14px"><table><thead><tr><th>월</th><th>2025 광고비</th><th>2026 광고비</th><th>증감</th><th>2025 광고매출</th><th>2026 광고매출</th><th>증감</th><th>2025 ROAS</th><th>2026 ROAS</th></tr></thead><tbody>${comparisonRows}</tbody></table></div>
+          <h3 class="product-category-title" style="margin:14px 0 8px">2026년 네이버 광고 계정 3개</h3>
+          <div class="table-wrap" style="margin-bottom:14px"><table><thead><tr><th>광고계정</th><th>광고비</th><th>광고매출</th><th>ROAS</th><th>전환수</th><th>상태</th></tr></thead><tbody>${accountRows}</tbody></table></div>
+          <h3 class="product-category-title" style="margin:14px 0 8px">슬롯 상품군 광고 참고치</h3>
+          <div class="table-wrap"><table><thead><tr><th>비교 상품군</th><th>연결 상품번호</th><th>광고비</th><th>광고매출</th><th>ROAS</th><th>매핑 기준·제한</th></tr></thead><tbody>${mappingRows}<tr><td>세트모음전</td><td>4843121925</td><td colspan="3">비교 불가</td><td class="wrap">원본에서 직접 식별 가능한 전용 캠페인 또는 상품 ID가 없습니다.</td></tr></tbody></table></div>
         </div>` : "";
-
       els.slotEfficiencyBody.innerHTML = `
         <div class="kpis" style="margin-bottom:14px">          <div class="metric"><div class="label">완료 슬롯비</div><div class="value">${money(summary.totalSlotCost || 0)}</div><div class="sub">${number(summary.completedCount || 0)}개 완료 구간</div></div>
           <div class="metric"><div class="label">슬롯 운영 기간 매출</div><div class="value">${money(summary.totalSales || 0)}</div><div class="sub">완료 구간 합계</div></div>
@@ -1912,11 +1928,12 @@
         </div>`;
       if (window._charts.historicalAd) window._charts.historicalAd.destroy();
       const historicalCanvas = document.getElementById("historicalAdChart");
-      if (historicalCanvas && benchmark.monthly?.length) {
-        window._charts.historicalAd = new Chart(historicalCanvas, { type: "bar", data: { labels: benchmark.monthly.map(row => row.month), datasets: [
-          { label: "광고비", data: benchmark.monthly.map(row => Number(row.adCost || 0)), backgroundColor: "rgba(245,158,11,.35)", borderColor: "#f59e0b", borderWidth: 1 },
-          { label: "광고매출", data: benchmark.monthly.map(row => Number(row.adSales || 0)), type: "line", borderColor: "#4865f4", backgroundColor: "#4865f4", tension: .25 }
-        ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, ticks: { callback: value => won.format(value) } } } } });
+      if (historicalCanvas && report2026.monthly?.length) {
+        const labels = (report2026.monthly || []).map(row => String(row.month).slice(5) + "월");
+        window._charts.historicalAd = new Chart(historicalCanvas, { type: "line", data: { labels, datasets: [
+          { label: "2025 ROAS", data: labels.map(label => Number(month2025.get(label.slice(0, 2))?.roas || 0) * 100), borderColor: "#94a3b8", backgroundColor: "#94a3b8", tension: .25 },
+          { label: "2026 ROAS", data: labels.map(label => Number(month2026.get(label.slice(0, 2))?.roas || 0) * 100), borderColor: "#4865f4", backgroundColor: "#4865f4", tension: .25 }
+        ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, ticks: { callback: value => `${number(value)}%` } } } } });
       }
 
       if (window._charts.slotEfficiency) window._charts.slotEfficiency.destroy();
@@ -2636,6 +2653,7 @@ function renderBrandContract() {
   </script>
 </body>
 </html>
+
 
 
 
