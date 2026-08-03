@@ -1,0 +1,7 @@
+Slides 1-5: original narrative retained but Korean text is rewritten cleanly and conclusions are tightened.
+Slide 6: source slide 2 duplicated for a 2025-vs-2026 driver bridge.
+Slide 7: source slide 4 duplicated for product-family benchmark comparison.
+Slide 8: source slide 6 duplicated for explicit slot continuation/stop rules.
+Slide 9: source slide 2 duplicated for evidence limits and required controls.
+Slide 10: source slide 6 duplicated for a 30-day action plan.
+No new visual theme, logo, chart image, or external asset is added.

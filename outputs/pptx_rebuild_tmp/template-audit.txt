@@ -1,0 +1,8 @@
+Communication job: 대표이사가 2026년 1~7월 광고 성과를 과대해석하지 않고, 계정 집중 리스크와 리워드 슬롯 검증 기준을 이해한 뒤 다음 30일의 예산·데이터 조치를 승인하도록 한다.
+
+Source structure: 16:9, dark navy executive-report theme, one title slide and five recurring analysis layouts.
+Reusable patterns: title/hero (source 1), four-metric + two-panel summary (source 2), line-chart + interpretation rail (source 3), three-row comparison table (source 4), three-row active-slot table (source 5), three-step action list (source 6).
+Typography/spacing: inherited source text boxes and styles are preserved; visible copy is shortened to fit the original frames.
+Insertion contract: every output slide is a duplicate of one source slide. Existing shapes are rewritten in place; no alternate visual template is introduced.
+
+Known source limitation: the official template inspection helper could not enumerate the PPTX package because its Windows unzip dependency failed. Artifact-tool direct import, full slide inspection, rendering, duplication, and export succeeded, so the direct imported structure is used as the source inventory.

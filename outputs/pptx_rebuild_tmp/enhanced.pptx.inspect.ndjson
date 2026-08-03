@@ -1,0 +1,245 @@
+{"kind":"deck","id":"pr/aa5ezu","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/6g9rwq","slide":1,"title":"경영진 보고","textShapes":8}
+{"kind":"textbox","id":"sh/sre58nil","slide":1,"text":"경영진 보고","textPreview":"경영진 보고","textChars":6,"textLines":1,"bbox":[64,74,300,28]}
+{"kind":"textbox","id":"sh/9crq9ob2","slide":1,"text":"2026년 1~7월\n광고·리워드 슬롯 효율 보고","textPreview":"2026년 1~7월 | 광고·리워드 슬롯 효율 보고","textChars":26,"textLines":2,"bbox":[64,142,760,150]}
+{"kind":"textbox","id":"sh/obi90jah","slide":1,"text":"전년 동기간 비교 · 네이버 광고 3계정 · 리워드 슬롯 3개","textPreview":"전년 동기간 비교 · 네이버 광고 3계정 · 리워드 슬롯 3개","textChars":34,"textLines":1,"bbox":[68,326,780,34]}
+{"kind":"shape","id":"sh/fm983etk","slide":1,"bbox":[870,120,300,360]}
+{"kind":"textbox","id":"sh/elgru9sf","slide":1,"text":"핵심 결론","textPreview":"핵심 결론","textChars":5,"textLines":1,"bbox":[912,166,220,28]}
+{"kind":"textbox","id":"sh/18rq5obq","slide":1,"text":"광고비\n+35.9%","textPreview":"광고비 | +35.9%","textChars":10,"textLines":2,"bbox":[912,220,220,74]}
+{"kind":"textbox","id":"sh/07i9wja5","slide":1,"text":"광고매출\n+312.8%","textPreview":"광고매출 | +312.8%","textChars":12,"textLines":2,"bbox":[912,320,220,74]}
+{"kind":"textbox","id":"sh/jitsfyt4","slide":1,"text":"ROAS\n1,240% → 3,767%","textPreview":"ROAS | 1,240% → 3,767%","textChars":20,"textLines":2,"bbox":[912,420,230,80]}
+{"kind":"textbox","id":"sh/yhkr6dsj","slide":1,"text":"보고 기준일  2026-08-03","textPreview":"보고 기준일  2026-08-03","textChars":18,"textLines":1,"bbox":[68,624,350,22]}
+{"kind":"notes","id":"nt/6g9rwq","slide":1,"text":"[Sources]\n- Naver Search Ads API monthly raw exports, 2025-01-01~2025-07-31 and 2026-01-01~2026-07-31\n- Thedotom slot efficiency Google Sheet export, updated 2026-08-03\n- Dashboard file: monthly-dashboard-2026-08.json"}
+{"kind":"slide","id":"sl/6pjic4","slide":2,"title":"경영진 요약","textShapes":20}
+{"kind":"textbox","id":"sh/apkn21of","slide":2,"text":"경영진 요약","textPreview":"경영진 요약","textChars":6,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/h03idwrm","slide":2,"text":"성과는 크게 개선됐지만, 계정 집중과 슬롯 검증 공백을 함께 관리해야 합니다","textPreview":"성과는 크게 개선됐지만, 계정 집중과 슬롯 검증 공백을 함께 관리해야 합니다","textChars":42,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/gzuhkra1","slide":2,"text":"2026 광고비","textPreview":"2026 광고비","textChars":8,"textLines":1,"bbox":[70,190,250,24]}
+{"kind":"textbox","id":"sh/32l0f69s","slide":2,"text":"₩185.8M","textPreview":"₩185.8M","textChars":7,"textLines":1,"bbox":[70,220,250,50]}
+{"kind":"textbox","id":"sh/i1czm1s7","slide":2,"text":"전년 대비 +35.9%","textPreview":"전년 대비 +35.9%","textChars":12,"textLines":1,"bbox":[70,274,250,32]}
+{"kind":"textbox","id":"sh/54nihwry","slide":2,"text":"2026 광고매출","textPreview":"2026 광고매출","textChars":9,"textLines":1,"bbox":[355,190,250,24]}
+{"kind":"textbox","id":"sh/43ehorad","slide":2,"text":"₩6,997.2M","textPreview":"₩6,997.2M","textChars":9,"textLines":1,"bbox":[355,220,250,50]}
+{"kind":"textbox","id":"sh/rq50j69o","slide":2,"text":"전년 대비 +312.8%","textPreview":"전년 대비 +312.8%","textChars":13,"textLines":1,"bbox":[355,274,250,32]}
+{"kind":"textbox","id":"sh/q5wzq1s3","slide":2,"text":"2026 ROAS","textPreview":"2026 ROAS","textChars":9,"textLines":1,"bbox":[640,190,250,24]}
+{"kind":"textbox","id":"sh/sv6x8vi5","slide":2,"text":"3,766.6%","textPreview":"3,766.6%","textChars":8,"textLines":1,"bbox":[640,220,250,50]}
+{"kind":"textbox","id":"sh/dgfe1gjq","slide":2,"text":"2025년 1,239.7%","textPreview":"2025년 1,239.7%","textChars":14,"textLines":1,"bbox":[640,274,250,32]}
+{"kind":"textbox","id":"sh/qt4f6l0z","slide":2,"text":"2026 전환수","textPreview":"2026 전환수","textChars":8,"textLines":1,"bbox":[925,190,250,24]}
+{"kind":"textbox","id":"sh/ruxwzq1k","slide":2,"text":"51,438건","textPreview":"51,438건","textChars":7,"textLines":1,"bbox":[925,220,250,50]}
+{"kind":"textbox","id":"sh/0j6xcvih","slide":2,"text":"전년 대비 +271.9%","textPreview":"전년 대비 +271.9%","textChars":13,"textLines":1,"bbox":[925,274,250,32]}
+{"kind":"shape","id":"sh/1kfy50zm","slide":2,"bbox":[70,350,540,220]}
+{"kind":"textbox","id":"sh/ehofal0b","slide":2,"text":"경영 판단","textPreview":"경영 판단","textChars":5,"textLines":1,"bbox":[100,378,220,28]}
+{"kind":"textbox","id":"sh/fixw3qhw","slide":2,"text":"① 광고 확대 성과 확인\n② 3월 추적 변화 영향 분리\n③ 슬롯은 종료 후 재판정","textPreview":"① 광고 확대 성과 확인 | ② 3월 추적 변화 영향 분리 | ③ 슬롯은 종료 후 재판정","textChars":45,"textLines":3,"bbox":[100,430,460,110]}
+{"kind":"shape","id":"sh/onqxgfid","slide":2,"bbox":[650,350,530,220]}
+{"kind":"textbox","id":"sh/pozy9kzy","slide":2,"text":"핵심 리스크","textPreview":"핵심 리스크","textChars":6,"textLines":1,"bbox":[680,378,160,28]}
+{"kind":"textbox","id":"sh/xsb6xgnq","slide":2,"text":"광고비의 97.1%가 한 계정에 집중됩니다. 7월 효율 둔화까지 겹쳐 단순 증액보다 검증 가능한 운영이 우선입니다.","textPreview":"광고비의 97.1%가 한 계정에 집중됩니다. 7월 효율 둔화까지 겹쳐 단순 증액보다 검증 가능한 운영이 우선입니다.","textChars":64,"textLines":1,"bbox":[680,430,450,105]}
+{"kind":"textbox","id":"sh/cr254b65","slide":2,"text":"광고·슬롯 효율 분석 | 2026-08-03","textPreview":"광고·슬롯 효율 분석 | 2026-08-03","textChars":24,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/bqtov65k","slide":2,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"notes","id":"nt/6pjic4","slide":2,"text":"[Sources]\n- Naver Search Ads API monthly raw exports, 2025-01-01~2025-07-31 and 2026-01-01~2026-07-31\n- Thedotom slot efficiency Google Sheet export, updated 2026-08-03\n- Dashboard file: monthly-dashboard-2026-08.json"}
+{"kind":"slide","id":"sl/7r48qj","slide":3,"title":"월별 성과 추이","textShapes":9}
+{"kind":"textbox","id":"sh/ovelwre5","slide":3,"text":"월별 성과 추이","textPreview":"월별 성과 추이","textChars":8,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/jep0fipw","slide":3,"text":"3월부터 급상승했지만, 4월 정점 이후 7월까지 3개월 연속 둔화했습니다","textPreview":"3월부터 급상승했지만, 4월 정점 이후 7월까지 3개월 연속 둔화했습니다","textChars":40,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"shape","id":"sh/tk7ilsny","slide":3,"bbox":[865,180,315,360]}
+{"kind":"textbox","id":"sh/8jy1sn6d","slide":3,"text":"월별 해석","textPreview":"월별 해석","textChars":5,"textLines":1,"bbox":[895,210,230,28]}
+{"kind":"textbox","id":"sh/7ip0j25s","slide":3,"text":"1~2월\n기존 효율 범위","textPreview":"1~2월 | 기존 효율 범위","textChars":13,"textLines":2,"bbox":[895,270,220,55]}
+{"kind":"textbox","id":"sh/6hgjqxo7","slide":3,"text":"3~4월\n추적·집계 전환점","textPreview":"3~4월 | 추적·집계 전환점","textChars":14,"textLines":2,"bbox":[895,350,220,55]}
+{"kind":"textbox","id":"sh/horipcnu","slide":3,"text":"5~7월\n고효율 유지, 둔화","textPreview":"5~7월 | 고효율 유지, 둔화","textChars":15,"textLines":2,"bbox":[895,430,220,55]}
+{"kind":"textbox","id":"sh/gni1w769","slide":3,"text":"7월 ROAS 3,473%는 여전히 높지만 4월 대비 33.7% 낮습니다. 증액은 한계효율 확인과 함께 진행해야 합니다.","textPreview":"7월 ROAS 3,473%는 여전히 높지만 4월 대비 33.7% 낮습니다. 증액은 한계효율 확인과 함께 진행해야 합니다.","textChars":67,"textLines":1,"bbox":[895,500,230,55]}
+{"kind":"textbox","id":"sh/2tw3uhwz","slide":3,"text":"광고·슬롯 효율 분석 | 2026-08-03","textPreview":"광고·슬롯 효율 분석 | 2026-08-03","textChars":24,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/3u5k3mdk","slide":3,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"chart","id":"ch/5onidg7y","slide":3,"name":"Chart","chartType":"line","bbox":[70,155,760,440]}
+{"kind":"notes","id":"nt/7r48qj","slide":3,"text":"[Sources]\n- Naver Search Ads API monthly raw exports, 2025-01-01~2025-07-31 and 2026-01-01~2026-07-31\n- Thedotom slot efficiency Google Sheet export, updated 2026-08-03\n- Dashboard file: monthly-dashboard-2026-08.json"}
+{"kind":"slide","id":"sl/22jhyu","slide":4,"title":"계정별 성과","textShapes":30}
+{"kind":"textbox","id":"sh/q54vytkf","slide":4,"text":"계정별 성과","textPreview":"계정별 성과","textChars":6,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/d4n2dov2","slide":4,"text":"광고비의 97.1%가 thedotomshop에 집중되어 성과와 리스크가 동시에 집중됩니다","textPreview":"광고비의 97.1%가 thedotomshop에 집중되어 성과와 리스크가 동시에 집중됩니다","textChars":49,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/cje14jeh","slide":4,"text":"광고계정","textPreview":"광고계정","textChars":4,"textLines":1,"bbox":[70,160,210,28]}
+{"kind":"textbox","id":"sh/z65kfed8","slide":4,"text":"광고비","textPreview":"광고비","textChars":3,"textLines":1,"bbox":[300,160,170,28]}
+{"kind":"textbox","id":"sh/y5wj69wn","slide":4,"text":"광고매출","textPreview":"광고매출","textChars":4,"textLines":1,"bbox":[530,160,170,28]}
+{"kind":"textbox","id":"sh/l8n2hove","slide":4,"text":"ROAS","textPreview":"ROAS","textChars":4,"textLines":1,"bbox":[760,160,170,28]}
+{"kind":"textbox","id":"sh/07e18jet","slide":4,"text":"전환수","textPreview":"전환수","textChars":3,"textLines":1,"bbox":[970,160,170,28]}
+{"kind":"textbox","id":"sh/napkjyd4","slide":4,"text":"판정","textPreview":"판정","textChars":2,"textLines":1,"bbox":[1120,160,170,28]}
+{"kind":"shape","id":"sh/m9wjatwz","slide":4,"bbox":[60,200,1160,80]}
+{"kind":"textbox","id":"sh/4faxgnuh","slide":4,"text":"thedotomshop","textPreview":"thedotomshop","textChars":12,"textLines":1,"bbox":[70,215,210,35]}
+{"kind":"textbox","id":"sh/pgjy9sv2","slide":4,"text":"₩180.5M","textPreview":"₩180.5M","textChars":7,"textLines":1,"bbox":[300,215,170,35]}
+{"kind":"textbox","id":"sh/2dsfedcb","slide":4,"text":"₩6,940.6M","textPreview":"₩6,940.6M","textChars":9,"textLines":1,"bbox":[530,215,170,35]}
+{"kind":"textbox","id":"sh/3e1w7idw","slide":4,"text":"3,846%","textPreview":"3,846%","textChars":6,"textLines":1,"bbox":[760,215,170,35]}
+{"kind":"textbox","id":"sh/cjuxk7ud","slide":4,"text":"51,241","textPreview":"51,241","textChars":6,"textLines":1,"bbox":[970,215,170,35]}
+{"kind":"textbox","id":"sh/dk3ydsvy","slide":4,"text":"핵심","textPreview":"핵심","textChars":2,"textLines":1,"bbox":[1120,215,170,35]}
+{"kind":"shape","id":"sh/qhsfixc7","slide":4,"bbox":[60,305,1160,80]}
+{"kind":"textbox","id":"sh/ri1gb2ds","slide":4,"text":"검색광고","textPreview":"검색광고","textChars":4,"textLines":1,"bbox":[70,320,210,35]}
+{"kind":"textbox","id":"sh/0nuxo7up","slide":4,"text":"₩5.3M","textPreview":"₩5.3M","textChars":5,"textLines":1,"bbox":[300,320,170,35]}
+{"kind":"textbox","id":"sh/183yhcvu","slide":4,"text":"₩56.6M","textPreview":"₩56.6M","textChars":6,"textLines":1,"bbox":[530,320,170,35]}
+{"kind":"textbox","id":"sh/94ze1cne","slide":4,"text":"1,066%","textPreview":"1,066%","textChars":6,"textLines":1,"bbox":[760,320,170,35]}
+{"kind":"textbox","id":"sh/83qxs7mt","slide":4,"text":"197","textPreview":"197","textChars":3,"textLines":1,"bbox":[970,320,170,35]}
+{"kind":"textbox","id":"sh/n2hwz258","slide":4,"text":"보조","textPreview":"보조","textChars":2,"textLines":1,"bbox":[1120,320,170,35]}
+{"kind":"shape","id":"sh/m18fqx4n","slide":4,"bbox":[60,410,1160,80]}
+{"kind":"textbox","id":"sh/hsjy5cna","slide":4,"text":"별도 광고","textPreview":"별도 광고","textChars":5,"textLines":1,"bbox":[70,425,210,35]}
+{"kind":"textbox","id":"sh/w7axw7mp","slide":4,"text":"₩0.0M","textPreview":"₩0.0M","textChars":5,"textLines":1,"bbox":[300,425,170,35]}
+{"kind":"textbox","id":"sh/v61g3254","slide":4,"text":"₩0.0M","textPreview":"₩0.0M","textChars":5,"textLines":1,"bbox":[530,425,170,35]}
+{"kind":"textbox","id":"sh/u58fuh4j","slide":4,"text":"0%","textPreview":"0%","textChars":2,"textLines":1,"bbox":[760,425,170,35]}
+{"kind":"textbox","id":"sh/dcfetsn6","slide":4,"text":"0","textPreview":"0","textChars":1,"textLines":1,"bbox":[970,425,170,35]}
+{"kind":"textbox","id":"sh/cb6xknml","slide":4,"text":"미집행","textPreview":"미집행","textChars":3,"textLines":1,"bbox":[1120,425,170,35]}
+{"kind":"textbox","id":"sh/2h4butkj","slide":4,"text":"계정 운영 판단","textPreview":"계정 운영 판단","textChars":8,"textLines":1,"bbox":[70,565,220,28]}
+{"kind":"textbox","id":"sh/3idc3ylo","slide":4,"text":"주력 계정은 유지하되 캠페인 목적·전환 태그·예산 상한을 분리합니다. 보조 계정은 확대보다 역할 재정의가 우선입니다.","textPreview":"주력 계정은 유지하되 캠페인 목적·전환 태그·예산 상한을 분리합니다. 보조 계정은 확대보다 역할 재정의가 우선입니다.","textChars":65,"textLines":1,"bbox":[300,557,860,62]}
+{"kind":"textbox","id":"sh/o3mdwj29","slide":4,"text":"광고·슬롯 효율 분석 | 2026-08-03","textPreview":"광고·슬롯 효율 분석 | 2026-08-03","textChars":24,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/p4vu5o3u","slide":4,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"notes","id":"nt/22jhyu","slide":4,"text":"[Sources]\n- Naver Search Ads API monthly raw exports, 2025-01-01~2025-07-31 and 2026-01-01~2026-07-31\n- Thedotom slot efficiency Google Sheet export, updated 2026-08-03\n- Dashboard file: monthly-dashboard-2026-08.json"}
+{"kind":"slide","id":"sl/b7qkb9","slide":5,"title":"현재 슬롯 운영","textShapes":32}
+{"kind":"textbox","id":"sh/7a58vm9c","slide":5,"text":"현재 슬롯 운영","textPreview":"현재 슬롯 운영","textChars":8,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/bq5o7elc","slide":5,"text":"총 132만원을 3개 상품에 배분했으며, 종료 전이므로 효율 판정은 아직 보류합니다","textPreview":"총 132만원을 3개 상품에 배분했으며, 종료 전이므로 효율 판정은 아직 보류합니다","textChars":46,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/apwne9kr","slide":5,"text":"상품","textPreview":"상품","textChars":2,"textLines":1,"bbox":[70,160,170,28]}
+{"kind":"textbox","id":"sh/94nm5436","slide":5,"text":"기간","textPreview":"기간","textChars":2,"textLines":1,"bbox":[275,160,170,28]}
+{"kind":"textbox","id":"sh/o3e5cz2l","slide":5,"text":"슬롯비","textPreview":"슬롯비","textChars":3,"textLines":1,"bbox":[455,160,170,28]}
+{"kind":"textbox","id":"sh/n2543ul0","slide":5,"text":"누적 매출","textPreview":"누적 매출","textChars":5,"textLines":1,"bbox":[640,160,170,28]}
+{"kind":"textbox","id":"sh/m1wnapkf","slide":5,"text":"광고비","textPreview":"광고비","textChars":3,"textLines":1,"bbox":[820,160,170,28]}
+{"kind":"textbox","id":"sh/t0r6h83a","slide":5,"text":"판정","textPreview":"판정","textChars":2,"textLines":1,"bbox":[990,160,170,28]}
+{"kind":"shape","id":"sh/8zi5o325","slide":5,"bbox":[60,200,1160,80]}
+{"kind":"textbox","id":"sh/upgbulw3","slide":5,"text":"수건단품","textPreview":"수건단품","textChars":4,"textLines":1,"bbox":[70,215,170,35]}
+{"kind":"textbox","id":"sh/fqpc3qdo","slide":5,"text":"07-31~08-09","textPreview":"07-31~08-09","textChars":11,"textLines":1,"bbox":[275,215,170,35]}
+{"kind":"textbox","id":"sh/gritwvet","slide":5,"text":"₩440K","textPreview":"₩440K","textChars":5,"textLines":1,"bbox":[455,215,170,35]}
+{"kind":"textbox","id":"sh/hsru50ve","slide":5,"text":"₩0.72M","textPreview":"₩0.72M","textChars":6,"textLines":1,"bbox":[640,215,170,35]}
+{"kind":"textbox","id":"sh/61gbq1wr","slide":5,"text":"₩215K","textPreview":"₩215K","textChars":5,"textLines":1,"bbox":[820,215,170,35]}
+{"kind":"textbox","id":"sh/72pcz6dc","slide":5,"text":"관찰중","textPreview":"관찰중","textChars":3,"textLines":1,"bbox":[990,215,170,35]}
+{"kind":"shape","id":"sh/s3ytsbex","slide":5,"bbox":[60,305,1160,80]}
+{"kind":"textbox","id":"sh/t47u1gvi","slide":5,"text":"세트모음전","textPreview":"세트모음전","textChars":5,"textLines":1,"bbox":[70,320,170,35]}
+{"kind":"textbox","id":"sh/qx0v25cb","slide":5,"text":"07-31~08-09","textPreview":"07-31~08-09","textChars":11,"textLines":1,"bbox":[275,320,170,35]}
+{"kind":"textbox","id":"sh/ry9cbadg","slide":5,"text":"₩660K","textPreview":"₩660K","textChars":5,"textLines":1,"bbox":[455,320,170,35]}
+{"kind":"textbox","id":"sh/n2l832t8","slide":5,"text":"₩0.91M","textPreview":"₩0.91M","textChars":6,"textLines":1,"bbox":[640,320,170,35]}
+{"kind":"textbox","id":"sh/m1cruxcn","slide":5,"text":"₩66K","textPreview":"₩66K","textChars":4,"textLines":1,"bbox":[820,320,170,35]}
+{"kind":"textbox","id":"sh/943q5cby","slide":5,"text":"관찰중","textPreview":"관찰중","textChars":3,"textLines":1,"bbox":[990,320,170,35]}
+{"kind":"shape","id":"sh/83u9w7ut","slide":5,"bbox":[60,410,1160,80]}
+{"kind":"textbox","id":"sh/v6ls72t4","slide":5,"text":"조구만고리수건","textPreview":"조구만고리수건","textChars":7,"textLines":1,"bbox":[70,425,170,35]}
+{"kind":"textbox","id":"sh/a5cryhcj","slide":5,"text":"07-31~08-09","textPreview":"07-31~08-09","textChars":11,"textLines":1,"bbox":[275,425,170,35]}
+{"kind":"textbox","id":"sh/x8na9cba","slide":5,"text":"₩220K","textPreview":"₩220K","textChars":5,"textLines":1,"bbox":[455,425,170,35]}
+{"kind":"textbox","id":"sh/w7u907up","slide":5,"text":"₩0.23M","textPreview":"₩0.23M","textChars":6,"textLines":1,"bbox":[640,425,170,35]}
+{"kind":"textbox","id":"sh/ja5sbmtg","slide":5,"text":"₩0K","textPreview":"₩0K","textChars":3,"textLines":1,"bbox":[820,425,170,35]}
+{"kind":"textbox","id":"sh/i9wr2hcv","slide":5,"text":"관찰중","textPreview":"관찰중","textChars":3,"textLines":1,"bbox":[990,425,170,35]}
+{"kind":"shape","id":"sh/gzypsrqt","slide":5,"bbox":[70,550,1110,82]}
+{"kind":"textbox","id":"sh/h07q1wre","slide":5,"text":"현재 부분집계","textPreview":"현재 부분집계","textChars":7,"textLines":1,"bbox":[100,574,180,28]}
+{"kind":"textbox","id":"sh/uxw7qh83","slide":5,"text":"슬롯비 ₩1.32M","textPreview":"슬롯비 ₩1.32M","textChars":10,"textLines":1,"bbox":[310,570,230,32]}
+{"kind":"textbox","id":"sh/fy58zm98","slide":5,"text":"매출 ₩1.87M","textPreview":"매출 ₩1.87M","textChars":9,"textLines":1,"bbox":[565,570,230,32]}
+{"kind":"textbox","id":"sh/sbepo7qx","slide":5,"text":"광고비 ₩0.41M","textPreview":"광고비 ₩0.41M","textChars":10,"textLines":1,"bbox":[820,570,230,32]}
+{"kind":"textbox","id":"sh/tcnqxcri","slide":5,"text":"광고·슬롯 효율 분석 | 2026-08-03","textPreview":"광고·슬롯 효율 분석 | 2026-08-03","textChars":24,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/69w7mh8r","slide":5,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"notes","id":"nt/b7qkb9","slide":5,"text":"[Sources]\n- Naver Search Ads API monthly raw exports, 2025-01-01~2025-07-31 and 2026-01-01~2026-07-31\n- Thedotom slot efficiency Google Sheet export, updated 2026-08-03\n- Dashboard file: monthly-dashboard-2026-08.json"}
+{"kind":"slide","id":"sl/yrtab5","slide":6,"title":"성과 개선의 구조","textShapes":20}
+{"kind":"textbox","id":"sh/nuhgjito","slide":6,"text":"성과 개선의 구조","textPreview":"성과 개선의 구조","textChars":9,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/i9gju9g7","slide":6,"text":"광고비보다 전환·광고매출이 훨씬 빠르게 늘었지만, 3월의 구조적 단절을 분리해야 합니다","textPreview":"광고비보다 전환·광고매출이 훨씬 빠르게 늘었지만, 3월의 구조적 단절을 분리해야 합니다","textChars":48,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/japknexs","slide":6,"text":"노출수","textPreview":"노출수","textChars":3,"textLines":1,"bbox":[70,190,250,24]}
+{"kind":"textbox","id":"sh/sfy10jy9","slide":6,"text":"-34.8%","textPreview":"-34.8%","textChars":6,"textLines":1,"bbox":[70,220,250,50]}
+{"kind":"textbox","id":"sh/tgr2tofu","slide":6,"text":"5.98M → 3.90M","textPreview":"5.98M → 3.90M","textChars":13,"textLines":1,"bbox":[70,274,250,32]}
+{"kind":"textbox","id":"sh/6dgjy9gj","slide":6,"text":"클릭수","textPreview":"클릭수","textChars":3,"textLines":1,"bbox":[355,190,250,24]}
+{"kind":"textbox","id":"sh/7epkrexo","slide":6,"text":"+60.8%","textPreview":"+60.8%","textChars":6,"textLines":1,"bbox":[355,220,250,50]}
+{"kind":"textbox","id":"sh/gjil43yl","slide":6,"text":"73.7K → 118.4K","textPreview":"73.7K → 118.4K","textChars":14,"textLines":1,"bbox":[355,274,250,32]}
+{"kind":"textbox","id":"sh/h4r2xof6","slide":6,"text":"전환수","textPreview":"전환수","textChars":3,"textLines":1,"bbox":[640,190,250,24]}
+{"kind":"textbox","id":"sh/t4zydc36","slide":6,"text":"+271.9%","textPreview":"+271.9%","textChars":7,"textLines":1,"bbox":[640,220,250,50]}
+{"kind":"textbox","id":"sh/sjqh472l","slide":6,"text":"13.8K → 51.4K","textPreview":"13.8K → 51.4K","textChars":13,"textLines":1,"bbox":[640,274,250,32]}
+{"kind":"textbox","id":"sh/7ihgb2l0","slide":6,"text":"광고매출","textPreview":"광고매출","textChars":4,"textLines":1,"bbox":[925,190,250,24]}
+{"kind":"textbox","id":"sh/6hoz2xkf","slide":6,"text":"+312.8%","textPreview":"+312.8%","textChars":7,"textLines":1,"bbox":[925,220,250,50]}
+{"kind":"textbox","id":"sh/h8zihcj2","slide":6,"text":"₩1.69B → ₩7.00B","textPreview":"₩1.69B → ₩7.00B","textChars":15,"textLines":1,"bbox":[925,274,250,32]}
+{"kind":"shape","id":"sh/g7qh872x","slide":6,"bbox":[70,350,540,220]}
+{"kind":"textbox","id":"sh/f6h0f2lc","slide":6,"text":"확인된 변화","textPreview":"확인된 변화","textChars":6,"textLines":1,"bbox":[100,378,220,28]}
+{"kind":"textbox","id":"sh/u58z6xkr","slide":6,"text":"CPC는 15.5% 하락했고 CVR은 18.8%에서 43.4%로 상승했습니다. 개선의 중심은 유입량보다 전환 성과입니다.","textPreview":"CPC는 15.5% 하락했고 CVR은 18.8%에서 43.4%로 상승했습니다. 개선의 중심은 유입량보다 전환 성과입니다.","textChars":67,"textLines":1,"bbox":[100,430,460,110]}
+{"kind":"shape","id":"sh/xcfy5s3y","slide":6,"bbox":[650,350,530,220]}
+{"kind":"textbox","id":"sh/wb6hwn2d","slide":6,"text":"검증할 변화","textPreview":"검증할 변화","textChars":6,"textLines":1,"bbox":[680,378,160,28]}
+{"kind":"textbox","id":"sh/ovqhsna9","slide":6,"text":"3월 ROAS가 1,046%에서 3,905%로 급변했습니다. 실제 판매 개선과 추적·집계 변경 효과를 분리해야 합니다.","textPreview":"3월 ROAS가 1,046%에서 3,905%로 급변했습니다. 실제 판매 개선과 추적·집계 변경 효과를 분리해야 합니다.","textChars":66,"textLines":1,"bbox":[680,430,450,105]}
+{"kind":"textbox","id":"sh/9wjilsbu","slide":6,"text":"광고·슬롯 효율 분석 | 2026-08-03","textPreview":"광고·슬롯 효율 분석 | 2026-08-03","textChars":24,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/2t8zqds3","slide":6,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"notes","id":"nt/yrtab5","slide":6,"text":"[Sources]\n- Naver Search Ads API monthly raw exports, 2025-01-01~2025-07-31 and 2026-01-01~2026-07-31\n- Thedotom slot efficiency Google Sheet export, updated 2026-08-03\n- Dashboard file: monthly-dashboard-2026-08.json"}
+{"kind":"slide","id":"sl/1zksva","slide":7,"title":"상품군 광고 벤치마크","textShapes":30}
+{"kind":"textbox","id":"sh/u1w7qx83","slide":7,"text":"상품군 광고 벤치마크","textPreview":"상품군 광고 벤치마크","textChars":11,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/ho7il4vi","slide":7,"text":"2026년 ROAS는 전년 대비 상승했지만, 7월에는 상품별 방향이 갈렸습니다","textPreview":"2026년 ROAS는 전년 대비 상승했지만, 7월에는 상품별 방향이 갈렸습니다","textChars":43,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/gnyhczux","slide":7,"text":"상품군","textPreview":"상품군","textChars":3,"textLines":1,"bbox":[70,160,210,28]}
+{"kind":"textbox","id":"sh/7y50fudg","slide":7,"text":"2025 ROAS","textPreview":"2025 ROAS","textChars":9,"textLines":1,"bbox":[300,160,170,28]}
+{"kind":"textbox","id":"sh/6xwz6pcv","slide":7,"text":"2026 ROAS","textPreview":"2026 ROAS","textChars":9,"textLines":1,"bbox":[530,160,170,28]}
+{"kind":"textbox","id":"sh/tknihkv6","slide":7,"text":"증가폭","textPreview":"증가폭","textChars":3,"textLines":1,"bbox":[760,160,170,28]}
+{"kind":"textbox","id":"sh/8jeh8ful","slide":7,"text":"2026.07","textPreview":"2026.07","textChars":7,"textLines":1,"bbox":[970,160,170,28]}
+{"kind":"textbox","id":"sh/ju50bad4","slide":7,"text":"판정","textPreview":"판정","textChars":2,"textLines":1,"bbox":[1120,160,170,28]}
+{"kind":"shape","id":"sh/ytcz25wj","slide":7,"bbox":[60,200,1160,80]}
+{"kind":"textbox","id":"sh/4f61gvmp","slide":7,"text":"수건 상품군","textPreview":"수건 상품군","textChars":6,"textLines":1,"bbox":[70,215,210,35]}
+{"kind":"textbox","id":"sh/5gf2p03a","slide":7,"text":"1,412%","textPreview":"1,412%","textChars":6,"textLines":1,"bbox":[300,215,170,35]}
+{"kind":"textbox","id":"sh/idojel4j","slide":7,"text":"5,740%","textPreview":"5,740%","textChars":6,"textLines":1,"bbox":[530,215,170,35]}
+{"kind":"textbox","id":"sh/3ex0nql4","slide":7,"text":"+4,328%p","textPreview":"+4,328%p","textChars":8,"textLines":1,"bbox":[760,215,170,35]}
+{"kind":"textbox","id":"sh/gbm1cvmd","slide":7,"text":"7,450%","textPreview":"7,450%","textChars":6,"textLines":1,"bbox":[970,215,170,35]}
+{"kind":"textbox","id":"sh/hcvil03y","slide":7,"text":"강세","textPreview":"강세","textChars":2,"textLines":1,"bbox":[1120,215,170,35]}
+{"kind":"shape","id":"sh/up4jal4n","slide":7,"bbox":[60,305,1160,80]}
+{"kind":"textbox","id":"sh/vad0jqls","slide":7,"text":"조구만 광고군","textPreview":"조구만 광고군","textChars":7,"textLines":1,"bbox":[70,320,210,35]}
+{"kind":"textbox","id":"sh/07q1ofmx","slide":7,"text":"1,777%","textPreview":"1,777%","textChars":6,"textLines":1,"bbox":[300,320,170,35]}
+{"kind":"textbox","id":"sh/18z2xk3i","slide":7,"text":"5,097%","textPreview":"5,097%","textChars":6,"textLines":1,"bbox":[530,320,170,35]}
+{"kind":"textbox","id":"sh/94vi1kvm","slide":7,"text":"+3,320%p","textPreview":"+3,320%p","textChars":8,"textLines":1,"bbox":[760,320,170,35]}
+{"kind":"textbox","id":"sh/o3m18fe1","slide":7,"text":"4,586%","textPreview":"4,586%","textChars":6,"textLines":1,"bbox":[970,320,170,35]}
+{"kind":"textbox","id":"sh/n2d0zadg","slide":7,"text":"둔화","textPreview":"둔화","textChars":2,"textLines":1,"bbox":[1120,320,170,35]}
+{"kind":"shape","id":"sh/m14j65wv","slide":7,"bbox":[60,410,1160,80]}
+{"kind":"textbox","id":"sh/10vix0va","slide":7,"text":"전체 계정","textPreview":"전체 계정","textChars":5,"textLines":1,"bbox":[70,425,210,35]}
+{"kind":"textbox","id":"sh/0zm14fep","slide":7,"text":"1,240%","textPreview":"1,240%","textChars":6,"textLines":1,"bbox":[300,425,170,35]}
+{"kind":"textbox","id":"sh/zyt0vad4","slide":7,"text":"3,767%","textPreview":"3,767%","textChars":6,"textLines":1,"bbox":[530,425,170,35]}
+{"kind":"textbox","id":"sh/exkj25wz","slide":7,"text":"+2,527%p","textPreview":"+2,527%p","textChars":8,"textLines":1,"bbox":[760,425,170,35]}
+{"kind":"textbox","id":"sh/dwbit0ve","slide":7,"text":"3,473%","textPreview":"3,473%","textChars":6,"textLines":1,"bbox":[970,425,170,35]}
+{"kind":"textbox","id":"sh/cv210vet","slide":7,"text":"둔화","textPreview":"둔화","textChars":2,"textLines":1,"bbox":[1120,425,170,35]}
+{"kind":"textbox","id":"sh/ipg7ex8f","slide":7,"text":"예산 배분 시사점","textPreview":"예산 배분 시사점","textChars":9,"textLines":1,"bbox":[70,565,220,28]}
+{"kind":"textbox","id":"sh/3qpon2p0","slide":7,"text":"수건 상품군은 7월에도 개선됐지만 조구만은 6월 대비 23.6% 하락했습니다. 증액분은 상품군별 한계효율로 분리합니다.","textPreview":"수건 상품군은 7월에도 개선됐지만 조구만은 6월 대비 23.6% 하락했습니다. 증액분은 상품군별 한계효율로 분리합니다.","textChars":66,"textLines":1,"bbox":[300,557,860,62]}
+{"kind":"textbox","id":"sh/4rypg7ql","slide":7,"text":"광고·슬롯 효율 분석 | 2026-08-03","textPreview":"광고·슬롯 효율 분석 | 2026-08-03","textChars":24,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/5s7qpc7q","slide":7,"text":"7","textPreview":"7","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"notes","id":"nt/1zksva","slide":7,"text":"[Sources]\n- Naver Search Ads API monthly raw exports, 2025-01-01~2025-07-31 and 2026-01-01~2026-07-31\n- Thedotom slot efficiency Google Sheet export, updated 2026-08-03\n- Dashboard file: monthly-dashboard-2026-08.json"}
+{"kind":"slide","id":"sl/l3lb62","slide":8,"title":"슬롯 판정 기준","textShapes":14}
+{"kind":"textbox","id":"sh/bmpkzqdo","slide":8,"text":"슬롯 판정 기준","textPreview":"슬롯 판정 기준","textChars":8,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/wv2hkryd","slide":8,"text":"슬롯은 매출 규모가 아니라 ‘추가로 만든 성과’와 순위 유지비용으로 판단합니다","textPreview":"슬롯은 매출 규모가 아니라 ‘추가로 만든 성과’와 순위 유지비용으로 판단합니다","textChars":43,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/hwbytwfy","slide":8,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[70,170,70,40]}
+{"kind":"textbox","id":"sh/ix4zm1gj","slide":8,"text":"증분매출 확인","textPreview":"증분매출 확인","textChars":7,"textLines":1,"bbox":[160,170,360,35]}
+{"kind":"textbox","id":"sh/jydgv6xo","slide":8,"text":"운영 전 동일 기간 대비 매출 증가분을 계산하고 광고·프로모션 중복 영향을 별도 표시","textPreview":"운영 전 동일 기간 대비 매출 증가분을 계산하고 광고·프로모션 중복 영향을 별도 표시","textChars":47,"textLines":1,"bbox":[520,170,650,64]}
+{"kind":"shape","id":"sh/4zmhoby9","slide":8,"bbox":[70,265,1100,1]}
+{"kind":"textbox","id":"sh/50vyxgfu","slide":8,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[70,315,70,40]}
+{"kind":"textbox","id":"sh/y10faxgz","slide":8,"text":"비용 회수 기준","textPreview":"비용 회수 기준","textChars":8,"textLines":1,"bbox":[160,315,360,35]}
+{"kind":"textbox","id":"sh/z29gj2xk","slide":8,"text":"증분매출÷슬롯비 3배 이상 유지, 1~3배 재검토, 1배 미만 중단 후보","textPreview":"증분매출÷슬롯비 3배 이상 유지, 1~3배 재검토, 1배 미만 중단 후보","textChars":40,"textLines":1,"bbox":[520,315,650,64]}
+{"kind":"shape","id":"sh/7u947adg","slide":8,"bbox":[70,410,1100,1]}
+{"kind":"textbox","id":"sh/mt03y5cb","slide":8,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[70,460,70,40]}
+{"kind":"textbox","id":"sh/9grm9kbm","slide":8,"text":"순위·지속성 확인","textPreview":"순위·지속성 확인","textChars":9,"textLines":1,"bbox":[160,460,360,35]}
+{"kind":"textbox","id":"sh/8vil0fu1","slide":8,"text":"검색 5위 이내 유지와 종료 후 7일간 매출·순위 잔존효과를 함께 검증","textPreview":"검색 5위 이내 유지와 종료 후 7일간 매출·순위 잔존효과를 함께 검증","textChars":39,"textLines":1,"bbox":[520,460,650,64]}
+{"kind":"shape","id":"sh/zq943qdk","slide":8,"bbox":[70,610,1100,50]}
+{"kind":"textbox","id":"sh/ypg3ulcz","slide":8,"text":"제안: 8월 10일 종료 후 7일 관찰 → 8월 18일 상품별 유지·축소·중단 결정","textPreview":"제안: 8월 10일 종료 후 7일 관찰 → 8월 18일 상품별 유지·축소·중단 결정","textChars":46,"textLines":1,"bbox":[110,622,1020,26]}
+{"kind":"textbox","id":"sh/lsrm50vq","slide":8,"text":"광고·슬롯 효율 분석 | 2026-08-03","textPreview":"광고·슬롯 효율 분석 | 2026-08-03","textChars":24,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/krilwvu5","slide":8,"text":"8","textPreview":"8","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"notes","id":"nt/l3lb62","slide":8,"text":"[Sources]\n- Naver Search Ads API monthly raw exports, 2025-01-01~2025-07-31 and 2026-01-01~2026-07-31\n- Thedotom slot efficiency Google Sheet export, updated 2026-08-03\n- Dashboard file: monthly-dashboard-2026-08.json"}
+{"kind":"slide","id":"sl/lmf4z3","slide":9,"title":"해석 범위와 한계","textShapes":20}
+{"kind":"textbox","id":"sh/0ryhw3yh","slide":9,"text":"해석 범위와 한계","textPreview":"해석 범위와 한계","textChars":9,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/bylgrm98","slide":9,"text":"현재 수치만으로 광고와 슬롯의 순수 인과효과를 확정할 수는 없습니다","textPreview":"현재 수치만으로 광고와 슬롯의 순수 인과효과를 확정할 수는 없습니다","textChars":37,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/qxcfyhsn","slide":9,"text":"확정 가능","textPreview":"확정 가능","textChars":5,"textLines":1,"bbox":[70,190,250,24]}
+{"kind":"textbox","id":"sh/lonyxwra","slide":9,"text":"광고 집행·전환","textPreview":"광고 집행·전환","textChars":8,"textLines":1,"bbox":[70,220,250,50]}
+{"kind":"textbox","id":"sh/03uh4rqp","slide":9,"text":"API 집계 기준 비교","textPreview":"API 집계 기준 비교","textChars":12,"textLines":1,"bbox":[70,274,250,32]}
+{"kind":"textbox","id":"sh/z2lgv694","slide":9,"text":"주의 필요","textPreview":"주의 필요","textChars":5,"textLines":1,"bbox":[355,190,250,24]}
+{"kind":"textbox","id":"sh/y1cz218z","slide":9,"text":"전환매출","textPreview":"전환매출","textChars":4,"textLines":1,"bbox":[355,220,250,50]}
+{"kind":"textbox","id":"sh/9sny1grm","slide":9,"text":"추적 변경 영향 가능","textPreview":"추적 변경 영향 가능","textChars":11,"textLines":1,"bbox":[355,274,250,32]}
+{"kind":"textbox","id":"sh/8reh8bq1","slide":9,"text":"판정 보류","textPreview":"판정 보류","textChars":5,"textLines":1,"bbox":[640,190,250,24]}
+{"kind":"textbox","id":"sh/6pobalk3","slide":9,"text":"슬롯 증분효과","textPreview":"슬롯 증분효과","textChars":7,"textLines":1,"bbox":[640,220,250,50]}
+{"kind":"textbox","id":"sh/7qxsj6lo","slide":9,"text":"대조기간 필요","textPreview":"대조기간 필요","textChars":7,"textLines":1,"bbox":[640,274,250,32]}
+{"kind":"textbox","id":"sh/8r6tcb29","slide":9,"text":"추가 필요","textPreview":"추가 필요","textChars":5,"textLines":1,"bbox":[925,190,250,24]}
+{"kind":"textbox","id":"sh/tsfalg3u","slide":9,"text":"수익성","textPreview":"수익성","textChars":3,"textLines":1,"bbox":[925,220,250,50]}
+{"kind":"textbox","id":"sh/udobelkf","slide":9,"text":"매출총이익률 필요","textPreview":"매출총이익률 필요","textChars":9,"textLines":1,"bbox":[925,274,250,32]}
+{"kind":"shape","id":"sh/vexcnql0","slide":9,"bbox":[70,350,540,220]}
+{"kind":"textbox","id":"sh/gf6tgv25","slide":9,"text":"이번 보고서의 원칙","textPreview":"이번 보고서의 원칙","textChars":10,"textLines":1,"bbox":[100,378,220,28]}
+{"kind":"textbox","id":"sh/hgzup03q","slide":9,"text":"성과 규모와 추세는 보고하되 인과효과는 대조기간 확보 후 확정합니다. 광고 ROAS와 슬롯 효율은 별도 관리합니다.","textPreview":"성과 규모와 추세는 보고하되 인과효과는 대조기간 확보 후 확정합니다. 광고 ROAS와 슬롯 효율은 별도 관리합니다.","textChars":64,"textLines":1,"bbox":[100,430,460,110]}
+{"kind":"shape","id":"sh/ax4b214v","slide":9,"bbox":[650,350,530,220]}
+{"kind":"textbox","id":"sh/bidsbmlg","slide":9,"text":"필수 데이터","textPreview":"필수 데이터","textChars":6,"textLines":1,"bbox":[680,378,160,28]}
+{"kind":"textbox","id":"sh/fqpgnyxw","slide":9,"text":"① 3월 집계 변경 이력 ② 슬롯 전·중·후 일매출·순위 ③ 상품별 매출총이익률 ④ 예산 변경 로그","textPreview":"① 3월 집계 변경 이력 ② 슬롯 전·중·후 일매출·순위 ③ 상품별 매출총이익률 ④ 예산 변경 로그","textChars":55,"textLines":1,"bbox":[680,430,450,105]}
+{"kind":"textbox","id":"sh/epgzutgr","slide":9,"text":"광고·슬롯 효율 분석 | 2026-08-03","textPreview":"광고·슬롯 효율 분석 | 2026-08-03","textChars":24,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/1cryp8f2","slide":9,"text":"9","textPreview":"9","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"notes","id":"nt/lmf4z3","slide":9,"text":"[Sources]\n- Naver Search Ads API monthly raw exports, 2025-01-01~2025-07-31 and 2026-01-01~2026-07-31\n- Thedotom slot efficiency Google Sheet export, updated 2026-08-03\n- Dashboard file: monthly-dashboard-2026-08.json"}
+{"kind":"slide","id":"sl/sq8390","slide":10,"title":"향후 30일 실행안","textShapes":14}
+{"kind":"textbox","id":"sh/4jq1wj6l","slide":10,"text":"향후 30일 실행안","textPreview":"향후 30일 실행안","textChars":10,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/d8n6tcna","slide":10,"text":"측정 기준을 고정하고 상품별·계정별 한계효율이 보이게 만듭니다","textPreview":"측정 기준을 고정하고 상품별·계정별 한계효율이 보이게 만듭니다","textChars":34,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/s7epk7m5","slide":10,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[70,170,70,40]}
+{"kind":"textbox","id":"sh/fapovm5g","slide":10,"text":"8월 5일까지","textPreview":"8월 5일까지","textChars":7,"textLines":1,"bbox":[160,170,360,35]}
+{"kind":"textbox","id":"sh/e9g7mh4v","slide":10,"text":"3월 전후 전환 태그·귀속기간·매출 집계 변경 이력을 확정하고 비교 기준 고정","textPreview":"3월 전후 전환 태그·귀속기간·매출 집계 변경 이력을 확정하고 비교 기준 고정","textChars":43,"textLines":1,"bbox":[520,170,650,64]}
+{"kind":"shape","id":"sh/1w76xwnm","slide":10,"bbox":[70,265,1100,1]}
+{"kind":"textbox","id":"sh/0vyporm1","slide":10,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[70,315,70,40]}
+{"kind":"textbox","id":"sh/veloji5c","slide":10,"text":"8월 18일까지","textPreview":"8월 18일까지","textChars":8,"textLines":1,"bbox":[160,315,360,35]}
+{"kind":"textbox","id":"sh/udcnad4r","slide":10,"text":"슬롯 종료 후 7일 데이터를 반영해 증분매출·회수배수·순위 잔존효과로 판정","textPreview":"슬롯 종료 후 7일 데이터를 반영해 증분매출·회수배수·순위 잔존효과로 판정","textChars":41,"textLines":1,"bbox":[520,315,650,64]}
+{"kind":"shape","id":"sh/0ral436t","slide":10,"bbox":[70,410,1100,1]}
+{"kind":"textbox","id":"sh/1cj2x8ne","slide":10,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[70,460,70,40]}
+{"kind":"textbox","id":"sh/eps32ton","slide":10,"text":"8월 말까지","textPreview":"8월 말까지","textChars":6,"textLines":1,"bbox":[160,460,360,35]}
+{"kind":"textbox","id":"sh/fq1kvy58","slide":10,"text":"주력 계정을 목적별로 분리하고 예산 +10% 실험군과 유지 대조군의 한계 ROAS 비교","textPreview":"주력 계정을 목적별로 분리하고 예산 +10% 실험군과 유지 대조군의 한계 ROAS 비교","textChars":48,"textLines":1,"bbox":[520,460,650,64]}
+{"kind":"shape","id":"sh/oful8n6p","slide":10,"bbox":[70,610,1100,50]}
+{"kind":"textbox","id":"sh/pg321sna","slide":10,"text":"승인 요청: 측정 기준 고정 → 슬롯 재판정 → 검증된 구간만 단계적 증액","textPreview":"승인 요청: 측정 기준 고정 → 슬롯 재판정 → 검증된 구간만 단계적 증액","textChars":41,"textLines":1,"bbox":[110,622,1020,26]}
+{"kind":"textbox","id":"sh/2ds36doj","slide":10,"text":"광고·슬롯 효율 분석 | 2026-08-03","textPreview":"광고·슬롯 효율 분석 | 2026-08-03","textChars":24,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/ne1kzi54","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"notes","id":"nt/sq8390","slide":10,"text":"[Sources]\n- Naver Search Ads API monthly raw exports, 2025-01-01~2025-07-31 and 2026-01-01~2026-07-31\n- Thedotom slot efficiency Google Sheet export, updated 2026-08-03\n- Dashboard file: monthly-dashboard-2026-08.json"}

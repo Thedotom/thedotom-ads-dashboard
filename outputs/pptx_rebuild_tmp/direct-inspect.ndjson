@@ -1,0 +1,136 @@
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"경영진 보고","textShapes":8}
+{"kind":"textbox","id":"sh/wn6dc7eh","slide":1,"text":"경영진 보고","textPreview":"경영진 보고","textChars":6,"textLines":1,"bbox":[64,74,300,28]}
+{"kind":"textbox","id":"sh/547294r6","slide":1,"text":"2026년 1~7월\n광고·슬롯 효율 보고","textPreview":"2026년 1~7월 | 광고·슬롯 효율 보고","textChars":22,"textLines":2,"bbox":[64,142,760,150]}
+{"kind":"textbox","id":"sh/k3yl0zql","slide":1,"text":"2025년 동기간 대비 · 네이버 광고 3계정 · 리워드 슬롯 3개","textPreview":"2025년 동기간 대비 · 네이버 광고 3계정 · 리워드 슬롯 3개","textChars":37,"textLines":1,"bbox":[68,326,780,34]}
+{"kind":"shape","id":"sh/7qp4be9c","slide":1,"bbox":[870,120,300,360]}
+{"kind":"textbox","id":"sh/65g3298r","slide":1,"text":"핵심 결론","textPreview":"핵심 결론","textChars":5,"textLines":1,"bbox":[912,166,220,28]}
+{"kind":"textbox","id":"sh/ts7md4r2","slide":1,"text":"광고비\n+35.9%","textPreview":"광고비 | +35.9%","textChars":10,"textLines":2,"bbox":[912,220,220,74]}
+{"kind":"textbox","id":"sh/sryl4zqx","slide":1,"text":"광고매출\n+312.8%","textPreview":"광고매출 | +312.8%","textChars":12,"textLines":2,"bbox":[912,320,220,74]}
+{"kind":"textbox","id":"sh/fu94fe98","slide":1,"text":"ROAS\n1,240% → 3,767%","textPreview":"ROAS | 1,240% → 3,767%","textChars":20,"textLines":2,"bbox":[912,420,230,80]}
+{"kind":"textbox","id":"sh/utg3698n","slide":1,"text":"보고 기준일 2026-08-03","textPreview":"보고 기준일 2026-08-03","textChars":17,"textLines":1,"bbox":[68,624,350,22]}
+{"kind":"slide","id":"sl/hwbqtkby","slide":2,"title":"대표이사 보고","textShapes":20}
+{"kind":"textbox","id":"sh/65kfmpor","slide":2,"text":"대표이사 보고","textPreview":"대표이사 보고","textChars":7,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/9072xkry","slide":2,"text":"광고 효율은 크게 개선됐지만, 전환 집계 기준 점검이 필요합니다","textPreview":"광고 효율은 크게 개선됐지만, 전환 집계 기준 점검이 필요합니다","textChars":35,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/ozy1ofad","slide":2,"text":"2026 광고비","textPreview":"2026 광고비","textChars":8,"textLines":1,"bbox":[70,190,250,24]}
+{"kind":"textbox","id":"sh/b29kza94","slide":2,"text":"₩185.8M","textPreview":"₩185.8M","textChars":7,"textLines":1,"bbox":[70,220,250,50]}
+{"kind":"textbox","id":"sh/a10jqpsj","slide":2,"text":"전년 대비 +35.9%","textPreview":"전년 대비 +35.9%","textChars":12,"textLines":1,"bbox":[70,274,250,32]}
+{"kind":"textbox","id":"sh/x4r21kru","slide":2,"text":"2026 광고매출","textPreview":"2026 광고매출","textChars":9,"textLines":1,"bbox":[355,190,250,24]}
+{"kind":"textbox","id":"sh/w3i1sfa9","slide":2,"text":"₩6,997.2M","textPreview":"₩6,997.2M","textChars":9,"textLines":1,"bbox":[355,220,250,50]}
+{"kind":"textbox","id":"sh/r65knqtk","slide":2,"text":"전년 대비 +312.8%","textPreview":"전년 대비 +312.8%","textChars":13,"textLines":1,"bbox":[355,274,250,32]}
+{"kind":"textbox","id":"sh/q5wjelsz","slide":2,"text":"2026 ROAS","textPreview":"2026 ROAS","textChars":9,"textLines":1,"bbox":[640,190,250,24]}
+{"kind":"textbox","id":"sh/ove9o7yd","slide":2,"text":"3,766.6%","textPreview":"3,766.6%","textChars":8,"textLines":1,"bbox":[640,220,250,50]}
+{"kind":"textbox","id":"sh/9wnqhczy","slide":2,"text":"2025년 1,239.7%","textPreview":"2025년 1,239.7%","textChars":14,"textLines":1,"bbox":[640,274,250,32]}
+{"kind":"textbox","id":"sh/mtwrmxg7","slide":2,"text":"2026 전환수","textPreview":"2026 전환수","textChars":8,"textLines":1,"bbox":[925,190,250,24]}
+{"kind":"textbox","id":"sh/nu58f2hs","slide":2,"text":"51,438건","textPreview":"51,438건","textChars":7,"textLines":1,"bbox":[925,220,250,50]}
+{"kind":"textbox","id":"sh/wjy9sry9","slide":2,"text":"전년 대비 +271.9%","textPreview":"전년 대비 +271.9%","textChars":13,"textLines":1,"bbox":[925,274,250,32]}
+{"kind":"shape","id":"sh/xk7qlczu","slide":2,"bbox":[70,350,540,220]}
+{"kind":"textbox","id":"sh/ahwrqhgj","slide":2,"text":"경영 판단","textPreview":"경영 판단","textChars":5,"textLines":1,"bbox":[100,378,220,28]}
+{"kind":"textbox","id":"sh/bip8jmho","slide":2,"text":"• 집행 확대보다 측정 신뢰도 확인이 우선\n• 3월 이후 전환매출 급증 원인 점검\n• 슬롯비는 광고비와 분리해 증분효과 평가","textPreview":"• 집행 확대보다 측정 신뢰도 확인이 우선 | • 3월 이후 전환매출 급증 원인 점검 | • 슬롯비는 광고비와 분리해 증분효과 평가","textChars":69,"textLines":3,"bbox":[100,430,460,110]}
+{"kind":"shape","id":"sh/cnupgny5","slide":2,"bbox":[650,350,530,220]}
+{"kind":"textbox","id":"sh/do3q9szq","slide":2,"text":"주의","textPreview":"주의","textChars":2,"textLines":1,"bbox":[680,378,160,28]}
+{"kind":"textbox","id":"sh/t8byxkn2","slide":2,"text":"광고 성과 개선과 전환 추적·집계 변경 가능성이 동시에 존재합니다. 매출 원장과 광고 전환매출의 월별 대조가 필요합니다.","textPreview":"광고 성과 개선과 전환 추적·집계 변경 가능성이 동시에 존재합니다. 매출 원장과 광고 전환매출의 월별 대조가 필요합니다.","textChars":67,"textLines":1,"bbox":[680,430,450,105]}
+{"kind":"textbox","id":"sh/s72xofmh","slide":2,"text":"더도톰 광고·슬롯 효율 분석 | 2026-08-03","textPreview":"더도톰 광고·슬롯 효율 분석 | 2026-08-03","textChars":28,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/76twva5c","slide":2,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"slide","id":"sl/ofy9wn61","slide":3,"title":"대표이사 보고","textShapes":9}
+{"kind":"textbox","id":"sh/943mhgre","slide":3,"text":"대표이사 보고","textPreview":"대표이사 보고","textChars":7,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/cza94vmx","slide":3,"text":"2026년 ROAS는 3월부터 구조적으로 상승했습니다","textPreview":"2026년 ROAS는 3월부터 구조적으로 상승했습니다","textChars":29,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"shape","id":"sh/298ryl4v","slide":3,"bbox":[865,180,315,360]}
+{"kind":"textbox","id":"sh/3ah8rqlg","slide":3,"text":"월별 해석","textPreview":"월별 해석","textChars":5,"textLines":1,"bbox":[895,210,230,28]}
+{"kind":"textbox","id":"sh/obq90bml","slide":3,"text":"1~2월\n기존 효율 범위","textPreview":"1~2월 | 기존 효율 범위","textChars":13,"textLines":2,"bbox":[895,270,220,55]}
+{"kind":"textbox","id":"sh/pcjqtg36","slide":3,"text":"3월\nROAS 급증 시작","textPreview":"3월 | ROAS 급증 시작","textChars":13,"textLines":2,"bbox":[895,350,220,55]}
+{"kind":"textbox","id":"sh/m5cra54z","slide":3,"text":"4~7월\n고효율 지속","textPreview":"4~7월 | 고효율 지속","textChars":11,"textLines":2,"bbox":[895,430,220,55]}
+{"kind":"textbox","id":"sh/n6ls3alk","slide":3,"text":"성과 개선 여부와 별개로 전환 추적 기준을 확인해야 합니다.","textPreview":"성과 개선 여부와 별개로 전환 추적 기준을 확인해야 합니다.","textChars":33,"textLines":1,"bbox":[895,500,230,55]}
+{"kind":"textbox","id":"sh/n2l4fq98","slide":3,"text":"더도톰 광고·슬롯 효율 분석 | 2026-08-03","textPreview":"더도톰 광고·슬롯 효율 분석 | 2026-08-03","textChars":28,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/m1c3mlsn","slide":3,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"chart","id":"ch/sjml03qh","slide":3,"name":"Chart","chartType":"line","bbox":[70,155,760,440]}
+{"kind":"slide","id":"sl/jyx0ra1s","slide":4,"title":"대표이사 보고","textShapes":30}
+{"kind":"textbox","id":"sh/axcf29kj","slide":4,"text":"대표이사 보고","textPreview":"대표이사 보고","textChars":7,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/1cj2d8b6","slide":4,"text":"광고비의 97%는 thedotomshop 계정에 집중돼 있습니다","textPreview":"광고비의 97%는 thedotomshop 계정에 집중돼 있습니다","textChars":35,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/0ba143al","slide":4,"text":"광고계정","textPreview":"광고계정","textChars":4,"textLines":1,"bbox":[70,160,210,28]}
+{"kind":"textbox","id":"sh/rm1k7yt4","slide":4,"text":"광고비","textPreview":"광고비","textChars":3,"textLines":1,"bbox":[300,160,170,28]}
+{"kind":"textbox","id":"sh/ql8jytsj","slide":4,"text":"광고매출","textPreview":"광고매출","textChars":4,"textLines":1,"bbox":[530,160,170,28]}
+{"kind":"textbox","id":"sh/doj29oba","slide":4,"text":"ROAS","textPreview":"ROAS","textChars":4,"textLines":1,"bbox":[760,160,170,28]}
+{"kind":"textbox","id":"sh/sna103ap","slide":4,"text":"전환수","textPreview":"전환수","textChars":3,"textLines":1,"bbox":[970,160,170,28]}
+{"kind":"textbox","id":"sh/3ihk3et8","slide":4,"text":"상태","textPreview":"상태","textChars":2,"textLines":1,"bbox":[1120,160,170,28]}
+{"kind":"shape","id":"sh/ih8ju9sn","slide":4,"bbox":[60,200,1160,80]}
+{"kind":"textbox","id":"sh/kbm987y5","slide":4,"text":"thedotomshop","textPreview":"thedotomshop","textChars":12,"textLines":1,"bbox":[70,215,210,35]}
+{"kind":"textbox","id":"sh/5cva1cfq","slide":4,"text":"₩180.5M","textPreview":"₩180.5M","textChars":7,"textLines":1,"bbox":[300,215,170,35]}
+{"kind":"textbox","id":"sh/i94r6xgz","slide":4,"text":"₩6940.6M","textPreview":"₩6940.6M","textChars":8,"textLines":1,"bbox":[530,215,170,35]}
+{"kind":"textbox","id":"sh/jadsz2xk","slide":4,"text":"3846%","textPreview":"3846%","textChars":5,"textLines":1,"bbox":[760,215,170,35]}
+{"kind":"textbox","id":"sh/w72947yt","slide":4,"text":"51,241","textPreview":"51,241","textChars":6,"textLines":1,"bbox":[970,215,170,35]}
+{"kind":"textbox","id":"sh/x8vaxsfe","slide":4,"text":"정상","textPreview":"정상","textChars":2,"textLines":1,"bbox":[1120,215,170,35]}
+{"kind":"shape","id":"sh/a5kr2xg3","slide":4,"bbox":[60,305,1160,80]}
+{"kind":"textbox","id":"sh/v6tsv2xo","slide":4,"text":"검색광고","textPreview":"검색광고","textChars":4,"textLines":1,"bbox":[70,320,210,35]}
+{"kind":"textbox","id":"sh/g36tgryd","slide":4,"text":"₩5.3M","textPreview":"₩5.3M","textChars":5,"textLines":1,"bbox":[300,320,170,35]}
+{"kind":"textbox","id":"sh/h4fa9wfy","slide":4,"text":"₩56.6M","textPreview":"₩56.6M","textChars":6,"textLines":1,"bbox":[530,320,170,35]}
+{"kind":"textbox","id":"sh/p0batw72","slide":4,"text":"1066%","textPreview":"1066%","textChars":5,"textLines":1,"bbox":[760,320,170,35]}
+{"kind":"textbox","id":"sh/oz29krqh","slide":4,"text":"197","textPreview":"197","textChars":3,"textLines":1,"bbox":[970,320,170,35]}
+{"kind":"textbox","id":"sh/3ytsrmpw","slide":4,"text":"정상","textPreview":"정상","textChars":2,"textLines":1,"bbox":[1120,320,170,35]}
+{"kind":"shape","id":"sh/2xkrih8b","slide":4,"bbox":[60,410,1160,80]}
+{"kind":"textbox","id":"sh/1wbapc7q","slide":4,"text":"더도톰 광고","textPreview":"더도톰 광고","textChars":6,"textLines":1,"bbox":[70,425,210,35]}
+{"kind":"textbox","id":"sh/gv29g7q5","slide":4,"text":"₩0.0M","textPreview":"₩0.0M","textChars":5,"textLines":1,"bbox":[300,425,170,35]}
+{"kind":"textbox","id":"sh/fu9sn2p0","slide":4,"text":"₩0.0M","textPreview":"₩0.0M","textChars":5,"textLines":1,"bbox":[530,425,170,35]}
+{"kind":"textbox","id":"sh/et0reh8f","slide":4,"text":"0%","textPreview":"0%","textChars":2,"textLines":1,"bbox":[760,425,170,35]}
+{"kind":"textbox","id":"sh/tsrqlc7u","slide":4,"text":"0","textPreview":"0","textChars":1,"textLines":1,"bbox":[970,425,170,35]}
+{"kind":"textbox","id":"sh/sri9s7q9","slide":4,"text":"0원","textPreview":"0원","textChars":2,"textLines":1,"bbox":[1120,425,170,35]}
+{"kind":"textbox","id":"sh/ilwf69kv","slide":4,"text":"계정 운영 판단","textPreview":"계정 운영 판단","textChars":8,"textLines":1,"bbox":[70,565,220,28]}
+{"kind":"textbox","id":"sh/jm5gze1g","slide":4,"text":"‘더도톰 광고’ 계정은 7개월간 집행 실적이 없습니다. 유지 목적이 없다면 계정·캠페인 구조를 정리해 운영 복잡도를 낮출 수 있습니다.","textPreview":"‘더도톰 광고’ 계정은 7개월간 집행 실적이 없습니다. 유지 목적이 없다면 계정·캠페인 구조를 정리해 운영 복잡도를 낮출 수 있습니다.","textChars":75,"textLines":1,"bbox":[300,557,860,62]}
+{"kind":"textbox","id":"sh/knex8j21","slide":4,"text":"더도톰 광고·슬롯 효율 분석 | 2026-08-03","textPreview":"더도톰 광고·슬롯 효율 분석 | 2026-08-03","textChars":28,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/5ony1oj6","slide":4,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"slide","id":"sl/i107q5of","slide":5,"title":"대표이사 보고","textShapes":32}
+{"kind":"textbox","id":"sh/5kn2hszu","slide":5,"text":"대표이사 보고","textPreview":"대표이사 보고","textChars":7,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/dgbulwnm","slide":5,"text":"현재 슬롯은 전체 132만원을 3개 상품에 배분해 운영 중입니다","textPreview":"현재 슬롯은 전체 132만원을 3개 상품에 배분해 운영 중입니다","textChars":35,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/cf2tcr61","slide":5,"text":"상품","textPreview":"상품","textChars":2,"textLines":1,"bbox":[70,160,170,28]}
+{"kind":"textbox","id":"sh/z2tcnm5s","slide":5,"text":"기간","textPreview":"기간","textChars":2,"textLines":1,"bbox":[275,160,170,28]}
+{"kind":"textbox","id":"sh/yhkbe1o7","slide":5,"text":"슬롯비","textPreview":"슬롯비","textChars":3,"textLines":1,"bbox":[455,160,170,28]}
+{"kind":"textbox","id":"sh/l4bupwny","slide":5,"text":"누적 매출","textPreview":"누적 매출","textChars":5,"textLines":1,"bbox":[640,160,170,28]}
+{"kind":"textbox","id":"sh/032tgr6d","slide":5,"text":"광고비","textPreview":"광고비","textChars":3,"textLines":1,"bbox":[820,160,170,28]}
+{"kind":"textbox","id":"sh/n6dcr65o","slide":5,"text":"판정","textPreview":"판정","textChars":2,"textLines":1,"bbox":[990,160,170,28]}
+{"kind":"shape","id":"sh/m5kbi1oj","slide":5,"bbox":[60,200,1160,80]}
+{"kind":"textbox","id":"sh/w32dkbuh","slide":5,"text":"수건단품","textPreview":"수건단품","textChars":4,"textLines":1,"bbox":[70,215,170,35]}
+{"kind":"textbox","id":"sh/x4vedgvm","slide":5,"text":"07-31~08-09","textPreview":"07-31~08-09","textChars":11,"textLines":1,"bbox":[275,215,170,35]}
+{"kind":"textbox","id":"sh/ahkvi1cb","slide":5,"text":"₩440K","textPreview":"₩440K","textChars":5,"textLines":1,"bbox":[455,215,170,35]}
+{"kind":"textbox","id":"sh/v2twb6dw","slide":5,"text":"₩7.72M","textPreview":"₩7.72M","textChars":6,"textLines":1,"bbox":[640,215,170,35]}
+{"kind":"textbox","id":"sh/k7mxovud","slide":5,"text":"₩315K","textPreview":"₩315K","textChars":5,"textLines":1,"bbox":[820,215,170,35]}
+{"kind":"textbox","id":"sh/58vehgvy","slide":5,"text":"관찰중","textPreview":"관찰중","textChars":3,"textLines":1,"bbox":[990,215,170,35]}
+{"kind":"shape","id":"sh/i54fmlc7","slide":5,"bbox":[60,305,1160,80]}
+{"kind":"textbox","id":"sh/j6dwfqds","slide":5,"text":"세트모음전","textPreview":"세트모음전","textChars":5,"textLines":1,"bbox":[70,320,170,35]}
+{"kind":"textbox","id":"sh/sb6xsvu9","slide":5,"text":"07-31~08-09","textPreview":"07-31~08-09","textChars":11,"textLines":1,"bbox":[275,320,170,35]}
+{"kind":"textbox","id":"sh/tcfel0vu","slide":5,"text":"₩660K","textPreview":"₩660K","textChars":5,"textLines":1,"bbox":[455,320,170,35]}
+{"kind":"textbox","id":"sh/hgrmpwj2","slide":5,"text":"₩3.91M","textPreview":"₩3.91M","textChars":6,"textLines":1,"bbox":[640,320,170,35]}
+{"kind":"textbox","id":"sh/gfi5grih","slide":5,"text":"₩96K","textPreview":"₩96K","textChars":4,"textLines":1,"bbox":[820,320,170,35]}
+{"kind":"textbox","id":"sh/fe94nm1w","slide":5,"text":"관찰중","textPreview":"관찰중","textChars":3,"textLines":1,"bbox":[990,320,170,35]}
+{"kind":"shape","id":"sh/ud0ne10b","slide":5,"bbox":[60,410,1160,80]}
+{"kind":"textbox","id":"sh/pkr6tgjy","slide":5,"text":"조구만고리수건","textPreview":"조구만고리수건","textChars":7,"textLines":1,"bbox":[70,425,170,35]}
+{"kind":"textbox","id":"sh/4ji5kbid","slide":5,"text":"07-31~08-09","textPreview":"07-31~08-09","textChars":11,"textLines":1,"bbox":[275,425,170,35]}
+{"kind":"textbox","id":"sh/3i94r61s","slide":5,"text":"₩220K","textPreview":"₩220K","textChars":5,"textLines":1,"bbox":[455,425,170,35]}
+{"kind":"textbox","id":"sh/2h0ni107","slide":5,"text":"₩0.23M","textPreview":"₩0.23M","textChars":6,"textLines":1,"bbox":[640,425,170,35]}
+{"kind":"textbox","id":"sh/5o7mhcju","slide":5,"text":"₩0K","textPreview":"₩0K","textChars":3,"textLines":1,"bbox":[820,425,170,35]}
+{"kind":"textbox","id":"sh/kny587i9","slide":5,"text":"관찰중","textPreview":"관찰중","textChars":3,"textLines":1,"bbox":[990,425,170,35]}
+{"kind":"shape","id":"sh/atcjidg7","slide":5,"bbox":[70,550,1110,82]}
+{"kind":"textbox","id":"sh/vu5kbihc","slide":5,"text":"현재 부분집계","textPreview":"현재 부분집계","textChars":7,"textLines":1,"bbox":[100,574,180,28]}
+{"kind":"textbox","id":"sh/wve1knyx","slide":5,"text":"슬롯비 ₩1.32M","textPreview":"슬롯비 ₩1.32M","textChars":10,"textLines":1,"bbox":[310,570,230,32]}
+{"kind":"textbox","id":"sh/xwn2dszi","slide":5,"text":"매출 ₩11.87M","textPreview":"매출 ₩11.87M","textChars":10,"textLines":1,"bbox":[565,570,230,32]}
+{"kind":"textbox","id":"sh/ihw3mxg3","slide":5,"text":"광고비 ₩0.41M","textPreview":"광고비 ₩0.41M","textChars":10,"textLines":1,"bbox":[820,570,230,32]}
+{"kind":"textbox","id":"sh/ji5kf2ho","slide":5,"text":"더도톰 광고·슬롯 효율 분석 | 2026-08-03","textPreview":"더도톰 광고·슬롯 효율 분석 | 2026-08-03","textChars":28,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/kjelony9","slide":5,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}
+{"kind":"slide","id":"sl/x8f69ofe","slide":6,"title":"대표이사 보고","textShapes":14}
+{"kind":"textbox","id":"sh/twfux0ne","slide":6,"text":"대표이사 보고","textPreview":"대표이사 보고","textChars":7,"textLines":1,"bbox":[60,34,300,24]}
+{"kind":"textbox","id":"sh/yhg7epsj","slide":6,"text":"다음 의사결정은 ‘확대’보다 ‘검증 후 선택’입니다","textPreview":"다음 의사결정은 ‘확대’보다 ‘검증 후 선택’입니다","textChars":28,"textLines":1,"bbox":[60,66,1160,54]}
+{"kind":"textbox","id":"sh/zi98nu94","slide":6,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[70,170,70,40]}
+{"kind":"textbox","id":"sh/87ipkzal","slide":6,"text":"전환 데이터 검증","textPreview":"전환 데이터 검증","textChars":9,"textLines":1,"bbox":[160,170,360,35]}
+{"kind":"textbox","id":"sh/98rqt4r6","slide":6,"text":"2026년 3월 이후 광고 전환매출을 실제 매출 원장과 월별 대조","textPreview":"2026년 3월 이후 광고 전환매출을 실제 매출 원장과 월별 대조","textChars":36,"textLines":1,"bbox":[520,170,650,64]}
+{"kind":"shape","id":"sh/ml07i9sv","slide":6,"bbox":[70,265,1100,1]}
+{"kind":"textbox","id":"sh/7m98ru9g","slide":6,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[70,315,70,40]}
+{"kind":"textbox","id":"sh/oryp8fah","slide":6,"text":"슬롯 종료 후 증분 평가","textPreview":"슬롯 종료 후 증분 평가","textChars":13,"textLines":1,"bbox":[160,315,360,35]}
+{"kind":"textbox","id":"sh/pc76hkr2","slide":6,"text":"8월 9일 종료 후 10일 전후 동일기간 매출·순위·광고비 비교","textPreview":"8월 9일 종료 후 10일 전후 동일기간 매출·순위·광고비 비교","textChars":35,"textLines":1,"bbox":[520,315,650,64]}
+{"kind":"shape","id":"sh/h4bupgn6","slide":6,"bbox":[70,410,1100,1]}
+{"kind":"textbox","id":"sh/w32twb6l","slide":6,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[70,460,70,40]}
+{"kind":"textbox","id":"sh/v2tcn650","slide":6,"text":"계정 구조 정리","textPreview":"계정 구조 정리","textChars":8,"textLines":1,"bbox":[160,460,360,35]}
+{"kind":"textbox","id":"sh/u1kbu1ov","slide":6,"text":"0원 계정 유지 목적 확인 후 비활성 캠페인과 권한 체계 정리","textPreview":"0원 계정 유지 목적 확인 후 비활성 캠페인과 권한 체계 정리","textChars":34,"textLines":1,"bbox":[520,460,650,64]}
+{"kind":"shape","id":"sh/5svutgni","slide":6,"bbox":[70,610,1100,50]}
+{"kind":"textbox","id":"sh/47mt0b6x","slide":6,"text":"제안: 8월 10일 슬롯 종료 리포트에서 재집행 여부를 최종 결정","textPreview":"제안: 8월 10일 슬롯 종료 리포트에서 재집행 여부를 최종 결정","textChars":36,"textLines":1,"bbox":[110,622,1020,26]}
+{"kind":"textbox","id":"sh/j6dcr65c","slide":6,"text":"더도톰 광고·슬롯 효율 분석 | 2026-08-03","textPreview":"더도톰 광고·슬롯 효율 분석 | 2026-08-03","textChars":28,"textLines":1,"bbox":[60,682,500,18]}
+{"kind":"textbox","id":"sh/i54bylor","slide":6,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1180,682,40,18]}

@@ -1,0 +1,7 @@
+Internal sources used throughout:
+- Naver Search Ads API monthly raw exports, 2025-01-01 through 2025-07-31 and 2026-01-01 through 2026-07-31.
+- data/slot_efficiency_2025_ad_benchmark.json, updated 2026-08-03.
+- Thedotom slot efficiency Google Sheet export embedded in monthly dashboard data, updated 2026-08-03.
+- data/monthly-dashboard-2026-08.json.
+
+No external web research or external visual assets were used.
