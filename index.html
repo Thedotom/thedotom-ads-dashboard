@@ -856,8 +856,10 @@
         </div>`;
       window.location.replace("http://127.0.0.1:8790");
     }
-    const initialMonth = new URLSearchParams(window.location.search).get("month") || "";
-    const state = { data: null, powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: "overview", month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
+    const initialParams = new URLSearchParams(window.location.search);
+    const initialMonth = initialParams.get("month") || "";
+    const initialPage = initialParams.get("page") || "overview";
+    const state = { data: null, powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: initialPage, month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -2465,6 +2467,9 @@ function renderBrandContract() {
     document.querySelectorAll(".nav button[data-page]").forEach(btn => {
       btn.addEventListener("click", async () => {
         state.page = btn.dataset.page;
+        const nextUrl = new URL(window.location.href);
+        nextUrl.searchParams.set("page", state.page);
+        history.replaceState(null, "", nextUrl);
         if (state.data?.month !== state.month) {
           await loadData();
         } else {
