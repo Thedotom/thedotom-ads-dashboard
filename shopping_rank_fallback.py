@@ -129,6 +129,29 @@ for date_key in sorted(rank_data):
                 metadata["image"] = value["image"]
             if value.get("title"):
                 metadata["title"] = value["title"]
+confirmed_ranks = {}
+for date_key in sorted(rank_data):
+    for slot_name in ("morning", "afternoon"):
+        for key, value in rank_data.get(date_key, {}).get(slot_name, {}).get("shopping", {}).items():
+            if isinstance(value.get("rank"), int) and value.get("source") != "naver_integrated_search":
+                confirmed_ranks[key] = {"rank": value["rank"], "date": date_key, "slot": slot_name}
+
+current_month = today[:7]
+for date_key in sorted(rank_data):
+    if not date_key.startswith(current_month):
+        continue
+    for slot_name in ("morning", "afternoon"):
+        for key, value in rank_data.get(date_key, {}).get(slot_name, {}).get("shopping", {}).items():
+            metadata = product_metadata.get(str(value.get("product_id") or ""), {})
+            if not value.get("image"):
+                value["image"] = metadata.get("image", "")
+            if not value.get("title"):
+                value["title"] = metadata.get("title", "")
+            confirmed = confirmed_ranks.get(key, {})
+            value["last_known_rank"] = confirmed.get("rank")
+            value["last_known_date"] = confirmed.get("date", "")
+            value["last_known_slot"] = confirmed.get("slot", "")
+
 slot_data = rank_data.setdefault(today, {}).setdefault(slot, {"shopping": {}, "powerlink": {}})
 shopping = slot_data.setdefault("shopping", {})
 status_rank = {"4위 밖": "outside_top4", "접속 제한": "blocked", "확인 오류": "error"}
@@ -136,12 +159,16 @@ for row in all_results:
     key = f"{row['keyword']}_{row['productId']}"
     previous = shopping.get(key, {})
     metadata = product_metadata.get(row["productId"], {})
+    confirmed = confirmed_ranks.get(key, {})
     shopping[key] = {
         "keyword": row["keyword"], "product_id": row["productId"],
         "rank": row["rank"] if row["rank"] is not None else status_rank.get(row["status"], "error"),
         "status": row["status"], "scope": "top4", "source": "naver_integrated_search",
         "image": row.get("image") or previous.get("image") or metadata.get("image", ""),
         "title": row.get("title") or previous.get("title") or metadata.get("title", ""),
+        "last_known_rank": confirmed.get("rank"),
+        "last_known_date": confirmed.get("date", ""),
+        "last_known_slot": confirmed.get("slot", ""),
         "collected_at": now.strftime("%H:%M:%S"),
     }
 RANK_DATA.write_text(json.dumps(rank_data, ensure_ascii=False, indent=2), encoding="utf-8")
