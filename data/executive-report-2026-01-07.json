@@ -1,0 +1,23 @@
+{
+  "period": "2026-01-01~2026-07-31",
+  "actualSales": 4576728430,
+  "totalMarketingCost": 238386831,
+  "searchAdCost": 185771363,
+  "platformAttributedSales": 6997246530,
+  "conversions": 51438,
+  "platformRoas": 37.66590510508339,
+  "mer": 19.198746888832964,
+  "marketingCostRate": 0.05208673283680063,
+  "attributedSalesShare": 1.5288751860682281,
+  "averageAttributedConversionValue": 136032.6321007815,
+  "monthly": [
+    {"month":"2026-01","actualSales":762821160,"totalMarketingCost":46951890,"marketingCostRate":0.061550324587220415,"mer":16.24686801745361,"attributedSalesShare":0.2674023882609654},
+    {"month":"2026-02","actualSales":670127563,"totalMarketingCost":27957970,"marketingCostRate":0.04172037018569851,"mer":23.96910659107224,"attributedSalesShare":0.22978050523792587},
+    {"month":"2026-03","actualSales":696068000,"totalMarketingCost":20956704,"marketingCostRate":0.03010726538211784,"mer":33.21457420021775,"attributedSalesShare":1.162756397363476},
+    {"month":"2026-04","actualSales":624889921,"totalMarketingCost":27150499,"marketingCostRate":0.043448450819228365,"mer":23.015780336118315,"attributedSalesShare":2.266493973424161},
+    {"month":"2026-05","actualSales":616938931,"totalMarketingCost":32460970,"marketingCostRate":0.05261618025528689,"mer":19.005560554721562,"attributedSalesShare":2.584654476927474},
+    {"month":"2026-06","actualSales":676161776,"totalMarketingCost":37956740,"marketingCostRate":0.0561355896580584,"mer":17.814010792286165,"attributedSalesShare":2.1312374510800502},
+    {"month":"2026-07","actualSales":529721079,"totalMarketingCost":44952058,"marketingCostRate":0.08485986263725782,"mer":11.784134087920958,"attributedSalesShare":2.601335126405268}
+  ],
+  "basis": "monthly-dashboard-2026-01~07 totalSalesMetrics.autoSalesTotal and autoAdCostTotal; Naver Search Ads platform attribution benchmark"
+}
