@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -589,6 +589,49 @@
     .slot-decision.bad { background:#fee2e2; color:#991b1b; }
     .slot-decision.active { background:#ede9fe; color:#6d28d9; }
     .slot-note { margin:0 0 14px; padding:12px 14px; border-radius:10px; border:1px solid #fde68a; background:#fffbeb; color:#854d0e; font-size:12px; line-height:1.55; }
+    .slot-exec { display:grid; gap:14px; }
+    .slot-hero { padding:22px 24px; border-radius:16px; color:#fff; background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 58%,#4865f4 100%); box-shadow:var(--shadow-lg); }
+    .slot-hero-kicker { font-size:11px; font-weight:900; letter-spacing:.08em; color:#bfdbfe; }
+    .slot-hero h3 { margin:8px 0 10px; max-width:900px; font-size:23px; line-height:1.35; color:#fff; }
+    .slot-hero p { margin:0; max-width:980px; color:rgba(255,255,255,.78); font-size:13px; line-height:1.65; }
+    .slot-kpi-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+    .slot-kpi { padding:16px 17px; border:1px solid var(--line); border-radius:13px; background:#fff; box-shadow:var(--shadow); }
+    .slot-kpi-label { color:var(--muted); font-size:11px; font-weight:800; }
+    .slot-kpi-value { margin-top:7px; font-size:23px; font-weight:900; letter-spacing:-.03em; }
+    .slot-kpi-delta { margin-top:5px; font-size:12px; font-weight:700; color:var(--green); }
+    .slot-kpi-delta.warn { color:var(--amber); }
+    .slot-dashboard-grid { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr); gap:14px; }
+    .slot-panel { padding:18px; border:1px solid var(--line); border-radius:14px; background:#fff; box-shadow:var(--shadow); min-width:0; }
+    .slot-panel-head { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; margin-bottom:14px; }
+    .slot-panel-title { font-size:14px; font-weight:900; }
+    .slot-panel-sub { margin-top:4px; color:var(--muted); font-size:11px; line-height:1.45; }
+    .slot-insight-list { display:grid; gap:10px; }
+    .slot-insight { padding:12px 13px; border-radius:10px; background:#f8fafc; border-left:4px solid var(--blue); }
+    .slot-insight.warn { border-left-color:var(--amber); }
+    .slot-insight strong { display:block; font-size:13px; }
+    .slot-insight span { display:block; margin-top:4px; color:var(--muted); font-size:11px; line-height:1.5; }
+    .slot-account-list { display:grid; gap:12px; }
+    .slot-account-row { display:grid; grid-template-columns:110px minmax(0,1fr) 72px; gap:10px; align-items:center; font-size:12px; }
+    .slot-account-name { overflow:hidden; text-overflow:ellipsis; font-weight:800; }
+    .slot-account-track { height:9px; overflow:hidden; border-radius:999px; background:#e2e8f0; }
+    .slot-account-bar { height:100%; border-radius:inherit; background:linear-gradient(90deg,#4865f4,#8b5cf6); }
+    .slot-account-value { text-align:right; font-weight:900; }
+    .slot-card-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .slot-live-card { padding:16px; border:1px solid var(--line); border-radius:13px; background:#fff; box-shadow:var(--shadow); }
+    .slot-live-top { display:flex; justify-content:space-between; gap:8px; align-items:flex-start; }
+    .slot-live-name { font-size:14px; font-weight:900; line-height:1.35; }
+    .slot-live-period { margin-top:4px; color:var(--muted); font-size:11px; }
+    .slot-live-metrics { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; margin-top:14px; }
+    .slot-live-metric { padding:10px; border-radius:9px; background:#f8fafc; }
+    .slot-live-metric span { display:block; color:var(--muted); font-size:10px; }
+    .slot-live-metric strong { display:block; margin-top:4px; font-size:14px; }
+    .slot-detail { border:1px solid var(--line); border-radius:12px; background:#fff; overflow:hidden; }
+    .slot-detail summary { cursor:pointer; padding:14px 16px; font-size:13px; font-weight:900; list-style:none; }
+    .slot-detail summary::after { content:'표 펼치기'; float:right; color:var(--blue); font-size:11px; }
+    .slot-detail[open] summary::after { content:'표 접기'; }
+    .slot-detail .table-wrap { border-top:1px solid var(--line); }
+    @media (max-width:1100px) { .slot-kpi-grid,.slot-card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .slot-dashboard-grid { grid-template-columns:1fr; } }
+    @media (max-width:680px) { .slot-kpi-grid,.slot-card-grid { grid-template-columns:1fr; } .slot-hero h3 { font-size:19px; } }
     @media (max-width:980px) { .slot-summary-grid { grid-template-columns:1fr; } }
   </style>
 </head>
@@ -1780,97 +1823,7 @@
       const analysis = state.data.slotEfficiency || {};
       const allPeriods = analysis.periods || [];
       const periods = allPeriods.filter(period => String(period.startDate || "").slice(0, 7) <= state.month && String(period.endDate || "").slice(0, 7) >= state.month);
-      const completedPeriods = periods.filter(period => period.isComplete);
       if (!els.slotEfficiencyBody) return;
-      if (!periods.length) {
-        els.slotEfficiencyStatus.textContent = `${state.month} 슬롯 없음`;
-        els.slotEfficiencyBody.innerHTML = `<div class="empty">${html(state.month)}에 운영된 슬롯 데이터가 없습니다.</div>`;
-        return;
-      }
-      const sum = (rows, getter) => rows.reduce((total, row) => total + Number(getter(row) || 0), 0);
-      const totalSlotCost = sum(completedPeriods, period => period.slotCost);
-      const totalSales = sum(completedPeriods, period => period.during?.sales);
-      const totalAdCost = sum(completedPeriods, period => period.during?.adCost);
-      const rankedPeriods = completedPeriods.filter(period => period.rankAverage != null);
-      const summary = {
-        completedCount: completedPeriods.length,
-        activeCount: periods.length - completedPeriods.length,
-        totalSlotCost,
-        totalSales,
-        yearOverYearSales: null,
-        incrementalSales: null,
-        slotCostRate: totalSales ? totalSlotCost / totalSales : 0,
-        blendedSalesRoas: totalSales && (totalSlotCost + totalAdCost) ? totalSales / (totalSlotCost + totalAdCost) : 0,
-        rankAverage: rankedPeriods.length ? sum(rankedPeriods, period => period.rankAverage) / rankedPeriods.length : null
-      };
-      const productMap = new Map();
-      completedPeriods.forEach(period => {
-        const key = period.product || period.productId || "기타";
-        if (!productMap.has(key)) productMap.set(key, { product: period.product, productId: period.productId, periodCount: 0, slotCost: 0, sales: 0, ranks: [], bestRanks: [] });
-        const product = productMap.get(key);
-        product.periodCount += 1;
-        product.slotCost += Number(period.slotCost || 0);
-        product.sales += Number(period.during?.sales || 0);
-        if (period.rankAverage != null) product.ranks.push(Number(period.rankAverage));
-        if (period.rankBest != null) product.bestRanks.push(Number(period.rankBest));
-      });
-      const products = [...productMap.values()].map(product => ({
-        ...product,
-        yearOverYearSales: null,
-        incrementalSales: null,
-        slotCostRate: product.sales ? product.slotCost / product.sales : 0,
-        rankAverage: product.ranks.length ? product.ranks.reduce((a, b) => a + b, 0) / product.ranks.length : null,
-        bestRank: product.bestRanks.length ? Math.min(...product.bestRanks) : null
-      }));
-      els.slotEfficiencyStatus.textContent = `${state.month} · 완료 ${number(summary.completedCount || 0)}개 · 관찰중 ${number(summary.activeCount || 0)}개`;
-      const decisionClass = decision => ({
-        "효율 양호": "good",
-        "순위 유지": "defense",
-        "비용 주의": "caution",
-        "재검토": "bad",
-        "관찰중": "active"
-      })[decision] || "active";
-      const signedMoney = value => `${Number(value || 0) >= 0 ? "+" : "-"}${money(Math.abs(Number(value || 0)))}`;
-      const signedRate = value => value == null ? "-" : `${Number(value) >= 0 ? "+" : ""}${rateText(value)}`;
-      const productVisuals = new Map((state.data.rewardMarketing?.items || []).map(item => [String(item.productId || ""), item]));
-      const productCards = products.map(product => `
-        <article class="slot-product-card">
-          <h3>${html(product.product || "")}</h3>
-          <div class="slot-product-meta">상품번호 ${html(product.productId || "")} · 완료 슬롯 ${number(product.periodCount || 0)}회</div>
-          <div class="slot-product-stats">
-            <div class="slot-product-stat"><span>슬롯비</span><strong>${money(product.slotCost || 0)}</strong></div>
-            <div class="slot-product-stat"><span>기간 매출</span><strong>${money(product.sales || 0)}</strong></div>
-            <div class="slot-product-stat"><span>전년 동기간 대비</span><strong>-</strong></div>
-            <div class="slot-product-stat"><span>슬롯비율</span><strong>${rateText(product.slotCostRate || 0)}</strong></div>
-            <div class="slot-product-stat"><span>평균 순위</span><strong>${product.rankAverage == null ? "-" : `${Number(product.rankAverage).toFixed(1)}위`}</strong></div>
-            <div class="slot-product-stat"><span>최고 순위</span><strong>${product.bestRank == null ? "-" : `${number(product.bestRank)}위`}</strong></div>
-          </div>
-        </article>`).join("");
-      const rows = periods.map(period => {
-        const visual = productVisuals.get(String(period.productId || "")) || {};
-        const image = visual.image || "";
-        const link = period.link || visual.link || "";
-        const thumbnail = image
-          ? `<img class="slot-product-thumb" src="${html(image)}" alt="${html(period.product || visual.productName || "상품")} 썸네일" loading="lazy">`
-          : `<span class="slot-product-thumb" aria-hidden="true"></span>`;
-        const linkedThumbnail = link
-          ? `<a class="slot-product-thumb-link" href="${html(link)}" target="_blank" rel="noopener noreferrer" aria-label="${html(period.product || visual.productName || "상품")} 상품 페이지 열기">${thumbnail}</a>`
-          : thumbnail;
-        return `
-        <tr>
-          <td class="wrap"><div class="slot-product-cell">${linkedThumbnail}<div class="slot-product-copy"><strong>${html(period.product || "")}</strong><div class="slot-product-keyword">${html(period.keyword || "")}</div></div></div></td>
-          <td class="wrap">${html(period.startDate || "")}<br>~ ${html(period.endDate || "")}</td>
-          <td>${money(period.slotCost || 0)}</td>
-          <td>-<br><span style="font-size:10px;color:var(--muted)">2025년 데이터 적재 대기</span></td>
-          <td>${money(period.during?.sales || 0)}<br><span style="font-size:10px;color:var(--muted)">${html(period.startDate || "")} ~ ${html(period.endDate || "")}</span></td>
-          <td>-<br><span style="font-size:10px;color:var(--muted)">전년 데이터 적재 후 계산</span></td>
-          <td>${number(period.during?.orders || 0)}</td>
-          <td>${period.slotCostRate == null ? "-" : rateText(period.slotCostRate)}</td>
-          <td>${period.blendedSalesRoas == null ? "-" : roasText(period.blendedSalesRoas)}</td>
-          <td>${period.rankAverage == null ? "-" : `${Number(period.rankAverage).toFixed(1)}위`}<br><span style="font-size:11px;color:var(--muted)">최고 ${period.rankBest == null ? "-" : `${number(period.rankBest)}위`}</span></td>
-          <td><span class="slot-decision ${decisionClass(period.decision)}">${html(period.decision || "")}</span>${period.isComplete ? "" : `<br><span style="font-size:10px;color:var(--muted)">${number(period.during?.daysWithData || 0)}/${number(period.days || 0)}일 집계</span>`}</td>
-        </tr>`;
-      }).join("");
       const benchmark = analysis.historicalAdBenchmark || {};
       const report2025 = benchmark.reports?.["2025"] || {};
       const report2026 = benchmark.reports?.["2026"] || {};
@@ -1878,83 +1831,39 @@
       const total2026 = report2026.totals || {};
       const compare = benchmark.comparison2026vs2025 || {};
       const changeText = metric => compare[metric]?.rate == null ? "-" : `${Number(compare[metric].rate) >= 0 ? "+" : ""}${rateText(compare[metric].rate)}`;
+      const decisionClass = decision => ({ "효율 양호":"good", "순위 유지":"defense", "비용 주의":"caution", "재검토":"bad", "관찰중":"active" })[decision] || "active";
       const month2025 = new Map((report2025.monthly || []).map(row => [String(row.month).slice(5), row]));
       const month2026 = new Map((report2026.monthly || []).map(row => [String(row.month).slice(5), row]));
-      const comparisonRows = [...new Set([...month2025.keys(), ...month2026.keys()])].sort().map(month => {
-        const oldRow = month2025.get(month) || {}; const newRow = month2026.get(month) || {};
-        const costChange = Number(oldRow.adCost || 0) ? (Number(newRow.adCost || 0) - Number(oldRow.adCost || 0)) / Number(oldRow.adCost) : null;
-        const salesChange = Number(oldRow.adSales || 0) ? (Number(newRow.adSales || 0) - Number(oldRow.adSales || 0)) / Number(oldRow.adSales) : null;
-        return `<tr><td>${html(month)}월</td><td>${money(oldRow.adCost || 0)}</td><td>${money(newRow.adCost || 0)}</td><td>${signedRate(costChange)}</td><td>${money(oldRow.adSales || 0)}</td><td>${money(newRow.adSales || 0)}</td><td>${signedRate(salesChange)}</td><td>${roasText(oldRow.roas || 0)}</td><td>${roasText(newRow.roas || 0)}</td></tr>`;
-      }).join("");
-      const accountRows = (report2026.accounts || []).map(account => `<tr><td>${html(account.account || "")}</td><td>${money(account.totals?.adCost || 0)}</td><td>${money(account.totals?.adSales || 0)}</td><td>${roasText(account.totals?.roas || 0)}</td><td>${number(account.totals?.conversions || 0)}</td><td>${Number(account.totals?.adCost || 0) ? "정상 집계" : "실적 0원"}</td></tr>`).join("");
-      const mappingRows = (report2026.groups || []).map(group => `<tr><td>${html(group.label || "")}</td><td>${html(group.productId || "-")}</td><td>${money(group.totals?.adCost || 0)}</td><td>${money(group.totals?.adSales || 0)}</td><td>${roasText(group.totals?.roas || 0)}</td><td class="wrap">${html(group.mappingNote || "")}</td></tr>`).join("");
-      const historicalHtml = report2026.monthly?.length ? `
-        <div class="product-category" style="margin-bottom:14px">
-          <div class="product-category-head"><div><h3 class="product-category-title">2025·2026년 1~7월 네이버 광고 효율 비교</h3><div class="product-category-sub">네이버 광고 3개 계정 전체 포함 · 광고비·전환매출·ROAS 전년 동기간 비교</div></div></div>
-          <div class="kpis" style="margin:12px 0 14px">
-            <div class="metric"><div class="label">2026 광고비</div><div class="value">${money(total2026.adCost || 0)}</div><div class="sub">전년 대비 ${changeText("adCost")}</div></div>
-            <div class="metric"><div class="label">2026 광고매출</div><div class="value">${money(total2026.adSales || 0)}</div><div class="sub">전년 대비 ${changeText("adSales")}</div></div>
-            <div class="metric"><div class="label">2026 광고 ROAS</div><div class="value">${roasText(total2026.roas || 0)}</div><div class="sub">2025 ${roasText(total2025.roas || 0)}</div></div>
-            <div class="metric"><div class="label">2026 전환수</div><div class="value">${number(total2026.conversions || 0)}</div><div class="sub">전년 대비 ${changeText("conversions")}</div></div>
-          </div>
-          <p class="slot-note">2026년 3월부터 전환매출과 ROAS가 크게 상승했습니다. 광고 성과 개선과 함께 전환 추적·집계 기준 변경 가능성도 있으므로 월별 추세를 함께 확인해야 합니다. 과거 원본에는 상품 ID가 없어 상품별 비교는 캠페인명 기준입니다.</p>
-          <div class="pl-chart-panel" style="margin-bottom:14px"><div class="pl-chart-title">2025 vs 2026 월별 광고 ROAS</div><div style="height:300px;position:relative"><canvas id="historicalAdChart"></canvas></div></div>
-          <div class="table-wrap" style="margin-bottom:14px"><table><thead><tr><th>월</th><th>2025 광고비</th><th>2026 광고비</th><th>증감</th><th>2025 광고매출</th><th>2026 광고매출</th><th>증감</th><th>2025 ROAS</th><th>2026 ROAS</th></tr></thead><tbody>${comparisonRows}</tbody></table></div>
-          <h3 class="product-category-title" style="margin:14px 0 8px">2026년 네이버 광고 계정 3개</h3>
-          <div class="table-wrap" style="margin-bottom:14px"><table><thead><tr><th>광고계정</th><th>광고비</th><th>광고매출</th><th>ROAS</th><th>전환수</th><th>상태</th></tr></thead><tbody>${accountRows}</tbody></table></div>
-          <h3 class="product-category-title" style="margin:14px 0 8px">슬롯 상품군 광고 참고치</h3>
-          <div class="table-wrap"><table><thead><tr><th>비교 상품군</th><th>연결 상품번호</th><th>광고비</th><th>광고매출</th><th>ROAS</th><th>매핑 기준·제한</th></tr></thead><tbody>${mappingRows}<tr><td>세트모음전</td><td>4843121925</td><td colspan="3">비교 불가</td><td class="wrap">원본에서 직접 식별 가능한 전용 캠페인 또는 상품 ID가 없습니다.</td></tr></tbody></table></div>
-        </div>` : "";
+      const accountCostTotal = (report2026.accounts || []).reduce((sum, account) => sum + Number(account.totals?.adCost || 0), 0);
+      const accountVisuals = (report2026.accounts || []).map(account => {
+        const cost = Number(account.totals?.adCost || 0); const share = accountCostTotal ? cost / accountCostTotal : 0;
+        return `<div class="slot-account-row"><div class="slot-account-name">${html(account.account || "-")}</div><div class="slot-account-track"><div class="slot-account-bar" style="width:${Math.max(share * 100, cost ? 2 : 0).toFixed(1)}%"></div></div><div class="slot-account-value">${rateText(share)}</div></div>`;
+      }).join("") || `<div class="empty">계정별 데이터가 없습니다.</div>`;
+      const slotCards = periods.map(period => `
+        <article class="slot-live-card"><div class="slot-live-top"><div><div class="slot-live-name">${html(period.product || "-")}</div><div class="slot-live-period">${html(period.startDate || "")} ~ ${html(period.endDate || "")}</div></div><span class="slot-decision ${decisionClass(period.decision)}">${html(period.decision || "관찰중")}</span></div>
+        <div class="slot-live-metrics"><div class="slot-live-metric"><span>슬롯비</span><strong>${money(period.slotCost || 0)}</strong></div><div class="slot-live-metric"><span>현재 매출</span><strong>${money(period.during?.sales || 0)}</strong></div><div class="slot-live-metric"><span>집계 진행</span><strong>${number(period.during?.daysWithData || 0)}/${number(period.days || 0)}일</strong></div><div class="slot-live-metric"><span>검색 순위</span><strong>${period.rankAverage == null ? "-" : `${Number(period.rankAverage).toFixed(1)}위`}</strong></div></div></article>`).join("") || `<div class="empty">${html(state.month)}에 운영된 슬롯이 없습니다.</div>`;
+      const monthRows = [...new Set([...month2025.keys(), ...month2026.keys()])].sort().map(month => { const a=month2025.get(month)||{}, b=month2026.get(month)||{}; return `<tr><td>${month}월</td><td>${money(a.adCost||0)}</td><td>${money(b.adCost||0)}</td><td>${roasText(a.roas||0)}</td><td>${roasText(b.roas||0)}</td></tr>`; }).join("");
+      const accountRows = (report2026.accounts || []).map(account => `<tr><td>${html(account.account||"")}</td><td>${money(account.totals?.adCost||0)}</td><td>${money(account.totals?.adSales||0)}</td><td>${roasText(account.totals?.roas||0)}</td><td>${number(account.totals?.conversions||0)}</td></tr>`).join("");
+      const slotRows = periods.map(period => `<tr><td class="wrap"><strong>${html(period.product||"")}</strong><br><span style="color:var(--muted);font-size:10px">${html(period.keyword||"")}</span></td><td>${html(period.startDate||"")}<br>~ ${html(period.endDate||"")}</td><td>${money(period.slotCost||0)}</td><td>${money(period.during?.sales||0)}</td><td>${number(period.during?.orders||0)}</td><td>${period.slotCostRate==null?"-":rateText(period.slotCostRate)}</td><td>${period.rankAverage==null?"-":`${Number(period.rankAverage).toFixed(1)}위`}</td><td><span class="slot-decision ${decisionClass(period.decision)}">${html(period.decision||"")}</span></td></tr>`).join("");
+      els.slotEfficiencyStatus.textContent = `2026년 1~7월 · ${state.month} 슬롯 ${periods.length}개`;
       els.slotEfficiencyBody.innerHTML = `
-        <div class="kpis" style="margin-bottom:14px">          <div class="metric"><div class="label">완료 슬롯비</div><div class="value">${money(summary.totalSlotCost || 0)}</div><div class="sub">${number(summary.completedCount || 0)}개 완료 구간</div></div>
-          <div class="metric"><div class="label">슬롯 운영 기간 매출</div><div class="value">${money(summary.totalSales || 0)}</div><div class="sub">완료 구간 합계</div></div>
-          <div class="metric"><div class="label">전년 동기간 대비</div><div class="value">-</div><div class="sub">2025년 데이터 적재 후 제공</div></div>
-          <div class="metric"><div class="label">슬롯비율</div><div class="value">${rateText(summary.slotCostRate || 0)}</div><div class="sub">슬롯비 / 기간 매출</div></div>
-          <div class="metric"><div class="label">통합 매출 효율</div><div class="value">${roasText(summary.blendedSalesRoas || 0)}</div><div class="sub">매출 / (광고비+슬롯비)</div></div>
-          <div class="metric"><div class="label">평균 검색 순위</div><div class="value">${summary.rankAverage == null ? "-" : `${Number(summary.rankAverage).toFixed(1)}위`}</div><div class="sub">순위 표본이 있는 완료 구간</div></div>
-        </div>
-        ${historicalHtml}
-        <p class="slot-note">매출 비교와 증분매출은 2025년 전년 동기간 데이터가 충분히 적재된 뒤 제공합니다. 현재는 슬롯 운영 기간의 실제 매출·주문, 슬롯비율, 광고비 포함 효율, 검색 순위만 표시합니다. 부분 집계 구간은 완료 합계와 자동 판정에서 제외됩니다.</p>
-        <div class="slot-summary-grid">${productCards}</div>
-        <div class="pl-chart-panel" style="margin-bottom:14px">
-          <div class="pl-chart-title">선택 월 완료 슬롯 · 슬롯 운영 기간 매출</div>
-          <div style="height:300px;position:relative"><canvas id="slotEfficiencyChart"></canvas></div>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>제품·키워드</th><th>슬롯 기간</th><th>슬롯비</th><th>전년 동기간 매출</th><th>슬롯 운영 기간 매출</th><th>증분매출</th><th>주문</th><th>슬롯비율</th><th>통합 효율</th><th>검색 순위</th><th>판정</th></tr></thead>
-            <tbody>${rows}</tbody>
-          </table>
+        <div class="slot-exec">
+          <div class="slot-hero"><div class="slot-hero-kicker">EXECUTIVE VIEW · 2026년 1~7월</div><h3>광고 효율은 크게 개선됐지만, 4월 이후 둔화와 계정 집중을 함께 관리해야 합니다</h3><p>광고비 증액보다 전환 효율 개선이 성장을 만들었습니다. 슬롯은 종료 후 증분매출과 순위 잔존효과로 최종 판단합니다.</p></div>
+          <div class="slot-kpi-grid"><div class="slot-kpi"><div class="slot-kpi-label">광고비</div><div class="slot-kpi-value">${money(total2026.adCost||0)}</div><div class="slot-kpi-delta">전년 대비 ${changeText("adCost")}</div></div><div class="slot-kpi"><div class="slot-kpi-label">광고매출</div><div class="slot-kpi-value">${money(total2026.adSales||0)}</div><div class="slot-kpi-delta">전년 대비 ${changeText("adSales")}</div></div><div class="slot-kpi"><div class="slot-kpi-label">ROAS</div><div class="slot-kpi-value">${roasText(total2026.roas||0)}</div><div class="slot-kpi-delta">2025 ${roasText(total2025.roas||0)}</div></div><div class="slot-kpi"><div class="slot-kpi-label">전환수</div><div class="slot-kpi-value">${number(total2026.conversions||0)}</div><div class="slot-kpi-delta">전년 대비 ${changeText("conversions")}</div></div></div>
+          <div class="slot-dashboard-grid"><div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">월별 광고 ROAS</div><div class="slot-panel-sub">2025년과 2026년 월별 흐름</div></div></div><div style="height:300px;position:relative"><canvas id="historicalAdChart"></canvas></div></div><div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">지금 봐야 할 3가지</div><div class="slot-panel-sub">경영 판단 요약</div></div></div><div class="slot-insight-list"><div class="slot-insight"><strong>성과 개선은 전환이 견인</strong><span>노출 감소에도 클릭과 전환이 증가했습니다.</span></div><div class="slot-insight warn"><strong>4월 이후 효율 둔화</strong><span>7월 ROAS는 4월 정점 대비 약 33.7% 낮습니다.</span></div><div class="slot-insight warn"><strong>비용이 한 계정에 집중</strong><span>측정 오류나 운영 변화가 전체 결과에 직접 영향을 줍니다.</span></div></div></div></div>
+          <div class="slot-dashboard-grid"><div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">광고비 계정 집중도</div><div class="slot-panel-sub">2026년 1~7월 계정별 비중</div></div></div><div class="slot-account-list">${accountVisuals}</div></div><div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">다음 의사결정</div><div class="slot-panel-sub">검증 후 단계적 집행</div></div></div><div class="slot-insight-list"><div class="slot-insight"><strong>8월 18일 슬롯 재판정</strong><span>종료 후 7일 데이터로 유지·축소·중단 결정</span></div><div class="slot-insight"><strong>예산 +10% 대조 실험</strong><span>검증된 상품군만 증액해 한계 ROAS 비교</span></div></div></div></div>
+          <div class="slot-panel-head" style="margin:4px 0 0"><div><div class="slot-panel-title" style="font-size:17px">현재 슬롯 운영 현황</div><div class="slot-panel-sub">확정 판정 전 집계 진행률과 검색 순위를 확인합니다</div></div></div><div class="slot-card-grid">${slotCards}</div>
+          <div class="slot-dashboard-grid"><div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">완료 슬롯 운영 기간 매출</div><div class="slot-panel-sub">부분 집계는 자동 판정에서 제외</div></div></div><div style="height:280px;position:relative"><canvas id="slotEfficiencyChart"></canvas></div></div><div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">판정 기준</div></div></div><div class="slot-insight-list"><div class="slot-insight"><strong>유지</strong><span>증분매출÷슬롯비 3배 이상 + 검색 5위 이내</span></div><div class="slot-insight warn"><strong>재검토</strong><span>회수배수 1~3배 또는 순위 개선이 일시적</span></div><div class="slot-insight warn"><strong>중단 후보</strong><span>회수배수 1배 미만 또는 잔존효과 없음</span></div></div></div></div>
+          <details class="slot-detail"><summary>월별·계정별 광고 상세표</summary><div class="table-wrap"><table><thead><tr><th>월</th><th>2025 광고비</th><th>2026 광고비</th><th>2025 ROAS</th><th>2026 ROAS</th></tr></thead><tbody>${monthRows}</tbody></table></div><div class="table-wrap"><table><thead><tr><th>광고계정</th><th>광고비</th><th>광고매출</th><th>ROAS</th><th>전환수</th></tr></thead><tbody>${accountRows}</tbody></table></div></details>
+          <details class="slot-detail"><summary>슬롯별 원본 상세표</summary><div class="table-wrap"><table><thead><tr><th>제품·키워드</th><th>기간</th><th>슬롯비</th><th>현재 매출</th><th>주문</th><th>슬롯비율</th><th>검색 순위</th><th>판정</th></tr></thead><tbody>${slotRows}</tbody></table></div></details>
+          <p class="slot-note">광고 ROAS와 슬롯 효율은 분리해 판단합니다. 슬롯 증분효과는 전년 동기간 데이터와 종료 후 7일 관찰값 확보 후 확정됩니다.</p>
         </div>`;
       if (window._charts.historicalAd) window._charts.historicalAd.destroy();
       const historicalCanvas = document.getElementById("historicalAdChart");
-      if (historicalCanvas && report2026.monthly?.length) {
-        const labels = (report2026.monthly || []).map(row => String(row.month).slice(5) + "월");
-        window._charts.historicalAd = new Chart(historicalCanvas, { type: "line", data: { labels, datasets: [
-          { label: "2025 ROAS", data: labels.map(label => Number(month2025.get(label.slice(0, 2))?.roas || 0) * 100), borderColor: "#94a3b8", backgroundColor: "#94a3b8", tension: .25 },
-          { label: "2026 ROAS", data: labels.map(label => Number(month2026.get(label.slice(0, 2))?.roas || 0) * 100), borderColor: "#4865f4", backgroundColor: "#4865f4", tension: .25 }
-        ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, ticks: { callback: value => `${number(value)}%` } } } } });
-      }
-
+      if (historicalCanvas && report2026.monthly?.length) { const labels=(report2026.monthly||[]).map(row=>String(row.month).slice(5)+"월"); window._charts.historicalAd=new Chart(historicalCanvas,{type:"line",data:{labels,datasets:[{label:"2025 ROAS",data:labels.map(label=>Number(month2025.get(label.slice(0,2))?.roas||0)*100),borderColor:"#94a3b8",backgroundColor:"#94a3b8",tension:.25},{label:"2026 ROAS",data:labels.map(label=>Number(month2026.get(label.slice(0,2))?.roas||0)*100),borderColor:"#4865f4",backgroundColor:"#4865f4",tension:.25}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,ticks:{callback:value=>`${number(value)}%`}}}}}); }
       if (window._charts.slotEfficiency) window._charts.slotEfficiency.destroy();
-      const completePeriods = periods.filter(period => period.isComplete);
-      const canvas = document.getElementById("slotEfficiencyChart");
-      if (canvas) {
-        window._charts.slotEfficiency = new Chart(canvas, {
-          type: "bar",
-          data: {
-            labels: completePeriods.map(period => `${period.product} ${String(period.startDate).slice(5)}`),
-            datasets: [
-              { label: "슬롯 운영 기간 매출", data: completePeriods.map(period => Number(period.during?.sales || 0)), backgroundColor: "rgba(72,101,244,.25)", borderColor: "#4865f4", borderWidth: 2, borderRadius: 5 }
-            ]
-          },
-          options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { position: "bottom" }, tooltip: { callbacks: { label: context => ` ${context.dataset.label}: ${won.format(context.raw)}` } } },
-            scales: { x: { grid: { display: false }, ticks: { color: "#64748b", maxRotation: 45, minRotation: 25 } }, y: { beginAtZero: true, grid: { color: "#f1f5f9" }, ticks: { color: "#64748b", callback: value => won.format(value) } } }
-          }
-        });
-      }
+      const completed = periods.filter(period=>period.isComplete); const canvas=document.getElementById("slotEfficiencyChart");
+      if (canvas) window._charts.slotEfficiency=new Chart(canvas,{type:"bar",data:{labels:completed.map(period=>`${period.product} ${String(period.startDate).slice(5)}`),datasets:[{label:"운영 기간 매출",data:completed.map(period=>Number(period.during?.sales||0)),backgroundColor:"rgba(72,101,244,.25)",borderColor:"#4865f4",borderWidth:2,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,ticks:{callback:value=>won.format(value)}}}}});
     }
 
     function normalizedManualRows(rows, defaults) {
