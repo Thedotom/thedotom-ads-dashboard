@@ -52,6 +52,8 @@ def check_chunk(chunk):
                 "productId": product_id,
                 "rank": None,
                 "status": "4위 밖",
+                "image": "",
+                "title": "",
             }
             try:
                 driver.get(url)
@@ -68,6 +70,10 @@ def check_chunk(chunk):
                         siblings = parent.find_elements("xpath", "./li")
                         result["rank"] = siblings.index(product_li) + 1
                         result["status"] = "노출"
+                        result["title"] = (links[-1].text or "").strip()
+                        images = product_li.find_elements("css selector", "img")
+                        if images:
+                            result["image"] = images[0].get_attribute("src") or images[0].get_attribute("data-src") or ""
             except Exception as exc:
                 result["status"] = "확인 오류"
                 result["error"] = str(exc)[:160]
@@ -111,17 +117,31 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 output = OUTPUT_DIR / f"current-shopping-top4-{today}-{slot}.json"
 output.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 rank_data = json.loads(RANK_DATA.read_text(encoding="utf-8-sig")) if RANK_DATA.exists() else {}
+product_metadata = {}
+for date_key in sorted(rank_data):
+    for slot_name in ("morning", "afternoon"):
+        for value in rank_data.get(date_key, {}).get(slot_name, {}).get("shopping", {}).values():
+            product_id = str(value.get("product_id") or "")
+            if not product_id:
+                continue
+            metadata = product_metadata.setdefault(product_id, {"image": "", "title": ""})
+            if value.get("image"):
+                metadata["image"] = value["image"]
+            if value.get("title"):
+                metadata["title"] = value["title"]
 slot_data = rank_data.setdefault(today, {}).setdefault(slot, {"shopping": {}, "powerlink": {}})
 shopping = slot_data.setdefault("shopping", {})
 status_rank = {"4위 밖": "outside_top4", "접속 제한": "blocked", "확인 오류": "error"}
 for row in all_results:
     key = f"{row['keyword']}_{row['productId']}"
     previous = shopping.get(key, {})
+    metadata = product_metadata.get(row["productId"], {})
     shopping[key] = {
         "keyword": row["keyword"], "product_id": row["productId"],
         "rank": row["rank"] if row["rank"] is not None else status_rank.get(row["status"], "error"),
         "status": row["status"], "scope": "top4", "source": "naver_integrated_search",
-        "image": previous.get("image", ""), "title": previous.get("title", ""),
+        "image": row.get("image") or previous.get("image") or metadata.get("image", ""),
+        "title": row.get("title") or previous.get("title") or metadata.get("title", ""),
         "collected_at": now.strftime("%H:%M:%S"),
     }
 RANK_DATA.write_text(json.dumps(rank_data, ensure_ascii=False, indent=2), encoding="utf-8")
