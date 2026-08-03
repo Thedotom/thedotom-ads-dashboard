@@ -660,14 +660,13 @@
           <button type="button" data-page="dailyProductSmartstore">더도톰스튜디오</button>
           <button type="button" data-page="dailyProductMura">무라</button>
         </div>
-        <button type="button" data-page="executiveReport">경영 보고서</button>
         <button type="button" data-page="slotEfficiency">슬롯 효율</button>
         <button type="button" data-revenue-root>매출·손익 분석</button>
         <div class="sub-nav-group" data-revenue-subnav>
           <button type="button" data-page="totalSales">월별 매출·광고비</button>
           <button type="button" data-page="dailyRevenue">일일 매출</button>
         </div>
-        <button type="button" data-page="monthlyReport">월보고서</button>
+        <button type="button" data-page="monthlyReport">보고서</button>
       </div>
       <div class="hidden-controls">
         <select id="typeFilter">
@@ -810,10 +809,6 @@
         <div class="section-head"><h2>일일 제품 성과</h2><span id="dailyProductStatus" class="count"></span></div>
         <div class="memo-body" id="dailyProductBody"></div>
       </section>
-      <section class="page-section" data-page="executiveReport">
-        <div class="section-head"><h2>1~7월 광고 경영 보고서</h2><span id="executiveReportStatus" class="count"></span></div>
-        <div class="memo-body" id="executiveReportBody"></div>
-      </section>
       <section class="page-section" data-page="slotEfficiency">
         <div class="section-head"><h2>슬롯 효율 분석</h2><span id="slotEfficiencyStatus" class="count"></span></div>
         <div class="memo-body" id="slotEfficiencyBody"></div>
@@ -824,10 +819,8 @@
         <div class="memo-body" id="totalSalesBody"></div>
       </section>
       <section class="page-section" data-page="monthlyReport">
-        <div class="section-head"><h2>월보고서</h2><span class="count">정리 예정</span></div>
-        <div class="memo-body">
-          <div class="empty">월보고서 내용은 이후 정리본을 붙여가며 보수할 수 있도록 비워두었습니다.</div>
-        </div>
+        <div class="section-head"><h2>1~7월 광고 보고서</h2><span id="executiveReportStatus" class="count"></span></div>
+        <div class="memo-body" id="executiveReportBody"></div>
       </section>
       <div class="memo-grid page-section hidden" data-page="report">
         <section>
@@ -1100,11 +1093,10 @@
         dailyProductCafe24: "자사몰 일일 제품 성과",
         dailyProductSmartstore: "더도톰스튜디오 일일 제품 성과",
         dailyProductMura: "무라 일일 제품 성과",
-        executiveReport: "1~7월 광고 경영 보고서",
         slotEfficiency: "슬롯 효율 분석",
         totalSales: "월별 매출·광고비",
         dailyRevenue: "일일 매출",
-        monthlyReport: "월보고서"
+        monthlyReport: "보고서"
       };
       els.pageTitle.textContent = titles[state.page] || titles.overview;
       const isRankTrafficPage = state.page === "rankShopping" || state.page === "rankPowerlink";
