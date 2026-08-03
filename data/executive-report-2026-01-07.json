@@ -17,7 +17,12 @@
       "totalMarketingCost": 46951890,
       "marketingCostRate": 0.061550324587220415,
       "mer": 16.24686801745361,
-      "attributedSalesShare": 0.2674023882609654
+      "attributedSalesShare": 0.2674023882609654,
+      "searchAdCost": 16856158,
+      "platformAttributedSales": 203980200,
+      "platformRoas": 12.101227337807346,
+      "conversions": 1826,
+      "averageAttributedConversionValue": 111708.76232201533
     },
     {
       "month": "2026-02",
@@ -25,7 +30,12 @@
       "totalMarketingCost": 27957970,
       "marketingCostRate": 0.04172037018569851,
       "mer": 23.96910659107224,
-      "attributedSalesShare": 0.22978050523792587
+      "attributedSalesShare": 0.22978050523792587,
+      "searchAdCost": 14722180,
+      "platformAttributedSales": 153982250,
+      "platformRoas": 10.459201694314293,
+      "conversions": 1470,
+      "averageAttributedConversionValue": 104749.8299319728
     },
     {
       "month": "2026-03",
@@ -33,7 +43,12 @@
       "totalMarketingCost": 20956704,
       "marketingCostRate": 0.03010726538211784,
       "mer": 33.21457420021775,
-      "attributedSalesShare": 1.162756397363476
+      "attributedSalesShare": 1.162756397363476,
+      "searchAdCost": 20723907,
+      "platformAttributedSales": 809357520,
+      "platformRoas": 39.054292223951784,
+      "conversions": 3291,
+      "averageAttributedConversionValue": 245930.5742935278
     },
     {
       "month": "2026-04",
@@ -41,7 +56,12 @@
       "totalMarketingCost": 27150499,
       "marketingCostRate": 0.043448450819228365,
       "mer": 23.015780336118315,
-      "attributedSalesShare": 2.266493973424161
+      "attributedSalesShare": 2.266493973424161,
+      "searchAdCost": 27018589,
+      "platformAttributedSales": 1416309240,
+      "platformRoas": 52.419807710906,
+      "conversions": 7106,
+      "averageAttributedConversionValue": 199311.74218969885
     },
     {
       "month": "2026-05",
@@ -49,7 +69,12 @@
       "totalMarketingCost": 32460970,
       "marketingCostRate": 0.05261618025528689,
       "mer": 19.005560554721562,
-      "attributedSalesShare": 2.584654476927474
+      "attributedSalesShare": 2.584654476927474,
+      "searchAdCost": 31901731,
+      "platformAttributedSales": 1594573970,
+      "platformRoas": 49.983932533316136,
+      "conversions": 11931,
+      "averageAttributedConversionValue": 133649.6496521666
     },
     {
       "month": "2026-06",
@@ -57,7 +82,12 @@
       "totalMarketingCost": 37956740,
       "marketingCostRate": 0.0561355896580584,
       "mer": 17.814010792286165,
-      "attributedSalesShare": 2.1312374510800502
+      "attributedSalesShare": 2.1312374510800502,
+      "searchAdCost": 34876740,
+      "platformAttributedSales": 1441061300,
+      "platformRoas": 41.31869263010247,
+      "conversions": 12735,
+      "averageAttributedConversionValue": 113157.54220651746
     },
     {
       "month": "2026-07",
@@ -65,40 +95,13 @@
       "totalMarketingCost": 44952058,
       "marketingCostRate": 0.08485986263725782,
       "mer": 11.784134087920958,
-      "attributedSalesShare": 2.601335126405268
+      "attributedSalesShare": 2.601335126405268,
+      "searchAdCost": 39672058,
+      "platformAttributedSales": 1377982050,
+      "platformRoas": 34.734322328324886,
+      "conversions": 13079,
+      "averageAttributedConversionValue": 105358.36455386497
     }
   ],
-  "basis": "monthly-dashboard-2026-01~07 totalSalesMetrics.autoSalesTotal and autoAdCostTotal; Naver Search Ads platform attribution benchmark",
-  "phases": [
-    {
-      "key": "jan_mar",
-      "label": "1~3월",
-      "months": 3,
-      "actualSales": 2129016723,
-      "totalMarketingCost": 95866564,
-      "marketingCostRate": 0.045028563169252286,
-      "mer": 22.20812590091369,
-      "platformAttributedSales": 1167319970,
-      "searchAdCost": 52302245,
-      "platformRoas": 22.318735457722703,
-      "attributedSalesShare": 0.5482906533280434,
-      "conversions": 6587,
-      "averageAttributedConversionValue": 177215.72339456505
-    },
-    {
-      "key": "apr_jul",
-      "label": "4~7월",
-      "months": 4,
-      "actualSales": 2447711707,
-      "totalMarketingCost": 142520267,
-      "marketingCostRate": 0.05822592039430892,
-      "mer": 17.174481626532458,
-      "platformAttributedSales": 5829926560,
-      "searchAdCost": 133469118,
-      "platformRoas": 43.67996617764418,
-      "attributedSalesShare": 2.3817864429571074,
-      "conversions": 44851,
-      "averageAttributedConversionValue": 129984.316068761
-    }
-  ]
+  "basis": "monthly-dashboard-2026-01~07 totalSalesMetrics.autoSalesTotal and autoAdCostTotal; Naver Search Ads platform attribution benchmark"
 }
