@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -1779,7 +1779,7 @@
     function renderSlotEfficiency() {
       const analysis = state.data.slotEfficiency || {};
       const allPeriods = analysis.periods || [];
-      const periods = allPeriods.filter(period => String(period.startDate || "").startsWith(state.month));
+      const periods = allPeriods.filter(period => String(period.startDate || "").slice(0, 7) <= state.month && String(period.endDate || "").slice(0, 7) >= state.month);
       const completedPeriods = periods.filter(period => period.isComplete);
       if (!els.slotEfficiencyBody) return;
       if (!periods.length) {
@@ -1871,15 +1871,33 @@
           <td><span class="slot-decision ${decisionClass(period.decision)}">${html(period.decision || "")}</span>${period.isComplete ? "" : `<br><span style="font-size:10px;color:var(--muted)">${number(period.during?.daysWithData || 0)}/${number(period.days || 0)}일 집계</span>`}</td>
         </tr>`;
       }).join("");
+      const benchmark = analysis.historicalAdBenchmark || {};
+      const benchmarkTotal = (benchmark.groups || []).find(group => group.key === "all")?.totals || {};
+      const benchmarkRows = (benchmark.monthly || []).map(row => `<tr><td>${html(row.month || "")}</td><td>${number(row.impressions || 0)}</td><td>${number(row.clicks || 0)}</td><td>${money(row.adCost || 0)}</td><td>${money(row.adSales || 0)}</td><td>${roasText(row.roas || 0)}</td><td>${money(row.cpc || 0)}</td><td>${money(row.cpa || 0)}</td></tr>`).join("");
+      const mappingRows = (benchmark.groups || []).filter(group => group.key !== "all").map(group => `<tr><td>${html(group.label || "")}</td><td>${html(group.productId || "-")}</td><td>${money(group.totals?.adCost || 0)}</td><td>${money(group.totals?.adSales || 0)}</td><td>${roasText(group.totals?.roas || 0)}</td><td class="wrap">${html(group.mappingNote || "")}</td></tr>`).join("");
+      const historicalHtml = benchmark.monthly?.length ? `
+        <div class="product-category" style="margin-bottom:14px">
+          <div class="product-category-head"><div><h3 class="product-category-title">2025년 1~7월 광고 효율 기준</h3><div class="product-category-sub">네이버 검색광고 API 원본 · 상품 ID가 없는 과거 데이터는 캠페인명 기준으로 상품군 매핑</div></div></div>
+          <div class="kpis" style="margin:12px 0 14px">
+            <div class="metric"><div class="label">누적 광고비</div><div class="value">${money(benchmarkTotal.adCost || 0)}</div><div class="sub">2025-01-01 ~ 2025-07-31</div></div>
+            <div class="metric"><div class="label">누적 광고매출</div><div class="value">${money(benchmarkTotal.adSales || 0)}</div><div class="sub">네이버 전환매출</div></div>
+            <div class="metric"><div class="label">광고 ROAS</div><div class="value">${roasText(benchmarkTotal.roas || 0)}</div><div class="sub">광고매출 / 광고비</div></div>
+            <div class="metric"><div class="label">전환수</div><div class="value">${number(benchmarkTotal.conversions || 0)}</div><div class="sub">7개월 누적</div></div>
+          </div>
+          <div class="pl-chart-panel" style="margin-bottom:14px"><div class="pl-chart-title">2025년 월별 광고비·광고매출 추세</div><div style="height:300px;position:relative"><canvas id="historicalAdChart"></canvas></div></div>
+          <div class="table-wrap" style="margin-bottom:14px"><table><thead><tr><th>월</th><th>노출</th><th>클릭</th><th>광고비</th><th>광고매출</th><th>ROAS</th><th>CPC</th><th>CPA</th></tr></thead><tbody>${benchmarkRows}</tbody></table></div>
+          <div class="table-wrap"><table><thead><tr><th>비교 상품군</th><th>연결 상품번호</th><th>광고비</th><th>광고매출</th><th>ROAS</th><th>매핑 기준·제한</th></tr></thead><tbody>${mappingRows}<tr><td>세트모음전</td><td>4843121925</td><td colspan="3">비교 불가</td><td class="wrap">2025 원본에서 직접 식별 가능한 전용 캠페인 또는 상품 ID가 없습니다.</td></tr></tbody></table></div>
+        </div>` : "";
+
       els.slotEfficiencyBody.innerHTML = `
-        <div class="kpis" style="margin-bottom:14px">
-          <div class="metric"><div class="label">완료 슬롯비</div><div class="value">${money(summary.totalSlotCost || 0)}</div><div class="sub">${number(summary.completedCount || 0)}개 완료 구간</div></div>
+        <div class="kpis" style="margin-bottom:14px">          <div class="metric"><div class="label">완료 슬롯비</div><div class="value">${money(summary.totalSlotCost || 0)}</div><div class="sub">${number(summary.completedCount || 0)}개 완료 구간</div></div>
           <div class="metric"><div class="label">슬롯 운영 기간 매출</div><div class="value">${money(summary.totalSales || 0)}</div><div class="sub">완료 구간 합계</div></div>
           <div class="metric"><div class="label">전년 동기간 대비</div><div class="value">-</div><div class="sub">2025년 데이터 적재 후 제공</div></div>
           <div class="metric"><div class="label">슬롯비율</div><div class="value">${rateText(summary.slotCostRate || 0)}</div><div class="sub">슬롯비 / 기간 매출</div></div>
           <div class="metric"><div class="label">통합 매출 효율</div><div class="value">${roasText(summary.blendedSalesRoas || 0)}</div><div class="sub">매출 / (광고비+슬롯비)</div></div>
           <div class="metric"><div class="label">평균 검색 순위</div><div class="value">${summary.rankAverage == null ? "-" : `${Number(summary.rankAverage).toFixed(1)}위`}</div><div class="sub">순위 표본이 있는 완료 구간</div></div>
         </div>
+        ${historicalHtml}
         <p class="slot-note">매출 비교와 증분매출은 2025년 전년 동기간 데이터가 충분히 적재된 뒤 제공합니다. 현재는 슬롯 운영 기간의 실제 매출·주문, 슬롯비율, 광고비 포함 효율, 검색 순위만 표시합니다. 부분 집계 구간은 완료 합계와 자동 판정에서 제외됩니다.</p>
         <div class="slot-summary-grid">${productCards}</div>
         <div class="pl-chart-panel" style="margin-bottom:14px">
@@ -1892,6 +1910,15 @@
             <tbody>${rows}</tbody>
           </table>
         </div>`;
+      if (window._charts.historicalAd) window._charts.historicalAd.destroy();
+      const historicalCanvas = document.getElementById("historicalAdChart");
+      if (historicalCanvas && benchmark.monthly?.length) {
+        window._charts.historicalAd = new Chart(historicalCanvas, { type: "bar", data: { labels: benchmark.monthly.map(row => row.month), datasets: [
+          { label: "광고비", data: benchmark.monthly.map(row => Number(row.adCost || 0)), backgroundColor: "rgba(245,158,11,.35)", borderColor: "#f59e0b", borderWidth: 1 },
+          { label: "광고매출", data: benchmark.monthly.map(row => Number(row.adSales || 0)), type: "line", borderColor: "#4865f4", backgroundColor: "#4865f4", tension: .25 }
+        ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, ticks: { callback: value => won.format(value) } } } } });
+      }
+
       if (window._charts.slotEfficiency) window._charts.slotEfficiency.destroy();
       const completePeriods = periods.filter(period => period.isComplete);
       const canvas = document.getElementById("slotEfficiencyChart");
@@ -2609,6 +2636,7 @@ function renderBrandContract() {
   </script>
 </body>
 </html>
+
 
 
 

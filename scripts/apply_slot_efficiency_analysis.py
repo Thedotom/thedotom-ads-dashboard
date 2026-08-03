@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import argparse
 import json
@@ -243,6 +243,9 @@ def main() -> None:
     parser.add_argument("source", type=Path)
     args = parser.parse_args()
     periods, payload = load_source(args.source)
+    benchmark_path = DATA / "slot_efficiency_2025_ad_benchmark.json"
+    if benchmark_path.exists():
+        payload["historicalAdBenchmark"] = json.loads(benchmark_path.read_text(encoding="utf-8-sig"))
     update_dashboard_files(payload)
     print(
         json.dumps(
@@ -258,3 +261,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
