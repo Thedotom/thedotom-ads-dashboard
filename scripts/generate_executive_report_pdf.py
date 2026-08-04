@@ -27,6 +27,7 @@ S={
  'body':ParagraphStyle('body',fontName='Malgun',fontSize=8.7,leading=14,textColor=colors.HexColor('#334155')),
  'small':ParagraphStyle('small',fontName='Malgun',fontSize=7,leading=9,textColor=NAVY),
  'smallb':ParagraphStyle('smallb',fontName='MalgunB',fontSize=7,leading=9,textColor=NAVY),
+ 'smallw':ParagraphStyle('smallw',fontName='MalgunB',fontSize=7,leading=9,textColor=colors.white),
  'klabel':ParagraphStyle('klabel',fontName='MalgunB',fontSize=8,leading=11,textColor=SLATE,alignment=1),
  'kpi':ParagraphStyle('kpi',fontName='MalgunB',fontSize=14,leading=19,textColor=NAVY,alignment=1),
 }
@@ -60,7 +61,7 @@ def build():
  kd=[[P(x,'klabel') for x in ['실제 전체 매출','전체 마케팅비','마케팅비율','실제 매출 MER']],[P(money(report['actualSales']),'kpi'),P(money(report['totalMarketingCost']),'kpi'),P(pct(report['marketingCostRate']),'kpi'),P(mult(report['mer']),'kpi')]];kt=Table(kd,colWidths=[43.5*mm]*4,rowHeights=[12*mm,18*mm]);kt.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),PALE),('GRID',(0,0),(-1,-1),.5,LINE),('VALIGN',(0,0),(-1,-1),'MIDDLE')]));story += [kt,Spacer(1,8*mm),P('대표 보고 결론','h2')]
  conclusions=[('실제 효율 중심',f"누적 실제 MER {mult(report['mer'])}, 매출 대비 마케팅비율 {pct(report['marketingCostRate'])}"),('플랫폼 지표 분리',f"플랫폼 귀속매출이 실제 매출의 {pct(report['attributedSalesShare'])}로 100% 초과"),('슬롯 상품별 판단',f"총 {ss['periodCount']}개 구간, 완료 {ss['completedCount']}개, 진행·관찰 {ss['activeCount']}개"),('하반기 실행','저효율 광고 조정과 슬롯 유지·축소·중단 기준을 월 1회 점검')];story += [styled_table([[P(a,'smallb'),P(b)] for a,b in conclusions],[36*mm,138*mm],False),PageBreak()]
  story += [P('2. 1~7월 월별 성과','h1'),line_chart(report['monthly'])]
- md=[[P(x,'smallb') for x in ['월','실제 매출','마케팅비','비용률','실제 MER','플랫폼 ROAS','귀속/실매출']]]
+ md=[[P(x,'smallw') for x in ['월','실제 매출','마케팅비','비용률','실제 MER','플랫폼 ROAS','귀속/실매출']]]
  for r in report['monthly']: md.append([P(r['month'][5:]+'월','small'),P(money(r['actualSales']),'small'),P(money(r['totalMarketingCost']),'small'),P(pct(r['marketingCostRate']),'small'),P(mult(r['mer']),'small'),P(mult(r['platformRoas']),'small'),P(pct(r['attributedSalesShare']),'small')])
  story += [styled_table(md,[14*mm,34*mm,31*mm,20*mm,22*mm,24*mm,29*mm]),Spacer(1,7*mm),P('해석','h2'),P('3월부터 플랫폼 귀속매출이 실제 매출을 넘기 시작했고 4~7월에는 차이가 더 커졌습니다. 하반기 예산 판단은 플랫폼 ROAS 단독이 아니라 실제 매출 MER와 비용률을 우선 기준으로 삼습니다.'),PageBreak()]
  story += [P('3. 슬롯 효율','h1'),P('실제 진행 기간 2026.05.22 - 2026.08.09'),Spacer(1,4*mm)]
@@ -68,8 +69,8 @@ def build():
  products=[]
  for name in sorted(set(r['product'] for r in periods)):
   rr=[r for r in periods if r['product']==name];cost=sum(r.get('slotCost',0) for r in rr);sales=sum((r.get('during') or {}).get('sales',0) for r in rr);ranks=[r['rankAverage'] for r in rr if r.get('rankAverage') is not None];products.append([P(name,'smallb'),P(str(len(rr))+'회','small'),P(money(cost),'small'),P(money(sales),'small'),P(pct(cost/sales) if sales else '-','small'),P(f'{sum(ranks)/len(ranks):.1f}위' if ranks else '-','small')])
- story += [styled_table([[P(x,'smallb') for x in ['상품','구간','슬롯비','집계 매출','비용률','평균 순위']]]+products,[36*mm,18*mm,31*mm,38*mm,24*mm,27*mm]),PageBreak(),P('4. 슬롯 진행 상세','h1')]
- sd=[[P(x,'smallb') for x in ['상품·키워드','진행 기간','슬롯비','매출','주문','비용률','순위','판정']]]
+ story += [styled_table([[P(x,'smallw') for x in ['상품','구간','슬롯비','집계 매출','비용률','평균 순위']]]+products,[36*mm,18*mm,31*mm,38*mm,24*mm,27*mm]),PageBreak(),P('4. 슬롯 진행 상세','h1')]
+ sd=[[P(x,'smallw') for x in ['상품·키워드','진행 기간','슬롯비','매출','주문','비용률','순위','판정']]]
  for r in periods:
   du=r.get('during') or {};sd.append([P(r['product']+'<br/><font color="#64748B">'+r.get('keyword','')+'</font>','small'),P(r['startDate']+'<br/>~ '+r['endDate'],'small'),P(money(r.get('slotCost')),'small'),P(money(du.get('sales')),'small'),P(int(du.get('orders') or 0),'small'),P(pct(r['slotCostRate']) if r.get('slotCostRate') is not None else '-','small'),P(f"{r['rankAverage']:.1f}위" if r.get('rankAverage') is not None else '-','small'),P(r.get('decision','관찰중'),'small')])
  story += [styled_table(sd,[32*mm,29*mm,22*mm,26*mm,12*mm,17*mm,13*mm,23*mm]),PageBreak(),P('5. 현재 운영 상태와 하반기 실행안','h1')]
