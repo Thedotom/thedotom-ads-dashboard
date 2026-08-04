@@ -1861,9 +1861,10 @@
       const analysis = state.data.slotEfficiency || {};
       const actualReport = state.executiveReportData || {};
       const allPeriods = analysis.periods || [];
-      const reportStart = "2026-01-01";
-      const reportEnd = "2026-07-31";
-      const periods = allPeriods.filter(period => String(period.startDate || "") <= reportEnd && String(period.endDate || "") >= reportStart);
+      const periods = [...allPeriods].sort((a, b) => String(a.startDate || "").localeCompare(String(b.startDate || "")));
+      const slotStartDate = periods.length ? periods[0].startDate : "";
+      const slotEndDate = periods.reduce((latest, period) => String(period.endDate || "") > String(latest || "") ? period.endDate : latest, "");
+      const slotPeriodLabel = slotStartDate && slotEndDate ? `${slotStartDate.replaceAll("-", ".")} ~ ${slotEndDate.replaceAll("-", ".")}` : "운영 일정 없음";
       if (!els.slotEfficiencyBody) return;
       const benchmark = analysis.historicalAdBenchmark || {};
       const report2025 = benchmark.reports?.["2025"] || {};
@@ -1906,7 +1907,7 @@
       const slotProductMap = new Map();
       periods.forEach(period => { const key=period.product||"기타"; if(!slotProductMap.has(key)) slotProductMap.set(key,{name:key,count:0,cost:0,sales:0,complete:0,active:0,ranks:[]}); const item=slotProductMap.get(key); item.count+=1; item.cost+=Number(period.slotCost||0); item.sales+=Number(period.during?.sales||0); item.complete+=period.isComplete?1:0; item.active+=period.isComplete?0:1; if(period.rankAverage!=null)item.ranks.push(Number(period.rankAverage)); });
       const slotProductSummary = [...slotProductMap.values()].map(item => `<article class="slot-live-card"><div class="slot-live-top"><div><div class="slot-live-name">${html(item.name)}</div><div class="slot-live-period">총 ${number(item.count)}회 · 완료 ${number(item.complete)} · 관찰 ${number(item.active)}</div></div></div><div class="slot-live-metrics"><div class="slot-live-metric"><span>누적 슬롯비</span><strong>${money(item.cost)}</strong></div><div class="slot-live-metric"><span>집계 매출</span><strong>${money(item.sales)}</strong></div><div class="slot-live-metric"><span>슬롯비/매출</span><strong>${item.sales?rateText(item.cost/item.sales):"-"}</strong></div><div class="slot-live-metric"><span>평균 순위</span><strong>${item.ranks.length?`${(item.ranks.reduce((a,b)=>a+b,0)/item.ranks.length).toFixed(1)}위`:"-"}</strong></div></div></article>`).join("");
-      els.slotEfficiencyStatus.textContent = `2026.01.01~07.31 · 전체 슬롯 ${periods.length}개`;
+      els.slotEfficiencyStatus.textContent = `${slotPeriodLabel} · 전체 슬롯 ${periods.length}개`;
       if (els.executiveReportBody) {
         els.executiveReportStatus.textContent = "1~7월 월별 성과 · 슬롯 효율 · 하반기 액션 플랜";
         els.executiveReportBody.innerHTML = `
@@ -1929,13 +1930,12 @@
             <details class="slot-detail"><summary>1~7월 광고·슬롯 상세 데이터</summary><div class="table-wrap"><table><thead><tr><th>월</th><th>2025 광고비</th><th>2026 광고비</th><th>2025 ROAS</th><th>2026 ROAS</th></tr></thead><tbody>${monthRows}</tbody></table></div><div class="table-wrap"><table><thead><tr><th>광고계정</th><th>광고비</th><th>광고매출</th><th>ROAS</th><th>전환수</th></tr></thead><tbody>${accountRows}</tbody></table></div><div class="table-wrap"><table><thead><tr><th>제품·키워드</th><th>기간</th><th>슬롯비</th><th>현재 매출</th><th>주문</th><th>슬롯비율</th><th>검색 순위</th><th>판정</th></tr></thead><tbody>${slotRows}</tbody></table></div></details>
           </div>`;
       }
-      els.slotEfficiencyStatus.textContent = `2026.01.01~07.31 · 전체 슬롯 ${periods.length}개`;
+      els.slotEfficiencyStatus.textContent = `${slotPeriodLabel} · 전체 슬롯 ${periods.length}개`;
       els.slotEfficiencyBody.innerHTML = `
         <div class="slot-exec">
-          <div class="slot-panel-head" style="margin:4px 0 0"><div><div class="slot-panel-title" style="font-size:17px">1~7월 슬롯 운영 현황</div><div class="slot-panel-sub">해당 기간과 겹치는 모든 슬롯 ${periods.length}개를 표시합니다</div></div></div>
-          <div class="slot-card-grid">${slotCards}</div>
-          <div class="slot-dashboard-grid"><div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">완료 슬롯 운영 기간 매출</div><div class="slot-panel-sub">부분 집계는 자동 판정에서 제외</div></div></div><div style="height:280px;position:relative"><canvas id="slotEfficiencyChart"></canvas></div></div><div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">판정 기준</div></div></div><div class="slot-insight-list"><div class="slot-insight"><strong>유지</strong><span>증분매출÷슬롯비 3배 이상 + 검색 5위 이내</span></div><div class="slot-insight warn"><strong>재검토</strong><span>회수배수 1~3배 또는 순위 개선이 일시적</span></div><div class="slot-insight warn"><strong>중단 후보</strong><span>회수배수 1배 미만 또는 잔존효과 없음</span></div></div></div></div>
-          <details class="slot-detail"><summary>1~7월 전체 슬롯 상세표 · ${periods.length}개</summary><div class="table-wrap"><table><thead><tr><th>제품·키워드</th><th>기간</th><th>슬롯비</th><th>현재 매출</th><th>주문</th><th>슬롯비율</th><th>검색 순위</th><th>판정</th></tr></thead><tbody>${slotRows}</tbody></table></div></details>
+          <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 운영 기간 매출</div><div class="slot-panel-sub">${slotPeriodLabel} · 집계가 완료된 구간만 그래프에 표시</div></div></div><div style="height:320px;position:relative"><canvas id="slotEfficiencyChart"></canvas></div></div>
+          <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 진행 상세 리스트</div><div class="slot-panel-sub">실제 진행 일정 ${slotPeriodLabel} · 전체 ${periods.length}개 구간</div></div></div><div class="table-wrap"><table><thead><tr><th>제품·키워드</th><th>진행 기간</th><th>슬롯비</th><th>현재 매출</th><th>주문</th><th>슬롯비율</th><th>검색 순위</th><th>판정</th></tr></thead><tbody>${slotRows}</tbody></table></div></div>
+          <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">판정 기준</div></div></div><div class="slot-insight-list"><div class="slot-insight"><strong>유지</strong><span>증분매출÷슬롯비 3배 이상 + 검색 5위 이내</span></div><div class="slot-insight warn"><strong>재검토</strong><span>회수배수 1~3배 또는 순위 개선이 일시적</span></div><div class="slot-insight warn"><strong>중단 후보</strong><span>회수배수 1배 미만 또는 잔존효과 없음</span></div></div></div>
           <p class="slot-note">슬롯 증분효과는 전년 동기간 데이터와 종료 후 7일 관찰값 확보 후 확정됩니다.</p>
         </div>`;
       if (window._charts.historicalAd) window._charts.historicalAd.destroy();
