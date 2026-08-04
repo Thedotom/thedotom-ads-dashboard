@@ -868,7 +868,7 @@
     const initialParams = new URLSearchParams(window.location.search);
     const initialMonth = initialParams.get("month") || "";
     const initialPage = initialParams.get("page") || "overview";
-    const state = { data: null, executiveReportData: {}, powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: initialPage, month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
+    const state = { data: null, availableMonths: [], executiveReportData: {}, powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: initialPage, month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -1043,19 +1043,18 @@
       render();
     }
     async function fetchDashboardData() {
-      if (!state.month) {
-        try {
-          const monthRes = await fetch(`data/months.json?v=${Date.now()}`, { cache: "no-store" });
-          if (monthRes.ok) {
-            const monthData = await monthRes.json();
-            const months = Array.isArray(monthData)
-              ? monthData
-              : (monthData.months || monthData.availableMonths || []);
-            state.month = monthData.latest || months[0] || "";
-          }
-        } catch (error) {
-          console.warn("Month list fetch failed; falling back to latest dashboard data", error);
+      try {
+        const monthRes = await fetch(`data/months.json?v=${Date.now()}`, { cache: "no-store" });
+        if (monthRes.ok) {
+          const monthData = await monthRes.json();
+          const months = Array.isArray(monthData)
+            ? monthData
+            : (monthData.months || monthData.availableMonths || []);
+          state.availableMonths = months;
+          if (!state.month) state.month = monthData.latest || months[0] || "";
         }
+      } catch (error) {
+        console.warn("Month list fetch failed; falling back to dashboard data", error);
       }
       const qs = state.month ? `?month=${encodeURIComponent(state.month)}` : "";
       try {
@@ -1070,7 +1069,11 @@
       return await staticRes.json();
     }
     function fillMonths() {
-      const months = state.data.availableMonths || [];
+      const months = [...new Set([
+        ...(state.availableMonths || []),
+        ...(state.data.availableMonths || []),
+        state.month
+      ].filter(Boolean))].sort((a, b) => String(b).localeCompare(String(a)));
       const options = months.map(month => `<option value="${html(month)}">${html(month)}</option>`).join("");
       els.monthFilter.innerHTML = options;
       els.monthFilter.value = state.month;
