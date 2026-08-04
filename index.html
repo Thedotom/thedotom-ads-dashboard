@@ -2406,7 +2406,23 @@ function renderBrandContract() {
           return cell;
         };
 
+        const configuredAdgroupForRow = row => {
+          const campaign = String(row.campaign || "");
+          const keyword = String(row.keyword || "").trim();
+          const device = String(row.device || "").toLowerCase() === "mobile" ? "모바일" : "PC";
+          const candidates = (state.powerlinkCreativeConfig?.groups || []).filter(group =>
+            group.campaign === campaign && group.device === device &&
+            (group.keywords || []).some(item => String(item.keyword || "").trim() === keyword)
+          );
+          if (!candidates.length) return "";
+          const active = candidates.find(group => (group.keywords || []).some(item =>
+            String(item.keyword || "").trim() === keyword && item.status === "운영 가능"
+          ));
+          return (active || candidates[0]).adgroup || "";
+        };
         const resolveActualAdgroup = row => {
+          const configured = configuredAdgroupForRow(row);
+          if (configured) return configured;
           if (row.campaign !== "파워링크_더도톰_자사몰") return row.adgroup || row.campaign || "기타";
           const keyword = String(row.keyword || "");
           const suffix = String(row.device || "").toLowerCase() === "mobile" ? "M" : "PC";
@@ -2415,10 +2431,9 @@ function renderBrandContract() {
             ? `더도톰 자사몰_돌잔치초대장(${suffix})`
             : `더도톰_자사몰_돌답례품(${suffix})`;
         };
-        const adgroupBoxName = adgroup => String(adgroup || "")
-          .replace(/\s*\((?:M|PC)\)\s*$/i, "");
+        const adgroupBoxName = adgroup => String(adgroup || "");
 
-        // (M)/(PC)는 노출 영역이므로 같은 기본 광고그룹은 한 박스에 합친다.
+        // API의 실제 광고그룹명을 카드 기준으로 사용해 PC/M 및 세부 그룹을 합치지 않는다.
         const adgroupMap = {};
         pcRows.forEach(row => {
           const cKey = adgroupBoxName(resolveActualAdgroup(row));
