@@ -1138,7 +1138,7 @@
         button.classList.toggle("active", isRevenuePage);
       });
       const fixedReportPage = state.page === "monthlyReport";
-      document.querySelectorAll('label[for="monthFilter"], #monthFilter, .page-month-control').forEach(control => control.classList.toggle("hidden", fixedReportPage));
+      document.querySelectorAll('label[for="monthFilter"], #monthFilter, .page-month-control').forEach(control => { control.style.display = fixedReportPage ? "none" : ""; });
       els.typeFilter.value = pageType();
     }
     function fillCampaigns() {
