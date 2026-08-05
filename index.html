@@ -2025,10 +2025,12 @@ function renderGa4Analytics() {
   const revenueCoverage = manualSelfSales ? gaRevenue / manualSelfSales : 0;
   const gaRoas = manualAdCost ? gaRevenue / manualAdCost : 0;
   const sources = ga4.sourceMedium || [];
+  const quality = ga4.utmQuality || {};
   const naver = sources.filter(row => String(row.sessionSourceMedium || "").toLowerCase().includes("naver"));
   const naverSessions = naver.reduce((sum, row) => sum + Number(row.sessions || 0), 0);
   const naverRevenue = naver.reduce((sum, row) => sum + Number(row.purchaseRevenue || 0), 0);
-  const rows = (items, key) => items.slice(0, 15).map(row => `<tr><td class="wrap"><strong>${html(row[key] || "(not set)")}</strong></td><td>${number(row.sessions || 0)}</td><td>${number(row.totalUsers || 0)}</td><td>${number(row.transactions || 0)}</td><td><strong>${money(row.purchaseRevenue || 0)}</strong></td></tr>`).join("");
+  const sourceRows = sources.slice(0, 15).map(row => `<tr><td class="wrap"><strong>${html(row.sessionSourceMedium || "(not set)")}</strong>${row.qualityIssue ? `<br><span class="pill bad">${html(row.qualityIssue)}</span>` : ""}</td><td>${html(row.channelGroup || "미분류")} · ${html(row.mediumLabel || "")}</td><td>${number(row.sessions || 0)}</td><td>${number(row.transactions || 0)}</td><td><strong>${money(row.purchaseRevenue || 0)}</strong></td></tr>`).join("");
+  const campaignRows = (ga4.campaigns || []).slice(0, 15).map(row => `<tr><td class="wrap"><strong>${html(row.sessionCampaignName || "(not set)")}</strong>${row.qualityIssue ? `<br><span class="pill bad">${html(row.qualityIssue)}</span>` : ""}</td><td>${html(row.campaignLabel || "미분류")}</td><td>${html(row.device || "미분류")}</td><td>${number(row.sessions || 0)}</td><td>${number(row.transactions || 0)}</td><td><strong>${money(row.purchaseRevenue || 0)}</strong></td></tr>`).join("");
   els.ga4Status.textContent = `${ga4.period?.startDate || ""} ~ ${ga4.period?.endDate || ""} · ${ga4.updatedAt || ""}`;
   els.ga4Body.innerHTML = `
     <div class="ga4-wrap">
@@ -2043,12 +2045,17 @@ function renderGa4Analytics() {
         <div class="ga4-kpi"><span>GA4 매출 포착률</span><strong>${rateText(revenueCoverage)}</strong><small>GA4 구매 매출 ÷ 수기 자사몰 매출</small></div>
         <div class="ga4-kpi"><span>GA4 매출 기준 ROAS</span><strong>${roasText(gaRoas)}</strong><small>GA4 구매 매출 ÷ 전체 수기 광고비</small></div>
       </div>
+      <div class="ga4-compare">
+        <div class="ga4-kpi"><span>UTM 표준 매핑률</span><strong>${rateText(quality.mappingCoverage || 0)}</strong><small>표준 source/medium 규칙으로 분류된 세션</small></div>
+        <div class="ga4-kpi"><span>소스 누락 세션</span><strong>${number(quality.missingSourceSessions || 0)}</strong><small>utm_source가 없거나 (not set)인 세션</small></div>
+        <div class="ga4-kpi"><span>캠페인 누락 세션</span><strong>${number(quality.missingCampaignSessions || 0)}</strong><small>utm_campaign이 비어 있거나 (not set)인 세션</small></div>
+      </div>
       <div class="ga4-panel"><div class="ga4-panel-head">일별 세션과 구매 매출</div><div class="ga4-panel-body"><div class="ga4-chart"><canvas id="ga4DailyChart"></canvas></div></div></div>
       <div class="layout" style="margin-bottom:0">
-        <div class="ga4-panel"><div class="ga4-panel-head">유입 소스 / 매체 TOP 15</div><div class="table-wrap"><table class="compact"><thead><tr><th>소스 / 매체</th><th>세션</th><th>사용자</th><th>거래</th><th>구매 매출</th></tr></thead><tbody>${rows(sources, "sessionSourceMedium")}</tbody></table></div></div>
-        <div class="ga4-panel"><div class="ga4-panel-head">세션 캠페인 TOP 15</div><div class="table-wrap"><table class="compact"><thead><tr><th>캠페인</th><th>세션</th><th>사용자</th><th>거래</th><th>구매 매출</th></tr></thead><tbody>${rows(ga4.campaigns || [], "sessionCampaignName")}</tbody></table></div></div>
+        <div class="ga4-panel"><div class="ga4-panel-head">유입 소스 / 매체 TOP 15</div><div class="table-wrap"><table class="compact"><thead><tr><th>소스 / 매체</th><th>표준 분류</th><th>세션</th><th>거래</th><th>구매 매출</th></tr></thead><tbody>${sourceRows}</tbody></table></div></div>
+        <div class="ga4-panel"><div class="ga4-panel-head">세션 캠페인 TOP 15</div><div class="table-wrap"><table class="compact"><thead><tr><th>캠페인</th><th>표준 캠페인</th><th>기기</th><th>세션</th><th>거래</th><th>구매 매출</th></tr></thead><tbody>${campaignRows}</tbody></table></div></div>
       </div>
-      <div class="ga4-note">${html(ga4.note || "")} GA4 구매 매출은 분석용 귀속값이며 실제 정산 매출은 수기 매출을 기준으로 판단합니다.</div>
+      <div class="ga4-note">${html(ga4.note || "")} GA4 구매 매출은 분석용 귀속값이며 실제 정산 매출은 수기 매출을 기준으로 판단합니다. UTM 표준은 공유 관리 시트 기준이며, 누락·미등록 값은 품질 점검 대상으로 표시합니다.</div>
     </div>`;
   if (window._charts.ga4Daily) window._charts.ga4Daily.destroy();
   const canvas = document.getElementById("ga4DailyChart");
