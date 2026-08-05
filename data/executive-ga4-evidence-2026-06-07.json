@@ -1,0 +1,39 @@
+{
+  "period": "2026-06-19~2026-07-31",
+  "notice": "GA4 구매 추적이 확인되는 2026년 6월 19일부터 7월 31일까지의 자사몰 관측값입니다.",
+  "summary": {
+    "sessions": 37750,
+    "users": 24984,
+    "transactions": 2737,
+    "purchaseRevenue": 461864450,
+    "paidSearchSessions": 15951,
+    "paidSearchTransactions": 774,
+    "paidSearchRevenue": 159766900,
+    "paidSearchSessionShare": 0.4225430464,
+    "paidSearchTransactionShare": 0.2827913774,
+    "paidSearchRevenueShare": 0.3459151440
+  },
+  "july": {
+    "sessions": 28572,
+    "transactions": 2250,
+    "purchaseRevenue": 362690550,
+    "paidSearchSessions": 15596,
+    "paidSearchTransactions": 761,
+    "paidSearchRevenue": 157140900,
+    "paidSearchSessionShare": 0.5458483837,
+    "paidSearchTransactionShare": 0.3382222222,
+    "paidSearchRevenueShare": 0.4332638438,
+    "utmMappingCoverage": 0.9932172575
+  },
+  "decision": {
+    "headline": "광고 전면 중단보다 고효율 유지·저효율 축소가 타당",
+    "reason": "7월 자사몰에서 검색광고 유입 후 구매 매출 157,140,900원이 관측됐으며, 이는 GA4 자사몰 구매 매출의 43.3%입니다.",
+    "risk": "광고를 모두 끄면 검색광고가 만들던 신규·비브랜드 유입까지 동시에 사라질 수 있습니다.",
+    "action": "성과가 확인되는 검색광고는 유지하고, 낮은 ROAS 키워드·캠페인부터 단계적으로 축소한 뒤 7일 단위로 매출 변화를 비교합니다."
+  },
+  "limitations": [
+    "GA4 구매 매출은 태그가 설치된 자사몰 기준이며 스마트스토어·무라 매출은 포함하지 않습니다.",
+    "검색광고 유입 후 관측된 구매 매출이며 광고가 없었을 때의 증분매출을 직접 증명하는 값은 아닙니다.",
+    "6월은 19일부터 구매 추적이 확인되므로 6월 전체 비교에는 사용하지 않습니다."
+  ]
+}
