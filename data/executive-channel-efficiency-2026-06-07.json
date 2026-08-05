@@ -1,0 +1,50 @@
+{
+  "period": "2026-06-01~2026-07-31",
+  "operational": [
+    {
+      "channel": "파워링크",
+      "impressions": 272748,
+      "clicks": 16427,
+      "adCost": 37272217,
+      "ctr": 0.0602277560,
+      "cpc": 2268.9607
+    },
+    {
+      "channel": "쇼핑검색",
+      "impressions": 1053601,
+      "clicks": 17961,
+      "adCost": 37276581,
+      "ctr": 0.0170472503,
+      "cpc": 2075.4179
+    }
+  ],
+  "ga4": {
+    "period": "2026-06-19~2026-07-31",
+    "powerlink": {
+      "utmMedium": "np",
+      "sessions": 7699,
+      "transactions": 280,
+      "purchaseRevenue": 54425300,
+      "status": "분리 측정 가능"
+    },
+    "shopping": {
+      "utmMedium": "ns",
+      "sessions": 0,
+      "transactions": 0,
+      "purchaseRevenue": 0,
+      "status": "분리 측정 미확인"
+    },
+    "unclassifiedNaverCpc": {
+      "sessions": 3582,
+      "transactions": 58,
+      "purchaseRevenue": 12824300,
+      "status": "파워링크·쇼핑검색 구분 불가"
+    }
+  },
+  "decision": {
+    "powerlink": "CTR 6.0%로 검색 의도 반응이 높고 GA4 구매 280건이 관측됐습니다. 고효율 키워드는 유지하고 저효율 키워드부터 조정합니다.",
+    "shopping": "노출 105만 회와 CPC 2,075원으로 상품 노출·유입 비용은 양호하지만 GA4 구매 연결은 현재 분리할 수 없습니다. UTM ns 적용 후 예산 판단을 확정합니다.",
+    "measurement": "naver / cpc 3,582세션은 어느 광고 유형인지 구분할 수 없어 두 채널 성과에 배분하지 않습니다."
+  },
+  "note": "광고 플랫폼 전환매출과 귀속 ROAS는 대표 보고서 효율 판단에 사용하지 않습니다."
+}
