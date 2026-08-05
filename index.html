@@ -691,6 +691,7 @@
           <button type="button" data-page="totalSales">월별 매출·광고비</button>
           <button type="button" data-page="dailyRevenue">일일 매출</button>
           <button type="button" data-page="ga4Analytics">GA4 성과</button>
+          <button type="button" data-page="ga4Products">GA4 상품 성과</button>
         </div>
         <button type="button" data-page="monthlyReport">대표 보고서</button>
       </div>
@@ -841,6 +842,7 @@
       </section>
       <section class="page-section" data-page="dailyRevenue"><div class="section-head"><h2>일일 매출</h2><span id="dailyRevenueStatus" class="count"></span></div><div class="memo-body" id="dailyRevenueBody"></div></section>
       <section class="page-section" data-page="ga4Analytics"><div class="section-head"><h2>GA4 자사몰 성과</h2><span id="ga4Status" class="count"></span></div><div id="ga4Body"></div></section>
+      <section class="page-section" data-page="ga4Products"><div class="section-head"><h2>GA4 상품 성과</h2><span id="ga4ProductsStatus" class="count"></span></div><div id="ga4ProductsBody"></div></section>
 <section class="page-section" data-page="totalSales">
         <div class="section-head"><h2>월별 매출·광고비</h2><span id="totalSalesStatus" class="count"></span></div>
         <div class="memo-body" id="totalSalesBody"></div>
@@ -919,6 +921,8 @@
       totalSalesBody: document.getElementById("totalSalesBody"),
       ga4Status: document.getElementById("ga4Status"),
       ga4Body: document.getElementById("ga4Body"),
+      ga4ProductsStatus: document.getElementById("ga4ProductsStatus"),
+      ga4ProductsBody: document.getElementById("ga4ProductsBody"),
       inspectionBody: document.getElementById("inspectionBody"),
       inspectionCount: document.getElementById("inspectionCount"),
       planBody: document.getElementById("planBody"),
@@ -1133,11 +1137,12 @@
         totalSales: "월별 매출·광고비",
         dailyRevenue: "일일 매출",
         ga4Analytics: "GA4 자사몰 성과",
+        ga4Products: "GA4 상품 성과",
         monthlyReport: "상반기 대표 보고서"
       };
       els.pageTitle.textContent = titles[state.page] || titles.overview;
       const isRankTrafficPage = state.page === "rankShopping" || state.page === "rankPowerlink";
-      const isRevenuePage = state.page === "totalSales" || state.page === "dailyRevenue" || state.page === "ga4Analytics";
+      const isRevenuePage = state.page === "totalSales" || state.page === "dailyRevenue" || state.page === "ga4Analytics" || state.page === "ga4Products";
       const isDailyProductPage = state.page === "dailyProduct" || state.page === "dailyProductCafe24" || state.page === "dailyProductSmartstore" || state.page === "dailyProductMura";
       document.querySelectorAll("[data-page]").forEach(el => {
         if (el.tagName === "BUTTON") return;
@@ -1218,6 +1223,7 @@
       renderSlotEfficiency();
       renderDailyRevenue();
       renderGa4Analytics();
+      renderGa4Products();
   renderTotalSalesMetrics();
       renderInspection();
       renderPlan();
@@ -2007,6 +2013,47 @@
     }
 
 
+
+
+function renderGa4Products() {
+  if (!els.ga4ProductsBody) return;
+  const ga4 = state.data?.ga4Analytics;
+  const products = ga4?.products || [];
+  if (!ga4 || !products.length) {
+    els.ga4ProductsStatus.textContent = "미수집";
+    els.ga4ProductsBody.innerHTML = '<div class="empty">선택한 월의 GA4 상품 데이터가 없습니다.</div>';
+    return;
+  }
+  const query = String(els.searchInput?.value || "").trim().toLowerCase();
+  const filtered = products.filter(row => !query || `${row.itemId || ""} ${row.itemName || ""} ${row.itemCategory || ""}`.toLowerCase().includes(query));
+  const sum = key => products.reduce((total, row) => total + Number(row[key] || 0), 0);
+  const totalRevenue = sum("itemRevenue");
+  const totalPurchased = sum("itemsPurchased");
+  const totalCart = sum("itemsAddedToCart");
+  const totalViewed = sum("itemsViewed");
+  const rows = filtered.map((row, index) => {
+    const quantity = Number(row.itemsPurchased || 0);
+    const unitRevenue = quantity ? Number(row.itemRevenue || 0) / quantity : 0;
+    return `<tr><td>${number(index + 1)}</td><td>${html(row.itemId || "-")}</td><td class="wrap"><strong>${html(row.itemName || "(not set)")}</strong></td><td class="wrap">${html(row.itemCategory || "-")}</td><td>${number(row.itemsViewed || 0)}</td><td>${number(row.itemsAddedToCart || 0)}</td><td>${number(quantity)}</td><td><strong>${money(row.itemRevenue || 0)}</strong></td><td>${money(unitRevenue)}</td></tr>`;
+  }).join("");
+  els.ga4ProductsStatus.textContent = `${ga4.period?.startDate || ""} ~ ${ga4.period?.endDate || ""} · 전체 ${number(products.length)}개${query ? ` · 검색 ${number(filtered.length)}개` : ""}`;
+  els.ga4ProductsBody.innerHTML = `
+    <div class="ga4-wrap">
+      <div class="ga4-kpis">
+        <div class="ga4-kpi"><span>수집 상품</span><strong>${number(products.length)}개</strong><small>item_id · item_name 기준</small></div>
+        <div class="ga4-kpi"><span>상품 조회 수량</span><strong>${number(totalViewed)}</strong><small>view_item의 items 수량</small></div>
+        <div class="ga4-kpi"><span>장바구니 추가 수량</span><strong>${number(totalCart)}</strong><small>add_to_cart의 items 수량</small></div>
+        <div class="ga4-kpi"><span>구매 수량 · 상품 매출</span><strong>${number(totalPurchased)}개</strong><small>${money(totalRevenue)}</small></div>
+      </div>
+      <div class="ga4-panel"><div class="ga4-panel-head">상품 매출 상위 12개</div><div class="ga4-panel-body"><div class="ga4-chart"><canvas id="ga4ProductChart"></canvas></div></div></div>
+      <div class="ga4-panel"><div class="ga4-panel-head">상품별 전체 성과 ${number(filtered.length)}개</div><div class="table-wrap"><table><thead><tr><th>순번</th><th>상품 ID</th><th>상품명</th><th>카테고리</th><th>조회 수량</th><th>장바구니 수량</th><th>구매 수량</th><th>상품 매출</th><th>구매 단가</th></tr></thead><tbody>${rows || '<tr><td colspan="9" class="empty">검색 결과가 없습니다.</td></tr>'}</tbody></table></div></div>
+      <div class="ga4-note">상품 매출은 GA4 itemRevenue 기준으로 세금과 배송비를 제외합니다. 조회·장바구니·구매는 이벤트 수가 아니라 각 이벤트의 상품 수량 합계이므로, 대량 주문 상품은 구매 수량이 크게 표시될 수 있습니다.</div>
+    </div>`;
+  if (window._charts.ga4Products) window._charts.ga4Products.destroy();
+  const canvas = document.getElementById("ga4ProductChart");
+  const top = products.slice(0, 12);
+  if (canvas && top.length) window._charts.ga4Products = new Chart(canvas, {type:"bar",data:{labels:top.map(row=>row.itemName||row.itemId||"상품"),datasets:[{label:"상품 매출",data:top.map(row=>Number(row.itemRevenue||0)),backgroundColor:"rgba(72,101,244,.25)",borderColor:"#4865f4",borderWidth:1,borderRadius:5}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"},tooltip:{callbacks:{label:ctx=>` 상품 매출: ${won.format(ctx.raw)}`}}},scales:{x:{beginAtZero:true,ticks:{callback:value=>won.format(value)}},y:{grid:{display:false}}}}});
+}
 
 function renderGa4Analytics() {
   if (!els.ga4Body) return;

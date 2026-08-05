@@ -152,6 +152,11 @@ def main() -> None:
         ["sessions", "totalUsers", "transactions", "purchaseRevenue"],
         100,
     )
+    products, _ = run_report(
+        client, args.property_id, start_date, end_date, ["itemId", "itemName", "itemCategory"],
+        ["itemRevenue", "itemsPurchased", "itemsAddedToCart", "itemsViewed"],
+        10_000,
+    )
 
     taxonomy = json.loads(CLASSIFICATION_PATH.read_text(encoding="utf-8-sig"))
     sources = classify_source_rows(sources, taxonomy)
@@ -179,6 +184,7 @@ def main() -> None:
         "sourceMedium": sources,
         "channels": channels,
         "campaigns": campaigns,
+        "products": products,
         "utmQuality": {
             "mappedSessions": mapped_sessions,
             "unmappedSessions": max(0, source_session_total - mapped_sessions),
