@@ -46,7 +46,7 @@ def line_chart(rows):
  c.data=[[float(r.get('mer') or 0) for r in rows],[float(r.get('platformRoas') or 0) for r in rows]]
  c.categoryAxis.categoryNames=[r['month'][5:]+'월' for r in rows]; c.categoryAxis.labels.fontName='Malgun';c.categoryAxis.labels.fontSize=8;c.valueAxis.labels.fontName='Malgun';c.valueAxis.labels.fontSize=8;c.valueAxis.valueMin=0
  c.lines[0].strokeColor=BLUE;c.lines[0].strokeWidth=2;c.lines[1].strokeColor=AMBER;c.lines[1].strokeWidth=2;d.add(c)
- d.add(String(155,8,'실제 MER',fontName='Malgun',fontSize=8,fillColor=BLUE));d.add(String(250,8,'플랫폼 ROAS',fontName='Malgun',fontSize=8,fillColor=AMBER));return d
+ d.add(String(145,8,'실제 매출 MER',fontName='Malgun',fontSize=8,fillColor=BLUE));d.add(String(245,8,'네이버 귀속 ROAS',fontName='Malgun',fontSize=8,fillColor=AMBER));return d
 def slot_chart(periods):
  sums={}
  for r in periods:
@@ -68,9 +68,9 @@ def build():
  kd=[[P(x,'klabel') for x in ['실제 전체 매출','광고·마케팅비','마케팅비율','실제 매출 MER']],[P(money(report['actualSales']),'kpi'),P(money(marketing_cost),'kpi'),P(pct(marketing_rate),'kpi'),P(mult(report_mer),'kpi')]];kt=Table(kd,colWidths=[43.5*mm]*4,rowHeights=[12*mm,18*mm]);kt.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),PALE),('GRID',(0,0),(-1,-1),.5,LINE),('VALIGN',(0,0),(-1,-1),'MIDDLE')]));story += [kt,Spacer(1,8*mm),P('대표 보고 결론','h2')]
  conclusions=[('광고 판단','전면 중단보다 고효율 검색광고 유지 · 저효율 키워드부터 단계 축소'),('7월 GA4 근거',f"검색광고 유입 후 구매 매출 {money(ga4e['july']['paidSearchRevenue'])} · 자사몰 구매 매출의 {pct(ga4e['july']['paidSearchRevenueShare'])}"),('실제 효율 중심',f"슬롯 제외 누적 실제 MER {mult(report_mer)}, 마케팅비율 {pct(marketing_rate)}"),('중단 검증','7일 단위 축소 후 광고비 절감액과 실제 매출 감소액을 비교 · 손실이 크면 복원')];story += [styled_table([[P(a,'smallb'),P(b)] for a,b in conclusions],[36*mm,138*mm],False),PageBreak()]
  story += [P('2. 1~7월 월별 성과','h1'),line_chart(monthly)]
- md=[[P(x,'smallw') for x in ['월','실제 매출','광고·마케팅비','슬롯비','비용률','실제 MER','플랫폼 ROAS','귀속/실매출']]]
+ md=[[P(x,'smallw') for x in ['월','실제 매출','광고·마케팅비','슬롯비','비용률','실제 MER','네이버 귀속 ROAS','귀속/실매출']]]
  for r in monthly: md.append([P(r['month'][5:]+'월','small'),P(money(r['actualSales']),'small'),P(money(r['marketingCost']),'small'),P(money(r['slotCost']),'small'),P(pct(r['marketingCostRate']),'small'),P(mult(r['mer']),'small'),P(mult(r['platformRoas']),'small'),P(pct(r['attributedSalesShare']),'small')])
- story += [styled_table(md,[12*mm,30*mm,26*mm,20*mm,18*mm,20*mm,22*mm,26*mm]),Spacer(1,7*mm),P('해석','h2'),P('마케팅비와 MER에서는 슬롯비를 제외했습니다. 3월부터 플랫폼 귀속매출이 실제 매출을 넘기 시작했으므로 하반기 예산 판단은 실제 매출 MER와 비용률을 우선 기준으로 삼습니다.'),PageBreak()]
+ story += [styled_table(md,[12*mm,30*mm,26*mm,20*mm,18*mm,20*mm,22*mm,26*mm]),Spacer(1,7*mm),P('해석','h2'),P('네이버 귀속 ROAS는 네이버 검색광고 API의 전환매출 ÷ 광고비이며 실제 전체 매출 효율이 아닙니다. 마케팅비와 실제 매출 MER에서는 슬롯비를 제외했습니다. 하반기 예산 판단은 실제 매출 MER와 비용률, GA4 광고 유입 구매를 우선 기준으로 삼습니다.'),PageBreak()]
  story += [P('3. GA4 기반 광고 유입·구매 효과','h1'),P('관측 기간  2026.06.19 - 2026.07.31  |  태그가 설치된 자사몰 기준'),Spacer(1,5*mm)]
  gs=ga4e['summary']; gj=ga4e['july']
  gk=[[P(x,'klabel') for x in ['검색광고 유입','검색광고 유입 구매','유입 후 구매 매출','7월 매출 비중']],[P(f"{int(gs['paidSearchSessions']):,}세션",'kpi'),P(f"{int(gs['paidSearchTransactions']):,}건",'kpi'),P(money(gs['paidSearchRevenue']),'kpi'),P(pct(gj['paidSearchRevenueShare']),'kpi')]]
