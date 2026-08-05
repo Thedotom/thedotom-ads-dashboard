@@ -74,8 +74,15 @@ def build():
  story += [styled_table(md,[16*mm,38*mm,34*mm,26*mm,28*mm,32*mm]),Spacer(1,7*mm),P('해석','h2'),P('월별 성과는 실제 전체 매출과 실제 집행비만 사용했습니다. 마케팅비와 실제 매출 MER에서는 슬롯비를 제외했으며, 하반기 예산 판단은 실제 매출 MER와 비용률, GA4 광고 유입 구매를 우선 기준으로 삼습니다.'),PageBreak()]
  story += [P('3. 파워링크·쇼핑검색 운영 효율','h1'),P('비교 기간  2026.06.01 - 2026.07.31  |  실제 광고비·노출·클릭 기준'),Spacer(1,5*mm)]
  ch={r['channel']:r for r in channels['operational']}; pl=ch['파워링크']; sh=ch['쇼핑검색']; cg=channels['ga4']
- cd=[[P(x,'smallw') for x in ['광고 유형','광고비','노출','클릭','CTR','CPC','GA4 구매 연결']],[P('파워링크','smallb'),P(money(pl['adCost']),'small'),P(f"{int(pl['impressions']):,}",'small'),P(f"{int(pl['clicks']):,}",'small'),P(pct(pl['ctr']),'small'),P(money(pl['cpc']),'small'),P(f"{int(cg['powerlink']['transactions']):,}건 · {money(cg['powerlink']['purchaseRevenue'])}",'small')],[P('쇼핑검색','smallb'),P(money(sh['adCost']),'small'),P(f"{int(sh['impressions']):,}",'small'),P(f"{int(sh['clicks']):,}",'small'),P(pct(sh['ctr']),'small'),P(money(sh['cpc']),'small'),P('분리 측정 미확인','small')]]
- story += [styled_table(cd,[24*mm,28*mm,27*mm,22*mm,18*mm,24*mm,31*mm]),Spacer(1,7*mm),P('채널별 해석','h2')]
+ cd=[[P(x,'smallw') for x in ['월','광고 유형','광고비','노출','클릭','CTR','CPC','GA4 구매 연결']]]
+ for r in channels['monthly']:
+  ga4_text=f"{int(r['ga4Sessions']):,}세션 · {int(r['ga4Transactions']):,}건 · {money(r['ga4PurchaseRevenue'])}" if r['channel']=='파워링크' else r['ga4Status']
+  cd.append([P(r['month'][5:]+'월','small'),P(r['channel'],'smallb'),P(money(r['adCost']),'small'),P(f"{int(r['impressions']):,}",'small'),P(f"{int(r['clicks']):,}",'small'),P(pct(r['ctr']),'small'),P(money(r['cpc']),'small'),P(ga4_text+('<br/>'+r['ga4Status'] if r['channel']=='파워링크' else ''),'small')])
+ for r in channels['operational']:
+  ga=cg['powerlink'] if r['channel']=='파워링크' else None
+  ga4_text=f"{int(ga['sessions']):,}세션 · {int(ga['transactions']):,}건 · {money(ga['purchaseRevenue'])}" if ga else '분리 측정 미확인'
+  cd.append([P('합계','smallb'),P(r['channel'],'smallb'),P(money(r['adCost']),'smallb'),P(f"{int(r['impressions']):,}",'small'),P(f"{int(r['clicks']):,}",'small'),P(pct(r['ctr']),'small'),P(money(r['cpc']),'small'),P(ga4_text,'small')])
+ story += [styled_table(cd,[12*mm,21*mm,27*mm,23*mm,18*mm,15*mm,22*mm,36*mm]),Spacer(1,7*mm),P('채널별 해석','h2')]
  channel_notes=[('파워링크 · 검색 의도 대응',f"CTR {pct(pl['ctr'])}로 반응률이 높고, GA4에서 {int(cg['powerlink']['sessions']):,}세션·구매 {int(cg['powerlink']['transactions']):,}건이 관측됐습니다. 고효율 키워드는 유지하고 저효율 키워드부터 조정합니다."),('쇼핑검색 · 상품 발견 유입',f"{int(sh['impressions']):,}회 노출과 CPC {money(sh['cpc'])}으로 노출·유입 비용은 양호합니다. 다만 UTM ns가 확인되지 않아 구매 효율은 아직 단정하지 않습니다."),('측정 보완',f"naver / cpc {int(cg['unclassifiedNaverCpc']['sessions']):,}세션은 광고 유형 구분이 불가능해 어느 채널에도 배분하지 않았습니다. 쇼핑검색 링크에 utm_medium=ns를 적용한 뒤 구매 효율을 확정합니다."),('판단 원칙','플랫폼 전환매출은 사용하지 않습니다. 현재는 실제 집행비·클릭 효율과 GA4에서 분리 확인된 구매만으로 판단합니다.')]
  story += [styled_table([[P(a,'smallb'),P(b)] for a,b in channel_notes],[42*mm,132*mm],False),Spacer(1,7*mm),P('현재 결론','h2'),P('<b>파워링크는 구매 연결이 확인돼 선별 유지가 가능하고, 쇼핑검색은 유입 비용은 양호하지만 구매 분리 측정이 완료될 때까지 확대·중단을 확정하지 않습니다.</b>'),PageBreak()]
  story += [P('4. GA4 기반 광고 유입·구매 효과','h1'),P('관측 기간  2026.06.19 - 2026.07.31  |  태그가 설치된 자사몰 기준'),Spacer(1,5*mm)]
