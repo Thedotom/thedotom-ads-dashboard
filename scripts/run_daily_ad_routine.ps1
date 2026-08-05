@@ -62,6 +62,9 @@ try {
     & $python (Join-Path $repo "scripts\apply_cafe24_api_daily_sales.py") $until $until
     if ($LASTEXITCODE -ne 0) { throw "Cafe24 daily sales apply failed" }
 
+    & $python (Join-Path $repo "scripts\sync_ga4_month.py") --month $month
+    if ($LASTEXITCODE -ne 0) { throw "GA4 monthly sync failed" }
+
     Copy-Item -LiteralPath (Join-Path $repo "data\monthly-dashboard-$month.json") -Destination (Join-Path $repo "data\monthly-dashboard-latest.json") -Force
     & $python (Join-Path $repo "scripts\update_naver_bid_snapshot.py")
     if ($LASTEXITCODE -ne 0) { throw "Bid snapshot update failed" }
