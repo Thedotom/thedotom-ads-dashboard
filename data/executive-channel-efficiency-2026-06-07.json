@@ -1,4 +1,4 @@
-{
+﻿{
     "period":  "2026-06-01~2026-07-31",
     "monthly":  [
                     {
@@ -25,7 +25,7 @@
                         "ga4Sessions":  0,
                         "ga4Transactions":  0,
                         "ga4PurchaseRevenue":  0,
-                        "ga4Status":  "분리 측정 미확인"
+                        "ga4Status":  "UTM 미수집 · 적용 필요"
                     },
                     {
                         "month":  "2026-07",
@@ -51,7 +51,7 @@
                         "ga4Sessions":  0,
                         "ga4Transactions":  0,
                         "ga4PurchaseRevenue":  0,
-                        "ga4Status":  "분리 측정 미확인"
+                        "ga4Status":  "UTM 미수집 · 적용 필요"
                     }
                 ],
     "operational":  [
@@ -86,7 +86,8 @@
                                  "sessions":  0,
                                  "transactions":  0,
                                  "purchaseRevenue":  0,
-                                 "status":  "분리 측정 미확인"
+                                 "status":  "UTM 미수집 · 적용 필요",
+                                 "nextAction":  "쇼핑검색 랜딩 URL에 utm_source=naver\u0026utm_medium=ns 적용 후 7일 관측"
                              },
                 "unclassifiedNaverCpc":  {
                                              "sessions":  3582,
@@ -97,7 +98,7 @@
             },
     "decision":  {
                      "powerlink":  "CTR 6.0%로 검색 의도 반응이 높고 GA4 구매 280건이 관측됐습니다. 고효율 키워드는 유지하고 저효율 키워드부터 조정합니다.",
-                     "shopping":  "노출 105만 회와 CPC 2,075원으로 상품 노출·유입 비용은 양호하지만 GA4 구매 연결은 현재 분리할 수 없습니다. UTM ns 적용 후 예산 판단을 확정합니다.",
+                     "shopping":  "노출 105만 회와 CPC 2,075원으로 유입 비용은 확인됐지만 구매 연결은 아직 측정되지 않았습니다. UTM ns 적용 후 7일 데이터로 예산 판단을 확정합니다.",
                      "measurement":  "naver / cpc 3,582세션은 어느 광고 유형인지 구분할 수 없어 두 채널 성과에 배분하지 않습니다."
                  },
     "note":  "광고 플랫폼 전환매출과 귀속 ROAS는 대표 보고서 효율 판단에 사용하지 않습니다."

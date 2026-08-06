@@ -1,0 +1,19 @@
+﻿{
+    "updatedAt":  "2026-08-06",
+    "channel":  "쇼핑검색",
+    "status":  "UTM 미수집",
+    "required":  {
+                     "utm_content":  "{product_id}",
+                     "utm_campaign":  "{campaign_name}",
+                     "utm_medium":  "ns",
+                     "utm_source":  "naver",
+                     "utm_term":  "{keyword}"
+                 },
+    "landingUrlRule":  "기존 자사몰 상품 URL에 위 파라미터를 추가",
+    "validation":  [
+                       "GA4 sessionSourceMedium = naver / ns 확인",
+                       "transactions·purchaseRevenue가 0보다 큰지 확인",
+                       "최소 7일 관측 후 쇼핑검색 예산 판단"
+                   ],
+    "note":  "현재 네이버 원본 광고 리포트에는 랜딩 URL이 포함되지 않아 광고 계정에서 추적 템플릿 적용이 필요합니다."
+}

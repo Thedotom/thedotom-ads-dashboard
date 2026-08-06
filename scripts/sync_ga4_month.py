@@ -166,6 +166,16 @@ def main() -> None:
     mapped_sessions = sum(int(row.get("sessions", 0) or 0) for row in sources if row.get("isMapped"))
     missing_source_sessions = sum(int(row.get("sessions", 0) or 0) for row in sources if row.get("qualityIssue") == "utm_source 누락")
     missing_campaign_sessions = sum(int(row.get("sessions", 0) or 0) for row in campaigns if row.get("qualityIssue") == "utm_campaign 누락")
+    shopping_rows = [row for row in sources if row.get("sourceKey") == "naver" and row.get("mediumKey") == "ns"]
+    shopping_measurement = {
+        "utmSource": "naver",
+        "utmMedium": "ns",
+        "sessions": sum(int(row.get("sessions", 0) or 0) for row in shopping_rows),
+        "transactions": sum(int(row.get("transactions", 0) or 0) for row in shopping_rows),
+        "purchaseRevenue": sum(float(row.get("purchaseRevenue", 0) or 0) for row in shopping_rows),
+        "status": "확인" if shopping_rows and any(int(row.get("sessions", 0) or 0) > 0 for row in shopping_rows) else "UTM 미수집",
+        "nextAction": "쇼핑검색 랜딩 URL에 utm_source=naver&utm_medium=ns를 적용한 뒤 7일 이상 관측"
+    }
 
     target = args.data_dir / f"monthly-dashboard-{args.month}.json"
     data = json.loads(target.read_text(encoding="utf-8-sig"))
@@ -192,7 +202,7 @@ def main() -> None:
             "missingCampaignSessions": missing_campaign_sessions,
             "mappingCoverage": mapped_sessions / source_session_total if source_session_total else 0,
         },
-        "utmClassificationUpdatedAt": taxonomy.get("updatedAt"),
+        "utmClassificationUpdatedAt": taxonomy.get("updatedAt"),        "shoppingSearchMeasurement": shopping_measurement,
         "note": "GA4는 태그가 설치된 자사몰의 방문·구매 행동 기준이며 스마트스토어·무라 매출은 포함하지 않습니다.",
     }
     target.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
