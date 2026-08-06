@@ -25,7 +25,11 @@
                         "ga4Sessions":  0,
                         "ga4Transactions":  0,
                         "ga4PurchaseRevenue":  0,
-                        "ga4Status":  "UTM 미수집 · 적용 필요"
+                        "ga4Status":  "네이버 전환매출·스마트스토어 기준",
+                        "platformAttributedSales":  1058180150,
+                        "platformConversions":  2878,
+                        "smartstoreSales":  307696401,
+                        "smartstoreOrders":  7148
                     },
                     {
                         "month":  "2026-07",
@@ -51,7 +55,11 @@
                         "ga4Sessions":  0,
                         "ga4Transactions":  0,
                         "ga4PurchaseRevenue":  0,
-                        "ga4Status":  "UTM 미수집 · 적용 필요"
+                        "ga4Status":  "네이버 전환매출·스마트스토어 기준",
+                        "platformAttributedSales":  1033810000,
+                        "platformConversions":  2623,
+                        "smartstoreSales":  287243394,
+                        "smartstoreOrders":  6682
                     }
                 ],
     "operational":  [
@@ -86,8 +94,13 @@
                                  "sessions":  0,
                                  "transactions":  0,
                                  "purchaseRevenue":  0,
-                                 "status":  "UTM 미수집 · 적용 필요",
-                                 "nextAction":  "쇼핑검색 랜딩 URL에 utm_source=naver\u0026utm_medium=ns 적용 후 7일 관측"
+                                 "status":  "스마트스토어 채널 · GA4 제외",
+                                 "platformAttributedSales":  2091990150,
+                                 "platformConversions":  5501,
+                                 "smartstoreSales":  594939795,
+                                 "smartstoreOrders":  13830,
+                                 "measurementBasis":  "네이버 광고 전환매출 + 스마트스토어 판매성과",
+                                 "nextAction":  "GA4가 아닌 네이버·스마트스토어 기준으로 쇼핑검색 효율 판단"
                              },
                 "unclassifiedNaverCpc":  {
                                              "sessions":  3582,
@@ -98,8 +111,8 @@
             },
     "decision":  {
                      "powerlink":  "CTR 6.0%로 검색 의도 반응이 높고 GA4 구매 280건이 관측됐습니다. 고효율 키워드는 유지하고 저효율 키워드부터 조정합니다.",
-                     "shopping":  "노출 105만 회와 CPC 2,075원으로 유입 비용은 확인됐지만 구매 연결은 아직 측정되지 않았습니다. UTM ns 적용 후 7일 데이터로 예산 판단을 확정합니다.",
-                     "measurement":  "naver / cpc 3,582세션은 어느 광고 유형인지 구분할 수 없어 두 채널 성과에 배분하지 않습니다."
+                     "shopping":  "쇼핑검색은 스마트스토어로 연결되므로 GA4 자사몰 구매가 아니라 네이버 전환매출과 스마트스토어 판매성과로 판단합니다. 7월 네이버 전환매출 1,033,810,000원, 스마트스토어 매출 287,243,394원이 확인됩니다.",
+                     "measurement":  "GA4는 자사몰 유입 측정용이며 스마트스토어 구매를 포함하지 않습니다. 쇼핑검색은 네이버 광고 리포트와 스마트스토어 성과를 기준으로 분리 관리합니다."
                  },
     "note":  "광고 플랫폼 전환매출과 귀속 ROAS는 대표 보고서 효율 판단에 사용하지 않습니다."
 }

@@ -1,7 +1,7 @@
 ﻿{
     "updatedAt":  "2026-08-06",
     "channel":  "쇼핑검색",
-    "status":  "UTM 미수집",
+    "status":  "스마트스토어 기준 집계",
     "required":  {
                      "utm_content":  "{product_id}",
                      "utm_campaign":  "{campaign_name}",
@@ -15,5 +15,7 @@
                        "transactions·purchaseRevenue가 0보다 큰지 확인",
                        "최소 7일 관측 후 쇼핑검색 예산 판단"
                    ],
-    "note":  "현재 네이버 원본 광고 리포트에는 랜딩 URL이 포함되지 않아 광고 계정에서 추적 템플릿 적용이 필요합니다."
+    "note":  "쇼핑검색은 스마트스토어로 연결되므로 GA4 구매 연결을 사용하지 않습니다. UTM은 보조 유입 분석용이며 효율 판단은 네이버·스마트스토어 데이터로 합니다.",
+    "measurementBasis":  "네이버 광고 전환매출 + 스마트스토어 판매성과",
+    "ga4Scope":  "GA4 자사몰 구매는 쇼핑검색 판단에서 제외"
 }
