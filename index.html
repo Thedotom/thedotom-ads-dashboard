@@ -200,7 +200,28 @@
     .metric:nth-child(5) { border-left: 4px solid #94a3b8; }
     .metric .label { color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
     .metric .value { margin-top: 8px; font-size: 22px; font-weight: 900; white-space: nowrap; color: var(--text); }
-    .metric .sub { margin-top: 5px; color: var(--muted); font-size: 12px; }
+    .metric .sub { margin-top: 5px; color: var(--muted); font-size: 12px; }    .executive-summary { margin: 0 0 16px; }
+    .executive-summary .section-head { align-items: flex-start; }
+    .executive-summary-kicker { color: var(--blue); font-size: 11px; font-weight: 900; letter-spacing: .04em; }
+    .executive-summary-title { margin: 3px 0 0; font-size: 18px; }
+    .executive-summary-grid { display: grid; grid-template-columns: minmax(0,1.2fr) repeat(3,minmax(150px,1fr)); gap: 10px; padding: 14px 16px 4px; }
+    .executive-summary-card { min-height: 88px; padding: 13px 14px; border: 1px solid var(--line); border-radius: 10px; background: #f8fafc; }
+    .executive-summary-card .label { color: var(--muted); font-size: 11px; font-weight: 800; }
+    .executive-summary-card .value { margin-top: 7px; color: var(--text); font-size: 20px; font-weight: 900; }
+    .executive-summary-card .sub { margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .executive-summary-card.good { border-top: 3px solid var(--green); }
+    .executive-summary-card.warn { border-top: 3px solid var(--amber); }
+    .executive-summary-card.bad { border-top: 3px solid #ef4444; }
+    .executive-summary-body { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); gap: 14px; padding: 10px 16px 16px; }
+    .executive-summary-list { display: grid; gap: 7px; }
+    .executive-summary-row { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 9px 11px; border-radius: 8px; background: #fff; border: 1px solid var(--line); font-size: 12px; }
+    .executive-summary-row strong { font-weight: 900; }
+    .executive-summary-row span:last-child { color: var(--muted); text-align: right; }
+    .executive-summary-actions { display: grid; gap: 7px; }
+    .executive-summary-action { padding: 10px 12px; border-radius: 8px; background: #fff; border-left: 4px solid var(--blue); border-top: 1px solid var(--line); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 12px; line-height: 1.45; }
+    .executive-summary-action.warn { border-left-color: var(--amber); }
+    @media (max-width: 900px) { .executive-summary-grid,.executive-summary-body { grid-template-columns: 1fr 1fr; } .executive-summary-grid .executive-summary-card:first-child { grid-column: 1/-1; } }
+    @media (max-width: 620px) { .executive-summary-grid,.executive-summary-body { grid-template-columns: 1fr; } .executive-summary-grid .executive-summary-card:first-child { grid-column: auto; } }
     .layout {
       display: grid;
       grid-template-columns: minmax(380px, 0.95fr) minmax(480px, 1.05fr);
@@ -731,7 +752,10 @@
           <button id="exportBtn" class="ghost" type="button">보고서 초안</button>
         </div>
       </div>
-      <div id="kpis" class="kpis page-section" data-page="overview"></div>
+      <div id="kpis" class="kpis page-section" data-page="overview"></div>      <section class="executive-summary page-section" data-page="overview">
+        <div class="section-head"><div><div class="executive-summary-kicker">EXECUTIVE BRIEF</div><h2 class="executive-summary-title">대표 경영 요약</h2></div><span id="executiveSummaryStatus" class="count"></span></div>
+        <div id="executiveSummaryBody"></div>
+      </section>
       <section class="page-section" data-page="overview" style="margin-bottom:16px">
         <div class="section-head"><h2>네이버 광고 계정별 성과</h2><span id="accountPerformanceStatus" class="count"></span></div>
         <div class="kpis" id="accountPerformanceBody"></div>
@@ -1218,6 +1242,7 @@
       els.meta.textContent = `${todayLabel()} · ${d.month} 광고 운영 현황`;
       els.profile.textContent = `${d.dataProfile.period} · ${d.dataProfile.granularity} · 원천 ${number(d.dataProfile.rawRows)}행 · 상세 ${number(d.dataProfile.detailRows)}개`;
       renderKpis();
+      renderExecutiveSummary();
       renderAccountPerformance();
       renderTypes();
       renderCampaigns();
@@ -1238,7 +1263,25 @@
       renderOverviewCharts();
       renderOverviewShoppingRank();
     }
-    function renderKpis() {
+    function renderExecutiveSummary() {
+      const body = document.getElementById("executiveSummaryBody"), status = document.getElementById("executiveSummaryStatus");
+      if (!body) return;
+      const month = state.month || state.data.month || "";
+      const salesRows = (state.data.totalSalesMetrics?.dailySales || []).filter(row => String(row.date || "").startsWith(month));
+      const totalSales = salesRows.reduce((sum, row) => sum + Number(row.totalNetSales || row.netSales || 0), 0);
+      const adCost = Number(state.data.summary?.cost || 0), adSales = Number(state.data.summary?.revenue || 0), costRate = totalSales ? adCost / totalSales : 0;
+      const storeMap = new Map();
+      salesRows.forEach(day => (day.stores || []).forEach(store => { const key = store.name || store.store || "기타"; storeMap.set(key, (storeMap.get(key) || 0) + Number(store.netSales || 0)); }));
+      const stores = [...storeMap.entries()].sort((a,b) => b[1] - a[1]);
+      const productMap = new Map();
+      (state.data.dailyProductPerformance?.rows || []).filter(row => String(row.date || "").startsWith(month)).forEach(row => { const key = row.product || row.productName || row.productId || "상품 미상"; productMap.set(key, (productMap.get(key) || 0) + Number(row.dailySales || 0)); });
+      const products = [...productMap.entries()].sort((a,b) => b[1] - a[1]), topStore = stores[0] || ["데이터 없음", 0], topProduct = products[0] || ["데이터 없음", 0];
+      const attention = costRate >= .12 ? ["bad", "광고비 부담", `${rateText(costRate)} · 예산과 저효율 키워드 점검`] : costRate >= .08 ? ["warn", "광고비 관찰", `${rateText(costRate)} · 채널별 효율을 주간 단위로 확인`] : ["good", "광고비 안정", `${rateText(costRate)} · 현재 집행 수준 유지 검토`];
+      const storeText = stores.slice(0, 3).map(([name, value]) => `<div class="executive-summary-row"><strong>${html(name)}</strong><span>${money(value)} · ${totalSales ? (value / totalSales * 100).toFixed(1) : 0}%</span></div>`).join("") || `<div class="empty">스토어 매출 데이터가 없습니다.</div>`;
+      const actions = `<div class="executive-summary-action"><strong>확대 후보</strong> · ${html(topProduct[0])} ${money(topProduct[1])} — 매출 기여 1위 제품의 재고·노출을 확인합니다.</div><div class="executive-summary-action"><strong>유지</strong> · ${html(topStore[0])} ${money(topStore[1])} — 현재 매출 중심 채널입니다.</div><div class="executive-summary-action warn"><strong>다음 점검</strong> · 광고비 ${money(adCost)}와 검색광고 전환매출 ${money(adSales)} 연결을 확인합니다.</div>`;
+      status.textContent = `${month} · ${salesRows.length}일 집계`;
+      body.innerHTML = `<div class="executive-summary-grid"><div class="executive-summary-card good"><div class="label">이번 달 누적 매출</div><div class="value">${money(totalSales)}</div><div class="sub">스토어 판매 합계 · ${salesRows.length}일 반영</div></div><div class="executive-summary-card ${attention[0]}"><div class="label">광고비 부담</div><div class="value">${rateText(costRate)}</div><div class="sub">광고비 ${money(adCost)} ÷ 매출</div></div><div class="executive-summary-card"><div class="label">매출 1위 스토어</div><div class="value">${money(topStore[1])}</div><div class="sub">${html(topStore[0])}</div></div><div class="executive-summary-card ${attention[0]}"><div class="label">현재 판단</div><div class="value">${attention[1]}</div><div class="sub">${attention[2]}</div></div></div><div class="executive-summary-body"><div><div class="section-head" style="padding:4px 0 8px;border-bottom:0;background:none"><h3 style="font-size:14px">스토어별 매출</h3></div><div class="executive-summary-list">${storeText}</div></div><div><div class="section-head" style="padding:4px 0 8px;border-bottom:0;background:none"><h3 style="font-size:14px">대표님이 볼 결론</h3></div><div class="executive-summary-actions">${actions}</div></div></div>`;
+    }    function renderKpis() {
       const s = state.data.summary;
       const items = [
         ["총 광고비", money(s.cost), state.data.displayAdvertising ? "파워링크+쇼핑검색+ADVoost" : "파워링크+쇼핑검색"],
