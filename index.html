@@ -752,11 +752,7 @@
           <button id="exportBtn" class="ghost" type="button">보고서 초안</button>
         </div>
       </div>
-      <div id="kpis" class="kpis page-section" data-page="overview"></div>      <section class="executive-summary page-section" data-page="overview">
-        <div class="section-head"><div><div class="executive-summary-kicker">EXECUTIVE BRIEF</div><h2 class="executive-summary-title">대표 경영 요약</h2></div><span id="executiveSummaryStatus" class="count"></span></div>
-        <div id="executiveSummaryBody"></div>
-      </section>
-      <section class="page-section" data-page="overview" style="margin-bottom:16px">
+      <div id="kpis" class="kpis page-section" data-page="overview"></div>      <section class="page-section" data-page="overview" style="margin-bottom:16px">
         <div class="section-head"><h2>네이버 광고 계정별 성과</h2><span id="accountPerformanceStatus" class="count"></span></div>
         <div class="kpis" id="accountPerformanceBody"></div>
       </section>
@@ -1242,7 +1238,6 @@
       els.meta.textContent = `${todayLabel()} · ${d.month} 광고 운영 현황`;
       els.profile.textContent = `${d.dataProfile.period} · ${d.dataProfile.granularity} · 원천 ${number(d.dataProfile.rawRows)}행 · 상세 ${number(d.dataProfile.detailRows)}개`;
       renderKpis();
-      renderExecutiveSummary();
       renderAccountPerformance();
       renderTypes();
       renderCampaigns();
@@ -1254,6 +1249,7 @@
       renderRankTraffic();
       renderDailyProductPerformance();
       renderSlotEfficiency();
+      renderExecutiveSummary();
       renderDailyRevenue();
       renderGa4Analytics();
       renderGa4Products();
@@ -1264,23 +1260,16 @@
       renderOverviewShoppingRank();
     }
     function renderExecutiveSummary() {
-      const body = document.getElementById("executiveSummaryBody"), status = document.getElementById("executiveSummaryStatus");
-      if (!body) return;
-      const month = state.month || state.data.month || "";
-      const salesRows = (state.data.totalSalesMetrics?.dailySales || []).filter(row => String(row.date || "").startsWith(month));
-      const totalSales = salesRows.reduce((sum, row) => sum + Number(row.totalNetSales || row.netSales || 0), 0);
-      const adCost = Number(state.data.summary?.cost || 0), adSales = Number(state.data.summary?.revenue || 0), costRate = totalSales ? adCost / totalSales : 0;
-      const storeMap = new Map();
-      salesRows.forEach(day => (day.stores || []).forEach(store => { const key = store.name || store.store || "기타"; storeMap.set(key, (storeMap.get(key) || 0) + Number(store.netSales || 0)); }));
-      const stores = [...storeMap.entries()].sort((a,b) => b[1] - a[1]);
-      const productMap = new Map();
-      (state.data.dailyProductPerformance?.rows || []).filter(row => String(row.date || "").startsWith(month)).forEach(row => { const key = row.product || row.productName || row.productId || "상품 미상"; productMap.set(key, (productMap.get(key) || 0) + Number(row.dailySales || 0)); });
-      const products = [...productMap.entries()].sort((a,b) => b[1] - a[1]), topStore = stores[0] || ["데이터 없음", 0], topProduct = products[0] || ["데이터 없음", 0];
-      const attention = costRate >= .12 ? ["bad", "광고비 부담", `${rateText(costRate)} · 예산과 저효율 키워드 점검`] : costRate >= .08 ? ["warn", "광고비 관찰", `${rateText(costRate)} · 채널별 효율을 주간 단위로 확인`] : ["good", "광고비 안정", `${rateText(costRate)} · 현재 집행 수준 유지 검토`];
-      const storeText = stores.slice(0, 3).map(([name, value]) => `<div class="executive-summary-row"><strong>${html(name)}</strong><span>${money(value)} · ${totalSales ? (value / totalSales * 100).toFixed(1) : 0}%</span></div>`).join("") || `<div class="empty">스토어 매출 데이터가 없습니다.</div>`;
-      const actions = `<div class="executive-summary-action"><strong>확대 후보</strong> · ${html(topProduct[0])} ${money(topProduct[1])} — 매출 기여 1위 제품의 재고·노출을 확인합니다.</div><div class="executive-summary-action"><strong>유지</strong> · ${html(topStore[0])} ${money(topStore[1])} — 현재 매출 중심 채널입니다.</div><div class="executive-summary-action warn"><strong>다음 점검</strong> · 광고비 ${money(adCost)}와 검색광고 전환매출 ${money(adSales)} 연결을 확인합니다.</div>`;
-      status.textContent = `${month} · ${salesRows.length}일 집계`;
-      body.innerHTML = `<div class="executive-summary-grid"><div class="executive-summary-card good"><div class="label">이번 달 누적 매출</div><div class="value">${money(totalSales)}</div><div class="sub">스토어 판매 합계 · ${salesRows.length}일 반영</div></div><div class="executive-summary-card ${attention[0]}"><div class="label">광고비 부담</div><div class="value">${rateText(costRate)}</div><div class="sub">광고비 ${money(adCost)} ÷ 매출</div></div><div class="executive-summary-card"><div class="label">매출 1위 스토어</div><div class="value">${money(topStore[1])}</div><div class="sub">${html(topStore[0])}</div></div><div class="executive-summary-card ${attention[0]}"><div class="label">현재 판단</div><div class="value">${attention[1]}</div><div class="sub">${attention[2]}</div></div></div><div class="executive-summary-body"><div><div class="section-head" style="padding:4px 0 8px;border-bottom:0;background:none"><h3 style="font-size:14px">스토어별 매출</h3></div><div class="executive-summary-list">${storeText}</div></div><div><div class="section-head" style="padding:4px 0 8px;border-bottom:0;background:none"><h3 style="font-size:14px">대표님이 볼 결론</h3></div><div class="executive-summary-actions">${actions}</div></div></div>`;
+      const body = document.getElementById("executiveReportBody"), status = document.getElementById("executiveReportStatus");
+      if (!body || !state.executiveReportData) return;
+      const report = state.executiveReportData || {}, ga4 = state.executiveGa4Evidence || {}, channel = state.executiveChannelEfficiency || {};
+      const monthly = report.monthly || [], best = [...monthly].sort((a,b) => Number(b.mer || 0) - Number(a.mer || 0))[0] || {}, weakest = [...monthly].sort((a,b) => Number(a.mer || 0) - Number(b.mer || 0))[0] || {}, july = monthly.find(row => row.month === "2026-07") || {};
+      const ga4July = ga4.july || {}, ga4Decision = ga4.decision || {}, channelDecision = channel.decision || {};
+      const reportCost = Number(report.totalMarketingCost || 0), actualSales = Number(report.actualSales || 0), costRate = Number(report.marketingCostRate || 0), mer = Number(report.mer || 0);
+      const actions = `<div class="executive-summary-action"><strong>유지·확대</strong> · 파워링크는 GA4에서 7월 구매매출 ${money(ga4July.paidSearchRevenue || 0)}가 확인됐으므로 고효율 키워드 중심으로 유지합니다.</div><div class="executive-summary-action warn"><strong>축소·재배분</strong> · 7월 MER ${roasText(july.mer || 0)}로 상반기 최고 효율 월보다 낮아졌습니다. 저효율 캠페인부터 단계적으로 줄입니다.</div><div class="executive-summary-action warn"><strong>측정 보완</strong> · 쇼핑검색은 GA4 구매 연결이 분리되지 않아 UTM ns 적용 후 예산 확대 여부를 결정합니다.</div>`;
+      status.textContent = "2026.01.01 ~ 07.31 · 경영 요약";
+      const summary = `<section class="executive-summary" style="margin-bottom:16px"><div class="section-head"><div><div class="executive-summary-kicker">MANAGEMENT SUMMARY</div><h3 class="executive-summary-title">상반기 실적 결론과 하반기 액션</h3></div><span class="count">대표 의사결정용</span></div><div class="executive-summary-grid"><div class="executive-summary-card good"><div class="label">1~7월 실제 매출</div><div class="value">${money(actualSales)}</div><div class="sub">자사몰·스마트스토어·무라 순매출</div></div><div class="executive-summary-card good"><div class="label">실제 매출 MER</div><div class="value">${roasText(mer)}</div><div class="sub">전체 마케팅비 ${money(reportCost)} 기준</div></div><div class="executive-summary-card"><div class="label">최고 효율 월</div><div class="value">${html(String(best.month || "").slice(5))}월</div><div class="sub">MER ${roasText(best.mer || 0)}</div></div><div class="executive-summary-card warn"><div class="label">최근 점검 월</div><div class="value">${html(String(weakest.month || "").slice(5))}월</div><div class="sub">MER ${roasText(weakest.mer || 0)} · 비용률 ${rateText(weakest.marketingCostRate || 0)}</div></div></div><div class="executive-summary-body"><div><div class="section-head" style="padding:4px 0 8px;border-bottom:0;background:none"><h3 style="font-size:14px">상반기 판단</h3></div><div class="executive-summary-list"><div class="executive-summary-row"><strong>사업 전체</strong><span>매출 대비 마케팅비 ${rateText(costRate)} · 수익성은 유효</span></div><div class="executive-summary-row"><strong>검색광고</strong><span>7월 GA4 구매매출 ${money(ga4July.paidSearchRevenue || 0)} · 전면 중단 불필요</span></div><div class="executive-summary-row"><strong>데이터 신뢰도</strong><span>쇼핑검색 구매 연결은 보완 필요</span></div></div></div><div><div class="section-head" style="padding:4px 0 8px;border-bottom:0;background:none"><h3 style="font-size:14px">하반기 액션</h3></div><div class="executive-summary-actions">${actions}</div></div></div></section>`;
+      if (!body.querySelector(".executive-summary")) body.insertAdjacentHTML("afterbegin", summary);
     }    function renderKpis() {
       const s = state.data.summary;
       const items = [
