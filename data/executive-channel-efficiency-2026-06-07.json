@@ -268,5 +268,143 @@
                      "shopping":  "쇼핑검색은 스마트스토어로 연결되므로 GA4 자사몰 구매가 아니라 네이버 전환매출과 스마트스토어 판매성과로 판단합니다. 7월 네이버 전환매출 1,033,810,000원, 스마트스토어 매출 287,243,394원이 확인됩니다.",
                      "measurement":  "GA4는 자사몰 유입 측정용이며 스마트스토어 구매를 포함하지 않습니다. 쇼핑검색은 네이버 광고 리포트와 스마트스토어 성과를 기준으로 분리 관리합니다."
                  },
-    "note":  "광고 플랫폼 전환매출과 귀속 ROAS는 대표 보고서 효율 판단에 사용하지 않습니다."
+    "note":  "광고 플랫폼 전환매출과 귀속 ROAS는 대표 보고서 효율 판단에 사용하지 않습니다.",
+    "shoppingProductSummary":  [
+                                   {
+                                       "productId":  "11562165854",
+                                       "productName":  "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
+                                       "adgroups":  [
+                                                        "조구만_에디션_돌답례품1",
+                                                        "조구만_에디션_돌잔치답례품"
+                                                    ],
+                                       "actualSales":  538463250,
+                                       "grossSales":  698117140,
+                                       "orders":  10317,
+                                       "refundAmount":  159653890,
+                                       "quantity":  209963
+                                   },
+                                   {
+                                       "productId":  "11858377273",
+                                       "productName":  "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
+                                       "adgroups":  [
+                                                        "데일리_호텔수건_최종"
+                                                    ],
+                                       "actualSales":  57159560,
+                                       "grossSales":  60975860,
+                                       "orders":  1435,
+                                       "refundAmount":  3816300,
+                                       "quantity":  1549
+                                   },
+                                   {
+                                       "productId":  "12047676813",
+                                       "productName":  "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
+                                       "adgroups":  [
+                                                        "호두정과_돌답례품_메인"
+                                                    ],
+                                       "actualSales":  24968270,
+                                       "grossSales":  28328770,
+                                       "orders":  154,
+                                       "refundAmount":  3360500,
+                                       "quantity":  7285
+                                   },
+                                   {
+                                       "productId":  "13337070806",
+                                       "productName":  "조구만 돌답례품 수건세트 핸드워시 꿀 선택 돌잔치답례품 (20개이상단가)",
+                                       "adgroups":  [
+                                                        "조구만_핸드워시세트_돌잔치답례품"
+                                                    ],
+                                       "actualSales":  75489626,
+                                       "grossSales":  98228500,
+                                       "orders":  700,
+                                       "refundAmount":  22738874,
+                                       "quantity":  15691
+                                   },
+                                   {
+                                       "productId":  "13337257373",
+                                       "productName":  "조구만 돌답례품 핸드워시 손세정제 돌잔치답례품 (20개이상단가)",
+                                       "adgroups":  [
+                                                        "조구만_핸드워시_돌답례품"
+                                                    ],
+                                       "actualSales":  14846140,
+                                       "grossSales":  19059220,
+                                       "orders":  139,
+                                       "refundAmount":  4213080,
+                                       "quantity":  4971
+                                   },
+                                   {
+                                       "productId":  "13471936380",
+                                       "productName":  "돌잔치 모바일 초대장 돌초대장 시안제공 간편수정 당일제작",
+                                       "adgroups":  [
+                                                        "모바일초대장_돌잔치초대장",
+                                                        "모바일초대장_모바일초대장"
+                                                    ],
+                                       "actualSales":  802600,
+                                       "grossSales":  1015700,
+                                       "orders":  152,
+                                       "refundAmount":  213100,
+                                       "quantity":  152
+                                   },
+                                   {
+                                       "productId":  "4624494637",
+                                       "productName":  "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
+                                       "adgroups":  [
+                                                        "2600원_답례품"
+                                                    ],
+                                       "actualSales":  768262010,
+                                       "grossSales":  989546800,
+                                       "orders":  24631,
+                                       "refundAmount":  221284790,
+                                       "quantity":  688969
+                                   },
+                                   {
+                                       "productId":  "4766394357",
+                                       "productName":  "답례품 수건 150g 자수 제작 기념품 타올 더도톰",
+                                       "adgroups":  [
+                                                        "3700원_수건답례품(M)"
+                                                    ],
+                                       "actualSales":  120640368,
+                                       "grossSales":  144588830,
+                                       "orders":  3126,
+                                       "refundAmount":  23948462,
+                                       "quantity":  77629
+                                   },
+                                   {
+                                       "productId":  "4843121925",
+                                       "productName":  "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+                                       "adgroups":  [
+                                                        "돌답례품",
+                                                        "돌세트 답례품"
+                                                    ],
+                                       "actualSales":  411948878,
+                                       "grossSales":  535324610,
+                                       "orders":  8132,
+                                       "refundAmount":  123375732,
+                                       "quantity":  220036
+                                   },
+                                   {
+                                       "productId":  "6052815173",
+                                       "productName":  "장례답례품 소금 세트 장례식 장례 부고 부의 조의 조문 특화 답례 선물 더도톰 [원산지:파키스탄]",
+                                       "adgroups":  [
+                                                        "조문답례품_1"
+                                                    ],
+                                       "actualSales":  26266700,
+                                       "grossSales":  30902200,
+                                       "orders":  457,
+                                       "refundAmount":  4635500,
+                                       "quantity":  9696
+                                   },
+                                   {
+                                       "productId":  "7444568862",
+                                       "productName":  "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
+                                       "adgroups":  [
+                                                        "꿀_결혼답례품",
+                                                        "꿀_돌잔치답례품1"
+                                                    ],
+                                       "actualSales":  70299770,
+                                       "grossSales":  79843150,
+                                       "orders":  563,
+                                       "refundAmount":  9543380,
+                                       "quantity":  20487
+                                   }
+                               ]
 }
