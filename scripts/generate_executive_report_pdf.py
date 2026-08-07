@@ -59,7 +59,7 @@ def footer(canvas,doc):
  canvas.saveState();canvas.setStrokeColor(LINE);canvas.line(18*mm,14*mm,192*mm,14*mm);canvas.setFont('Malgun',7);canvas.setFillColor(SLATE);canvas.drawString(18*mm,9*mm,'더도톰 2026년 1~7월 광고·슬롯 보고서');canvas.drawRightString(192*mm,9*mm,str(doc.page));canvas.restoreState()
 def build():
  OUT.parent.mkdir(parents=True,exist_ok=True); periods=sorted(dash['slotEfficiency']['periods'],key=lambda x:x.get('startDate','')); ss=dash['slotEfficiency']['summary']; groups=power.get('groups',[]); kws=[k for g in groups for k in g.get('keywords',[])]; off=[k for k in kws if k.get('status')!='운영 가능']; goff=[g for g in groups if g.get('campaignStatus')!='운영 가능' or g.get('adgroupStatus')!='운영 가능']
- map_rows=[r for r in mapping.get('rows',[]) if r.get('status') == 'ON']
+ map_rows=[r for r in mapping.get('rows',[]) if r.get('status') == 'ON' and str(r.get('productId')) != '6052815173']
  product_sales={}
  for row in (dash_month.get('dailyProductPerformance',{}).get('rows',[]) or []):
   pid=str(row.get('productId') or '')

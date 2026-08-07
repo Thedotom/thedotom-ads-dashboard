@@ -417,22 +417,6 @@
                                        "orders":  700,
                                        "refundAmount":  22738874,
                                        "quantity":  15691
-                                   },
-                                   {
-                                       "productId":  "6052815173",
-                                       "productName":  "장례답례품 소금 세트 장례식 장례 부고 부의 조의 조문 특화 답례 선물 더도톰 [원산지:파키스탄]",
-                                       "adgroups":  [
-                                                        "조문답례품_1"
-                                                    ],
-                                       "status":  "ON",
-                                       "adCost":  808,
-                                       "attributedRevenue":  0,
-                                       "adRoas":  0,
-                                       "actualSales":  26266700,
-                                       "grossSales":  30902200,
-                                       "orders":  457,
-                                       "refundAmount":  4635500,
-                                       "quantity":  9696
                                    }
                                ]
 }
