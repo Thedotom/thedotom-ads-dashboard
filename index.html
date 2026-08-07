@@ -907,7 +907,7 @@
     const initialParams = new URLSearchParams(window.location.search);
     const initialMonth = initialParams.get("month") || "";
     const initialPage = initialParams.get("page") || "overview";
-    const state = { data: null, availableMonths: [], executiveReportData: {}, executiveGa4Evidence: {}, executiveChannelEfficiency: {}, powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: initialPage, month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
+    const state = { data: null, availableMonths: [], executiveReportData: {}, executiveGa4Evidence: {}, executiveChannelEfficiency: {}, slotMonthlyProductSales: {}, powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: initialPage, month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -1064,7 +1064,7 @@
         }).join("") + `</div>`;
     }
     async function loadData() {
-      const [dashboardData, creativeConfig, executiveReportData, executiveGa4Evidence, executiveChannelEfficiency] = await Promise.all([
+      const [dashboardData, creativeConfig, executiveReportData, executiveGa4Evidence, executiveChannelEfficiency, slotMonthlyProductSales] = await Promise.all([
         fetchDashboardData(),
         fetch(`data/powerlink-creative-config.json?v=${Date.now()}`, { cache: "no-store" })
           .then(response => response.ok ? response.json() : { groups: [] })
@@ -1077,6 +1077,9 @@
           .catch(() => ({})),
         fetch(`data/executive-channel-efficiency-2026-06-07.json?v=${Date.now()}`, { cache: "no-store" })
           .then(response => response.ok ? response.json() : {})
+          .catch(() => ({})),
+        fetch(`data/slot-monthly-product-sales-2026-01-07.json?v=${Date.now()}`, { cache: "no-store" })
+          .then(response => response.ok ? response.json() : {})
           .catch(() => ({}))
       ]);
       state.data = dashboardData;
@@ -1084,6 +1087,7 @@
       state.executiveReportData = executiveReportData;
       state.executiveGa4Evidence = executiveGa4Evidence;
       state.executiveChannelEfficiency = executiveChannelEfficiency;
+      state.slotMonthlyProductSales = slotMonthlyProductSales;
       state.month = state.data.month;
       applyManualRevenueLocal(state.month);
       fillMonths();
@@ -1977,6 +1981,11 @@
         const purchaseCell = ga ? `${number(ga.sessions || 0)}세션 · ${number(ga.transactions || 0)}건 · ${money(ga.purchaseRevenue || 0)}` : row.channel === "쇼핑검색" ? `${money(shoppingGa4.platformAttributedSales || 0)} 네이버 전환매출<br>${money(shoppingGa4.smartstoreSales || 0)} 스마트스토어 매출` : `<span class="slot-decision caution">측정 미확인</span>`;
         return `<tr style="background:#f8fafc"><td>합계</td><td><strong>${html(row.channel || "")}</strong></td><td><strong>${money(row.adCost || 0)}</strong></td><td>${number(row.impressions || 0)}</td><td>${number(row.clicks || 0)}</td><td>${rateText(row.ctr || 0)}</td><td>${money(row.cpc || 0)}</td><td>${purchaseCell}</td></tr>`;
       }).join("");
+      const slotMonthly = state.slotMonthlyProductSales || {};
+      const slotMonthlyProducts = slotMonthly.products || [];
+      const slotMonthlyHeader = (slotMonthly.months || []).map(month => `<th>${html(month)}</th>`).join("");
+      const slotMonthlyBody = slotMonthlyProducts.map(product => `<tr><td class="wrap"><strong>${html(product.product || "-")}</strong><br><span style="color:var(--muted);font-size:10px">${html(product.productId || "")}</span></td>${(product.monthly || []).map(value => `<td>${money(value || 0)}</td>`).join("")}<td><strong>${money((product.monthly || []).reduce((sum, value) => sum + Number(value || 0), 0))}</strong></td></tr>`).join("");
+      const slotMonthlySalesPanel = `<div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 미진행 매출 정리</div><div class="slot-panel-sub">운영 전후 21일 비교 대신, 1~7월 월별 상품 매출을 비교 기준으로 표시합니다.</div></div></div><div class="table-wrap"><table><thead><tr><th>상품</th>${slotMonthlyHeader}<th>1~7월 합계</th></tr></thead><tbody>${slotMonthlyBody || `<tr><td class="empty" colspan="10">월별 상품 매출 데이터가 없습니다.</td></tr>`}</tbody></table></div></div>`;
       const allPeriods = analysis.periods || [];
       const periods = [...allPeriods].sort((a, b) => String(a.startDate || "").localeCompare(String(b.startDate || "")));
       const slotStartDate = periods.length ? periods[0].startDate : "";
@@ -2059,6 +2068,7 @@
       }      els.slotEfficiencyStatus.textContent = `${slotPeriodLabel} · 전체 슬롯 ${periods.length}개`;
       els.slotEfficiencyBody.innerHTML = `
         <div class="slot-exec">
+          ${slotMonthlySalesPanel}
           <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 운영 기간 매출</div><div class="slot-panel-sub">${slotPeriodLabel} · 집계가 완료된 구간만 그래프에 표시</div></div></div><div style="height:320px;position:relative"><canvas id="slotEfficiencyChart"></canvas></div></div>
           <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 진행 상세 리스트</div><div class="slot-panel-sub">실제 진행 일정 ${slotPeriodLabel} · 전체 ${periods.length}개 구간</div></div></div><div class="table-wrap"><table><thead><tr><th>제품·키워드</th><th>진행 기간</th><th>슬롯비</th><th>현재 매출</th><th>주문</th><th>슬롯비율</th><th>검색 순위</th><th>판정</th></tr></thead><tbody>${slotRows}</tbody></table></div></div>
           <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">판정 기준</div></div></div><div class="slot-insight-list"><div class="slot-insight"><strong>유지</strong><span>증분매출÷슬롯비 3배 이상 + 검색 5위 이내</span></div><div class="slot-insight warn"><strong>재검토</strong><span>회수배수 1~3배 또는 순위 개선이 일시적</span></div><div class="slot-insight warn"><strong>중단 후보</strong><span>회수배수 1배 미만 또는 잔존효과 없음</span></div></div></div>
