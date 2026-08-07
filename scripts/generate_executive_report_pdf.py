@@ -90,7 +90,7 @@ def build():
  for r in monthly: md.append([P(r['month'][5:]+'월','small'),P(money(r['actualSales']),'small'),P(money(r['marketingCost']),'small'),P(money(r['slotCost']),'small'),P(pct(r['marketingCostRate']),'small'),P(mult(r['mer']),'small')])
  story += [styled_table(md,[16*mm,38*mm,34*mm,26*mm,28*mm,32*mm]),Spacer(1,7*mm),P('해석','h2'),P('월별 성과는 실제 전체 매출과 실제 집행비만 사용했습니다. 마케팅비와 실제 매출 MER에서는 슬롯비를 제외했으며, 하반기 예산 판단은 실제 매출 MER와 비용률, GA4 광고 유입 구매를 우선 기준으로 삼습니다.'),PageBreak()]
  story += [P('3. 파워링크·쇼핑검색 운영 효율','h1'),P('비교 기간  2026.06.01 - 2026.07.31  |  실제 광고비·노출·클릭 기준'),Spacer(1,5*mm)]
- ch={r['channel']:r for r in channels['operational']}; pl=ch['파워링크']; sh=ch['쇼핑검색']; cg=channels['ga4']
+ ch={r['channel']:r for r in channels['operational']}; pl=ch['파워링크']; sh=ch['쇼핑검색']; sh['adRoas']=sh['platformAttributedSales']/sh['adCost'] if sh['adCost'] else 0; cg=channels['ga4']
  cd=[[P(x,'smallw') for x in ['월','광고 유형','광고비','노출','클릭','CTR','CPC','GA4 구매 연결']]]
  for r in channels['monthly']:
   ga4_text=f"{int(r['ga4Sessions']):,}세션 · {int(r['ga4Transactions']):,}건 · {money(r['ga4PurchaseRevenue'])}" if r['channel']=='파워링크' else r['ga4Status']
@@ -100,10 +100,10 @@ def build():
   ga4_text=f"{int(ga['sessions']):,}세션 · {int(ga['transactions']):,}건 · {money(ga['purchaseRevenue'])}" if ga else '분리 측정 미확인'
   cd.append([P('합계','smallb'),P(r['channel'],'smallb'),P(money(r['adCost']),'smallb'),P(f"{int(r['impressions']):,}",'small'),P(f"{int(r['clicks']):,}",'small'),P(pct(r['ctr']),'small'),P(money(r['cpc']),'small'),P(ga4_text,'small')])
  story += [styled_table(cd,[12*mm,21*mm,27*mm,23*mm,18*mm,15*mm,22*mm,36*mm]),Spacer(1,7*mm),P('채널별 해석','h2')]
- channel_notes=[('파워링크 · 검색 의도 대응',f"CTR {pct(pl['ctr'])}로 반응률이 높고, GA4에서 {int(cg['powerlink']['sessions']):,}세션·구매 {int(cg['powerlink']['transactions']):,}건이 관측됐습니다. 고효율 키워드의 유지·확대 여부와 저효율 키워드의 조정 범위는 대표님 결정 사항입니다."),('쇼핑검색 · 상품 발견 유입',f"{int(sh['impressions']):,}회 노출과 CPC {money(sh['cpc'])}으로 노출·유입 비용은 양호합니다. 다만 UTM ns가 확인되지 않아 구매 효율은 아직 단정하지 않습니다."),('측정 보완',f"naver / cpc는 파워링크로 재분류해 파워링크 GA4 성과에 포함했습니다. 쇼핑검색은 utm_medium=ns와 스마트스토어 판매성과를 기준으로 별도 확인합니다."),('판단 원칙','플랫폼 전환매출은 사용하지 않습니다. 현재는 실제 집행비·클릭 효율과 GA4에서 분리 확인된 구매만으로 판단합니다.')]
+ channel_notes=[('1. 네이버 쇼핑검색 광고 지표',f"1~7월 광고비 {money(sh['adCost'])} · 클릭 {int(sh['clicks']):,}회 · 네이버 전환매출 {money(sh['platformAttributedSales'])} · 광고 ROAS {mult(sh['adRoas'])}."),('2. 연결상품 실제 성과',"매핑된 스마트스토어 상품별 7월 실제 매출·주문수는 아래 표에 표시했습니다. 광고그룹이 여러 개면 광고비는 합산하고 상품매출은 한 번만 집계했습니다."),('3. 대표님 판단 지표','네이버 전환매출과 스마트스토어 실제 매출은 합산하지 않습니다. 광고비/실매출, 주문수 추이, 환불액, GA4 구매 연결을 함께 보고 예산 유지·조정 여부를 대표님이 결정합니다.'),('4. 데이터 범위','네이버 전환매출은 플랫폼 귀속 기준이고 스마트스토어 실제 매출은 상품 판매 기준입니다. 두 수치의 차이는 측정 기준 차이로 해석합니다.')]
  mapping_table=[[P(x,'smallw') for x in ['연결 본상품','상품 ID','광고그룹','광고비','네이버 전환매출','광고 ROAS','7월 실제 매출','주문수']]]
  for r in map_summary: mapping_table.append([P(r['productName'],'small'),P(r['productId'],'small'),P(r['groups'],'small'),P(money(r['cost']),'small'),P(money(r['revenue']),'small'),P(mult(r['roas']),'small'),P(money(r['sales']),'small'),P(str(int(r['orders'])),'small')])
- story += [styled_table(mapping_table,[42*mm,24*mm,34*mm,22*mm,27*mm,20*mm,27*mm,18*mm]),Spacer(1,4*mm),P('상품 연결 기준','h2'),P('쇼핑검색 광고그룹을 스마트스토어 상품 ID로 연결해 광고 성과와 7월 실제 상품매출을 함께 표시했습니다. 동일 상품에 여러 광고그룹이 연결된 경우 광고비는 합산하고 상품매출은 중복 집계하지 않았습니다.'),Spacer(1,7*mm),P('현재 결론','h2'),P('<b>파워링크는 구매 연결이 확인돼 선별 유지가 가능하고, 쇼핑검색은 유입 비용은 양호하지만 구매 분리 측정이 완료될 때까지 확대·중단 판단에 필요한 상품 연결 지표를 우선 확인합니다.</b>'),PageBreak()]
+ story += [styled_table(mapping_table,[42*mm,24*mm,34*mm,22*mm,27*mm,20*mm,27*mm,18*mm]),Spacer(1,4*mm),P('상품 연결 기준','h2'),P('쇼핑검색 광고그룹을 스마트스토어 상품 ID로 연결해 광고 성과와 7월 실제 상품매출을 함께 표시했습니다. 동일 상품에 여러 광고그룹이 연결된 경우 광고비는 합산하고 상품매출은 중복 집계하지 않았습니다.'),Spacer(1,7*mm),P('현재 결론','h2'),P('<b>대표님은 네이버 광고 지표와 연결상품 실제 성과를 함께 확인한 뒤 예산 유지·조정 여부를 결정합니다.</b>'),PageBreak()]
  story += [P('4. GA4 기반 광고 유입·구매 효과','h1'),P('관측 기간  2026.06.19 - 2026.07.31  |  태그가 설치된 자사몰 기준'),Spacer(1,5*mm)]
  gs=ga4e['summary']; gj=ga4e['july']
  gk=[[P(x,'klabel') for x in ['검색광고 유입','검색광고 유입 구매','유입 후 구매 매출','7월 매출 비중']],[P(f"{int(gs['paidSearchSessions']):,}세션",'kpi'),P(f"{int(gs['paidSearchTransactions']):,}건",'kpi'),P(money(gs['paidSearchRevenue']),'kpi'),P(pct(gj['paidSearchRevenueShare']),'kpi')]]
