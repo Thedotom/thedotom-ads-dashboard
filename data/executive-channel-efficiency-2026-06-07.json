@@ -1,4 +1,4 @@
-﻿{
+{
     "period":  "2026-01-01~2026-07-31",
     "monthly":  [
                     {
@@ -189,10 +189,10 @@
                         "adCost":  20331056,
                         "ctr":  0.054911881373430983,
                         "cpc":  2235.4102253985707,
-                        "ga4Sessions":  7397,
-                        "ga4Transactions":  276,
-                        "ga4PurchaseRevenue":  53864800,
-                        "ga4Status":  "분리 측정 가능"
+                        "ga4Sessions":  10303,
+                        "ga4Transactions":  323,
+                        "ga4PurchaseRevenue":  64794800.008051,
+                        "ga4Status":  "파워링크(np+cpc) 분리 측정"
                     },
                     {
                         "month":  "2026-07",
@@ -237,11 +237,11 @@
     "ga4":  {
                 "period":  "2026-06-19~2026-07-31",
                 "powerlink":  {
-                                  "utmMedium":  "np",
-                                  "sessions":  7699,
-                                  "transactions":  280,
-                                  "purchaseRevenue":  54425300,
-                                  "status":  "분리 측정 가능"
+                                  "utmMedium":  "np+cpc",
+                                  "sessions":  10303,
+                                  "transactions":  323,
+                                  "purchaseRevenue":  64794800.008051,
+                                  "status":  "파워링크(np+cpc)로 분리 측정"
                               },
                 "shopping":  {
                                  "utmMedium":  "ns",
@@ -257,10 +257,10 @@
                                  "nextAction":  "GA4가 아닌 네이버·스마트스토어 기준으로 쇼핑검색 효율 판단"
                              },
                 "unclassifiedNaverCpc":  {
-                                             "sessions":  3582,
-                                             "transactions":  58,
-                                             "purchaseRevenue":  12824300,
-                                             "status":  "파워링크·쇼핑검색 구분 불가"
+                                             "sessions":  0,
+                                             "transactions":  0,
+                                             "purchaseRevenue":  0,
+                                             "status":  "파워링크로 재분류 완료"
                                          }
             },
     "decision":  {

@@ -1,68 +1,203 @@
 {
-  "updatedAt": "2026-08-05",
-  "sourceSheet": "https://docs.google.com/spreadsheets/d/1VN4EYii5QO7l8y-jaPlH4m9BKZITS_dkwiM2KmS1OQM/edit?usp=sharing",
-  "sources": {
-    "naver": "네이버",
-    "google": "구글",
-    "meta": "메타 광고",
-    "insta": "인스타그램",
-    "facebook": "페이스북",
-    "threads": "쓰레드",
-    "tiktok": "틱톡",
-    "youtube": "유튜브",
-    "kakao": "카카오",
-    "crm": "문자/CRM",
-    "email": "이메일",
-    "catalog": "회사소개서",
-    "d2c": "자사몰"
-  },
-  "mediums": {
-    "np": {"label": "파워링크", "group": "검색광고"},
-    "bs": {"label": "브랜드검색", "group": "검색광고"},
-    "ns": {"label": "쇼핑검색", "group": "검색광고"},
-    "cpc": {"label": "기존 네이버 검색광고", "group": "검색광고"},
-    "cpc_ad": {"label": "클릭형 광고", "group": "유료광고"},
-    "nc": {"label": "네이버 카페", "group": "바이럴/콘텐츠"},
-    "nbg": {"label": "네이버 블로그", "group": "바이럴/콘텐츠"},
-    "nsd": {"label": "무가시딩", "group": "바이럴/콘텐츠"},
-    "psd": {"label": "유가시딩", "group": "바이럴/콘텐츠"},
-    "gp": {"label": "공동구매", "group": "바이럴/콘텐츠"},
-    "rv": {"label": "체험단", "group": "바이럴/콘텐츠"},
-    "sp": {"label": "서포터즈", "group": "바이럴/콘텐츠"},
-    "profile": {"label": "프로필 링크", "group": "온드미디어"},
-    "blog": {"label": "자사 블로그", "group": "온드미디어"},
-    "owned_text": {"label": "텍스트 게시물", "group": "온드미디어"},
-    "owned_img": {"label": "이미지 게시물", "group": "온드미디어"},
-    "owned_viral": {"label": "바이럴 게시물", "group": "온드미디어"},
-    "owned_video": {"label": "영상 게시물", "group": "온드미디어"},
-    "msg_ad": {"label": "광고성 문자", "group": "CRM"},
-    "em_ad": {"label": "이메일", "group": "CRM"},
-    "link": {"label": "문자 링크", "group": "CRM"},
-    "ka_msg_ad": {"label": "카카오 메시지", "group": "카카오"},
-    "ka_alimtalk": {"label": "카카오 알림톡", "group": "카카오"},
-    "ka_oc_org": {"label": "카카오 오픈채팅", "group": "카카오"},
-    "ka_channel_org": {"label": "카카오 채널", "group": "카카오"},
-    "gs": {"label": "구글 쇼핑", "group": "검색광고"},
-    "ga": {"label": "구글 검색", "group": "검색광고"},
-    "organic": {"label": "자연검색", "group": "자연유입"},
-    "referral": {"label": "외부 추천", "group": "추천유입"},
-    "(none)": {"label": "직접 유입", "group": "직접유입"}
-  },
-  "campaigns": {
-    "d2c_main_pc": {"label": "답례품 메인", "device": "PC"},
-    "d2c_main_mo": {"label": "답례품 메인", "device": "모바일"},
-    "d2c_best_mo": {"label": "특판/베스트", "device": "모바일"},
-    "d2c_sub_mo": {"label": "답례품 서브키워드", "device": "모바일"},
-    "d2c_small_mo": {"label": "소규모 답례품", "device": "모바일"},
-    "d2c_wedding_mo": {"label": "웨딩 답례품", "device": "모바일"},
-    "d2c_brand_pc": {"label": "브랜드검색", "device": "PC"},
-    "d2c_brand_mo": {"label": "브랜드검색", "device": "모바일"},
-    "d2c_invitation_pc": {"label": "모바일초대장", "device": "PC"},
-    "d2c_invitation_mo": {"label": "모바일초대장", "device": "모바일"},
-    "d2c_wdhand_mo": {"label": "웨딩 핸드워시", "device": "모바일"},
-    "naver_powerlink": {"label": "기존 파워링크", "device": "미분류"},
-    "naver_brand_search": {"label": "기존 브랜드검색", "device": "미분류"},
-    "set": {"label": "쿠폰 발급", "device": "전체"},
-    "re": {"label": "쿠폰 리마인드", "device": "전체"}
-  }
+    "updatedAt":  "2026-08-05",
+    "sourceSheet":  "https://docs.google.com/spreadsheets/d/1VN4EYii5QO7l8y-jaPlH4m9BKZITS_dkwiM2KmS1OQM/edit?usp=sharing",
+    "sources":  {
+                    "naver":  "네이버",
+                    "google":  "구글",
+                    "meta":  "메타 광고",
+                    "insta":  "인스타그램",
+                    "facebook":  "페이스북",
+                    "threads":  "쓰레드",
+                    "tiktok":  "틱톡",
+                    "youtube":  "유튜브",
+                    "kakao":  "카카오",
+                    "crm":  "문자/CRM",
+                    "email":  "이메일",
+                    "catalog":  "회사소개서",
+                    "d2c":  "자사몰"
+                },
+    "mediums":  {
+                    "np":  {
+                               "label":  "파워링크",
+                               "group":  "검색광고"
+                           },
+                    "bs":  {
+                               "label":  "브랜드검색",
+                               "group":  "검색광고"
+                           },
+                    "ns":  {
+                               "label":  "쇼핑검색",
+                               "group":  "검색광고"
+                           },
+                    "cpc":  {
+                                "label":  "파워링크",
+                                "group":  "검색광고"
+                            },
+                    "cpc_ad":  {
+                                   "label":  "클릭형 광고",
+                                   "group":  "유료광고"
+                               },
+                    "nc":  {
+                               "label":  "네이버 카페",
+                               "group":  "바이럴/콘텐츠"
+                           },
+                    "nbg":  {
+                                "label":  "네이버 블로그",
+                                "group":  "바이럴/콘텐츠"
+                            },
+                    "nsd":  {
+                                "label":  "무가시딩",
+                                "group":  "바이럴/콘텐츠"
+                            },
+                    "psd":  {
+                                "label":  "유가시딩",
+                                "group":  "바이럴/콘텐츠"
+                            },
+                    "gp":  {
+                               "label":  "공동구매",
+                               "group":  "바이럴/콘텐츠"
+                           },
+                    "rv":  {
+                               "label":  "체험단",
+                               "group":  "바이럴/콘텐츠"
+                           },
+                    "sp":  {
+                               "label":  "서포터즈",
+                               "group":  "바이럴/콘텐츠"
+                           },
+                    "profile":  {
+                                    "label":  "프로필 링크",
+                                    "group":  "온드미디어"
+                                },
+                    "blog":  {
+                                 "label":  "자사 블로그",
+                                 "group":  "온드미디어"
+                             },
+                    "owned_text":  {
+                                       "label":  "텍스트 게시물",
+                                       "group":  "온드미디어"
+                                   },
+                    "owned_img":  {
+                                      "label":  "이미지 게시물",
+                                      "group":  "온드미디어"
+                                  },
+                    "owned_viral":  {
+                                        "label":  "바이럴 게시물",
+                                        "group":  "온드미디어"
+                                    },
+                    "owned_video":  {
+                                        "label":  "영상 게시물",
+                                        "group":  "온드미디어"
+                                    },
+                    "msg_ad":  {
+                                   "label":  "광고성 문자",
+                                   "group":  "CRM"
+                               },
+                    "em_ad":  {
+                                  "label":  "이메일",
+                                  "group":  "CRM"
+                              },
+                    "link":  {
+                                 "label":  "문자 링크",
+                                 "group":  "CRM"
+                             },
+                    "ka_msg_ad":  {
+                                      "label":  "카카오 메시지",
+                                      "group":  "카카오"
+                                  },
+                    "ka_alimtalk":  {
+                                        "label":  "카카오 알림톡",
+                                        "group":  "카카오"
+                                    },
+                    "ka_oc_org":  {
+                                      "label":  "카카오 오픈채팅",
+                                      "group":  "카카오"
+                                  },
+                    "ka_channel_org":  {
+                                           "label":  "카카오 채널",
+                                           "group":  "카카오"
+                                       },
+                    "gs":  {
+                               "label":  "구글 쇼핑",
+                               "group":  "검색광고"
+                           },
+                    "ga":  {
+                               "label":  "구글 검색",
+                               "group":  "검색광고"
+                           },
+                    "organic":  {
+                                    "label":  "자연검색",
+                                    "group":  "자연유입"
+                                },
+                    "referral":  {
+                                     "label":  "외부 추천",
+                                     "group":  "추천유입"
+                                 },
+                    "(none)":  {
+                                   "label":  "직접 유입",
+                                   "group":  "직접유입"
+                               }
+                },
+    "campaigns":  {
+                      "d2c_main_pc":  {
+                                          "label":  "답례품 메인",
+                                          "device":  "PC"
+                                      },
+                      "d2c_main_mo":  {
+                                          "label":  "답례품 메인",
+                                          "device":  "모바일"
+                                      },
+                      "d2c_best_mo":  {
+                                          "label":  "특판/베스트",
+                                          "device":  "모바일"
+                                      },
+                      "d2c_sub_mo":  {
+                                         "label":  "답례품 서브키워드",
+                                         "device":  "모바일"
+                                     },
+                      "d2c_small_mo":  {
+                                           "label":  "소규모 답례품",
+                                           "device":  "모바일"
+                                       },
+                      "d2c_wedding_mo":  {
+                                             "label":  "웨딩 답례품",
+                                             "device":  "모바일"
+                                         },
+                      "d2c_brand_pc":  {
+                                           "label":  "브랜드검색",
+                                           "device":  "PC"
+                                       },
+                      "d2c_brand_mo":  {
+                                           "label":  "브랜드검색",
+                                           "device":  "모바일"
+                                       },
+                      "d2c_invitation_pc":  {
+                                                "label":  "모바일초대장",
+                                                "device":  "PC"
+                                            },
+                      "d2c_invitation_mo":  {
+                                                "label":  "모바일초대장",
+                                                "device":  "모바일"
+                                            },
+                      "d2c_wdhand_mo":  {
+                                            "label":  "웨딩 핸드워시",
+                                            "device":  "모바일"
+                                        },
+                      "naver_powerlink":  {
+                                              "label":  "기존 파워링크",
+                                              "device":  "미분류"
+                                          },
+                      "naver_brand_search":  {
+                                                 "label":  "기존 브랜드검색",
+                                                 "device":  "미분류"
+                                             },
+                      "set":  {
+                                  "label":  "쿠폰 발급",
+                                  "device":  "전체"
+                              },
+                      "re":  {
+                                 "label":  "쿠폰 리마인드",
+                                 "device":  "전체"
+                             }
+                  }
 }
