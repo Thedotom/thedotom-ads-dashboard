@@ -1735,6 +1735,29 @@
       const assessments = shoppingBaseRows().map(shoppingAssessment);
       const categoryCount = key => assessments.filter(item => item.key === key).length;
       const calculatedRoas = Number(mix.adCost || 0) ? Number(mix.revenue || 0) / Number(mix.adCost || 0) : 0;
+      const mappingRows = (state.data.shoppingProductMapping?.rows || []);
+      const salesRows = state.data.dailyProductPerformance?.rows || [];
+      const productSales = new Map();
+      salesRows.forEach(row => {
+        const id = String(row.productId || "");
+        if (!id) return;
+        const item = productSales.get(id) || { sales: 0, gross: 0, orders: 0, quantity: 0, refunds: 0 };
+        item.sales += Number(row.dailySales || 0); item.gross += Number(row.grossSales || 0);
+        item.orders += Number(row.orders || 0); item.quantity += Number(row.quantity || 0);
+        item.refunds += Number(row.refundAmount || 0); productSales.set(id, item);
+      });
+      const adRows = state.data.keywordPerformance || [];
+      const mappedProducts = [...new Map(mappingRows.map(row => [String(row.productId), row])).values()];
+      const mappingSummary = mappedProducts.map(item => {
+        const linked = mappingRows.filter(row => String(row.productId) === String(item.productId));
+        const groups = new Set(linked.map(row => String(row.adgroup || "")));
+        const ads = adRows.filter(row => groups.has(String(row["광고그룹명"] || "")));
+        const cost = ads.reduce((sum, row) => sum + Number(row["총비용"] || 0), 0);
+        const revenue = ads.reduce((sum, row) => sum + Number(row["전환매출"] || 0), 0);
+        const actual = productSales.get(String(item.productId)) || { sales: 0, gross: 0, orders: 0, quantity: 0, refunds: 0 };
+        return { ...item, adgroups: linked.map(row => row.adgroup).filter(Boolean), cost, revenue, roas: cost ? revenue / cost : 0, actual };
+      }).sort((a, b) => b.actual.sales - a.actual.sales);
+      const mappingHtml = mappingSummary.map(item => `<tr><td>${html(item.adgroups.join(", "))}</td><td class="wrap">${html(item.productName)}</td><td>${html(item.productId)}</td><td>${money(item.cost)}</td><td>${money(item.revenue)}</td><td>${ratio(item.roas)}</td><td><strong>${money(item.actual.sales)}</strong><div class="sub">주문 ${number(item.actual.orders)}건 · 환불 ${money(item.actual.refunds)}</div></td><td>${item.actual.sales ? ratio(item.cost / item.actual.sales) : "-"}</td></tr>`).join("");
       els.shoppingIntegratedBody.innerHTML = `
         <div class="kpis" style="margin-bottom:12px">
           <div class="metric"><div class="label">쇼핑검색 광고비</div><div class="value">${money(mix.adCost || dailyCosts.totalCost || 0)}</div><div class="sub">자동 수집 누적 비용</div></div>
@@ -1743,6 +1766,7 @@
           <div class="metric"><div class="label">광고 ROAS</div><div class="value">${ratio(mix.adRoas || calculatedRoas)}</div><div class="sub">쇼핑검색 단독</div></div>
           <div class="metric"><div class="label">점검 필요</div><div class="value">${number(categoryCount("highCpc") + categoryCount("noConversion") + categoryCount("lowRoas"))}</div><div class="sub">고CPC·무전환·저ROAS</div></div>
         </div>
+        <div class="slot-panel" style="margin-bottom:14px"><div class="slot-panel-head"><div><div class="slot-panel-title">쇼핑검색 광고그룹 · 연결상품 실제 매출</div><div class="slot-panel-sub">광고그룹별 광고 성과와 스마트스토어 상품 ID 기준 실제 판매를 연결한 표입니다. 실제 매출은 환불 반영 후 판매액 기준입니다.</div></div></div><div class="table-wrap"><table><thead><tr><th>광고그룹</th><th>연결 본상품</th><th>상품 ID</th><th>광고비</th><th>네이버 전환매출</th><th>광고 ROAS</th><th>스마트스토어 실제 매출</th><th>광고비/실매출</th></tr></thead><tbody>${mappingHtml || `<tr><td class="empty" colspan="8">상품 매핑 데이터가 없습니다.</td></tr>`}</tbody></table></div></div>
         <div class="pl-chart-area" style="display:grid;margin-bottom:14px">
           <div class="pl-chart-panel" style="grid-column:1/-1">
             <div class="pl-chart-title">전체 일자별 쇼핑검색 광고비 · ${money(dailySum("cost").reduce((sum, value) => sum + value, 0))}</div>

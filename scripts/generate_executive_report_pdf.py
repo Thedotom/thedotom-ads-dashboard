@@ -17,6 +17,8 @@ report=json.loads((ROOT/'data'/'executive-report-2026-01-07.json').read_text(enc
 ga4e=json.loads((ROOT/'data'/'executive-ga4-evidence-2026-06-07.json').read_text(encoding='utf-8-sig'))
 channels=json.loads((ROOT/'data'/'executive-channel-efficiency-2026-06-07.json').read_text(encoding='utf-8-sig'))
 dash=json.loads((ROOT/'data'/'monthly-dashboard-2026-08.json').read_text(encoding='utf-8-sig'))
+dash_month=json.loads((ROOT/'data'/'monthly-dashboard-2026-07.json').read_text(encoding='utf-8-sig'))
+mapping=json.loads((ROOT/'data'/'shopping-product-mapping.json').read_text(encoding='utf-8-sig'))
 power=json.loads((ROOT/'data'/'powerlink-creative-config.json').read_text(encoding='utf-8-sig'))
 pdfmetrics.registerFont(TTFont('Malgun',r'C:\Windows\Fonts\malgun.ttf'))
 pdfmetrics.registerFont(TTFont('MalgunB',r'C:\Windows\Fonts\malgunbd.ttf'))
@@ -57,6 +59,21 @@ def footer(canvas,doc):
  canvas.saveState();canvas.setStrokeColor(LINE);canvas.line(18*mm,14*mm,192*mm,14*mm);canvas.setFont('Malgun',7);canvas.setFillColor(SLATE);canvas.drawString(18*mm,9*mm,'더도톰 2026년 1~7월 광고·슬롯 보고서');canvas.drawRightString(192*mm,9*mm,str(doc.page));canvas.restoreState()
 def build():
  OUT.parent.mkdir(parents=True,exist_ok=True); periods=sorted(dash['slotEfficiency']['periods'],key=lambda x:x.get('startDate','')); ss=dash['slotEfficiency']['summary']; groups=power.get('groups',[]); kws=[k for g in groups for k in g.get('keywords',[])]; off=[k for k in kws if k.get('status')!='운영 가능']; goff=[g for g in groups if g.get('campaignStatus')!='운영 가능' or g.get('adgroupStatus')!='운영 가능']
+ map_rows=mapping.get('rows',[])
+ product_sales={}
+ for row in (dash_month.get('dailyProductPerformance',{}).get('rows',[]) or []):
+  pid=str(row.get('productId') or '')
+  if not pid: continue
+  item=product_sales.setdefault(pid,{'sales':0,'orders':0,'refunds':0})
+  item['sales']+=float(row.get('dailySales') or 0); item['orders']+=float(row.get('orders') or 0); item['refunds']+=float(row.get('refundAmount') or 0)
+ ad_rows=dash_month.get('keywordPerformance',[]) or []
+ map_summary=[]
+ for pid in sorted({str(r.get('productId')) for r in map_rows}):
+  linked=[r for r in map_rows if str(r.get('productId'))==pid]; groups={str(r.get('adgroup') or '') for r in linked}
+  ads=[r for r in ad_rows if str(r.get('광고그룹명') or '') in groups]
+  cost=sum(float(r.get('총비용') or 0) for r in ads); revenue=sum(float(r.get('전환매출') or 0) for r in ads); actual=product_sales.get(pid,{'sales':0,'orders':0,'refunds':0})
+  map_summary.append({'productName':linked[0].get('productName',''),'productId':pid,'groups':', '.join(sorted(groups-{''})),'cost':cost,'revenue':revenue,'roas':revenue/cost if cost else 0,'sales':actual['sales'],'orders':actual['orders'],'refunds':actual['refunds']})
+ map_summary.sort(key=lambda x:x['sales'],reverse=True)
  slot_by_month={}
  for r in periods: slot_by_month[r['startDate'][:7]]=slot_by_month.get(r['startDate'][:7],0)+float(r.get('slotCost') or 0)
  monthly=[]
@@ -84,7 +101,9 @@ def build():
   cd.append([P('합계','smallb'),P(r['channel'],'smallb'),P(money(r['adCost']),'smallb'),P(f"{int(r['impressions']):,}",'small'),P(f"{int(r['clicks']):,}",'small'),P(pct(r['ctr']),'small'),P(money(r['cpc']),'small'),P(ga4_text,'small')])
  story += [styled_table(cd,[12*mm,21*mm,27*mm,23*mm,18*mm,15*mm,22*mm,36*mm]),Spacer(1,7*mm),P('채널별 해석','h2')]
  channel_notes=[('파워링크 · 검색 의도 대응',f"CTR {pct(pl['ctr'])}로 반응률이 높고, GA4에서 {int(cg['powerlink']['sessions']):,}세션·구매 {int(cg['powerlink']['transactions']):,}건이 관측됐습니다. 고효율 키워드는 유지하고 저효율 키워드부터 조정합니다."),('쇼핑검색 · 상품 발견 유입',f"{int(sh['impressions']):,}회 노출과 CPC {money(sh['cpc'])}으로 노출·유입 비용은 양호합니다. 다만 UTM ns가 확인되지 않아 구매 효율은 아직 단정하지 않습니다."),('측정 보완',f"naver / cpc {int(cg['unclassifiedNaverCpc']['sessions']):,}세션은 광고 유형 구분이 불가능해 어느 채널에도 배분하지 않았습니다. 쇼핑검색 링크에 utm_medium=ns를 적용한 뒤 구매 효율을 확정합니다."),('판단 원칙','플랫폼 전환매출은 사용하지 않습니다. 현재는 실제 집행비·클릭 효율과 GA4에서 분리 확인된 구매만으로 판단합니다.')]
- story += [styled_table([[P(a,'smallb'),P(b)] for a,b in channel_notes],[42*mm,132*mm],False),Spacer(1,7*mm),P('현재 결론','h2'),P('<b>파워링크는 구매 연결이 확인돼 선별 유지가 가능하고, 쇼핑검색은 유입 비용은 양호하지만 구매 분리 측정이 완료될 때까지 확대·중단을 확정하지 않습니다.</b>'),PageBreak()]
+ mapping_table=[[P(x,'smallw') for x in ['연결 본상품','상품 ID','광고그룹','광고비','네이버 전환매출','광고 ROAS','7월 실제 매출','주문수']]]
+ for r in map_summary: mapping_table.append([P(r['productName'],'small'),P(r['productId'],'small'),P(r['groups'],'small'),P(money(r['cost']),'small'),P(money(r['revenue']),'small'),P(mult(r['roas']),'small'),P(money(r['sales']),'small'),P(str(int(r['orders'])),'small')])
+ story += [styled_table(mapping_table,[42*mm,24*mm,34*mm,22*mm,27*mm,20*mm,27*mm,18*mm]),Spacer(1,4*mm),P('상품 연결 기준','h2'),P('쇼핑검색 광고그룹을 스마트스토어 상품 ID로 연결해 광고 성과와 7월 실제 상품매출을 함께 표시했습니다. 동일 상품에 여러 광고그룹이 연결된 경우 광고비는 합산하고 상품매출은 중복 집계하지 않았습니다.'),Spacer(1,7*mm),P('현재 결론','h2'),P('<b>파워링크는 구매 연결이 확인돼 선별 유지가 가능하고, 쇼핑검색은 유입 비용은 양호하지만 구매 분리 측정이 완료될 때까지 확대·중단을 확정하지 않습니다.</b>'),PageBreak()]
  story += [P('4. GA4 기반 광고 유입·구매 효과','h1'),P('관측 기간  2026.06.19 - 2026.07.31  |  태그가 설치된 자사몰 기준'),Spacer(1,5*mm)]
  gs=ga4e['summary']; gj=ga4e['july']
  gk=[[P(x,'klabel') for x in ['검색광고 유입','검색광고 유입 구매','유입 후 구매 매출','7월 매출 비중']],[P(f"{int(gs['paidSearchSessions']):,}세션",'kpi'),P(f"{int(gs['paidSearchTransactions']):,}건",'kpi'),P(money(gs['paidSearchRevenue']),'kpi'),P(pct(gj['paidSearchRevenueShare']),'kpi')]]
