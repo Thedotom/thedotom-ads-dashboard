@@ -1,112 +1,311 @@
 {
     "source":  "Google Sheet",
-    "sourceUrl":  "https://docs.google.com/spreadsheets/d/1paQId8jm6rdEjka7IYUD36kQubc7gEjxJ7W9HHs9vYg/edit",
-    "updatedAt":  "2026-08-07 13:52:37",
+    "sourceUrl":  "https://docs.google.com/spreadsheets/d/1Q4CPUSzuQYaAlVXc42savxcnzYkIkBW4DU-mAaZj1yY/edit",
+    "updatedAt":  "2026-08-07 16:05:53",
     "rows":  [
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_꿀",
                      "adgroup":  "꿀_결혼답례품",
                      "productName":  "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
-                     "productId":  "7444568862"
+                     "productId":  "7444568862",
+                     "status":  "ON"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_꿀",
+                     "adgroup":  "꿀_돌답례품",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_꿀",
+                     "adgroup":  "꿀_돌답례품(M)",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_꿀",
                      "adgroup":  "꿀_돌잔치답례품1",
                      "productName":  "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
-                     "productId":  "7444568862"
+                     "productId":  "7444568862",
+                     "status":  "ON"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_꿀",
+                     "adgroup":  "꿀_돌잔치답례품2",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_데일리",
+                     "adgroup":  "데일리_호텔수건1",
+                     "productName":  "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
+                     "productId":  "11858377273",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_데일리",
+                     "adgroup":  "데일리_호텔수건2",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_데일리",
                      "adgroup":  "데일리_호텔수건_최종",
                      "productName":  "호텔수건 5+5 10장 40수 코마사 190g 타올 타월 세트 더도톰",
-                     "productId":  "11858377273"
+                     "productId":  "11858377273",
+                     "status":  "ON"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_모바일초대장",
                      "adgroup":  "모바일초대장_돌잔치초대장",
                      "productName":  "돌잔치 모바일 초대장 돌초대장 시안제공 간편수정 당일제작",
-                     "productId":  "13471936380"
+                     "productId":  "13471936380",
+                     "status":  "ON"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_모바일초대장",
                      "adgroup":  "모바일초대장_모바일초대장",
                      "productName":  "돌잔치 모바일 초대장 돌초대장 시안제공 간편수정 당일제작",
-                     "productId":  "13471936380"
+                     "productId":  "13471936380",
+                     "status":  "ON"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_비타민",
+                     "adgroup":  "비타민_감사선물",
+                     "productName":  "종근당 비타민 답례품 결혼식 결혼 웨딩 기념 선물",
+                     "productId":  "13057839057",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_비타민",
+                     "adgroup":  "비타민_결혼답례품",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_비타민",
+                     "adgroup":  "비타민_결혼답례품_테스트",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_세트",
+                     "adgroup":  "결혼답례품",
+                     "productName":  "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+                     "productId":  "4843121925",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_세트",
+                     "adgroup":  "결혼식답례품세트 ",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_세트",
+                     "adgroup":  "결혼키워드",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_세트",
                      "adgroup":  "돌답례품",
                      "productName":  "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
-                     "productId":  "4843121925"
+                     "productId":  "4843121925",
+                     "status":  "ON"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_세트",
-                     "adgroup":  "돌세트 답례품",
+                     "adgroup":  "돌답례품핸드워시(m)",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_세트",
+                     "adgroup":  "돌세트 답레품",
                      "productName":  "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
-                     "productId":  "4843121925"
+                     "productId":  "4843121925",
+                     "status":  "ON"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_세트",
+                     "adgroup":  "돌잔치답례품핸드워시(m)",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_세트",
+                     "adgroup":  "돌핸드워시",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_세트",
+                     "adgroup":  "멀티키워드",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_수건",
                      "adgroup":  "2600원_답례품",
                      "productName":  "답례품 돌잔치 돌 수건 웨딩 환갑 칠순 개업 소규모 더도톰 150g 화이트",
-                     "productId":  "4624494637"
+                     "productId":  "4624494637",
+                     "status":  "ON"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_수건",
+                     "adgroup":  "2600원_돌답례품수건(M)",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_수건",
+                     "adgroup":  "2600원_돌수건(M)",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_수건",
+                     "adgroup":  "2600원_수건답례품(완)",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_수건",
                      "adgroup":  "3700원_수건답례품(M)",
                      "productName":  "답례품 수건 150g 자수 제작 기념품 타올 더도톰",
-                     "productId":  "4766394357"
+                     "productId":  "4766394357",
+                     "status":  "ON"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_조구만",
+                     "adgroup":  "조구만_꿀_돌잔치답례품",
+                     "productName":  "조구만 돌답례품 국내산 벌꿀 돌잔치 답례품 선물 (20개이상단가)",
+                     "productId":  "13337444346",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_조구만",
+                     "adgroup":  "조구만_꿀세트_돌답례품",
+                     "productName":  "조구만 돌답례품 수건세트 핸드워시 꿀 선택 돌잔치답례품 (20개이상단가)",
+                     "productId":  "13337070806",
+                     "status":  "OFF"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_조구만",
+                     "adgroup":  "조구만_수건단품_돌답례품",
+                     "productName":  "조구만 돌답례품 수건 40수 170g 단품 돌잔치 답례품 선물 (20개이상단가)",
+                     "productId":  "13336908552",
+                     "status":  "OFF"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_조구만",
                      "adgroup":  "조구만_에디션_돌답례품1",
                      "productName":  "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
-                     "productId":  "11562165854"
+                     "productId":  "11562165854",
+                     "status":  "ON"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_조구만",
+                     "adgroup":  "조구만_에디션_돌답례품2",
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_조구만",
                      "adgroup":  "조구만_에디션_돌잔치답례품",
                      "productName":  "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
-                     "productId":  "11562165854"
+                     "productId":  "11562165854",
+                     "status":  "ON"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_조구만",
                      "adgroup":  "조구만_핸드워시_돌답례품",
                      "productName":  "조구만 돌답례품 핸드워시 손세정제 돌잔치답례품 (20개이상단가)",
-                     "productId":  "13337257373"
+                     "productId":  "13337257373",
+                     "status":  "ON"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_조구만",
                      "adgroup":  "조구만_핸드워시세트_돌잔치답례품",
                      "productName":  "조구만 돌답례품 수건세트 핸드워시 꿀 선택 돌잔치답례품 (20개이상단가)",
-                     "productId":  "13337070806"
+                     "productId":  "13337070806",
+                     "status":  "ON"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_조문답례품",
                      "adgroup":  "조문답례품_1",
                      "productName":  "장례답례품 소금 세트 장례식 장례 부고 부의 조의 조문 특화 답례 선물 더도톰 [원산지:파키스탄]",
-                     "productId":  "6052815173"
+                     "productId":  "6052815173",
+                     "status":  "ON"
+                 },
+                 {
+                     "adType":  "쇼핑검색",
+                     "campaign":  "쇼핑검색_더도톰_호두정과",
+                     "adgroup":  "호두정과_돌답례품",
+                     "productName":  "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
+                     "productId":  "12047676813",
+                     "status":  "OFF"
                  },
                  {
                      "adType":  "쇼핑검색",
                      "campaign":  "쇼핑검색_더도톰_호두정과",
                      "adgroup":  "호두정과_돌답례품_메인",
-                     "productName":  "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
-                     "productId":  "12047676813"
+                     "productName":  "",
+                     "productId":  "",
+                     "status":  "OFF"
                  }
              ]
 }

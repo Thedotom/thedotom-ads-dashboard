@@ -271,20 +271,21 @@
     "note":  "광고 플랫폼 전환매출과 귀속 ROAS는 대표 보고서 효율 판단에 사용하지 않습니다.",
     "shoppingProductSummary":  [
                                    {
-                                       "productId":  "11562165854",
-                                       "productName":  "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
+                                       "productId":  "7444568862",
+                                       "productName":  "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
                                        "adgroups":  [
-                                                        "조구만_에디션_돌답례품1",
-                                                        "조구만_에디션_돌잔치답례품"
+                                                        "꿀_결혼답례품",
+                                                        "꿀_돌잔치답례품1"
                                                     ],
-                                       "actualSales":  538463250,
-                                       "grossSales":  698117140,
-                                       "orders":  10317,
-                                       "refundAmount":  159653890,
-                                       "quantity":  209963,
-                                       "adCost":  28648597,
-                                       "attributedRevenue":  1348453630,
-                                       "adRoas":  47.068749300358405
+                                       "status":  "ON",
+                                       "adCost":  2897995,
+                                       "attributedRevenue":  100520650,
+                                       "adRoas":  34.6862744759739,
+                                       "actualSales":  70299770,
+                                       "grossSales":  79843150,
+                                       "orders":  563,
+                                       "refundAmount":  9543380,
+                                       "quantity":  20487
                                    },
                                    {
                                        "productId":  "11858377273",
@@ -292,59 +293,15 @@
                                        "adgroups":  [
                                                         "데일리_호텔수건_최종"
                                                     ],
+                                       "status":  "ON",
+                                       "adCost":  3816970,
+                                       "attributedRevenue":  59443800,
+                                       "adRoas":  15.573557036078356,
                                        "actualSales":  57159560,
                                        "grossSales":  60975860,
                                        "orders":  1435,
                                        "refundAmount":  3816300,
-                                       "quantity":  1549,
-                                       "adCost":  3816970,
-                                       "attributedRevenue":  59443800,
-                                       "adRoas":  15.573557036078356
-                                   },
-                                   {
-                                       "productId":  "12047676813",
-                                       "productName":  "답례품 호두정과 4봉set 결혼식 돌잔치 웨딩 결혼 회사 승진 단체 선물 개업 조문 더도톰",
-                                       "adgroups":  [
-                                                        "호두정과_돌답례품_메인"
-                                                    ],
-                                       "actualSales":  24968270,
-                                       "grossSales":  28328770,
-                                       "orders":  154,
-                                       "refundAmount":  3360500,
-                                       "quantity":  7285,
-                                       "adCost":  1065739,
-                                       "attributedRevenue":  23665400,
-                                       "adRoas":  22.205624454017354
-                                   },
-                                   {
-                                       "productId":  "13337070806",
-                                       "productName":  "조구만 돌답례품 수건세트 핸드워시 꿀 선택 돌잔치답례품 (20개이상단가)",
-                                       "adgroups":  [
-                                                        "조구만_핸드워시세트_돌잔치답례품"
-                                                    ],
-                                       "actualSales":  75489626,
-                                       "grossSales":  98228500,
-                                       "orders":  700,
-                                       "refundAmount":  22738874,
-                                       "quantity":  15691,
-                                       "adCost":  7853196,
-                                       "attributedRevenue":  538020360,
-                                       "adRoas":  68.509732852713725
-                                   },
-                                   {
-                                       "productId":  "13337257373",
-                                       "productName":  "조구만 돌답례품 핸드워시 손세정제 돌잔치답례품 (20개이상단가)",
-                                       "adgroups":  [
-                                                        "조구만_핸드워시_돌답례품"
-                                                    ],
-                                       "actualSales":  14846140,
-                                       "grossSales":  19059220,
-                                       "orders":  139,
-                                       "refundAmount":  4213080,
-                                       "quantity":  4971,
-                                       "adCost":  2028212,
-                                       "attributedRevenue":  87455260,
-                                       "adRoas":  43.11938791408393
+                                       "quantity":  1549
                                    },
                                    {
                                        "productId":  "13471936380",
@@ -353,14 +310,32 @@
                                                         "모바일초대장_돌잔치초대장",
                                                         "모바일초대장_모바일초대장"
                                                     ],
+                                       "status":  "ON",
+                                       "adCost":  266119,
+                                       "attributedRevenue":  2633750,
+                                       "adRoas":  9.89688823421101,
                                        "actualSales":  802600,
                                        "grossSales":  1015700,
                                        "orders":  152,
                                        "refundAmount":  213100,
-                                       "quantity":  152,
-                                       "adCost":  266119,
-                                       "attributedRevenue":  2633750,
-                                       "adRoas":  9.89688823421101
+                                       "quantity":  152
+                                   },
+                                   {
+                                       "productId":  "4843121925",
+                                       "productName":  "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+                                       "adgroups":  [
+                                                        "돌답례품",
+                                                        "돌세트 답레품"
+                                                    ],
+                                       "status":  "ON",
+                                       "adCost":  1798789,
+                                       "attributedRevenue":  156405290,
+                                       "adRoas":  86.950326024897862,
+                                       "actualSales":  411948878,
+                                       "grossSales":  535324610,
+                                       "orders":  8132,
+                                       "refundAmount":  123375732,
+                                       "quantity":  220036
                                    },
                                    {
                                        "productId":  "4624494637",
@@ -368,14 +343,15 @@
                                        "adgroups":  [
                                                         "2600원_답례품"
                                                     ],
+                                       "status":  "ON",
+                                       "adCost":  46460144,
+                                       "attributedRevenue":  2689041590,
+                                       "adRoas":  57.8784600839808,
                                        "actualSales":  768262010,
                                        "grossSales":  989546800,
                                        "orders":  24631,
                                        "refundAmount":  221284790,
-                                       "quantity":  688969,
-                                       "adCost":  46460144,
-                                       "attributedRevenue":  2689041590,
-                                       "adRoas":  57.8784600839808
+                                       "quantity":  688969
                                    },
                                    {
                                        "productId":  "4766394357",
@@ -383,30 +359,64 @@
                                        "adgroups":  [
                                                         "3700원_수건답례품(M)"
                                                     ],
+                                       "status":  "ON",
+                                       "adCost":  1187820,
+                                       "attributedRevenue":  81084150,
+                                       "adRoas":  68.262994393089869,
                                        "actualSales":  120640368,
                                        "grossSales":  144588830,
                                        "orders":  3126,
                                        "refundAmount":  23948462,
-                                       "quantity":  77629,
-                                       "adCost":  1187820,
-                                       "attributedRevenue":  81084150,
-                                       "adRoas":  68.262994393089869
+                                       "quantity":  77629
                                    },
                                    {
-                                       "productId":  "4843121925",
-                                       "productName":  "답례품 돌잔치 돌 핸드워시 세트 칠순 개업 프리미엄 더도톰 150g 화이트",
+                                       "productId":  "11562165854",
+                                       "productName":  "조구만 돌답례품 수건 40수 170g 돌잔치 답례품 에디션 (20개이상단가)",
                                        "adgroups":  [
-                                                        "돌답례품",
-                                                        "돌세트 답례품"
+                                                        "조구만_에디션_돌답례품1",
+                                                        "조구만_에디션_돌잔치답례품"
                                                     ],
-                                       "actualSales":  411948878,
-                                       "grossSales":  535324610,
-                                       "orders":  8132,
-                                       "refundAmount":  123375732,
-                                       "quantity":  220036,
-                                       "adCost":  1845264,
-                                       "attributedRevenue":  164855490,
-                                       "adRoas":  89.339785526623828
+                                       "status":  "ON",
+                                       "adCost":  28648597,
+                                       "attributedRevenue":  1348453630,
+                                       "adRoas":  47.068749300358405,
+                                       "actualSales":  538463250,
+                                       "grossSales":  698117140,
+                                       "orders":  10317,
+                                       "refundAmount":  159653890,
+                                       "quantity":  209963
+                                   },
+                                   {
+                                       "productId":  "13337257373",
+                                       "productName":  "조구만 돌답례품 핸드워시 손세정제 돌잔치답례품 (20개이상단가)",
+                                       "adgroups":  [
+                                                        "조구만_핸드워시_돌답례품"
+                                                    ],
+                                       "status":  "ON",
+                                       "adCost":  2028212,
+                                       "attributedRevenue":  87455260,
+                                       "adRoas":  43.11938791408393,
+                                       "actualSales":  14846140,
+                                       "grossSales":  19059220,
+                                       "orders":  139,
+                                       "refundAmount":  4213080,
+                                       "quantity":  4971
+                                   },
+                                   {
+                                       "productId":  "13337070806",
+                                       "productName":  "조구만 돌답례품 수건세트 핸드워시 꿀 선택 돌잔치답례품 (20개이상단가)",
+                                       "adgroups":  [
+                                                        "조구만_핸드워시세트_돌잔치답례품"
+                                                    ],
+                                       "status":  "ON",
+                                       "adCost":  7853196,
+                                       "attributedRevenue":  538020360,
+                                       "adRoas":  68.509732852713725,
+                                       "actualSales":  75489626,
+                                       "grossSales":  98228500,
+                                       "orders":  700,
+                                       "refundAmount":  22738874,
+                                       "quantity":  15691
                                    },
                                    {
                                        "productId":  "6052815173",
@@ -414,30 +424,15 @@
                                        "adgroups":  [
                                                         "조문답례품_1"
                                                     ],
+                                       "status":  "ON",
+                                       "adCost":  808,
+                                       "attributedRevenue":  0,
+                                       "adRoas":  0,
                                        "actualSales":  26266700,
                                        "grossSales":  30902200,
                                        "orders":  457,
                                        "refundAmount":  4635500,
-                                       "quantity":  9696,
-                                       "adCost":  808,
-                                       "attributedRevenue":  0,
-                                       "adRoas":  0
-                                   },
-                                   {
-                                       "productId":  "7444568862",
-                                       "productName":  "답례품 꿀 사양벌꿀 돌 잔치 결혼식 결혼 웨딩 조문 고희 직장 회사 더도톰",
-                                       "adgroups":  [
-                                                        "꿀_결혼답례품",
-                                                        "꿀_돌잔치답례품1"
-                                                    ],
-                                       "actualSales":  70299770,
-                                       "grossSales":  79843150,
-                                       "orders":  563,
-                                       "refundAmount":  9543380,
-                                       "quantity":  20487,
-                                       "adCost":  2897995,
-                                       "attributedRevenue":  100520650,
-                                       "adRoas":  34.6862744759739
+                                       "quantity":  9696
                                    }
                                ]
 }
