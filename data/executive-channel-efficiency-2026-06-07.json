@@ -281,7 +281,10 @@
                                        "grossSales":  698117140,
                                        "orders":  10317,
                                        "refundAmount":  159653890,
-                                       "quantity":  209963
+                                       "quantity":  209963,
+                                       "adCost":  28648597,
+                                       "attributedRevenue":  1348453630,
+                                       "adRoas":  47.068749300358405
                                    },
                                    {
                                        "productId":  "11858377273",
@@ -293,7 +296,10 @@
                                        "grossSales":  60975860,
                                        "orders":  1435,
                                        "refundAmount":  3816300,
-                                       "quantity":  1549
+                                       "quantity":  1549,
+                                       "adCost":  3816970,
+                                       "attributedRevenue":  59443800,
+                                       "adRoas":  15.573557036078356
                                    },
                                    {
                                        "productId":  "12047676813",
@@ -305,7 +311,10 @@
                                        "grossSales":  28328770,
                                        "orders":  154,
                                        "refundAmount":  3360500,
-                                       "quantity":  7285
+                                       "quantity":  7285,
+                                       "adCost":  1065739,
+                                       "attributedRevenue":  23665400,
+                                       "adRoas":  22.205624454017354
                                    },
                                    {
                                        "productId":  "13337070806",
@@ -317,7 +326,10 @@
                                        "grossSales":  98228500,
                                        "orders":  700,
                                        "refundAmount":  22738874,
-                                       "quantity":  15691
+                                       "quantity":  15691,
+                                       "adCost":  7853196,
+                                       "attributedRevenue":  538020360,
+                                       "adRoas":  68.509732852713725
                                    },
                                    {
                                        "productId":  "13337257373",
@@ -329,7 +341,10 @@
                                        "grossSales":  19059220,
                                        "orders":  139,
                                        "refundAmount":  4213080,
-                                       "quantity":  4971
+                                       "quantity":  4971,
+                                       "adCost":  2028212,
+                                       "attributedRevenue":  87455260,
+                                       "adRoas":  43.11938791408393
                                    },
                                    {
                                        "productId":  "13471936380",
@@ -342,7 +357,10 @@
                                        "grossSales":  1015700,
                                        "orders":  152,
                                        "refundAmount":  213100,
-                                       "quantity":  152
+                                       "quantity":  152,
+                                       "adCost":  266119,
+                                       "attributedRevenue":  2633750,
+                                       "adRoas":  9.89688823421101
                                    },
                                    {
                                        "productId":  "4624494637",
@@ -354,7 +372,10 @@
                                        "grossSales":  989546800,
                                        "orders":  24631,
                                        "refundAmount":  221284790,
-                                       "quantity":  688969
+                                       "quantity":  688969,
+                                       "adCost":  46460144,
+                                       "attributedRevenue":  2689041590,
+                                       "adRoas":  57.8784600839808
                                    },
                                    {
                                        "productId":  "4766394357",
@@ -366,7 +387,10 @@
                                        "grossSales":  144588830,
                                        "orders":  3126,
                                        "refundAmount":  23948462,
-                                       "quantity":  77629
+                                       "quantity":  77629,
+                                       "adCost":  1187820,
+                                       "attributedRevenue":  81084150,
+                                       "adRoas":  68.262994393089869
                                    },
                                    {
                                        "productId":  "4843121925",
@@ -379,7 +403,10 @@
                                        "grossSales":  535324610,
                                        "orders":  8132,
                                        "refundAmount":  123375732,
-                                       "quantity":  220036
+                                       "quantity":  220036,
+                                       "adCost":  1845264,
+                                       "attributedRevenue":  164855490,
+                                       "adRoas":  89.339785526623828
                                    },
                                    {
                                        "productId":  "6052815173",
@@ -391,7 +418,10 @@
                                        "grossSales":  30902200,
                                        "orders":  457,
                                        "refundAmount":  4635500,
-                                       "quantity":  9696
+                                       "quantity":  9696,
+                                       "adCost":  808,
+                                       "attributedRevenue":  0,
+                                       "adRoas":  0
                                    },
                                    {
                                        "productId":  "7444568862",
@@ -404,7 +434,10 @@
                                        "grossSales":  79843150,
                                        "orders":  563,
                                        "refundAmount":  9543380,
-                                       "quantity":  20487
+                                       "quantity":  20487,
+                                       "adCost":  2897995,
+                                       "attributedRevenue":  100520650,
+                                       "adRoas":  34.6862744759739
                                    }
                                ]
 }
