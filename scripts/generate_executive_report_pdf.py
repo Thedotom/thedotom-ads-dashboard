@@ -107,7 +107,7 @@ def build():
  story += [KeepTogether([P('채널별 해석','h2'),styled_table([[P(a,'smallb'),P(b)] for a,b in channel_notes],[38*mm,136*mm],False),Spacer(1,6*mm)])]
  mapping_table=[[P(x,'smallw') for x in ['연결 본상품','상품 ID','광고그룹','광고비','네이버 전환매출','광고 ROAS','1~7월 실제 매출','주문수']]]
  for r in map_summary: mapping_table.append([P(r['productName'],'small'),P(r['productId'],'small'),P(r['groups'],'small'),P(money(r['cost']),'small'),P(money(r['revenue']),'small'),P(mult(r['roas']),'small'),P(money(r['sales']),'small'),P(str(int(r['orders'])),'small')])
- story += [styled_table(mapping_table,[42*mm,24*mm,34*mm,22*mm,27*mm,20*mm,27*mm,18*mm]),Spacer(1,4*mm),P('상품 연결 기준','h2'),P('쇼핑검색 광고그룹을 스마트스토어 상품 ID로 연결해 1~7월 광고 성과와 실제 상품매출을 함께 표시했습니다. 동일 상품의 여러 광고그룹은 광고비를 합산하고 상품매출은 중복 집계하지 않았습니다.'),Spacer(1,7*mm),P('운영 결정','h2'),P(f"<b>쇼핑검색은 1~7월 네이버 귀속 ROAS {mult(sh['adRoas'])}를 근거로 전체 운영을 유지합니다. 연결상품 중 광고비 대비 실제 매출·주문 성과가 낮은 광고그룹만 감액 또는 OFF하고, 조정 전후 7일 성과를 비교해 재개 여부를 결정합니다.</b>"),PageBreak()]
+ story += [styled_table(mapping_table,[42*mm,24*mm,34*mm,22*mm,27*mm,20*mm,27*mm,18*mm]),Spacer(1,7*mm),P('운영 결정','h2'),P(f"<b>쇼핑검색은 1~7월 네이버 귀속 ROAS {mult(sh['adRoas'])}를 근거로 전체 운영을 유지합니다. 연결상품 중 광고비 대비 실제 매출·주문 성과가 낮은 광고그룹만 감액 또는 OFF하고, 조정 전후 7일 성과를 비교해 재개 여부를 결정합니다.</b>"),PageBreak()]
  story += [P('4. GA4 기반 광고 유입·구매 효과','h1'),P('관측 기간  2026.06.19 - 2026.07.31  |  태그가 설치된 자사몰 기준'),Spacer(1,5*mm)]
  gs=ga4e['summary']; gj=ga4e['july']
  gk=[[P(x,'klabel') for x in ['검색광고 유입','검색광고 유입 구매','유입 후 구매 매출','7월 매출 비중']],[P(f"{int(gs['paidSearchSessions']):,}세션",'kpi'),P(f"{int(gs['paidSearchTransactions']):,}건",'kpi'),P(money(gs['paidSearchRevenue']),'kpi'),P(pct(gj['paidSearchRevenueShare']),'kpi')]]
