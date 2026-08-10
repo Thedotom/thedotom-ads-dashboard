@@ -1,4 +1,4 @@
-from pathlib import Path
+﻿from pathlib import Path
 import json
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
@@ -119,7 +119,7 @@ def build():
  for name in sorted(set(r['product'] for r in periods if r.get('isComplete'))):
   rr=[r for r in periods if r['product']==name and r.get('isComplete')];cost=sum(r.get('slotCost',0) for r in rr);sales=sum((r.get('during') or {}).get('sales',0) for r in rr);ranks=[r['rankAverage'] for r in rr if r.get('rankAverage') is not None];products.append([P(name,'smallb'),P(str(len(rr))+'회','small'),P(money(cost),'small'),P(money(sales),'small'),P(pct(cost/sales) if sales else '-','small'),P(f'{sum(ranks)/len(ranks):.1f}위' if ranks else '-','small')])
  story += [styled_table([[P(x,'smallw') for x in ['상품','구간','슬롯비','집계 매출','비용률','평균 순위']]]+products,[36*mm,18*mm,31*mm,38*mm,24*mm,27*mm]),Spacer(1,7*mm),P('지속 운영 판단','h2')]
- decisions=[('전체','전면 지속 보류','운영 전 21일 상품매출 대조값은 확보했습니다. 첫 21일 일평균은 수건단품 -2%, 세트모음전 +7%, 조구만고리수건 -10%로 차이가 있어 일괄 연장 대신 상품별 차등 운영이 필요합니다.'),('수건단품','지속 검증','비용률 약 1.0%, 평균 3.6위입니다. 유지 여부는 종료 후 7일 매출·순위 대조 결과를 보고 대표님이 결정합니다.'),('세트모음전','축소 검증','비용률 약 3.8%, 평균 8.2위이며 최근 매출이 초기보다 낮아 구간과 예산을 줄입니다.'),('조구만고리수건','중단 대조','평균 2.7위지만 비용률 약 24.0%입니다. 중단 여부는 대표님이 결정하며, 중단 시 매출·순위 유지 여부를 비교합니다.')]
+ decisions=[('전체','전면 지속 보류','슬롯 시작 전 30일과 운영 후 첫 30일을 비교하면 수건단품은 매출 +2.9%·주문 +10.6%, 세트모음전은 매출 +6.2%·주문 +15.1%, 조구만고리수건은 매출 +94.3%·주문 +81.9%입니다. 광고·프로모션 영향을 분리할 수 없어 증가분 전체를 슬롯 효과로 확정하지 않고 상품별 비용률·순위와 함께 판단합니다.'),('수건단품','지속 검증','비용률 약 1.0%, 평균 3.6위입니다. 유지 여부는 종료 후 7일 매출·순위 대조 결과를 보고 대표님이 결정합니다.'),('세트모음전','축소 검증','비용률 약 3.8%, 평균 8.2위이며 최근 매출이 초기보다 낮아 구간과 예산을 줄입니다.'),('조구만고리수건','중단 대조','평균 2.7위지만 비용률 약 24.0%입니다. 중단 여부는 대표님이 결정하며, 중단 시 매출·순위 유지 여부를 비교합니다.')]
  story += [styled_table([[P(a,'smallb'),P(b,'smallb'),P(c)] for a,b,c in decisions],[30*mm,28*mm,116*mm],False),Spacer(1,6*mm),P('판단 한계','h2'),P('집계 매출은 광고와 프로모션이 함께 반영된 관찰값입니다. 현재 데이터만으로 슬롯이 매출을 늘렸다고 단정할 수 없으며, 다음 운영부터는 시작 전 10일·운영 10일·종료 후 7일을 같은 상품 기준으로 비교해야 합니다.'),PageBreak(),P('6. 현재 운영 상태와 하반기 실행안','h1')]
  ops=[('파워링크',f'광고그룹 {len(groups)}개 · 키워드 {len(kws)}개 · 키워드 OFF {len(off)}개 · 그룹 OFF {len(goff)}개'),('순위 수집',f"{dash['rankTraffic'].get('updatedAt','-')} 기준 · 실제 그룹과 PC/모바일 분리"),('슬롯 일정',f"2026.05.22 - 2026.08.09 · 전체 {len(periods)}개 구간")];story += [styled_table([[P(a,'smallb'),P(b)] for a,b in ops],[36*mm,138*mm],False),Spacer(1,9*mm),P('하반기 실행 우선순위','h2')]
  actions=[('1. 측정 기준 고정','실제 매출 MER와 마케팅비율을 경영 판단 기준으로 고정합니다.'),('2. 저효율 광고 조정','실제 매출 기여와 GA4 구매 연결이 낮거나 OFF 전환된 키워드의 입찰·검색어·상품 연결을 재검토합니다.'),('3. 슬롯 재배분','비용률, 평균 순위, 종료 후 7일 잔존효과로 유지·축소·중단을 결정합니다.'),('4. 월 1회 보고','누적 성과와 현재 운영 변경을 분리해 같은 형식으로 업데이트합니다.')];story += [styled_table([[P(a,'smallb'),P(b)] for a,b in actions],[40*mm,134*mm],False),Spacer(1,9*mm),P('유의사항','h2'),P('슬롯 집계 매출은 광고·프로모션 효과가 함께 포함된 관찰값입니다. 최종 증분효과는 운영 전 동기간 및 종료 후 7일 데이터를 확보한 뒤 확정해야 합니다.')]
