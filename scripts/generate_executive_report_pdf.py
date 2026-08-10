@@ -6,7 +6,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether
 from reportlab.graphics.shapes import Drawing, String
 from reportlab.graphics.charts.linecharts import HorizontalLineChart
 from reportlab.graphics.charts.barcharts import VerticalBarChart
@@ -102,9 +102,9 @@ def build():
   ga=cg['powerlink'] if r['channel']=='파워링크' else None
   ga4_text=f"{int(ga['sessions']):,}세션 · {int(ga['transactions']):,}건 · {money(ga['purchaseRevenue'])}" if ga else f"네이버 광고 전환매출 {money(cg['shopping']['platformAttributedSales'])}<br/>스마트스토어 실제 매출 {money(cg['shopping']['smartstoreSales'])}"
   cd.append([P('합계','smallb'),P(r['channel'],'smallb'),P(money(r['adCost']),'smallb'),P(f"{int(r['impressions']):,}",'small'),P(f"{int(r['clicks']):,}",'small'),P(pct(r['ctr']),'small'),P(money(r['cpc']),'small'),P(ga4_text,'small')])
- story += [styled_table(cd,[12*mm,21*mm,27*mm,23*mm,18*mm,15*mm,22*mm,36*mm]),Spacer(1,7*mm),P('채널별 해석','h2')]
+ story += [styled_table(cd,[12*mm,21*mm,27*mm,23*mm,18*mm,15*mm,22*mm,36*mm]),Spacer(1,7*mm)]
  channel_notes=[('1. 쇼핑검색 운영 결정',f"1~7월 광고비 {money(sh['adCost'])} · 네이버 귀속매출 {money(sh['platformAttributedSales'])} · ROAS {mult(sh['adRoas'])}로 전체 운영을 유지합니다."),('2. 파워링크 운영 결정',f"1~7월 광고비 {money(pl['adCost'])} 대비 GA4 확인 구매매출 {money(cg['powerlink']['purchaseRevenue'])}로 관측 ROAS {mult(cg['powerlink']['purchaseRevenue']/pl['adCost'] if pl['adCost'] else 0)}입니다. 핵심 키워드는 순위 중심으로 유지하고 저효율만 선별 조정합니다."),('3. 연결상품 실제 성과','스마트스토어 연결상품 9개의 1~7월 실제 매출·주문·환불을 아래 표에 표시했습니다. 광고비와 네이버 귀속매출은 실제 판매성과와 합산하지 않습니다.'),('4. 데이터 범위','네이버 귀속매출은 플랫폼 기준이고 스마트스토어 실제 매출은 상품 판매 기준입니다. 두 수치는 측정 기준이 달라 각각 판단 근거로 사용합니다.')]
- story += [styled_table([[P(a,'smallb'),P(b)] for a,b in channel_notes],[38*mm,136*mm],False),Spacer(1,6*mm)]
+ story += [KeepTogether([P('채널별 해석','h2'),styled_table([[P(a,'smallb'),P(b)] for a,b in channel_notes],[38*mm,136*mm],False),Spacer(1,6*mm)])]
  mapping_table=[[P(x,'smallw') for x in ['연결 본상품','상품 ID','광고그룹','광고비','네이버 전환매출','광고 ROAS','1~7월 실제 매출','주문수']]]
  for r in map_summary: mapping_table.append([P(r['productName'],'small'),P(r['productId'],'small'),P(r['groups'],'small'),P(money(r['cost']),'small'),P(money(r['revenue']),'small'),P(mult(r['roas']),'small'),P(money(r['sales']),'small'),P(str(int(r['orders'])),'small')])
  story += [styled_table(mapping_table,[42*mm,24*mm,34*mm,22*mm,27*mm,20*mm,27*mm,18*mm]),Spacer(1,4*mm),P('상품 연결 기준','h2'),P('쇼핑검색 광고그룹을 스마트스토어 상품 ID로 연결해 1~7월 광고 성과와 실제 상품매출을 함께 표시했습니다. 동일 상품의 여러 광고그룹은 광고비를 합산하고 상품매출은 중복 집계하지 않았습니다.'),Spacer(1,7*mm),P('운영 결정','h2'),P(f"<b>쇼핑검색은 1~7월 네이버 귀속 ROAS {mult(sh['adRoas'])}를 근거로 전체 운영을 유지합니다. 연결상품 중 광고비 대비 실제 매출·주문 성과가 낮은 광고그룹만 감액 또는 OFF하고, 조정 전후 7일 성과를 비교해 재개 여부를 결정합니다.</b>"),PageBreak()]
