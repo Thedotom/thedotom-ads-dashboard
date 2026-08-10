@@ -96,11 +96,11 @@ def build():
  ch={r['channel']:r for r in channels['operational']}; pl=ch['파워링크']; sh=ch['쇼핑검색']; sh['adRoas']=sh['platformAttributedSales']/sh['adCost'] if sh['adCost'] else 0; cg=channels['ga4']
  cd=[[P(x,'smallw') for x in ['월','광고 유형','광고비','노출','클릭','CTR','CPC','구매 연결 기준']]]
  for r in channels['monthly']:
-  ga4_text=f"{int(r['ga4Sessions']):,}세션 · {int(r['ga4Transactions']):,}건 · {money(r['ga4PurchaseRevenue'])}" if r['channel']=='파워링크' else f"{money(r.get('platformAttributedSales',0))} 네이버 · {money(r.get('smartstoreSales',0))} 스토어"
+  ga4_text=f"{int(r['ga4Sessions']):,}세션 · {int(r['ga4Transactions']):,}건 · {money(r['ga4PurchaseRevenue'])}" if r['channel']=='파워링크' else f"네이버 광고 전환매출 {money(r.get('platformAttributedSales',0))}<br/>스마트스토어 실제 매출 {money(r.get('smartstoreSales',0))}"
   cd.append([P(r['month'][5:]+'월','small'),P(r['channel'],'smallb'),P(money(r['adCost']),'small'),P(f"{int(r['impressions']):,}",'small'),P(f"{int(r['clicks']):,}",'small'),P(pct(r['ctr']),'small'),P(money(r['cpc']),'small'),P(ga4_text+('<br/>'+r['ga4Status'] if r['channel']=='파워링크' else ''),'small')])
  for r in channels['operational']:
   ga=cg['powerlink'] if r['channel']=='파워링크' else None
-  ga4_text=f"{int(ga['sessions']):,}세션 · {int(ga['transactions']):,}건 · {money(ga['purchaseRevenue'])}" if ga else f"{money(cg['shopping']['platformAttributedSales'])} 네이버 · {money(cg['shopping']['smartstoreSales'])} 스토어"
+  ga4_text=f"{int(ga['sessions']):,}세션 · {int(ga['transactions']):,}건 · {money(ga['purchaseRevenue'])}" if ga else f"네이버 광고 전환매출 {money(cg['shopping']['platformAttributedSales'])}<br/>스마트스토어 실제 매출 {money(cg['shopping']['smartstoreSales'])}"
   cd.append([P('합계','smallb'),P(r['channel'],'smallb'),P(money(r['adCost']),'smallb'),P(f"{int(r['impressions']):,}",'small'),P(f"{int(r['clicks']):,}",'small'),P(pct(r['ctr']),'small'),P(money(r['cpc']),'small'),P(ga4_text,'small')])
  story += [styled_table(cd,[12*mm,21*mm,27*mm,23*mm,18*mm,15*mm,22*mm,36*mm]),Spacer(1,7*mm),P('채널별 해석','h2')]
  channel_notes=[('1. 쇼핑검색 운영 결정',f"1~7월 광고비 {money(sh['adCost'])} · 네이버 귀속매출 {money(sh['platformAttributedSales'])} · ROAS {mult(sh['adRoas'])}로 전체 운영을 유지합니다."),('2. 파워링크 운영 결정',f"1~7월 광고비 {money(pl['adCost'])} 대비 GA4 확인 구매매출 {money(cg['powerlink']['purchaseRevenue'])}로 관측 ROAS {mult(cg['powerlink']['purchaseRevenue']/pl['adCost'] if pl['adCost'] else 0)}입니다. 핵심 키워드는 순위 중심으로 유지하고 저효율만 선별 조정합니다."),('3. 연결상품 실제 성과','스마트스토어 연결상품 9개의 1~7월 실제 매출·주문·환불을 아래 표에 표시했습니다. 광고비와 네이버 귀속매출은 실제 판매성과와 합산하지 않습니다.'),('4. 데이터 범위','네이버 귀속매출은 플랫폼 기준이고 스마트스토어 실제 매출은 상품 판매 기준입니다. 두 수치는 측정 기준이 달라 각각 판단 근거로 사용합니다.')]
