@@ -105,13 +105,16 @@ def load_source(path: Path) -> tuple[list[dict], dict]:
         while day <= end:
             rank_values.extend(rank_rows.get((day, product), []))
             day += timedelta(days=1)
-        complete = during["daysWithData"] >= days
+        as_period = cost == 0
+        complete = during["daysWithData"] >= days and end <= datetime.now().date()
         sales_change_rate = incremental_sales / prior["sales"] if prior["sales"] else None
         slot_cost_rate = cost / during["sales"] if during["sales"] else None
         blended_cost = during["adCost"] + cost
         blended_roas = during["sales"] / blended_cost if blended_cost else None
         average_rank = sum(rank_values) / len(rank_values) if rank_values else None
-        if not complete:
+        if as_period:
+            decision = "AS 기간"
+        elif not complete:
             decision = "관찰중"
         elif average_rank is not None and average_rank <= 5 and (
             slot_cost_rate is None or slot_cost_rate <= 0.05
@@ -132,10 +135,10 @@ def load_source(path: Path) -> tuple[list[dict], dict]:
                 "vendor": str(vendor or ""),
                 "startDate": str(start),
                 "endDate": str(end),
-                "comparisonStatus": "pending_2025_data",
-                "comparisonBasis": "전년 동기간 매출",
+                "comparisonStatus": "as_extension" if as_period else "pending_2025_data",
+                "comparisonBasis": "업체 무상 AS 연장" if as_period else "전년 동기간 매출",
                 "days": days,
-                "sourceStatus": str(source_status or ""),
+                "sourceStatus": "AS 기간" if as_period else str(source_status or ""),
                 "isComplete": complete,
                 "slotCost": cost,
                 "yearOverYearSales": None,
@@ -261,4 +264,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
