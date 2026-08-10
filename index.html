@@ -2033,6 +2033,29 @@
       const actualMonthlyRows = reportMonthlyAdOnly.map(row => `<tr><td>${html(String(row.month || "").slice(5))}월</td><td>${money(row.actualSales || 0)}</td><td>${money(row.marketingCost || 0)}</td><td>${money(row.slotCost || 0)}</td><td>${rateText(row.marketingCostRate || 0)}</td><td>${roasText(row.mer || 0)}</td></tr>`).join("");
       const slotRows = periods.map(period => `<tr><td class="wrap"><strong>${html(period.product||"")}</strong><br><span style="color:var(--muted);font-size:10px">${html(period.keyword||"")}</span></td><td>${html(period.startDate||"")}<br>~ ${html(period.endDate||"")}</td><td>${money(period.slotCost||0)}</td><td>${money(period.during?.sales||0)}</td><td>${number(period.during?.orders||0)}</td><td>${period.slotCostRate==null?"-":rateText(period.slotCostRate)}</td><td>${period.rankAverage==null?"-":`${Number(period.rankAverage).toFixed(1)}위`}</td><td><span class="slot-decision ${decisionClass(period.decision)}">${html(period.decision||"")}</span></td></tr>`).join("");
       const completedPeriods = periods.filter(period => period.isComplete);
+      const slotChartWindows = [...new Map(completedPeriods.map(period => {
+        const key = `${period.startDate}|${period.endDate}`;
+        return [key, { key, startDate: period.startDate, endDate: period.endDate }];
+      })).values()];
+      const slotChartProducts = [...new Set(completedPeriods.map(period => period.product || "기타"))];
+      const slotChartColors = [
+        { background: "rgba(72,101,244,.28)", border: "#4865f4" },
+        { background: "rgba(16,185,129,.28)", border: "#10b981" },
+        { background: "rgba(245,158,11,.30)", border: "#f59e0b" }
+      ];
+      const slotChartLabels = slotChartWindows.map(window => `${String(window.startDate).slice(5).replace("-", ".")}~${String(window.endDate).slice(5).replace("-", ".")}`);
+      const slotChartDatasets = slotChartProducts.map((product, index) => {
+        const color = slotChartColors[index % slotChartColors.length];
+        return {
+          label: product,
+          data: slotChartWindows.map(window => Number(completedPeriods.find(period => period.product === product && period.startDate === window.startDate && period.endDate === window.endDate)?.during?.sales || 0)),
+          backgroundColor: color.background,
+          borderColor: color.border,
+          borderWidth: 2,
+          borderRadius: 5
+        };
+      });
+      const slotChartOptions = { responsive:true, maintainAspectRatio:false, interaction:{mode:"index",intersect:false}, plugins:{legend:{position:"bottom"},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${won.format(ctx.raw)}`}}}, scales:{x:{grid:{display:false}},y:{beginAtZero:true,ticks:{callback:value=>won.format(value)}}} };
       const activePeriods = periods.filter(period => !period.isComplete);
       const totalSlotBudget = periods.reduce((sum, period) => sum + Number(period.slotCost || 0), 0);
       const completedSlotSales = completedPeriods.reduce((sum, period) => sum + Number(period.during?.sales || 0), 0);
@@ -2069,7 +2092,7 @@
       els.slotEfficiencyBody.innerHTML = `
         <div class="slot-exec">
           ${slotMonthlySalesPanel}
-          <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 운영 기간 매출</div><div class="slot-panel-sub">${slotPeriodLabel} · 집계가 완료된 구간만 그래프에 표시</div></div></div><div style="height:320px;position:relative"><canvas id="slotEfficiencyChart"></canvas></div></div>
+          <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 운영 기간 매출</div><div class="slot-panel-sub">${slotPeriodLabel} · 완료된 운영기간별 상품 매출 비교 · 진행 중인 무상 AS 기간 제외</div></div></div><div style="height:320px;position:relative"><canvas id="slotEfficiencyChart"></canvas></div></div>
           <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 진행 상세 리스트</div><div class="slot-panel-sub">실제 진행 일정 ${slotPeriodLabel} · 전체 ${periods.length}개 구간</div></div></div><div class="table-wrap"><table><thead><tr><th>제품·키워드</th><th>진행 기간</th><th>슬롯비</th><th>현재 매출</th><th>주문</th><th>슬롯비율</th><th>검색 순위</th><th>판정</th></tr></thead><tbody>${slotRows}</tbody></table></div></div>
           <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">판정 기준</div></div></div><div class="slot-insight-list"><div class="slot-insight"><strong>유지</strong><span>증분매출÷슬롯비 3배 이상 + 검색 5위 이내</span></div><div class="slot-insight warn"><strong>재검토</strong><span>회수배수 1~3배 또는 순위 개선이 일시적</span></div><div class="slot-insight warn"><strong>중단 후보</strong><span>회수배수 1배 미만 또는 잔존효과 없음</span></div></div></div>
           <p class="slot-note">슬롯 증분효과는 전년 동기간 데이터와 종료 후 7일 관찰값 확보 후 확정됩니다.</p>
@@ -2077,9 +2100,9 @@
       if (window._charts.historicalAd) window._charts.historicalAd.destroy();
       if (window._charts.executiveSlot) window._charts.executiveSlot.destroy();
       const executiveSlotCanvas = document.getElementById("executiveSlotChart");
-      if (executiveSlotCanvas) window._charts.executiveSlot = new Chart(executiveSlotCanvas,{type:"bar",data:{labels:completedPeriods.map(period=>`${period.product} ${String(period.startDate).slice(5)}`),datasets:[{label:"운영 기간 매출",data:completedPeriods.map(period=>Number(period.during?.sales||0)),backgroundColor:"rgba(72,101,244,.25)",borderColor:"#4865f4",borderWidth:2,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,ticks:{callback:value=>won.format(value)}}}}});      if (window._charts.slotEfficiency) window._charts.slotEfficiency.destroy();
-      const completed = periods.filter(period=>period.isComplete); const canvas=document.getElementById("slotEfficiencyChart");
-      if (canvas) window._charts.slotEfficiency=new Chart(canvas,{type:"bar",data:{labels:completed.map(period=>`${period.product} ${String(period.startDate).slice(5)}`),datasets:[{label:"운영 기간 매출",data:completed.map(period=>Number(period.during?.sales||0)),backgroundColor:"rgba(72,101,244,.25)",borderColor:"#4865f4",borderWidth:2,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,ticks:{callback:value=>won.format(value)}}}}});
+      if (executiveSlotCanvas) window._charts.executiveSlot = new Chart(executiveSlotCanvas,{type:"bar",data:{labels:slotChartLabels,datasets:slotChartDatasets},options:slotChartOptions});      if (window._charts.slotEfficiency) window._charts.slotEfficiency.destroy();
+      const canvas=document.getElementById("slotEfficiencyChart");
+      if (canvas) window._charts.slotEfficiency=new Chart(canvas,{type:"bar",data:{labels:slotChartLabels,datasets:slotChartDatasets},options:slotChartOptions});
     }
 
     function normalizedManualRows(rows, defaults) {

@@ -33,11 +33,14 @@ def load_source(path: Path) -> tuple[list[dict], dict]:
     ]
     for sheet_name in performance_sheets:
         sheet = workbook[sheet_name]
+        current_date = None
         for row in sheet.iter_rows(min_row=2, max_col=10, values_only=True):
             product, date_value, ad_sales, ad_cost, status, sales, orders = row[:7]
-            if not product or not isinstance(date_value, datetime):
+            if isinstance(date_value, datetime):
+                current_date = date_value.date()
+            if not product or current_date is None:
                 continue
-            performance[(date_value.date(), str(product))] = {
+            performance[(current_date, str(product))] = {
                 "adSales": as_number(ad_sales),
                 "adCost": as_number(ad_cost),
                 "status": str(status or ""),
