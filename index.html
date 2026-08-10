@@ -1,4 +1,4 @@
-<!-- dashboard-build: 2026-08-07-1800 -->
+﻿<!-- dashboard-build: 2026-08-07-1800 -->
 <!doctype html>
 <html lang="ko">
 <head>
@@ -1984,8 +1984,8 @@
       const slotMonthly = state.slotMonthlyProductSales || {};
       const slotMonthlyProducts = slotMonthly.products || [];
       const slotMonthlyHeader = (slotMonthly.months || []).map(month => `<th>${html(month)}</th>`).join("");
-      const slotMonthlyBody = slotMonthlyProducts.map(product => `<tr><td class="wrap"><strong>${html(product.product || "-")}</strong><br><span style="color:var(--muted);font-size:10px">${html(product.productId || "")}</span></td>${(product.monthly || []).map(value => `<td>${money(value || 0)}</td>`).join("")}<td><strong>${money((product.monthly || []).reduce((sum, value) => sum + Number(value || 0), 0))}</strong></td></tr>`).join("");
-      const slotMonthlySalesPanel = `<div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 미진행 매출 정리</div><div class="slot-panel-sub">운영 전후 21일 비교 대신, 1~7월 월별 상품 매출을 비교 기준으로 표시합니다.</div></div></div><div class="table-wrap"><table><thead><tr><th>상품</th>${slotMonthlyHeader}<th>1~7월 합계</th></tr></thead><tbody>${slotMonthlyBody || `<tr><td class="empty" colspan="10">월별 상품 매출 데이터가 없습니다.</td></tr>`}</tbody></table></div></div>`;
+      const slotMonthlyBody = slotMonthlyProducts.map(product => `<tr><td class="wrap"><strong>${html(product.product || "-")}</strong><br><span style="color:var(--muted);font-size:10px">${html(product.productId || "")}</span></td>${(product.monthly || []).map(value => `<td>${money(value || 0)}</td>`).join("")}</tr>`).join("");
+      const slotMonthlySalesPanel = `<div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 상품 월별 매출 정리</div><div class="slot-panel-sub">누적 합계 없이 1월부터 8월 9일까지 상품별 월 매출을 비교합니다.</div></div></div><div class="table-wrap"><table><thead><tr><th>상품</th>${slotMonthlyHeader}</tr></thead><tbody>${slotMonthlyBody || `<tr><td class="empty" colspan="9">월별 상품 매출 데이터가 없습니다.</td></tr>`}</tbody></table></div></div>`;
       const allPeriods = analysis.periods || [];
       const periods = [...allPeriods].sort((a, b) => String(a.startDate || "").localeCompare(String(b.startDate || "")));
       const slotStartDate = periods.length ? periods[0].startDate : "";
@@ -2904,17 +2904,3 @@ function renderBrandContract() {
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
