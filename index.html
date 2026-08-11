@@ -1210,8 +1210,7 @@
         .map(r => r["캠페인명"])
         .filter(Boolean))].sort();
       els.campaignFilter.innerHTML = `<option value="">전체</option>` + names.map(name => `<option value="${html(name)}">${html(name)}</option>`).join("");
-      const preferred = "파워링크_더도톰_자사몰";
-      els.campaignFilter.value = names.includes(current) ? current : (state.page === "powerlink" && names.includes(preferred) ? preferred : "");
+      els.campaignFilter.value = state.page === "powerlink" ? "" : (names.includes(current) ? current : "");
     }
     function fillAdgroups() {
       const current = els.adgroupFilter.value;
