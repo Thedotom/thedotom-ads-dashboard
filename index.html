@@ -916,7 +916,7 @@
     const initialParams = new URLSearchParams(window.location.search);
     const initialMonth = initialParams.get("month") || "";
     const initialPage = initialParams.get("page") || "overview";
-    const state = { data: null, availableMonths: [], executiveReportData: {}, executiveGa4Evidence: {}, executiveChannelEfficiency: {}, slotMonthlyProductSales: {}, brandSearchPerformance: { contract: {}, months: [] }, powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: initialPage, month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
+    const state = { data: null, availableMonths: [], executiveReportData: {}, executiveGa4Evidence: {}, executiveChannelEfficiency: {}, slotMonthlyProductSales: {}, brandSearchPerformance: { contracts: [] }, brandContractKey: "current", powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: initialPage, month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -1072,24 +1072,28 @@
             + `<div style="padding:6px 12px 8px">${kws}${more}</div></div>`;
         }).join("") + `</div>`;
     }
-   async function fetchBrandSearchPerformance() {
-      const months = ["2026-05", "2026-06", "2026-07", "2026-08"];
+    async function fetchBrandSearchPerformance() {
+      const months = ["2026-06", "2026-07", "2026-08"];
       const datasets = await Promise.all(months.map(month =>
         fetch(`data/monthly-dashboard-${month}.json?v=${Date.now()}`, { cache: "no-store" })
           .then(response => response.ok ? response.json() : {})
           .catch(() => ({}))
       ));
-      const contract = datasets.find(data => data.brandContract && Object.keys(data.brandContract).length)?.brandContract || {};
-      const rows = datasets.map((data, index) => {
+      const currentMonthly = [{ month: "2026-05", period: "2026-05-19 ~ 2026-05-31", impressions: 2695, clicks: 1479, conversions: 1221, revenue: 45948200 }];
+      datasets.forEach((data, index) => {
         const performance = (data.typePerformance || []).find(row => row["광고유형"] === "브랜드검색") || {};
         const period = (data.monthly || []).find(row => row["항목"] === "보고기간")?.["내용"] || months[index];
-        return {
-          month: months[index], period,
-          impressions: Number(performance["노출수"] || 0), clicks: Number(performance["클릭수"] || 0),
-          conversions: Number(performance["전환수"] || 0), revenue: Number(performance["전환매출"] || 0)
-        };
-      }).filter(row => row.impressions || row.clicks || row.conversions || row.revenue);
-      return { contract, months: rows };
+        currentMonthly.push({ month: months[index], period, impressions: Number(performance["노출수"] || 0), clicks: Number(performance["클릭수"] || 0), conversions: Number(performance["전환수"] || 0), revenue: Number(performance["전환매출"] || 0) });
+      });
+      const previousKeywords = [["더도톰",5805,3377],["더도톰수건",604,265],["더도톰돌수건",72,26],["더도톰스튜디오",53,18],["더도톰답례품",37,13],["더도톰핸드워시",19,3],["더도톰답례품수건",14,7],["진주더도톰",12,1]].map(row => ({ "키워드":row[0], "노출수":row[1], "클릭수":row[2] }));
+      const currentKeywords = [["더도톰",16089,9585],["더도톰수건",2118,1034],["더도톰스튜디오",1217,108],["더도톰돌수건",419,144],["더도톰답례품",316,129],["더도톰핸드워시",40,8],["더도톰답례품수건",33,6],["THEDOTOM",28,12]].map(row => ({ "키워드":row[0], "노출수":row[1], "클릭수":row[2] }));
+      return { contracts: [
+        { key:"current", label:"2026.05.19 ~ 08.18 · 브랜드검색 3개월 계약", contract:{ status:"현재 3개월 계약", startDate:"2026-05-19", endDate:"2026-08-18", pcAmount:1980000, mobileAmount:2640000, totalAmount:4620000, payment:"계약시 광고비 선차감", areas:"모바일 브랜드검색, PC 브랜드검색", keywords:currentKeywords }, months:currentMonthly },
+        { key:"previous", label:"2026.04.21 ~ 05.18 · 이전 브랜드검색 계약", contract:{ status:"이전 1개월 계약", startDate:"2026-04-21", endDate:"2026-05-18", totalAmount:null, payment:"계약금 원본 확인 필요", areas:"모바일 브랜드검색, PC 브랜드검색", keywords:previousKeywords }, months:[
+          { month:"2026-04", period:"2026-04-21 ~ 2026-04-30", impressions:2425, clicks:1307, conversions:1218, revenue:51808700 },
+          { month:"2026-05", period:"2026-05-01 ~ 2026-05-18", impressions:4234, clicks:2414, conversions:2435, revenue:100258500 }
+        ] }
+      ] };
     }
     async function loadData() {
       const [dashboardData, creativeConfig, executiveReportData, executiveGa4Evidence, executiveChannelEfficiency, slotMonthlyProductSales, brandSearchPerformance] = await Promise.all([
@@ -1161,19 +1165,26 @@
       ].filter(Boolean))].sort((a, b) => String(b).localeCompare(String(a)));
       const isBrandContract = state.page === "brand";
       const options = isBrandContract
-        ? `<option value="${html(state.month)}">2026.05.19 ~ 08.18 · 브랜드검색 3개월 계약</option>`
+        ? (state.brandSearchPerformance.contracts || []).map(contract => `<option value="${html(contract.key)}">${html(contract.label)}</option>`).join("")
         : months.map(month => `<option value="${html(month)}">${html(month)}</option>`).join("");
       document.querySelectorAll('label[for="monthFilter"], label[for="pageMonthFilter"]').forEach(label => {
         label.textContent = isBrandContract ? "계약 선택" : "월 선택";
       });
+      const selectedValue = isBrandContract ? state.brandContractKey : state.month;
       els.monthFilter.innerHTML = options;
-      els.monthFilter.value = state.month;
+      els.monthFilter.value = selectedValue;
       if (els.pageMonthFilter) {
         els.pageMonthFilter.innerHTML = options;
-        els.pageMonthFilter.value = state.month;
+        els.pageMonthFilter.value = selectedValue;
       }
     }
     async function changeDashboardMonth(month) {
+      if (state.page === "brand") {
+        if (month) state.brandContractKey = month;
+        fillMonths();
+        renderBrandContract();
+        return;
+      }
       if (!month || month === state.month) {
         if (els.monthFilter) els.monthFilter.value = state.month;
         if (els.pageMonthFilter) els.pageMonthFilter.value = state.month;
@@ -2541,9 +2552,11 @@ function renderTotalSalesMetrics() {
 
 
 function renderBrandContract() {
-      const report = state.brandSearchPerformance || { contract: {}, months: [] };
-      const brand = { ...(report.contract || {}), ...(state.data.brandContract || {}) };
-      const months = report.months || [];
+      const report = state.brandSearchPerformance || { contracts: [] };
+      const contracts = report.contracts || [];
+      const selected = contracts.find(contract => contract.key === state.brandContractKey) || contracts[0] || { contract: {}, months: [] };
+      const brand = selected.contract || {};
+      const months = selected.months || [];
       const totals = months.reduce((sum, row) => ({
         impressions: sum.impressions + Number(row.impressions || 0),
         clicks: sum.clicks + Number(row.clicks || 0),
@@ -2551,6 +2564,10 @@ function renderBrandContract() {
         revenue: sum.revenue + Number(row.revenue || 0)
       }), { impressions: 0, clicks: 0, conversions: 0, revenue: 0 });
       const ctr = totals.impressions ? totals.clicks / totals.impressions : 0;
+      const hasContractAmount = brand.totalAmount !== null && brand.totalAmount !== undefined && Number.isFinite(Number(brand.totalAmount));
+      const contractAmount = hasContractAmount ? money(brand.totalAmount) : "확인 필요";
+      const contractAmountNote = hasContractAmount ? `PC ${money(brand.pcAmount || 0)} · 모바일 ${money(brand.mobileAmount || 0)}` : "이전 계약서 원본 금액 확인 필요";
+      const observedLabel = months.length ? `${html(months[0].period)} ~ ${html(months[months.length - 1].period)}` : "집계기간 없음";
       els.brandStatus.textContent = `${html(brand.startDate || "2026-05-19")} ~ ${html(brand.endDate || "2026-08-18")} · 계약 실적`;
       const monthlyRows = months.map(row => {
         const monthlyCtr = row.impressions ? row.clicks / row.impressions : 0;
@@ -2562,8 +2579,8 @@ function renderBrandContract() {
       els.brandBody.innerHTML = `
         <div class="kpis" style="margin-bottom:12px">
           <div class="metric"><div class="label">계약 기간</div><div class="value" style="font-size:18px">${html(brand.startDate || "2026-05-19")} ~ ${html(brand.endDate || "2026-08-18")}</div><div class="sub">${html(brand.status || "3개월 브랜드검색 계약")}</div></div>
-          <div class="metric"><div class="label">총 계약금</div><div class="value">${money(brand.totalAmount || 0)}</div><div class="sub">PC ${money(brand.pcAmount || 0)} · 모바일 ${money(brand.mobileAmount || 0)}</div></div>
-          <div class="metric"><div class="label">누적 노출</div><div class="value">${number(totals.impressions)}</div><div class="sub">5월~8월 현재</div></div>
+          <div class="metric"><div class="label">총 계약금</div><div class="value">${contractAmount}</div><div class="sub">${contractAmountNote}</div></div>
+          <div class="metric"><div class="label">누적 노출</div><div class="value">${number(totals.impressions)}</div><div class="sub">선택 계약 기간 합계</div></div>
           <div class="metric"><div class="label">누적 클릭</div><div class="value">${number(totals.clicks)}</div><div class="sub">CTR ${pct(ctr)}</div></div>
           <div class="metric"><div class="label">누적 전환</div><div class="value">${number(totals.conversions)}</div><div class="sub">네이버 광고 집계</div></div>
           <div class="metric"><div class="label">누적 전환매출</div><div class="value">${money(totals.revenue)}</div><div class="sub">브랜드검색 귀속 매출</div></div>
@@ -2575,7 +2592,7 @@ function renderBrandContract() {
             <tbody>${monthlyRows || `<tr><td class="empty" colspan="6">브랜드검색 월별 실적이 없습니다.</td></tr>`}</tbody>
           </table>
         </div>
-        <div class="meta" style="margin-bottom:10px">브랜드검색 비용은 월별 API 비용 0원이 아니라 선차감된 총 계약금 ${money(brand.totalAmount || 0)}으로 관리합니다. 전환과 전환매출은 네이버 광고 귀속 기준입니다.</div>
+        <div class="meta" style="margin-bottom:10px">집계 범위: ${observedLabel}. 브랜드검색 비용은 월별 API 비용 0원이 아니라 계약금으로 관리합니다. 전환과 전환매출은 네이버 광고 귀속 기준입니다.</div>
         <div class="table-wrap">
           <table>
             <thead><tr><th>브랜드 키워드</th><th>노출</th><th>클릭</th></tr></thead>
