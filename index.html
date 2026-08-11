@@ -540,6 +540,10 @@
     .shopping-adgroup-name { display:block; width:100%; color:inherit; font-size:10px; font-weight:900; line-height:1.15; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .shopping-adgroup-product { display:block; width:100%; margin-top:1px; color:#64748b; font-size:9px; font-weight:600; line-height:1.15; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .shopping-adgroup-button.active .shopping-adgroup-product { color:rgba(255,255,255,.72); }
+    .shopping-adgroup-button.is-off, .shopping-adgroup-button.is-off.active { border-color:#cbd5e1 !important; background:#f1f5f9 !important; color:#94a3b8 !important; }
+    .shopping-adgroup-button.is-off .shopping-adgroup-product, .shopping-adgroup-button.is-off.active .shopping-adgroup-product { color:#94a3b8; }
+    .shopping-off-label { display:inline-flex; align-items:center; margin-left:5px; padding:1px 5px; border-radius:999px; background:#e2e8f0; color:#64748b; font-size:9px; font-weight:900; }
+    .shopping-performance-row.is-off td { background:#f8fafc; color:#94a3b8; }
     @media (max-width:1200px) { .shopping-campaign-list { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:760px) {
       .shopping-product-tabs { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:thin; }
@@ -1644,6 +1648,15 @@
         </section>`;
       }).join("");
     }
+    function shoppingAdgroupIsOff(campaign, adgroup) {
+      const campaignName = String(campaign || "").trim().toLowerCase();
+      const adgroupName = String(adgroup || "").trim().toLowerCase();
+      const mapping = (state.data.shoppingProductMapping?.rows || []).find(row =>
+        String(row.campaign || "").trim().toLowerCase() === campaignName &&
+        String(row.adgroup || "").trim().toLowerCase() === adgroupName
+      );
+      return mapping?.status === "OFF";
+    }
     function shoppingAssessment(row) {
       const cost = Number(row["총비용"] || 0);
       const clicks = Number(row["클릭수"] || 0);
@@ -1694,9 +1707,10 @@
         const head = `<tr class="total-row"><td colspan="14"><strong>${html(assessment.label)}</strong> · ${number(group.rows.length)}개 · 광고비 ${money(groupCost)}</td></tr>`;
         const body = group.rows.sort((a, b) => Number(b["총비용"] || 0) - Number(a["총비용"] || 0)).map(row => {
           const item = shoppingAssessment(row);
-          return `<tr>
+          const isOff = shoppingAdgroupIsOff(row["캠페인명"], row["광고그룹명"]);
+          return `<tr class="shopping-performance-row${isOff ? " is-off" : ""}">
             <td>${html(row["캠페인명"])}</td>
-            <td>${html(row["광고그룹명"])}</td>
+            <td>${html(row["광고그룹명"])}${isOff ? '<span class="shopping-off-label">OFF</span>' : ""}</td>
             <td>${html(row["상품명"] || row["광고그룹명"])}</td>
             <td><strong>${money(row["현재입찰가"] || 0)}</strong><div style="font-size:10px;color:var(--muted)">${html(row["입찰단위"] || "")}</div></td>
             <td>${bidChangeHtml(row)}</td>
@@ -1748,7 +1762,8 @@
           <div class="shopping-campaign-head"><span>${html(campaign)}</span><span class="shopping-campaign-count">광고그룹 ${number(entries.length)}개</span></div>
           <div class="shopping-adgroup-grid">${entries.map(({ item, index }) => {
             const key = productKey(item, index);
-            return `<button class="pl-chip shopping-adgroup-button ${key === state.shoppingProduct ? "active" : ""}" type="button" data-shopping-product="${html(key)}" title="${html(productName(item))}"><span class="shopping-adgroup-name">${html(item.adgroup || item.adProductName || "광고그룹 미지정")}</span><span class="shopping-adgroup-product">${html(productName(item))}</span></button>`;
+            const isOff = shoppingAdgroupIsOff(item.campaign, item.adgroup || item.adProductName);
+            return `<button class="pl-chip shopping-adgroup-button${isOff ? " is-off" : ""} ${key === state.shoppingProduct ? "active" : ""}" type="button" data-shopping-product="${html(key)}" title="${html(productName(item))}"><span class="shopping-adgroup-name">${html(item.adgroup || item.adProductName || "광고그룹 미지정")}${isOff ? '<span class="shopping-off-label">OFF</span>' : ""}</span><span class="shopping-adgroup-product">${html(productName(item))}</span></button>`;
           }).join("")}</div>
         </section>`).join("");
       const selectedCost = selectedItem ? Number(selectedItem.totalCost ?? selectedItem.cost ?? selectedDailyCost.reduce((sum, value) => sum + value, 0)) : 0;
