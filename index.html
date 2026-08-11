@@ -728,7 +728,7 @@
           <button type="button" data-page="ga4Analytics">GA4 성과</button>
           <button type="button" data-page="ga4Products">GA4 상품 성과</button>
         </div>
-        <button class="nav-root" type="button" data-nav-toggle="marketingColumnSubnav" data-marketing-column-root aria-expanded="false">마케팅 칼럼</button>
+        <button class="nav-root" type="button" data-nav-toggle="marketingColumnSubnav" data-marketing-column-root aria-expanded="false">마케팅</button>
         <div class="sub-nav-group" id="marketingColumnSubnav" hidden>
           <button type="button" data-page="marketingCrm">CRM</button>
           <button type="button" data-page="marketingExperience">체험단</button>
@@ -883,9 +883,9 @@
       <section class="page-section" data-page="dailyRevenue"><div class="section-head"><h2>일일 매출</h2><span id="dailyRevenueStatus" class="count"></span></div><div class="memo-body" id="dailyRevenueBody"></div></section>
       <section class="page-section" data-page="ga4Analytics"><div class="section-head"><h2>GA4 자사몰 성과</h2><span id="ga4Status" class="count"></span></div><div id="ga4Body"></div></section>
       <section class="page-section" data-page="ga4Products"><div class="section-head"><h2>GA4 상품 성과</h2><span id="ga4ProductsStatus" class="count"></span></div><div id="ga4ProductsBody"></div></section>
-      <section class="page-section" data-page="marketingCrm"><div class="section-head"><h2>CRM 마케팅 칼럼</h2></div><div class="memo-body"><div class="empty">CRM 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
-      <section class="page-section" data-page="marketingExperience"><div class="section-head"><h2>체험단 마케팅 칼럼</h2></div><div class="memo-body"><div class="empty">체험단 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
-      <section class="page-section" data-page="marketingMomCafe"><div class="section-head"><h2>맘카페 마케팅 칼럼</h2></div><div class="memo-body"><div class="empty">맘카페 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
+      <section class="page-section" data-page="marketingCrm"><div class="section-head"><h2>CRM</h2></div><div class="memo-body"><div class="empty">CRM 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
+      <section class="page-section" data-page="marketingExperience"><div class="section-head"><h2>체험단</h2></div><div class="memo-body"><div class="empty">체험단 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
+      <section class="page-section" data-page="marketingMomCafe"><div class="section-head"><h2>맘카페</h2></div><div class="memo-body"><div class="empty">맘카페 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
 <section class="page-section" data-page="totalSales">
         <div class="section-head"><h2>월별 매출·광고비</h2><span id="totalSalesStatus" class="count"></span></div>
         <div class="memo-body" id="totalSalesBody"></div>
@@ -1231,9 +1231,9 @@
         dailyRevenue: "일일 매출",
         ga4Analytics: "GA4 자사몰 성과",
         ga4Products: "GA4 상품 성과",
-        marketingCrm: "마케팅 칼럼 · CRM",
-        marketingExperience: "마케팅 칼럼 · 체험단",
-        marketingMomCafe: "마케팅 칼럼 · 맘카페",
+        marketingCrm: "CRM",
+        marketingExperience: "체험단",
+        marketingMomCafe: "맘카페",
         monthlyReport: "보고서"
       };
       els.pageTitle.textContent = titles[state.page] || titles.overview;
