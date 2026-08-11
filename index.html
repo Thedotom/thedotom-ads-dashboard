@@ -342,9 +342,25 @@
     .crm-campaign-card span:last-child { text-align: right; }
     .crm-campaign-card b { font-size: 14px; }
     .crm-campaign-card small { color: var(--muted); font-size: 12px; }
+    .momcafe-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .momcafe-link { display:inline-flex; align-items:center; width:auto; height:34px; padding:0 12px; text-decoration:none; }
+    .momcafe-post-list { display:grid; gap:10px; }
+    .momcafe-post { border:1px solid var(--line); border-radius:10px; background:#fff; overflow:hidden; }
+    .momcafe-post summary { display:flex; align-items:center; gap:12px; padding:14px; cursor:pointer; list-style:none; }
+    .momcafe-post summary::-webkit-details-marker { display:none; }
+    .momcafe-post[open] summary { background:#f8fafc; border-bottom:1px solid var(--line); }
+    .momcafe-no { display:grid; place-items:center; width:28px; height:28px; flex:0 0 28px; border-radius:50%; background:#e0e7ff; color:#3730a3; font-size:12px; font-weight:800; }
+    .momcafe-summary { min-width:0; flex:1; display:grid; gap:4px; }
+    .momcafe-summary b { font-size:13px; } .momcafe-summary small { color:var(--muted); font-size:11px; }
+    .momcafe-post-content { display:grid; grid-template-columns:minmax(220px,360px) minmax(0,1fr); gap:18px; padding:16px; }
+    .momcafe-post-content.no-image { grid-template-columns:1fr; }
+    .momcafe-post-image { width:100%; max-height:680px; object-fit:contain; object-position:top; border-radius:8px; background:#f8fafc; }
+    .momcafe-copy h3 { margin:0 0 6px; font-size:12px; } .momcafe-copy h3:not(:first-child) { margin-top:14px; }
+    .momcafe-copy pre { margin:0; white-space:pre-wrap; font:inherit; font-size:12px; line-height:1.65; color:var(--text); }
+    .momcafe-origin { display:inline-block; margin-top:16px; color:var(--blue); font-size:12px; font-weight:700; text-decoration:none; }
     .status.good { display: inline-flex; padding: 5px 9px; border-radius: 999px; background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 800; }
     @media (max-width: 1100px) { .crm-message-grid { grid-template-columns: 1fr; } }
-    @media (max-width: 900px) { .decision-list { grid-template-columns: 1fr; } .crm-message-content { grid-template-columns: 1fr; } .crm-message-shot { max-height: 680px; } .crm-campaign-card { align-items: flex-start; flex-direction: column; } .crm-campaign-card span:last-child { text-align: left; } }
+    @media (max-width: 900px) { .decision-list { grid-template-columns: 1fr; } .crm-message-content { grid-template-columns: 1fr; } .crm-message-shot { max-height: 680px; } .crm-campaign-card { align-items: flex-start; flex-direction: column; } .crm-campaign-card span:last-child { text-align: left; } .momcafe-post-content { grid-template-columns:1fr; } }
     .memo-body label { display: block; margin: 10px 0 5px; color: var(--muted); font-size: 12px; font-weight: 700; }
     .rank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 16px; }
     .rank-card { border: 1px solid var(--line); border-radius: 12px; background: #fff; overflow: hidden; box-shadow: var(--shadow); }
@@ -1009,7 +1025,7 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
         </div>
       </section>
       <section class="page-section" data-page="marketingExperience"><div class="section-head"><h2>체험단</h2></div><div class="memo-body"><div class="empty">체험단 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
-      <section class="page-section" data-page="marketingMomCafe"><div class="section-head"><h2>맘카페</h2></div><div class="memo-body"><div class="empty">맘카페 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
+      <section class="page-section" data-page="marketingMomCafe"><div id="momCafeCampaignList"><div class="section-head"><div><h2>맘카페 캠페인</h2><div class="count" style="margin-top:4px">계약별 발행 원고와 증빙 기록</div></div><span class="count">총 1개</span></div><div class="kpis"><div class="metric"><div class="label">전체 캠페인</div><div class="value">1개</div></div><div class="metric"><div class="label">계약 게시물</div><div class="value">10건</div></div><div class="metric"><div class="label">발행 완료</div><div class="value">10건</div><div class="sub">완료율 100%</div></div><div class="metric"><div class="label">집행 금액</div><div class="value">330,000원</div><div class="sub">VAT 포함</div></div><div class="metric"><div class="label">게시 카페</div><div class="value">5곳</div></div></div><button class="crm-campaign-card" type="button" data-momcafe-campaign="kinder-towel-202607"><span><b>어린이집 고리수건 맘카페 바이럴</b><small>2026.07.21 ~ 07.26 · 뉴커브 · 발행 완료</small></span><span><b>10건 발행</b><small>질의 4건 · 후기 6건 · 상세보기 →</small></span></button></div><div id="momCafeCampaignDetail" hidden><button class="ghost" type="button" data-momcafe-back style="width:auto;margin-bottom:12px">← 맘카페 캠페인 목록</button><div id="momCafeDetailBody"></div></div></section>
 <section class="page-section" data-page="totalSales">
         <div class="section-head"><h2>월별 매출·광고비</h2><span id="totalSalesStatus" class="count"></span></div>
         <div class="memo-body" id="totalSalesBody"></div>
@@ -1347,6 +1363,22 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
       list.hidden = showDetail;
       detail.hidden = !showDetail;
     }
+    let momCafeLoaded = false;
+    async function renderMomCafeCampaignView() {
+      const list = document.getElementById("momCafeCampaignList");
+      const detail = document.getElementById("momCafeCampaignDetail");
+      if (!list || !detail) return;
+      const showDetail = state.page === "marketingMomCafe" && new URL(window.location.href).searchParams.get("campaign") === "kinder-towel-202607";
+      list.hidden = showDetail; detail.hidden = !showDetail;
+      if (!showDetail || momCafeLoaded) return;
+      const body = document.getElementById("momCafeDetailBody");
+      try {
+        const data = await fetch("data/momcafe-kinder-towel-202607.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+        const posts = data.posts.map(p => `<details class="momcafe-post"><summary><span class="momcafe-no">${html(p.no)}</span><span class="momcafe-summary"><b>${html(p.title)}</b><small>${html(p.date)} · ${html(p.cafe)} · ${html(p.format)}</small></span><span class="pill done">발행</span></summary><div class="momcafe-post-content ${p.image ? "" : "no-image"}">${p.image ? `<a href="${html(p.image)}" target="_blank" rel="noopener"><img class="momcafe-post-image" src="${html(p.image)}" alt="게시물 ${html(p.no)} 첨부 이미지" loading="lazy"></a>` : ""}<div class="momcafe-copy"><h3>본문</h3><pre>${html(p.body)}</pre><h3>댓글</h3><pre>${html(p.comment)}</pre><h3>작성자 답글</h3><pre>${html(p.reply)}</pre><a class="momcafe-origin" href="${html(p.link)}" target="_blank" rel="noopener">네이버 카페 원문 열기 ↗</a></div></div></details>`).join("");
+        body.innerHTML = `<div class="section-head"><div><h2>어린이집 고리수건 맘카페 바이럴</h2><div class="count" style="margin-top:4px">2026.07.21 ~ 07.26 · 운영사 뉴커브</div></div><span class="status good">발행 완료</span></div><div class="kpis"><div class="metric"><div class="label">계약 수량</div><div class="value">10건</div></div><div class="metric"><div class="label">발행 완료</div><div class="value">10건</div><div class="sub">삭제 0건</div></div><div class="metric"><div class="label">원고 구성</div><div class="value">질의 4 · 후기 6</div></div><div class="metric"><div class="label">공급가</div><div class="value">300,000원</div><div class="sub">건당 30,000원</div></div><div class="metric"><div class="label">결제 금액</div><div class="value">330,000원</div><div class="sub">VAT 포함</div></div></div><section style="margin-bottom:16px"><div class="section-head"><h2>계약 및 운영 기준</h2></div><div class="memo-body"><div class="decision-list"><div class="decision-card"><b>운영사·계약</b><span>뉴커브 · 견적번호 Q2026-001 · 견적일 2026.07.14 · 결제 완료</span></div><div class="decision-card"><b>발행 방식</b><span>하루 2건, 게시 시간 간격 유지 · 제목·본문·사진 구성 중복 방지</span></div><div class="decision-card"><b>우선 카페</b><span>맘스홀릭 계열 우선 · 실제 5개 카페에 10건 발행</span></div><div class="decision-card"><b>소재 기준</b><span>정보성 질의 원고와 사진 후기 원고를 구분해 자연스럽게 구성</span></div></div><div class="momcafe-actions"><a class="ghost momcafe-link" href="${html(data.sheetUrl)}" target="_blank" rel="noopener">계약 진행 시트</a><a class="ghost momcafe-link" href="${html(data.postsSheetUrl)}" target="_blank" rel="noopener">원고 진행 시트</a><a class="ghost momcafe-link" href="assets/momcafe/quote_newcurve.png" target="_blank" rel="noopener">견적서</a><a class="ghost momcafe-link" href="assets/momcafe/bankbook_newcurve.jpg" target="_blank" rel="noopener">통장사본</a></div></div></section><section><div class="section-head"><div><h2>발행 게시물</h2><div class="count" style="margin-top:4px">제목을 누르면 원문·댓글·답글과 이미지를 확인할 수 있습니다</div></div><span class="count">10건</span></div><div class="memo-body"><div class="momcafe-post-list">${posts}</div><div class="empty" style="margin-top:14px;text-align:left">현재 원본에는 조회수·유입·구매 전환 지표가 없어 발행 이행과 원고 증빙을 기준으로 정리했습니다. 다음 캠페인부터 게시물별 조회수와 UTM 유입을 함께 기록하면 성과 비교가 가능합니다.</div></div></section>`;
+        momCafeLoaded = true;
+      } catch (error) { body.innerHTML = `<div class="empty">맘카페 상세 데이터를 불러오지 못했습니다.</div>`; }
+    }
     function renderPageShell() {
       const titles = {
         overview: "네이버 광고 월간 대시보드",
@@ -1404,6 +1436,7 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
       document.querySelectorAll('label[for="monthFilter"], #monthFilter, .page-month-control').forEach(control => { control.style.display = fixedContextPage ? "none" : ""; });
       els.typeFilter.value = pageType();
       renderCrmCampaignView();
+      renderMomCafeCampaignView();
     }
     function fillCampaigns() {
       const current = els.campaignFilter.value;
@@ -3107,7 +3140,7 @@ function renderBrandContract() {
         state.page = btn.dataset.page;
         const nextUrl = new URL(window.location.href);
         nextUrl.searchParams.set("page", state.page);
-        if (state.page === "marketingCrm") nextUrl.searchParams.delete("campaign");
+        if (state.page === "marketingCrm" || state.page === "marketingMomCafe") nextUrl.searchParams.delete("campaign");
         history.replaceState(null, "", nextUrl);
         if (state.data?.month !== state.month) {
           await loadData();
@@ -3134,6 +3167,12 @@ function renderBrandContract() {
         renderCrmCampaignView();
       });
     });
+    document.querySelectorAll("[data-momcafe-campaign]").forEach(btn => btn.addEventListener("click", () => {
+      const nextUrl = new URL(window.location.href); nextUrl.searchParams.set("page", "marketingMomCafe"); nextUrl.searchParams.set("campaign", btn.dataset.momcafeCampaign); history.replaceState(null, "", nextUrl); renderMomCafeCampaignView();
+    }));
+    document.querySelectorAll("[data-momcafe-back]").forEach(btn => btn.addEventListener("click", () => {
+      const nextUrl = new URL(window.location.href); nextUrl.searchParams.delete("campaign"); history.replaceState(null, "", nextUrl); renderMomCafeCampaignView();
+    }));
     document.querySelectorAll(".nav button[data-nav-toggle]").forEach(btn => {
       btn.addEventListener("click", () => {
         const group = document.getElementById(btn.dataset.navToggle);
