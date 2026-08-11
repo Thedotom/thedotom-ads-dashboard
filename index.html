@@ -1657,6 +1657,23 @@
       );
       return mapping?.status === "OFF";
     }
+    function shoppingDisplayItems() {
+      const items = [...(state.data.dailyProductCosts?.items || [])];
+      (state.data.shoppingProductMapping?.rows || []).forEach(row => {
+        const campaign = String(row.campaign || "").trim().toLowerCase();
+        const adgroup = String(row.adgroup || "").trim().toLowerCase();
+        const exists = items.some(item =>
+          String(item.campaign || "").trim().toLowerCase() === campaign &&
+          String(item.adgroup || item.adProductName || "").trim().toLowerCase() === adgroup
+        );
+        if (!exists) items.push({
+          campaign: row.campaign, adgroup: row.adgroup, adProductName: row.adgroup,
+          productName: row.productName || "연결상품 없음", productId: row.productId || "",
+          totalCost: 0, clicks: 0, conversions: 0, revenue: 0, daily: []
+        });
+      });
+      return items;
+    }
     function shoppingAssessment(row) {
       const cost = Number(row["총비용"] || 0);
       const clicks = Number(row["클릭수"] || 0);
@@ -1731,7 +1748,8 @@
     function renderShoppingIntegrated() {
       const mix = state.data.shoppingIntegrated || {};
       const dailyCosts = state.data.dailyProductCosts || {};
-      const items = dailyCosts.items || [];
+      const mappingRows = state.data.shoppingProductMapping?.rows || [];
+      const items = shoppingDisplayItems();
       const dates = dailyCosts.dates || [];
       const productKey = (item, index) => [item.campaign, item.adgroup, item.adProductName, item.productId, index].map(value => String(value ?? "")).join("||");
       const productName = item => String(item?.productName || item?.product || item?.name || item?.title || "상품명 없음");
@@ -1760,7 +1778,7 @@
       const campaignButtons = [...campaignMap.entries()].map(([campaign, entries]) => `
         <section class="shopping-campaign-group">
           <div class="shopping-campaign-head"><span>${html(campaign)}</span><span class="shopping-campaign-count">광고그룹 ${number(entries.length)}개</span></div>
-          <div class="shopping-adgroup-grid">${entries.map(({ item, index }) => {
+          <div class="shopping-adgroup-grid">${entries.sort((a, b) => Number(shoppingAdgroupIsOff(a.item.campaign, a.item.adgroup || a.item.adProductName)) - Number(shoppingAdgroupIsOff(b.item.campaign, b.item.adgroup || b.item.adProductName)) || a.index - b.index).map(({ item, index }) => {
             const key = productKey(item, index);
             const isOff = shoppingAdgroupIsOff(item.campaign, item.adgroup || item.adProductName);
             return `<button class="pl-chip shopping-adgroup-button${isOff ? " is-off" : ""} ${key === state.shoppingProduct ? "active" : ""}" type="button" data-shopping-product="${html(key)}" title="${html(productName(item))}"><span class="shopping-adgroup-name">${html(item.adgroup || item.adProductName || "광고그룹 미지정")}${isOff ? '<span class="shopping-off-label">OFF</span>' : ""}</span><span class="shopping-adgroup-product">${html(productName(item))}</span></button>`;
@@ -1774,7 +1792,7 @@
       const assessments = shoppingBaseRows().map(shoppingAssessment);
       const categoryCount = key => assessments.filter(item => item.key === key).length;
       const calculatedRoas = Number(mix.adCost || 0) ? Number(mix.revenue || 0) / Number(mix.adCost || 0) : 0;
-      const mappingRows = (state.data.shoppingProductMapping?.rows || []);
+
       const salesRows = state.data.dailyProductPerformance?.rows || [];
       const productSales = new Map();
       salesRows.forEach(row => {
@@ -1853,7 +1871,7 @@
     }
     function selectShoppingProduct(key) {
       const dailyCosts = state.data?.dailyProductCosts || {};
-      const items = dailyCosts.items || [];
+      const items = shoppingDisplayItems();
       const dates = dailyCosts.dates || [];
       const productKey = (item, index) => [item.campaign, item.adgroup, item.adProductName, item.productId, index].map(value => String(value ?? "")).join("||");
       const index = items.findIndex((item, itemIndex) => productKey(item, itemIndex) === key);
