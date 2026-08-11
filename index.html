@@ -612,6 +612,8 @@
     .pl-config-status.off { background:#fee2e2; color:#991b1b; }
     .pl-keyword-cloud { display:flex; flex-wrap:wrap; gap:6px; max-height:150px; overflow:auto; }
     .pl-keyword-chip { display:inline-flex; align-items:center; gap:5px; padding:5px 8px; border:1px solid #dbe3ec; border-radius:999px; background:#fff; color:#334155; font-size:11px; }
+    .pl-keyword-chip.is-off { border-color:#e2e8f0; background:#f1f5f9; color:#94a3b8; }
+    .pl-keyword-off-label { padding:1px 5px; border-radius:999px; background:#e2e8f0; color:#64748b; font-size:9px; font-weight:800; letter-spacing:.04em; }
     @media (max-width:1050px) { .pl-config-grid { grid-template-columns:1fr; } .pl-creative-grid { grid-template-columns:1fr; } }
     @media (max-width:640px) { .pl-config-head { flex-direction:column; } .pl-config-counts { justify-content:flex-start; } .pl-config-item.has-image { flex-direction:column; } .pl-config-image-button,.pl-config-image { width:132px; } }
     .roas-bar-inline { display:inline-block; height:5px; border-radius:3px; background:linear-gradient(90deg,var(--blue),var(--green)); vertical-align:middle; margin-left:6px; }
@@ -1461,9 +1463,10 @@
           ? `<h4 class="pl-config-campaign-title"><span>${html(campaignKey)}</span><span class="pl-config-campaign-count">광고그룹 ${number(groupTotal)}개</span></h4>`
           : "";
         previousCampaign = group.campaign;
-        const keywordChips = (group.keywords || []).map(item =>
-          `<span class="pl-keyword-chip" title="입찰가 ${money(item.bidAmount || 0)} · ${html(item.status || "")}">${html(item.keyword || "")}</span>`
-        ).join("");
+        const keywordChips = (group.keywords || []).map(item => {
+          const keywordOff = item.status !== "운영 가능";
+          return `<span class="pl-keyword-chip${keywordOff ? " is-off" : ""}" title="입찰가 ${money(item.bidAmount || 0)} · ${html(item.status || "")}">${html(item.keyword || "")}${keywordOff ? '<span class="pl-keyword-off-label">OFF</span>' : ""}</span>`;
+        }).join("");
         const creativeCards = (group.creatives || []).map((creative, index) => `
           <article class="pl-creative-preview">
             <div class="pl-creative-label"><span>소재 ${number(index + 1)} · ${html(creative.type || "")}</span><span>${html(creative.status || "")}</span></div>
