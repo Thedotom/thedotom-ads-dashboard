@@ -1159,7 +1159,13 @@
         ...(state.data.availableMonths || []),
         state.month
       ].filter(Boolean))].sort((a, b) => String(b).localeCompare(String(a)));
-      const options = months.map(month => `<option value="${html(month)}">${html(month)}</option>`).join("");
+      const isBrandContract = state.page === "brand";
+      const options = isBrandContract
+        ? `<option value="${html(state.month)}">2026.05.19 ~ 08.18 · 브랜드검색 3개월 계약</option>`
+        : months.map(month => `<option value="${html(month)}">${html(month)}</option>`).join("");
+      document.querySelectorAll('label[for="monthFilter"], label[for="pageMonthFilter"]').forEach(label => {
+        label.textContent = isBrandContract ? "계약 선택" : "월 선택";
+      });
       els.monthFilter.innerHTML = options;
       els.monthFilter.value = state.month;
       if (els.pageMonthFilter) {
@@ -2928,7 +2934,7 @@ function renderBrandContract() {
         if (state.data?.month !== state.month) {
           await loadData();
         } else {
-          fillCampaigns(); fillAdgroups(); render();
+          fillMonths(); fillCampaigns(); fillAdgroups(); render();
         }
         document.body.classList.remove("sidebar-open");
       });
