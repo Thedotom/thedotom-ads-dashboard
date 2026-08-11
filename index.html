@@ -1771,9 +1771,10 @@
         item.refunds += Number(row.refundAmount || 0); productSales.set(id, item);
       });
       const adRows = state.data.keywordPerformance || [];
-      const mappedProducts = [...new Map(mappingRows.map(row => [String(row.productId), row])).values()];
+      const validMappingRows = mappingRows.filter(row => String(row.productId || "").trim());
+      const mappedProducts = [...new Map(validMappingRows.map(row => [String(row.productId), row])).values()];
       const mappingSummary = mappedProducts.map(item => {
-        const linked = mappingRows.filter(row => String(row.productId) === String(item.productId));
+        const linked = validMappingRows.filter(row => String(row.productId) === String(item.productId));
         const groups = new Set(linked.map(row => String(row.adgroup || "")));
         const ads = adRows.filter(row => groups.has(String(row["광고그룹명"] || "")));
         const cost = ads.reduce((sum, row) => sum + Number(row["총비용"] || 0), 0);
