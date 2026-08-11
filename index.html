@@ -1085,13 +1085,13 @@
         const period = (data.monthly || []).find(row => row["항목"] === "보고기간")?.["내용"] || months[index];
         currentMonthly.push({ month: months[index], period, impressions: Number(performance["노출수"] || 0), clicks: Number(performance["클릭수"] || 0), conversions: Number(performance["전환수"] || 0), revenue: Number(performance["전환매출"] || 0) });
       });
-      const previousKeywords = [["더도톰",5805,3377],["더도톰수건",604,265],["더도톰돌수건",72,26],["더도톰스튜디오",53,18],["더도톰답례품",37,13],["더도톰핸드워시",19,3],["더도톰답례품수건",14,7],["진주더도톰",12,1]].map(row => ({ "키워드":row[0], "노출수":row[1], "클릭수":row[2] }));
+      const previousKeywords = [["더도톰",6248,3642],["더도톰수건",639,290],["더도톰돌수건",78,29],["더도톰스튜디오",54,19],["더도톰답례품",43,17],["더도톰핸드워시",20,3],["더도톰답례품수건",14,7],["진주더도톰",13,1]].map(row => ({ "키워드":row[0], "노출수":row[1], "클릭수":row[2] }));
       const currentKeywords = [["더도톰",16089,9585],["더도톰수건",2118,1034],["더도톰스튜디오",1217,108],["더도톰돌수건",419,144],["더도톰답례품",316,129],["더도톰핸드워시",40,8],["더도톰답례품수건",33,6],["THEDOTOM",28,12]].map(row => ({ "키워드":row[0], "노출수":row[1], "클릭수":row[2] }));
       return { contracts: [
         { key:"current", label:"2026.05.19 ~ 08.18 · 브랜드검색 3개월 계약", contract:{ status:"현재 3개월 계약", startDate:"2026-05-19", endDate:"2026-08-18", pcAmount:1980000, mobileAmount:2640000, totalAmount:4620000, payment:"계약시 광고비 선차감", areas:"모바일 브랜드검색, PC 브랜드검색", keywords:currentKeywords }, months:currentMonthly },
-        { key:"previous", label:"2026.04.21 ~ 05.18 · 이전 브랜드검색 계약", contract:{ status:"이전 1개월 계약", startDate:"2026-04-21", endDate:"2026-05-18", totalAmount:null, payment:"계약금 원본 확인 필요", areas:"모바일 브랜드검색, PC 브랜드검색", keywords:previousKeywords }, months:[
+        { key:"previous", label:"2026.04.21 ~ 05.20 · 이전 브랜드검색 계약", contract:{ status:"이전 1개월 계약", startDate:"2026-04-21", endDate:"2026-05-20", pcAmount:660000, mobileAmount:880000, totalAmount:1540000, payment:"계약시 광고비 선차감", areas:"모바일 브랜드검색, PC 브랜드검색", keywords:previousKeywords }, months:[
           { month:"2026-04", period:"2026-04-21 ~ 2026-04-30", impressions:2425, clicks:1307, conversions:1218, revenue:51808700 },
-          { month:"2026-05", period:"2026-05-01 ~ 2026-05-18", impressions:4234, clicks:2414, conversions:2435, revenue:100258500 }
+          { month:"2026-05", period:"2026-05-01 ~ 2026-05-20", impressions:4728, clicks:2713, conversions:2666, revenue:110467000 }
         ] }
       ] };
     }
