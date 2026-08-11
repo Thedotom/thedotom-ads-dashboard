@@ -1,0 +1,456 @@
+{
+    "campaigns":  [
+                      {
+                          "id":  "invitation-202607",
+                          "name":  "7/7차 [더도톰] 돌잔치 모바일 초대장",
+                          "platform":  "네이버 인플루언서",
+                          "campaignUrl":  null,
+                          "selectedCount":  4,
+                          "recruitTarget":  null,
+                          "currentStage":  "보고서 확인",
+                          "snapshotDate":  "2026-07-21",
+                          "todoNote":  null,
+                          "stages":  [
+                                         {
+                                             "name":  "캠페인 기획"
+                                         },
+                                         {
+                                             "name":  "인플루언서 모집",
+                                             "range":  "07.03~07.05"
+                                         },
+                                         {
+                                             "name":  "인플루언서 선정",
+                                             "range":  "07.06"
+                                         },
+                                         {
+                                             "name":  "발표/배송준비",
+                                             "range":  "07.07"
+                                         },
+                                         {
+                                             "name":  "콘텐츠 등록",
+                                             "range":  "07.08~07.19"
+                                         },
+                                         {
+                                             "name":  "보고서 확인",
+                                             "range":  "07.21"
+                                         }
+                                     ],
+                          "report":  {
+                                         "summary":  "상위노출 검색결과: 돌잔치모바일초대장 4건 · 돌잔치초대장/셀프모바일초대장만들기/돌초대장 각 2건 · 돌잔치준비 1건",
+                                         "stats":  [
+                                                       {
+                                                           "label":  "콘텐츠 수",
+                                                           "value":  "4개"
+                                                       },
+                                                       {
+                                                           "label":  "총 조회수 (누적/평균)",
+                                                           "value":  "310 / 77"
+                                                       },
+                                                       {
+                                                           "label":  "모바일 조회수 (누적/평균)",
+                                                           "value":  "195 / 48"
+                                                       },
+                                                       {
+                                                           "label":  "PC 조회수 (누적/평균)",
+                                                           "value":  "115 / 28"
+                                                       },
+                                                       {
+                                                           "label":  "모바일 비중",
+                                                           "value":  "63%"
+                                                       }
+                                                   ],
+                                         "deviceSplit":  {
+                                                             "mobile":  63,
+                                                             "pc":  37
+                                                         },
+                                         "topExposureKeywords":  [
+                                                                     {
+                                                                         "keyword":  "돌잔치모바일초대장",
+                                                                         "count":  31
+                                                                     },
+                                                                     {
+                                                                         "keyword":  "돌잔치초대장",
+                                                                         "count":  13
+                                                                     },
+                                                                     {
+                                                                         "keyword":  "셀프모바일초대장만들기",
+                                                                         "count":  13
+                                                                     },
+                                                                     {
+                                                                         "keyword":  "돌초대장",
+                                                                         "count":  13
+                                                                     },
+                                                                     {
+                                                                         "keyword":  "돌잔치준비",
+                                                                         "count":  7
+                                                                     },
+                                                                     {
+                                                                         "keyword":  "아기첫돌초대장",
+                                                                         "count":  0
+                                                                     },
+                                                                     {
+                                                                         "keyword":  "소규모돌잔치",
+                                                                         "count":  0
+                                                                     }
+                                                                 ],
+                                         "inflowKeywords":  [
+                                                                {
+                                                                    "keyword":  "모바일 돌잔치 초대장",
+                                                                    "pct":  17.24
+                                                                },
+                                                                {
+                                                                    "keyword":  "돌잔치 모바일 초대장 무료",
+                                                                    "pct":  13.79
+                                                                },
+                                                                {
+                                                                    "keyword":  "무료돌잔치초대장",
+                                                                    "pct":  13.79
+                                                                },
+                                                                {
+                                                                    "keyword":  "모바일 초대장",
+                                                                    "pct":  13.79
+                                                                },
+                                                                {
+                                                                    "keyword":  "돌잔치 초대장",
+                                                                    "pct":  10.34
+                                                                },
+                                                                {
+                                                                    "keyword":  "돌잔치 모바일 초대장 문구",
+                                                                    "pct":  6.89
+                                                                },
+                                                                {
+                                                                    "keyword":  "돌잔치 초대장 문구",
+                                                                    "pct":  6.89
+                                                                },
+                                                                {
+                                                                    "keyword":  "심플한 돌잔치 초대장",
+                                                                    "pct":  6.89
+                                                                },
+                                                                {
+                                                                    "keyword":  "돌잔치 모바일",
+                                                                    "pct":  6.89
+                                                                },
+                                                                {
+                                                                    "keyword":  "돌잔치 모바일초대장 무료",
+                                                                    "pct":  3.44
+                                                                }
+                                                            ],
+                                         "keywordExposure":  [
+                                                                 {
+                                                                     "keyword":  "돌잔치모바일초대장",
+                                                                     "exposedCount":  4,
+                                                                     "entries":  [
+                                                                                     {
+                                                                                         "nickname":  "은가비월드",
+                                                                                         "rank":  1
+                                                                                     },
+                                                                                     {
+                                                                                         "nickname":  "프롬로맨스",
+                                                                                         "rank":  4
+                                                                                     },
+                                                                                     {
+                                                                                         "nickname":  "쿼츠0620",
+                                                                                         "rank":  14
+                                                                                     },
+                                                                                     {
+                                                                                         "nickname":  "치수경",
+                                                                                         "rank":  21
+                                                                                     }
+                                                                                 ]
+                                                                 },
+                                                                 {
+                                                                     "keyword":  "돌잔치초대장",
+                                                                     "exposedCount":  2,
+                                                                     "entries":  [
+                                                                                     {
+                                                                                         "nickname":  "프롬로맨스",
+                                                                                         "rank":  6
+                                                                                     },
+                                                                                     {
+                                                                                         "nickname":  "쿼츠0620",
+                                                                                         "rank":  14
+                                                                                     }
+                                                                                 ]
+                                                                 },
+                                                                 {
+                                                                     "keyword":  "셀프모바일초대장만들기",
+                                                                     "exposedCount":  2,
+                                                                     "entries":  [
+                                                                                     {
+                                                                                         "nickname":  "은가비월드",
+                                                                                         "rank":  1
+                                                                                     },
+                                                                                     {
+                                                                                         "nickname":  "치수경",
+                                                                                         "rank":  6
+                                                                                     }
+                                                                                 ]
+                                                                 },
+                                                                 {
+                                                                     "keyword":  "돌초대장",
+                                                                     "exposedCount":  2,
+                                                                     "entries":  [
+                                                                                     {
+                                                                                         "nickname":  "프롬로맨스",
+                                                                                         "rank":  7
+                                                                                     },
+                                                                                     {
+                                                                                         "nickname":  "쿼츠0620",
+                                                                                         "rank":  12
+                                                                                     }
+                                                                                 ]
+                                                                 },
+                                                                 {
+                                                                     "keyword":  "돌잔치준비",
+                                                                     "exposedCount":  1,
+                                                                     "entries":  [
+                                                                                     {
+                                                                                         "nickname":  "프롬로맨스",
+                                                                                         "rank":  20
+                                                                                     }
+                                                                                 ]
+                                                                 }
+                                                             ],
+                                         "images":  [
+
+                                                    ],
+                                         "imagesData":  [
+
+                                                        ]
+                                     },
+                          "mission":  {
+                                          "provided":  [
+                                                           "레뷰 20,000 포인트",
+                                                           "돌잔치 모바일 초대장 제작서비스 1개"
+                                                       ],
+                                          "titleKeywords":  [
+                                                                "돌잔치초대장",
+                                                                "돌잔치모바일초대장",
+                                                                "돌잔치준비"
+                                                            ],
+                                          "bodyKeywords":  [
+                                                               "셀프모바일초대장만들기",
+                                                               "돌초대장",
+                                                               "돌잔치준비",
+                                                               "아기첫돌초대장",
+                                                               "소규모돌잔치"
+                                                           ],
+                                          "bodyKeywordMinMentions":  5,
+                                          "requiredLink":  "https://vo.la/iZMiqZU",
+                                          "requiredHashtags":  [
+                                                                   "#모바일초대장",
+                                                                   "#돌잔치초대장",
+                                                                   "#돌잔치준비",
+                                                                   "#돌잔치준비물",
+                                                                   "#돌잔치문더도톰",
+                                                                   "#첫돌체크리스트"
+                                                               ],
+                                          "minChars":  1000,
+                                          "minPhotos":  15,
+                                          "videoRequired":  true,
+                                          "structure":  [
+                                                            "1. 서론 — 돌잔치 준비 과정에서 모바일 초대장이 필요한 이유·사용 상황을 자연스럽게",
+                                                            "2. 본문 — 제품 사용 후기 \u0026 장점, 제작 사이트에서 초대장 만드는 과정 캡처 후 작성(카메라로 PC화면 촬영 금지)"
+                                                        ],
+                                          "highlightPoints":  [
+                                                                  "다양한 템플릿(자유로운 스타일 조정)",
+                                                                  "옵션 설정/해제 자유",
+                                                                  "초보자도 쉬운 제작",
+                                                                  "옵션 순서 변경 가능",
+                                                                  "넉넉한 사용기한 + 기간 내 무료 수정",
+                                                                  "카카오톡·URL로 쉬운 배포",
+                                                                  "답례품 전문 브랜드 \u0027더도톰\u0027 언급"
+                                                              ],
+                                          "notes":  [
+                                                        "쿠폰번호 적용해 워터마크 제거된 이미지 사용",
+                                                        "제작 과정만이 아니라 실제 완성된 초대장 이미지도 노출 필수",
+                                                        "본문에 제품 구매 링크 삽입 필수",
+                                                        "리뷰 약속 시 평생소장 이벤트 내용 포함",
+                                                        "생성형 AI로 작성 불가 (적발 시 수정요청·페널티)",
+                                                        "콘텐츠 유지기간: 결과 발표일 기준 6개월 (미유지 시 페널티)"
+                                                    ]
+                                      },
+                          "influencers":  [
+                                              {
+                                                  "nickname":  "프롬로맨스",
+                                                  "blogName":  "프롬로맨스",
+                                                  "category":  "패션 마케터 · 비즈니스 캐주얼 스타일",
+                                                  "fans":  2920,
+                                                  "rating":  4,
+                                                  "blogId":  "alsyffl2"
+                                              },
+                                              {
+                                                  "nickname":  "은가비월드",
+                                                  "blogName":  "은가비",
+                                                  "category":  "여행 전문블로거 · 국내 전문",
+                                                  "fans":  3719,
+                                                  "rating":  3.5,
+                                                  "blogId":  "catch-y"
+                                              },
+                                              {
+                                                  "nickname":  "치수경",
+                                                  "blogName":  "우다다담",
+                                                  "category":  "생활건강 전문블로거",
+                                                  "fans":  4059,
+                                                  "rating":  4,
+                                                  "blogId":  "leesoohyun87"
+                                              },
+                                              {
+                                                  "nickname":  "쿼츠0620",
+                                                  "blogName":  "쿼츠",
+                                                  "category":  "뷰티 전문블로거 · 기초화장 전문",
+                                                  "fans":  5140,
+                                                  "rating":  3.5,
+                                                  "blogId":  "suzy_0620"
+                                              }
+                                          ],
+                          "reviewers":  [
+                                            {
+                                                "blogUrl":  "https://blog.naver.com/alsyffl2/224340780060",
+                                                "blogId":  "alsyffl2",
+                                                "status":  "콘텐츠 등록 완료",
+                                                "reviewStatus":  "통과",
+                                                "registeredAt":  "2026-07-13",
+                                                "title":  "돌잔치 준비 필수! 더도톰 모바일 돌잔치초대장으로 쉽고 예쁘게 완성한 후기",
+                                                "postDate":  "2026-07-08",
+                                                "likes":  4,
+                                                "comments":  0
+                                            },
+                                            {
+                                                "blogUrl":  "https://blog.naver.com/suzy_0620/224340115336",
+                                                "blogId":  "suzy_0620",
+                                                "status":  "콘텐츠 등록 완료",
+                                                "reviewStatus":  "통과",
+                                                "registeredAt":  "2026-07-13",
+                                                "title":  "돌잔치준비 더도톰 모바일 초대장으로 쉽고 예쁘게",
+                                                "postDate":  "2026-07-08",
+                                                "likes":  5,
+                                                "comments":  0
+                                            },
+                                            {
+                                                "blogUrl":  "https://blog.naver.com/catch-y/224350391471",
+                                                "blogId":  "catch-y",
+                                                "status":  "콘텐츠 등록 완료",
+                                                "reviewStatus":  "통과",
+                                                "registeredAt":  "2026-07-21",
+                                                "title":  "더도톰 돌잔치 모바일 초대장 셀프 제작 문구 만들기 추천 돌잔치준비",
+                                                "postDate":  "2026-07-18",
+                                                "likes":  10,
+                                                "comments":  3
+                                            },
+                                            {
+                                                "blogUrl":  "https://blog.naver.com/leesoohyun87/224345188075",
+                                                "blogId":  "leesoohyun87",
+                                                "status":  "콘텐츠 등록 완료",
+                                                "reviewStatus":  "통과",
+                                                "registeredAt":  "2026-07-21",
+                                                "title":  "돌잔치준비 필수템 더도톰 돌잔치모바일초대장 셀프제작 후기 (돌잔치초대장 만들기)",
+                                                "postDate":  "2026-07-13",
+                                                "likes":  2,
+                                                "comments":  2
+                                            }
+                                        ]
+                      },
+                      {
+                          "id":  "kinder-towel-202608",
+                          "name":  "8월 [더도톰] 조구만 어린이집 고리수건 체험단",
+                          "platform":  "레뷰 (네이버 인플루언서 프리미어)",
+                          "campaignUrl":  "https://www.revu.net/campaign/1379139",
+                          "selectedCount":  0,
+                          "recruitTarget":  6,
+                          "currentStage":  "인플루언서 모집",
+                          "snapshotDate":  "2026-07-31",
+                          "todoNote":  "신청 접수 중(2026-07-31 기준 신청자 72명, 모집 목표 6명) — 08.06 선정 발표 예정, 확정되면 influencers/reviewers 갱신",
+                          "stages":  [
+                                         {
+                                             "name":  "캠페인 기획"
+                                         },
+                                         {
+                                             "name":  "인플루언서 모집",
+                                             "range":  "07.30~08.04"
+                                         },
+                                         {
+                                             "name":  "인플루언서 선정",
+                                             "range":  "08.06"
+                                         },
+                                         {
+                                             "name":  "발표/배송준비",
+                                             "range":  "08.06~08.09"
+                                         },
+                                         {
+                                             "name":  "콘텐츠 등록",
+                                             "range":  "08.10~08.16"
+                                         },
+                                         {
+                                             "name":  "보고서 확인",
+                                             "range":  "08.19"
+                                         }
+                                     ],
+                          "report":  null,
+                          "mission":  {
+                                          "provided":  [
+                                                           "레뷰 20,000 포인트",
+                                                           "조구만 어린이집 고리수건 5종 1SET (옵션 A/B/C 중 택 1)"
+                                                       ],
+                                          "titleKeywords":  [
+                                                                "어린이집고리수건",
+                                                                "어린이집준비물",
+                                                                "어린이집순수건"
+                                                            ],
+                                          "bodyKeywords":  [
+                                                               "어린이집필수템",
+                                                               "어린이집고리수건",
+                                                               "어린이집수건",
+                                                               "고리수건",
+                                                               "아기수건"
+                                                           ],
+                                          "bodyKeywordMinMentions":  5,
+                                          "requiredLink":  "https://vo.la/fEZu7xU",
+                                          "requiredHashtags":  [
+                                                                   "#조구만",
+                                                                   "#더도톰",
+                                                                   "#어린이집고리수건",
+                                                                   "#어린이집준비물",
+                                                                   "#어린이집수건",
+                                                                   "#고리수건",
+                                                                   "#수건답례품",
+                                                                   "#핸드타올"
+                                                               ],
+                                          "minChars":  1000,
+                                          "minPhotos":  15,
+                                          "videoRequired":  true,
+                                          "structure":  [
+                                                            "1. 서론 — 어린이집 준비물로 고리수건이 필요한 이유를 등원 후 손씻기/간식·식사 후/놀이 후 등 실제 경험 위주로 작성",
+                                                            "2. 본론 — 제품 사용 후기 \u0026 장점(KC 인증/항균 인증 원단/고리 디자인/국내 생산/네임라벨 등)을 자연스럽게 언급, 택배 박스 배경 금지·깔끔한 배경에서 촬영, 캐릭터 자수와 이름이 잘 보이게 촬영",
+                                                            "3. 어린이집 준비물로 사용하기 좋은 이유 — 본인이 느낀 가장 큰 메리트 1가지 강조",
+                                                            "4. 본문 키워드 2회 이상 작성",
+                                                            "5. 제품 구매 링크 삽입 필수"
+                                                        ],
+                                          "highlightPoints":  [
+                                                                  "어린이제품 KC 인증",
+                                                                  "항균 인증 원단 사용",
+                                                                  "아이 혼자서도 사용하기 편한 고리 디자인",
+                                                                  "100% 국내 생산",
+                                                                  "국내 유일 조구만 어린이집 고리수건",
+                                                                  "친환경 네임라벨"
+                                                              ],
+                                          "notes":  [
+                                                        "만 0세~5세 자녀를 둔 회원만 신청 가능",
+                                                        "신청 시 자수 기입할 자녀 이름 기입 필수(한글 4자/영문 8자 이내)",
+                                                        "원고·콘텐츠 등록기간 미준수 또는 제공내역 양도·판매·교환 시 페널티 및 제품정가·배송비 청구",
+                                                        "업체 요청에 따라 선정 인플루언서 수 변경 가능 / 선정 후 제공내역과 배송지 변경 불가",
+                                                        "콘텐츠 작성 시 선정된 캠페인의 제품으로 단독 촬영 필수",
+                                                        "콘텐츠 유지기간은 캠페인 결과 발표일 기준 6개월이며, 미유지 시 페널티 적용",
+                                                        "생성형 AI로 작성 불가 (적발 시 수정요청·페널티)",
+                                                        "네이버 인플루언서 프리미어만 신청 가능"
+                                                    ]
+                                      },
+                          "influencers":  [
+
+                                          ],
+                          "reviewers":  [
+
+                                        ]
+                      }
+                  ]
+}

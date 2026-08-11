@@ -358,6 +358,19 @@
     .momcafe-copy h3 { margin:0 0 6px; font-size:12px; } .momcafe-copy h3:not(:first-child) { margin-top:14px; }
     .momcafe-copy pre { margin:0; white-space:pre-wrap; font:inherit; font-size:12px; line-height:1.65; color:var(--text); }
     .momcafe-origin { display:inline-block; margin-top:16px; color:var(--blue); font-size:12px; font-weight:700; text-decoration:none; }
+    .experience-stage-list { display:flex; flex-wrap:wrap; gap:8px; }
+    .experience-stage { padding:9px 11px; border:1px solid var(--line); border-radius:9px; background:#f8fafc; font-size:11px; color:var(--muted); }
+    .experience-stage.current { border-color:#818cf8; background:#eef2ff; color:#3730a3; font-weight:800; }
+    .experience-stage b { display:block; margin-bottom:3px; color:inherit; }
+    .experience-review-list { display:grid; gap:10px; }
+    .experience-review { display:flex; justify-content:space-between; gap:16px; padding:14px; border:1px solid var(--line); border-radius:10px; background:#fff; }
+    .experience-review-main { min-width:0; display:grid; gap:5px; }
+    .experience-review-main a { color:var(--text); font-size:13px; font-weight:700; text-decoration:none; }
+    .experience-review-main small { color:var(--muted); }
+    .experience-review-metrics { flex:0 0 auto; text-align:right; font-size:12px; color:var(--muted); }
+    .experience-keywords { display:flex; flex-wrap:wrap; gap:7px; }
+    .experience-keyword { padding:6px 9px; border-radius:999px; background:#eef2ff; color:#3730a3; font-size:11px; font-weight:700; }
+    .experience-mission-list { margin:0; padding-left:18px; color:var(--muted); font-size:12px; line-height:1.7; }
     .status.good { display: inline-flex; padding: 5px 9px; border-radius: 999px; background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 800; }
     @media (max-width: 1100px) { .crm-message-grid { grid-template-columns: 1fr; } }
     @media (max-width: 900px) { .decision-list { grid-template-columns: 1fr; } .crm-message-content { grid-template-columns: 1fr; } .crm-message-shot { max-height: 680px; } .crm-campaign-card { align-items: flex-start; flex-direction: column; } .crm-campaign-card span:last-child { text-align: left; } .momcafe-post-content { grid-template-columns:1fr; } }
@@ -1024,7 +1037,7 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
         </div><div class="count" style="margin-top:14px">대상: 카페24 문자수신 동의 고객 · 알림톡 1PU=1원, 건당 7원 · 원본 기준일 2026.08.11</div></div></section>
         </div>
       </section>
-      <section class="page-section" data-page="marketingExperience"><div class="section-head"><h2>체험단</h2></div><div class="memo-body"><div class="empty">체험단 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
+      <section class="page-section" data-page="marketingExperience"><div id="experienceBody"><div class="empty">체험단 데이터를 불러오는 중입니다.</div></div></section>
       <section class="page-section" data-page="marketingMomCafe"><div id="momCafeCampaignList"><div class="section-head"><div><h2>맘카페 캠페인</h2><div class="count" style="margin-top:4px">계약별 발행 원고와 증빙 기록</div></div><span class="count">총 1개</span></div><div class="kpis"><div class="metric"><div class="label">전체 캠페인</div><div class="value">1개</div></div><div class="metric"><div class="label">계약 게시물</div><div class="value">10건</div></div><div class="metric"><div class="label">발행 완료</div><div class="value">10건</div><div class="sub">완료율 100%</div></div><div class="metric"><div class="label">집행 금액</div><div class="value">330,000원</div><div class="sub">VAT 포함</div></div><div class="metric"><div class="label">게시 카페</div><div class="value">5곳</div></div></div><button class="crm-campaign-card" type="button" data-momcafe-campaign="kinder-towel-202607"><span><b>어린이집 고리수건 맘카페 바이럴</b><small>2026.07.21 ~ 07.26 · 뉴커브 · 발행 완료</small></span><span><b>10건 발행</b><small>질의 4건 · 후기 6건 · 상세보기 →</small></span></button></div><div id="momCafeCampaignDetail" hidden><button class="ghost" type="button" data-momcafe-back style="width:auto;margin-bottom:12px">← 맘카페 캠페인 목록</button><div id="momCafeDetailBody"></div></div></section>
 <section class="page-section" data-page="totalSales">
         <div class="section-head"><h2>월별 매출·광고비</h2><span id="totalSalesStatus" class="count"></span></div>
@@ -1363,7 +1376,29 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
       list.hidden = showDetail;
       detail.hidden = !showDetail;
     }
-    let momCafeLoaded = false;
+    let experienceData = null;
+    function experienceListHtml(campaigns) {
+      const completed = campaigns.filter(c => c.report).length;
+      return `<div class="section-head"><div><h2>체험단 캠페인</h2><div class="count" style="margin-top:4px">캠페인별 모집·콘텐츠·성과 기록</div></div><span class="count">총 ${campaigns.length}개</span></div><div class="kpis"><div class="metric"><div class="label">전체 캠페인</div><div class="value">${campaigns.length}개</div></div><div class="metric"><div class="label">보고서 완료</div><div class="value">${completed}개</div></div><div class="metric"><div class="label">선정 인원</div><div class="value">${campaigns.reduce((a,c)=>a+(Number(c.selectedCount)||0),0)}명</div></div><div class="metric"><div class="label">등록 콘텐츠</div><div class="value">${campaigns.reduce((a,c)=>a+(c.reviewers?.length||0),0)}개</div></div><div class="metric"><div class="label">누적 조회수</div><div class="value">310회</div><div class="sub">보고서 확인분</div></div></div>${campaigns.map(c => `<button class="crm-campaign-card" type="button" data-experience-campaign="${html(c.id)}"><span><b>${html(c.name)}</b><small>${html(c.platform)} · ${html(c.currentStage)} · 기준 ${html(c.snapshotDate)}</small></span><span><b>${c.report ? `콘텐츠 ${c.reviewers.length}개` : `모집 목표 ${c.recruitTarget||0}명`}</b><small>${c.report ? "보고서 완료" : "과거 진행 기록"} · 상세보기 →</small></span></button>`).join("")}`;
+    }
+    function experienceDetailHtml(c) {
+      const stageHtml = (c.stages||[]).map(s => `<div class="experience-stage ${s.name===c.currentStage?"current":""}"><b>${html(s.name)}</b>${html(s.range||"완료")}</div>`).join("");
+      const provided = (c.mission?.provided||[]).map(v=>`<li>${html(v)}</li>`).join("");
+      const requirements = [`본문 ${c.mission?.minChars||0}자 이상`,`사진 ${c.mission?.minPhotos||0}장 이상`,c.mission?.videoRequired?"영상 필수":"영상 선택"].map(v=>`<li>${html(v)}</li>`).join("");
+      const keywords = [...(c.mission?.titleKeywords||[]),...(c.mission?.bodyKeywords||[])].map(k=>`<span class="experience-keyword">${html(k)}</span>`).join("");
+      const reviews = (c.reviewers||[]).map(r=>`<div class="experience-review"><div class="experience-review-main"><a href="${html(r.blogUrl)}" target="_blank" rel="noopener">${html(r.title)}</a><small>${html(r.postDate)} · ${html(r.blogId)} · ${html(r.reviewStatus)}</small></div><div class="experience-review-metrics">좋아요 ${html(r.likes)}<br>댓글 ${html(r.comments)}</div></div>`).join("");
+      const influencers = (c.influencers||[]).map(i=>`<tr><td>${html(i.nickname)}</td><td>${html(i.blogName)}</td><td>${html(i.category)}</td><td>${Number(i.fans||0).toLocaleString()}</td><td>${html(i.rating)}</td></tr>`).join("");
+      const report = c.report ? `<section style="margin-bottom:16px"><div class="section-head"><h2>성과 보고서</h2><span class="status good">완료</span></div><div class="kpis">${c.report.stats.map(v=>`<div class="metric"><div class="label">${html(v.label)}</div><div class="value">${html(v.value)}</div></div>`).join("")}</div><div class="memo-body"><div class="decision-card"><b>검색 노출 요약</b><span>${html(c.report.summary)}</span></div></div></section><section style="margin-bottom:16px"><div class="section-head"><h2>상위 노출 키워드</h2></div><div class="table-wrap"><table><thead><tr><th>키워드</th><th>노출 콘텐츠</th><th>순위</th></tr></thead><tbody>${c.report.keywordExposure.map(k=>`<tr><td>${html(k.keyword)}</td><td>${html(k.exposedCount)}건</td><td>${k.entries.map(e=>`${html(e.nickname)} ${html(e.rank)}위`).join(" · ")}</td></tr>`).join("")}</tbody></table></div></section>` : `<div class="empty" style="margin-bottom:16px;text-align:left">이 캠페인은 원본 데이터가 ${html(c.snapshotDate)} 기준 모집 단계에서 멈춰 있습니다. 현재 선정·발행 상태가 확인되면 이 캠페인 기록에 이어서 갱신할 수 있습니다.</div>`;
+      return `<button class="ghost" type="button" data-experience-back style="width:auto;margin-bottom:12px">← 체험단 캠페인 목록</button><div class="section-head"><div><h2>${html(c.name)}</h2><div class="count" style="margin-top:4px">${html(c.platform)} · 데이터 기준 ${html(c.snapshotDate)}</div></div><span class="pill ${c.report?"done":"active"}">${html(c.currentStage)}</span></div><div class="memo-body" style="margin-bottom:16px"><div class="experience-stage-list">${stageHtml}</div>${c.todoNote?`<div class="empty" style="margin-top:12px;text-align:left">${html(c.todoNote)}</div>`:""}</div>${report}<section style="margin-bottom:16px"><div class="section-head"><h2>캠페인 미션</h2>${c.campaignUrl?`<a class="momcafe-origin" href="${html(c.campaignUrl)}" target="_blank" rel="noopener">레뷰 캠페인 열기 ↗</a>`:""}</div><div class="memo-body"><div class="decision-list"><div class="decision-card"><b>제공 내역</b><ul class="experience-mission-list">${provided}</ul></div><div class="decision-card"><b>필수 제작 기준</b><ul class="experience-mission-list">${requirements}</ul></div></div><div class="experience-keywords" style="margin-top:14px">${keywords}</div></div></section>${influencers?`<section style="margin-bottom:16px"><div class="section-head"><h2>선정 인플루언서</h2><span class="count">${c.influencers.length}명</span></div><div class="table-wrap"><table><thead><tr><th>닉네임</th><th>블로그</th><th>분야</th><th>팬</th><th>평점</th></tr></thead><tbody>${influencers}</tbody></table></div></section>`:""}${reviews?`<section><div class="section-head"><h2>등록 콘텐츠</h2><span class="count">${c.reviewers.length}개</span></div><div class="memo-body"><div class="experience-review-list">${reviews}</div></div></section>`:""}`;
+    }
+    async function renderExperienceView() {
+      if (state.page !== "marketingExperience") return;
+      const root = document.getElementById("experienceBody"); if (!root) return;
+      try { if (!experienceData) experienceData = await fetch("data/experience-campaigns.json").then(r=>{if(!r.ok)throw new Error(r.status);return r.json()});
+        const id = new URL(window.location.href).searchParams.get("campaign"); const campaign = experienceData.campaigns.find(c=>c.id===id);
+        root.innerHTML = campaign ? experienceDetailHtml(campaign) : experienceListHtml(experienceData.campaigns);
+      } catch(e) { root.innerHTML='<div class="empty">체험단 데이터를 불러오지 못했습니다.</div>'; }
+    }    let momCafeLoaded = false;
     async function renderMomCafeCampaignView() {
       const list = document.getElementById("momCafeCampaignList");
       const detail = document.getElementById("momCafeCampaignDetail");
@@ -1437,6 +1472,7 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
       els.typeFilter.value = pageType();
       renderCrmCampaignView();
       renderMomCafeCampaignView();
+      renderExperienceView();
     }
     function fillCampaigns() {
       const current = els.campaignFilter.value;
@@ -3140,7 +3176,7 @@ function renderBrandContract() {
         state.page = btn.dataset.page;
         const nextUrl = new URL(window.location.href);
         nextUrl.searchParams.set("page", state.page);
-        if (state.page === "marketingCrm" || state.page === "marketingMomCafe") nextUrl.searchParams.delete("campaign");
+        if (state.page === "marketingCrm" || state.page === "marketingMomCafe" || state.page === "marketingExperience") nextUrl.searchParams.delete("campaign");
         history.replaceState(null, "", nextUrl);
         if (state.data?.month !== state.month) {
           await loadData();
@@ -3167,7 +3203,14 @@ function renderBrandContract() {
         renderCrmCampaignView();
       });
     });
-    document.querySelectorAll("[data-momcafe-campaign]").forEach(btn => btn.addEventListener("click", () => {
+    document.getElementById("experienceBody")?.addEventListener("click", event => {
+      const campaignButton = event.target.closest("[data-experience-campaign]");
+      const backButton = event.target.closest("[data-experience-back]");
+      if (!campaignButton && !backButton) return;
+      const nextUrl = new URL(window.location.href);
+      if (campaignButton) nextUrl.searchParams.set("campaign", campaignButton.dataset.experienceCampaign); else nextUrl.searchParams.delete("campaign");
+      history.replaceState(null, "", nextUrl); renderExperienceView();
+    });    document.querySelectorAll("[data-momcafe-campaign]").forEach(btn => btn.addEventListener("click", () => {
       const nextUrl = new URL(window.location.href); nextUrl.searchParams.set("page", "marketingMomCafe"); nextUrl.searchParams.set("campaign", btn.dataset.momcafeCampaign); history.replaceState(null, "", nextUrl); renderMomCafeCampaignView();
     }));
     document.querySelectorAll("[data-momcafe-back]").forEach(btn => btn.addEventListener("click", () => {
