@@ -1426,7 +1426,18 @@
       if (!root) return;
       const config = state.powerlinkCreativeConfig || {};
       const allGroups = config.groups || [];
-      const groups = allGroups;
+      const campaignOrder = campaign => {
+        const name = String(campaign || "");
+        if (name.startsWith("파워링크_더도톰_핵심키워드")) return 1;
+        if (name === "파워링크_더도톰_자사몰") return 2;
+        if (name === "파워링크_더도톰_세부 키워드") return 3;
+        if (name.includes("스스")) return 99;
+        return 50;
+      };
+      const groups = allGroups
+        .map((group, index) => ({ group, index }))
+        .sort((a, b) => campaignOrder(a.group.campaign) - campaignOrder(b.group.campaign) || a.index - b.index)
+        .map(item => item.group);
       if (!allGroups.length) {
         root.innerHTML = "";
         return;
