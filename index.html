@@ -327,6 +327,12 @@
     .detail-toolbar button.active { background: var(--blue); border-color: var(--blue); color: #fff; }
     .memo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
     .memo-body { padding: 14px; }
+    .decision-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .decision-card { display: grid; gap: 6px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #f8fafc; }
+    .decision-card b { color: var(--text); font-size: 13px; }
+    .decision-card span { color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .status.good { display: inline-flex; padding: 5px 9px; border-radius: 999px; background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 800; }
+    @media (max-width: 900px) { .decision-list { grid-template-columns: 1fr; } }
     .memo-body label { display: block; margin: 10px 0 5px; color: var(--muted); font-size: 12px; font-weight: 700; }
     .rank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 16px; }
     .rank-card { border: 1px solid var(--line); border-radius: 12px; background: #fff; overflow: hidden; box-shadow: var(--shadow); }
@@ -883,7 +889,36 @@
       <section class="page-section" data-page="dailyRevenue"><div class="section-head"><h2>일일 매출</h2><span id="dailyRevenueStatus" class="count"></span></div><div class="memo-body" id="dailyRevenueBody"></div></section>
       <section class="page-section" data-page="ga4Analytics"><div class="section-head"><h2>GA4 자사몰 성과</h2><span id="ga4Status" class="count"></span></div><div id="ga4Body"></div></section>
       <section class="page-section" data-page="ga4Products"><div class="section-head"><h2>GA4 상품 성과</h2><span id="ga4ProductsStatus" class="count"></span></div><div id="ga4ProductsBody"></div></section>
-      <section class="page-section" data-page="marketingCrm"><div class="section-head"><h2>CRM</h2></div><div class="memo-body"><div class="empty">CRM 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
+      <section class="page-section" data-page="marketingCrm">
+        <div class="section-head"><div><h2>어린이집 필수템 2,000원 할인 쿠폰</h2><div class="count" style="margin-top:4px">2026.07.14 최초 발송 · 2026.07.27 마감 리마인드</div></div><span class="status good">완료</span></div>
+        <div class="kpis">
+          <div class="metric"><div class="label">CRM 대상 DB</div><div class="value">26,378명</div><div class="sub">알림톡 25,803 · SMS 575</div></div>
+          <div class="metric"><div class="label">알림톡 도달</div><div class="value">17,430명</div><div class="sub">발송 21,657 · 도달률 80.5%</div></div>
+          <div class="metric"><div class="label">알림톡 클릭</div><div class="value">524회</div><div class="sub">조회 대비 클릭률 3.0%</div></div>
+          <div class="metric"><div class="label">메시지 비용</div><div class="value">166,492원</div><div class="sub">알림톡 151,599 · SMS 14,893</div></div>
+          <div class="metric"><div class="label">쿠폰 사용</div><div class="value">11건</div><div class="sub">전체 발급 53,971 · 사용률 0.02%</div></div>
+        </div>
+        <section style="margin-bottom:16px"><div class="section-head"><h2>핵심 해석</h2></div><div class="memo-body">
+          <div class="decision-list">
+            <div class="decision-card"><b>초기 알림톡 반응이 가장 좋음</b><span>7월 14일 클릭률 4.6%, 클릭 410회로 전체 알림톡 클릭의 78%를 만들었습니다.</span></div>
+            <div class="decision-card"><b>마감 리마인드는 효율 하락</b><span>도달률은 80.1%로 유지됐지만 클릭률은 1.3%로 낮아졌고, 클릭당 메시지 비용은 약 660원입니다.</span></div>
+            <div class="decision-card"><b>SMS는 보완 채널</b><span>성공률 99.0%로 안정적이지만 건당 25.9P로 알림톡 7원보다 비쌉니다. 미도달자 보완 발송에 적합합니다.</span></div>
+            <div class="decision-card"><b>쿠폰 사용의 CRM 귀속은 확인 불가</b><span>쿠폰은 CRM 대상자가 아닌 카페24 전체 회원 53,971명에게 발급됐고 목표 이벤트도 설정되지 않아, 사용 11건을 CRM 성과로 단정할 수 없습니다.</span></div>
+          </div>
+        </div></section>
+        <section style="margin-bottom:16px"><div class="section-head"><h2>채널 성과</h2></div><div class="table-wrap"><table><thead><tr><th>채널</th><th>캠페인</th><th>대상 DB</th><th>발송/성공</th><th>도달</th><th>도달률</th><th>클릭</th><th>클릭률</th><th>비용</th></tr></thead><tbody>
+          <tr><td>알림톡</td><td>최초 발송 · 07.14</td><td>15,060</td><td>10,914</td><td>8,830</td><td>80.9%</td><td>410</td><td>4.6%</td><td>76,398원</td></tr>
+          <tr><td>알림톡</td><td>마감 리마인드 · 07.27</td><td>10,743</td><td>10,743</td><td>8,600</td><td>80.1%</td><td>114</td><td>1.3%</td><td>75,201원</td></tr>
+          <tr><td>SMS</td><td>최초 발송 · 07.14</td><td>288</td><td>282</td><td>282</td><td>97.9%</td><td>미측정</td><td>-</td><td>7,459.2P</td></tr>
+          <tr><td>SMS</td><td>마감 리마인드 · 07.27</td><td>287</td><td>287</td><td>287</td><td>100.0%</td><td>미측정</td><td>-</td><td>7,433.3P</td></tr>
+        </tbody></table></div></section>
+        <section style="margin-bottom:16px"><div class="section-head"><h2>쿠폰 전환</h2></div><div class="memo-body"><div class="kpis" style="margin:0"><div class="metric"><div class="label">쿠폰 번호</div><div class="value" style="font-size:17px">6085701671600000586</div></div><div class="metric"><div class="label">전체 발급</div><div class="value">53,971건</div></div><div class="metric"><div class="label">사용</div><div class="value">11건</div></div><div class="metric"><div class="label">사용률</div><div class="value">0.02%</div></div></div><div class="empty" style="margin-top:12px;text-align:left">발급 모수는 CRM 수신 동의 고객이 아니라 카페24 전체 회원입니다. 정확한 캠페인 전환율을 보려면 다음 발송부터 수신자 전용 쿠폰 또는 채널별 UTM 구매 이벤트를 연결해야 합니다.</div></div></section>
+        <section><div class="section-head"><h2>발송 메시지</h2></div><div class="memo-body"><details><summary><b>07.14 최초 발송 문구</b></summary><pre style="white-space:pre-wrap;font:inherit;line-height:1.7;margin:14px 0 0">어린이집 필수템 2,000원 할인 쿠폰이 발급되었어요!
+쿠폰 만료일: 7월 27일 오후 1시
+쿠폰 확인: 마이페이지 &gt; 쿠폰</pre></details><details style="margin-top:12px"><summary><b>07.27 마감 리마인드 문구</b></summary><pre style="white-space:pre-wrap;font:inherit;line-height:1.7;margin:14px 0 0">고객님, 쿠폰이 곧 사라져요.
+어린이집 필수템 2,000원 할인 쿠폰 마감 3시간 전 안내
+쿠폰 확인하기 버튼을 통해 쿠폰함으로 이동</pre></details><div class="count" style="margin-top:14px">대상: 카페24 문자수신 동의 고객 · 알림톡 1PU=1원, 건당 7원 · 원본 기준일 2026.08.11</div></div></section>
+      </section>
       <section class="page-section" data-page="marketingExperience"><div class="section-head"><h2>체험단</h2></div><div class="memo-body"><div class="empty">체험단 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
       <section class="page-section" data-page="marketingMomCafe"><div class="section-head"><h2>맘카페</h2></div><div class="memo-body"><div class="empty">맘카페 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
 <section class="page-section" data-page="totalSales">
@@ -1267,8 +1302,8 @@
         if (active && group) group.hidden = false;
         if (root) root.setAttribute("aria-expanded", String(group ? !group.hidden : false));
       });
-      const fixedReportPage = state.page === "monthlyReport";
-      document.querySelectorAll('label[for="monthFilter"], #monthFilter, .page-month-control').forEach(control => { control.style.display = fixedReportPage ? "none" : ""; });
+      const fixedContextPage = state.page === "monthlyReport" || isMarketingColumnPage;
+      document.querySelectorAll('label[for="monthFilter"], #monthFilter, .page-month-control').forEach(control => { control.style.display = fixedContextPage ? "none" : ""; });
       els.typeFilter.value = pageType();
     }
     function fillCampaigns() {
