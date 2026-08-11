@@ -148,6 +148,9 @@
     }
     .nav button:hover { background: var(--sidebar-hover); color: rgba(255,255,255,0.9); }
     .nav button.active { background: var(--sidebar-active); color: var(--sidebar-text-active); }
+    .nav button.nav-root { display: flex; align-items: center; justify-content: space-between; }
+    .nav button.nav-root::after { content: "▸"; font-size: 11px; transition: transform .15s ease; }
+    .nav button.nav-root[aria-expanded="true"]::after { transform: rotate(90deg); }
     .nav .sub-nav-group {
       margin: 4px 0 10px 18px;
       padding-left: 14px;
@@ -167,6 +170,7 @@
       background: var(--sidebar-active);
       color: var(--sidebar-text-active);
     }
+    .nav .sub-nav-group[hidden] { display: none; }
     .nav-sub {
       display: grid;
       gap: 2px;
@@ -704,25 +708,31 @@
         <button type="button" data-page="powerlink">파워링크</button>
         <button type="button" data-page="shopping">쇼핑검색</button>
         <button type="button" data-page="brand">브랜드검색</button>
-        <button type="button" data-rank-root>순위 트래픽</button>
-        <div class="nav-sub">
+        <button class="nav-root" type="button" data-nav-toggle="rankSubnav" data-rank-root aria-expanded="false">순위 트래픽</button>
+        <div class="sub-nav-group" id="rankSubnav" hidden>
           <button type="button" data-page="rankShopping">쇼핑검색 순위</button>
           <button type="button" data-page="rankPowerlink">파워링크 순위</button>
         </div>
-        <button type="button" data-daily-product-root>일일 제품 성과</button>
-        <div class="sub-nav-group" data-daily-product-subnav>
+        <button class="nav-root" type="button" data-nav-toggle="dailyProductSubnav" data-daily-product-root aria-expanded="false">일일 제품 성과</button>
+        <div class="sub-nav-group" id="dailyProductSubnav" data-daily-product-subnav hidden>
           <button type="button" data-page="dailyProduct">전체</button>
           <button type="button" data-page="dailyProductCafe24">자사몰</button>
           <button type="button" data-page="dailyProductSmartstore">더도톰스튜디오</button>
           <button type="button" data-page="dailyProductMura">무라</button>
         </div>
         <button type="button" data-page="slotEfficiency">슬롯 효율</button>
-        <button type="button" data-revenue-root>매출·손익 분석</button>
-        <div class="sub-nav-group" data-revenue-subnav>
+        <button class="nav-root" type="button" data-nav-toggle="revenueSubnav" data-revenue-root aria-expanded="false">매출·손익 분석</button>
+        <div class="sub-nav-group" id="revenueSubnav" data-revenue-subnav hidden>
           <button type="button" data-page="totalSales">월별 매출·광고비</button>
           <button type="button" data-page="dailyRevenue">일일 매출</button>
           <button type="button" data-page="ga4Analytics">GA4 성과</button>
           <button type="button" data-page="ga4Products">GA4 상품 성과</button>
+        </div>
+        <button class="nav-root" type="button" data-nav-toggle="marketingColumnSubnav" data-marketing-column-root aria-expanded="false">마케팅 칼럼</button>
+        <div class="sub-nav-group" id="marketingColumnSubnav" hidden>
+          <button type="button" data-page="marketingCrm">CRM</button>
+          <button type="button" data-page="marketingExperience">체험단</button>
+          <button type="button" data-page="marketingMomCafe">맘카페</button>
         </div>
         <button type="button" data-page="monthlyReport">보고서</button>
       </div>
@@ -873,6 +883,9 @@
       <section class="page-section" data-page="dailyRevenue"><div class="section-head"><h2>일일 매출</h2><span id="dailyRevenueStatus" class="count"></span></div><div class="memo-body" id="dailyRevenueBody"></div></section>
       <section class="page-section" data-page="ga4Analytics"><div class="section-head"><h2>GA4 자사몰 성과</h2><span id="ga4Status" class="count"></span></div><div id="ga4Body"></div></section>
       <section class="page-section" data-page="ga4Products"><div class="section-head"><h2>GA4 상품 성과</h2><span id="ga4ProductsStatus" class="count"></span></div><div id="ga4ProductsBody"></div></section>
+      <section class="page-section" data-page="marketingCrm"><div class="section-head"><h2>CRM 마케팅 칼럼</h2></div><div class="memo-body"><div class="empty">CRM 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
+      <section class="page-section" data-page="marketingExperience"><div class="section-head"><h2>체험단 마케팅 칼럼</h2></div><div class="memo-body"><div class="empty">체험단 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
+      <section class="page-section" data-page="marketingMomCafe"><div class="section-head"><h2>맘카페 마케팅 칼럼</h2></div><div class="memo-body"><div class="empty">맘카페 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
 <section class="page-section" data-page="totalSales">
         <div class="section-head"><h2>월별 매출·광고비</h2><span id="totalSalesStatus" class="count"></span></div>
         <div class="memo-body" id="totalSalesBody"></div>
@@ -1218,12 +1231,16 @@
         dailyRevenue: "일일 매출",
         ga4Analytics: "GA4 자사몰 성과",
         ga4Products: "GA4 상품 성과",
+        marketingCrm: "마케팅 칼럼 · CRM",
+        marketingExperience: "마케팅 칼럼 · 체험단",
+        marketingMomCafe: "마케팅 칼럼 · 맘카페",
         monthlyReport: "보고서"
       };
       els.pageTitle.textContent = titles[state.page] || titles.overview;
       const isRankTrafficPage = state.page === "rankShopping" || state.page === "rankPowerlink";
       const isRevenuePage = state.page === "totalSales" || state.page === "dailyRevenue" || state.page === "ga4Analytics" || state.page === "ga4Products";
       const isDailyProductPage = state.page === "dailyProduct" || state.page === "dailyProductCafe24" || state.page === "dailyProductSmartstore" || state.page === "dailyProductMura";
+      const isMarketingColumnPage = state.page === "marketingCrm" || state.page === "marketingExperience" || state.page === "marketingMomCafe";
       document.querySelectorAll("[data-page]").forEach(el => {
         if (el.tagName === "BUTTON") return;
         const visible = el.dataset.page === state.page || (el.dataset.page === "rankTraffic" && isRankTrafficPage) || (el.dataset.page === "dailyProduct" && isDailyProductPage);
@@ -1240,6 +1257,15 @@
       });
       document.querySelectorAll(".nav [data-revenue-root]").forEach(button => {
         button.classList.toggle("active", isRevenuePage);
+      });
+      document.querySelectorAll(".nav [data-marketing-column-root]").forEach(button => {
+        button.classList.toggle("active", isMarketingColumnPage);
+      });
+      [["rankSubnav", isRankTrafficPage], ["dailyProductSubnav", isDailyProductPage], ["revenueSubnav", isRevenuePage], ["marketingColumnSubnav", isMarketingColumnPage]].forEach(([id, active]) => {
+        const group = document.getElementById(id);
+        const root = document.querySelector('[data-nav-toggle="' + id + '"]');
+        if (active && group) group.hidden = false;
+        if (root) root.setAttribute("aria-expanded", String(group ? !group.hidden : false));
       });
       const fixedReportPage = state.page === "monthlyReport";
       document.querySelectorAll('label[for="monthFilter"], #monthFilter, .page-month-control').forEach(control => { control.style.display = fixedReportPage ? "none" : ""; });
@@ -2956,11 +2982,12 @@ function renderBrandContract() {
         document.body.classList.remove("sidebar-open");
       });
     });
-    document.querySelectorAll(".nav button[data-rank-root]").forEach(btn => {
+    document.querySelectorAll(".nav button[data-nav-toggle]").forEach(btn => {
       btn.addEventListener("click", () => {
-        if (state.page !== "rankShopping" && state.page !== "rankPowerlink") state.page = "rankShopping";
-        render();
-        if (window.innerWidth < 760) document.body.classList.remove("sidebar-open");
+        const group = document.getElementById(btn.dataset.navToggle);
+        if (!group) return;
+        group.hidden = !group.hidden;
+        btn.setAttribute("aria-expanded", String(!group.hidden));
       });
     });
     els.monthFilter.addEventListener("change", () => { changeDashboardMonth(els.monthFilter.value); });
@@ -2970,13 +2997,6 @@ function renderBrandContract() {
     els.adgroupFilter?.addEventListener("change", render);
     els.decisionFilter?.addEventListener("change", render);
     els.searchInput?.addEventListener("input", render);
-    document.querySelectorAll(".nav button[data-daily-product-root]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (!["dailyProduct", "dailyProductCafe24", "dailyProductSmartstore", "dailyProductMura"].includes(state.page)) state.page = "dailyProduct";
-        render();
-        document.body.classList.remove("sidebar-open");
-      });
-    });
     els.badOnlyBtn?.addEventListener("click", () => { state.badOnly = !state.badOnly; render(); });
     document.querySelectorAll("[data-shopping-mode]").forEach(btn => {
       btn.addEventListener("click", () => {
