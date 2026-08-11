@@ -916,7 +916,7 @@
     const initialParams = new URLSearchParams(window.location.search);
     const initialMonth = initialParams.get("month") || "";
     const initialPage = initialParams.get("page") || "overview";
-    const state = { data: null, availableMonths: [], executiveReportData: {}, executiveGa4Evidence: {}, executiveChannelEfficiency: {}, slotMonthlyProductSales: {}, powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: initialPage, month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
+    const state = { data: null, availableMonths: [], executiveReportData: {}, executiveGa4Evidence: {}, executiveChannelEfficiency: {}, slotMonthlyProductSales: {}, brandSearchPerformance: { contract: {}, months: [] }, powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: initialPage, month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -1072,8 +1072,27 @@
             + `<div style="padding:6px 12px 8px">${kws}${more}</div></div>`;
         }).join("") + `</div>`;
     }
+   async function fetchBrandSearchPerformance() {
+      const months = ["2026-05", "2026-06", "2026-07", "2026-08"];
+      const datasets = await Promise.all(months.map(month =>
+        fetch(`data/monthly-dashboard-${month}.json?v=${Date.now()}`, { cache: "no-store" })
+          .then(response => response.ok ? response.json() : {})
+          .catch(() => ({}))
+      ));
+      const contract = datasets.find(data => data.brandContract && Object.keys(data.brandContract).length)?.brandContract || {};
+      const rows = datasets.map((data, index) => {
+        const performance = (data.typePerformance || []).find(row => row["광고유형"] === "브랜드검색") || {};
+        const period = (data.monthly || []).find(row => row["항목"] === "보고기간")?.["내용"] || months[index];
+        return {
+          month: months[index], period,
+          impressions: Number(performance["노출수"] || 0), clicks: Number(performance["클릭수"] || 0),
+          conversions: Number(performance["전환수"] || 0), revenue: Number(performance["전환매출"] || 0)
+        };
+      }).filter(row => row.impressions || row.clicks || row.conversions || row.revenue);
+      return { contract, months: rows };
+    }
     async function loadData() {
-      const [dashboardData, creativeConfig, executiveReportData, executiveGa4Evidence, executiveChannelEfficiency, slotMonthlyProductSales] = await Promise.all([
+      const [dashboardData, creativeConfig, executiveReportData, executiveGa4Evidence, executiveChannelEfficiency, slotMonthlyProductSales, brandSearchPerformance] = await Promise.all([
         fetchDashboardData(),
         fetch(`data/powerlink-creative-config.json?v=${Date.now()}`, { cache: "no-store" })
           .then(response => response.ok ? response.json() : { groups: [] })
@@ -1089,7 +1108,8 @@
           .catch(() => ({})),
         fetch(`data/slot-monthly-product-sales-2026-01-07.json?v=${Date.now()}`, { cache: "no-store" })
           .then(response => response.ok ? response.json() : {})
-          .catch(() => ({}))
+          .catch(() => ({})),
+        fetchBrandSearchPerformance()
       ]);
       state.data = dashboardData;
       state.powerlinkCreativeConfig = creativeConfig;
@@ -1097,6 +1117,7 @@
       state.executiveGa4Evidence = executiveGa4Evidence;
       state.executiveChannelEfficiency = executiveChannelEfficiency;
       state.slotMonthlyProductSales = slotMonthlyProductSales;
+      state.brandSearchPerformance = brandSearchPerformance;
       state.month = state.data.month;
       applyManualRevenueLocal(state.month);
       fillMonths();
@@ -2514,26 +2535,45 @@ function renderTotalSalesMetrics() {
 
 
 function renderBrandContract() {
-      const brand = state.data.brandContract || {};
-      els.brandStatus.textContent = brand.status || "";
+      const report = state.brandSearchPerformance || { contract: {}, months: [] };
+      const brand = { ...(report.contract || {}), ...(state.data.brandContract || {}) };
+      const months = report.months || [];
+      const totals = months.reduce((sum, row) => ({
+        impressions: sum.impressions + Number(row.impressions || 0),
+        clicks: sum.clicks + Number(row.clicks || 0),
+        conversions: sum.conversions + Number(row.conversions || 0),
+        revenue: sum.revenue + Number(row.revenue || 0)
+      }), { impressions: 0, clicks: 0, conversions: 0, revenue: 0 });
+      const ctr = totals.impressions ? totals.clicks / totals.impressions : 0;
+      els.brandStatus.textContent = `${html(brand.startDate || "2026-05-19")} ~ ${html(brand.endDate || "2026-08-18")} · 계약 실적`;
+      const monthlyRows = months.map(row => {
+        const monthlyCtr = row.impressions ? row.clicks / row.impressions : 0;
+        return `<tr><td><strong>${html(row.month.slice(5))}월</strong><div class="sub">${html(row.period)}</div></td><td>${number(row.impressions)}</td><td>${number(row.clicks)}</td><td>${pct(monthlyCtr)}</td><td>${number(row.conversions)}</td><td><strong>${money(row.revenue)}</strong></td></tr>`;
+      }).join("");
       const keywordRows = (brand.keywords || []).map(row => `
         <tr><td>${html(row["키워드"])}</td><td>${number(row["노출수"])}</td><td>${number(row["클릭수"])}</td></tr>
       `).join("");
       els.brandBody.innerHTML = `
         <div class="kpis" style="margin-bottom:12px">
-          <div class="metric"><div class="label">계약</div><div class="value" style="font-size:18px">${html(brand.period || "-")}</div><div class="sub">${html(brand.status || "")}</div></div>
+          <div class="metric"><div class="label">계약 기간</div><div class="value" style="font-size:18px">${html(brand.startDate || "2026-05-19")} ~ ${html(brand.endDate || "2026-08-18")}</div><div class="sub">${html(brand.status || "3개월 브랜드검색 계약")}</div></div>
           <div class="metric"><div class="label">총 계약금</div><div class="value">${money(brand.totalAmount || 0)}</div><div class="sub">PC ${money(brand.pcAmount || 0)} · 모바일 ${money(brand.mobileAmount || 0)}</div></div>
-          <div class="metric"><div class="label">월 환산</div><div class="value">${money(brand.monthlyAmount || 0)}</div><div class="sub">${html(brand.payment || "")}</div></div>
-          <div class="metric"><div class="label">노출</div><div class="value">${number(brand.impressions)}</div><div class="sub">브랜드 영역 노출 추이</div></div>
-          <div class="metric"><div class="label">클릭</div><div class="value">${number(brand.clicks)}</div><div class="sub">브랜드 검색 유입</div></div>
-          <div class="metric"><div class="label">전환</div><div class="value">${number(brand.conversions)}</div><div class="sub">${money(brand.revenue || 0)}</div></div>
+          <div class="metric"><div class="label">누적 노출</div><div class="value">${number(totals.impressions)}</div><div class="sub">5월~8월 현재</div></div>
+          <div class="metric"><div class="label">누적 클릭</div><div class="value">${number(totals.clicks)}</div><div class="sub">CTR ${pct(ctr)}</div></div>
+          <div class="metric"><div class="label">누적 전환</div><div class="value">${number(totals.conversions)}</div><div class="sub">네이버 광고 집계</div></div>
+          <div class="metric"><div class="label">누적 전환매출</div><div class="value">${money(totals.revenue)}</div><div class="sub">브랜드검색 귀속 매출</div></div>
         </div>
-        <div class="meta" style="margin-bottom:10px">${html(brand.startDate || "")} ~ ${html(brand.endDate || "")} · ${html(brand.areas || "")} · ${html(brand.checkPoint || "")}</div>
-        <div class="meta" style="margin-bottom:10px">${html(brand.memo || "")}</div>
+        <div class="meta" style="margin-bottom:10px">${html(brand.areas || "모바일 브랜드검색, PC 브랜드검색")} · ${html(brand.payment || "계약시 광고비 선차감")}</div>
+        <div class="table-wrap" style="margin-bottom:14px">
+          <table>
+            <thead><tr><th>월/집계기간</th><th>노출</th><th>클릭</th><th>CTR</th><th>전환</th><th>전환매출</th></tr></thead>
+            <tbody>${monthlyRows || `<tr><td class="empty" colspan="6">브랜드검색 월별 실적이 없습니다.</td></tr>`}</tbody>
+          </table>
+        </div>
+        <div class="meta" style="margin-bottom:10px">브랜드검색 비용은 월별 API 비용 0원이 아니라 선차감된 총 계약금 ${money(brand.totalAmount || 0)}으로 관리합니다. 전환과 전환매출은 네이버 광고 귀속 기준입니다.</div>
         <div class="table-wrap">
           <table>
             <thead><tr><th>브랜드 키워드</th><th>노출</th><th>클릭</th></tr></thead>
-            <tbody>${keywordRows || `<tr><td class="empty" colspan="3">브랜드검색 계약 데이터가 없습니다.</td></tr>`}</tbody>
+            <tbody>${keywordRows || `<tr><td class="empty" colspan="3">브랜드 키워드 세부 데이터가 없습니다.</td></tr>`}</tbody>
           </table>
         </div>`;
     }
