@@ -544,6 +544,7 @@
     .shopping-adgroup-button.is-off .shopping-adgroup-product, .shopping-adgroup-button.is-off.active .shopping-adgroup-product { color:#94a3b8; }
     .shopping-off-label { display:inline-flex; align-items:center; margin-left:5px; padding:1px 5px; border-radius:999px; background:#e2e8f0; color:#64748b; font-size:9px; font-weight:900; }
     .shopping-performance-row.is-off td { background:#f8fafc; color:#94a3b8; }
+    .shopping-mapping-row.is-off td { background:#e2e8f0 !important; color:#64748b; }
     @media (max-width:1200px) { .shopping-campaign-list { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:760px) {
       .shopping-product-tabs { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:thin; }
@@ -1813,9 +1814,9 @@
         const cost = ads.reduce((sum, row) => sum + Number(row["총비용"] || 0), 0);
         const revenue = ads.reduce((sum, row) => sum + Number(row["전환매출"] || 0), 0);
         const actual = productSales.get(String(item.productId)) || { sales: 0, gross: 0, orders: 0, quantity: 0, refunds: 0 };
-        return { ...item, adgroups: linked.map(row => row.adgroup).filter(Boolean), cost, revenue, roas: cost ? revenue / cost : 0, actual };
+        return { ...item, adgroups: linked.map(row => row.adgroup).filter(Boolean), isOff: linked.length > 0 && linked.every(row => row.status === "OFF"), cost, revenue, roas: cost ? revenue / cost : 0, actual };
       }).sort((a, b) => b.actual.sales - a.actual.sales);
-      const mappingHtml = mappingSummary.map(item => `<tr><td>${html(item.adgroups.join(", "))}</td><td class="wrap">${html(item.productName)}</td><td>${html(item.productId)}</td><td>${money(item.cost)}</td><td>${money(item.revenue)}</td><td>${ratio(item.roas)}</td><td><strong>${money(item.actual.sales)}</strong><div class="sub">주문 ${number(item.actual.orders)}건 · 환불 ${money(item.actual.refunds)}</div></td><td>${item.actual.sales ? ratio(item.cost / item.actual.sales) : "-"}</td></tr>`).join("");
+      const mappingHtml = mappingSummary.map(item => `<tr class="shopping-mapping-row${item.isOff ? " is-off" : ""}"><td>${html(item.adgroups.join(", "))}${item.isOff ? '<span class="shopping-off-label">OFF</span>' : ""}</td><td class="wrap">${html(item.productName)}</td><td>${html(item.productId)}</td><td>${money(item.cost)}</td><td>${money(item.revenue)}</td><td>${ratio(item.roas)}</td><td><strong>${money(item.actual.sales)}</strong><div class="sub">주문 ${number(item.actual.orders)}건 · 환불 ${money(item.actual.refunds)}</div></td><td>${item.actual.sales ? ratio(item.cost / item.actual.sales) : "-"}</td></tr>`).join("");
       els.shoppingIntegratedBody.innerHTML = `
         <div class="kpis" style="margin-bottom:12px">
           <div class="metric"><div class="label">쇼핑검색 광고비</div><div class="value">${money(mix.adCost || dailyCosts.totalCost || 0)}</div><div class="sub">자동 수집 누적 비용</div></div>
