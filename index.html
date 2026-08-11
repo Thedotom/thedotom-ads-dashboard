@@ -598,10 +598,12 @@
     .pl-config-campaign-count { color:#475569; font-size:11px; font-weight:800; }
     .pl-config-campaign-title:first-child { margin-top:0; }
     .pl-config-group { position:relative; margin-top:9px; border:1px solid #cbd5e1; border-left:4px solid #2563eb; border-radius:11px; background:#fff; overflow:hidden; }
-    .pl-config-group.is-off { border-left-color:#dc2626; background:#fffafa; }
+    .pl-config-group.is-off { border-left-color:#94a3b8; background:#f8fafc; }
+    .pl-config-group.is-off > summary { background:#f1f5f9; }
     .pl-config-group > summary { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 14px; cursor:pointer; list-style:none; }
     .pl-config-group > summary::-webkit-details-marker { display:none; }
     .pl-config-group[open] > summary { border-bottom:1px solid var(--line); background:#f8fafc; }
+    .pl-config-group.is-off[open] > summary { background:#f1f5f9; }
     .pl-config-group-body { padding:13px; }
     .pl-config-group-title { display:flex; align-items:flex-start; gap:10px; min-width:0; }
     .pl-config-group-order { flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; min-width:30px; height:24px; padding:0 7px; border-radius:7px; background:#dbeafe; color:#1d4ed8; font-size:11px; font-weight:900; }
