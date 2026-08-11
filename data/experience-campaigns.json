@@ -356,11 +356,11 @@
                           "name":  "8월 [더도톰] 조구만 어린이집 고리수건 체험단",
                           "platform":  "레뷰 (네이버 인플루언서 프리미어)",
                           "campaignUrl":  "https://www.revu.net/campaign/1379139",
-                          "selectedCount":  0,
+                          "selectedCount":  6,
                           "recruitTarget":  6,
-                          "currentStage":  "인플루언서 모집",
-                          "snapshotDate":  "2026-07-31",
-                          "todoNote":  "신청 접수 중(2026-07-31 기준 신청자 72명, 모집 목표 6명) — 08.06 선정 발표 예정, 확정되면 influencers/reviewers 갱신",
+                          "currentStage":  "콘텐츠 등록",
+                          "snapshotDate":  "2026-08-11",
+                          "todoNote":  "모집은 08.04 마감, 08.06 선정 발표 완료(6명). 현재 콘텐츠 등록 기간(08.10~08.16)이며 등록 마감은 08.16입니다.",
                           "stages":  [
                                          {
                                              "name":  "캠페인 기획"
@@ -446,11 +446,50 @@
                                                     ]
                                       },
                           "influencers":  [
-
+                                              {
+                                                  "blogUrl":  "https://blog.naver.com/ght4351",
+                                                  "blogName":  "김꼰님",
+                                                  "nickname":  "김꼰님",
+                                                  "blogId":  "ght4351"
+                                              },
+                                              {
+                                                  "blogUrl":  "https://blog.naver.com/hanee5538",
+                                                  "blogName":  "육아인플햄찌",
+                                                  "nickname":  "육아인플햄찌",
+                                                  "blogId":  "hanee5538"
+                                              },
+                                              {
+                                                  "blogUrl":  "https://blog.naver.com/nana1004k",
+                                                  "blogName":  "뾰로롱세라",
+                                                  "nickname":  "뾰로롱세라",
+                                                  "blogId":  "nana1004k"
+                                              },
+                                              {
+                                                  "blogUrl":  "https://blog.naver.com/kistera",
+                                                  "blogName":  "yijun0929",
+                                                  "nickname":  "yijun0929",
+                                                  "blogId":  "kistera"
+                                              },
+                                              {
+                                                  "blogUrl":  "https://blog.naver.com/dlgudrjf5086",
+                                                  "blogName":  "Kymlove",
+                                                  "nickname":  "Kymlove",
+                                                  "blogId":  "dlgudrjf5086"
+                                              },
+                                              {
+                                                  "blogUrl":  "https://blog.naver.com/kje3329",
+                                                  "blogName":  "슈슈85",
+                                                  "nickname":  "슈슈85",
+                                                  "blogId":  "kje3329"
+                                              }
                                           ],
                           "reviewers":  [
 
-                                        ]
+                                        ],
+                          "selectionDate":  "2026-08-06",
+                          "recruitmentDeadline":  "2026-08-04",
+                          "contentDeadline":  "2026-08-16",
+                          "selectionOptionSummary":  "A. 해피데이 4명 · B. 나랑놀자 2명"
                       }
                   ]
 }
