@@ -1463,7 +1463,11 @@
           ? `<h4 class="pl-config-campaign-title"><span>${html(campaignKey)}</span><span class="pl-config-campaign-count">광고그룹 ${number(groupTotal)}개</span></h4>`
           : "";
         previousCampaign = group.campaign;
-        const keywordChips = (group.keywords || []).map(item => {
+        const orderedKeywords = (group.keywords || [])
+          .map((item, index) => ({ item, index }))
+          .sort((a, b) => Number(b.item.status === "운영 가능") - Number(a.item.status === "운영 가능") || a.index - b.index)
+          .map(entry => entry.item);
+        const keywordChips = orderedKeywords.map(item => {
           const keywordOff = item.status !== "운영 가능";
           return `<span class="pl-keyword-chip${keywordOff ? " is-off" : ""}" title="입찰가 ${money(item.bidAmount || 0)} · ${html(item.status || "")}">${html(item.keyword || "")}${keywordOff ? '<span class="pl-keyword-off-label">OFF</span>' : ""}</span>`;
         }).join("");
