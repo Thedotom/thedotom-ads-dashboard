@@ -336,9 +336,15 @@
     .crm-message-content { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px; padding: 14px; }
     .crm-message-shot { display: block; width: 100%; max-height: 520px; object-fit: contain; object-position: top; background: #f8fafc; border-radius: 8px; }
     .crm-message-text { white-space: pre-wrap; font: inherit; font-size: 12px; line-height: 1.65; margin: 0; color: var(--text); }
+    .crm-campaign-card { width: 100%; height: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px; text-align: left; border: 1px solid var(--line); border-radius: 12px; background: #fff; box-shadow: var(--shadow); color: var(--text); }
+    .crm-campaign-card:hover { border-color: var(--blue); background: #f8faff; }
+    .crm-campaign-card span { display: grid; gap: 6px; }
+    .crm-campaign-card span:last-child { text-align: right; }
+    .crm-campaign-card b { font-size: 14px; }
+    .crm-campaign-card small { color: var(--muted); font-size: 12px; }
     .status.good { display: inline-flex; padding: 5px 9px; border-radius: 999px; background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 800; }
     @media (max-width: 1100px) { .crm-message-grid { grid-template-columns: 1fr; } }
-    @media (max-width: 900px) { .decision-list { grid-template-columns: 1fr; } .crm-message-content { grid-template-columns: 1fr; } .crm-message-shot { max-height: 680px; } }
+    @media (max-width: 900px) { .decision-list { grid-template-columns: 1fr; } .crm-message-content { grid-template-columns: 1fr; } .crm-message-shot { max-height: 680px; } .crm-campaign-card { align-items: flex-start; flex-direction: column; } .crm-campaign-card span:last-child { text-align: left; } }
     .memo-body label { display: block; margin: 10px 0 5px; color: var(--muted); font-size: 12px; font-weight: 700; }
     .rank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 16px; }
     .rank-card { border: 1px solid var(--line); border-radius: 12px; background: #fff; overflow: hidden; box-shadow: var(--shadow); }
@@ -896,6 +902,22 @@
       <section class="page-section" data-page="ga4Analytics"><div class="section-head"><h2>GA4 자사몰 성과</h2><span id="ga4Status" class="count"></span></div><div id="ga4Body"></div></section>
       <section class="page-section" data-page="ga4Products"><div class="section-head"><h2>GA4 상품 성과</h2><span id="ga4ProductsStatus" class="count"></span></div><div id="ga4ProductsBody"></div></section>
       <section class="page-section" data-page="marketingCrm">
+        <div id="crmCampaignList">
+          <div class="section-head"><div><h2>CRM 캠페인</h2><div class="count" style="margin-top:4px">캠페인별 발송·반응·전환 기록</div></div><span class="count">총 1개</span></div>
+          <div class="kpis">
+            <div class="metric"><div class="label">전체 캠페인</div><div class="value">1개</div></div>
+            <div class="metric"><div class="label">누적 대상 DB</div><div class="value">26,378명</div></div>
+            <div class="metric"><div class="label">알림톡 도달</div><div class="value">17,430명</div><div class="sub">도달률 80.5%</div></div>
+            <div class="metric"><div class="label">알림톡 클릭</div><div class="value">524회</div><div class="sub">클릭률 3.0%</div></div>
+            <div class="metric"><div class="label">누적 메시지 비용</div><div class="value">166,492원</div></div>
+          </div>
+          <button class="crm-campaign-card" type="button" data-crm-campaign="kinder-towel-202607">
+            <span><b>어린이집 필수템 2,000원 할인 쿠폰</b><small>2026.07.14 ~ 07.27 · 알림톡 + SMS · 완료</small></span>
+            <span><b>클릭 524회</b><small>쿠폰 사용 11건 · 상세보기 →</small></span>
+          </button>
+        </div>
+        <div id="crmCampaignDetail" hidden>
+          <button class="ghost" type="button" data-crm-back style="width:auto;margin-bottom:12px">← CRM 캠페인 목록</button>
         <div class="section-head"><div><h2>어린이집 필수템 2,000원 할인 쿠폰</h2><div class="count" style="margin-top:4px">2026.07.14 최초 발송 · 2026.07.27 마감 리마인드</div></div><span class="status good">완료</span></div>
         <div class="kpis">
           <div class="metric"><div class="label">CRM 대상 DB</div><div class="value">26,378명</div><div class="sub">알림톡 25,803 · SMS 575</div></div>
@@ -984,6 +1006,7 @@ https://vo.la/MqQwixs
 지금 주문하기
 https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium=link&amp;utm_campaign=re&amp;utm_term=</pre></div></article>
         </div><div class="count" style="margin-top:14px">대상: 카페24 문자수신 동의 고객 · 알림톡 1PU=1원, 건당 7원 · 원본 기준일 2026.08.11</div></div></section>
+        </div>
       </section>
       <section class="page-section" data-page="marketingExperience"><div class="section-head"><h2>체험단</h2></div><div class="memo-body"><div class="empty">체험단 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
       <section class="page-section" data-page="marketingMomCafe"><div class="section-head"><h2>맘카페</h2></div><div class="memo-body"><div class="empty">맘카페 운영 내용과 성과를 이곳에 추가할 수 있습니다.</div></div></section>
@@ -1315,6 +1338,15 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
       if (state.page === "brand") return "브랜드검색";
       return "";
     }
+    function renderCrmCampaignView() {
+      const list = document.getElementById("crmCampaignList");
+      const detail = document.getElementById("crmCampaignDetail");
+      if (!list || !detail) return;
+      const campaign = new URL(window.location.href).searchParams.get("campaign");
+      const showDetail = state.page === "marketingCrm" && campaign === "kinder-towel-202607";
+      list.hidden = showDetail;
+      detail.hidden = !showDetail;
+    }
     function renderPageShell() {
       const titles = {
         overview: "네이버 광고 월간 대시보드",
@@ -1371,6 +1403,7 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
       const fixedContextPage = state.page === "monthlyReport" || isMarketingColumnPage;
       document.querySelectorAll('label[for="monthFilter"], #monthFilter, .page-month-control').forEach(control => { control.style.display = fixedContextPage ? "none" : ""; });
       els.typeFilter.value = pageType();
+      renderCrmCampaignView();
     }
     function fillCampaigns() {
       const current = els.campaignFilter.value;
@@ -3074,6 +3107,7 @@ function renderBrandContract() {
         state.page = btn.dataset.page;
         const nextUrl = new URL(window.location.href);
         nextUrl.searchParams.set("page", state.page);
+        if (state.page === "marketingCrm") nextUrl.searchParams.delete("campaign");
         history.replaceState(null, "", nextUrl);
         if (state.data?.month !== state.month) {
           await loadData();
@@ -3081,6 +3115,23 @@ function renderBrandContract() {
           fillMonths(); fillCampaigns(); fillAdgroups(); render();
         }
         document.body.classList.remove("sidebar-open");
+      });
+    });
+    document.querySelectorAll("[data-crm-campaign]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const nextUrl = new URL(window.location.href);
+        nextUrl.searchParams.set("page", "marketingCrm");
+        nextUrl.searchParams.set("campaign", btn.dataset.crmCampaign);
+        history.replaceState(null, "", nextUrl);
+        renderCrmCampaignView();
+      });
+    });
+    document.querySelectorAll("[data-crm-back]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const nextUrl = new URL(window.location.href);
+        nextUrl.searchParams.delete("campaign");
+        history.replaceState(null, "", nextUrl);
+        renderCrmCampaignView();
       });
     });
     document.querySelectorAll(".nav button[data-nav-toggle]").forEach(btn => {
