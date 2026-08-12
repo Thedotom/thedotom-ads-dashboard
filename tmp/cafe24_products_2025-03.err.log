@@ -1,0 +1,39 @@
+Traceback (most recent call last):
+  File "D:\±¤°íº¸°í¼­\public_dashboard\scripts\fetch_cafe24_product_performance_api.py", line 32, in request_json
+    with urllib.request.urlopen(request, timeout=60) as response:
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\urllib\request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\urllib\request.py", line 493, in open
+    response = meth(req, response)
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\urllib\request.py", line 602, in http_response
+    response = self.parent.error(
+        'http', request, response, code, msg, hdrs)
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\urllib\request.py", line 531, in error
+    return self._call_chain(*args)
+           ~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\urllib\request.py", line 464, in _call_chain
+    result = func(*args)
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\urllib\request.py", line 611, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 429: Too Many Requests
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\±¤°íº¸°í¼­\public_dashboard\scripts\fetch_apply_cafe24_product_range_safe.py", line 108, in <module>
+    main()
+    ~~~~^^
+  File "D:\±¤°íº¸°í¼­\public_dashboard\scripts\fetch_apply_cafe24_product_range_safe.py", line 71, in main
+    rows, orders, raw_items = cafe24.build_rows(date_text, config, headers)
+                              ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\±¤°íº¸°í¼­\public_dashboard\scripts\fetch_cafe24_product_performance_api.py", line 124, in build_rows
+    for item in fetch_items(config, headers, order["order_id"]):
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\±¤°íº¸°í¼­\public_dashboard\scripts\fetch_cafe24_product_performance_api.py", line 104, in fetch_items
+    return request_json("GET", url, headers=headers).get("items") or []
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\±¤°íº¸°í¼­\public_dashboard\scripts\fetch_cafe24_product_performance_api.py", line 37, in request_json
+    raise RuntimeError(f"HTTP {error.code}: {detail}") from error
+RuntimeError: HTTP 429: {"error":{"code":429,"message":"Too much requests occur. (40\/40)"}}

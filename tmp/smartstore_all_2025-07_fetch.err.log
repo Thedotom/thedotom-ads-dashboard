@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "D:\±¤°íº¸°í¼­\public_dashboard\scripts\fetch_smartstore_product_performance_range.py", line 58, in <module>
+    main()
+    ~~~~^^
+  File "D:\±¤°íº¸°í¼­\public_dashboard\scripts\fetch_smartstore_product_performance_range.py", line 46, in main
+    outputs.append(str(download_file(driver, store_key, target)))
+                       ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\±¤°íº¸°í¼­\public_dashboard\scripts\fetch_smartstore_product_performance_browser.py", line 193, in download_file
+    raise RuntimeError("download did not complete within 90 seconds")
+RuntimeError: download did not complete within 90 seconds
