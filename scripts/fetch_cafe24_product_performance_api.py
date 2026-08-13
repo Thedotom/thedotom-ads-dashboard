@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import base64
 import json
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -28,13 +29,19 @@ def request_json(method, url, headers=None, body=None):
     request = urllib.request.Request(url, data=data, method=method)
     for key, value in (headers or {}).items():
         request.add_header(key, value)
-    try:
-        with urllib.request.urlopen(request, timeout=60) as response:
-            raw = response.read().decode("utf-8")
-            return json.loads(raw) if raw else {}
-    except urllib.error.HTTPError as error:
-        detail = error.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"HTTP {error.code}: {detail}") from error
+    for attempt in range(6):
+        try:
+            # Cafe24 limits this endpoint to 40 requests per minute.
+            time.sleep(1.6)
+            with urllib.request.urlopen(request, timeout=60) as response:
+                raw = response.read().decode("utf-8")
+                return json.loads(raw) if raw else {}
+        except urllib.error.HTTPError as error:
+            detail = error.read().decode("utf-8", errors="replace")
+            if error.code == 429 and attempt < 5:
+                time.sleep(65)
+                continue
+            raise RuntimeError(f"HTTP {error.code}: {detail}") from error
 
 
 def load_access():
