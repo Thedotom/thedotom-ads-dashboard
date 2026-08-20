@@ -1082,7 +1082,7 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
     const initialParams = new URLSearchParams(window.location.search);
     const initialMonth = initialParams.get("month") || "";
     const initialPage = initialParams.get("page") || "overview";
-    const state = { data: null, availableMonths: [], executiveReportData: {}, executiveGa4Evidence: {}, executiveChannelEfficiency: {}, slotMonthlyProductSales: {}, brandSearchPerformance: { contracts: [] }, brandContractKey: "current", powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: initialPage, month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
+    const state = { data: null, availableMonths: [], executiveReportData: {}, executiveGa4Evidence: {}, executiveChannelEfficiency: {}, slotMonthlyProductSales: {}, slotProductOverview: {}, brandSearchPerformance: { contracts: [] }, brandContractKey: "current", powerlinkCreativeConfig: { groups: [] }, badOnly: false, detailMode: "all", plView: "table", page: initialPage, month: initialMonth, rankView: "shopping", rankDate: "", rankSlot: "", powerlinkDevice: "pc", rewardView: "active", shoppingMode: "all", shoppingProduct: "", dailyProductDate: "", dailyProductMonth: "" };
     const els = {
       pageTitle: document.getElementById("pageTitle"),
       meta: document.getElementById("meta"),
@@ -1262,7 +1262,7 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
       ] };
     }
     async function loadData() {
-      const [dashboardData, creativeConfig, executiveReportData, executiveGa4Evidence, executiveChannelEfficiency, slotMonthlyProductSales, brandSearchPerformance] = await Promise.all([
+      const [dashboardData, creativeConfig, executiveReportData, executiveGa4Evidence, executiveChannelEfficiency, slotMonthlyProductSales, slotProductOverview, brandSearchPerformance] = await Promise.all([
         fetchDashboardData(),
         fetch(`data/powerlink-creative-config.json?v=${Date.now()}`, { cache: "no-store" })
           .then(response => response.ok ? response.json() : { groups: [] })
@@ -1279,6 +1279,9 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
         fetch(`data/slot-monthly-product-sales-2026-01-07.json?v=${Date.now()}`, { cache: "no-store" })
           .then(response => response.ok ? response.json() : {})
           .catch(() => ({})),
+        fetch(`data/slot-product-overview-2026-08.json?v=${Date.now()}`, { cache: "no-store" })
+          .then(response => response.ok ? response.json() : {})
+          .catch(() => ({})),
         fetchBrandSearchPerformance()
       ]);
       state.data = dashboardData;
@@ -1287,6 +1290,7 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
       state.executiveGa4Evidence = executiveGa4Evidence;
       state.executiveChannelEfficiency = executiveChannelEfficiency;
       state.slotMonthlyProductSales = slotMonthlyProductSales;
+      state.slotProductOverview = slotProductOverview;
       state.brandSearchPerformance = brandSearchPerformance;
       state.month = state.data.month;
       applyManualRevenueLocal(state.month);
@@ -2331,7 +2335,12 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
       const slotCards = periods.map(period => `
         <article class="slot-live-card"><div class="slot-live-top"><div><div class="slot-live-name">${html(period.product || "-")}</div><div class="slot-live-period">${html(period.startDate || "")} ~ ${html(period.endDate || "")}</div></div><span class="slot-decision ${decisionClass(period.decision)}">${html(period.decision || "관찰중")}</span></div>
         <div class="slot-live-metrics"><div class="slot-live-metric"><span>슬롯비</span><strong>${money(period.slotCost || 0)}</strong></div><div class="slot-live-metric"><span>현재 매출</span><strong>${money(period.during?.sales || 0)}</strong></div><div class="slot-live-metric"><span>집계 진행</span><strong>${number(period.during?.daysWithData || 0)}/${number(period.days || 0)}일</strong></div><div class="slot-live-metric"><span>검색 순위</span><strong>${period.rankAverage == null ? "-" : `${Number(period.rankAverage).toFixed(1)}위`}</strong></div></div></article>`).join("") || `<div class="empty">${html(state.month)}에 운영된 슬롯이 없습니다.</div>`;
-      const slotInvoices = state.data.slotInvoices || [];
+      const slotOverview = state.slotProductOverview || {};
+      const slotOverviewProducts = slotOverview.products || [];
+      const overviewCards = slotOverviewProducts.map(item => { const current=item.current||{}; const active=periods.find(period=>String(period.productId)===String(item.productId)&&!period.isComplete); const blended=Number(current.adCost||0)+Number(active?.slotCost||0); return `<article class="slot-live-card"><div class="slot-live-top"><div><div class="slot-live-name">${html(item.product||"")}</div><div class="slot-live-period">${html(item.latestDate||"-")}까지 · ${active?`${html(active.startDate)}~${html(active.endDate)} 진행중`:"운영 이력"}</div></div><span class="slot-decision ${active?"active":"good"}">${active?"진행중":"집계"}</span></div><div class="slot-live-metrics"><div class="slot-live-metric"><span>8월 일평균 매출</span><strong>${money(current.dailySales||0)}</strong></div><div class="slot-live-metric"><span>일평균 주문</span><strong>${Number(current.dailyOrders||0).toFixed(1)}건</strong></div><div class="slot-live-metric"><span>평균 주문금액</span><strong>${money(current.orderValue||0)}</strong></div><div class="slot-live-metric"><span>8월 광고비</span><strong>${money(current.adCost||0)}</strong></div><div class="slot-live-metric"><span>현재 슬롯비</span><strong>${money(active?.slotCost||0)}</strong></div><div class="slot-live-metric"><span>광고+슬롯 비용률</span><strong>${current.sales?rateText(blended/Number(current.sales)):"-"}</strong></div></div></article>`; }).join("");
+      const overviewMonthlyCharts = slotOverviewProducts.map(item => `<div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">${html(item.product)} · 월별 매출과 주문</div><div class="slot-panel-sub">월 매출 막대 · 일평균 주문 선</div></div></div><div style="height:260px;position:relative"><canvas id="slotMonthlyOverview-${html(item.productId)}"></canvas></div></div>`).join("");
+      const overviewRankCharts = slotOverviewProducts.map(item => `<div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">${html(item.product)} · 검색순위 추이</div><div class="slot-panel-sub">Google Sheet 순위 트래킹 · 낮을수록 상위</div></div></div><div style="height:250px;position:relative"><canvas id="slotRankOverview-${html(item.productId)}"></canvas></div></div>`).join("");
+      const slotOverviewPanel = slotOverviewProducts.length ? `<div class="slot-panel-head" style="margin:4px 0 0"><div><div class="slot-panel-title" style="font-size:18px">상품별 슬롯 운영 대시보드</div><div class="slot-panel-sub">${html(slotOverview.updatedAt||"")} 기준 · Google Sheet 제품 성과·순위·광고비 연결</div></div></div><div class="slot-card-grid">${overviewCards}</div><div class="slot-card-grid">${overviewMonthlyCharts}</div><div class="slot-card-grid">${overviewRankCharts}</div>` : "";      const slotInvoices = state.data.slotInvoices || [];
       const invoiceTotal = slotInvoices.reduce((sum, invoice) => sum + Number(invoice.totalAmount || 0), 0);
       const slotInvoicePanel = slotInvoices.length ? `<details class="slot-panel" style="overflow:hidden"><summary style="list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;background:linear-gradient(135deg,#f8fafc,#eef2ff)"><div><div class="slot-panel-title">슬롯 결제 증빙 아카이브</div><div class="slot-panel-sub">세금계산서 ${number(slotInvoices.length)}건 · 누적 ${money(invoiceTotal)}</div></div><span aria-hidden="true" style="font-size:22px;line-height:1;color:#1d4ed8">⌄</span></summary><div style="padding:10px 16px 16px">${[...slotInvoices].sort((a,b)=>String(b.issueDate||"").localeCompare(String(a.issueDate||""))).map(invoice => `<details style="border-bottom:1px solid var(--line)"><summary style="list-style:none;cursor:pointer;display:grid;grid-template-columns:82px minmax(0,1fr) auto;align-items:center;gap:14px;padding:14px 4px"><img src="${html(invoice.assetPath||"")}" alt="" style="width:82px;height:54px;object-fit:cover;object-position:top;border:1px solid var(--line);border-radius:7px;background:#fff"><div style="min-width:0"><strong style="display:block;font-size:13px;color:var(--ink)">${html(invoice.servicePeriod||"-")}</strong><span style="display:block;margin-top:4px;font-size:11px;color:var(--muted)">발행 ${html(invoice.issueDate||"-")} · 승인번호 ${html(invoice.approvalNumber||"-")}</span></div><div style="text-align:right"><strong style="display:block;color:#1d4ed8">${money(invoice.totalAmount||0)}</strong><span aria-hidden="true" style="font-size:18px;line-height:1;color:var(--muted)">⌄</span></div></summary><div style="display:grid;grid-template-columns:minmax(260px,1fr) minmax(280px,420px);gap:16px;padding:4px 4px 18px 100px;align-items:start"><div class="slot-insight-list"><div class="slot-insight"><strong>공급가액 ${money(invoice.supplyAmount||0)} + VAT ${money(invoice.vat||0)}</strong><span>${html(invoice.supplier||"-")} · ${number(invoice.quantity||0)}개 · 개당 ${money(invoice.unitPrice||0)}</span></div>${(invoice.products||[]).length?`<div class="slot-insight"><strong>상품 구성</strong><span>${invoice.products.map(row=>`${html(row.product)} ${number(row.quantity)}개 · ${money(row.amount)}`).join("<br>")}</span></div>`:""}</div><a href="${html(invoice.assetPath||"#")}" target="_blank" rel="noopener"><img src="${html(invoice.assetPath||"")}" alt="${html(invoice.issueDate||"")} 세금계산서" style="display:block;width:100%;max-width:420px;height:auto;max-height:260px;object-fit:contain;object-position:top;border:1px solid var(--line);border-radius:10px;background:#fff"></a></div></details>`).join("")}</div></details>` : "";      const monthRows = [...new Set([...month2025.keys(), ...month2026.keys()])].sort().map(month => { const a=month2025.get(month)||{}, b=month2026.get(month)||{}; return `<tr><td>${month}월</td><td>${money(a.adCost||0)}</td><td>${money(b.adCost||0)}</td><td>${roasText(a.roas||0)}</td><td>${roasText(b.roas||0)}</td></tr>`; }).join("");
       const accountRows = (report2026.accounts || []).map(account => `<tr><td>${html(account.account||"")}</td><td>${money(account.totals?.adCost||0)}</td><td>${money(account.totals?.adSales||0)}</td><td>${roasText(account.totals?.roas||0)}</td><td>${number(account.totals?.conversions||0)}</td></tr>`).join("");
@@ -2415,14 +2424,25 @@ https://www.thedotom.com/myshop/coupon/coupon.html?utm_source=crm&amp;utm_medium
       }      els.slotEfficiencyStatus.textContent = `${slotPeriodLabel} · 전체 슬롯 ${periods.length}개`;
       els.slotEfficiencyBody.innerHTML = `
         <div class="slot-exec">
-          ${slotMonthlySalesPanel}
+          ${slotOverviewPanel}
           ${slotInvoicePanel}
+          ${slotMonthlySalesPanel}
           <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 운영 기간 매출</div><div class="slot-panel-sub">${slotPeriodLabel} · 완료된 운영기간별 상품 매출 비교 · 진행 중인 무상 AS 기간 제외</div></div></div><div style="height:320px;position:relative"><canvas id="slotEfficiencyChart"></canvas></div></div>
           <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">슬롯 진행 상세 리스트</div><div class="slot-panel-sub">실제 진행 일정 ${slotPeriodLabel} · 전체 ${periods.length}개 구간</div></div></div><div class="table-wrap"><table><thead><tr><th>제품·키워드</th><th>진행 기간</th><th>슬롯비</th><th>현재 매출</th><th>주문</th><th>슬롯비율</th><th>검색 순위</th><th>판정</th></tr></thead><tbody>${slotRows}</tbody></table></div></div>
           <div class="slot-panel"><div class="slot-panel-head"><div><div class="slot-panel-title">판정 기준</div></div></div><div class="slot-insight-list"><div class="slot-insight"><strong>유지</strong><span>증분매출÷슬롯비 3배 이상 + 검색 5위 이내</span></div><div class="slot-insight warn"><strong>재검토</strong><span>회수배수 1~3배 또는 순위 개선이 일시적</span></div><div class="slot-insight warn"><strong>중단 후보</strong><span>회수배수 1배 미만 또는 잔존효과 없음</span></div></div></div>
           <p class="slot-note">슬롯 증분효과는 전년 동기간 데이터와 종료 후 7~10일 관찰값 확보 후 확정됩니다.</p>
         </div>`;
-      if (window._charts.historicalAd) window._charts.historicalAd.destroy();
+      slotOverviewProducts.forEach((item,index) => {
+        const colors=["#4865f4","#0891b2","#7c3aed"], color=colors[index%colors.length];
+        const monthlyCanvas=document.getElementById(`slotMonthlyOverview-${item.productId}`);
+        const monthlyKey=`slotMonthlyOverview${item.productId}`;
+        if(window._charts[monthlyKey]) window._charts[monthlyKey].destroy();
+        if(monthlyCanvas) window._charts[monthlyKey]=new Chart(monthlyCanvas,{type:"bar",data:{labels:(item.months||[]).map(row=>`${String(row.month).slice(5)}월`),datasets:[{label:"월 매출",data:(item.months||[]).map(row=>Number(row.sales||0)),backgroundColor:`${color}33`,borderColor:color,borderWidth:2,borderRadius:5,yAxisID:"y"},{type:"line",label:"일평균 주문",data:(item.months||[]).map(row=>Number(row.dailyOrders||0)),borderColor:"#f59e0b",backgroundColor:"#f59e0b",pointRadius:3,tension:.3,yAxisID:"y1"}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"},tooltip:{callbacks:{label:ctx=>ctx.dataset.yAxisID==="y1"?`${ctx.dataset.label}: ${Number(ctx.raw).toFixed(1)}건`:`${ctx.dataset.label}: ${won.format(ctx.raw)}`}}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,ticks:{callback:value=>won.format(value)}},y1:{beginAtZero:true,position:"right",grid:{drawOnChartArea:false},ticks:{callback:value=>`${value}건`}}}}});
+        const rankCanvas=document.getElementById(`slotRankOverview-${item.productId}`);
+        const rankKey=`slotRankOverview${item.productId}`;
+        if(window._charts[rankKey]) window._charts[rankKey].destroy();
+        if(rankCanvas) window._charts[rankKey]=new Chart(rankCanvas,{type:"line",data:{labels:(item.rankDaily||[]).map(row=>String(row.date).slice(5).replace("-",".")),datasets:[{label:"평균 순위",data:(item.rankDaily||[]).map(row=>Number(row.rank||0)),borderColor:color,backgroundColor:`${color}22`,fill:true,pointRadius:2,tension:.25}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${Number(ctx.raw).toFixed(1)}위`}}},scales:{x:{grid:{display:false},ticks:{maxTicksLimit:12,maxRotation:45,minRotation:0}},y:{reverse:true,min:1,ticks:{callback:value=>`${value}위`}}}}});
+      });      if (window._charts.historicalAd) window._charts.historicalAd.destroy();
       if (window._charts.executiveSlot) window._charts.executiveSlot.destroy();
       const executiveSlotCanvas = document.getElementById("executiveSlotChart");
       if (executiveSlotCanvas) window._charts.executiveSlot = new Chart(executiveSlotCanvas,{type:"bar",data:{labels:slotChartLabels,datasets:slotChartDatasets},options:slotChartOptions});      if (window._charts.slotEfficiency) window._charts.slotEfficiency.destroy();
