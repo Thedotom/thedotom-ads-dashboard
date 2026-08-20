@@ -156,21 +156,15 @@ def update_august_payment(data: dict) -> None:
 
 
 def update_invoice(data: dict) -> None:
-    invoices = data.setdefault("slotInvoices", [])
-    values = {
-        "issueDate": "2026-08-19", "approvalNumber": "20260819-10260819-43955418",
-        "supplier": "주식회사 아우어마케팅", "servicePeriod": "2026-08-20 ~ 2026-08-29",
-        "invoiceItem": "8.10~8.19 온라인서비스", "quantity": 30, "unitPrice": 40_000,
-        "supplyAmount": 1_200_000, "vat": 120_000, "totalAmount": 1_320_000,
-        "assetPath": "assets/slots/tax-invoice-2026-08-19.png", "note": "스테이 10일 30개 유료 연장 증빙",
-        "products": [
-            {"product": "돌잔치답례품(수건)", "quantity": 10, "amount": 400_000},
-            {"product": "돌잔치답례품(핸드워시)", "quantity": 15, "amount": 600_000},
-            {"product": "어린이집수건", "quantity": 5, "amount": 200_000},
-        ],
-    }
-    invoice = next((row for row in invoices if row.get("approvalNumber") == values["approvalNumber"]), None)
-    invoices.append(values) if invoice is None else invoice.update(values)
+    invoice_rows = [
+        {"issueDate":"2026-08-19","approvalNumber":"20260819-10260819-43955418","servicePeriod":"2026-08-20 ~ 2026-08-29","assetPath":"assets/slots/tax-invoice-2026-08-19.png","note":"스테이 10일 30개 유료 연장 증빙","products":[{"product":"돌잔치답례품(수건)","quantity":10,"amount":400_000},{"product":"돌잔치답례품(핸드워시)","quantity":15,"amount":600_000},{"product":"어린이집수건","quantity":5,"amount":200_000}]},
+        {"issueDate":"2026-07-30","approvalNumber":"20260730-10260730-22443963","servicePeriod":"2026-07-31 ~ 2026-08-09","assetPath":"assets/slots/tax-invoice-2026-07-31.jpg"},
+        {"issueDate":"2026-07-20","approvalNumber":"20260720-10260720-14835422","servicePeriod":"2026-07-21 ~ 2026-07-30","assetPath":"assets/slots/tax-invoice-2026-07-21.jpg"},
+        {"issueDate":"2026-07-09","approvalNumber":"20260709-10260709-97717430","servicePeriod":"2026-07-11 ~ 2026-07-20","assetPath":"assets/slots/tax-invoice-2026-07-11.jpg"},
+        {"issueDate":"2026-06-30","approvalNumber":"20260630-10260630-81637295","servicePeriod":"2026-07-01 ~ 2026-07-10","assetPath":"assets/slots/tax-invoice-2026-07-01.jpg"},
+    ]
+    common = {"supplier":"주식회사 아우어마케팅","invoiceItem":"온라인서비스","quantity":30,"unitPrice":40_000,"supplyAmount":1_200_000,"vat":120_000,"totalAmount":1_320_000}
+    data["slotInvoices"] = [{**common, **row} for row in invoice_rows]
 
 def main() -> None:
     for path in TARGETS:
