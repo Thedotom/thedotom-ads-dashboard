@@ -46,17 +46,17 @@ def styled_table(data,widths,header=True):
  t.setStyle(TableStyle(rules)); return t
 def line_chart(rows):
  d=Drawing(470,205); c=HorizontalLineChart(); c.x=45;c.y=35;c.width=395;c.height=135
- c.data=[[float(r.get('mer') or 0) for r in rows]]
+ c.data=[[float(r.get('platformRoas') or 0) for r in rows]]
  c.categoryAxis.categoryNames=[r['month'][5:]+'월' for r in rows]; c.categoryAxis.labels.fontName='Malgun';c.categoryAxis.labels.fontSize=8;c.valueAxis.labels.fontName='Malgun';c.valueAxis.labels.fontSize=8;c.valueAxis.valueMin=0
  c.lines[0].strokeColor=BLUE;c.lines[0].strokeWidth=2;c.lines[1].strokeColor=AMBER;c.lines[1].strokeWidth=2;d.add(c)
- d.add(String(205,8,'전체 매출/광고비',fontName='Malgun',fontSize=8,fillColor=BLUE));return d
+ d.add(String(195,8,'네이버 광고 ROAS',fontName='Malgun',fontSize=8,fillColor=BLUE));return d
 def slot_chart(periods):
  sums={}
  for r in periods:
   if r.get('isComplete'): sums[r.get('product','기타')]=sums.get(r.get('product','기타'),0)+float((r.get('during') or {}).get('sales') or 0)/100000000
  d=Drawing(470,205);c=VerticalBarChart();c.x=55;c.y=40;c.width=370;c.height=135;c.data=[list(sums.values())];c.categoryAxis.categoryNames=list(sums);c.categoryAxis.labels.fontName='Malgun';c.categoryAxis.labels.fontSize=8;c.valueAxis.labels.fontName='Malgun';c.valueAxis.labels.fontSize=8;c.valueAxis.valueMin=0;c.bars[0].fillColor=BLUE;c.bars[0].strokeColor=BLUE;d.add(c);d.add(String(210,8,'완료 구간 집계 매출 (억원)',fontName='Malgun',fontSize=8,fillColor=SLATE));return d
 def footer(canvas,doc):
- canvas.saveState();canvas.setStrokeColor(LINE);canvas.line(18*mm,14*mm,192*mm,14*mm);canvas.setFont('Malgun',7);canvas.setFillColor(SLATE);canvas.drawString(18*mm,9*mm,'더도톰 2026년 1~7월 광고·슬롯 보고서');canvas.drawRightString(192*mm,9*mm,str(doc.page));canvas.restoreState()
+ canvas.saveState();canvas.setStrokeColor(LINE);canvas.line(18*mm,14*mm,192*mm,14*mm);canvas.setFont('Malgun',7);canvas.setFillColor(SLATE);canvas.drawString(18*mm,9*mm,'더도톰 2026년 1~7월 네이버 광고·슬롯 비용 보고서');canvas.drawRightString(192*mm,9*mm,str(doc.page));canvas.restoreState()
 def build():
  OUT.parent.mkdir(parents=True,exist_ok=True); periods=sorted(dash['slotEfficiency']['periods'],key=lambda x:x.get('startDate','')); ss=dash['slotEfficiency']['summary']; groups=power.get('groups',[]); kws=[k for g in groups for k in g.get('keywords',[])]; off=[k for k in kws if k.get('status')!='운영 가능']; goff=[g for g in groups if g.get('campaignStatus')!='운영 가능' or g.get('adgroupStatus')!='운영 가능']
  slot_start=min((r.get('startDate','') for r in periods),default=''); slot_end=max((r.get('endDate','') for r in periods),default=''); complete_count=sum(1 for r in periods if r.get('isComplete')); active_count=len(periods)-complete_count
@@ -80,19 +80,22 @@ def build():
  for r in periods: slot_by_month[r['startDate'][:7]]=slot_by_month.get(r['startDate'][:7],0)+float(r.get('slotCost') or 0)
  monthly=[]
  for r in report['monthly']:
-  row=dict(r);row['slotCost']=slot_by_month.get(row['month'],0);row['marketingCost']=max(0,float(row['totalMarketingCost'])-row['slotCost']);row['marketingCostRate']=row['marketingCost']/row['actualSales'] if row['actualSales'] else 0;row['mer']=row['actualSales']/row['marketingCost'] if row['marketingCost'] else 0;monthly.append(row)
- report_slot_cost=sum(r['slotCost'] for r in monthly);marketing_cost=float(report['totalMarketingCost'])-report_slot_cost;marketing_rate=marketing_cost/report['actualSales'];report_mer=report['actualSales']/marketing_cost
+  row=dict(r);row['slotCost']=slot_by_month.get(row['month'],0);row['marketingCost']=float(row.get('searchAdCost') or 0);row['platformRoas']=float(row.get('platformAttributedSales') or 0)/row['marketingCost'] if row['marketingCost'] else 0;monthly.append(row)
+ report_slot_cost=float(ss.get('totalSlotCost') or 0);marketing_cost=float(report['searchAdCost']);direct_cost=marketing_cost+report_slot_cost;reference_cost_rate=direct_cost/report['actualSales'];ad_roas=float(report['platformAttributedSales'])/marketing_cost
  ch={r['channel']:r for r in channels['operational']}; pl=ch['파워링크']; sh=ch['쇼핑검색']; sh['adRoas']=sh['platformAttributedSales']/sh['adCost'] if sh['adCost'] else 0; cg=channels['ga4']
- doc=SimpleDocTemplate(str(OUT),pagesize=A4,leftMargin=18*mm,rightMargin=18*mm,topMargin=18*mm,bottomMargin=19*mm,title='더도톰 2026년 1~7월 광고·슬롯 보고서',author='더도톰'); story=[]
- cover=Table([[P('2026년 1~7월<br/>광고·슬롯 보고서','title')],[P('전체 실매출과 광고비를 먼저 보여주고, 광고 전환매출은 별도의<br/>광고 성과 참고값으로 구분해 제시합니다.','sub')]],colWidths=[174*mm],rowHeights=[72*mm,52*mm]);cover.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),NAVY),('BACKGROUND',(0,1),(-1,1),colors.HexColor('#172554')),('VALIGN',(0,0),(-1,-1),'MIDDLE'),('LEFTPADDING',(0,0),(-1,-1),15*mm)]));story += [Spacer(1,28*mm),cover,Spacer(1,13*mm),P('보고 기간  2026.01.01 - 2026.07.31','h2'),P(f'슬롯 운영 일정  {slot_start} - {slot_end}  |  2026.08.10 - 2026.08.19 무상 AS(0원)'),PageBreak()]
- story += [P('1. 경영 요약','h1')]
- kd=[[P(x,'klabel') for x in ['전체 실매출','광고·마케팅비','광고비 비중','매출/광고비']],[P(money(report['actualSales']),'kpi'),P(money(marketing_cost),'kpi'),P(pct(marketing_rate),'kpi'),P(mult(report_mer),'kpi')]];kt=Table(kd,colWidths=[43.5*mm]*4,rowHeights=[12*mm,18*mm]);kt.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),PALE),('GRID',(0,0),(-1,-1),.5,LINE),('VALIGN',(0,0),(-1,-1),'MIDDLE')]));story += [kt,Spacer(1,8*mm),P('숫자 읽는 방법','h2')]
- conclusions=[('전체 실매출',f"실제 판매 실적 {money(report['actualSales'])}입니다. 회사 매출과 광고비 비율 계산에 사용합니다."),('광고·마케팅비',f"실제 지출액 {money(marketing_cost)}이며 슬롯비는 별도로 구분했습니다."),('광고 전환매출','네이버·GA4가 광고에 연결한 추정 매출입니다. 전체 실매출에 더하지 않고 광고 성과 참고값으로만 봅니다.'),('핵심 구분','회사 실적은 전체 실매출로, 광고 효율은 광고비·전환수·광고 전환매출로 각각 확인합니다.') ];story += [styled_table([[P(a,'smallb'),P(b)] for a,b in conclusions],[36*mm,138*mm],False),PageBreak()]
- story += [P('2. 1~7월 월별 성과','h1'),line_chart(monthly)]
- md=[[P(x,'smallw') for x in ['월','전체 실매출','광고·마케팅비','슬롯비','광고비 비중','매출/광고비']]]
- for r in monthly: md.append([P(r['month'][5:]+'월','small'),P(money(r['actualSales']),'small'),P(money(r['marketingCost']),'small'),P(money(r['slotCost']),'small'),P(pct(r['marketingCostRate']),'small'),P(mult(r['mer']),'small')])
- story += [styled_table(md,[16*mm,38*mm,34*mm,26*mm,28*mm,32*mm]),Spacer(1,7*mm),P('해석','h2'),P('월별 전체 실매출은 실제 판매 기준이며 광고 전환매출과 다른 값입니다. 광고·마케팅비와 매출/광고비 계산에서는 슬롯비를 제외했습니다.'),PageBreak()]
- story += [P('3. 파워링크·쇼핑검색 운영 효율','h1'),P('집계 기간  2026.01.01 - 2026.07.31  |  실제 광고비·노출·클릭 기준'),Spacer(1,5*mm)]
+ doc=SimpleDocTemplate(str(OUT),pagesize=A4,leftMargin=18*mm,rightMargin=18*mm,topMargin=18*mm,bottomMargin=19*mm,title='더도톰 2026년 1~7월 네이버 광고·슬롯 비용 보고서',author='더도톰'); story=[]
+ cover=Table([[P('2026년 1~7월<br/>네이버 광고·슬롯 비용 보고서','title')],[P('네이버 파워링크·쇼핑검색 광고비와 검색 슬롯 결과만 정리했습니다.<br/>다른 마케팅 활동은 이 보고서에 포함하지 않았습니다.','sub')]],colWidths=[174*mm],rowHeights=[72*mm,52*mm]);cover.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),NAVY),('BACKGROUND',(0,1),(-1,1),colors.HexColor('#172554')),('VALIGN',(0,0),(-1,-1),'MIDDLE'),('LEFTPADDING',(0,0),(-1,-1),15*mm)]));story += [Spacer(1,28*mm),cover,Spacer(1,13*mm),P('보고 기간  2026.01.01 - 2026.07.31','h2'),P(f'슬롯 운영 일정  {slot_start} - {slot_end}  |  2026.08.10 - 2026.08.19 무상 AS(0원)'),PageBreak()]
+ story += [P('1. 대표 요약','h1')]
+ kd=[[P(x,'klabel') for x in ['네이버 광고비','슬롯비','광고 전환매출','광고 ROAS']],[P(money(marketing_cost),'kpi'),P(money(report_slot_cost),'kpi'),P(money(report['platformAttributedSales']),'kpi'),P(mult(ad_roas),'kpi')]];kt=Table(kd,colWidths=[43.5*mm]*4,rowHeights=[12*mm,18*mm]);kt.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),PALE),('GRID',(0,0),(-1,-1),.5,LINE),('VALIGN',(0,0),(-1,-1),'MIDDLE')]));story += [kt,Spacer(1,8*mm),P('이 보고서의 범위','h2')]
+ scope=[('포함', '네이버 파워링크·쇼핑검색 광고비와 전환성과, 네이버 검색 슬롯 비용·순위·운영기간 매출'),('제외', '라이브 방송, 체험단, 맘카페, CRM 및 기타 마케팅 활동의 비용과 성과'),('직접 집계 비용',f"네이버 광고비 {money(marketing_cost)} + 슬롯비 {money(report_slot_cost)} = {money(direct_cost)}"),('전체 매출 참고',f"전체 매출 {money(report['actualSales'])}은 비용 규모 비교용입니다. 네이버 광고의 기여 매출을 뜻하지 않습니다.")]
+ story += [styled_table([[P(a,'smallb'),P(b)] for a,b in scope],[36*mm,138*mm],False),Spacer(1,7*mm),P('꼭 구분해서 볼 숫자','h2')]
+ definitions=[('광고 전환매출',f"네이버가 광고에 연결한 추정 매출 {money(report['platformAttributedSales'])}입니다."),('광고 ROAS',f"광고비 1원당 광고 전환매출 {ad_roas:.1f}원으로 집계됐습니다."),('전체 매출',f"비용 비교용 참고값이며 직접 집계 비용은 전체 매출의 {pct(reference_cost_rate)}입니다."),('해석 한계','라이브·체험단·맘카페·CRM 등이 제외되어 네이버 광고의 순수 매출 기여도는 이 보고서만으로 계산할 수 없습니다.')]
+ story += [styled_table([[P(a,'smallb'),P(b)] for a,b in definitions],[36*mm,138*mm],False),PageBreak()]
+ story += [P('2. 월별 네이버 광고비와 전환성과','h1'),line_chart(monthly)]
+ md=[[P(x,'smallw') for x in ['월','전체 매출 (참고)','네이버 광고비','슬롯비','광고 전환매출','광고 ROAS']]]
+ for r in monthly: md.append([P(r['month'][5:]+'월','small'),P(money(r['actualSales']),'small'),P(money(r['marketingCost']),'small'),P(money(r['slotCost']),'small'),P(money(r['platformAttributedSales']),'small'),P(mult(r['platformRoas']),'small')])
+ story += [styled_table(md,[16*mm,34*mm,30*mm,24*mm,38*mm,32*mm]),Spacer(1,7*mm),P('표 읽는 방법','h2'),P('광고 전환매출은 네이버 광고 플랫폼의 귀속 추정값입니다. 전체 매출과 합산하지 않습니다. 전체 매출은 네이버 광고비 규모를 비교하기 위한 참고값이며, 라이브 방송·체험단·맘카페·CRM 등 다른 마케팅 영향도 포함돼 있습니다.'),PageBreak()]
+ story += [P('3. 네이버 광고 유형별 집행 결과','h1'),P('집계 기간  2026.01.01 - 2026.07.31  |  실제 광고비·노출·클릭 기준'),Spacer(1,5*mm)]
  ch={r['channel']:r for r in channels['operational']}; pl=ch['파워링크']; sh=ch['쇼핑검색']; sh['adRoas']=sh['platformAttributedSales']/sh['adCost'] if sh['adCost'] else 0; cg=channels['ga4']
  cd=[[P(x,'smallw') for x in ['월','광고 유형','광고비','노출','클릭','CTR','CPC','구매 연결 기준']]]
  for r in channels['monthly']:
@@ -108,7 +111,7 @@ def build():
  mapping_table=[[P(x,'smallw') for x in ['연결 본상품','상품 ID','광고그룹','광고비','광고 전환매출 (참고)','광고 ROAS','상품 실제 매출 (환불 반영)','주문수']]]
  for r in map_summary: mapping_table.append([P(r['productName'],'small'),P(r['productId'],'small'),P(r['groups'],'small'),P(money(r['cost']),'small'),P(money(r['revenue']),'small'),P(mult(r['roas']),'small'),P(money(r['sales']),'small'),P(str(int(r['orders'])),'small')])
  story += [styled_table(mapping_table,[42*mm,24*mm,34*mm,22*mm,27*mm,20*mm,27*mm,18*mm]),Spacer(1,7*mm),P('관측 요약','h2'),P(f"쇼핑검색은 1~7월 네이버 귀속 ROAS {mult(sh['adRoas'])}로 집계됐습니다. 연결상품별 실제 매출·주문 성과에는 편차가 관측됐습니다."),PageBreak()]
- story += [P('4. GA4 기반 광고 유입·구매 효과','h1'),P('관측 기간  2026.06.19 - 2026.07.31  |  태그가 설치된 자사몰 기준'),Spacer(1,5*mm)]
+ story += [P('4. 자사몰에서 확인된 네이버 광고 유입','h1'),P('관측 기간  2026.06.19 - 2026.07.31  |  태그가 설치된 자사몰 기준'),Spacer(1,5*mm)]
  gs=ga4e['summary']; gj=ga4e['july']
  gk=[[P(x,'klabel') for x in ['검색광고 유입','검색광고 유입 구매','유입 후 구매 매출','7월 매출 비중']],[P(f"{int(gs['paidSearchSessions']):,}세션",'kpi'),P(f"{int(gs['paidSearchTransactions']):,}건",'kpi'),P(money(gs['paidSearchRevenue']),'kpi'),P(pct(gj['paidSearchRevenueShare']),'kpi')]]
  gt=Table(gk,colWidths=[43.5*mm]*4,rowHeights=[12*mm,18*mm]);gt.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),PALE),('GRID',(0,0),(-1,-1),.5,LINE),('VALIGN',(0,0),(-1,-1),'MIDDLE')]))
@@ -117,7 +120,7 @@ def build():
  story += [KeepTogether([P('광고 유입 관측 결과','h2'),styled_table([[P(a,'smallb'),P(b)] for a,b in evidence],[36*mm,138*mm],False)]),Spacer(1,7*mm)]
  limits=[('자사몰 한정','GA4 값에는 스마트스토어·무라 매출이 포함되지 않습니다.'),('관측값','검색광고 유입 후 구매 매출이며 광고가 없었을 때의 순증매출을 직접 증명하지는 않습니다.'),('6월 부분 집계','구매 추적이 확인되는 6월 19일부터만 포함했습니다.'),('UTM 신뢰도',f"7월 UTM 분류율은 {pct(gj['utmMappingCoverage'])}로 집계됐습니다.")]
  story += [KeepTogether([P('데이터 해석 범위','h2'),styled_table([[P(a,'smallb'),P(b)] for a,b in limits],[36*mm,138*mm],False)]),PageBreak()]
- story += [P('5. 슬롯 효율','h1'),P(f'실제 진행 기간 {slot_start} - {slot_end}  |  8월 10~19일 무상 AS(슬롯비 0원)'),Spacer(1,4*mm)]
+ story += [P('5. 네이버 검색 슬롯 운영 결과','h1'),P(f'실제 진행 기간 {slot_start} - {slot_end}  |  8월 10~19일 무상 AS(슬롯비 0원)'),Spacer(1,4*mm)]
  sk=[[P(x,'klabel') for x in ['전체 슬롯비','집계 매출','슬롯비/매출','평균 검색순위']],[P(money(ss['totalSlotCost']),'kpi'),P(money(ss['totalSales']),'kpi'),P(pct(ss['slotCostRate']),'kpi'),P(f"{ss['rankAverage']:.1f}위",'kpi')]];st=Table(sk,colWidths=[43.5*mm]*4,rowHeights=[12*mm,18*mm]);st.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),PALE),('GRID',(0,0),(-1,-1),.5,LINE)]));story += [st,slot_chart(periods),P('상품별 요약','h2')]
  products=[]
  for name in sorted(set(r['product'] for r in periods if r.get('isComplete'))):
