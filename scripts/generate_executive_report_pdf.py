@@ -108,45 +108,23 @@ def build():
  story += [KeepTogether([P('채널별 해석','h2'),styled_table([[P(a,'smallb'),P(b)] for a,b in channel_notes],[38*mm,136*mm],False),Spacer(1,6*mm)])]
  mapping_table=[[P(x,'smallw') for x in ['연결 본상품','상품 ID','광고그룹','광고비','네이버 전환매출','광고 ROAS','1~7월 실제 매출','주문수']]]
  for r in map_summary: mapping_table.append([P(r['productName'],'small'),P(r['productId'],'small'),P(r['groups'],'small'),P(money(r['cost']),'small'),P(money(r['revenue']),'small'),P(mult(r['roas']),'small'),P(money(r['sales']),'small'),P(str(int(r['orders'])),'small')])
- story += [styled_table(mapping_table,[42*mm,24*mm,34*mm,22*mm,27*mm,20*mm,27*mm,18*mm]),Spacer(1,7*mm),P('운영 결정','h2'),P(f"<b>쇼핑검색은 1~7월 네이버 귀속 ROAS {mult(sh['adRoas'])}를 근거로 전체 운영을 유지합니다. 연결상품 중 광고비 대비 실제 매출·주문 성과가 낮은 광고그룹만 감액 또는 OFF하고, 조정 전후 7일 성과를 비교해 재개 여부를 결정합니다.</b>"),PageBreak()]
+ story += [styled_table(mapping_table,[42*mm,24*mm,34*mm,22*mm,27*mm,20*mm,27*mm,18*mm]),Spacer(1,7*mm),P('관측 요약','h2'),P(f"쇼핑검색은 1~7월 네이버 귀속 ROAS {mult(sh['adRoas'])}로 집계됐습니다. 연결상품별 실제 매출·주문 성과에는 편차가 관측됐습니다."),PageBreak()]
  story += [P('4. GA4 기반 광고 유입·구매 효과','h1'),P('관측 기간  2026.06.19 - 2026.07.31  |  태그가 설치된 자사몰 기준'),Spacer(1,5*mm)]
  gs=ga4e['summary']; gj=ga4e['july']
  gk=[[P(x,'klabel') for x in ['검색광고 유입','검색광고 유입 구매','유입 후 구매 매출','7월 매출 비중']],[P(f"{int(gs['paidSearchSessions']):,}세션",'kpi'),P(f"{int(gs['paidSearchTransactions']):,}건",'kpi'),P(money(gs['paidSearchRevenue']),'kpi'),P(pct(gj['paidSearchRevenueShare']),'kpi')]]
  gt=Table(gk,colWidths=[43.5*mm]*4,rowHeights=[12*mm,18*mm]);gt.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),PALE),('GRID',(0,0),(-1,-1),.5,LINE),('VALIGN',(0,0),(-1,-1),'MIDDLE')]))
  story += [gt,Spacer(1,7*mm)]
- evidence=[('확인된 효과',f"7월 GA4 자사몰 구매매출 {money(gj['purchaseRevenue'])} 중 검색광고 유입 후 구매매출은 {money(gj['paidSearchRevenue'])}으로 {pct(gj['paidSearchRevenueShare'])}입니다."),('전면 중단 위험',f"검색광고 유입 {int(gj['paidSearchSessions']):,}세션과 구매 {int(gj['paidSearchTransactions']):,}건이 확인돼 전체 광고를 일괄 중단하지 않습니다."),('운영 결정','쇼핑검색은 전체 유지하고 파워링크는 핵심 키워드 순위를 유지합니다. 저효율·비시즌 키워드만 감액 또는 OFF합니다.'),('검증 방법','조정 항목은 전후 7일 광고비·순위·실제 매출·주문을 비교하고, 매출 손실이 절감액보다 크면 즉시 복원합니다.')]
- story += [KeepTogether([P('광고 운영 판단','h2'),styled_table([[P(a,'smallb'),P(b)] for a,b in evidence],[36*mm,138*mm],False)]),Spacer(1,7*mm)]
- limits=[('자사몰 한정','GA4 값에는 스마트스토어·무라 매출이 포함되지 않습니다.'),('관측값','검색광고 유입 후 구매 매출이며 광고가 없었을 때의 순증매출을 직접 증명하지는 않습니다.'),('6월 부분 집계','구매 추적이 확인되는 6월 19일부터만 포함했습니다.'),('UTM 신뢰도',f"7월 UTM 분류율은 {pct(gj['utmMappingCoverage'])}로 유입 구분의 누락은 제한적입니다.")]
- story += [KeepTogether([P('데이터 해석 범위','h2'),styled_table([[P(a,'smallb'),P(b)] for a,b in limits],[36*mm,138*mm],False)]),Spacer(1,7*mm),P('최종 운영안','h2'),P('<b>성과가 확인된 검색광고는 유지하고, 8월 조정 대상만 선별 감액·OFF합니다. 핵심 답례품 키워드는 전환 수치만으로 중단하지 않고 PC·모바일 파워링크 순위를 함께 관리합니다.</b>'),PageBreak()]
+ evidence=[('확인된 매출',f"7월 GA4 자사몰 구매매출 {money(gj['purchaseRevenue'])} 중 검색광고 유입 후 구매매출은 {money(gj['paidSearchRevenue'])}으로 {pct(gj['paidSearchRevenueShare'])}입니다."),('확인된 유입',f"검색광고 유입 {int(gj['paidSearchSessions']):,}세션과 구매 {int(gj['paidSearchTransactions']):,}건이 관측됐습니다.")]
+ story += [KeepTogether([P('광고 유입 관측 결과','h2'),styled_table([[P(a,'smallb'),P(b)] for a,b in evidence],[36*mm,138*mm],False)]),Spacer(1,7*mm)]
+ limits=[('자사몰 한정','GA4 값에는 스마트스토어·무라 매출이 포함되지 않습니다.'),('관측값','검색광고 유입 후 구매 매출이며 광고가 없었을 때의 순증매출을 직접 증명하지는 않습니다.'),('6월 부분 집계','구매 추적이 확인되는 6월 19일부터만 포함했습니다.'),('UTM 신뢰도',f"7월 UTM 분류율은 {pct(gj['utmMappingCoverage'])}로 집계됐습니다.")]
+ story += [KeepTogether([P('데이터 해석 범위','h2'),styled_table([[P(a,'smallb'),P(b)] for a,b in limits],[36*mm,138*mm],False)]),PageBreak()]
  story += [P('5. 슬롯 효율','h1'),P(f'실제 진행 기간 {slot_start} - {slot_end}  |  8월 10~19일 무상 AS(슬롯비 0원)'),Spacer(1,4*mm)]
  sk=[[P(x,'klabel') for x in ['전체 슬롯비','집계 매출','슬롯비/매출','평균 검색순위']],[P(money(ss['totalSlotCost']),'kpi'),P(money(ss['totalSales']),'kpi'),P(pct(ss['slotCostRate']),'kpi'),P(f"{ss['rankAverage']:.1f}위",'kpi')]];st=Table(sk,colWidths=[43.5*mm]*4,rowHeights=[12*mm,18*mm]);st.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),PALE),('GRID',(0,0),(-1,-1),.5,LINE)]));story += [st,slot_chart(periods),P('상품별 요약','h2')]
  products=[]
  for name in sorted(set(r['product'] for r in periods if r.get('isComplete'))):
   rr=[r for r in periods if r['product']==name and r.get('isComplete')];cost=sum(r.get('slotCost',0) for r in rr);sales=sum((r.get('during') or {}).get('sales',0) for r in rr);ranks=[r['rankAverage'] for r in rr if r.get('rankAverage') is not None];products.append([P(name,'smallb'),P(str(len(rr))+'회','small'),P(money(cost),'small'),P(money(sales),'small'),P(pct(cost/sales) if sales else '-','small'),P(f'{sum(ranks)/len(ranks):.1f}위' if ranks else '-','small')])
  story += [styled_table([[P(x,'smallw') for x in ['상품','구간','슬롯비','집계 매출','비용률','평균 순위']]]+products,[36*mm,18*mm,31*mm,38*mm,24*mm,27*mm]),Spacer(1,7*mm),P('지속 운영 판단','h2')]
- decisions=[('전체','전면 지속 보류','슬롯 시작 전 30일과 운영 후 첫 30일을 비교하면 수건단품은 매출 +2.9%·주문 +10.6%, 세트모음전은 매출 +6.2%·주문 +15.1%, 조구만고리수건은 매출 +94.3%·주문 +81.9%입니다. 광고·프로모션 영향을 분리할 수 없어 증가분 전체를 슬롯 효과로 확정하지 않고 상품별 비용률·순위와 함께 판단합니다.'),('수건단품','지속 검증','비용률 약 1.0%, 평균 3.6위로 가장 양호합니다. 종료 후 7~10일간 매출·순위를 관찰해 비교 지표를 확보하고, 이후에는 순위 하락 시 재가동하고 회복 후 멈추는 간헐 운영 방식도 조심스럽게 검토합니다.'),('세트모음전','축소 검증','비용률 약 3.8%, 평균 8.2위이며 최근 매출이 초기보다 낮습니다. 종료 후 7~10일간 매출·순위를 비교한 뒤 결과에 따라 예산과 운영 기간을 다시 설정해 보정합니다.'),('조구만고리수건','중단 대조','평균 2.7위지만 비용률 약 24.0%로 매출 대비 부담이 있습니다. 중단 후 7~10일간 매출 유지 여부와 순위 하락 폭을 비교해 재운영 여부를 판단합니다.')]
- story += [styled_table([[P(a,'smallb'),P(b,'smallb'),P(c)] for a,b,c in decisions],[30*mm,28*mm,116*mm],False),Spacer(1,6*mm),P('판단 한계','h2'),P('집계 매출은 광고와 프로모션이 함께 반영된 관찰값입니다. 현재 보고서는 슬롯 시작 전 30일과 운영 후 첫 30일을 비교했으며, 최종 판단은 종료 후 7~10일의 매출·순위 변화까지 같은 상품 기준으로 확인합니다.'),Spacer(1,8*mm),P('6. 현재 운영 상태와 하반기 실행안','h1')]
- ops=[('파워링크',f'광고그룹 {len(groups)}개 · 키워드 {len(kws)}개 · 키워드 OFF {len(off)}개 · 그룹 OFF {len(goff)}개'),('순위 수집',f"{dash['rankTraffic'].get('updatedAt','-')} 기준 · 실제 그룹과 PC/모바일 분리"),('슬롯 일정',f"{slot_start} - {slot_end} · 전체 {len(periods)}개 · 완료 {complete_count}개 · 진행/관찰 {active_count}개 · AS 3개 구간 0원")];story += [styled_table([[P(a,'smallb'),P(b)] for a,b in ops],[36*mm,138*mm],False),Spacer(1,8*mm),P('8월 조정 현황 및 재개 계획','h2')]
- actions=[('핵심키워드 M · 답례품','전환 수치만으로 중단하지 않고 PC·모바일 파워링크 순위와 노출 유지 여부를 중심으로 별도 관리합니다.'),('자사몰 PC · 답례품','8월 입찰 조정을 진행했으며 조정 전후 순위·유입·매출 변화를 비교해 추가 조정 여부를 정합니다.'),('세부키워드 · 결혼식답례품','비결혼 시즌인 8월에는 OFF로 운영하고, 8월 말 소재와 연결 페이지를 검토한 뒤 시즌에 맞춰 재개합니다.'),('쇼핑검색 · 꿀','현재 OFF 상태를 유지하면서 7일간 매출·주문 변화를 확인해 재개 여부를 정합니다.'),('슬롯 후속 검증','수건단품·세트모음전·조구만고리수건 모두 종료 후 7~10일 매출·순위를 비교해 다음 예산과 기간을 보정합니다.')];story += [styled_table([[P(a,'smallb'),P(b)] for a,b in actions],[42*mm,132*mm],False),Spacer(1,8*mm),P('추천 운영 방향','h2'),P('캠페인 전체를 일괄 조정하지 않고 핵심 키워드는 순위를 유지하며 별도 관리합니다. 저효율·비시즌 항목만 OFF 또는 감액하고, 조정 전후 같은 기간의 순위·매출·주문을 기록해 재개 조건을 판단합니다.')]
- story += [PageBreak(),P('7. 9월 운영을 위해 대표님이 결정할 사항','h1'),P('결정 기준  8월 실제 집행비 대비  |  9월 1일부터 적용'),Spacer(1,5*mm)]
- september_choices=[
-  ('광고비 절감','8월 대비 10~20% 감액','저효율·비시즌 키워드 OFF 범위를 넓힙니다. 비용은 줄지만 핵심 키워드 순위와 광고 유입 매출이 하락할 수 있습니다.'),
-  ('광고비 유지 (추천)','8월 총액 유지·항목 재배분','쇼핑검색과 핵심 답례품 키워드는 유지하고, OFF 예산을 9월 결혼 시즌 키워드와 검증된 상품으로 옮깁니다.'),
-  ('광고비 확대','8월 대비 10~20% 증액','결혼식답례품 재개와 성과 상품 노출을 확대합니다. 7일 단위로 증액분의 매출 회수 여부를 확인합니다.'),
-  ('슬롯비 절감 (추천)','전면 연장 없이 선별·간헐 운영','조구만고리수건은 중단 대조를 유지하고, 수건단품만 순위 하락 시 단기 재가동합니다. 세트모음전은 축소 검증합니다.'),
-  ('슬롯비 유지','8월 유료 집행 수준 유지','세 상품을 기존 수준으로 운영합니다. 순위 방어에는 유리하지만 슬롯 효과가 분리 검증되지 않은 비용도 계속 발생합니다.'),
-  ('슬롯비 확대','신규·기존 상품 구간 추가','매출·순위 동반 개선이 확인된 상품에만 추가합니다. 현재 근거로는 우선 추천하지 않습니다.'),
- ]
- story += [styled_table([[P('결정안','smallw'),P('9월 실행 범위','smallw'),P('효과와 위험','smallw')]]+[[P(a,'smallb'),P(b,'smallb'),P(c)] for a,b,c in september_choices],[38*mm,45*mm,91*mm]),Spacer(1,7*mm)]
- approvals=[
-  ('결정 1 · 광고 총액','절감 / 유지 / 확대 중 선택. 추천은 총액 유지 후 항목 재배분입니다.'),
-  ('결정 2 · 슬롯 총액','절감 / 유지 / 확대 중 선택. 추천은 전면 연장 없는 선별·간헐 운영으로 비용 절감입니다.'),
-  ('결정 3 · 확대 허용 조건','광고·슬롯 모두 7일 비교에서 추가 비용보다 추가 매출 기여가 클 때만 다음 7일 확대합니다.'),
-  ('결정 4 · 복원 조건','핵심 키워드 순위 급락 또는 매출 손실이 절감액보다 커지면 직전 운영 수준으로 즉시 복원합니다.'),
- ]
- story += [P('대표님 승인 요청','h2'),styled_table([[P(a,'smallb'),P(b)] for a,b in approvals],[42*mm,132*mm],False),Spacer(1,7*mm),P('실무 추천 결론','h2'),P('<b>9월 광고비는 유지하되 성과 항목으로 재배분하고, 슬롯비는 선별·간헐 운영으로 절감하는 안을 추천합니다. 광고와 슬롯을 동시에 확대하면 어느 비용이 매출과 순위에 기여했는지 구분하기 어려우므로, 확대가 필요하면 한 항목씩 7일 단위로 검증합니다.</b>')]
+ decisions=[('전체 비교','수건단품 매출 +2.9%·주문 +10.6%, 세트모음전 매출 +6.2%·주문 +15.1%, 조구만고리수건 매출 +94.3%·주문 +81.9%가 관측됐습니다.'),('수건단품','비용률 약 1.0%, 평균 검색 순위 3.6위로 세 상품 중 비용 부담이 가장 낮았습니다.'),('세트모음전','비용률 약 3.8%, 평균 검색 순위 8.2위이며 최근 매출은 초기 구간보다 낮았습니다.'),('조구만고리수건','비용률 약 24.0%, 평균 검색 순위 2.7위로 비용 부담이 가장 높았습니다.')]
+ story += [styled_table([[P(a,'smallb'),P(b)] for a,b in decisions],[42*mm,132*mm],False),Spacer(1,7*mm),P('해석 한계','h2'),P('집계 매출에는 광고와 프로모션 영향이 함께 포함되어 있어 슬롯의 순수 증분 효과를 분리할 수 없습니다.')]
  doc.build(story,onFirstPage=footer,onLaterPages=footer);print(OUT)
- MSG_OUT.parent.mkdir(parents=True,exist_ok=True)
- MSG_OUT.write_text('''대표님, 2026년 1~7월 광고·슬롯 최종보고서 전달드립니다.\n\n8월 조정 현황은 보고서에 기존 내용 그대로 반영되어 있습니다. 9월부터는 광고비와 슬롯비 운영 방향에 대한 결정이 필요합니다.\n\n[9월 결정 요청]\n1. 광고비: 절감 / 유지 / 확대\n- 절감: 8월 대비 10~20% 감액. 비용은 줄지만 핵심 키워드 순위와 광고 유입 매출 하락 가능성이 있습니다.\n- 유지(추천): 8월 총액은 유지하고, 저효율·비시즌 항목의 예산을 9월 결혼 시즌 키워드와 검증된 상품으로 재배분합니다.\n- 확대: 8월 대비 10~20% 증액. 결혼식답례품과 성과 상품을 확대하되 7일 단위로 증액분의 매출 회수 여부를 확인합니다.\n\n2. 슬롯비: 절감 / 유지 / 확대\n- 절감(추천): 전면 연장하지 않고 선별·간헐 운영합니다. 조구만고리수건은 중단 대조, 수건단품은 순위 하락 시 단기 재가동, 세트모음전은 축소 검증합니다.\n- 유지: 8월 유료 집행 수준을 유지합니다. 순위 방어에는 유리하지만 효과가 분리 검증되지 않은 비용도 계속 발생합니다.\n- 확대: 성과가 확인된 상품만 구간을 추가합니다. 현재 근거로는 우선 추천하지 않습니다.\n\n실무 추천안은 '광고비 유지·재배분 + 슬롯비 절감·선별 운영'입니다. 광고와 슬롯을 동시에 확대하지 않고, 한 항목씩 7일 단위로 매출·주문·순위를 비교하겠습니다. 추가 비용보다 추가 매출 기여가 클 때만 다음 7일을 확대하고, 핵심 순위 급락 또는 매출 손실이 절감액보다 크면 직전 수준으로 복원하겠습니다.\n\n9월 운영안으로 광고비 [절감/유지/확대], 슬롯비 [절감/유지/확대] 중 선택 부탁드립니다.\n''',encoding='utf-8')
- print(MSG_OUT)
 if __name__=='__main__': build()
